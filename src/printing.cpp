@@ -41,7 +41,7 @@
 #include "printing.h"
 #include "version.h"
 
-bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
+bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
 {
     KPrinter printer;
     printer.setDocName( imageWin.filename() );

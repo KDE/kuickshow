@@ -18,6 +18,8 @@
 
 #include <stdlib.h>
 
+#include <kmainwindow.h>
+
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qdrawutil.h>
@@ -59,18 +61,20 @@
 #include <kwin.h>
 #include <netwm.h>
 
-#include "imagewindow.h"
 #include "kuick.h"
 #include "kuickdata.h"
 #include "printing.h"
+#include "imagewindow.h"
 
 #undef GrayScale
 
 QCursor *ImageWindow::s_handCursor = 0L;
 
 ImageWindow::ImageWindow( ImData *_idata, QWidget *parent, const char *name )
-    : ImlibWidget( _idata, parent, name )
+   : KMainWindow(parent, name, WDestructiveClose), image( _idata, this, name )
 {
+    idata=_idata;
+
     init();
 }
 
@@ -89,7 +93,8 @@ void ImageWindow::init()
     brightnessMenu = 0L;
     contrastMenu = 0L;
 
-
+    xpos=0; ypos=0;
+    
     m_actions = new KActionCollection( this );
 
     if ( !s_handCursor ) {
@@ -101,19 +106,22 @@ void ImageWindow::init()
     }
 
     setupActions();
-    imageCache->setMaxImages( kdata->maxCachedImages );
-
+    
     transWidget    = 0L;
     myIsFullscreen = false;
 
     xpos = 0, ypos = 0;
 
     setAcceptDrops( true );
-    setBackgroundColor( kdata->backgroundColor );
 
     static QPixmap imageIcon = UserIcon( "imageviewer-medium" );
     static QPixmap miniImageIcon = UserIcon( "imageviewer-small" );
     KWin::setIcons( winId(), imageIcon, miniImageIcon );
+    
+    setCentralWidget(&image);
+    
+    connect( &image, SIGNAL( loaded( KuickImage * )),
+            this, SLOT( loaded( KuickImage * )));
 }
 
 void ImageWindow::updateActions()
@@ -137,28 +145,28 @@ void ImageWindow::setupActions()
                  this, SLOT( zoomOut() ),
                  m_actions, "zoom_out" );
     new KAction( i18n("Restore Original Size"), Key_O,
-                 this, SLOT( showImageOriginalSize() ),
+                 &image, SLOT( showImageOriginalSize() ),
                  m_actions, "original_size" );
     new KAction( i18n("Maximize"), Key_M,
                  this, SLOT( maximize() ),
                  m_actions, "maximize" );
 
     new KAction( i18n("Rotate Clockwise"), Key_9,
-                 this, SLOT( rotate270() ),
+                 &image, SLOT( rotate270() ),
                  m_actions, "rotate270" );		 
     new KAction( i18n("Rotate 180 degrees"), Key_8,
-                 this, SLOT( rotate180() ),
+                 &image, SLOT( rotate180() ),
                  m_actions, "rotate180" );
     new KAction( i18n("Rotate Counterclockwise"), Key_7,
-                 this, SLOT( rotate90() ),
+                 &image, SLOT( rotate90() ),
                  m_actions, "rotate90" );
 
 
     new KAction( i18n("Flip Horizontally"), Key_Asterisk,
-                 this, SLOT( flipHoriz() ),
+                 &image, SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
     new KAction( i18n("Flip Vertically"), Key_Slash,
-                 this, SLOT( flipVert() ),
+                 &image, SLOT( flipVert() ),
                  m_actions, "flip_vertically" );
 
     new KAction( i18n("Print Image..."), KStdAccel::print(),
@@ -212,6 +220,7 @@ void ImageWindow::setupActions()
     KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );		     
     
     action->setShortcut(cut);
+    action->setIcon(QString("window_fullscreen"));
 #else
      new KAction( i18n("Toggle Fullscreen mode"), Key_Return, 
                   this, SLOT( toggleFullscreen() ),
@@ -227,8 +236,30 @@ void ImageWindow::setupActions()
                  m_actions, "properties" );
 
     m_actions->readShortcutSettings();
+    
+    m_actions->action("previous_image")->setIcon(QString("previous"));
+    m_actions->action("next_image")->setIcon(QString("next"));
+    m_actions->action("zoom_in")->setIcon(QString("viewmag+"));
+    m_actions->action("zoom_out")->setIcon(QString("viewmag-"));
+    m_actions->action("original_size")->setIcon(QString("viewmag1"));
+    m_actions->action("maximize")->setIcon(QString("vewmagfit"));
+    
+    m_actions->action("previous_image")->plug( toolBar() );
+    m_actions->action("next_image")->plug( toolBar() );
+    toolBar()->insertLineSeparator();
+    m_actions->action("zoom_in")->plug( toolBar() );
+    m_actions->action("zoom_out")->plug( toolBar() );
+    m_actions->action("original_size")->plug( toolBar() );
+    m_actions->action("maximize")->plug( toolBar() );
+    
+    toolBar()->setTitle(i18n("Navigation"));
 }
 
+void ImageWindow::showImage()
+{
+	image.setViewportPosition(QPoint(-xpos, -ypos));
+	image.showImage();
+}
 
 void ImageWindow::setFullscreen( bool enable )
 {
@@ -244,6 +275,7 @@ void ImageWindow::setFullscreen( bool enable )
 
     myIsFullscreen = enable;
     centerImage(); // ### really necessary (multihead!)
+    showImage();
 }
 
 
@@ -267,8 +299,9 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 
     QString caption = i18n( "Filename (Imagewidth x Imageheight)",
                             "%3 (%1 x %2)" );
-    caption = caption.arg( m_kuim->originalWidth() ).
-              arg( m_kuim->originalHeight() ).arg( m_kuim->filename() );
+    QSize s=image.originalImageSize();
+    caption = caption.arg( s.width() ).
+              arg( s.height() ).arg( image.imageFilename() );
     setCaption( kapp->makeStdCaption( caption ) );
 }
 
@@ -284,14 +317,12 @@ void ImageWindow::centerImage()
     }
     else
     {
-        w = width();
-        h = height();
+        w = image.width();
+        h = image.height();
     }
 
-    xpos = w/2 - imageWidth()/2;
-    ypos = h/2 - imageHeight()/2;
-
-    //XMoveWindow( x11Display(), win, xpos, ypos );
+    xpos = w/2 - image.imageWidth()/2;
+    ypos = h/2 - image.imageHeight()/2;
 }
 
 
@@ -303,8 +334,8 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
     int cwlocal = width();
     int chlocal = height();
 
-    int iw = imageWidth();
-    int ih = imageHeight();
+    int iw = image.imageWidth();
+    int ih = image.imageHeight();
 
     if ( myIsFullscreen || width() > desktopWidth() )
 	cwlocal = desktopWidth();
@@ -332,8 +363,6 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 	}
     }
 
-    m_kuim->setViewportPosition(QPoint(xpos, ypos));
-    
     showImage();
 }
 
@@ -352,14 +381,14 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 //
 bool ImageWindow::showNextImage( const QString& filename )
 {
-    if ( !loadImage( filename ) ) {
+    if ( !image.loadImage( filename ) ) {
 	emit sigBadImage( filename );
 	return false;
     }
 
     else {
-	// updateWidget( true ); // already called from loadImage()
-	//showImage();
+	centerImage();
+	showImage();
 	return true;
     }
 }
@@ -374,8 +403,8 @@ void ImageWindow::addBrightness( int factor )
     if ( factor == 0 )
 	return;
 
-    int oldValue = mod_brightness;
-    setBrightness( oldValue + (idata->brightnessFactor * (int) factor) );
+    int oldValue = image.brightness();
+    image.setBrightness( oldValue + (idata->brightnessFactor * (int) factor) );
 }
 
 void ImageWindow::addContrast( int factor )
@@ -383,8 +412,8 @@ void ImageWindow::addContrast( int factor )
     if ( factor == 0 )
 	return;
 
-    int oldValue = mod_contrast;
-    setContrast( oldValue + (idata->contrastFactor * (int) factor) );
+    int oldValue = image.contrast();
+    image.setContrast( oldValue + (idata->contrastFactor * (int) factor) );
 }
 
 void ImageWindow::addGamma( int factor )
@@ -392,8 +421,8 @@ void ImageWindow::addGamma( int factor )
     if ( factor == 0 )
 	return;
 
-    int oldValue = mod_gamma;
-    setGamma( oldValue + (idata->gammaFactor * (int) factor) );
+    int oldValue = image.gamma();
+    image.setGamma( oldValue + (idata->gammaFactor * (int) factor) );
 }
 
 
@@ -426,13 +455,13 @@ void ImageWindow::scrollRight()
 
 void ImageWindow::zoomIn()
 {
-    zoomImage( kdata->zoomSteps );
+    image.zoomImage( kdata->zoomSteps );
 }
 
 void ImageWindow::zoomOut()
 {
     Q_ASSERT( kdata->zoomSteps != 0 );
-    zoomImage( 1.0 / kdata->zoomSteps );
+    image.zoomImage( 1.0 / kdata->zoomSteps );
 }
 
 ///
@@ -540,7 +569,7 @@ void ImageWindow::mousePressEvent( QMouseEvent *e )
             setCursor( *s_handCursor );
     }
 
-    ImlibWidget::mousePressEvent( e );
+    image.mousePressEvent( e );
 }
 
 void ImageWindow::updateCursor( KuickCursor cursor )
@@ -555,7 +584,7 @@ void ImageWindow::updateCursor( KuickCursor cursor )
             break;
         case DefaultCursor:
         default:
-            if ( imageWidth() > width() || imageHeight() > height() )
+            if ( image.imageWidth() > width() || image.imageHeight() > height() )
                 setCursor( *s_handCursor );
             else
                 setCursor( arrowCursor );
@@ -679,11 +708,11 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 
     uint w = 0; // shut up compiler!
     uint h = 0;
-    w = (uint) ( factor * (float) imageWidth() );
-    h = (uint) ( factor * (float) imageHeight() );
+    w = (uint) ( factor * (float) image.imageWidth() );
+    h = (uint) ( factor * (float) image.imageHeight() );
 
     if ( w > kdata->maxWidth || h > kdata->maxHeight ) {
-	qDebug("KuickShow: scaling larger than configured maximum -> aborting" );
+	kdDebug() << "KuickShow: scaling larger than configured maximum -> aborting" << endl;
 	return;
     }
 
@@ -697,13 +726,13 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     xtmp += xcenter;
     ytmp += ycenter;
 
-    m_kuim->resize( w, h );
-    //XResizeWindow( x11Display(), win, w, h );
-    updateWidget( false );
+    image.zoomImage(factor);
+    //m_kuim->resize( w, h );
+
+    image.updateWidget( false );
 
     xpos = xtmp; ypos = ytmp;
 
-    //XMoveWindow( x11Display(), win, xpos, ypos );
     scrollImage( 1, 1, true ); // unrestricted scrolling
 }
 
@@ -714,9 +743,9 @@ void ImageWindow::focusInEvent( QFocusEvent * )
 }
 
 
-void ImageWindow::resizeEvent( QResizeEvent *e )
+void ImageWindow::resizeEvent( QResizeEvent * )
 {
-    ImlibWidget::resizeEvent( e );
+    //image.resizeEvent( e );
 
     centerImage();
     updateCursor();
@@ -741,10 +770,10 @@ void ImageWindow::dropEvent( QDropEvent *e )
         const KURL &url = list.first();
         if (KIO::NetAccess::download( url, tmpFile, this ) )
         {
-            loadImage( tmpFile );
+            image.loadImage( tmpFile );
             KIO::NetAccess::removeTempFile( tmpFile );
         }
-        updateWidget();
+        image.updateWidget();
 	e->accept();
     }
     else
@@ -805,7 +834,9 @@ void ImageWindow::setPopupMenu()
 
 void ImageWindow::printImage()
 {
-    if ( !m_kuim )
+	kdDebug() << "ImageWindow::printImage() unimplemented." << endl;
+/*
+    if ( !image.imageLoaded() )
         return;
 
     if ( !Printing::printImage( *this, this ) )
@@ -813,11 +844,12 @@ void ImageWindow::printImage()
         KMessageBox::sorry( this, i18n("Unable to print the image."),
                             i18n("Printing Failed") );
     }
+*/
 }
 
 void ImageWindow::saveImage()
 {
-    if ( !m_kuim )
+    if ( !image.imageLoaded() )
         return;
 
     KuickData tmp;
@@ -830,8 +862,8 @@ void ImageWindow::saveImage()
                    );
 
     QString selection = m_saveDirectory.isEmpty() ?
-                            m_kuim->filename() :
-                            KURL::fromPathOrURL( m_kuim->filename() ).fileName();
+                            image.filename() :
+                            KURL::fromPathOrURL( image.filename() ).fileName();
     dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setCaption( i18n("Save As") );
@@ -847,10 +879,6 @@ void ImageWindow::saveImage()
                                    "have write permission to the file.");
                 KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
             }
-
-            if ( file == m_kuim->filename() ) {
-//                Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
-            }
         }
     }
 
@@ -863,7 +891,7 @@ void ImageWindow::saveImage()
 #endif
 }
 
-bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) const
+bool ImageWindow::saveImage( const QString& /*filename*/, bool /*keepOriginalSize*/ ) const
 {
   /*  int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
@@ -884,7 +912,7 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
 
     return success;*/
     
-    kdDebug() << "ERROR: ImageWindow::saveImage() unimplemented." << endl;
+    kdDebug() << "ImageWindow::saveImage() unimplemented." << endl;
     
     return false;
 }
@@ -971,7 +999,7 @@ void ImageWindow::autoScale( KuickImage *kuim )
 // only called when kdata->isModsEnabled is true
 bool ImageWindow::autoRotate( KuickImage *kuim )
 {
-    if ( kdata->autoRotation && ImlibWidget::autoRotate( kuim ) )
+    if ( kdata->autoRotation && image.autoRotate( kuim ) )
         return true;
 
     else // rotation by metadata not available or not configured
@@ -1045,7 +1073,7 @@ void ImageWindow::resizeOptimal( int w, int h )
 
 void ImageWindow::maximize()
 {
-    if ( !m_kuim )
+    if ( image.imageLoaded() )
 	return;
 
     bool oldUpscale = kdata->upScale;
@@ -1054,11 +1082,11 @@ void ImageWindow::maximize()
     kdata->upScale = true;
     kdata->downScale = true;
 
-    autoScale( m_kuim );
-    updateWidget( true );
+    image.autoScaleImage(maxImageSize());
+    //updateWidget( true );
 
     if ( !myIsFullscreen )
-	resizeOptimal( imageWidth(), imageHeight() );
+	resizeOptimal( image.imageWidth(), image.imageHeight() );
 
     kdata->upScale = oldUpscale;
     kdata->downScale = oldDownscale;

@@ -101,7 +101,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   imOrig = new ImlibWidget( 0L, gbPreview, "original image" );
 
   lbImFiltered = new QLabel( i18n("Modified"), gbPreview );
-  imFiltered = new ImlibWidget( 0L, gbPreview, "" );
+  imFiltered = new ImlibWidget( 0L, gbPreview, "filtered image" );
   connect( imFiltered, SIGNAL( destroyed() ), SLOT( slotNoImage() ));
 
   ////
@@ -185,9 +185,15 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   loadSettings( *kdata );
 
   if ( imOrig )
+  {
+    imOrig->QWidget::resize(imOrig->originalImageSize());
     imOrig->setFixedSize( imOrig->size() );
+  }
   if ( imFiltered )
+  {
+    imFiltered->QWidget::resize(imFiltered->originalImageSize());
     imFiltered->setFixedSize( imFiltered->size() );
+  }
 
   mainLayout->activate();
 }

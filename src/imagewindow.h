@@ -21,6 +21,7 @@
 
 #include <qevent.h>
 
+#include <kmainwindow.h>
 #include <kaction.h>
 
 #include "imlibwidget.h"
@@ -32,7 +33,7 @@ class QString;
 class QTimer;
 class QWidget;
 
-class ImageWindow : public ImlibWidget
+class ImageWindow : public KMainWindow
 {
   Q_OBJECT
 
@@ -58,10 +59,14 @@ public:
    */
   void resizeOptimal( int w, int h );
   void autoScale( KuickImage *kuim );
+  void autoScaleImage();
   virtual bool autoRotate( KuickImage *kuim );
 
   bool          saveImage( const QString& filename, bool keepOriginalSize ) const;
 
+  const QString & filename() { return image.imageFilename(); }
+  const KURL url() { return image.url(); }
+  
 public slots:
   void 		zoomIn();
   void 		zoomOut();
@@ -78,19 +83,21 @@ public slots:
   void 	        printImage();
   void 		toggleFullscreen();
   void 		maximize();
+  void		loaded( KuickImage * );
 
 signals:
   void 		sigFocusWindow( ImageWindow * );
   // go advance images back/forth
   void          requestImage( ImageWindow *, int advance );
+  void 		sigBadImage( const QString& );
 
 protected:
   ~ImageWindow(); // deletes itself, just call close( true );
 
   void 		init();
   void 		centerImage();
+  void		showImage();
   virtual void	updateGeometry( int imWidth, int imHeight );
-  virtual void  loaded( KuickImage * );
 
   virtual void  wheelEvent( QWheelEvent * );
   virtual void	keyPressEvent( QKeyEvent * );
@@ -106,7 +113,7 @@ protected:
   enum KuickCursor { DefaultCursor = 0, ZoomCursor, MoveCursor };
   void         updateCursor( KuickCursor cursor = DefaultCursor );
 
-
+  ImlibWidget image;
 
   // popupmenu entries
   uint 		itemViewerZoomMax, itemViewerZoomOrig, itemViewerZoomIn;
@@ -120,10 +127,11 @@ protected:
 
 
   uint 		xmove, ymove;	// used for scrolling the image with the mouse
-  //int		xpos, ypos; 	// top left corner of the image
+  int		xpos, ypos; 	// top left corner of the image
   int 		xzoom, yzoom;  // used for zooming the image with the mouse
   uint 		xposPress, yposPress;
 
+  ImData	*idata;
 
   QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;

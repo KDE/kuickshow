@@ -533,7 +533,7 @@ void KuickShow::showImage( const KFileItem *fi,
                 KFileItem *item = 0L;                 // don't move cursor
                 item = fileWidget->getItem( FileWidget::Next, true );
                 if ( item )
-                    safeViewer->cacheImage( item->url().path() ); // FIXME
+                    ((ImlibWidget *) safeViewer->centralWidget())->cacheImage( item->url().path() ); // FIXME
             }
 
             m_viewer = safeViewer;
@@ -604,7 +604,7 @@ void KuickShow::slotPrint()
     ImageWindow *iw = new ImageWindow( 0, this, "printing image" );
     KFileItem *item;
     while ( (item = it.current()) ) {
-        if (FileWidget::isImage( item ) && iw->loadImage( item->url().path()))
+        if (FileWidget::isImage( item ) && iw->showNextImage( item->url().path()))
             iw->printImage();
         ++it;
     }
@@ -697,7 +697,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 
         if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
             if ( FileWidget::isImage( item_next ) )
-                view->cacheImage( item_next->url().path() ); // ###
+                ((ImlibWidget *)view->centralWidget())->cacheImage( item_next->url().path() ); // ###
     }
 }
 
@@ -842,7 +842,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
                 if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
                     if ( FileWidget::isImage( item_next ) )
-                        m_viewer->cacheImage( item_next->url().path() ); // ###
+                        ((ImlibWidget *) m_viewer->centralWidget())->cacheImage( item_next->url().path() ); // ###
 
                 ret = true; // don't pass keyEvent
             }

@@ -61,14 +61,15 @@ void ImlibWidget::init()
     myBackgroundColor = Qt::black;
     m_kuim              = 0L;
 
-    xpos=0; ypos=0;
-    
     setAutoRender( true );
 
     setPalette( QPalette( myBackgroundColor ));
     setBackgroundMode( NoBackground );
 
-    imageCache = new ImageCache( 4 ); // cache 4 images (FIXME?)
+    imageCache = new ImageCache( kdata->maxCachedImages );
+    
+    setBackgroundColor( kdata->backgroundColor );
+    
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
     connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
 }
@@ -105,7 +106,7 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
 	return 0L;
     }
 
-    loaded( kuim ); // maybe upscale/downscale/rotate in subclasses
+    emit loaded( kuim ); // maybe upscale/downscale/rotate
 
     return kuim;
 }
@@ -117,7 +118,7 @@ void ImlibWidget::paintEvent(QPaintEvent *e)
 	e=e;
 	
 	m_kuim->setViewportSize(size());
-	m_kuim->setViewportPosition(QPoint(-xpos, -ypos));
+	//m_kuim->setViewportPosition(QPoint(-xpos, -ypos));
 		
 	paint->drawPixmap(QPoint(0,0), m_kuim->getQPixmap());
 	
@@ -130,11 +131,6 @@ void ImlibWidget::paintEvent(QPaintEvent *e)
 	}
 }
 
-// overridden in subclass
-void ImlibWidget::loaded( KuickImage * )
-{
-}
-
 bool ImlibWidget::loadImage( const QString& filename )
 {
     KuickImage *kuim = loadImageInternal( filename );
@@ -143,7 +139,7 @@ bool ImlibWidget::loadImage( const QString& filename )
     if ( kuim ) {
 	m_kuim = kuim;
 	m_kuim->setViewportSize(size());
-	autoUpdate( true ); // -> updateWidget() -> updateGeometry()
+	autoUpdate( false ); // -> updateWidget() -> updateGeometry()
 	m_filename = filename;
         return true;
     }
@@ -208,8 +204,20 @@ void ImlibWidget::zoomImage( float factor )
     if ( wf <= 2.0 || hf <= 2.0 ) // minimum size for an image is 2x2 pixels
 	return;
 
+    QRect vp=m_kuim->getViewport();
+    
+    QPoint p=vp.topLeft();
+    QPoint vpcenter=vp.center();
+
+    p=vpcenter-p;
+    
+    p*=(double) factor;
+    m_kuim->setViewportPosition(vpcenter+p);	//recenter the image
+        
     m_kuim->resize( (int) wf, (int) hf );
-    autoUpdate( true );
+    
+
+    autoUpdate( false );
 }
 
 
@@ -219,7 +227,7 @@ void ImlibWidget::showImageOriginalSize()
 	return;
 
     m_kuim->restoreOriginalSize();
-    autoUpdate( true );
+    autoUpdate( false );
 
 }
 
@@ -288,7 +296,7 @@ void ImlibWidget::setRotation( Rotation rot )
     if ( m_kuim )
     {
         if ( m_kuim->rotateAbs( rot ) )
-            autoUpdate( true );
+            autoUpdate( false );
     }
 }
 
@@ -353,16 +361,19 @@ void ImlibWidget::setFlipMode( int mode )
 }
 
 
-void ImlibWidget::updateWidget( bool geometryUpdate )
+void ImlibWidget::updateWidget( bool /*geometryUpdate*/ )
 {
     if ( !m_kuim )
 	return;
+
+	showImage();
 	
+/*	
     if ( geometryUpdate )
     {
 	updateGeometry( m_kuim->width(), m_kuim->height() );
     }
-    else showImage();
+    else showImage();*/
 }
 
 void ImlibWidget::resize(int w, int h)
@@ -373,13 +384,15 @@ void ImlibWidget::resize(int w, int h)
 	{
 		m_kuim->setViewportSize(QSize(w, h));
 	}
+	
+	update();
 }
 
 // here we just use the size of m_kuim, may be overridden in subclass
 void ImlibWidget::updateGeometry( int w, int h )
 {
     bool show=(w == width() && h == height());
-    resize( w, h );
+    //resize( w, h );
     if (show)
     	showImage();
 }
@@ -436,6 +449,68 @@ void ImlibWidget::setBusyCursor()
 void ImlibWidget::restoreCursor()
 {
     setCursor( m_oldCursor );
+}
+
+// upscale/downscale depending on configuration
+void ImlibWidget::autoScaleImage(const QSize &maxImageSize)
+{
+    QSize s=originalImageSize();
+
+    int newW = s.width();
+    int newH = s.height();
+
+    int mw = maxImageSize.width();
+    int mh = maxImageSize.height();
+
+    if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == ROT_270 )
+        qSwap( newW, newH );
+
+    bool doIt = false;
+
+    if ( kdata->upScale )
+    {
+	if ( (newW < mw) && (newH < mh) )
+        {
+            doIt = true;
+
+	    float ratio1, ratio2;
+	    int maxUpScale = kdata->maxUpScale;
+
+	    ratio1 = (float) mw / (float) newW;
+	    ratio2 = (float) mh / (float) newH;
+	    ratio1 = (ratio1 < ratio2) ? ratio1 : ratio2;
+	    if ( maxUpScale > 0 )
+		ratio1 = (ratio1 < maxUpScale) ? ratio1 : maxUpScale;
+	    newH = (int) ((float) newH * ratio1);
+	    newW = (int) ((float) newW * ratio1);
+	}
+    }
+
+    if ( kdata->downScale )
+    {
+	// eventually set width and height to the best/max possible screen size
+	if ( (newW > mw) || (newH > mh) )
+        {
+            doIt = true;
+
+	    if ( newW > mw )
+            {
+		float ratio = (float) newW / (float) newH;
+		newW = mw;
+		newH = (int) ((float) newW / ratio);
+	    }
+
+	    // the previously calculated "h" might be larger than screen
+	    if ( newH > mh ) {
+		float ratio = (float) newW / (float) newH;
+		newH = mh;
+		newW = (int) ((float) newH * ratio);
+	    }
+	}
+    }
+
+    if ( doIt )
+        m_kuim->resize( newW, newH );
 }
 
 //----------
@@ -544,7 +619,7 @@ void KuickImage::renderPixmap()
     		scaled=smoothTransform();
 	else	scaled=fastTransform();
     }
-    else scaled=myIm->copy();
+    else scaled=fastTransform();
     
     
     
@@ -931,6 +1006,10 @@ QRgb KuickImage::getValidPixel(QImage * im, int x, int y, int dest_x, int dest_y
 void KuickImage::setViewportSize(const QSize &size)
 {
 	myIsDirty=(size == myViewport.size()) ? myIsDirty : true;
+	
+	if (size == myViewport.size())
+		kdDebug() << "Setting viewport size to " << size.width() << "x" << size.height() << endl;
+		
 	myViewport.setSize(size);
 }
 

@@ -39,6 +39,7 @@
 #include "imdata.h"
 #include "kuickdata.h"
 
+class ImageWindow;
 
 // hmm, global declaration for now
 enum FlipMode { FlipNone = 0, FlipHorizontal = 1, FlipVertical = 2 };
@@ -75,6 +76,7 @@ public:
   void		setViewportSize(const QSize &size);
   void		setViewportPosition(const QPoint &point);
   void		setViewport(const QRect &vp);
+  const QRect & getViewport() const { return myViewport; }
   
   QImage	smoothTransform();
   QImage	fastTransform();
@@ -152,6 +154,8 @@ class ImlibWidget : public QWidget
 {
   Q_OBJECT
 
+  friend class ImageWindow;  
+  
 public:
 
   ImlibWidget( ImData *_idata=0, QWidget *parent=0, const char *name=0 );
@@ -168,9 +172,9 @@ public:
   void 		setRotation( Rotation );
   void 		setFlipMode( int mode );
 
-  int 		brightness() 		 const;
-  int 		contrast()		 const;
-  int 		gamma() 		 const;
+  int 		brightness() 		 const {return mod_brightness;}
+  int 		contrast()		 const {return mod_contrast;}
+  int 		gamma() 		 const {return mod_gamma;}
   Rotation 	rotation() 		 const { return m_kuim ? m_kuim->absRotation() : ROT_0; }
   FlipMode	flipMode() 		 const { return m_kuim ? m_kuim->flipMode() : FlipNone; }
 
@@ -184,6 +188,16 @@ public:
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
 
+  void		setViewportSize(const QSize &size) { m_kuim->setViewportSize(size); }
+  void		setViewportPosition(const QPoint &point) {m_kuim->setViewportPosition(point); }
+  void		setViewport(const QRect &vp) { m_kuim->setViewport(vp); }
+  const QSize	originalImageSize() { if (!imageLoaded()) return QSize(0,0); return QSize(m_kuim->originalWidth(), m_kuim->originalHeight()); }
+  const QString& imageFilename() { return m_kuim->filename(); }
+  
+  bool		imageLoaded() { return m_kuim != 0L ; }
+  
+  void		autoScaleImage(const QSize &maxImageSize);
+  
   /**
    * @return true if auto-rotation is not possible, e.g. because no metadata
    * about orientation is available
@@ -207,8 +221,7 @@ protected:
   void 		rotate( int );
   void 		updateWidget( bool geometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
-  virtual void  loaded( KuickImage * );
-
+  
   virtual void resize(int w, int h);
   
   virtual void	paintEvent( QPaintEvent *e);
@@ -249,6 +262,7 @@ protected slots:
 
 signals:
   void 		sigBadImage( const QString& );
+  void		loaded( KuickImage * );
 
 };
 
