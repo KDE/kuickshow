@@ -27,7 +27,7 @@ class KuickConfigDialog : public LogoTabDialog
     Q_OBJECT
 
 public:
-    KuickConfigDialog( KAccel *browerAccel, QWidget *parent=0,
+    KuickConfigDialog( KActionCollection *coll, QWidget *parent=0,
 		       const char *name=0, bool modal=true);
     ~KuickConfigDialog();
 
@@ -40,7 +40,7 @@ private:
     DefaultsWidget   *defaultsWidget;
     GeneralWidget    *generalWidget;
     KKeyChooser      *imageKeyChooser, *browserKeyChooser;
-    KAccel 	     *m_browserAccel;
+    KActionCollection *coll;
 
     ImageWindow      *imageWindow;
 

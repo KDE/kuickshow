@@ -23,13 +23,13 @@
 #include "kuickdata.h"
 
 
-KuickConfigDialog::KuickConfigDialog( KAccel *browserAccel, QWidget *parent,
+KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 				      const char *name, bool modal )
     : LogoTabDialog( KJanusWidget::Tabbed, i18n("KuickShow Configuration"),
 		     Help | Default | Ok | Apply | Cancel, Ok,
 		     parent, name, modal )
 {
-    m_browserAccel = browserAccel;
+    coll = _coll;
     QVBox *box = addVBoxPage( i18n("General") );
     generalWidget = new GeneralWidget( box, "general widget" );
 
@@ -44,7 +44,7 @@ KuickConfigDialog::KuickConfigDialog( KAccel *browserAccel, QWidget *parent,
     imageKeyChooser = new KKeyChooser( imageWindow->accel(), box );
 
     box = addVBoxPage( i18n("Browser Shortcuts") );
-    browserKeyChooser = new KKeyChooser( browserAccel, box );
+    browserKeyChooser = new KKeyChooser( coll, box );
 
     connect( this, SIGNAL( defaultClicked() ), SLOT( resetDefaults() ));
 }
@@ -63,7 +63,8 @@ void KuickConfigDialog::applyConfig()
     imageWindow->accel()->writeSettings();
 
     browserKeyChooser->commitChanges();
-    m_browserAccel->writeSettings();
+    // remove QString::null parameter -- ellis
+    coll->writeShortcutSettings( QString::null );
 
     KGlobal::config()->sync();
 }

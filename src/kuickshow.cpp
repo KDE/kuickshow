@@ -198,8 +198,9 @@ void KuickShow::initGUI( const KURL& startDir )
 
     KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit" );
 
+    // remove QString::null parameter -- ellis
+    coll->readShortcutSettings( QString::null );
     m_accel = coll->accel();
-    m_accel->readSettings();
 
     KToolBar *tBar = toolBar();
     coll->action("up")->plug( tBar );
@@ -209,7 +210,7 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action("reload")->plug( tBar );
 
     tBar->insertSeparator();
-    configure->plug ( tBar );
+    configure->plug( tBar );
     slide->plug( tBar );
     tBar->insertSeparator();
     hidden->plug( tBar );
@@ -640,7 +641,7 @@ void KuickShow::configuration()
 	initGUI( QDir::homeDirPath() );
     }
 
-    dialog = new KuickConfigDialog( m_accel, 0L, "dialog", false );
+    dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L, "dialog", false );
     dialog->resize( 540, 510 );
     dialog->setIcon( kapp->miniIcon() );
 
