@@ -57,7 +57,7 @@ public:
   void autoScale( KuickImage *kuim );
   virtual bool autoRotate( KuickImage *kuim );
 
-  bool          saveImage( const QString& filename ) const;
+  bool          saveImage( const QString& filename, bool keepOriginalSize ) const;
 
 public slots:
   void 		zoomIn();

@@ -37,7 +37,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
         if ( tmpFile.status() == 0 )
         {
             tmpFile.setAutoDelete( true );
-            if ( imageWin.saveImage( tmpFile.name() ) )
+            if ( imageWin.saveImage( tmpFile.name(), true ) )
                 return printImageWithQt( tmpFile.name(), printer,
                                          imageWin.filename() );
         }
@@ -119,7 +119,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     //
     p.drawImage( x, y, image );
 
-    if ( printFilename ) 
+    if ( printFilename )
     {
         QString fname = minimizeString( originalFileName, fm, w );
         if ( !fname.isEmpty() )
@@ -141,7 +141,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 {
     if ( text.length() <= 5 )
         return QString::null; // no sense to cut that tiny little string
-    
+
     bool changed = false;
     while ( metrics.width( text ) > maxWidth )
     {
@@ -149,7 +149,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
         text.remove( mid, 2 ); // remove 2 characters in the middle
         changed = true;
     }
-    
+
     if ( changed ) // add "..." in the middle
     {
         int mid = text.length() / 2;
@@ -158,7 +158,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 
         text.replace( mid - 1, 3, "..." );
     }
-    
+
     return text;
 }
 

@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 
+#include <qcheckbox.h>
 #include <qcursor.h>
 #include <qdrawutil.h>
 #include <qkeycode.h>
@@ -837,39 +838,53 @@ void ImageWindow::saveImage()
         return;
 
     KuickData tmp;
-    QString file = KFileDialog::getSaveFileName( m_kuim->filename(),
-                                                 tmp.fileFilter, this );
-    if ( !file.isEmpty() )
+    QCheckBox *keepSize = new QCheckBox( i18n("Keep original Image Size"), 0L);
+    keepSize->setChecked( true );
+    KFileDialog dlg( QString::null, tmp.fileFilter, this, "filedialog", true,
+                     keepSize );
+    dlg.setSelection( m_kuim->filename() );
+    dlg.setOperationMode( KFileDialog::Saving );
+    dlg.setCaption( i18n("Save As") );
+    if ( dlg.exec() == QDialog::Accepted )
     {
-        if ( !saveImage( file ) )
+        QString file = dlg.selectedFile();
+        if ( !file.isEmpty() )
         {
-            QString tmp = i18n("Couldn't save the file.\n"
-                               "Perhaps the disk is full, or you don't "
-                               "have write permission to the file.");
-            KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
-        }
-        
-        if ( file == m_kuim->filename() ) {
-            Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+            if ( !saveImage( file, keepSize->isChecked() ) )
+            {
+                QString tmp = i18n("Couldn't save the file.\n"
+                                   "Perhaps the disk is full, or you don't "
+                                   "have write permission to the file.");
+                KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
+            }
+
+            if ( file == m_kuim->filename() ) {
+                Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+            }
         }
     }
 }
 
-bool ImageWindow::saveImage( const QString& filename ) const
+bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) const
 {
+    int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
+    int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
+    if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == 270 )
+        qSwap( w, h );
+        
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
-                                                   m_kuim->width(),
-                                                   m_kuim->height() );
+                                                   w, h );
+    bool success = false;
+    
     if ( saveIm ) {
         Imlib_apply_modifiers_to_rgb( id, saveIm );
-        bool success = Imlib_save_image( id, saveIm,
-                                         QFile::encodeName( filename ).data(),
-                                         NULL );
+        success = Imlib_save_image( id, saveIm,
+                                    QFile::encodeName( filename ).data(),
+                                    NULL );
         Imlib_kill_image( id, saveIm );
-        return success;
     }
 
-    return false;
+    return success;
 }
 
 void ImageWindow::toggleFullscreen()
