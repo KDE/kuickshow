@@ -75,7 +75,7 @@ void ImageWindow::init()
 //   KCursor::setAutoHideCursor( this, true, true );
 
     m_actions = new KActionCollection( this );
-    
+
     if ( !s_handCursor ) {
         QString file = locate( "appdata", "pics/handcursor.png" );
         if ( !file.isEmpty() )
@@ -88,12 +88,12 @@ void ImageWindow::init()
                                    this, "next_image" );
     connect( action, SIGNAL( activated() ), SLOT( slotRequestNext() ));
     m_actions->insert( action );
-                      
+
     action = new KAction( i18n("Show previous Image"), KStdAccel::prior(),
                           this, "previous_image" );
     connect( action, SIGNAL( activated() ), SLOT( slotRequestPrevious() ));
     m_actions->insert( action );
-                                   
+
 
     m_accel        = 0L;
     transWidget    = 0L;
@@ -123,7 +123,7 @@ void ImageWindow::updateAccel()
 
   m_actions->action( "next_image" )->plugAccel( m_accel );
   m_actions->action( "previous_image" )->plugAccel( m_accel );
-  
+
   m_accel->insertItem( i18n("Scroll Up"),	 "Scroll Up",         "Up" );
   m_accel->insertItem( i18n("Scroll Down"),      "Scroll Down",       "Down" );
   m_accel->insertItem( i18n("Scroll Left"),      "Scroll Left",       "Left" );
@@ -447,10 +447,10 @@ void ImageWindow::wheelEvent( QWheelEvent *e )
     e->accept();
     static const int WHEEL_DELTA = 120;
     int delta = e->delta();
-    
+
     if ( delta == 0 )
         return;
-    
+
     int steps = delta / WHEEL_DELTA;
     emit requestImage( this, -steps );
 }
@@ -710,7 +710,12 @@ void ImageWindow::setPopupMenu()
 {
   viewerMenu = new QPopupMenu( this );
 
+  m_actions->action("next_image")->plug( viewerMenu );
+  m_actions->action("previous_image")->plug( viewerMenu );
+  viewerMenu->insertSeparator();
+  
   brightnessMenu = new QPopupMenu( viewerMenu );
+  
   itemBrightnessPlus = brightnessMenu->insertItem( i18n("+"), this,
 						   SLOT( moreBrightness() ));
   itemBrightnessMinus = brightnessMenu->insertItem( i18n("-"), this,
