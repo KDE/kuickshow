@@ -162,7 +162,7 @@ KuickShow::KuickShow( const char *name )
       // else // we don't handle local non-images
   }
 
-  if ( kdata->startInLastDir || args->isSet( "lastdir" )) {
+  if ( (kdata->startInLastDir && args->count() == 0) || args->isSet( "lastdir" )) {
       kc->setGroup( "SessionSettings");
       startDir = kc->readEntry( "CurrentDirectory", startDir.url() );
   }
