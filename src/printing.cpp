@@ -37,7 +37,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
         if ( tmpFile.status() == 0 )
         {
             tmpFile.setAutoDelete( true );
-            if ( imageWin.saveImage( tmpFile.name() ) )
+            if ( imageWin.saveImage( tmpFile.name(), true ) )
                 return printImageWithQt( tmpFile.name(), printer,
                                          imageWin.filename() );
         }
