@@ -1,13 +1,20 @@
-/****************************************************************************
-** $Id$
-**
-** ImlibWidget: maps an Xlib window with Imlib's contents on a QWidget
-**
-** Created : 98
-**
-** Copyright (C) 1998-2001 by Carsten Pfeiffer.  All rights reserved.
-**
-****************************************************************************/
+/* This file is part of the KDE project
+   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation, version 2.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; see the file COPYING.  If not, write to
+   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+ */
 
 #ifndef IMLIBWIDGET_H
 #define IMLIBWIDGET_H
@@ -162,7 +169,7 @@ public:
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
-    
+
   /**
    * @return true if auto-rotation is not possible, e.g. because no metadata
    * about orientation is available

@@ -1,11 +1,20 @@
-/****************************************************************************
-** $Id$
-**
-** Created : 98
-**
-** Copyright (C) 1998-2001 by Carsten Pfeiffer.  All rights reserved.
-**
-****************************************************************************/
+/* This file is part of the KDE project
+   Copyright (C) 1998-2002 Carsten Pfeiffer <pfeiffer@kde.org>
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation, version 2.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; see the file COPYING.  If not, write to
+   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+ */
 
 #include <qkeycode.h>
 
@@ -55,7 +64,7 @@ FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
 
     connect( this, SIGNAL(urlEntered(const KURL&)),
              SLOT( slotURLEntered( const KURL& )));
-    
+
     // should actually be KDirOperator's job!
     connect( this, SIGNAL( finishedLoading() ), SLOT( slotFinishedLoading() ));
 }
@@ -158,7 +167,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 	
 	if ( (k->state() & (ControlButton | AltButton)) == 0 ) {
 	    int key = k->key();
- 	    if ( actionCollection()->action("delete")->shortcut().contains( key ) ) 
+ 	    if ( actionCollection()->action("delete")->shortcut().contains( key ) )
             {
                 k->accept();
 		KFileItem *item = getCurrentItem( false );

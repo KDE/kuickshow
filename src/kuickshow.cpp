@@ -1,13 +1,20 @@
-/****************************************************************************
-** $Id$
-**
-** KuickShow - a fast and comfortable image viewer based on Rasterman's Imlib
-**
-** Created : 98
-**
-** Copyright (C) 1998-2002 by Carsten Pfeiffer.  All rights reserved.
-**
-****************************************************************************/
+/* This file is part of the KDE project
+   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation, version 2.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; see the file COPYING.  If not, write to
+   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+ */
 
 #include <stdio.h>
 #include <assert.h>
@@ -125,7 +132,7 @@ KuickShow::KuickShow( const char *name )
           startDir = url;
           isDir = true;
       }
-      
+
       // need to check remote files
       else if ( !url.isLocalFile() )
       {
@@ -341,7 +348,7 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action( "separate dirs" )->setShortcut(Key_F12);
 
     // ### somehow the filewidget isn't resized at all sometimes, when initGUI
-    // is called lazily, not from this c'tor. (just a tiny little widget in 
+    // is called lazily, not from this c'tor. (just a tiny little widget in
     // the upper left corner of the mainwindow. Work around that.
     fileWidget->resize( size() );
 }
@@ -431,7 +438,7 @@ void KuickShow::showImage( const KFileItem *fi,
     fullscreen |= (newWindow && kdata->fullScreen);
 
     if ( FileWidget::isImage( fi ) ) {
-        
+
 	if ( newWindow ) {
 	    m_viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
 	    s_viewers.append( m_viewer );
@@ -693,8 +700,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
     ImageWindow *window = dynamic_cast<ImageWindow*>( o );
     if ( window ) {
-        // The XWindow used to display Imlib's image is being resized when 
-        // switching images, causing enter- and leaveevents for this 
+        // The XWindow used to display Imlib's image is being resized when
+        // switching images, causing enter- and leaveevents for this
         // ImageWindow, leading to the cursor being unhidden. So we simply
         // don't pass those events to KCursor to prevent that.
         if ( eventType != QEvent::Leave && eventType != QEvent::Enter )

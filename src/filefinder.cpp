@@ -1,7 +1,19 @@
-/**
- * $Id$
- *
- * Copyright 1998, 1999, 2000, 20001 by Carsten Pfeiffer
+/* This file is part of the KDE project
+   Copyright (C) 1998-2002 Carsten Pfeiffer <pfeiffer@kde.org>
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation, version 2.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; see the file COPYING.  If not, write to
+   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
  */
 
 #include <qkeycode.h>
@@ -30,7 +42,7 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
              SLOT( hide() ));
     connect( completionBox(), SIGNAL( activated( const QString& ) ),
              SLOT( slotAccept( const QString& )));
-    connect( this, SIGNAL( returnPressed( const QString& )), 
+    connect( this, SIGNAL( returnPressed( const QString& )),
              SLOT( slotAccept( const QString& ) ));
 
     KURLCompletion *comp = new KURLCompletion();
@@ -39,10 +51,10 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     setCompletionObject( comp, false );
     setAutoDeleteCompletionObject( true );
     setFocusPolicy( ClickFocus );
-    
+
     KConfig *config = KGlobal::config();
     KConfigGroupSaver cs( config, "GeneralConfiguration" );
-    setCompletionMode( (KGlobalSettings::Completion) 
+    setCompletionMode( (KGlobalSettings::Completion)
                config->readNumEntry( "FileFinderCompletionMode",
                                      KGlobalSettings::completionMode()));
 }
