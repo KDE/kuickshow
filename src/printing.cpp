@@ -74,24 +74,58 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer)
         h -= fm.lineSpacing(); // ### assuming the filename fits into one line
     }
 
+    //
     // shrink image to pagesize, if necessary
+    //
     bool shrinkToFit = (printer.option( "kuickshow-shrinkToFit" ) != f);
     if ( shrinkToFit && image.width() > w || image.height() > h ) {
         image = image.smoothScale( w, h, QImage::ScaleMin );
     }
 
-    // center image
-    int x = (w - image.width())/2;
-    int y = (h - image.height())/2;
+
+    //
+    // align image
+    //
+    bool ok = false;
+    int alignment = printer.option("kuickshow-alignment").toInt( &ok );
+    if ( !ok )
+        alignment = Qt::AlignCenter; // default
+
+    int x = 0;
+    int y = 0;
+
+    // x - alignment
+    if ( alignment & Qt::AlignHCenter )
+        x = (w - image.width())/2;
+    else if ( alignment & Qt::AlignLeft )
+        x = 0;
+    else if ( alignment & Qt::AlignRight )
+        x = w - image.width();
+
+    // y - alignment
+    if ( alignment & Qt::AlignVCenter )
+        y = (h - image.height())/2;
+    else if ( alignment & Qt::AlignTop )
+        y = 0;
+    else if ( alignment & Qt::AlignBottom )
+        y = h - image.height();
+
+
+
+
+
+    //
+    // perform the actual drawing
+    //
     p.drawImage( x, y, image );
-    
+
     if ( printFilename ) {
         int fw = fm.width( filename );
         int x = (w - fw)/2;
         int y = h - fm.lineSpacing(); // ### assumption as above
         p.drawText( x, y, filename );
     }
-    
+
     p.end();
 
     return true;
@@ -110,7 +144,7 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setMargin( KDialog::marginHint() );
     layout->setSpacing( KDialog::spacingHint() );
-    
+
     m_addFileName = new QCheckBox( i18n("Print fi&lename below image"), this);
     m_addFileName->setChecked( true );
     layout->addWidget( m_addFileName );
