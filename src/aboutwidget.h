@@ -17,6 +17,8 @@
 #include <qevent.h>
 #include <qvbox.h>
 
+class KURLWidget;
+
 class AboutWidget : public QVBox
 {
     Q_OBJECT
@@ -26,9 +28,10 @@ public:
 
 protected:
     ~AboutWidget();
+    bool eventFilter( QObject*, QEvent * );
 
 private:
-    bool eventFilter( QObject*, QEvent * );
+    KURLWidget *m_homepage;
 
 };
 

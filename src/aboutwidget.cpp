@@ -10,6 +10,7 @@
 ****************************************************************************/
 
 #include <qdatetime.h>
+#include <qevent.h>
 #include <qglobal.h>
 #include <qgroupbox.h>
 #include <qlabel.h>
@@ -50,21 +51,17 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
     QLabel *authors = new QLabel("Kuickshow " KUICKSHOWVERSION
 				 " was brought to you by", gBox);
     authors->setAlignment( AlignCenter );
-    authors->installEventFilter( this );
 
-    KURLWidget *homepage = new KURLWidget("Carsten Pfeiffer", gBox);
-    homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
-    homepage->setAlignment( AlignCenter );
+    m_homepage = new KURLWidget("Carsten Pfeiffer", gBox);
+    m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
+    m_homepage->setAlignment( AlignCenter );
 
-    QLabel *copy = new QLabel("(C) 1998-2001", gBox);
+    QLabel *copy = new QLabel("(C) 1998-2002", gBox);
     copy->setAlignment( AlignCenter );
-    copy->installEventFilter( this );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );
-    if ( im->loadImage( file ) ) {
+    if ( im->loadImage( file ) )
 	im->setFixedSize( im->width(), im->height() );
-	im->installEventFilter( this );
-    }
     else {
 	delete im;
 	im = 0L;
@@ -79,8 +76,11 @@ AboutWidget::~AboutWidget()
 bool AboutWidget::eventFilter( QObject *o, QEvent *e )
 {
     if ( e->type() == QEvent::MouseButtonPress ) {
-	delete this;
-	return true;
+        QMouseEvent *ev = static_cast<QMouseEvent*>( e );
+        if ( !m_homepage->geometry().contains( ev->pos() ) ) {
+            delete this;
+            return true;
+        }
     }
 
     return QVBox::eventFilter( o, e );
