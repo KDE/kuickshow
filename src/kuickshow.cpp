@@ -225,12 +225,12 @@ void KuickShow::initGUI( const KURL& startDir )
                                   KShortcut(),
 				  this, SLOT( about() ), coll, "about" );
 
-    oneWindowAction = new KToggleAction( i18n("Open only one Image Window"),
+    oneWindowAction = new KToggleAction( i18n("Open Only One Image Window"),
 					 "window_new",
                                          KShortcut( CTRL+Key_N ), coll,
 					 "kuick_one window" );
 
-    m_toggleBrowserAction = new KToggleAction( i18n("Show/Hide the File Browser"), KShortcut( Key_Space ), coll, "toggleBrowser" );
+    m_toggleBrowserAction = new KToggleAction( i18n("Show/Hide File Browser"), KShortcut( Key_Space ), coll, "toggleBrowser" );
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
 
@@ -1029,7 +1029,7 @@ void KuickShow::initImlib()
 		    "Start kuickshow on the command line "
 		    "and look for error messages.\n"
 		    "I will quit now.");
-	    KMessageBox::error( this, tmp, i18n("Fatal Imlib error") );
+	    KMessageBox::error( this, tmp, i18n("Fatal Imlib Error") );
 
 	    ::exit(1);
 	}

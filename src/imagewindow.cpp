@@ -159,13 +159,13 @@ void ImageWindow::setupActions()
                  this, SLOT( maximize() ),
                  m_actions, "maximize" );
 
-    new KAction( i18n("Rotate 90 degrees"), Key_9,
+    new KAction( i18n("Rotate 90 Degrees"), Key_9,
                  this, SLOT( rotate90() ),
                  m_actions, "rotate90" );
-    new KAction( i18n("Rotate 180 degrees"), Key_8,
+    new KAction( i18n("Rotate 180 Degrees"), Key_8,
                  this, SLOT( rotate180() ),
                  m_actions, "rotate180" );
-    new KAction( i18n("Rotate 270 degrees"), Key_7,
+    new KAction( i18n("Rotate 270 Degrees"), Key_7,
                  this, SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
@@ -220,7 +220,7 @@ void ImageWindow::setupActions()
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
 
-    new KAction( i18n("Toggle Fullscreen mode"), Key_Return,
+    new KAction( i18n("Toggle Fullscreen Mode"), Key_Return,
                  this, SLOT( toggleFullscreen() ),
                  m_actions, "toggle_fullscreen" );
     new KAction( i18n("Reload Image"), Key_Enter,
@@ -847,7 +847,7 @@ void ImageWindow::saveImage()
         return;
 
     KuickData tmp;
-    QCheckBox *keepSize = new QCheckBox( i18n("Keep Original Image Size"), 0L);
+    QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), 0L);
     keepSize->setChecked( true );
     KFileDialog dlg( QString::null, tmp.fileFilter, this, "filedialog", true
 #if KDE_VERSION >= 310
