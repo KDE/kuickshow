@@ -10,12 +10,12 @@ METASOURCES = AUTO
 
 kuickshow_la_LDFLAGS = $(all_libraries) -module -avoid-version
 kuickshow_la_LIBADD  = $(LIB_KFILE) $(LIB_IMLIB)
-kuickshow_la_SOURCES =	\
+kuickshow_la_SOURCES =	kuickshow.cpp \
 	aboutwidget.cpp     generalwidget.cpp  kuickconfigdlg.cpp  main.cpp \
 	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \
-	imdata.cpp          kuickshow.cpp      basewidget.cpp \
-	filefinder.cpp      imlibwidget.cpp    kurlwidget.cpp logo.cpp \
-	filewidget.cpp      logotabdialog.cpp  kuickio.cpp    kuick.cpp
+	imdata.cpp          basewidget.cpp \
+	filefinder.cpp      kurlwidget.cpp logo.cpp filewidget.cpp \
+	logotabdialog.cpp  kuickio.cpp    kuick.cpp imlibwidget.cpp
 
 # now the kuickshow binary
 kuickshow_LDADD = kuickshow.la $(LIB_KFILE) $(LIB_IMLIB)
