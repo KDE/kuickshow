@@ -6,11 +6,11 @@ kdeinit_LTLIBRARIES = kuickshow.la
 
 # set the include path for X, qt and KDE
 INCLUDES = $(all_includes)
-KDE_CXXFLAGS = $(IMLIB_CFLAGS)
+KDE_CXXFLAGS = 
 METASOURCES = AUTO
 
 kuickshow_la_LDFLAGS = $(all_libraries) -module -avoid-version
-kuickshow_la_LIBADD  = $(LIB_KDEPRINT) $(LIB_IMLIB)
+kuickshow_la_LIBADD  = $(LIB_KDEPRINT)
 kuickshow_la_SOURCES =	kuickshow.cpp \
 	aboutwidget.cpp     generalwidget.cpp  kuickconfigdlg.cpp  main.cpp \
 	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \

@@ -14,7 +14,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
- */
+*/
 
 #ifndef KUICKSHOW_H
 #define KUICKSHOW_H
@@ -24,6 +24,7 @@
 #include <qstring.h>
 #include <qvaluelist.h>
 
+#include <kfileitem.h>
 #include <kmainwindow.h>
 #include <kurl.h>
 
@@ -32,12 +33,15 @@
 class FileWidget;
 class ImageWindow;
 class ImData;
-class KFileItem;
 class KuickConfigDialog;
 
 class KAccel;
 class KConfig;
 class KToggleAction;
+class AboutWidget;
+
+class KURL;
+class KURLComboBox;
 
 class DelayedRepeatEvent
 {
@@ -72,6 +76,11 @@ public:
     virtual void 	show();
     static QValueList<ImageWindow*>  s_viewers;
 
+    // overridden to make KDCOPActionProxy work -- all our actions are not
+    // in the mainwindow's collection, but in the filewidget's.
+    virtual KActionCollection* actionCollection() const;
+
+    
 protected:
     virtual void	readProperties( KConfig * );
 
@@ -94,7 +103,7 @@ private slots:
     void 		nextSlide();
     void                nextSlide( KFileItem *item );
     void		viewerDeleted();
-    void 		dropEvent( QDropEvent * );
+    void 		slotDropped( const KFileItem *, QDropEvent *, const KURL::List &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
 
@@ -104,6 +113,9 @@ private slots:
     void		slotReplayEvent();
     void                slotReplayAdvance();
     void                slotOpenURL();
+    void		slotSetURL( const KURL& );
+    void		slotURLComboReturnPressed();
+//     void                invalidateImages( const KFileItemList& items );
 
 private:
     void 		initGUI( const KURL& startDir );
@@ -118,6 +130,7 @@ private:
     uint                m_slideshowCycle;
 
     FileWidget   	*fileWidget;
+    KURLComboBox	*cmbPath;
     KuickConfigDialog 	*dialog;
     ImageWindow 	*m_viewer;
     KToggleAction 	*oneWindowAction;
@@ -126,7 +139,6 @@ private:
     QTimer              *m_slideTimer;
     KAction             *m_toggleBrowserAction;
     QGuardedPtr<AboutWidget> aboutWidget;
-
 };
 
 #endif
