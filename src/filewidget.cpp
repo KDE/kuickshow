@@ -9,7 +9,7 @@
 
 #include <qkeycode.h>
 
-#include <kapp.h> // KDE_VERSION
+#include <kapplication.h> // KDE_VERSION
 #include <kfilereader.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>

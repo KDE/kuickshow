@@ -21,7 +21,7 @@
 
 #include <kaccel.h>
 #include <kaction.h>
-#include <kapp.h>
+#include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <kcursor.h>
@@ -33,7 +33,7 @@
 #include <kpropsdlg.h>
 #include <kstatusbar.h>
 #include <kstdaction.h>
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 #include <ktoolbar.h>
 #include <kurldrag.h>
 #include <kwin.h>

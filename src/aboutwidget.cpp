@@ -15,7 +15,7 @@
 #include <qlabel.h>
 
 #include <kwin.h>
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 
 #include "imlibwidget.h"
 #include "kurlwidget.h"

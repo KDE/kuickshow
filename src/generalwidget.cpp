@@ -4,7 +4,7 @@
 #include <qtooltip.h>
 #include <qvgroupbox.h>
 
-#include <kcolorbtn.h>
+#include <kcolorbutton.h>
 #include <kdialog.h>
 #include <kiconloader.h>
 #include <klineedit.h>

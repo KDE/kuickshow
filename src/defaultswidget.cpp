@@ -8,7 +8,7 @@
 #include <kdialog.h>
 #include <klocale.h>
 #include <knuminput.h>
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 
 #include "imlibwidget.h"
 #include "defaultswidget.h"

@@ -41,7 +41,7 @@
 #include <kfiledialog.h>
 #include <klocale.h>
 #include <kstdaccel.h>
-#include <kstddirs.h>
+#include <kstandarddirs.h>
 #include <ktempfile.h>
 #include <kwin.h>
 #include <netwm.h>
