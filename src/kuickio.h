@@ -25,6 +25,7 @@ class KuickIO : public QObject
 public:
     static KuickIO * self( QWidget *parent );
 
+    bool deleteFile( const QString& path, bool dontAsk );
     bool deleteFile( const KURL&, bool dontAsk );
     bool deleteFiles( const KURL::List&, bool dontAsk );
 

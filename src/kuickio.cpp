@@ -20,6 +20,17 @@ KuickIO * KuickIO::self( QWidget *parent )
     return s_self;
 }
 
+bool KuickIO::deleteFile( const QString& path, bool dontAsk )
+{
+    KURL url;
+    if ( path.at(0) == '/' )
+        url.setPath( path );
+    else
+        url = path;
+
+    deleteFile( url, dontAsk );
+}
+
 bool KuickIO::deleteFile( const KURL& url, bool dontAsk )
 {
     if ( !dontAsk ) {
