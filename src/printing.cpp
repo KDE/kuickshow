@@ -1,3 +1,7 @@
+#include <qcheckbox.h>
+#include <qfont.h>
+#include <qfontmetrics.h>
+#include <qgrid.h>
 #include <qhbox.h>
 #include <qlayout.h>
 #include <qimage.h>
@@ -10,6 +14,7 @@
 #include <kdialog.h>
 #include <klocale.h>
 #include <kdebug.h>
+#include <kglobalsettings.h>
 #include <knuminput.h>
 #include <kprinter.h>
 #include <ktempfile.h>
@@ -25,7 +30,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
     printer.setDocName( imageWin.filename() );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
-    KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page" ));
+    KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page"));
 
     if ( printer.setup( parent ) )
     {
@@ -55,11 +60,23 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer)
     p.begin( &printer );
 
     QPaintDeviceMetrics metrics( &printer );
+    p.setFont( KGlobalSettings::generalFont() );
+    QFontMetrics fm = p.fontMetrics();
+
     int w = metrics.width();
     int h = metrics.height();
 
+    QString t = "true";
+    QString f = "false";
+
+    bool printFilename = printer.option( "kuickshow-printFilename" ) != f;
+    if ( printFilename ) {
+        h -= fm.lineSpacing(); // ### assuming the filename fits into one line
+    }
+
     // shrink image to pagesize, if necessary
-    if ( image.width() > w || image.height() > h ) {
+    bool shrinkToFit = (printer.option( "kuickshow-shrinkToFit" ) != f);
+    if ( shrinkToFit && image.width() > w || image.height() > h ) {
         image = image.smoothScale( w, h, QImage::ScaleMin );
     }
 
@@ -67,6 +84,14 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer)
     int x = (w - image.width())/2;
     int y = (h - image.height())/2;
     p.drawImage( x, y, image );
+    
+    if ( printFilename ) {
+        int fw = fm.width( filename );
+        int x = (w - fw)/2;
+        int y = h - fm.lineSpacing(); // ### assumption as above
+        p.drawText( x, y, filename );
+    }
+    
     p.end();
 
     return true;
@@ -83,41 +108,46 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     setTitle( i18n("Image Settings") );
 
     QVBoxLayout *layout = new QVBoxLayout( this );
-    layout->setAutoAdd( true );
     layout->setMargin( KDialog::marginHint() );
     layout->setSpacing( KDialog::spacingHint() );
+    
+    m_addFileName = new QCheckBox( i18n("Print fi&lename below image"), this);
+    m_addFileName->setChecked( true );
+    layout->addWidget( m_addFileName );
 
     QVButtonGroup *group = new QVButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
+    layout->addWidget( group );
     m_shrinkToFit = new QRadioButton( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit->setChecked( true );
 
-    QHBox *box = new QHBox( group );
-    m_scale = new QRadioButton( i18n("Print in e&xact size"), box );
-    group->insert( m_scale );
-    connect( m_scale, SIGNAL( toggled( bool ) ), SLOT( toggleScaling( bool )));
+    QWidget *widget = new QWidget( group );
+    QGridLayout *grid = new QGridLayout( widget, 3, 3 );
+    grid->addColSpacing( 0, 30 );
+    grid->setColStretch( 0, 0 );
+    grid->setColStretch( 1, 1 );
+    grid->setColStretch( 2, 10 );
 
-    m_units = new KComboBox( false, box, "unit combobox" );
+    m_scale = new QRadioButton( i18n("Print in e&xact size: "), widget );
+    grid->addMultiCellWidget( m_scale, 0, 0, 0, 1 );
+    group->insert( m_scale );
+    connect( m_scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
+
+    m_units = new KComboBox( false, widget, "unit combobox" );
+    grid->addWidget( m_units, 0, 2, AlignLeft );
     m_units->insertItem( i18n("Millimeters") );
     m_units->insertItem( i18n("Centimeters") );
     m_units->insertItem( i18n("Inches") );
 
-    QGridLayout *grid = new QGridLayout( group, 2, 2, KDialog::marginHint() );
-//     grid->addItem( new QSpacerItem( 20, 1 ) );
-
-    m_width = new KIntNumInput( group, "exact width" );
-    m_width->setLabel( i18n("&Width" ));
+    m_width = new KIntNumInput( widget, "exact width" );
+    grid->addWidget( m_width, 1, 1 );
+    m_width->setLabel( i18n("&Width" ) );
     m_width->setMinValue( 1 );
 
-    grid->addWidget( m_width, 0, 1 );
-//     grid->addItem( new QSpacerItem( 20, 1) );
-
-    m_height = new KIntNumInput( m_width, 1, group );
-    m_height->setLabel( i18n("&Height" ));
+    m_height = new KIntNumInput( widget, "exact height" );
+    grid->addWidget( m_height, 2, 1 );
+    m_height->setLabel( i18n("&Height" ) );
     m_height->setMinValue( 1 );
-    grid->addWidget( m_height, 1, 1 );
-
-
 }
 
 KuickPrintDialogPage::~KuickPrintDialogPage()
@@ -131,6 +161,7 @@ void KuickPrintDialogPage::getOptions( QMap<QString,QString>& opts,
     QString f = "false";
 
 //    ### opts["kuickshow-alignment"] = ;
+    opts["kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
     opts["kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;
     opts["kuickshow-scale"] = m_scale->isChecked() ? t : f;
     opts["kuickshow-scale-unit"] = m_units->currentText();
@@ -143,7 +174,8 @@ void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
     QString t = "true";
     QString f = "false";
 
-    m_shrinkToFit->setChecked( opts["kuickshow-shrinkToFit"] == t );
+    m_addFileName->setChecked( opts["kuickshow-printFilename"] != f );
+    m_shrinkToFit->setChecked( opts["kuickshow-shrinkToFit"] != f );
     m_scale->setChecked( opts["kuickshow-scale"] == t );
 
     m_units->setCurrentItem( opts["kuickshow-scale-unit"] );
@@ -155,10 +187,10 @@ void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
     val = opts["kuickshow-scale-height-pixels"].toInt( &ok );
     if ( ok )
         setScaleHeight( val, 1 ); // ###
-    
-    if ( !m_scale->isChecked() && !m_shrinkToFit->isChecked() )
-        m_shrinkToFit->setChecked( true );
-    
+
+    if ( m_scale->isChecked() == m_shrinkToFit->isChecked() )
+        m_shrinkToFit->setChecked( !m_scale->isChecked() );
+
     toggleScaling( m_scale->isChecked() );
 }
 

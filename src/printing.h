@@ -14,6 +14,7 @@
 
 #include <kdeprint/kprintdialogpage.h>
 
+class QCheckBox;
 class QRadioButton;
 class KComboBox;
 class KPrinter;
@@ -46,7 +47,7 @@ public:
 
 private slots:
     void toggleScaling( bool enable );
-    
+
 private:
     // return values in pixels!
     int scaleWidth() const;
@@ -60,6 +61,7 @@ private:
     KIntNumInput *m_width;
     KIntNumInput *m_height;
     KComboBox *m_units;
+    QCheckBox *m_addFileName;
 
 };
 

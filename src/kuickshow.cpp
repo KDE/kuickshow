@@ -410,8 +410,9 @@ void KuickShow::slotPrint()
 
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow( 0, id, this, "printing image" );
-    while ( it.current() ) {
-	if ( iw->loadImage( it.current()->url().path() ) )
+    KFileItem *item;
+    while ( (item = it.current()) ) {
+	if (FileWidget::isImage( item ) && iw->loadImage( item->url().path()))
 	    iw->printImage();
 	++it;
     }
@@ -865,7 +866,7 @@ void KuickShow::deleteAllViewers()
         (*it)->blockSignals( true ); // don't call viewerDeleted()
         (*it)->close( true );
     }
-    
+
     s_viewers.clear();
     m_viewer = 0L;
 }
