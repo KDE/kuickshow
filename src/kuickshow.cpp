@@ -980,7 +980,7 @@ void KuickShow::toggleBrowser()
         show();
         raise();
         KWin::setActiveWindow( winId() ); // ### this should not be necessary
-        setFocus();
+//         setFocus();
     }
     else if ( !s_viewers.isEmpty() )
         hide();
