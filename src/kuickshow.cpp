@@ -1185,4 +1185,12 @@ void KuickShow::deleteAllViewers()
     m_viewer = 0L;
 }
 
+KActionCollection * KuickShow::actionCollection() const
+{
+    if ( fileWidget )
+        return fileWidget->actionCollection();
+
+    return KMainWindow::actionCollection();
+}
+
 #include "kuickshow.moc"

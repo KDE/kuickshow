@@ -24,6 +24,7 @@
 #include <qstring.h>
 #include <qvaluelist.h>
 
+#include <kfileitem.h>
 #include <kmainwindow.h>
 #include <kurl.h>
 
@@ -34,7 +35,6 @@
 class FileWidget;
 class ImageWindow;
 class ImData;
-class KFileItem;
 class KuickConfigDialog;
 
 class KAccel;
@@ -78,6 +78,11 @@ public:
     virtual void 	show();
     static QValueList<ImageWindow*>  s_viewers;
 
+    // overridden to make KDCOPActionProxy work -- all our actions are not
+    // in the mainwindow's collection, but in the filewidget's.
+    virtual KActionCollection* actionCollection() const;
+
+    
 protected:
     virtual void	readProperties( KConfig * );
     void 		initImlibParams( ImData *, ImlibInitParams * );
@@ -113,6 +118,7 @@ private slots:
     void                slotOpenURL();
     void		slotSetURL( const KURL& );
     void		slotURLComboReturnPressed();
+//     void                invalidateImages( const KFileItemList& items );
 
 private:
     void 		initGUI( const KURL& startDir );
