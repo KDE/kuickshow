@@ -268,6 +268,7 @@ void ImageWindow::setFullscreen( bool enable )
 
 void ImageWindow::updateGeometry( int imWidth, int imHeight )
 {
+//     qDebug("::updateGeometry: %i, %i", imWidth, imHeight);
     //  XMoveWindow( x11Display(), win, 0, 0 );
     XResizeWindow( x11Display(), win, imWidth, imHeight );
 
@@ -287,9 +288,9 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 
     QString caption = i18n( "Filename (Imagewidth x Imageheight)",
                             "%1 (%2 x %3)" );
-    caption = caption.arg( kuim->filename() ).
-              arg( kuim->originalWidth() ).
-              arg( kuim->originalHeight() );
+    caption = caption.arg( m_kuim->filename() ).
+              arg( m_kuim->originalWidth() ).
+              arg( m_kuim->originalHeight() );
     setCaption( kapp->makeStdCaption( caption ) );
 }
 
@@ -698,7 +699,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     xtmp += xcenter;
     ytmp += ycenter;
 
-    kuim->resize( w, h );
+    m_kuim->resize( w, h );
     XResizeWindow( x11Display(), win, w, h );
     updateWidget( false );
 
@@ -818,7 +819,7 @@ void ImageWindow::setPopupMenu()
 
 void ImageWindow::printImage()
 {
-    if ( !kuim )
+    if ( !m_kuim )
         return;
 
     if ( !Printing::printImage( *this ) )
@@ -830,8 +831,11 @@ void ImageWindow::printImage()
 
 void ImageWindow::saveImage()
 {
+    if ( !m_kuim )
+        return;
+    
     KuickData tmp;
-    QString file = KFileDialog::getSaveFileName( kuim->filename(), 
+    QString file = KFileDialog::getSaveFileName( m_kuim->filename(),
                                                  tmp.fileFilter, this );
     if ( !file.isEmpty() )
     {
@@ -847,9 +851,9 @@ void ImageWindow::saveImage()
 
 bool ImageWindow::saveImage( const QString& filename ) const
 {
-    ImlibImage *saveIm = Imlib_clone_scaled_image( id, kuim->imlibImage(),
-                                                   kuim->width(),
-                                                   kuim->height() );
+    ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
+                                                   m_kuim->width(),
+                                                   m_kuim->height() );
     if ( saveIm ) {
         Imlib_apply_modifiers_to_rgb( id, saveIm );
         bool success = Imlib_save_image( id, saveIm,
@@ -867,14 +871,18 @@ void ImageWindow::toggleFullscreen()
     setFullscreen( !myIsFullscreen );
 }
 
-// upscale/downscale depending on configuration
 void ImageWindow::loaded( KuickImage *kuim )
 {
-    if ( !(kdata->isModsEnabled || kdata->upScale || kdata->downScale) ) {
+    if ( !kdata->isModsEnabled ) {
 	kuim->restoreOriginalSize();
-	return;
     }
+    else
+        autoScale( kuim );
+}
 
+// upscale/downscale depending on configuration
+void ImageWindow::autoScale( KuickImage *kuim )
+{
     int newW = kuim->originalWidth();
     int newH = kuim->originalHeight();
 
@@ -882,8 +890,17 @@ void ImageWindow::loaded( KuickImage *kuim )
     int mw = s.width();
     int mh = s.height();
 
-    if ( kdata->upScale ) {
-	if ( (newW < mw) && (newH < mh) ) {
+    if ( kuim->absRotation() == ROT_90 || kuim->absRotation() == ROT_270 )
+        qSwap( newW, newH );
+
+    bool doIt = false;
+    
+    if ( kdata->upScale ) 
+    {
+	if ( (newW < mw) && (newH < mh) ) 
+        {
+            doIt = true;
+
 	    float ratio1, ratio2;
 	    int maxUpScale = kdata->maxUpScale;
 
@@ -897,10 +914,15 @@ void ImageWindow::loaded( KuickImage *kuim )
 	}
     }
 
-    if ( kdata->downScale ) {
+    if ( kdata->downScale ) 
+    {
 	// eventually set width and height to the best/max possible screen size
-	if ( (newW > mw) || (newH > mh) ) {
-	    if ( newW > mw ) {
+	if ( (newW > mw) || (newH > mh) ) 
+        {
+            doIt = true;
+
+	    if ( newW > mw ) 
+            {
 		float ratio = (float) newW / (float) newH;
 		newW = mw;
 		newH = (int) ((float) newW / ratio);
@@ -915,7 +937,8 @@ void ImageWindow::loaded( KuickImage *kuim )
 	}
     }
 
-    kuim->resize( newW, newH );
+    if ( doIt )
+        kuim->resize( newW, newH );
 }
 
 int ImageWindow::desktopWidth( bool totalScreen ) const
@@ -944,7 +967,8 @@ QSize ImageWindow::maxImageSize() const
     if ( myIsFullscreen || initialFullscreen ) {
         int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
 	return QApplication::desktop()->screenGeometry(scnum).size();
-    } else {
+    } 
+    else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
     }
 }
@@ -965,7 +989,7 @@ void ImageWindow::resizeOptimal( int w, int h )
 
 void ImageWindow::maximize()
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
     bool oldUpscale = kdata->upScale;
@@ -974,7 +998,7 @@ void ImageWindow::maximize()
     kdata->upScale = true;
     kdata->downScale = true;
 
-    loaded( kuim );
+    autoScale( m_kuim );
     updateWidget( true );
 
     if ( !myIsFullscreen )

@@ -24,6 +24,7 @@
 
 #include <kcursor.h>
 #include <kdebug.h>
+#include <kfilemetainfo.h>
 
 #include "imlibwidget.h"
 
@@ -87,10 +88,9 @@ void ImlibWidget::init()
 {
     int w = 1; // > 0 for XCreateWindow
     int h = 1;
-    myRotation        = ROT_0;
     myFlipMode        = FlipNone;
     myBackgroundColor = Qt::black;
-    kuim              = 0L;
+    m_kuim              = 0L;
 
     if ( !id )
 	qFatal("ImlibWidget: Imlib not initialized, aborting.");
@@ -100,7 +100,7 @@ void ImlibWidget::init()
     setPalette( QPalette( myBackgroundColor ));
     setBackgroundMode( PaletteBackground );
 
-    imageCache = new ImageCache( id, 3 ); // cache three images (FIXME?)
+    imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
     connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
 
@@ -122,7 +122,7 @@ KURL ImlibWidget::url() const
         url.setPath( m_filename );
     else
         url = m_filename;
-    
+
     return url;
 }
 
@@ -135,15 +135,40 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
     mod.contrast = idata->contrast + ImlibOffset;
     mod.gamma = idata->gamma + ImlibOffset;
 
-    KuickImage *myKuim = imageCache->getKuimage( filename, mod );
-    if ( !myKuim ) {// couldn't load file, maybe corrupt or wrong format
+    KuickImage *kuim = imageCache->getKuimage( filename, mod );
+    if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
 	kdWarning() << "ImlibWidget: can't load image " << filename << endl;
 	return 0L;
     }
 
-    loaded( myKuim ); // maybe upscale/downscale in subclasses
+    if ( kdata->autoRotation ) 
+    {
+        KFileMetaInfo metadatas( filename );
+        KFileMetaInfoItem metaitem = metadatas.item("Orientation");
+        if ( metaitem.isValid() ) 
+        {
+            if ( !metaitem.value().isNull() )
+            {
+                switch ( metaitem.value().toInt() ) 
+                {
+                    case 1:
+                    default:
+                        kuim->rotateAbs( ROT_0 );
+                        break;
+                    case 6:
+                        kuim->rotateAbs( ROT_90 );
+                        break;
+                    case 8:
+                        kuim->rotateAbs( ROT_270 );
+                        break;
+                }
+            }
+        }
+    }
 
-    return myKuim;
+    loaded( kuim ); // maybe upscale/downscale in subclasses
+
+    return kuim;
 }
 
 // overridden in subclass
@@ -153,12 +178,11 @@ void ImlibWidget::loaded( KuickImage * )
 
 bool ImlibWidget::loadImage( const QString& filename )
 {
-    KuickImage *myKuim = loadImageInternal( filename );
+    KuickImage *kuim = loadImageInternal( filename );
     // FIXME - check everywhere if we have a kuim or not!
 
-    if ( myKuim ) {
-	kuim = myKuim;
-
+    if ( kuim ) {
+	m_kuim = kuim;
 	autoUpdate( true ); // -> updateWidget() -> updateGeometry()
 	m_filename = filename;
         return true;
@@ -170,9 +194,9 @@ bool ImlibWidget::loadImage( const QString& filename )
 
 bool ImlibWidget::cacheImage( const QString& filename )
 {
-    KuickImage *myKuim = loadImageInternal( filename );
-    if ( myKuim ) {
-        myKuim->renderPixmap();
+    KuickImage *kuim = loadImageInternal( filename );
+    if ( kuim ) {
+        kuim->renderPixmap();
         return true;
     }
     return false;
@@ -218,28 +242,28 @@ void ImlibWidget::setGamma( int factor )
 
 void ImlibWidget::zoomImage( float factor )
 {
-    if ( factor == 1 || factor == 0 || !kuim )
+    if ( factor == 1 || factor == 0 || !m_kuim )
 	return;
 
     float wf, hf;
 
-    wf = (float) kuim->width() * factor;
-    hf = (float) kuim->height() * factor;
+    wf = (float) m_kuim->width() * factor;
+    hf = (float) m_kuim->height() * factor;
 
     if ( wf <= 2.0 || hf <= 2.0 ) // minimum size for an image is 2x2 pixels
 	return;
 
-    kuim->resize( (int) wf, (int) hf );
+    m_kuim->resize( (int) wf, (int) hf );
     autoUpdate( true );
 }
 
 
 void ImlibWidget::showImageOriginalSize()
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
-    kuim->restoreOriginalSize();
+    m_kuim->restoreOriginalSize();
     autoUpdate( true );
 
     showImage();
@@ -248,78 +272,61 @@ void ImlibWidget::showImageOriginalSize()
 
 void ImlibWidget::setRotation( Rotation rot )
 {
-    if ( myRotation == rot )
-	return;
+    if ( m_kuim )
+        m_kuim->rotateAbs( rot );
 
-    int diff = rot - myRotation;
-    bool clockWise = (diff > 0);
-
-    switch( abs(diff) ) {
-    case ROT_90:
-	if ( clockWise ) rotate90();
-	else 	     rotate270();
-	break;
-    case ROT_180:
-	rotate180();
-	break;
-    case ROT_270:	
-	if ( clockWise ) rotate270();
-	else 	     rotate90();
-	break;
-    }
-
-    // image is automatically updated in rotateXX()
+    autoUpdate( true );
 }
 
 
 // slots connected to Accels and popupmenu
 void ImlibWidget::rotate90()
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
-    kuim->rotate( ROT_90 );
+    m_kuim->rotate( ROT_90 );
     autoUpdate( true );
-    myRotation = (Rotation) ((myRotation + ROT_90) % 4);
+    m_kuim->setRotationValue( (Rotation) ((m_kuim->absRotation() + ROT_90) % 4) );
 }
 
 void ImlibWidget::rotate180()
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
-    kuim->rotate( ROT_180 );
+    m_kuim->rotate( ROT_180 );
     autoUpdate();
-    myRotation = (Rotation) ((myRotation + ROT_180) % 4);
+    m_kuim->setRotationValue( (Rotation) ((m_kuim->absRotation() + ROT_180) % 4) );
 }
 
 void ImlibWidget::rotate270()
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
-    kuim->rotate( ROT_270 );
+    m_kuim->rotate( ROT_270 );
     autoUpdate( true );
-    myRotation = (Rotation) ((myRotation + ROT_270) % 4);
+    m_kuim->setRotationValue( (Rotation) ((m_kuim->absRotation() + ROT_270) % 4) );
 }
 
 
 // should this go into a subclass?
 void ImlibWidget::flipHoriz()
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
-    kuim->flip( FlipHorizontal );
+    m_kuim->flip( FlipHorizontal );
     autoUpdate();
 }
 
 void ImlibWidget::flipVert()
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
-    kuim->flip( FlipVertical );
+    m_kuim->flip( FlipVertical );
     autoUpdate();
 }
 // end slots
@@ -327,25 +334,25 @@ void ImlibWidget::flipVert()
 
 void ImlibWidget::setFlipMode( FlipMode mode )
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
     bool changed = false;
 
     if ( (myFlipMode & FlipHorizontal) && !(mode & FlipHorizontal) ||
 	 (!(myFlipMode & FlipHorizontal) && mode & FlipHorizontal) ) {
-	Imlib_flip_image_horizontal( id, kuim->imlibImage() );
+	Imlib_flip_image_horizontal( id, m_kuim->imlibImage() );
 	changed = true;
     }
 
     if ( (myFlipMode & FlipVertical) && (mode & ~FlipVertical) ||
 	 ((myFlipMode & ~FlipVertical) && mode & FlipVertical) ) {
-	Imlib_flip_image_vertical( id, kuim->imlibImage() );
+	Imlib_flip_image_vertical( id, m_kuim->imlibImage() );
 	changed = true;
     }
 
     if ( changed ) {
-	kuim->setDirty( true );
+	m_kuim->setDirty( true );
 	autoUpdate();
 	myFlipMode = mode;
     }
@@ -354,16 +361,16 @@ void ImlibWidget::setFlipMode( FlipMode mode )
 
 void ImlibWidget::updateWidget( bool geometryUpdate )
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
 //     if ( geometryUpdate )
 //         XUnmapWindow( x11Display(), win );// remove the old image -> no flicker
 
-    XSetWindowBackgroundPixmap( x11Display(), win, kuim->pixmap() );
+    XSetWindowBackgroundPixmap( x11Display(), win, m_kuim->pixmap() );
 
     if ( geometryUpdate )
-	updateGeometry( kuim->width(), kuim->height() );
+	updateGeometry( m_kuim->width(), m_kuim->height() );
 
     XClearWindow( x11Display(), win );
 
@@ -371,7 +378,7 @@ void ImlibWidget::updateWidget( bool geometryUpdate )
 }
 
 
-// here we just use the size of kuim, may be overridden in subclass
+// here we just use the size of m_kuim, may be overridden in subclass
 void ImlibWidget::updateGeometry( int w, int h )
 {
     XMoveWindow( x11Display(), win, 0, 0 ); // center?
@@ -402,21 +409,21 @@ const QColor& ImlibWidget::backgroundColor() const
 
 void ImlibWidget::setImageModifier()
 {
-    if ( !kuim )
+    if ( !m_kuim )
 	return;
 
-    Imlib_set_image_modifier( id, kuim->imlibImage(), &mod );
-    kuim->setDirty( true );
+    Imlib_set_image_modifier( id, m_kuim->imlibImage(), &mod );
+    m_kuim->setDirty( true );
 }
 
 int ImlibWidget::imageWidth() const
 {
-    return kuim ? kuim->width() : 0;
+    return m_kuim ? m_kuim->width() : 0;
 }
 
 int ImlibWidget::imageHeight() const
 {
-    return kuim ? kuim->height() : 0;
+    return m_kuim ? m_kuim->height() : 0;
 }
 
 void ImlibWidget::setBusyCursor()
@@ -446,6 +453,7 @@ KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
 
     myOrigWidth  = myWidth;
     myOrigHeight = myHeight;
+    myRotation   = ROT_0;
 }
 
 KuickImage::~KuickImage()
@@ -474,6 +482,9 @@ void KuickImage::restoreOriginalSize()
     myWidth   = myOrigWidth;
     myHeight  = myOrigHeight;
     myIsDirty = true;
+
+    if ( myRotation == ROT_90 || myRotation == ROT_270 )
+        qSwap( myWidth, myHeight );
 }
 
 
@@ -491,6 +502,8 @@ void KuickImage::renderPixmap()
     if ( !myIsDirty )
 	return;
 
+//     qDebug("### rendering: %s", myFilename.latin1());
+    
     if ( myPixmap )
 	Imlib_free_pixmap( myId, myPixmap );
 
@@ -525,7 +538,7 @@ void KuickImage::rotate( Rotation rot )
     }
 
     else if ( rot == ROT_90 || rot == ROT_270 ) {
-	swap( &myWidth, &myHeight );
+	qSwap( myWidth, myHeight );
 	Imlib_rotate_image( myId, myIm, -1 );
 
 	if ( rot == ROT_90 ) 		// rotate 90 degrees
@@ -548,15 +561,28 @@ void KuickImage::flip( FlipMode flipMode )
     myIsDirty = true;
 }
 
-
-void KuickImage::swap( int *a, int *b )
+void KuickImage::rotateAbs( Rotation rot )
 {
-    int help = *a;
-    *a = *b;
-    *b = help;
+    if ( myRotation == rot )
+	return;
+
+    int diff = rot - myRotation;
+    bool clockWise = (diff > 0);
+
+    switch( abs(diff) ) {
+    case ROT_90:
+        rotate( clockWise ? ROT_90 : ROT_270 );
+	break;
+    case ROT_180:
+	rotate( ROT_180 );
+	break;
+    case ROT_270:
+        rotate( clockWise ? ROT_270 : ROT_90 );
+	break;
+    }
+
+    myRotation = (Rotation) ((myRotation + rot) % 4);
 }
-
-
 
 //----------
 
@@ -664,6 +690,7 @@ KuickImage * ImageCache::getKuimage( const QString& file,
     }
 
     if ( kuickList.count() > (uint) myMaxImages ) {
+//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).latin1());
 	kuickList.removeLast();
 	fileList.remove( fileList.fromLast() );
     }
@@ -675,13 +702,13 @@ KuickImage * ImageCache::getKuimage( const QString& file,
 /*
 KuickImage * ImageCache::find( const QString& file )
 {
-  KuickImage *myKuim = 0L;
+  KuickImage *kuim = 0L;
   int index = fileList.findIndex( file );
   if ( index >= 0 )
-    myKuim = kuickList.at( index );
+    kuim = kuickList.at( index );
 
-  debug("found cached KuickImage? : %p", myKuim );
-  return myKuim;
+  qDebug("found cached KuickImage? : %p", kuim );
+  return kuim;
 }
 */
 #include "imlibwidget.moc"

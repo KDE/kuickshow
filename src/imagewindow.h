@@ -54,6 +54,7 @@ public:
    * it won't ever get a bigger size than the workarea.
    */
   void resizeOptimal( int w, int h );
+  void autoScale( KuickImage *kuim );
 
   bool          saveImage( const QString& filename ) const;
 

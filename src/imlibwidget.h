@@ -55,6 +55,7 @@ public:
   void 		resize( int width, int height );
   void 		restoreOriginalSize();
   void 		rotate( Rotation rot );
+  void          rotateAbs( Rotation rot );
   void 		flip( FlipMode flipMode );
   ImlibImage *	imlibImage()	const { return myIm;      }
   Pixmap& 	pixmap();
@@ -63,6 +64,8 @@ public:
 
   void 		setDirty( bool d )    { myIsDirty = d;    }
   bool 		isDirty() 	const { return myIsDirty; }
+  Rotation absRotation()        const { return myRotation; }
+  void setRotationValue( Rotation rot ) { myRotation = rot; }
 
 private:
   int 		myWidth;
@@ -75,8 +78,7 @@ private:
 
   int 		myOrigWidth;
   int 		myOrigHeight;
-
-  void 		swap( int *a, int *b );
+  Rotation 	myRotation;
 
 signals:
   void 		startRendering();
@@ -150,13 +152,13 @@ public:
   int 		brightness() 		 const;
   int 		contrast()		 const;
   int 		gamma() 		 const;
-  Rotation 	rotation() 		 const { return myRotation; 	  }
+  Rotation 	rotation() 		 const { return m_kuim ? m_kuim->absRotation() : ROT_0; }
   FlipMode	flipMode() 		 const { return myFlipMode; 	  }
 
   int 		imageWidth() 		 const;
   int 		imageHeight() 		 const;
 
-  void 		setAutoRender( bool enable )  { isAutoRendering = enable;}
+  void 		setAutoRender( bool enable )   { isAutoRendering = enable;}
   bool 		isAutoRenderEnabled() 	const  { return isAutoRendering;  }
   void 		setMaxImageCache( int );
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
@@ -195,7 +197,7 @@ protected:
   bool		stillResizing, deleteImData, deleteImlibData;
   bool          imlibModifierChanged;
 
-  KuickImage 	*kuim;
+  KuickImage 	*m_kuim;
   ImageCache 	*imageCache;
   ImlibData     *id;
   ImData    	*idata;
@@ -210,7 +212,6 @@ protected:
 private:
   bool 		isAutoRendering;
   FlipMode 	myFlipMode;
-  Rotation 	myRotation;
   int 		myMaxImageCache;
   QColor 	myBackgroundColor;
 

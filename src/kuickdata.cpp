@@ -29,6 +29,7 @@ KuickData::KuickData()
 
   isModsEnabled    = true;
   fullScreen       = false;
+  autoRotation     = false;
   downScale 	   = true;
   upScale 	   = false;
   flipVertically   = false;
@@ -72,6 +73,7 @@ void KuickData::load()
   preloadImage = kc->readBoolEntry( "PreloadNextImage", def.preloadImage );
 
   fullScreen = kc->readBoolEntry( "Fullscreen", def.fullScreen);
+  autoRotation = kc->readBoolEntry( "AutoRotation", def.autoRotation);
   downScale  = kc->readBoolEntry( "ShrinkToScreenSize", def.downScale );
   upScale    = kc->readBoolEntry( "ZoomToScreenSize", def.upScale );
   flipVertically   = kc->readBoolEntry( "FlipVertically", def.flipVertically );
@@ -112,6 +114,7 @@ void KuickData::save()
   kc->writeEntry( "PreloadNextImage", preloadImage );
 
   kc->writeEntry( "Fullscreen", fullScreen  );
+  kc->writeEntry( "AutoRotation", autoRotation  );
   kc->writeEntry( "ShrinkToScreenSize", downScale );
   kc->writeEntry( "ZoomToScreenSize", upScale );
   kc->writeEntry( "FlipVertically", flipVertically );

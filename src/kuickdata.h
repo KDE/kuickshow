@@ -44,6 +44,7 @@ public:
     float	zoomSteps;
 
     bool 	preloadImage     :1;
+    bool 	autoRotation     :1;
     bool 	fullScreen       :1;
 
     // default image modifications
