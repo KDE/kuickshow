@@ -199,7 +199,7 @@ void KuickShow::initGUI( const KURL& startDir )
     KAction *showInOther = new KAction( i18n("Show Image"), KShortcut(),
                                         this, SLOT( slotShowInOtherWindow() ),
                                         coll, "kuick_showInOtherWindow" );
-    KAction *showInSame = new KAction( i18n("Show Image in Active Window"), 
+    KAction *showInSame = new KAction( i18n("Show Image in Active Window"),
                                        KShortcut(),
                                        this, SLOT( slotShowInSameWindow() ),
                                        coll, "kuick_showInSameWindow" );
@@ -331,7 +331,9 @@ void KuickShow::viewerDeleted()
 
     else if ( haveBrowser() ) {
 	setActiveWindow();
-	fileWidget->setFocus();
+        // This setFocus() call causes problems in the combiview (always the
+        // directory view on the left gets the focus, which is not desired)
+        // fileWidget->setFocus();
     }
 
     if ( fileWidget )
