@@ -71,7 +71,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     QString f = "false";
 
     int filenameOffset = 0;
-    bool printFilename = printer.option( "kuickshow-printFilename" ) != f;
+    bool printFilename = printer.option( "app-kuickshow-printFilename" ) != f;
     if ( printFilename ) {
         filenameOffset = fm.lineSpacing() + 14;
         h -= filenameOffset; // ### assuming the filename fits into one line
@@ -80,7 +80,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     //
     // shrink image to pagesize, if necessary
     //
-    bool shrinkToFit = (printer.option( "kuickshow-shrinkToFit" ) != f);
+    bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
     if ( shrinkToFit && image.width() > w || image.height() > h ) {
         image = image.smoothScale( w, h, QImage::ScaleMin );
     }
@@ -90,7 +90,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     // align image
     //
     bool ok = false;
-    int alignment = printer.option("kuickshow-alignment").toInt( &ok );
+    int alignment = printer.option("app-kuickshow-alignment").toInt( &ok );
     if ( !ok )
         alignment = Qt::AlignCenter; // default
 
@@ -194,13 +194,13 @@ void KuickPrintDialogPage::getOptions( QMap<QString,QString>& opts,
     QString t = "true";
     QString f = "false";
 
-//    ### opts["kuickshow-alignment"] = ;
-    opts["kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
-    opts["kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;
-    opts["kuickshow-scale"] = m_scale->isChecked() ? t : f;
-    opts["kuickshow-scale-unit"] = m_units->currentText();
-    opts["kuickshow-scale-width-pixels"] = QString::number( scaleWidth() );
-    opts["kuickshow-scale-height-pixels"] = QString::number( scaleHeight() );
+//    ### opts["app-kuickshow-alignment"] = ;
+    opts["app-kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
+    opts["app-kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;
+    opts["app-kuickshow-scale"] = m_scale->isChecked() ? t : f;
+    opts["app-kuickshow-scale-unit"] = m_units->currentText();
+    opts["app-kuickshow-scale-width-pixels"] = QString::number( scaleWidth() );
+    opts["app-kuickshow-scale-height-pixels"] = QString::number( scaleHeight() );
 }
 
 void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
@@ -208,17 +208,17 @@ void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
     QString t = "true";
     QString f = "false";
 
-    m_addFileName->setChecked( opts["kuickshow-printFilename"] != f );
-    m_shrinkToFit->setChecked( opts["kuickshow-shrinkToFit"] != f );
-    m_scale->setChecked( opts["kuickshow-scale"] == t );
+    m_addFileName->setChecked( opts["app-kuickshow-printFilename"] != f );
+    m_shrinkToFit->setChecked( opts["app-kuickshow-shrinkToFit"] != f );
+    m_scale->setChecked( opts["app-kuickshow-scale"] == t );
 
-    m_units->setCurrentItem( opts["kuickshow-scale-unit"] );
+    m_units->setCurrentItem( opts["app-kuickshow-scale-unit"] );
 
     bool ok;
-    int val = opts["kuickshow-scale-width-pixels"].toInt( &ok );
+    int val = opts["app-kuickshow-scale-width-pixels"].toInt( &ok );
     if ( ok )
         setScaleWidth( val, 1 ); // ###
-    val = opts["kuickshow-scale-height-pixels"].toInt( &ok );
+    val = opts["app-kuickshow-scale-height-pixels"].toInt( &ok );
     if ( ok )
         setScaleHeight( val, 1 ); // ###
 
