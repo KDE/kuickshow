@@ -95,7 +95,7 @@ KuickShow::KuickShow( const char *name )
   KURL startDir = base;
   for ( int i = 0; i < args->count(); i++ ) {
       KURL url( base, args->arg( i ) );
-      KFileItem item( -1, -1, url, false );
+      KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url, false );
 
       // for remote URLs, we don't know if it's a file or directory, but
       // FileWidget::isImage() should correct in most cases.
@@ -439,7 +439,7 @@ void KuickShow::dropEvent( QDropEvent *e )
 	    if ( !u.fileName().isEmpty() )
 		dir = u;
 	    else {
-		KFileItem item( -1, -1, u, false );
+		KFileItem item( KFileItem::Unknown, KFileItem::Unknown, u, false );
 		showImage( &item, true );
 	    }
 	}
@@ -711,7 +711,7 @@ void KuickShow::readProperties( KConfig *kc )
     QStringList images = kc->readListEntry( "Images shown" );
     QStringList::Iterator it;
     for ( it = images.begin(); it != images.end(); ++it ) {
-	KFileItem item( -1, -1, *it, false );
+	KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it, false );
 	if ( item.isReadable() )
 	    showImage( &item, true );
     }
