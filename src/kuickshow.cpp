@@ -188,7 +188,6 @@ KuickShow::~KuickShow()
     delete kdata;
 }
 
-
 void KuickShow::initGUI( const KURL& startDir )
 {
     fileWidget = new FileWidget( startDir, this, "MainWidget" );
@@ -204,6 +203,13 @@ void KuickShow::initGUI( const KURL& startDir )
 
     connect( fileWidget, SIGNAL( urlEntered( const KURL&  )),
 	     this, SLOT( dirSelected( const KURL& )) );
+
+/*
+    WABA: KDirOperator (fileWidget) does not have DND support (yet)
+
+    connect( iconView, SIGNAL( dropped( QDropEvent *, const QValueList<QIconDragItem>& )),
+             this, SLOT( slotDropped( QDropEvent *)) );
+*/
 
     // setup actions
     KAction *open = KStdAction::open( this, SLOT( slotOpenURL() ),
@@ -584,33 +590,20 @@ void KuickShow::slotShowInSameWindow()
     showImage( fileWidget->getCurrentItem( false ), false );
 }
 
-void KuickShow::dropEvent( QDropEvent *e )
+void KuickShow::slotDropped( QDropEvent *e )
 {
     KURL dir; // in case we get a directory dropped
     KURL::List urls;
     KURLDrag::decode( e, urls );
-    bool hasRemote = false;
 
-    KURL::List::Iterator it = urls.begin();
-    while ( it != urls.end() ) {
-	KURL u = *it;
-	if ( u.isLocalFile() ) {
-	    if ( !u.fileName().isEmpty() )
-		dir = u;
-	    else {
-		KFileItem item( KFileItem::Unknown, KFileItem::Unknown, u, false );
-		showImage( &item, true );
-	    }
-	}
-	else
-	    hasRemote = true;
-    }
-
-
-    if ( hasRemote ) {
-	QString tmp( i18n("You can only drop local files "
-                          "onto the image viewer!"));
-	KMessageBox::sorry( this, tmp, i18n("KuickShow Drop Error") );
+    KURL::List::ConstIterator it = urls.begin();
+    for ( ; it != urls.end(); ++it )
+    {
+        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
+        if ( FileWidget::isImage( &item ) )
+            showImage( &item, true );
+        else
+            fileWidget->setURL( *it, true );
     }
 }
 

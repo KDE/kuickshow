@@ -34,7 +34,6 @@
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qtimer.h>
-#include <qdragobject.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -57,6 +56,8 @@
 #include <ktempfile.h>
 #include <kwin.h>
 #include <netwm.h>
+#include <kurldrag.h>
+#include <kio/netaccess.h>
 
 #include "imagewindow.h"
 #include "kuick.h"
@@ -767,9 +768,15 @@ void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 void ImageWindow::dropEvent( QDropEvent *e )
 {
     // FIXME - only preliminary drop-support for now
-    QStringList list;
-    if ( QUriDrag::decodeLocalFiles( e, list ) ) {
-	loadImage( list.first() );
+    KURL::List list;
+    if ( KURLDrag::decode( e, list ) && !list.isEmpty()) {
+        QString tmpFile;
+        const KURL &url = list.first();
+        if (KIO::NetAccess::download( url, tmpFile ) )
+        {
+	    loadImage( tmpFile );
+	    KIO::NetAccess::removeTempFile( tmpFile );
+	}
 	updateWidget();
 	e->accept();
     }
