@@ -825,7 +825,7 @@ void ImageWindow::saveImage()
             QString tmp = i18n("Couldn't save the file.\n"
                                "Perhaps the disk is full, or you don't "
                                "have write permission to the file.");
-            KMessageBox::sorry( this, tmp, i18n("File saving failed"));
+            KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
         }
     }
 }
