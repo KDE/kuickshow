@@ -46,7 +46,7 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
 
-    imageKeyChooser = new KKeyChooser( imageWindow->accel(), box );
+    imageKeyChooser = new KKeyChooser( imageWindow->actionCollection(), box );
 
     box = addVBoxPage( i18n("Bro&wser Shortcuts") );
     browserKeyChooser = new KKeyChooser( coll, box );
@@ -65,11 +65,8 @@ void KuickConfigDialog::applyConfig()
     defaultsWidget->applySettings( *kdata );
     slideshowWidget->applySettings( *kdata );
 
-    imageKeyChooser->commitChanges();
-    imageWindow->accel()->writeSettings();
-
-    browserKeyChooser->commitChanges();
-    coll->writeShortcutSettings();
+    imageKeyChooser->save();
+    browserKeyChooser->save();
 
     KGlobal::config()->sync();
 }

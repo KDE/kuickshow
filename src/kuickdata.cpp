@@ -109,17 +109,17 @@ void KuickData::save()
   kc->writeEntry( "SlideshowCycles", slideshowCycles );
   kc->writeEntry( "SlideshowFullscreen", slideshowFullscreen );
 
-  kc->writeEntry( "PreloadNextImage", preloadImage ? "yes" : "no" );
+  kc->writeEntry( "PreloadNextImage", preloadImage );
 
-  kc->writeEntry( "Fullscreen", fullScreen ? "yes" : "no" );
-  kc->writeEntry( "ShrinkToScreenSize", downScale ? "yes" : "no" );
-  kc->writeEntry( "ZoomToScreenSize", upScale ? "yes" : "no" );
+  kc->writeEntry( "Fullscreen", fullScreen  );
+  kc->writeEntry( "ShrinkToScreenSize", downScale );
+  kc->writeEntry( "ZoomToScreenSize", upScale );
   kc->writeEntry( "FlipVertically", flipVertically );
   kc->writeEntry( "FlipHorizontally", flipHorizontally );
   kc->writeEntry( "MaxUpscale Factor", maxUpScale );
   kc->writeEntry( "Rotation", rotation );
 
-  kc->writeEntry( "ApplyDefaultModifications", isModsEnabled ? "yes" : "no" );
+  kc->writeEntry( "ApplyDefaultModifications", isModsEnabled );
 
 
   kc->writeEntry( "BrightnessStepSize", brightnessSteps );

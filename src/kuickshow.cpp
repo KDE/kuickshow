@@ -403,7 +403,6 @@ void KuickShow::showImage( const KFileItem *fi,
 		m_viewer->move( Kuick::workArea().topLeft() );
 	    }
 
-	    m_viewer->setPopupMenu();
 	    m_viewer->installEventFilter( this );
 	}
 
@@ -774,8 +773,7 @@ void KuickShow::slotConfigApplied()
     QValueListIterator<ImageWindow*> it = s_viewers.begin();
     while ( it != s_viewers.end() ) {
         viewer = *it;
-	viewer->updateAccel();
-        viewer->setBackgroundColor( kdata->backgroundColor );
+	viewer->updateActions();
 	++it;
     }
 

@@ -29,7 +29,6 @@
 #include <qtimer.h>
 #include <qdragobject.h>
 
-#include <kaccel.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kcursor.h>
@@ -81,6 +80,11 @@ void ImageWindow::init()
 {
 //     KCursor::setAutoHideCursor( this, true, true );
 //     KCursor::setHideCursorDelay( 1500 );
+    viewerMenu = 0L;
+    gammaMenu = 0L;
+    brightnessMenu = 0L;
+    contrastMenu = 0L;
+    
 
     m_actions = new KActionCollection( this );
 
@@ -92,16 +96,8 @@ void ImageWindow::init()
             s_handCursor = new QCursor( arrowCursor );
     }
 
-    new KAction( i18n("Show Next Image"), KStdAccel::next(),
-                 this, SLOT( slotRequestNext() ),
-                 m_actions, "next_image" );
+    setupActions();
 
-    new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
-                 this, SLOT( slotRequestPrevious() ),
-                 m_actions, "previous_image" );
-
-
-    m_accel        = 0L;
     transWidget    = 0L;
     myIsFullscreen = false;
     initialFullscreen = kdata->fullScreen;
@@ -111,7 +107,6 @@ void ImageWindow::init()
     m_numHeads = ScreenCount( x11Display() );
 
     setAcceptDrops( true );
-    updateAccel();
     setBackgroundColor( kdata->backgroundColor );
 
     static QPixmap imageIcon = UserIcon( "imageviewer-medium" );
@@ -119,61 +114,106 @@ void ImageWindow::init()
     KWin::setIcons( winId(), imageIcon, miniImageIcon );
 }
 
-
-void ImageWindow::updateAccel()
+void ImageWindow::updateActions()
 {
-  delete m_accel;
+    m_actions->readShortcutSettings();
+}
 
-  // configurable shortcuts
-  // yeah, I know you've waited for them for a long time :o)
-  m_accel = new KAccel( this );
+void ImageWindow::setupActions() 
+{
+    new KAction( i18n("Show Next Image"), KStdAccel::next(),
+                 this, SLOT( slotRequestNext() ),
+                 m_actions, "next_image" );
+    new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
+                 this, SLOT( slotRequestPrevious() ),
+                 m_actions, "previous_image" );
 
-  m_accel->insert( "Scroll Up", i18n( "Scroll Up" ), QString::null,
-                   Key_Up, this, SLOT( scrollUp() ) );
-  m_accel->insert( "Scroll Down", i18n( "Scroll Down" ), QString::null,
-                   Key_Down, this, SLOT( scrollDown() ) );
-  m_accel->insert( "Scroll Left", i18n( "Scroll Left" ), QString::null,
-                   Key_Left, this, SLOT( scrollLeft() ) );
-  m_accel->insert( "Scroll Right", i18n( "Scroll Right" ), QString::null,
-                   Key_Right, this, SLOT( scrollRight() ) );
-  m_accel->insert( "Zoom In", i18n( "Zoom In" ), QString::null,
-                   Key_Plus, this, SLOT( zoomIn() ) );
-  m_accel->insert( "Zoom Out", i18n( "Zoom Out" ), QString::null,
-                   Key_Minus, this, SLOT( zoomOut() ) );
-  m_accel->insert( "Flip Horizontally", i18n( "Flip Horizontally" ), QString::null,
-                   Key_Asterisk, this, SLOT( flipHoriz() ) );
-  m_accel->insert( "Flip Vertically", i18n( "Flip Vertically" ), QString::null,
-                   Key_Slash, this, SLOT( flipVert() ) );
-  m_accel->insert( "Rotate 90", i18n( "Rotate 90 Degrees" ), QString::null,
-                   Key_9, this, SLOT( rotate90() ) );
-  m_accel->insert( "Rotate 180", i18n( "Rotate 180 Degrees" ), QString::null,
-                   Key_8, this, SLOT( rotate180() ) );
-  m_accel->insert( "Rotate 270", i18n( "Rotate 270 Degrees" ), QString::null,
-                   Key_7, this, SLOT( rotate270() ) );
-  m_accel->insert( "Maximize", i18n( "Maximize" ), QString::null,
-                   Key_M, this, SLOT( maximize() ) );
-  m_accel->insert( "OriginalSize", i18n( "Restore Original Size" ), QString::null,
-                   Key_O, this, SLOT( showImageOriginalSize() ));
-  m_accel->insert( "More Brightness", i18n( "More Brightness" ), QString::null,
-                   Key_B, this, SLOT( moreBrightness() ) );
-  m_accel->insert( "Less Brightness", i18n( "Less Brightness" ), QString::null,
-                   SHIFT + Key_B, this, SLOT( lessBrightness() ) );
-  m_accel->insert( "More Contrast", i18n( "More Contrast" ), QString::null,
-                   Key_C, this, SLOT( moreContrast() ) );
-  m_accel->insert( "Less Contrast", i18n( "Less Contrast" ), QString::null,
-                   SHIFT + Key_C, this, SLOT( lessContrast() ) );
-  m_accel->insert( "More Gamma", i18n( "More Gamma" ), QString::null,
-                   Key_G, this, SLOT( moreGamma() ) );
-  m_accel->insert( "Less Gamma", i18n( "Less Gamma" ), QString::null,
-                   SHIFT + Key_G, this, SLOT( lessGamma() ) );
-  m_accel->insert( "Toggle Fullscreen", i18n( "Toggle Fullscreen mode" ), QString::null,
-                   Key_Return, this, SLOT( toggleFullscreen() ) );
-  m_accel->insert( "Close", i18n( "Close Viewer" ), QString::null,
-                   Key_Q, this, SLOT( close() ) );
-  m_accel->insert( "Reload", i18n("Reload Image" ), QString::null, Key_Enter,
-                   this, SLOT( reload() ) );
+    new KAction( i18n("Zoom In"), Key_Plus,
+                 this, SLOT( zoomIn() ),
+                 m_actions, "zoom_in" );
+    new KAction( i18n("Zoom Out"), Key_Minus,
+                 this, SLOT( zoomOut() ),
+                 m_actions, "zoom_out" );
+    new KAction( i18n("Restore Original Size"), Key_O,
+                 this, SLOT( showImageOriginalSize() ),
+                 m_actions, "original_size" );
+    new KAction( i18n("Maximize"), Key_M,
+                 this, SLOT( maximize() ),
+                 m_actions, "maximize" );
 
-  m_accel->readSettings();
+    new KAction( i18n("Rotate 90 degrees"), Key_9,
+                 this, SLOT( rotate90() ),
+                 m_actions, "rotate90" );
+    new KAction( i18n("Rotate 180 degrees"), Key_8,
+                 this, SLOT( rotate180() ),
+                 m_actions, "rotate180" );
+    new KAction( i18n("Rotate 270 degrees"), Key_7,
+                 this, SLOT( rotate270() ),
+                 m_actions, "rotate270" );
+
+    new KAction( i18n("Flip Horicontally"), Key_Asterisk,
+                 this, SLOT( flipHoriz() ),
+                 m_actions, "flip_horicontally" );
+    new KAction( i18n("Flip Vertically"), Key_Slash,
+                 this, SLOT( flipVert() ),
+                 m_actions, "flip_vertically" );
+
+    new KAction( i18n("Print Image..."), KStdAccel::print(),
+                 this, SLOT( printImage() ),
+                 m_actions, "print_image" );
+    new KAction( i18n("Save As..."), KStdAccel::save(),
+                 this, SLOT( saveImage() ),
+                 m_actions, "save_image_as" );
+
+    new KAction( i18n("Close"), Key_Q,
+                 this, SLOT( close() ),
+                 m_actions, "close_image" );
+    // --------
+    new KAction( i18n("More Brightness"), Key_B,
+                 this, SLOT( moreBrightness() ),
+                 m_actions, "more_brightness" );
+    new KAction( i18n("Less Brightness"), SHIFT + Key_B,
+                 this, SLOT( lessBrightness() ),
+                 m_actions, "less_brightness" );
+    new KAction( i18n("More Contrast"), Key_C,
+                 this, SLOT( moreContrast() ),
+                 m_actions, "more_contrast" );
+    new KAction( i18n("Less Contrast"), SHIFT + Key_C,
+                 this, SLOT( lessContrast() ),
+                 m_actions, "less_contrast" );
+    new KAction( i18n("More Gamma"), Key_G,
+                 this, SLOT( moreGamma() ),
+                 m_actions, "more_gamma" );
+    new KAction( i18n("Less Gamma"), SHIFT + Key_G,
+                 this, SLOT( lessGamma() ),
+                 m_actions, "less_gamma" );
+
+    // --------
+    new KAction( i18n("Scroll Up"), Key_Up,
+                 this, SLOT( scrollUp() ),
+                 m_actions, "scroll_up" );
+    new KAction( i18n("Scroll Down"), Key_Down,
+                 this, SLOT( scrollDown() ),
+                 m_actions, "scroll_down" );
+    new KAction( i18n("Scroll Left"), Key_Left,
+                 this, SLOT( scrollLeft() ),
+                 m_actions, "scroll_left" );
+    new KAction( i18n("Scroll Right"), Key_Right,
+                 this, SLOT( scrollRight() ),
+                 m_actions, "scroll_right" );
+
+    new KAction( i18n("Toggle Fullscreen mode"), Key_Return,
+                 this, SLOT( toggleFullscreen() ),
+                 m_actions, "toggle_fullscreen" );
+    new KAction( i18n("Reload Image"), Key_Enter,
+                 this, SLOT( reload() ),
+                 m_actions, "reload_image" );
+
+    new KAction( i18n("Properties..."), ALT + Key_Return,
+                 this, SLOT( slotProperties() ),
+                 m_actions, "properties" );
+    
+    m_actions->readShortcutSettings();
 }
 
 
@@ -197,6 +237,7 @@ void ImageWindow::setFullscreen( bool enable )
 
         setGeometry( QApplication::desktop()->screenGeometry(scnum) );
         // qApp->processEvents(); // not necessary anymore
+
     }
 
     else if ( !enable && myIsFullscreen ) { // go into window mode
@@ -513,8 +554,17 @@ void ImageWindow::mousePressEvent( QMouseEvent *e )
             setCursor( *s_handCursor );
     }
 
-    if ( e->button() == RightButton )
-	viewerMenu->popup( mapToGlobal( e->pos() ) );
+    ImlibWidget::mousePressEvent( e );
+}
+
+void ImageWindow::contextMenuEvent( QContextMenuEvent *e )
+{
+    e->accept();
+    
+    if ( !viewerMenu )
+        setPopupMenu();
+    
+    viewerMenu->popup( e->globalPos() );
 }
 
 void ImageWindow::mouseDoubleClickEvent( QMouseEvent *e )
@@ -540,6 +590,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 
   	transWidget->hide();
 	QPainter p( transWidget );
+ 	// really required?
  	p.eraseRect( transWidget->rect() );
 	transWidget->show();
 	qApp->processOneEvent();
@@ -720,104 +771,50 @@ void ImageWindow::dropEvent( QDropEvent *e )
 
 void ImageWindow::setPopupMenu()
 {
-  viewerMenu = new QPopupMenu( this );
+    viewerMenu = new QPopupMenu( this );
 
-  m_actions->action("next_image")->plug( viewerMenu );
-  m_actions->action("previous_image")->plug( viewerMenu );
-  viewerMenu->insertSeparator();
+    m_actions->action("next_image")->plug( viewerMenu );
+    m_actions->action("previous_image")->plug( viewerMenu );
+    viewerMenu->insertSeparator();
 
-  brightnessMenu = new QPopupMenu( viewerMenu );
+    brightnessMenu = new QPopupMenu( viewerMenu );
+    m_actions->action("more_brightness")->plug(brightnessMenu);
+    m_actions->action("less_brightness")->plug(brightnessMenu);
+  
+    contrastMenu = new QPopupMenu( viewerMenu );
+    m_actions->action("more_contrast")->plug(contrastMenu);
+    m_actions->action("less_contrast")->plug(contrastMenu);
+  
+    gammaMenu = new QPopupMenu( viewerMenu );
+    m_actions->action("more_gamma")->plug(gammaMenu);
+    m_actions->action("less_gamma")->plug(gammaMenu);
 
-  itemBrightnessPlus = brightnessMenu->insertItem( i18n("+"), this,
-						   SLOT( moreBrightness() ));
-  itemBrightnessMinus = brightnessMenu->insertItem( i18n("-"), this,
-						    SLOT( lessBrightness() ));
+    m_actions->action("zoom_in")->plug( viewerMenu );
+    m_actions->action("zoom_out")->plug( viewerMenu );
+    m_actions->action("original_size")->plug( viewerMenu );
+    m_actions->action("maximize")->plug( viewerMenu );
 
-  contrastMenu = new QPopupMenu( viewerMenu );
-  itemContrastPlus = contrastMenu->insertItem( i18n("+"), this,
-					       SLOT( moreContrast() ));
-  itemContrastMinus = contrastMenu->insertItem( i18n("-"), this,
-						SLOT( lessContrast() ));
+    viewerMenu->insertSeparator();
+    m_actions->action("rotate90")->plug( viewerMenu );
+    m_actions->action("rotate180")->plug( viewerMenu );
+    m_actions->action("rotate270")->plug( viewerMenu );
 
-  gammaMenu = new QPopupMenu( viewerMenu );
-  itemGammaPlus = gammaMenu->insertItem( i18n("+"), this, SLOT( moreGamma() ));
-  itemGammaMinus = gammaMenu->insertItem( i18n("-"), this,SLOT( lessGamma() ));
+    viewerMenu->insertSeparator();
+    m_actions->action("flip_vertically")->plug( viewerMenu );
+    m_actions->action("flip_horicontally")->plug( viewerMenu );
+    viewerMenu->insertSeparator();
+    viewerMenu->insertItem( i18n("Brightness"), brightnessMenu );
+    viewerMenu->insertItem( i18n("Contrast"), contrastMenu );
+    viewerMenu->insertItem( i18n("Gamma"), gammaMenu );
+    viewerMenu->insertSeparator();
 
-  itemViewerZoomIn = viewerMenu->insertItem( i18n("Zoom In"), this,
-					     SLOT( zoomIn() ));
-  itemViewerZoomOut = viewerMenu->insertItem( i18n("Zoom Out"), this,
-					      SLOT( zoomOut() ));
-  itemViewerZoomOrig = viewerMenu->insertItem( i18n("Restore Original Size"), this,
-					      SLOT( showImageOriginalSize() ));
-  itemViewerZoomMax = viewerMenu->insertItem( i18n("Maximize"), this,
-					      SLOT( maximize() ));
-  viewerMenu->insertSeparator();
-  itemRotate90    = viewerMenu->insertItem( i18n("Rotate 90 degrees"), this,
-					    SLOT( rotate90() ));
-  itemRotate180   = viewerMenu->insertItem( i18n("Rotate 180 degrees"), this,
-					    SLOT( rotate180() ));
-  itemRotate270   = viewerMenu->insertItem( i18n("Rotate 270 degrees"), this,
-					    SLOT( rotate270() ));
-  viewerMenu->insertSeparator();
-  itemViewerFlipH = viewerMenu->insertItem( i18n("Flip Horizontally"), this,
-					    SLOT( flipHoriz() ));
-  itemViewerFlipV = viewerMenu->insertItem( i18n("Flip Vertically"), this,
-					    SLOT( flipVert() ));
-  viewerMenu->insertSeparator();
-  viewerMenu->insertItem( i18n("Brightness"), brightnessMenu );
-  viewerMenu->insertItem( i18n("Contrast"), contrastMenu );
-  viewerMenu->insertItem( i18n("Gamma"), gammaMenu );
-  viewerMenu->insertSeparator();
-  itemViewerPrint = viewerMenu->insertItem( i18n("Print Image..."), this,
-					    SLOT( printImage() ));
-  itemViewerSave = viewerMenu->insertItem( i18n("Save As..."), this,
-					   SLOT( saveImage() ));
-  viewerMenu->insertItem( i18n("Properties..."), this, SLOT(slotProperties()));
-  viewerMenu->insertSeparator();
-  itemViewerClose = viewerMenu->insertItem( i18n("Close"), this,
-					    SLOT( close() ));
+    m_actions->action("print_image")->plug( viewerMenu );
+    m_actions->action("save_image_as")->plug( viewerMenu );
+    m_actions->action("properties")->plug( viewerMenu );
 
-  setPopupAccels();
-}
-
-
-void ImageWindow::setPopupAccels()
-{
-  brightnessMenu->setAccel(m_accel->shortcut("More Brightness").keyCodeQt(),
-                           itemBrightnessPlus);
-  brightnessMenu->setAccel(m_accel->shortcut("Less Brightness").keyCodeQt(),
-                           itemBrightnessMinus);
-  contrastMenu->setAccel(m_accel->shortcut("More Contrast").keyCodeQt(),
-                         itemContrastPlus);
-  contrastMenu->setAccel(m_accel->shortcut("Less Contrast").keyCodeQt(),
-                         itemContrastMinus);
-  gammaMenu->setAccel(m_accel->shortcut("More Gamma").keyCodeQt(),
-                      itemGammaPlus);
-  gammaMenu->setAccel(m_accel->shortcut("Less Gamma").keyCodeQt(),
-                      itemGammaMinus);
-  viewerMenu->setAccel(m_accel->shortcut("Zoom In").keyCodeQt(),
-                       itemViewerZoomIn);
-  viewerMenu->setAccel(m_accel->shortcut("Zoom Out").keyCodeQt(),
-                       itemViewerZoomOut);
-  viewerMenu->setAccel(m_accel->shortcut("OriginalSize").keyCodeQt(),
-                       itemViewerZoomOrig);
-  viewerMenu->setAccel(m_accel->shortcut("Maximize").keyCodeQt(),
-                       itemViewerZoomMax);
-  viewerMenu->setAccel(m_accel->shortcut("Rotate 90").keyCodeQt(),
-                       itemRotate90);
-  viewerMenu->setAccel(m_accel->shortcut("Rotate 180").keyCodeQt(),
-                       itemRotate180);
-  viewerMenu->setAccel(m_accel->shortcut("Rotate 270").keyCodeQt(),
-                       itemRotate270);
-  viewerMenu->setAccel(m_accel->shortcut("Flip Horizontally").keyCodeQt(),
-                       itemViewerFlipH);
-  viewerMenu->setAccel(m_accel->shortcut("Flip Vertically").keyCodeQt(),
-                       itemViewerFlipV);
-  viewerMenu->setAccel(m_accel->shortcut("Close Viewer").keyCodeQt(),
-                       itemViewerClose);
-  viewerMenu->setAccel(KStdAccel::print().keyCodeQt(), itemViewerPrint);
-  viewerMenu->setAccel(KStdAccel::save().keyCodeQt(),  itemViewerSave);
-}
+    viewerMenu->insertSeparator();
+    m_actions->action("close_image")->plug( viewerMenu );
+} 
 
 void ImageWindow::printImage()
 {

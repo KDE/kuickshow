@@ -27,8 +27,6 @@ class QString;
 class QTimer;
 class QWidget;
 
-class KAccel;
-
 class ImageWindow : public ImlibWidget
 {
   Q_OBJECT
@@ -47,11 +45,7 @@ public:
   void 		addContrast( int );
   void 		addGamma( int );
 
-
-  void 		setPopupMenu();
-  void 		setPopupAccels();
-
-  KAccel * 	accel() const { return m_accel; }
+  void 		updateActions();
 
   KActionCollection * actionCollection() const { return m_actions; }
 
@@ -60,8 +54,6 @@ public:
    * it won't ever get a bigger size than the workarea.
    */
   void resizeOptimal( int w, int h );
-
-  void updateAccel();
 
   bool          saveImage( const QString& filename ) const;
 
@@ -106,6 +98,7 @@ protected:
   virtual void 	resizeEvent( QResizeEvent * );
   virtual void 	dragEnterEvent( QDragEnterEvent * );
   virtual void 	dropEvent( QDropEvent * );
+  virtual void contextMenuEvent( QContextMenuEvent * );
 
 
 
@@ -129,11 +122,8 @@ protected:
 
 
   QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
-  QPopupMenu    *sizeMenu, *alignMenu;
   QWidget       *transWidget;
-
   ImageCache * 	imageCache;
-
 
 
 protected slots:
@@ -148,6 +138,8 @@ private:
   int 		desktopWidth( bool totalScreen = false ) const;
   int 		desktopHeight( bool totalScreen = false ) const;
   QSize		maxImageSize() const;
+  void          setupActions();
+  void 		setPopupMenu();
 
   bool 		myIsFullscreen;
   bool 		initialFullscreen;
@@ -161,10 +153,7 @@ private:
   // switching from fullscreen to window mode, as we will be resized twice.
   bool 		ignore_resize_hack;
 
-  KAccel * 	m_accel;
-
   static QCursor * s_handCursor;
-
 };
 
 
