@@ -209,8 +209,10 @@ void ImageWindow::setFullscreen( bool enable )
 
 	// hack around kwin not giving us a decoration, when going into window
 	// mode and initially started in fullscreen mode
-	if ( wasInitialFullscreen )
-	    hide(); show();
+        if ( wasInitialFullscreen ) {
+            hide();
+            show();
+    }
     }
 
     myIsFullscreen = enable;
@@ -812,31 +814,22 @@ void ImageWindow::printImage()
     
   if ( printer.setup( this ) ) 
   {
-      bool ofile = printer.outputToFile();
-      bool ok = true;
       QString tmpName;
+      bool ok = false;
       
       KTempFile tmpFile( "kuickshow", ".png" );
       if ( tmpFile.status() == 0 ) 
       {
           tmpFile.setAutoDelete( true );
-          tmpName = ofile ? printer.outputFileName() : tmpFile.name();
+          tmpName = tmpFile.name();
 
-          if ( !saveImage( tmpName ) )
-              ok = false;
-      }
-      else
-          ok = false;
-      
-      if ( !ok ) {
-          qDebug("KuickShow: Couldn't print image."); // FIXME, show messagebox
-          return;
+          ok = saveImage( tmpName );
       }
       
-      if ( ofile ) // done, user just wanted that postscript file
-          return;
-
+      if ( ok )
       printImageWithQt( tmpName, printer );
+      else
+          qDebug("KuickShow: Couldn't print image."); // FIXME, show messagebox
   }
 
 //   if ( Imlib_save_image( id, kuim->imlibImage(),
@@ -866,7 +859,8 @@ void ImageWindow::printImageWithQt( const QString& filename, KPrinter& printer)
     int iw = landscape ? image.height() : image.width();
     int ih = landscape ? image.width()  : image.height();
     
-    if ( iw > printArea.width() || ih > printArea.height() ) {
+    if ( printArea.isValid() && 
+         (iw > printArea.width() || ih > printArea.height()) ) {
         if ( landscape )
             image = image.smoothScale( printArea.height(), printArea.width(),
                                        QImage::ScaleMin );
