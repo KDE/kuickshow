@@ -228,26 +228,30 @@ default is 30, which is 3 seconds.</para>
 
 <varlistentry>
 <term><guilabel>Dither in LowColor (&lt;=8bit) modes</guilabel></term>
-<listitem><para><!-- And here --></para>
+<listitem><para><!-- And here -->
+</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Use own color palette</guilabel></term>
-<listitem><para><!-- and this one --></para>
+<listitem><para><!-- and this one -->
+</para>
 </listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Fast palette remapping</guilabel></term>
 <listitem>
-<para><!-- and this one --></para></listitem>
+<para><!-- and this one -->
+</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><guilabel>Maximum cache size (MB):</guilabel></term>
 <listitem>
-<para><!-- and another --></para></listitem>
+<para><!-- and another -->
+</para></listitem>
 </varlistentry>
 
 </variablelist>
