@@ -27,6 +27,7 @@
 #include <kconfig.h>
 #include <kcursor.h>
 #include <kfiledialog.h>
+#include <kfilemetainfo.h>
 #include <kglobal.h>
 #include <khelpmenu.h>
 #include <kiconloader.h>
@@ -66,8 +67,8 @@
 
 KuickData* kdata;
 
-static const int SIZE_ITEM = 0;
-static const int URL_ITEM  = 1;
+static const int URL_ITEM  = 0;
+static const int META_ITEM = 1;
 
 QValueList<ImageWindow*> KuickShow::s_viewers;
 
@@ -285,8 +286,8 @@ void KuickShow::initGUI( const KURL& startDir )
 
 
     KStatusBar* sBar = statusBar();
-    sBar->insertItem( "                          ", SIZE_ITEM, 2 );
     sBar->insertItem( "           ", URL_ITEM, 10 );
+    sBar->insertItem( "                          ", META_ITEM, 2 );
     sBar->setItemAlignment(URL_ITEM, QLabel::AlignVCenter | QLabel::AlignLeft);
 
     fileWidget->setFocus();
@@ -346,10 +347,23 @@ void KuickShow::viewerDeleted()
 
 void KuickShow::slotHighlighted( const KFileItem *fi )
 {
-    QString size;
-    size = i18n("%1 kb").arg(KGlobal::locale()->formatNumber((float)fi->size()/1024, 1));
-    statusBar()->changeItem( size, SIZE_ITEM );
-    statusBar()->changeItem( fi->url().prettyURL(), URL_ITEM );
+    KFileItem *item = const_cast<KFileItem *>( fi );
+    statusBar()->changeItem( item->getStatusBarInfo(), URL_ITEM );
+
+    QString meta;
+    KFileMetaInfo info = item->metaInfo();
+    if ( info.isValid() )
+    {
+        meta = info.item( KFileMimeTypeInfo::Size ).string();
+        KFileMetaInfoGroup group = info.group( "Technical" );
+        if ( group.isValid() )
+        {
+            QString bpp = group.item( "BitDepth" ).string();
+            if ( !bpp.isEmpty() )
+                meta.append( ", " ).append( bpp );
+        }
+    }
+    statusBar()->changeItem( meta, META_ITEM );
 
     bool image = FileWidget::isImage( fi );
     fileWidget->actionCollection()->action("kuick_print")->setEnabled( image );
