@@ -74,7 +74,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     bool printFilename = printer.option( "app-kuickshow-printFilename" ) != f;
     if ( printFilename ) {
         filenameOffset = fm.lineSpacing() + 14;
-        h -= filenameOffset; // ### assuming the filename fits into one line
+        h -= filenameOffset; // filename goes into one line!
     }
 
     //
@@ -119,16 +119,47 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     //
     p.drawImage( x, y, image );
 
-    if ( printFilename ) {
-        int fw = fm.width( originalFileName );
-        int x = (w - fw)/2;
-        int y = metrics.height() - filenameOffset/2; // ### assumption as above
-        p.drawText( x, y, originalFileName );
+    if ( printFilename ) 
+    {
+        QString fname = minimizeString( originalFileName, fm, w );
+        if ( !fname.isEmpty() )
+        {
+            int fw = fm.width( fname );
+            int x = (w - fw)/2;
+            int y = metrics.height() - filenameOffset/2;
+            p.drawText( x, y, fname );
+        }
     }
 
     p.end();
 
     return true;
+}
+
+QString Printing::minimizeString( QString text, const QFontMetrics&
+                                  metrics, int maxWidth )
+{
+    if ( text.length() <= 5 )
+        return QString::null; // no sense to cut that tiny little string
+    
+    bool changed = false;
+    while ( metrics.width( text ) > maxWidth )
+    {
+        int mid = text.length() / 2;
+        text.remove( mid, 2 ); // remove 2 characters in the middle
+        changed = true;
+    }
+    
+    if ( changed ) // add "..." in the middle
+    {
+        int mid = text.length() / 2;
+        if ( mid <= 5 ) // sanity check
+            return QString::null;
+
+        text.replace( mid - 1, 3, "..." );
+    }
+    
+    return text;
 }
 
 
@@ -222,7 +253,7 @@ void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
     val = opts["app-kuickshow-scale-height-pixels"].toInt( &ok );
     if ( ok )
         setScaleHeight( val );
-    
+
     if ( m_scale->isChecked() == m_shrinkToFit->isChecked() )
         m_shrinkToFit->setChecked( !m_scale->isChecked() );
 

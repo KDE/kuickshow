@@ -10,6 +10,7 @@
 #ifndef PRINTING_H
 #define PRINTING_H
 
+#include <qfontmetrics.h>
 #include <qstring.h>
 
 #include <kdeprint/kprintdialogpage.h>
@@ -32,6 +33,8 @@ public:
 
 private:
     static void addConfigPages();
+    static QString minimizeString( QString text, const QFontMetrics& metrics,
+                                   int maxWidth );
 
 };
 
