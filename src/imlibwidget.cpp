@@ -27,6 +27,7 @@
 
 #include "imlibwidget.h"
 
+const int ImlibWidget::ImlibOffset = 256;
 
 ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
   QWidget( parent, name, WDestructiveClose )

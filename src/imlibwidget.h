@@ -201,7 +201,7 @@ protected:
 
   QString m_filename;
 
-  static const int ImlibOffset = 256;
+  static const int ImlibOffset;
 
 
 private:
