@@ -5,6 +5,7 @@ lib_LTLIBRARIES = kuickshow.la
 
 # set the include path for X, qt and KDE
 INCLUDES = $(all_includes)
+KDE_CXXFLAGS = $(IMLIB_CFLAGS)
 CLEANFILES = dummy.cpp
 METASOURCES = AUTO
 
