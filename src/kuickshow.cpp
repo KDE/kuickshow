@@ -508,7 +508,7 @@ void KuickShow::showImage( const KFileItem *fi,
         ImageWindow *safeViewer = m_viewer;
 
         QString filename;
-        KIO::NetAccess::download(fi->url(), filename);
+        KIO::NetAccess::download(fi->url(), filename, this);
 
         if ( !safeViewer->showNextImage( filename ) ) {
             m_viewer = safeViewer;
@@ -688,7 +688,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 
     if ( FileWidget::isImage( item ) ) {
         QString filename;
-        KIO::NetAccess::download(item->url(), filename);
+        KIO::NetAccess::download(item->url(), filename, this);
         view->showNextImage( filename );
         if (m_slideTimer->isActive())
             m_slideTimer->start( kdata->slideDelay );
@@ -835,7 +835,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             if ( FileWidget::isImage( item ) ) {
                 QString filename;
-                KIO::NetAccess::download(item->url(), filename);
+                KIO::NetAccess::download(item->url(), filename, this);
                 m_viewer->showNextImage( filename );
 
                 if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
