@@ -879,7 +879,7 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
 {
     int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
-    if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == 270 )
+    if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == ROT_270 )
         qSwap( w, h );
 
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
