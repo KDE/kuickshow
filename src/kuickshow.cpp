@@ -253,7 +253,7 @@ void KuickShow::viewerDeleted()
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
 	if ( fileWidget )
 	    saveSettings();
-	
+
 	::exit(0);
     }
 
@@ -511,7 +511,9 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 
     if ( FileWidget::isImage( item ) ) {
         view->showNextImage( item->url().path() ); // ###
-		
+        if (m_slideTimer->isActive())
+	  m_slideTimer->start( kdata->slideDelay );
+
         if ( kdata->preloadImage ) // preload next image
             if ( FileWidget::isImage( item_next ) )
                 view->cacheImage( item_next->url().path() ); // ###
@@ -544,7 +546,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
     ImageWindow *window = dynamic_cast<ImageWindow*>( o );
     if ( window ) {
 // 	KCursor::autoHideEventFilter( o, e );
-	
+
 	m_viewer = window;
 	QString img;
 	KFileItem *item = 0L;      // the image to be shown
@@ -553,7 +555,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	if ( k ) { // keypress
 	    ret = true;
 	    int key = k->key();
-	
+
 	    // Key_Shift shouldn't load the browser in nobrowser mode, it
 	    // is used for zooming in the imagewindow
 	    if ( !fileWidget && key != Key_Escape && key != Key_Shift ) {
@@ -598,7 +600,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 		item = fileWidget->getNext( false ); // don't move
 		if ( !item )
 		    item = fileWidget->getPrevious( false );
-		
+
 		if ( KuickIO::self(m_viewer)->deleteFile( m_viewer->filename(),
                                                     k->state() & ShiftButton) )
 		    fileWidget->setCurrentItem( item );
@@ -834,7 +836,7 @@ void KuickShow::slotReplayEvent()
 
     eventFilter( e->viewer, e->event );
     delete e;
-    
+
     // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
     if ( fileWidget && fileWidget->view() ) {
         QWidget *widget = fileWidget->view()->widget();
