@@ -15,7 +15,7 @@
 #include <qvariant.h>
 
 #include <qevent.h>
-#include <qlist.h>
+#include <qptrlist.h>
 #include <qtimer.h>
 #include <qwidget.h>
 
@@ -102,8 +102,8 @@ public:
 private:
   int 			myMaxImages;
   QStringList		fileList;
-  QList<KuickImage>	kuickList;
-  //  QList<ImlibImage>	imList;
+  QPtrList<KuickImage>	kuickList;
+  //  QPtrList<ImlibImage>	imList;
   ImlibData * 		myId;
   int 			idleCount;
 
