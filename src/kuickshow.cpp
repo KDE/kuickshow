@@ -175,7 +175,7 @@ void KuickShow::initGUI( const KURL& startDir )
 				  coll, "kuick_slideshow" );
     KAction *about = new KAction( i18n( "About KuickShow" ), "about", 0,
 				  this, SLOT( about() ), coll );
-    
+
     oneWindowAction = new KToggleAction( i18n("Open only one image window"),
 					 "window_new", CTRL+Key_N, coll,
 					 "kuick_one window" );
@@ -220,7 +220,7 @@ void KuickShow::initGUI( const KURL& startDir )
     quit->plug( tBar );
     about->plug( tBar );
 
-    KHelpMenu *helpMenu = new KHelpMenu( this, 
+    KHelpMenu *helpMenu = new KHelpMenu( this,
                                          KGlobal::instance()->aboutData(),
                                          false );
     tBar->insertButton( "help", 100, helpMenu->menu(), true, i18n("Help") );
@@ -229,6 +229,7 @@ void KuickShow::initGUI( const KURL& startDir )
     KStatusBar* sBar = statusBar();
     sBar->insertItem( "                          ", SIZE_ITEM, 2 );
     sBar->insertItem( "           ", URL_ITEM, 10 );
+    sBar->setItemAlignment(URL_ITEM, QLabel::AlignVCenter | QLabel::AlignLeft);
 
     fileWidget->setFocus();
 
