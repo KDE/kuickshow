@@ -15,7 +15,6 @@
 #include <qevent.h>
 
 #include <kkeydialog.h>
-#include <kaccelbase.h>
 
 #include "logotabdialog.h"
 
@@ -34,9 +33,6 @@ public:
 
     void 		applyConfig();
 
-    //const KAccelActions& imageKeys() const { return m_imageKeys; }
-    //const KAccelActions& browserKeys() const { return m_browserKeys; }
-
 private slots:
     void 		resetDefaults();
 
@@ -44,7 +40,6 @@ private:
     DefaultsWidget   *defaultsWidget;
     GeneralWidget    *generalWidget;
     KKeyChooser      *imageKeyChooser, *browserKeyChooser;
-    //KAccelActions    m_imageKeys, m_browserKeys;
     KAccel 	     *m_browserAccel;
 
     ImageWindow      *imageWindow;
