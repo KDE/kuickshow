@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Kuickshow
+Exec=kuickshow %i %m -caption "%c"
+Icon=kuickshow
+Type=Application
+MimeType=image/gif;image/x-xpm;image/x-xbm;image/jpeg;image/bmp;image/png;image/x-png;image/tiff;image/x-xcf;image/x-bmp;image/x-psd;image/x-eim;
+DocPath=kuickshow/kuickshow.html
+Terminal=0
+InitialPreference=6
+
+Comment=A very fast imageviewer
+Comment[de]=Ein sehr schneller Bildbetrachter 

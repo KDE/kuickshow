@@ -1,0 +1,40 @@
+## Makefile.am for kuickshow
+
+bin_PROGRAMS = kuickshow
+lib_LTLIBRARIES = kuickshow.la
+
+# set the include path for X, qt and KDE
+INCLUDES = $(all_includes)
+CLEANFILES = dummy.cpp
+METASOURCES = AUTO
+
+kuickshow_la_LDFLAGS = $(all_libraries) -module -avoid-version
+kuickshow_la_LIBADD  = $(LIB_KFILE) $(LIB_IMLIB)
+kuickshow_la_SOURCES =	\
+	aboutwidget.cpp     generalwidget.cpp  kuickconfigdlg.cpp  main.cpp \
+	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \
+	imdata.cpp          kuickshow.cpp      basewidget.cpp \
+	filefinder.cpp      imlibwidget.cpp    kurlwidget.cpp logo.cpp \
+	filewidget.cpp      logotabdialog.cpp  kuickio.cpp    kuick.cpp
+
+# now the kuickshow binary
+kuickshow_LDADD = kuickshow.la $(LIB_KFILE) $(LIB_IMLIB)
+kuickshow_SOURCES = dummy.cpp
+kuickshow_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+
+
+# if you "make distclean", this files get removed. If you want to remove
+# them while "make clean", use CLEANFILES
+DISTCLEANFILES = $(METASOURCES)
+
+messages:
+	$(XGETTEXT) *.cpp *.h -o $(podir)/kuickshow.pot
+
+KDE_ICON = kuickshow
+
+ # this is where the kdelnk file will go 
+appsdir   = $(kde_appsdir)/Graphics
+apps_DATA = kuickshow.desktop
+
+dummy.cpp:
+	echo "// generated dummy file" > dummy.cpp

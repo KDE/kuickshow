@@ -1,0 +1,24 @@
+toolbar in imageviewer
+
+- Ctrl-S = Save current, Shift-Ctrl-S = Filedialog
+
+- allow to split browser into subwindows (multiple browsers)
+- mouse-usage better (e.g. left button = next image, middle button = previous
+  image, all configurable)
+- anim-gif support (QMovie perhaps)
+- cropping images (via Imlib_clone_scaled_image & Imlib_crop_and_clone_image())
+- thumbnail view, treeview
+- menubar (same as popupmenu) (abschaltbar) (mac-mode!)
+
+- configure-dialog: offer a directory to copy files to -> one click copies to it
+- rename/delete into popupmenu of imagewindow
+
+- if image not readable -> no nagscreen, jump to next image
+- network transparency with kio
+
+- small preview in browser window
+- bookmarks?
+- generate wallpaper (background desktop image)
+- display more image information (resolution, color depth, image comments...)
+- better slideshow (randomize, pause/continue, reverse, ...)
+- what else?

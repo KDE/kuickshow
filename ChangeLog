@@ -1,0 +1,837 @@
+<pre>
+Sat Aug  4 03:37:50 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* now completely smooth, flicker-free switching between images
+	and zooming
+	
+	* Reverted again to current kde-common/admin stuff
+
+	* added quit-button to toolbar (also makes Ctrl-Q work)
+
+	* made ChangeLog readable by KHelpCenter
+
+	* commented out benchmark debug output
+
+	* added support for objprelink in the specfile
+	(copy the tarball to your rpm-dir/SOURCES and rpm -ba kuickshow.spec)
+
+	* Fixed some bugs coming from kdelibs 2.1.x vs. 2.2 handling
+	Thanks a lot to Robert Charbonneau <etriaph@kdesktop.org>
+	and another anonymous helper from #kde for testing and useful
+	feedback.
+
+	* Added patch from Adrian Schroeter <adrian@suse.de> to make it
+	work with autoconf 2.5x -- Thanks!
+
+Wed Jul 11 17:19:38 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/filewidget.cpp (initActions): 
+	adopt to KDirOperator's contextmenu (i.e. don't add the "Properties..."
+	entry when it's already present)
+
+	* src/imagewindow.cpp:
+	show image size in the caption
+
+	* reverted to admin/* files from KuickShow 0.8 so that users of older
+	KDE versions can compile it again.
+
+	* cleaned up Imlib configure check
+
+	* made background color in viewer configurable
+
+	* added delete-action again for users of older kdelibs
+
+	* fixed some bugs in the filefinder widget
+	
+Wed Jul  4 01:06:58 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (printImage): 
+	Grmbl. Really fixed printing. It even works now :)
+
+Tue Jul 3 3:04:18 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+	
+	* Oups, the behavior of QPrinter::printCommand() has changed.
+	It returns a null String by default now :-O Fixed.
+
+Tue Jun 27 15:44:28 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+	
+	* src/imagewindow.cpp:
+	added KTempFile patch from Kevin Lo <kevlo@kde.org>
+
+Tue May 29 15:20:34 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (updateAccel): 
+	changed accels:
+	shift-accel is now for removing brightness/contrast/gamma
+
+	removed delete action, now provided by kfile
+
+Thu Apr 19 23:16:12 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* Integrated Multihead patch from Evan Edwards <evan@onepaper.com>
+	who was also so kind, to set up a homepage for KuickShow, as well
+	as a Sourceforge account. See kuickshow.sourceforge.net for details.
+
+	Thanks a lot, Evan!
+
+	Added handcursor from qwertz <kraftw@gmx.de>, thanks a lot!
+	
+	* src/imlibwidget.cpp (getKuimage): 
+	hopefully fixed crash reported by Alexxx and linuxphreak:
+	reorder the kuickimage and file-lists when returning a cached image
+
+Tue Mar 13 03:16:24 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* added lots of translations from the translation team.
+	I need to add a KAboutDialog somewhere to give them credit
+	for their excellent work!
+
+Fri Mar  9 21:50:12 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (eventFilter): 
+	call our parent class' eventFilter if we don't stop the event
+	-> moving/rearranging the toolbar works :)
+
+	* caption fixes, show the url in the caption
+
+	* save the visible images on SM shutdown and restore them on restore
+	
+	* src/imlibwidget.cpp:
+	don't delete this from closeEvent, WDestructiveClose does it better
+	-> sessionmanagement works
+
+	* defaultswidget.cpp:
+	fix typo found by qwertz
+
+	* add icon for delete, as suggested by Florian
+
+Thu Mar  8 13:29:17 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (mouseReleaseEvent): 
+	zooming should work properly now: 
+	- the window size is kept
+	- scrolling the zoomed image works correctly
+	- the rubber band sort of works (maybe even as good as in 0.6.7)
+	- respect maxWidth and maxHeight during zoom with the rubberband
+
+	added different icon for image window
+
+	* src/kuickshow.cpp
+	go into window mode when pressing space in fullscreen mode to show
+	the browser (always-on-top issue)
+
+	* src/filewidget.cpp
+	some more ensureItemVisible()
+
+	* installation/spec files fixes
+
+	* added im_palette.pal
+
+Wed Mar  7 21:25:15 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* doc/en/index.html: 
+	updated english documentation
+
+	* src/imagewindow.cpp
+	set our nice icon so that kicker can show it in the taskbar for 
+	example. Thanks to Florian for the hint :)
+
+	* i18n fix (° -> degrees), and s/-90/270/, another one from Florian
+
+	* resizeOptimal(): if we don't resize because we already have the right
+	size, call centerImage()
+
+	* zooming with the mouse works again (still not completely right tho:
+	- the rubber band is missing
+	- the size/scrolling does not always match the real imagesize
+
+	* src/filewidget.cpp:
+	ensureItemVisible() in the browser when browsing with PageUp/PageDown
+
+	* src/kuickshow.cpp:
+	disable the slideshow action when a slideshow is running
+
+Wed Mar  7 01:39:34 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (readProperties): 
+	clear the diroperators history stack on startup
+
+	* src/imagewindow.cpp:
+	update the accelerators when applying new configuration
+	(delete the old and create a new KAccel, setKeyDict() doesn't
+	work in our case
+
+	* use QWidget::x11Display() for later multihead support)
+
+	* general cleanup. hmm, this could be added to every entry
+	in the last days, I guess :}
+
+	* added workaround for relative paths not working in the filefinder
+	relative _files_ don't work yet, tho.
+
+	* documentation written for the upcoming 0.8pre release
+
+Mon Mar  5 13:07:59 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (init): 
+	Maximize and close shortcuts, as proposed by Crocodile on IRC.
+
+	* WDestructiveClose in ImlibWidget and close(true) everywhere
+
+Mon Mar  5 00:12:45 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (slotReplayEvent): 
+	going to the next/previous/... image now also works when started with
+	an image on the commandline (== no browser available)
+	Tricky thing: after creating the browser, we can't simply go on,
+	because the browser doesn't have any files at all (async listing).
+	So we save the pageUp/pageDown event and replay it when the browser
+	is ready.
+
+	* fixed Space needed to be hit twice to show the initial browser
+
+	* src/kuickshow.cpp, src/filewidget.cpp (eventFilter)
+	deleting files works from the filebrowser again, not only from the 
+	image window
+
+	* Makefile.am
+	build as KLM (kdeinit-loadable-module) to speed up startup
+
+	* hah! Adding two lines makes browsing about twice as fast :)
+	Well, equally as fast as the KDE1 version at least ;) The new caching
+	system set the dirty flag wrongly at one place, so the pixmap was
+	effectively rendered twice per image.
+	
+Sun Mar  4 20:33:44 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (initGUI): 
+	open only one window item in toolbar is honored properly now 
+	(replaced the checkbox in the configdialog)
+
+	* don't pass the KKeyEntryMap to all the image windows, this doesn't
+	work (and it also crashes after doing it a second time).
+	Thanks to Florian Hacker for the bugreport :)
+
+	* save the view properties of KDirOperator
+
+	* statusbar looks a bit better now (no fixed size entries anymore)
+	
+	* src/kuickio.cpp (deleteFile):
+	deletion of directories works, now
+
+	* src/imdata.cpp, kuickdata.cpp:
+	better handling of default values
+
+Sun Mar  4 13:57:52 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (setFullscreen): 
+	hack around QWidget::move() resizing us -> we just ignore that 
+	resizeEvent. Gives less flicker when switching into window-mode.
+
+	* initial fullscreen mode works again as well (hacking around a kwin
+	"limitation")
+
+Sun Mar  4 10:50:23 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickconfigdlg.cpp (KuickConfigDialog): 
+	Keyboard shortcuts configurable for browser and image viewer
+
+	* don't check mimetype in isImage() at the moment, people won't have
+	mimetypes for .eim and .psd probably
+
+	* removed unused EditDialog
+
+	* Added auto-hide cursor in viewer (doesn't work properly tho)
+
+Sat Mar  3 02:00:41 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (resizeOptimal): 
+	Honor the window manager decoration in window mode. Now always the
+	entire window including decoration is visible, no matter how large the
+	image is. 
+
+	* Fixed a scrolling bug when the window was exactly as large as the
+	desktop (only in fullscreen mode)
+
+	* don't go to the next image when cancelling a deletion of a file or
+	deletion fails
+
+	* some cleanup
+
+Thu Mar  1 03:49:11 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (showImage): 
+	positioning is fixed now. Removed processEvents() after move(),
+	we don't seem to need this anymore. Actually, this was the cause
+	for bogus geometries.
+
+Thu Mar  1 02:15:49 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp, src/imlibwidget.cpp: 
+	upScale/downScale mostly works. Some WindowManager positioning 
+	problems are left.
+
+Tue Feb 27 23:30:11 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (viewerDeleted): 
+	Fixed crash when the only image on the commandline couldn't be loaded
+
+Sun Feb 25 23:22:30 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* config-dialog works now, everything is saved, loaded and resetting
+	defaults works, too. All the layout management rewritten (was still
+	Qt 1.x style). Default Image modifications work, including the preview.
+	Only need a nice preview image now :)
+
+	* src/imlibwidget.*:
+	fixed setFlipMode()
+
+	* src/filewidget.cpp (eventFilter): 
+	fixed filefinder completion on first character
+	filefinder enters directory/opens image upon return now
+
+	* added nice new calibrate.png from qwertz, thanks!
+
+Wed Jan 10 23:39:14 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* lots of work... getting closer. Commandline handling is really
+	fixed now %-} Handles multiple files just fine. The filefinder
+	sort of works now (only the sort-order is not considered, this
+	could get hairy, I'm afraid). Added browsing actions to toolbar
+	and shortcuts. Works quite nicely.
+
+Fri Nov  3 14:32:53 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (setFullscreen): 
+	cool, no need to workaround kwin's auto-maximization needed,
+	setMinimumSize() does it! Thanks Matthias Ettrich!
+
+Fri Nov  3 13:23:41 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/*: 
+	some cleanups here and there
+	fixed commandline handling (dirs, files, absolute, relative)
+	made KURLWidget use KURLLabel (and fixed KURLLabel bugs)
+
+Fri Nov  3 01:49:57 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/*: some more work on the KDE2 port/integration. Workarounds for
+	kwin's auto-maximization added. Fullscreen works. Moving images inside
+	the window works properly again. NETWM/KWin handling is better now.
+	Also better handling of non-loadable files. 
+
+	Will make it a kdeinit-loadable module (KLM) for fast startup-times
+	later.
+	
+	Finally using it again reminds me how fast it is compared to, erm, the
+	other viewers :)
+
+Thu Aug 31 01:48:55 2000  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/*: started reworking/rewriting the whole stuff to make it KDE2
+	ready. Now I have to pay for rewriting so much of kdelibs/kfile... 
+	The good thing is: it's mostly about removing stuff from KuickShow
+	because the functionality is already in libkfile, now :)
+
+Tue Sep 28 10:35:39 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (resizeEvent): 
+	ahh, fixed a seldom-happening segfault: when "preload images" was 
+	turned on and kuickshow was started with an image as parameter (so that
+	the filebrowser was not shown in the beginning), it would segfault 
+	in KuickShow::resizeEvent(). I even got a bugreport about such a
+	segfault a while ago, but I couldn't reproduce it and neither did the
+	reporter answer to my mail.
+	Anyway, this is fixed now.
+
+	* src/imagewindow.cpp (dragEnterEvent): 
+	implemented preliminary drag/drop support from Konqueror
+
+Sat Sep 25 18:30:32 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (saveImage): 
+	(hopefully, untested) fixed bug, that an image was not saved with the
+	current size - the original size was used. Thanks for the report (and 
+	for some other suggestions) go to Hugo Lopes <hugolopes@netc.pt>
+
+	* src/imlibwidget.cpp:
+	lots of other changes, fixes, there's no sense mentioning them all, as
+	a lot of stuff is being rewritten/restructured and many things have to
+	be fixed.
+
+Tue Sep 14 23:57:18 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp:
+	Ok, finally I took the time to restructure ImlibWidget.
+	Now there is a simple ImlibWidget, that can load and show images
+	and there is the powerful ImageWindow, that can do all the stuff, the
+	previous ImlibWidget did.
+	There is a nice object-oriented wrapper around ImlibImages named
+	KuickImage - I hated all those C-functions everywhere.
+	
+	Additionally, the ImageWindow has fully configurable key-bindings.
+
+	And thanks to Vitor Fernandes <vitor_fernandes@SoftHome.net>
+	I got a Brazilian/Portuguese translation for KuickShow
+
+Tue Jul 27 20:32:09 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (setBusyCursor): 
+	loading an image from disk could take quite some time (e.g. on NFS),
+	so show a busy cursor during that operation, too.
+
+Thu Jul 22 21:26:11 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (preloadImage): 
+	Argh, fixed segfault - don't free the cached image, when it is the
+	current shown image as well (imCache == im). Occured when switching
+	back and forth between two images
+
+Fri Jul 16 13:09:07 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kfileview.cpp (refresh): 
+	Oh well, thanks to Robert Hamberger <Robert.Hamberger@AUDI.DE>, I
+	fixed another (hopefully last, for the next time) segfault. SIGSEGV
+	happened, when opening the about-dialog, NOT giving the focus back
+	to the filebrowser and then pressing the "show-hidden-files-button"
+	twice.
+
+	* src/kuickconfigdlg.cpp (keyPressEvent): 
+	fixed bug: pressing escape in config dialog didn't reenable the
+	toolbar button to open the dialog
+
+	* src/imlibwidget.cpp (autoRender): 
+	LOTS of updates, the new configuration dialog sort of works now
+	- all image manipulations can be daisychained now, just call
+	  setAutoRender( false ) and call updateImage() to apply (render)
+	  configuration dialog makes use of this to show the settings in an
+	  example image
+	- new and nice about dialog, also based on ImlibWidget :o)
+
+
+Wed Jul  7 01:09:14 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (loadImageInternal): 
+	Applied patch from Thorsten Scheuermann <uddn@rz.uni-karlsruhe.de>
+	(autoscale images to screensize) - thanks!
+
+Mon Jul  5 15:27:05 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickconfigdlg.cpp (closeEvent): 
+	Eieiei, introduced closeEvent() in configdialog, which just emits
+	cancelButtonPressed() - otherwise the Toolbarbutton wouldn't get
+	reenabled. Thanks to Thorsten Scheuermann for the bugreport!
+
+	* src/kuickshow.cpp (deleteFile): 
+	Uh oh, I really thought there were no segfaults in 0.6.6...
+	Thanks go to Vadim Zaliva, who proved me wrong :-} Just fixed that
+	core-dump, when trying to delete a directory.
+	
+Fri Jul  2 14:27:08 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (initGUI): 
+	moved some code around to delay creating the filebrowser and reading
+	the directory contents. If you give a filename on the commandline as
+	parameter, kuickshow will load the filebrowser first, when you really
+	want to.
+
+	* src/imlibwidget.cpp (desktopWidth): 
+	kuickhow now honors the panel and window-frame-size when displaying 
+	images in window-mode - the imagesize is properly adjusted in 
+	auto-shrink mode
+
+	* src/imlibwidget.cpp (showImageOriginalSize): 
+	fixed bug in window-mode: displaying image with "o" (original size)
+	didn't resize the window, if necessary
+	
+	* src/kuickshow.cpp (eventFilter): 
+	Bugfix: when did I have that crazy idea to set the palette to black
+	in the filebrowser??? In certain cases, I got an almost completely
+	black Messagebox...
+
+	* src/kfileview.cpp (removeItem): 
+	oups... segfault fixed: removing the very first item in the 
+	filebrowser caused crash
+
+Sat Jun 26 22:47:05 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/fileview.cpp (changeDirDialog): 
+	goto-dialog (ctrl-g) accepts ~ and replaces it with your homedirectory
+	I love ideas, that can be implemented in half a minute :o)
+
+Mon May 31 12:08:41 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (setFullscreen): 
+	Save and restore the geometry when switching between fullscreen and
+	window mode. Much nicer now :o)
+
+	* src/kuickshow.cpp (showImage):
+	Honor kpanel's placement, when showing the first image. Don't just move
+	it to (0,0), but use KWM::geometry().
+
+	* src/imlibwidget.cpp (showImageOriginalSize):
+	implemented Shortcut "o" to show image in the original size. Useful when
+	autoscaling is active and you want the original size (e.g. scaled text
+	is hardly readable).
+	
+Mon May 31 02:24:56 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* updated polish translation, many thanks to Krzysztof P. Jasiutowicz
+
+	* added german documentation, many thanks to Robert Hamberger,
+	who also enlargened the TODO-list :-P
+
+Fri May 28 11:48:46 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (mouseMoveEvent, mouseReleaseEvent): 
+	several cleanups (replaced bool shiftPressed with the appropriate
+	QEvent::state() & ShiftButton in the eventhandlers)
+
+	* fixed bug: Shift + MousePress + MouseRelease without moving the mouse
+	moved the image to the lower right corner
+
+	* implemented "close image on doubleclick", as suggested by Ralph 
+	Bernecker. Also put Close into popupmenu.
+
+	* improved cache of preloaded image, now stores the actual rendered
+	Pixmap -> a preloaded image shows almost before you press "next image"
+ 	;-) It can't get faster now. I only could cache more than one pixmap...
+	hmm, maybe later
+
+	* updated documentation
+
+Tue May 18 21:19:32 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kfileview.cpp (refresh): 
+	sorting does somehow work. Some code seems to be duplicated in
+	KFileInfoContents and KDir - both offer sorting. However, both
+	don't work 100% :-/ Anyway, if you have KDE 1.1.1, sorting should
+	work, it is disabled for earlier releases, as there was a segfault
+	problem in kfile (nobody ever seemed to use KFileInfoContent's sorting,
+	so that was never realized).
+
+	* src/kfileview.cpp, src/fileview.cpp:
+	some minor fixlets:  always try to highlight the last active file,
+	whenever the directory contents are updated
+
+	* src/kuickconfigdlg.cpp (several):
+	changed the two KIntLineEdits to more appropriate QSpinBoxes
+
+	* src/imlibwidget.cpp (setFullscreen, several),
+	* src/kuickshow.cpp (several)
+	FINALLY got the fullscreen/kpanel thing together
+	KDE 1.1 introduced KWM::staysOnTop, but unfortunately "on top" meant
+	"below kpanel". Since KDE 1.1.1, on top means on top :o) Even more
+	unfortunately, this revealed several problems with focus handling and
+	other widgets on top of the "top"-widget. So I used a timer, check
+	the focusevents and tell kwm when to make us the top widget, and when
+	not.
+
+	* src/imlibwidget.cpp, src/kuickshow.cpp
+	improved handling of multiple windows - always the window which last
+	had the focus will load new images
+
+	* src/kuickdata.cpp, src/kuickconfigdlg.cpp, src/kuickshow.cpp
+	configurable: open all images in one window, or open a new window
+
+Sat Apr 17 18:43:03 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (setToolbarPosition): 
+	added methods to (re)store the toolbar position
+
+	* src/imlibwidget.cpp:
+	changed fullscreen code to use the current (and hopefully final) way
+	KWM does "stayOnTop"
+
+	* src/kuickdata.cpp:
+	updated file filters (Photoshop psd and bmp)
+
+	* src/kfileview.cpp:
+	changed the kdir behavior, so that the browser displays files 
+	altogether at once, not incrementally. This also let me (finally, 
+	yippeee :-P) highlight the last direcory, where you came from.
+	And reading directories is a bit faster now, too.
+	
+Sun Feb 21 16:02:44 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (zoomImage): 
+	added minimum and maximum sizes for zooming images (thanks to 
+	Robert Hamberger for the idea (and for some funny emails :-P))
+
+	* src/kwm-workaround.h (keepOnTop): 
+	added Matthias' workaround for "always on top"-problem in fullscreen
+	mode, which was introduced with KWM-changes just before KDE 1.1
+	... too bad it doesn't work :-/ Gotta spend some time finding out, why
+	
+	* src/kuickshow.cpp (showImage): 
+	always move the first opened image-window to 0x0 (top left)
+	(thanks to Andreas Gelezun for the idea)
+
+Thu Feb  4 11:40:50 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* doc/en/index.html: 
+	updated documentation
+
+Wed Feb  3 22:43:32 1999  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (KuickShow): 
+	implemented deletion of files (delete/shift-delete/popupmenu)
+
+	fixed quite a few buglets with keyboard navigation (pageUp didn't
+	halt when a directory was found). pageUp/down and the like shall only
+	select files.
+
+	worked around kwm-bug (resize doesn't work properly after
+	KWM::setDecoration( noDecoration )
+	
+Tue Dec 29 16:55:11 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp, imlibwidget.cpp, kfileview.*: 
+	fixed updating of directory in statusbar and filename in caption of
+ 	imlibwidget
+
+	fileview is prepared to support sorting and filtering
+
+	added toggle showing hidden files (accessible via toolbar)
+
+	added Home-Button in toolbar to change to home directory
+
+Wed Nov 18 15:40:46 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (mouseMoveEvent): 
+
+	fixed cursor not being reset to arrorCursor, when shift-key was
+	released during resize ( == abort resizing )
+
+Wed Nov 18 15:09:36 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (saveSettings): 
+
+	size of the browserwindow is now saved and restored on next start
+
+Mon Nov  9 23:16:32 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+        * hopefully fixed autoconf stuff, which was broken at least on SunOS
+        Now tries to detect imlib-config and links against
+        `imlib-config --libs`. If this doesn't work, it links against
+        every graphics lib of libgif, libjpeg, libtiff and libpng, that
+        is available.
+        Another little bug is fixed, any changes (contrast/brightness/gamma)
+        were not saved when using "save as"
+
+Sat Nov  7 15:22:18 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp
+	added changing of brightness, contrast and gamma via keyboard and popup menu
+	added saving image
+	the factor, how much brightness/contrast/gamma you change with one click is
+	only editable in configfile, no dialog, yet.
+
+Sat Nov  7 12:57:48 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* acinclude.m4 (ac_imlib_config): 
+	added some configure-stuff to use `imlib-config' to determine the libs
+	to be linked against.
+
+Sun Oct 11 23:58:46 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (loadImageInternal): 
+	added configuration option to not override the color palette
+	useful for 8bit displays
+
+	* src/kuickshow.cpp:
+	fixed segfault when imlib can't load image
+	(don't preload the next image, then)
+
+Wed Sep 30 19:39:15 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* acinclude.m4, configure.in:
+	Added a configure-check for Imlib. Still incomplete (does NOT
+	check for all those other libs as libgif, libjpeg, libz, ...),
+	but at least finds libImlibs which are too old.
+
+	src/kuickshow.cpp (about):
+	about dialog is centered, now
+
+Fri Sep 25 19:32:13 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (keyPressEvent): 
+	Now behavior of scrolling/zooming with mouse is fixed:
+	pressing left mousebutton and moving the mouse will move the image
+	(only if it image is larger than current window)
+
+	Pressing Shift, left mousebutton and moving the mouse will zoom into
+	the image. Releasing Shift-button before mousebutton will abort zooming
+
+Thu Sep 24 02:41:26 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (mouseReleaseEvent): 
+	Ahh, finally I got "zoom inside image with mouse" working perfectly.
+	A rectangle is painted and this rectangle is zoomed and centered.
+	Not the very best solution, tho, as imlib is zooming the entire
+	image, not only the selected part... guess how long it can take for
+	bigger images.
+	Gotta find another solution later, creating a new imlib image with
+	just the selected part.
+
+Tue Sep 22 21:05:58 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (preloadImage): 
+	Added preloading facility. Fills the cache with the next image, so it
+	will pop up almost instantaneously, when pressing PageUp/Down.
+	Configurable via dialog.
+
+Mon Sep 21 16:29:56 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (eventFilter): 
+	Added "Enter-key", that reloads current image (so all zoom/move stuff
+	is restored to original settings).
+
+Sun Sep 20 19:04:23 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kfileview.cpp (prev): 
+	whoops, fixed a segfault, when trying to get a kfileinfo of index -1.
+	I shouldn't check, whether an unsigned int is smaller than 0, which it
+	actually was. Now uses int.
+
+Sun Sep 20 13:35:00 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (closeEvent): 
+	reverted to override closeEvent() and changed every occurrence of
+	close( true ) to close( false ), as closeEvent now explicitely 
+	deletes itself.
+	This was due to windowmanagers close-button, which should delete widget
+
+Sun Sep 20 03:08:45 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (printImage): 
+	added preliminary support for printing
+
+Sat Sep 19 01:40:22 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (rotate): 
+	added rotate-routine to - doh - rotate an image
+
+Fri Sep 18 01:08:46 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (scrollImage): 
+	Now changes cursor when attempting to move the image with the mouse
+	Also, image can be moved now, when in window mode and window is
+	larger than desktop
+
+Thu Sep 17 17:25:11 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (setPopupMenu): 
+	the fix for the popupmenu also let me finally delete it without
+	segfault :o)
+
+Thu Sep 17 13:13:09 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickconfigdlg.cpp (KuickConfigDialog): 
+	enlargened maxCache lineedit and changed tooltip
+
+	* src/imlibconfig.cpp
+	changed default value for maxCache from 0 to 10000 (10megs)
+
+	* src/imlibwidget.cpp (scrollImage): 
+	restricted scrolling so that you can move the image only
+	if it doesn't fit onto the screen.
+	You can't move the image out of the screen anymore.
+
+	Also fixed a segfault (ugh) in viewerMenu->popup(), as it was
+	initialized in the wrong place (now in initImlib()).
+	
+
+Thu Sep 17 00:11:53 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (loadImage): 
+	re-enabled Imlib_destroy_image()
+	Found another value in imlib configuration struct, pixmapcachesize
+	which I wasn't aware of. Now limiting imlib's cache really works :o))
+	I'm really happy now :-) Running out of Ram and even Swap is not too
+	funny ;o)
+
+Tue Sep 15 20:28:49 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (centerImage): 
+	fixed images not centering when larger than screen and in fullscreen
+	mode.
+	
+
+Tue Sep 15 14:06:27 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (mouseMoveEvent): 
+	scrolling the image with the mouse is now possible. Didn't expect
+	scrolling would be so smooth :o)
+	Also added a popupmenu (ImlibWidget::setPopupmenu( bool )) for
+	the basic features like zoom and flip image
+
+Mon Sep 14 16:20:30 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/fileview.cpp/.h
+	* src/kfileview.cpp/.h
+	* src/kuickshow.cpp
+	added "change directory" possibility. A dialog asks for a directory
+	and the fileview is being updated. Either accessible via the
+	popupmenu, or via Ctrl-g (goto)
+
+	* src/kuickshow.cpp (KuickShow): 
+	once again optimized commandline parsing
+
+Mon Sep 14 13:24:40 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+        * funny, I added lots of stuff, moved some other stuff around and
+	the result is a binary about 30k smaller than before :-D
+
+	* src/fileview.cpp (findCompletion): 
+	*strike* now even filecompletion works :-) If you hit some keys
+	on your keyboard, while in the filebrowser, a small edit window pops
+	up in the bottom-right corner. Just type in the first chars of the
+	filename of the image you want to see, and it will be highlighted.
+
+	* src/kuickshow.cpp, src/imlibwidget.h/.cpp: 
+	Cool. Now, I have only one ImlibData object, so I share imlib's
+	cache between all open windows. This does not only speed things
+	up quite a bit, but also reduced memory usage with multiple open
+	windows.
+	ImlibWidget therefore has a new constructor, where you can pass the
+	pointer to the ImlibData object.
+
+	* src/imlibwidget.cpp (ImlibWidget): 
+	now creates an ImlibConfig object itself, when none has been given
+	in the contructor
+
+Sun Sep 13 23:28:31 1998  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imlibwidget.cpp (renderImage): 
+	Don't destroy images ( Imlib_destroy_image() ) anymore. This boosts
+	browsing a LOT. Showing cached images is almosts instantaneous now!
+	Hope there's no sideeffect on this :-}
+
+	* src/kuickshow.cpp (eventFilter): 
+	space toggles show()ing and hide()ing the browser now.
+	If started with image as parameter, kuickshow doesn't show
+	the browser, hit space to show it.
+
+	* src/fileview.h (class FileView): 
+	findCompletion() is now public, so that I can tell the browser
+	to highlight the file, supplied via commandline.
+	
+
+History:
+--------
+- found that xemacs can create much better changelogs :o)
+- hacked a lot of goodies into KuickShow, several configuration options
+- decided to have a look at the Xlib stuff and found out, how to map
+  an Imlib image onto any QWidget - this is cool :o)
+- too bad, it was not very reliable and it was a mess, too
+- with my Xlib non-knowledge, found a way to "swallow" an Imlib image
+  onto a QWidget - imagine how happy I was :o)
+- if Kopacz got Imlib to work, I could do that, too :-P
+- end of August 98, saw Adam Kopacz' release of qiv (quick image viewer)
+  damn, this was my name (kiv, kuick image viewer) :o(
+- first tries to use Imlib to display on Qt/KDE widgets in April 98,
+  too bad, it didn't work :o(
+- first hack of kview to use a filebrowser in January
+- had the idea for such an app about December 97
+</pre>

@@ -1,0 +1,3 @@
+kdelibs issues:
+- The filefinder doesn't work when using the splitted view
+- in the detailed view, the filefinder can't highlight files during typing.

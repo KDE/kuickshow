@@ -1,0 +1,18 @@
+Begin3
+Title:          KuickShow
+Version:        0.8.2
+Entered-date:   August 2001
+Description:    KuickShow is a very fast image viewer, that lets you easily
+                browse large galleries. A builtin filebrowser and manager
+                is also available. Usage is somewhat inspired by ACDSee.
+Keywords:       KDE Qt Graphics Images Imageviewer Imlib
+Author:         Carsten Pfeiffer <pfeiffer@kde.org>
+Maintained-by:  Carsten Pfeiffer <pfeiffer@kde.org>
+Home-page:      http://devel-home.kde.org/~pfeiffer/kuickshow/
+Alternate-site: ftp://ftp.kde.org/pub/kde/stable/apps/graphics/
+Primary-site:   http://devel-home.kde.org/~pfeiffer/kuickshow/
+                xxxxxx  kuickshow-0.8.2.tar.gz
+                xxx     kuickshow-0.8.2.lsm
+Platform:       Unix. Needs Qt >= 2.2.4, KDE (kdelibs) >= 2.1 and Imlib 1.x
+Copying-policy: GPL
+End
