@@ -1,12 +1,12 @@
 toolbar in imageviewer
 
+mauve: Kuickimage should store floating-point zoom (so scaling down then scaling up returns us to original image size)
 - Ctrl-S = Save current, Shift-Ctrl-S = Filedialog
 
 - allow to split browser into subwindows (multiple browsers)
 - mouse-usage better (e.g. left button = next image, middle button = previous
   image, all configurable)
 - anim-gif support (QMovie perhaps)
-- cropping images (via Imlib_clone_scaled_image & Imlib_crop_and_clone_image())
 - thumbnail view, treeview
 - menubar (same as popupmenu) (abschaltbar) (mac-mode!)
 
