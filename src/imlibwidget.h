@@ -102,6 +102,8 @@ public:
   //  KuickImage *		find( const QString& filename );
 
 private:
+  ImlibImage *		loadImageWithQt( const QString& filename ) const;
+  
   int 			myMaxImages;
   QStringList		fileList;
   QPtrList<KuickImage>	kuickList;

@@ -220,11 +220,7 @@ void ImageWindow::setupActions()
 				  this, SLOT( pauseSlideShow() ),
 				  m_actions, "kuick_slideshow_pause" );
 
-    KShortcut cut(Key_Return);
-    cut.append(KStdAccel::shortcut(KStdAccel::FullScreen));
-
-    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
-    action->setShortcut(cut);
+    KAction *fullscreenAction = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
 
     new KAction( i18n("Reload Image"), Key_Enter,
                  this, SLOT( reload() ),
@@ -235,6 +231,14 @@ void ImageWindow::setupActions()
                  m_actions, "properties" );
 
     m_actions->readShortcutSettings();
+
+    // Unfortunately there is no KAction::setShortcutDefault() :-/
+    // so add Key_Return as fullscreen shortcut _after_ readShortcutSettings()
+    KShortcut cut( fullscreenAction->shortcut() );
+    if ( cut == fullscreenAction->shortcutDefault() ) {
+	cut.append(KKey(Key_Return));
+	fullscreenAction->setShortcut(cut);
+    }
 }
 
 

@@ -26,12 +26,14 @@
 #include <qcolor.h>
 #include <qfile.h>
 #include <qglobal.h>
+#include <qimage.h>
 #include <qobject.h>
 #include <qpalette.h>
 
 #include <kcursor.h>
 #include <kdebug.h>
 #include <kfilemetainfo.h>
+#include <kimageio.h>
 
 #include "imlibwidget.h"
 
@@ -754,8 +756,11 @@ KuickImage * ImageCache::getKuimage( const QString& file,
 // #endif	
 
         slotIdle();
-	if ( !im )
-	    return 0L;
+	if ( !im ) {
+	    im = loadImageWithQt( file );
+	    if ( !im )
+		return 0L;
+	}
 
 	Imlib_set_image_modifier( myId, im, &mod );
 	kuim = new KuickImage( file, im, myId );
@@ -775,6 +780,46 @@ KuickImage * ImageCache::getKuimage( const QString& file,
     return kuim;
 }
 
+
+// Note: the returned image's filename will not be the real filename (which it usually
+// isn't anyway, according to Imlib's sources).
+ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
+{
+    kdDebug() << "Trying to load " << fileName << " with KImageIO..." << endl;
+
+    KImageIO::registerFormats();
+
+    QImage image( fileName );
+    if ( image.isNull() )
+	return 0L;
+    if ( image.depth() != 32 ) {
+	image.setAlphaBuffer(false);
+	image = image.convertDepth(32);
+    }
+    if ( image.isNull() )
+	return 0L;
+
+    // convert to 24 bpp (discard alpha)
+    int numPixels = image.width() * image.height();
+    const int NUM_BYTES_ORIG = 4; // 32 bpp
+    const int NUM_BYTES_NEW  = 3; // 24 bpp
+    uchar *newImageData = new uchar[numPixels * NUM_BYTES_NEW];
+    uchar *newData = newImageData;
+    uchar *origData = image.bits();
+    
+    for (int i = 0; i < numPixels; i++) {
+	memcpy( newData, origData , NUM_BYTES_NEW);
+	newData  += NUM_BYTES_NEW;
+	origData += NUM_BYTES_ORIG;
+    }
+    
+    ImlibImage *im = Imlib_create_image_from_data( myId, newImageData, NULL,
+                                                   image.width(), image.height() );
+		    
+    delete[] newImageData;
+
+    return im;
+}
 
 /*
 KuickImage * ImageCache::find( const QString& file )
