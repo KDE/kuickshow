@@ -660,9 +660,10 @@ void KuickShow::about()
 {
     AboutWidget *aboutWidget = new AboutWidget( 0L, "about" );
     aboutWidget->adjustSize();
-    QWidget *d = QApplication::desktop();
-    QPoint p( d->width()/2 - aboutWidget->width()/2,
-	      d->height()/2 - aboutWidget->height()/2 );
+    int scnum = QApplication::desktop()->screenNumber(this);
+    QRect d = QApplication::desktop()->screenGeometry(scnum);
+    QPoint p( d.center().x() - aboutWidget->width()/2,
+	      d.center().y() - aboutWidget->height()/2 );
     aboutWidget->move( p );
     aboutWidget->show();
 }

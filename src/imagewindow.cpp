@@ -184,12 +184,13 @@ void ImageWindow::setFullscreen( bool enable )
 	// oldGeometry.x(), oldGeometry.y(),
 	// oldGeometry.width(), oldGeometry.height());
 
-	setFixedSize( QApplication::desktop()->size() );
+        int scnum = QApplication::desktop()->screenNumber(this);
+	setFixedSize( QApplication::desktop()->screenGeometry(scnum).size() );
 
 	KWin::setType( winId(), NET::Override );
 	KWin::setState( winId(), NET::StaysOnTop );
 
-	setGeometry( QApplication::desktop()->geometry() );
+	setGeometry( QApplication::desktop()->screenGeometry(scnum) );
 	// qApp->processEvents(); // not necessary anymore
     }
 
@@ -661,8 +662,9 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 	
 	int w = width();
 	int h = height();
-	if ( w == QApplication::desktop()->width() &&
-	     h == QApplication::desktop()->height() &&
+        int scnum = QApplication::desktop()->screenNumber(this);
+	if ( w == QApplication::desktop()->screenGeometry(scnum).width() &&
+	     h == QApplication::desktop()->screenGeometry(scnum).height() &&
 	     imageWidth() < w && imageHeight() < h ) {
 	
 	    return;
@@ -980,28 +982,31 @@ void ImageWindow::loaded( KuickImage *kuim )
 
 int ImageWindow::desktopWidth( bool totalScreen ) const
 {
-    if ( myIsFullscreen || totalScreen )
-	return QApplication::desktop()->width();
-
-    else
+    if ( myIsFullscreen || totalScreen ) {
+        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
+	return QApplication::desktop()->screenGeometry(scnum).width();
+    } else {
 	return Kuick::workArea().width();
+    }
 }
 
 
 int ImageWindow::desktopHeight( bool totalScreen ) const
 {
-    if ( myIsFullscreen || totalScreen )
-	return QApplication::desktop()->height();
-
-    else
+    if ( myIsFullscreen || totalScreen ) {
+        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
+	return QApplication::desktop()->screenGeometry(scnum).height();
+    } else {
 	return Kuick::workArea().height();
+    }
 }
 
 QSize ImageWindow::maxImageSize() const
 {
-    if ( myIsFullscreen || initialFullscreen )
-	return QApplication::desktop()->size();
-    else {
+    if ( myIsFullscreen || initialFullscreen ) {
+        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
+	return QApplication::desktop()->screenGeometry(scnum).size();
+    } else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
     }
 }
