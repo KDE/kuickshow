@@ -177,7 +177,7 @@ void KuickShow::initGUI( const KURL& startDir )
     KAction *about = new KAction( i18n( "About KuickShow" ), "about", 0,
 				  this, SLOT( about() ), coll );
 
-    oneWindowAction = new KToggleAction( i18n("Open only one image window"),
+    oneWindowAction = new KToggleAction( i18n("Open only one Image Window"),
 					 "window_new", CTRL+Key_N, coll,
 					 "kuick_one window" );
 

@@ -49,10 +49,10 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   lbRotate = new QLabel( i18n("Rotate image:"), gbGeometry );
 
   comboRotate = new KComboBox( gbGeometry, "rotate combobox" );
-  comboRotate->insertItem( i18n("0 degrees") );
-  comboRotate->insertItem( i18n("90 degrees") );
-  comboRotate->insertItem( i18n("180 degrees") );
-  comboRotate->insertItem( i18n("270 degrees") );
+  comboRotate->insertItem( i18n("0 Degrees") );
+  comboRotate->insertItem( i18n("90 Degrees") );
+  comboRotate->insertItem( i18n("180 Degrees") );
+  comboRotate->insertItem( i18n("270 Degrees") );
 
   // --
 
