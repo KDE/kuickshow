@@ -641,24 +641,33 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
 	    // Key_Shift shouldn't load the browser in nobrowser mode, it
 	    // is used for zooming in the imagewindow
-	    if ( !fileWidget && key != Key_Escape && key != Key_Shift ) {
-		KURL start;
-		QFileInfo fi( m_viewer->filename() );
-		start.setPath( fi.dirPath( true ) );
-		initGUI( start );
+	    if ( !fileWidget )
+            {
+                if ( key != Key_Escape && key != Key_Shift ) 
+                {
+                    KURL start;
+                    QFileInfo fi( m_viewer->filename() );
+                    start.setPath( fi.dirPath( true ) );
+                    initGUI( start );
 
-		// the fileBrowser will list the start-directory asynchronously
-		// so we can't immediately continue. There is no current-item
-		// and no next-item (actually no item at all). So we tell the
-		// browser the initial current-item and wait for it to tell us
-		// when it's ready. Then we will replay this KeyEvent.
-		fileWidget->setInitialItem( fi.fileName() );
-		delayedRepeatEvent( m_viewer, k );
-		connect( fileWidget, SIGNAL( finished() ),
-			 SLOT( slotReplayEvent() ));
-		return true;
+                    // the fileBrowser will list the start-directory 
+                    // asynchronously so we can't immediately continue. There 
+                    // is no current-item and no next-item (actually no item 
+                    // at all). So we tell the browser the initial 
+                    // current-item and wait for it to tell us when it's ready.
+                    // Then we will replay this KeyEvent.
+                    fileWidget->setInitialItem( fi.fileName() );
+                    delayedRepeatEvent( m_viewer, k );
+                    connect( fileWidget, SIGNAL( finished() ),
+                             SLOT( slotReplayEvent() ));
+                    return true;
+                }
+                
+                return KMainWindow::eventFilter( o, e );
 	    }
 
+            // we definitely have a fileWidget here!
+            
  	    // FIXME: make all this stuff via KStdAccel and KAccel ->slots
 
             KKey kkey( key );
