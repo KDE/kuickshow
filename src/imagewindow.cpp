@@ -823,18 +823,16 @@ void ImageWindow::printImage()
 
     if ( !Printing::printImage( *this ) )
     {
-        KMessageBox::sorry( this, i18n("Unable to print the image."), 
+        KMessageBox::sorry( this, i18n("Unable to print the image."),
                             i18n("Printing Failed") );
     }
 }
 
 void ImageWindow::saveImage()
 {
-    QString file;
     KuickData tmp;
-    file = KFileDialog::getSaveFileName( kuim->filename(), tmp.fileFilter,
-                                         this );
-    file = filename();
+    QString file = KFileDialog::getSaveFileName( kuim->filename(), 
+                                                 tmp.fileFilter, this );
     if ( !file.isEmpty() )
     {
         if ( !saveImage( file ) )
