@@ -31,7 +31,7 @@ public:
   void 		applySettings( KuickData& data );
 
 private:
-  int           currentRotation() const;
+  Rotation      currentRotation() const;
 
   QCheckBox 	*cbEnableMods;
 

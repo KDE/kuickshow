@@ -230,8 +230,8 @@ void DefaultsWidget::updatePreview()
     flipMode |= cbFlipVertically->isChecked() ? FlipVertical : FlipNone;
     imFiltered->setFlipMode( flipMode );
 
-    int rotation = cbEnableMods->isChecked() ? currentRotation() : ROT_0;
-    imFiltered->setRotation( (Rotation) rotation );
+    Rotation rotation = cbEnableMods->isChecked() ? currentRotation() : ROT_0;
+    imFiltered->setRotation( rotation );
 
     imFiltered->setBrightness( sbBrightness->value() );
     imFiltered->setContrast( sbContrast->value() );
@@ -254,9 +254,9 @@ void DefaultsWidget::enableWidgets( bool enable )
 }
 
 
-int DefaultsWidget::currentRotation() const
+Rotation DefaultsWidget::currentRotation() const
 {
-    return comboRotate->currentItem();
+    return (Rotation) comboRotate->currentItem();
 }
 
 #include "defaultswidget.moc"
