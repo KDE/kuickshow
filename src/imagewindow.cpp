@@ -240,13 +240,26 @@ void ImageWindow::setFullscreen( bool enable )
 	// oldGeometry.x(), oldGeometry.y(),
 	// oldGeometry.width(), oldGeometry.height());
 
-        int scnum = QApplication::desktop()->screenNumber(this);
-        setFixedSize( QApplication::desktop()->screenGeometry(scnum).size() );
+        QDesktopWidget *desktop = QApplication::desktop();
+        QRect r;
+        KConfig gc("kdeglobals", false, false);
+        gc.setGroup("Windows");
+
+        if (desktop->isVirtualDesktop() &&
+            gc.readBoolEntry("XineramaEnabled", true) &&
+            gc.readBoolEntry("XineramaPlacementEnabled", true)) {
+            int screen = desktop->screenNumber(this);
+            r = desktop->screenGeometry(screen);
+        } else {
+            r = desktop->geometry();
+        }
+        
+        setFixedSize( r.size() );
 
         KWin::setType( winId(), NET::Override );
         KWin::setState( winId(), NET::StaysOnTop );
 
-        setGeometry( QApplication::desktop()->screenGeometry(scnum) );
+        setGeometry( r );
         // qApp->processEvents(); // not necessary anymore
 
     }
@@ -733,9 +746,21 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 	
 	int w = width();
 	int h = height();
-        int scnum = QApplication::desktop()->screenNumber(this);
-	if ( w == QApplication::desktop()->screenGeometry(scnum).width() &&
-	     h == QApplication::desktop()->screenGeometry(scnum).height() &&
+        QDesktopWidget *desktop = QApplication::desktop();
+        QRect r;
+        KConfig gc("kdeglobals", false, false);
+        gc.setGroup("Windows");
+
+        if (desktop->isVirtualDesktop() &&
+            gc.readBoolEntry("XineramaEnabled", true) &&
+            gc.readBoolEntry("XineramaPlacementEnabled", true)) {
+            int screen = desktop->screenNumber(this);
+            r = desktop->screenGeometry(screen);
+        } else {
+            r = desktop->geometry();
+        }
+        
+	if ( w == r.width() && h == r.height() &&
 	     imageWidth() < w && imageHeight() < h ) {
 	
 	    return;
@@ -1006,8 +1031,21 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen )
     {
-        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
-	return QApplication::desktop()->screenGeometry(scnum).width();
+        QDesktopWidget *desktop = QApplication::desktop();
+        QRect r;
+        KConfig gc("kdeglobals", false, false);
+        gc.setGroup("Windows");
+
+        if (desktop->isVirtualDesktop() &&
+            gc.readBoolEntry("XineramaEnabled", true) &&
+            gc.readBoolEntry("XineramaPlacementEnabled", true)) {
+            int screen = desktop->screenNumber(topLevelWidget());
+            r = desktop->screenGeometry(screen);
+        } else {
+            r = desktop->geometry();
+        }
+        
+	return r.width();
     } else
 	return Kuick::workArea().width();
 }
@@ -1016,8 +1054,21 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 int ImageWindow::desktopHeight( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen ) {
-        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
-	return QApplication::desktop()->screenGeometry(scnum).height();
+        QDesktopWidget *desktop = QApplication::desktop();
+        QRect r;
+        KConfig gc("kdeglobals", false, false);
+        gc.setGroup("Windows");
+
+        if (desktop->isVirtualDesktop() &&
+            gc.readBoolEntry("XineramaEnabled", true) &&
+            gc.readBoolEntry("XineramaPlacementEnabled", true)) {
+            int screen = desktop->screenNumber(topLevelWidget());
+            r = desktop->screenGeometry(screen);
+        } else {
+            r = desktop->geometry();
+        }
+        
+	return r.height();
     } else {
 	return Kuick::workArea().height();
     }
@@ -1026,8 +1077,21 @@ int ImageWindow::desktopHeight( bool totalScreen ) const
 QSize ImageWindow::maxImageSize() const
 {
     if ( myIsFullscreen || initialFullscreen ) {
-        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
-	return QApplication::desktop()->screenGeometry(scnum).size();
+        QDesktopWidget *desktop = QApplication::desktop();
+        QRect r;
+        KConfig gc("kdeglobals", false, false);
+        gc.setGroup("Windows");
+
+        if (desktop->isVirtualDesktop() &&
+            gc.readBoolEntry("XineramaEnabled", true) &&
+            gc.readBoolEntry("XineramaPlacementEnabled", true)) {
+            int screen = desktop->screenNumber(topLevelWidget());
+            r = desktop->screenGeometry(screen);
+        } else {
+            r = desktop->geometry();
+        }
+        
+	return r.size();
     }
     else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );

@@ -916,6 +916,7 @@ void KuickShow::about()
 #if KDE_VERSION >= 310
     KDialog::centerOnScreen( aboutWidget );
 #else
+// Not fixed because it must be dead code now.
   QDesktopWidget *desktop = QApplication::desktop();
   int screen = desktop->screenNumber( aboutWidget );
   if ( screen == -1 )
