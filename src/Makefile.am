@@ -33,8 +33,7 @@ messages:
 KDE_ICON = kuickshow
 
  # this is where the kdelnk file will go 
-appsdir   = $(kde_appsdir)/Graphics
-apps_DATA = kuickshow.desktop
+xdg_apps_DATA = kuickshow.desktop
 
 dummy.cpp:
 	echo "// generated dummy file" > dummy.cpp
