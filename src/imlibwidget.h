@@ -188,9 +188,9 @@ public:
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
 
-  void		setViewportSize(const QSize &size) { m_kuim->setViewportSize(size); }
-  void		setViewportPosition(const QPoint &point) {m_kuim->setViewportPosition(point); }
-  void		setViewport(const QRect &vp) { m_kuim->setViewport(vp); }
+  void		setViewportSize(const QSize &size) { if (imageLoaded()) m_kuim->setViewportSize(size); }
+  void		setViewportPosition(const QPoint &point) {if (imageLoaded()) m_kuim->setViewportPosition(point); }
+  void		setViewport(const QRect &vp) { if (imageLoaded()) m_kuim->setViewport(vp); }
   const QRect & getViewport() { return m_kuim->getViewport(); }
   const QSize	originalImageSize() { if (!imageLoaded()) return QSize(-1,-1); return QSize(m_kuim->originalWidth(), m_kuim->originalHeight()); }
   const QString& imageFilename() { return m_kuim->filename(); }
