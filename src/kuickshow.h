@@ -98,7 +98,7 @@ private slots:
     void 		nextSlide();
     void                nextSlide( KFileItem *item );
     void		viewerDeleted();
-    void 		slotDropped( QDropEvent * );
+    void 		slotDropped( const KFileItem *, QDropEvent *, const KURL::List &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
 

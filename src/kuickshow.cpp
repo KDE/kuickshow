@@ -204,12 +204,10 @@ void KuickShow::initGUI( const KURL& startDir )
     connect( fileWidget, SIGNAL( urlEntered( const KURL&  )),
 	     this, SLOT( dirSelected( const KURL& )) );
 
-/*
-    WABA: KDirOperator (fileWidget) does not have DND support (yet)
 
-    connect( iconView, SIGNAL( dropped( QDropEvent *, const QValueList<QIconDragItem>& )),
-             this, SLOT( slotDropped( QDropEvent *)) );
-*/
+    fileWidget->setAcceptDrops(true);
+    connect( fileWidget, SIGNAL( dropped( const KFileItem *, QDropEvent *, const KURL::List & )),
+             this, SLOT( slotDropped( const KFileItem *, QDropEvent *, const KURL::List &)) );
 
     // setup actions
     KAction *open = KStdAction::open( this, SLOT( slotOpenURL() ),
@@ -590,12 +588,8 @@ void KuickShow::slotShowInSameWindow()
     showImage( fileWidget->getCurrentItem( false ), false );
 }
 
-void KuickShow::slotDropped( QDropEvent *e )
+void KuickShow::slotDropped( const KFileItem *, QDropEvent *, const KURL::List &urls)
 {
-    KURL dir; // in case we get a directory dropped
-    KURL::List urls;
-    KURLDrag::decode( e, urls );
-
     KURL::List::ConstIterator it = urls.begin();
     for ( ; it != urls.end(); ++it )
     {
