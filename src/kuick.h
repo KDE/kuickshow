@@ -24,6 +24,7 @@
 
 #include <kwin.h>
 #include <kwinmodule.h>
+#include <kdeversion.h>
 
 class Kuick
 {
@@ -34,10 +35,16 @@ public:
 
     static QSize frameSize( WId win = 0L ) {
 	if ( win ) {
+#if !KDE_IS_VERSION(3,2,0)
+	    KWin::Info info = KWin::info( win );
+	    int wborder = info.frameGeometry.width() - info.geometry.width();
+            int hborder = info.frameGeometry.height() - info.geometry.height();
+#else
 	    KWin::WindowInfo info = KWin::windowInfo(win, NET::WMKDEFrameStrut | NET::WMGeometry);
 	    int wborder = info.frameGeometry().width() - info.geometry().width();
 	    int hborder = info.frameGeometry().height() - info.geometry().height();
-	
+#endif
+	    
 	    if ( wborder || hborder ) { // we get a 0,0 border when not shown
 		s_frameSize.setWidth( wborder );
 		s_frameSize.setHeight( hborder );

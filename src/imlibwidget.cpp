@@ -573,8 +573,7 @@ void KuickImage::renderPixmap()
 
 #ifndef NDEBUG
      gettimeofday( &tms2, NULL );
-     qDebug("*** rendering image: %s at %dx%d, took %ld ms", myFilename.latin1(), myWidth, myHeight,
-            (tms2.tv_usec - tms1.tv_usec)/1000+(tms2.tv_sec - tms1.tv_sec)*1000);
+     kdDebug() << "*** rendering image: " << myFilename.latin1() << " at " << myWidth << "x" << myHeight << ", took " << ((tms2.tv_usec - tms1.tv_usec)/1000+(tms2.tv_sec - tms1.tv_sec)*1000) << " ms" << endl;
 #endif
 
 

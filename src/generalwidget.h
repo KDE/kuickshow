@@ -41,14 +41,11 @@ public:
     void 	applySettings( KuickData& data );
 
 private:
-    QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload;
-    QCheckBox   *cbFastRemap, *cbFastRender;
-    QCheckBox 	*cbDither16bit, *cbDither8bit, *cbOwnPalette;
+    QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload, *cbLastdir;
 
     QSlider	*quality;
     
     KLineEdit   	*editFilter;
-    KIntNumInput 	*delaySpinBox, *maxCacheSpinBox;
 
     KIntNumInput 	*sbMaxWidth, *sbMaxHeight;
     KIntNumInput 	*sbZoomFactor;
@@ -56,7 +53,6 @@ private:
     KColorButton        *colorButton;
 
 private slots:
-    void 	useOwnPalette();
     void slotURLClicked( const QString & );
 
 };

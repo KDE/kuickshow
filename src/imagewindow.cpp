@@ -205,11 +205,18 @@ void ImageWindow::setupActions()
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
 
+#if KDE_IS_VERSION(3,2,0)
     KShortcut cut(Key_Return);
     cut.append(KStdAccel::shortcut(KStdAccel::FullScreen));
 
-    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
+    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );		     
+    
     action->setShortcut(cut);
+#else
+     new KAction( i18n("Toggle Fullscreen mode"), Key_Return, 
+                  this, SLOT( toggleFullscreen() ),
+                  m_actions, "toggle_fullscreen" );
+#endif
 
     new KAction( i18n("Reload Image"), Key_Enter,
                  this, SLOT( reload() ),
@@ -817,7 +824,7 @@ void ImageWindow::saveImage()
     QCheckBox *keepSize = new QCheckBox( i18n("Keep original image Size"), 0L);
     keepSize->setChecked( true );
     KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this, "filedialog", true
-#if KDE_VERSION >= 310
+#if KDE_IS_VERSION(3,1,0)
                      ,keepSize
 #endif
                    );
@@ -851,7 +858,7 @@ void ImageWindow::saveImage()
     if ( lastDir != m_saveDirectory )
         m_saveDirectory = lastDir;
 
-#if KDE_VERSION < 310
+#if !KDE_IS_VERSION(3,1,0)
     delete keepSize;
 #endif
 }
@@ -877,7 +884,7 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
 
     return success;*/
     
-    qDebug("ERROR: ImageWindow::saveImage() unimplemented.");
+    kdDebug() << "ERROR: ImageWindow::saveImage() unimplemented." << endl;
     
     return false;
 }
