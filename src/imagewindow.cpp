@@ -848,6 +848,10 @@ void ImageWindow::saveImage()
                                "have write permission to the file.");
             KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
         }
+        
+        if ( file == m_kuim->filename() ) {
+            Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+        }
     }
 }
 
