@@ -223,7 +223,9 @@ void KuickShow::initGUI( const KURL& startDir )
     KHelpMenu *helpMenu = new KHelpMenu( this,
                                          KGlobal::instance()->aboutData(),
                                          false );
-    tBar->insertButton( "help", 100, helpMenu->menu(), true, i18n("Help") );
+    tBar->insertButton( "help", 100, 
+                        SIGNAL( clicked() ), this, SLOT( appHelpActivated() ));
+    tBar->setDelayedPopup( 100, helpMenu->menu() );
 
 
     KStatusBar* sBar = statusBar();
