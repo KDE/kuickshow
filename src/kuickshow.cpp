@@ -893,7 +893,7 @@ void KuickShow::configuration()
     if ( !m_accel ) {
         KURL start;
         start.setPath( QDir::homeDirPath() );
-        initGUI( QDir::homeDirPath() );
+        initGUI( KURL::fromPathOrURL( QDir::homeDirPath() ) );
     }
 
     dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L,
@@ -968,14 +968,14 @@ void KuickShow::readProperties( KConfig *kc )
     assert( fileWidget ); // from SM, we should always have initGUI on startup
     QString dir = kc->readPathEntry( "CurrentDirectory" );
     if ( !dir.isEmpty() ) {
-        fileWidget->setURL( dir, true );
+        fileWidget->setURL( KURL::fromPathOrURL( dir ), true );
         fileWidget->clearHistory();
     }
 
     QStringList images = kc->readPathListEntry( "Images shown" );
     QStringList::Iterator it;
     for ( it = images.begin(); it != images.end(); ++it ) {
-        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it, false );
+        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KURL::fromPathOrURL( *it ), false );
         if ( item.isReadable() )
             showImage( &item, true );
     }
