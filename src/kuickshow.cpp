@@ -71,7 +71,7 @@ KuickShow::KuickShow( const char *name )
       fileWidget( 0L ),
       dialog( 0L ),
       id( 0L ),
-      viewer( 0L ),
+      m_viewer( 0L ),
       newWindowAction( 0L ),
       m_accel( 0L ),
       m_delayedRepeatItem( 0L )
@@ -130,8 +130,8 @@ KuickShow::~KuickShow()
     if ( fileWidget )
 	saveSettings();
 
-    if ( viewer )
-	viewer->close( true );
+    if ( m_viewer )
+	m_viewer->close( true );
 
     delete id;
     kapp->quit();
@@ -238,7 +238,7 @@ void KuickShow::initGUI( const KURL& startDir )
 void KuickShow::viewerDeleted()
 {
     s_viewers.remove( (ImageWindow*) sender() );
-    viewer = 0L;
+    m_viewer = 0L;
 
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
 	if ( fileWidget )
@@ -290,45 +290,45 @@ void KuickShow::showFileItem( ImageWindow */*view*/,
 
 void KuickShow::showImage( const KFileItem *fi, bool newWin )
 {
-    bool newWindow = !viewer || newWin;
+    bool newWindow = !m_viewer || newWin;
 
     if ( FileWidget::isImage( fi ) ) {
 	if ( newWindow ) {
-	    viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
-	    s_viewers.append( viewer );
+	    m_viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
+	    s_viewers.append( m_viewer );
 
-	    connect( viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
-	    connect( viewer, SIGNAL( sigFocusWindow( ImageWindow *) ),
+	    connect( m_viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
+	    connect( m_viewer, SIGNAL( sigFocusWindow( ImageWindow *) ),
 		     this, SLOT( slotSetActiveViewer( ImageWindow * ) ));
-	    connect( viewer, SIGNAL( sigBadImage(const QString& ) ),
+	    connect( m_viewer, SIGNAL( sigBadImage(const QString& ) ),
 		     this, SLOT( messageCantLoadImage(const QString &) ));
-            connect( viewer, SIGNAL( requestImage( ImageWindow *, int )),
+            connect( m_viewer, SIGNAL( requestImage( ImageWindow *, int )),
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
 	    if ( s_viewers.count() == 1 ) {
 		// we have to move to 0x0 before showing _and_
 		// after showing, otherwise we get some bogus geometry()
-		viewer->move( Kuick::workArea().topLeft() );
+		m_viewer->move( Kuick::workArea().topLeft() );
 	    }
 
-	    viewer->setPopupMenu();
-	    viewer->installEventFilter( this );
+	    m_viewer->setPopupMenu();
+	    m_viewer->installEventFilter( this );
 	}
 
 	QString filename = fi->url().path();
 
-	if ( !viewer->showNextImage( filename ) )
-	    viewer->close( true ); // couldn't load image, close window
+	if ( !m_viewer->showNextImage( filename ) )
+	    m_viewer->close( true ); // couldn't load image, close window
 	else {
 	    if ( newWindow ) {
 		if ( kdata->fullScreen )
-		    viewer->setFullscreen( true );
+		    m_viewer->setFullscreen( true );
 
-		viewer->show();
+		m_viewer->show();
 		
 		if ( !kdata->fullScreen && s_viewers.count() == 1 ) {
 		    // the WM might have moved us after showing -> strike back!
 		    // move the first image to 0x0 workarea coord
-		    viewer->move( Kuick::workArea().topLeft() );
+		    m_viewer->move( Kuick::workArea().topLeft() );
 		}
 	    }
 
@@ -336,9 +336,9 @@ void KuickShow::showImage( const KFileItem *fi, bool newWin )
   		KFileItem *item = 0L;                 // don't move cursor
   		item = fileWidget->getItem( FileWidget::Next, true );
   		if ( item )
-  		    viewer->cacheImage( item->url().path() ); // FIXME
+  		    m_viewer->cacheImage( item->url().path() ); // FIXME
   	    }
-	} // viewer created successfully
+	} // m_viewer created successfully
     } // isImage
 }
 
@@ -354,19 +354,19 @@ void KuickShow::startSlideShow()
 
 void KuickShow::nextSlide()
 {
-    if ( !viewer ) {
+    if ( !m_viewer ) {
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
 	return;
     }
 
     KFileItem *item = fileWidget->getNext( true );
     if ( !item ) {
-	viewer->close( true );
+	m_viewer->close( true );
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
 	return;
     }
 
-    viewer->showNextImage( item->url().path() );
+    m_viewer->showNextImage( item->url().path() );
     QTimer::singleShot( kdata->slideDelay, this, SLOT( nextSlide() ) );
 }
 
@@ -509,7 +509,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
     if ( window ) {
 // 	KCursor::autoHideEventFilter( o, e );
 	
-	viewer = window;
+	m_viewer = window;
 	QString img;
 	KFileItem *item = 0L;      // the image to be shown
 	KFileItem *item_next = 0L; // the image to be cached
@@ -522,7 +522,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	    // is used for zooming in the imagewindow
 	    if ( !fileWidget && key != Key_Escape && key != Key_Shift ) {
 		KURL start;
-		QFileInfo fi( viewer->filename() );
+		QFileInfo fi( m_viewer->filename() );
 		start.setPath( fi.dirPath( true ) );
 		initGUI( start );
 
@@ -534,7 +534,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 		fileWidget->setInitialItem( fi.fileName() );
 		connect( fileWidget, SIGNAL( finished() ),
 			 SLOT( slotReplayEvent() ));
-		delayedRepeatEvent( viewer, k );
+		delayedRepeatEvent( m_viewer, k );
 		return true;
 	    }
 
@@ -563,8 +563,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 		if ( !item )
 		    item = fileWidget->getPrevious( false );
 		
-		if ( KuickIO::self( viewer )->deleteFile( viewer->filename(),
-						    k->state() & ShiftButton) )
+		if ( KuickIO::self(m_viewer)->deleteFile( m_viewer->filename(),
+                                                    k->state() & ShiftButton) )
 		    fileWidget->setCurrentItem( item );
 		else
 		    item = cur; // restore old current item
@@ -572,14 +572,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	    }
 
 	    case Key_Space: {
-		if ( haveBrowser() )
-		    hide();
-		else {
-		    if ( viewer->isFullscreen() )
-			viewer->setFullscreen( false );
-		    show();
-		}
-
+                toggleBrowser( !haveBrowser() );
 		return true; // don't pass keyEvent
 	    }
 
@@ -589,11 +582,11 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
 
 	    if ( FileWidget::isImage( item ) ) {
-		viewer->showNextImage( item->url().path() ); // ###
+		m_viewer->showNextImage( item->url().path() ); // ###
 		
 		if ( kdata->preloadImage ) // preload next image
 		    if ( FileWidget::isImage( item_next ) )
-			viewer->cacheImage( item_next->url().path() ); // ###
+			m_viewer->cacheImage( item_next->url().path() ); // ###
 
 		ret = true; // don't pass keyEvent
 	    }
@@ -732,7 +725,7 @@ void KuickShow::saveSettings()
 
 void KuickShow::messageCantLoadImage( const QString& filename )
 {
-    viewer->clearFocus();
+    m_viewer->clearFocus();
     QString tmp = i18n("Sorry, I can't load the image %1.\n"
 	    "Perhaps the file format is unsupported or "
                       "your Imlib is not installed properly.").arg(filename);
@@ -826,6 +819,21 @@ void KuickShow::slotReplayAdvance()
 
     slotAdvanceImage( e->viewer, e->steps );
     delete e;
+}
+
+void KuickShow::toggleBrowser( bool show )
+{
+    if ( show ) {
+        if ( m_viewer && m_viewer->isFullscreen() )
+            m_viewer->setFullscreen( false );
+        fileWidget->resize( size() ); // ### somehow fileWidget isn't resized!?
+        KuickShow::show();
+        raise();
+        KWin::setActiveWindow( winId() ); // ### this should not be necessary
+        setFocus();
+    }
+    else
+        hide();
 }
 
 #include "kuickshow.moc"

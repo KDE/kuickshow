@@ -76,13 +76,14 @@ private:
     void 		saveSettings();
     bool 		haveBrowser() const;
     void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );
+    void                toggleBrowser( bool show );
 
     uint 		viewItem, renameItem, deleteItem, printItem;
 
     FileWidget   	*fileWidget;
     KuickConfigDialog 	*dialog;
     ImlibData           *id;
-    ImageWindow 	*viewer;
+    ImageWindow 	*m_viewer;
     KToggleAction 	*newWindowAction;
     KAccel 		*m_accel;
     DelayedRepeatEvent  *m_delayedRepeatItem;
@@ -104,7 +105,7 @@ private slots:
     void 		nextSlide();
     void		viewerDeleted();
     void 		dropEvent( QDropEvent * );
-    void 		slotSetActiveViewer( ImageWindow *i ) { viewer = i; }
+    void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
 
     void 		slotShowInSameWindow();
