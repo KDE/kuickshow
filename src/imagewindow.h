@@ -100,6 +100,7 @@ protected:
   void 		init();
   void 		centerImage();
   void		showImage();
+  void		setupIcons();
   virtual void	updateGeometry( int imWidth, int imHeight );
 
   virtual void  wheelEvent( QWheelEvent * );
@@ -139,6 +140,7 @@ protected:
   QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;
 
+  KToolBar	*m_toolbar;
 
 protected slots:
   void 		saveImage();

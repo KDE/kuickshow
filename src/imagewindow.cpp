@@ -93,7 +93,6 @@ void ImageWindow::init()
     gammaMenu = 0L;
     brightnessMenu = 0L;
     contrastMenu = 0L;
-
     xpos=0; ypos=0;
     
     m_actions = new KActionCollection( this );
@@ -115,9 +114,7 @@ void ImageWindow::init()
 
     setAcceptDrops( true );
 
-    static QPixmap imageIcon = UserIcon( "imageviewer-medium" );
-    static QPixmap miniImageIcon = UserIcon( "imageviewer-small" );
-    KWin::setIcons( winId(), imageIcon, miniImageIcon );
+    setupIcons();
     
     setCentralWidget(&image);
     
@@ -125,6 +122,13 @@ void ImageWindow::init()
     
     connect( &image, SIGNAL( loaded( KuickImage * )),
             this, SLOT( loaded( KuickImage * )));
+}
+
+void ImageWindow::setupIcons()
+{
+    static QPixmap imageIcon = UserIcon( "imageviewer-medium" );
+    static QPixmap miniImageIcon = UserIcon( "imageviewer-small" );
+    KWin::setIcons( winId(), imageIcon, miniImageIcon );
 }
 
 void ImageWindow::updateActions()
@@ -261,15 +265,15 @@ void ImageWindow::setupActions()
     
     m_actions->action("previous_image")->plug( toolBar() );
     m_actions->action("next_image")->plug( toolBar() );
-    toolBar()->insertLineSeparator();
+    toolBar()->insertSeparator();
     m_actions->action("zoom_in")->plug( toolBar() );
     m_actions->action("zoom_out")->plug( toolBar() );
     m_actions->action("original_size")->plug( toolBar() );
     m_actions->action("maximize")->plug( toolBar() );
-    toolBar()->insertLineSeparator();
+    toolBar()->insertSeparator();
     m_actions->action("toggle_toolbar")->plug( toolBar());
 
-    toolBar()->insertLineSeparator();
+    toolBar()->insertSeparator();
     action->plug(toolBar());
     
     toolBar()->setTitle(i18n("Navigation"));
@@ -294,6 +298,7 @@ void ImageWindow::setFullscreen( bool enable )
 
     else if ( !enable && myIsFullscreen ) { // go into window mode
         showNormal();
+	setupIcons();
     }
 
     m_actions->action("toggle_fullscreen")->setIcon(QString((enable)?"window_nofullscreen":"window_fullscreen"));
