@@ -35,7 +35,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
     layout->setSpacing( KDialog::spacingHint() );
 
     m_fullScreen = new QCheckBox( i18n("Switch to &full-screen"), this );
-    m_startWithCurrent = new QCheckBox( i18n("S&tart with current image"), this);
+    m_startWithCurrent = new QCheckBox( i18n("Start with &current image"), this);
 
     m_delayTime = new KIntNumInput( this, "delay time" );
     m_delayTime->setLabel( i18n("De&lay between slides:") );
