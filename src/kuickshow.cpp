@@ -201,6 +201,12 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action("reload")->plug( tBar );
 
     tBar->insertSeparator();
+    
+    coll->action( "short view" )->plug( tBar );
+    coll->action( "detailed view" )->plug( tBar );
+    coll->action( "preview")->plug( tBar );
+
+    tBar->insertSeparator();
     configure->plug( tBar );
     slide->plug( tBar );
     tBar->insertSeparator();
