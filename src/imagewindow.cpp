@@ -822,7 +822,7 @@ void ImageWindow::printImage()
     if ( !m_kuim )
         return;
 
-    if ( !Printing::printImage( *this ) )
+    if ( !Printing::printImage( *this, this ) )
     {
         KMessageBox::sorry( this, i18n("Unable to print the image."),
                             i18n("Printing Failed") );
@@ -969,7 +969,7 @@ bool ImageWindow::autoRotate( KuickImage *kuim )
         if ( kuim->absRotation() == ROT_0 )
             kuim->rotateAbs( kdata->rotation );
     }
-    
+
     return true;
 }
 
