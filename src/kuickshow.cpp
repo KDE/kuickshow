@@ -579,7 +579,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
         start.setPath( fi.dirPath( true ) );
         initGUI( start );
 
-        // see eventFilter() for explanation and similar code 
+        // see eventFilter() for explanation and similar code
         if ( fileWidget->dirLister()->isFinished() &&
              fileWidget->dirLister()->rootItem() )
         {
@@ -678,8 +678,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     // sync KDirLister :( If the startDir is already cached by
                     // KDirLister, we won't ever get that finished() signal
                     // because it is emitted before we can connect(). So if
-                    // our dirlister has a rootFileItem, we assume the 
-                    // directory is read already and simply call 
+                    // our dirlister has a rootFileItem, we assume the
+                    // directory is read already and simply call
                     // slotReplayEvent() without the need for the finished()
                     // signal.
 
@@ -696,7 +696,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                         connect( fileWidget, SIGNAL( finished() ),
                                  SLOT( slotReplayEvent() ));
                     }
-                    
+
                     return true;
                 }
 
@@ -705,16 +705,14 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             // we definitely have a fileWidget here!
 
- 	    // FIXME: make all this stuff via KStdAccel and KAccel ->slots
-
-            KKey kkey( key );
-            if ( KStdAccel::home().contains( kkey ) )
+            KKey kkey( k );
+            if ( key == Key_Home || KStdAccel::home().contains( kkey ) )
             {
 		item = fileWidget->gotoFirstImage();
 		item_next = fileWidget->getNext( false );
 	    }
 
-            else if ( KStdAccel::end().contains( kkey ) )
+            else if ( key == Key_End || KStdAccel::end().contains( kkey ) )
             {
 		item = fileWidget->gotoLastImage();
 		item_next = fileWidget->getPrevious( false );
@@ -722,7 +720,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             else if ( fileWidget->actionCollection()->action("delete")->shortcut().contains( key ))
             {
-		KFileItem *cur = fileWidget->getCurrentItem( false );
+// 		KFileItem *cur = fileWidget->getCurrentItem( false );
+ 		(void) fileWidget->getCurrentItem( false );
 		item = fileWidget->getNext( false ); // don't move
 		if ( !item )
 		    item = fileWidget->getPrevious( false );
