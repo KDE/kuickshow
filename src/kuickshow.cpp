@@ -623,12 +623,13 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 		item = fileWidget->getNext( false ); // don't move
 		if ( !item )
 		    item = fileWidget->getPrevious( false );
-
-		if ( KuickIO::self(m_viewer)->deleteFile( m_viewer->filename(),
-                                                    k->state() & ShiftButton) )
-		    fileWidget->setCurrentItem( item );
-		else
-		    item = cur; // restore old current item
+                KFileItem it( KFileItem::Unknown, KFileItem::Unknown,
+                              m_viewer->url() );
+                KFileItemList list;
+                list.append( &it );
+                fileWidget->del( list, (k->state() & ShiftButton) == 0 );
+                // ### check failure asynchronously and restore old item?
+                fileWidget->setCurrentItem( item );
 		break;
 	    }
 

@@ -20,7 +20,6 @@
 #include "filefinder.h"
 #include "filewidget.h"
 #include "kuickdata.h"
-#include "kuickio.h"
 #include "kuickshow.h"
 
 #ifdef KeyPress
@@ -164,9 +163,11 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 	    else if ( key == Key_Delete ) {
                 k->accept();
 		KFileItem *item = getCurrentItem( false );
-		if ( item )
-		    KuickIO::self( this )->deleteFile( item->url(),
-						    k->state() & ShiftButton );
+		if ( item ) {
+                    KFileItemList list;
+                    list.append( item );
+		    del( list, (k->state() & ShiftButton) == 0 );
+                }
 		return true;
 	    }
 	

@@ -115,6 +115,16 @@ ImlibWidget::~ImlibWidget()
     delete imageCache;
 }
 
+KURL ImlibWidget::url() const
+{
+    KURL url;
+    if ( m_filename.at(0) == '/' )
+        url.setPath( m_filename );
+    else
+        url = m_filename;
+    
+    return url;
+}
 
 // tries to load "filename" and returns the according KuickImage *
 // or 0L if unsuccessful
