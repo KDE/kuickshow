@@ -745,9 +745,11 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             // Key_Shift shouldn't load the browser in nobrowser mode, it
             // is used for zooming in the imagewindow
+            // Key_Alt shouldn't either - otherwise Alt+F4 doesn't work, the
+            // F4 gets eaten (by NetAccess' modal dialog maybe?)
             if ( !fileWidget )
             {
-                if ( key != Key_Escape && key != Key_Shift )
+                if ( key != Key_Escape && key != Key_Shift && key != Key_Alt )
                 {
                     KURL start;
                     QFileInfo fi( m_viewer->filename() );
