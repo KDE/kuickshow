@@ -90,7 +90,6 @@ private:
 private slots:
     void 		slotQuit() { delete this; }
     void 		slotPrint();
-    void 		slotShowProperties();
     void 		slotConfigApplied();
     void 		slotConfigClosed();
     void 		messageCantLoadImage( const QString& );
@@ -113,8 +112,6 @@ private slots:
 
     void		slotReplayEvent();
     void        slotReplayAdvance();
-
-    void slotDelete(); // ### fallback, remove somewhen
 
 };
 

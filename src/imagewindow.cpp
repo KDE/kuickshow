@@ -18,13 +18,11 @@
 #include <qpainter.h>
 #include <qpen.h>
 #include <qpopupmenu.h>
-#include <qprintdialog.h>
 
 #ifdef KDE_USE_FINAL
 #undef GrayScale
 #undef Color
 #endif
-#include <qprinter.h>
 #include <qrect.h>
 #include <qstring.h>
 #include <qstringlist.h>
@@ -38,8 +36,11 @@
 #undef Unsorted
 #endif
 #include <kfiledialog.h>
+#include <kiconloader.h>
+#include <kimageeffect.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <kprinter.h>
 #include <kstdaccel.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>
@@ -49,8 +50,10 @@
 #include "imagewindow.h"
 #include "kuick.h"
 #include "kuickdata.h"
-#include <kiconloader.h>
+#include "version.h"
 #include <qapplication.h>
+
+#undef GrayScale
 
 QCursor *ImageWindow::s_handCursor = 0L;
 
@@ -709,9 +712,9 @@ void ImageWindow::setPopupMenu()
   m_actions->action("next_image")->plug( viewerMenu );
   m_actions->action("previous_image")->plug( viewerMenu );
   viewerMenu->insertSeparator();
-  
+
   brightnessMenu = new QPopupMenu( viewerMenu );
-  
+
   itemBrightnessPlus = brightnessMenu->insertItem( i18n("+"), this,
 						   SLOT( moreBrightness() ));
   itemBrightnessMinus = brightnessMenu->insertItem( i18n("-"), this,
@@ -797,104 +800,126 @@ void ImageWindow::setPopupAccels()
 
 void ImageWindow::printImage()
 {
-  QString printCmd, printerName;
-
-  QPrinter p;
-  if ( !QPrintDialog::getPrinterSetup( &p ) )
-    return;
-
-  // map Qt's options to imlibs'
-  int pagesize  = PAGE_SIZE_A4;	// default value: Din A4
-  int colormode = 0; 		// default value: grayscale
-  int copies    = 1;		// just print one copy
-  bool ofile    = false;        // don't output as file
-
-  QPrinter::PageSize ps = p.pageSize();
-
-  if ( ps == QPrinter::A4 )
-    pagesize = PAGE_SIZE_A4;
-
-  else if ( ps == QPrinter::Letter )
-    pagesize = PAGE_SIZE_LETTER;
-
-  else if ( ps == QPrinter::Legal )
-    pagesize = PAGE_SIZE_LEGAL;
-
-  else if ( ps == QPrinter::Executive )
-    pagesize = PAGE_SIZE_EXECUTIVE;
-
-  if ( p.colorMode() == QPrinter::Color )
-    colormode = 1;
-
-  copies      = p.numCopies();
-//  printCmd    = p.printProgram();
-// since Qt2, printProgram returns a null string by default!!!!!!!!!!
-  KConfig *config = KGlobal::config();
-  KConfigGroupSaver cs( config, "GeneralConfiguration" );
-  printCmd    = config->readEntry( "PrinterCommand", "lpr" );
-  printerName = p.printerName();
-  ofile       = p.outputToFile();
-
-  ImlibSaveInfo info;
-
-  info.page_size      = pagesize;
-  info.color          = colormode;
-  info.scaling        = 1024; // how to save in original size, without scaling?
-  info.xjustification = 512;  // center
-  info.yjustification = 512;  // center
-
-  KTempFile tmpFile( "kuickshow", ".ppm" );
-  tmpFile.setAutoDelete( true );
-  QString tmpName;
-  if ( ofile ) // user just wants to print to file
-    tmpName = p.outputFileName();
-  else
-    tmpName = tmpFile.name();
-
-  if ( Imlib_save_image( id, kuim->imlibImage(),
-                         QFile::encodeName( tmpName ).data(), &info ) == 0 )
+    if ( !kuim )
+        return;
+    
+  KPrinter printer;
+  printer.setFullPage( true );
+  printer.setDocName( kuim->filename() );
+  printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
+    
+  if ( printer.setup( this ) ) 
   {
-    qDebug("KuickShow: Couldn't print image."); // FIXME, show messagebox
-    return;
+      bool ofile = printer.outputToFile();
+      bool ok = true;
+      QString tmpName;
+      
+      KTempFile tmpFile( "kuickshow", ".png" );
+      if ( tmpFile.status() == 0 ) 
+      {
+          tmpFile.setAutoDelete( true );
+          tmpName = ofile ? printer.outputFileName() : tmpFile.name();
+
+          if ( !saveImage( tmpName ) )
+              ok = false;
+      }
+      else
+          ok = false;
+      
+      if ( !ok ) {
+          qDebug("KuickShow: Couldn't print image."); // FIXME, show messagebox
+          return;
+      }
+      
+      if ( ofile ) // done, user just wanted that postscript file
+          return;
+
+      printImageWithQt( tmpName, printer );
   }
 
-  if ( ofile ) // done, user just wanted that postscript file
-    return;
+//   if ( Imlib_save_image( id, kuim->imlibImage(),
+//                          QFile::encodeName( tmpName ).data(), &info ) == 0 )
 
-  // finally print the postscript file
-  QString cmdline = printCmd + " -P\"" + printerName + "\" " + tmpName;
-  qDebug("KuickShow: print commandline: %s", cmdline.local8Bit().data() );
-  for ( int i=0; i < copies; i++ ) // FIXME: better use a switch in lpr...
-    system( QFile::encodeName( cmdline ).data() );
 }
 
+void ImageWindow::printImageWithQt( const QString& filename, KPrinter& printer)
+{
+    QImage image( filename );
+    if ( image.isNull() ) {
+        qDebug("KuickShow: can't load image: %s for printing.", 
+               filename.isNull() ? "(null)" : filename.latin1());
+        return;
+    }
+    
+    QPainter p;
+    p.begin( &printer );
+    p.setWorldXForm( true );
+    
+    QSize printArea = printer.realPageSize();
+    
+    bool landscape = (printer.orientation() == KPrinter::Landscape);
+    
+    // shrink image to pagesize, if necessary (take orientation into account).
+    // ### Better ask user.
+    int iw = landscape ? image.height() : image.width();
+    int ih = landscape ? image.width()  : image.height();
+    
+    if ( iw > printArea.width() || ih > printArea.height() ) {
+        if ( landscape )
+            image = image.smoothScale( printArea.height(), printArea.width(),
+                                       QImage::ScaleMin );
+        else
+            image = image.smoothScale( printArea, QImage::ScaleMin );
+    }
+    
+    if ( landscape ) {
+        p.translate( 0.0, image.width() );
+        p.rotate( -90.0 );
+    }
+
+    if ( printer.colorMode() == KPrinter::GrayScale && !image.isGrayscale() ) {
+        // qDebug("*** GRAY ***");
+        KImageEffect::toGray( image );
+    }
+
+    p.drawImage( 0, 0, image );
+    p.end();
+    
+    printer.newPage();
+}
 
 void ImageWindow::saveImage()
 {
-  QString file;
-  KuickData tmp;
-  file = KFileDialog::getSaveFileName( kuim->filename(), tmp.fileFilter );
-  if ( !file.isEmpty() )
-  {
-    bool success = false;
-    ImlibImage *saveIm = 0L;
-    saveIm = Imlib_clone_scaled_image( id, kuim->imlibImage(),
-				       kuim->width(), kuim->height() );
+    QString file;
+    KuickData tmp;
+    file = KFileDialog::getSaveFileName( kuim->filename(), tmp.fileFilter );
+    if ( !file.isEmpty() )
+    {
+        if ( !saveImage( file ) ) 
+        {
+            QString tmp = i18n("Couldn't save the file.\n"
+                               "Perhaps the disk is full, or you don't "
+                               "have write permission to the file.");
+            KMessageBox::sorry( this, tmp, i18n("File saving failed"));
+        }
+    }
+}
+
+bool ImageWindow::saveImage( const QString& filename )
+{
+    ImlibImage *saveIm = Imlib_clone_scaled_image( id, kuim->imlibImage(),
+                                                   kuim->width(), 
+                                                   kuim->height() );
     if ( saveIm ) {
-      Imlib_apply_modifiers_to_rgb( id, saveIm );
-      if ( Imlib_save_image( id, saveIm,
-                             QFile::encodeName( file ).data(), NULL ) )
-	success = true;
-      // FIXME: remove the old image from cache and load the new one?
+        Imlib_apply_modifiers_to_rgb( id, saveIm );
+        bool success = Imlib_save_image( id, saveIm, 
+                                         QFile::encodeName( filename ).data(), 
+                                         NULL );
+        Imlib_kill_image( id, saveIm );
+        return success;
     }
 
-    if ( !success ) {
-      QString tmp = i18n("Couldn't save the file.\n"
-    		"Perhaps the disk is full, or you don't "
-    		"have write permission to the file.");
-      KMessageBox::sorry( this, tmp, i18n("File saving failed"));
-    }
-  }
+    return false;
 }
 
 void ImageWindow::toggleFullscreen()

@@ -28,6 +28,7 @@ class QTimer;
 class QWidget;
 
 class KAccel;
+class KPrinter;
 
 class ImageWindow : public ImlibWidget
 {
@@ -76,7 +77,7 @@ public slots:
   void 		scrollDown();
   void 		scrollLeft();
   void 		scrollRight();
-  void 		printImage();
+  void 	        printImage();
   void 		toggleFullscreen();
   void 		maximize();
 
@@ -139,6 +140,9 @@ protected slots:
 
 
 private:
+  bool          saveImage( const QString& filename );
+  void          printImageWithQt( const QString& filename, KPrinter& printer );
+
   int 		desktopWidth( bool totalScreen = false ) const;
   int 		desktopHeight( bool totalScreen = false ) const;
   QSize		maxImageSize() const;

@@ -80,6 +80,7 @@ KuickShow::KuickShow( const char *name )
   kdata->load();
 
   initImlib();
+  resize( 400, 500 );
 
   KConfig *kc = KGlobal::config();
 
@@ -160,11 +161,6 @@ void KuickShow::initGUI( const KURL& startDir )
 					coll, "kuick_print" );
     print->setText( i18n("Print image...") );
 
-    // ### remove somewhen, is in kdelibs 2.2alpha2
-    if ( !coll->action("delete") )
-        (void) new KAction( i18n("Delete File"), "editdelete", 0,
-                            this, SLOT( slotDelete()), coll, "kuick_delete" );
-
     KAction *configure = new KAction( i18n("Configuration"), "configure", 0,
 				      this, SLOT( configuration() ),
 				      coll, "kuick_configure" );
@@ -188,11 +184,6 @@ void KuickShow::initGUI( const KURL& startDir )
     (void) new KAction( i18n("Show Image in Active Window"), KShortcut(),
 			this, SLOT( slotShowInSameWindow() ),
 			coll, "kuick_showInSameWindow" );
-
-    if ( !coll->action( "properties" ) ) { // maybe KDirOperator did it already
-        (void) new KAction( i18n("Properties..."), ALT+Key_Return, this,
-                            SLOT( slotShowProperties() ), coll, "properties" );
-    }
 
     coll->action( "reload" )->setShortcut( KStdAccel::reload() );
 
@@ -311,7 +302,7 @@ void KuickShow::showImage( const KFileItem *fi, bool newWin )
 		     this, SLOT( slotSetActiveViewer( ImageWindow * ) ));
 	    connect( viewer, SIGNAL( sigBadImage(const QString& ) ),
 		     this, SLOT( messageCantLoadImage(const QString &) ));
-            connect( viewer, SIGNAL( requestImage( ImageWindow *, int )), 
+            connect( viewer, SIGNAL( requestImage( ImageWindow *, int )),
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
 	    if ( s_viewers.count() == 1 ) {
 		// we have to move to 0x0 before showing _and_
@@ -401,21 +392,6 @@ void KuickShow::slotPrint()
     iw->close( true );
 }
 
-// ### fallback for kdelibs older than 2.2alpha2
-// deletes the selected files in the filebrowser
-void KuickShow::slotDelete()
-{
-    KFileItem *item = fileWidget->getCurrentItem( false );
-    if ( item )
-        KuickIO::self( this )->deleteFile( item->url(), false );
-}
-
-// ### remove this and the action somewhen, KDirOperator has it since 2.2 Beta1
-void KuickShow::slotShowProperties()
-{
-    (void) new KPropertiesDialog( fileWidget->getCurrentItem( false ), this );
-}
-
 void KuickShow::slotShowInOtherWindow()
 {
     showImage( fileWidget->getCurrentItem( false ), true );
@@ -467,7 +443,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 {
     KFileItem *item      = 0L; // to be shown
     KFileItem *item_next = 0L; // to be cached
-    
+
     // the viewer might not be available yet. Factor this out somewhen.
     if ( !fileWidget ) {
         if ( m_delayedRepeatItem )
@@ -491,7 +467,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
             item = fileWidget->getNext( true );
         item_next = fileWidget->getNext( false );
     }
-    
+
     else if ( steps < 0 ) {
         for ( int i = steps; i < 0; i++ )
             item = fileWidget->getPrevious( true );

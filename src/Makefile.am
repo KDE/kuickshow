@@ -9,7 +9,7 @@ CLEANFILES = dummy.cpp
 METASOURCES = AUTO
 
 kuickshow_la_LDFLAGS = $(all_libraries) -module -avoid-version
-kuickshow_la_LIBADD  = $(LIB_KFILE) $(LIB_IMLIB)
+kuickshow_la_LIBADD  = $(LIB_KDEPRINT) $(LIB_IMLIB)
 kuickshow_la_SOURCES =	kuickshow.cpp \
 	aboutwidget.cpp     generalwidget.cpp  kuickconfigdlg.cpp  main.cpp \
 	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \
@@ -18,7 +18,7 @@ kuickshow_la_SOURCES =	kuickshow.cpp \
 	logotabdialog.cpp  kuickio.cpp    kuick.cpp imlibwidget.cpp
 
 # now the kuickshow binary
-kuickshow_LDADD = kuickshow.la $(LIB_KFILE) $(LIB_IMLIB)
+kuickshow_LDADD = kuickshow.la $(LIB_KIO) $(LIB_IMLIB)
 kuickshow_SOURCES = dummy.cpp
 kuickshow_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
