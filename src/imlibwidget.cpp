@@ -801,16 +801,21 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 
     // convert to 24 bpp (discard alpha)
     int numPixels = image.width() * image.height();
-    const int NUM_BYTES_ORIG = 4; // 32 bpp
     const int NUM_BYTES_NEW  = 3; // 24 bpp
     uchar *newImageData = new uchar[numPixels * NUM_BYTES_NEW];
     uchar *newData = newImageData;
-    uchar *origData = image.bits();
     
-    for (int i = 0; i < numPixels; i++) {
-	memcpy( newData, origData , NUM_BYTES_NEW);
-	newData  += NUM_BYTES_NEW;
-	origData += NUM_BYTES_ORIG;
+    int w = image.width();
+    int h = image.height();
+    
+    for (int y = 0; y < h; y++) {
+	QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
+	for (int x = 0; x < w; x++) {
+	    const QRgb& pixel = scanLine[x];
+	    *(newData++) = qRed(pixel);
+	    *(newData++) = qGreen(pixel);
+	    *(newData++) = qBlue(pixel);
+	}
     }
     
     ImlibImage *im = Imlib_create_image_from_data( myId, newImageData, NULL,
