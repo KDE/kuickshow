@@ -144,11 +144,11 @@ void ImageWindow::updateAccel()
                    Key_Asterisk, this, SLOT( flipHoriz() ) );
   m_accel->insert( "Flip Vertically", i18n( "Flip Vertically" ), QString::null,
                    Key_Slash, this, SLOT( flipVert() ) );
-  m_accel->insert( "Rotate 90", i18n( "Rotate 90 degrees" ), QString::null,
+  m_accel->insert( "Rotate 90", i18n( "Rotate 90 Degrees" ), QString::null,
                    Key_9, this, SLOT( rotate90() ) );
-  m_accel->insert( "Rotate 180", i18n( "Rotate 180 degrees" ), QString::null,
+  m_accel->insert( "Rotate 180", i18n( "Rotate 180 Degrees" ), QString::null,
                    Key_8, this, SLOT( rotate180() ) );
-  m_accel->insert( "Rotate 270", i18n( "Rotate 270 degrees" ), QString::null,
+  m_accel->insert( "Rotate 270", i18n( "Rotate 270 Degrees" ), QString::null,
                    Key_7, this, SLOT( rotate270() ) );
   m_accel->insert( "Maximize", i18n( "Maximize" ), QString::null,
                    Key_M, this, SLOT( maximize() ) );
