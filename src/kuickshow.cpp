@@ -26,10 +26,12 @@
 #include <kconfig.h>
 #include <kcursor.h>
 #include <kglobal.h>
+#include <khelpmenu.h>
 #include <kiconloader.h>
 #include <kio/netaccess.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <kpopupmenu.h>
 #include <kpropertiesdialog.h>
 #include <kstatusbar.h>
 #include <kstdaction.h>
@@ -173,13 +175,10 @@ void KuickShow::initGUI( const KURL& startDir )
 				  coll, "kuick_slideshow" );
     KAction *about = new KAction( i18n( "About KuickShow" ), "about", 0,
 				  this, SLOT( about() ), coll );
-    KAction *help = KStdAction::help( this, SLOT( appHelpActivated() ),
-				      coll, "kuick_help" );
+    
     oneWindowAction = new KToggleAction( i18n("Open only one image window"),
 					 "window_new", CTRL+Key_N, coll,
 					 "kuick_one window" );
-
-    KAction *hidden = coll->action( "show hidden" );
 
     (void) new KAction( i18n("Show Image"), KShortcut(),
                         this, SLOT( slotShowInOtherWindow() ),
@@ -215,13 +214,16 @@ void KuickShow::initGUI( const KURL& startDir )
     configure->plug( tBar );
     slide->plug( tBar );
     tBar->insertSeparator();
-    hidden->plug( tBar );
     oneWindowAction->plug( tBar );
     print->plug( tBar );
     tBar->insertSeparator();
     quit->plug( tBar );
     about->plug( tBar );
-    help->plug( tBar );
+
+    KHelpMenu *helpMenu = new KHelpMenu( this, 
+                                         KGlobal::instance()->aboutData(),
+                                         false );
+    tBar->insertButton( "help", 100, helpMenu->menu(), true, i18n("Help") );
 
 
     KStatusBar* sBar = statusBar();
