@@ -18,7 +18,6 @@ class QLabel;
 
 class KComboBox;
 class KIntNumInput;
-class KuickData;
 
 class DefaultsWidget : public BaseWidget
 {
@@ -28,13 +27,11 @@ public:
   DefaultsWidget( QWidget *parent, const char *name );
   ~DefaultsWidget();
 
-  void 		loadSettings();
-  void 		applySettings();
-  void 		resetDefaults();
+  void 		loadSettings( const KuickData& data );
+  void 		applySettings( KuickData& data );
 
 private:
   const int 	currentRotation();
-  void 		init( const KuickData& data );
 
   QCheckBox 	*cbEnableMods;
 

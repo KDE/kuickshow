@@ -12,7 +12,6 @@
 #include <knuminput.h>
 
 #include "generalwidget.h"
-#include "kuickdata.h"
 
 GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   : BaseWidget( "logo", parent, name )
@@ -30,7 +29,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   QGridLayout *gridLayout = new QGridLayout( 3, 3 );
   QLabel *l0 = new QLabel( i18n("Background color"), this );
   colorButton = new KColorButton( this );
-  
+
   QLabel *l1 = new QLabel( i18n("Show only files with extension: "), this, "label" );
   editFilter = new KLineEdit( this, "filteredit" );
 
@@ -79,7 +78,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   pixLabel->raise();
 
-  loadSettings();
+  loadSettings( *kdata );
   cbFullscreen->setFocus();
 }
 
@@ -87,12 +86,7 @@ GeneralWidget::~GeneralWidget()
 {
 }
 
-void GeneralWidget::loadSettings()
-{
-    init( *kdata );
-}
-
-void GeneralWidget::init( const KuickData& data )
+void GeneralWidget::loadSettings( const KuickData& data )
 {
     ImData *idata = data.idata;
 
@@ -111,21 +105,16 @@ void GeneralWidget::init( const KuickData& data )
     useOwnPalette(); // enable/disable remap-checkbox
 }
 
-void GeneralWidget::resetDefaults()
+void GeneralWidget::applySettings( KuickData& data)
 {
-    KuickData data;
-    init( data );
-}
+    ImData *idata = data.idata;
 
-void GeneralWidget::applySettings()
-{
-    ImData *idata = kdata->idata;
+    data.backgroundColor = colorButton->color();
+    data.fileFilter      = editFilter->text();
+    data.slideDelay 	  = (delaySpinBox->value() * 100);
+    data.fullScreen  	  = cbFullscreen->isChecked();
+    data.preloadImage	  = cbPreload->isChecked();
 
-    kdata->backgroundColor = colorButton->color();
-    kdata->fileFilter      = editFilter->text();
-    kdata->slideDelay 	  = (delaySpinBox->value() * 100);
-    kdata->fullScreen  	  = cbFullscreen->isChecked();
-    kdata->preloadImage	  = cbPreload->isChecked();
     idata->fastRemap 	  = cbFastRemap->isChecked();
     idata->ownPalette 	  = cbOwnPalette->isChecked();
     idata->fastRender 	  = cbFastRender->isChecked();

@@ -24,13 +24,10 @@ public:
     GeneralWidget( QWidget *parent, const char *name );
     ~GeneralWidget();
 
-    void 	loadSettings();
-    void 	applySettings();
-    void 	resetDefaults();
+    void 	loadSettings( const KuickData& data );
+    void 	applySettings( KuickData& data );
 
 private:
-    void 	init( const KuickData& );
-
     QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload;
     QCheckBox   *cbFastRemap, *cbFastRender;
     QCheckBox 	*cbDither16bit, *cbDither8bit, *cbOwnPalette;
@@ -42,7 +39,7 @@ private:
     KIntNumInput 	*sbZoomFactor;
 
     KColorButton        *colorButton;
-    
+
 private slots:
     void 	useOwnPalette();
 

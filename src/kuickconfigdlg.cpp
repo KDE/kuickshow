@@ -56,8 +56,8 @@ KuickConfigDialog::~KuickConfigDialog()
 
 void KuickConfigDialog::applyConfig()
 {
-    generalWidget->applySettings();
-    defaultsWidget->applySettings();
+    generalWidget->applySettings( *kdata );
+    defaultsWidget->applySettings( *kdata );
 
     imageKeyChooser->commitChanges();
     imageWindow->accel()->writeSettings();
@@ -71,8 +71,9 @@ void KuickConfigDialog::applyConfig()
 
 void KuickConfigDialog::resetDefaults()
 {
-    generalWidget->resetDefaults();
-    defaultsWidget->resetDefaults();
+    KuickData data;
+    generalWidget->loadSettings( data );
+    defaultsWidget->loadSettings( data );
     imageKeyChooser->allDefault();
     browserKeyChooser->allDefault();
 }

@@ -12,7 +12,6 @@
 
 #include "imlibwidget.h"
 #include "defaultswidget.h"
-#include "kuickdata.h"
 
 DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   : BaseWidget( QString::null, parent, name )
@@ -154,7 +153,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   if ( !imFiltered->loadImage( filename ) )
     imFiltered = 0L; // FIXME - display some errormessage!
 
-  loadSettings();
+  loadSettings( *kdata );
 
   if ( imOrig )
     imOrig->setFixedSize( imOrig->size() );
@@ -169,18 +168,7 @@ DefaultsWidget::~DefaultsWidget()
 {
 }
 
-void DefaultsWidget::loadSettings()
-{
-    init( *kdata );
-}
-
-void DefaultsWidget::resetDefaults()
-{
-    KuickData data;
-    init( data );
-}
-
-void DefaultsWidget::init( const KuickData& data )
+void DefaultsWidget::loadSettings( const KuickData& data )
 {
     cbDownScale->setChecked( data.downScale );
     cbUpScale->setChecked( data.upScale );
@@ -203,20 +191,20 @@ void DefaultsWidget::init( const KuickData& data )
     updatePreview();
 }
 
-void DefaultsWidget::applySettings()
+void DefaultsWidget::applySettings( KuickData& data )
 {
-    kdata->isModsEnabled = cbEnableMods->isChecked();
+    data.isModsEnabled = cbEnableMods->isChecked();
 
-    kdata->downScale  = cbDownScale->isChecked();
-    kdata->upScale    = cbUpScale->isChecked();
-    kdata->maxUpScale = sbMaxUpScaleFactor->value();
+    data.downScale  = cbDownScale->isChecked();
+    data.upScale    = cbUpScale->isChecked();
+    data.maxUpScale = sbMaxUpScaleFactor->value();
 
-    kdata->flipVertically   = cbFlipVertically->isChecked();
-    kdata->flipHorizontally = cbFlipHorizontally->isChecked();
+    data.flipVertically   = cbFlipVertically->isChecked();
+    data.flipHorizontally = cbFlipHorizontally->isChecked();
 
-    kdata->rotation = currentRotation();
+    data.rotation = currentRotation();
 
-    ImData *id = kdata->idata;
+    ImData *id = data.idata;
 
     id->brightness = sbBrightness->value();
     id->contrast   = sbContrast->value();

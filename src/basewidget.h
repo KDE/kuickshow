@@ -4,6 +4,8 @@
 #include <qevent.h>
 #include <qgroupbox.h>
 
+#include "kuickdata.h"
+
 class BaseWidget : public QGroupBox
 {
     Q_OBJECT
@@ -13,9 +15,8 @@ public:
 		const char *name=0 );
     virtual ~BaseWidget();
 
-    virtual void 	loadSettings()  = 0;
-    virtual void	applySettings() = 0;
-    virtual void	resetDefaults() = 0;
+    virtual void 	loadSettings( const KuickData& data )  = 0;
+    virtual void	applySettings( KuickData& data ) = 0;
 
 protected:
     QLabel 		*pixLabel;
