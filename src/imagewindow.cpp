@@ -113,6 +113,7 @@ void ImageWindow::init()
     KWin::setIcons( winId(), imageIcon, miniImageIcon );
 }
 
+
 void ImageWindow::updateAccel()
 {
   delete m_accel;
@@ -124,51 +125,49 @@ void ImageWindow::updateAccel()
   m_actions->action( "next_image" )->plugAccel( m_accel );
   m_actions->action( "previous_image" )->plugAccel( m_accel );
 
-  m_accel->insertItem( i18n("Scroll Up"),	 "Scroll Up",         "Up" );
-  m_accel->insertItem( i18n("Scroll Down"),      "Scroll Down",       "Down" );
-  m_accel->insertItem( i18n("Scroll Left"),      "Scroll Left",       "Left" );
-  m_accel->insertItem( i18n("Scroll Right"),     "Scroll Right",      "Right");
-  m_accel->insertItem( i18n("Zoom In"),          "Zoom In",           "Plus" );
-  m_accel->insertItem( i18n("Zoom Out"),         "Zoom Out",          "Minus");
-  m_accel->insertItem( i18n("Flip Horizontally"),"Flip Horizontally","Asterisk");
-  m_accel->insertItem( i18n("Flip Vertically"),  "Flip Vertically",   "Slash");
-  m_accel->insertItem( i18n("Rotate 90 degrees"), "Rotate 90",         "9" );
-  m_accel->insertItem( i18n("Rotate 180 degrees"),"Rotate 180",        "8" );
-  m_accel->insertItem( i18n("Rotate 270 degrees"),"Rotate 270",        "7" );
-  m_accel->insertItem( i18n("Maximize"), 	 "Maximize", 	      "M" );
-  m_accel->insertItem( i18n("Restore original size"), "OriginalSize", "O" );
-  m_accel->insertItem( i18n("More Brightness"),  "More Brightness",   "B");
-  m_accel->insertItem( i18n("Less Brightness"),  "Less Brightness", "SHIFT+B");
-  m_accel->insertItem( i18n("More Contrast"),    "More Contrast",     "C");
-  m_accel->insertItem( i18n("Less Contrast"),    "Less Contrast",   "SHIFT+C");
-  m_accel->insertItem( i18n("More Gamma"),       "More Gamma",        "G");
-  m_accel->insertItem( i18n("Less Gamma"),       "Less Gamma",      "SHIFT+G");
-  m_accel->insertItem( i18n("Toggle Fullscreen mode"), "Toggle Fullscreen",
-		       "Return" );
-  m_accel->insertItem( i18n("Close"), 		 "Close Viewer",      "Q" );
-  //  m_accel->insertItem( i18n(""), "", "" );
 
-  m_accel->connectItem( "Scroll Up",         this, SLOT( scrollUp() ));
-  m_accel->connectItem( "Scroll Down",       this, SLOT( scrollDown() ));
-  m_accel->connectItem( "Scroll Left",       this, SLOT( scrollLeft() ));
-  m_accel->connectItem( "Scroll Right",      this, SLOT( scrollRight() ));
-  m_accel->connectItem( "Zoom In",           this, SLOT( zoomIn() ));
-  m_accel->connectItem( "Zoom Out",          this, SLOT( zoomOut() ));
-  m_accel->connectItem( "Flip Horizontally", this, SLOT( flipHoriz() ));
-  m_accel->connectItem( "Flip Vertically",   this, SLOT( flipVert() ));
-  m_accel->connectItem( "Rotate 90",         this, SLOT( rotate90() ));
-  m_accel->connectItem( "Rotate 180",        this, SLOT( rotate180() ));
-  m_accel->connectItem( "Rotate 270",        this, SLOT( rotate270() ));
-  m_accel->connectItem( "Maximize", 	     this, SLOT( maximize() ));
-  m_accel->connectItem( "OriginalSize", this, SLOT( showImageOriginalSize() ));
-  m_accel->connectItem( "More Brightness"  , this, SLOT( moreBrightness() ));
-  m_accel->connectItem( "Less Brightness"  , this, SLOT( lessBrightness() ));
-  m_accel->connectItem( "More Contrast",     this, SLOT( moreContrast() ));
-  m_accel->connectItem( "Less Contrast",     this, SLOT( lessContrast() ));
-  m_accel->connectItem( "More Gamma",        this, SLOT( moreGamma() ));
-  m_accel->connectItem( "Less Gamma",        this, SLOT( lessGamma() ));
-  m_accel->connectItem( "Toggle Fullscreen", this, SLOT( toggleFullscreen() ));
-  m_accel->connectItem( "Close Viewer",      this, SLOT( close() ));
+  m_accel->insert( "Scroll Up", i18n( "Scroll Up" ), QString::null,
+                   Key_Up, this, SLOT( scrollUp() ) );
+  m_accel->insert( "Scroll Down", i18n( "Scroll Down" ), QString::null,
+                   Key_Down, this, SLOT( scrollDown() ) );
+  m_accel->insert( "Scroll Left", i18n( "Scroll Left" ), QString::null,
+                   Key_Left, this, SLOT( scrollLeft() ) );
+  m_accel->insert( "Scroll Right", i18n( "Scroll Right" ), QString::null,
+                   Key_Right, this, SLOT( scrollRight() ) );
+  m_accel->insert( "Zoom In", i18n( "Zoom In" ), QString::null,
+                   Key_Plus, this, SLOT( zoomIn() ) );
+  m_accel->insert( "Zoom Out", i18n( "Zoom Out" ), QString::null,
+                   Key_Minus, this, SLOT( zoomOut() ) );
+  m_accel->insert( "Flip Horizontally", i18n( "Flip Horizontally" ), QString::null,
+                   Key_Asterisk, this, SLOT( flipHoriz() ) );
+  m_accel->insert( "Flip Vertically", i18n( "Flip Vertically" ), QString::null,
+                   Key_Slash, this, SLOT( flipVert() ) );
+  m_accel->insert( "Rotate 90", i18n( "Rotate 90 degrees" ), QString::null,
+                   Key_9, this, SLOT( rotate90() ) );
+  m_accel->insert( "Rotate 180", i18n( "Rotate 180 degrees" ), QString::null,
+                   Key_8, this, SLOT( rotate180() ) );
+  m_accel->insert( "Rotate 270", i18n( "Rotate 270 degrees" ), QString::null,
+                   Key_7, this, SLOT( rotate270() ) );
+  m_accel->insert( "Maximize", i18n( "Maximize" ), QString::null,
+                   Key_M, this, SLOT( maximize() ) );
+  m_accel->insert( "OriginalSize", i18n( "Restore original size" ), QString::null,
+                   Key_O, this, SLOT( showImageOriginalSize() ));
+  m_accel->insert( "More Brightness", i18n( "More Brightness" ), QString::null,
+                   Key_B, this, SLOT( moreBrightness() ) );
+  m_accel->insert( "Less Brightness", i18n( "Less Brightness" ), QString::null,
+                   SHIFT + Key_B, this, SLOT( lessBrightness() ) );
+  m_accel->insert( "More Contrast", i18n( "More Contrast" ), QString::null,
+                   Key_C, this, SLOT( moreContrast() ) );
+  m_accel->insert( "Less Contrast", i18n( "Less Contrast" ), QString::null,
+                   SHIFT + Key_C, this, SLOT( lessContrast() ) );
+  m_accel->insert( "More Gamma", i18n( "More Gamma" ), QString::null,
+                   Key_G, this, SLOT( moreGamma() ) );
+  m_accel->insert( "Less Gamma", i18n( "Less Gamma" ), QString::null,
+                   SHIFT + Key_G, this, SLOT( lessGamma() ) );
+  m_accel->insert( "Toggle Fullscreen", i18n( "Toggle Fullscreen mode" ), QString::null,
+                   Key_Return, this, SLOT( toggleFullscreen() ) );
+  m_accel->insert( "Close", i18n( "Close Viewer" ), QString::null,
+                   Key_Q, this, SLOT( close() ) );
 
   m_accel->readSettings();
 }
@@ -458,9 +457,9 @@ void ImageWindow::wheelEvent( QWheelEvent *e )
 void ImageWindow::keyPressEvent( QKeyEvent *e )
 {
     uint key = e->key();
-    if ( key == Key_Escape || KStdAccel::isEqual( e, KStdAccel::close() ))
+    if ( key == Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
 	close( true );
-    else if ( KStdAccel::isEqual( e, KStdAccel::save() ))
+    else if ( KStdAccel::save().contains( KKey( e ) ) )
 	saveImage();
 
     else {
@@ -766,25 +765,36 @@ void ImageWindow::setPopupMenu()
 
 void ImageWindow::setPopupAccels()
 {
-  m_accel->changeMenuAccel(brightnessMenu, itemBrightnessPlus,
-			   "More Brightness");
-  m_accel->changeMenuAccel(brightnessMenu, itemBrightnessMinus,
-			   "Less Brightness");
-  m_accel->changeMenuAccel(contrastMenu, itemContrastPlus,    "More Contrast");
-  m_accel->changeMenuAccel(contrastMenu, itemContrastMinus,   "Less Contrast");
-  m_accel->changeMenuAccel(gammaMenu,    itemGammaPlus,       "More Gamma");
-  m_accel->changeMenuAccel(gammaMenu,    itemGammaMinus,      "Less Gamma");
-
-  m_accel->changeMenuAccel(viewerMenu,  itemViewerZoomIn,  "Zoom In" );
-  m_accel->changeMenuAccel(viewerMenu,  itemViewerZoomOut, "Zoom Out" );
-  m_accel->changeMenuAccel(viewerMenu,  itemRotate90,      "Rotate 90" );
-  m_accel->changeMenuAccel(viewerMenu,  itemRotate180,     "Rotate 180" );
-  m_accel->changeMenuAccel(viewerMenu,  itemRotate270,     "Rotate 270" );
-  m_accel->changeMenuAccel(viewerMenu,  itemViewerFlipH,   "Flip Horizontally" );
-  m_accel->changeMenuAccel(viewerMenu,  itemViewerFlipV,   "Flip Vertically" );
-  m_accel->changeMenuAccel(viewerMenu,  itemViewerPrint,   KStdAccel::Print );
-  m_accel->changeMenuAccel(viewerMenu,  itemViewerSave,    KStdAccel::Save );
-  m_accel->changeMenuAccel(viewerMenu,  itemViewerClose,   "Close Viewer" );
+  brightnessMenu->setAccel(m_accel->shortcut("More Brightness").keyCodeQt(),
+                           itemBrightnessPlus);
+  brightnessMenu->setAccel(m_accel->shortcut("Less Brightness").keyCodeQt(),
+                           itemBrightnessMinus);
+  contrastMenu->setAccel(m_accel->shortcut("More Contrast").keyCodeQt(),
+                         itemContrastPlus);
+  contrastMenu->setAccel(m_accel->shortcut("Less Contrast").keyCodeQt(),
+                         itemContrastMinus);
+  gammaMenu->setAccel(m_accel->shortcut("More Gamma").keyCodeQt(),
+                      itemGammaPlus);
+  gammaMenu->setAccel(m_accel->shortcut("Less Gamma").keyCodeQt(),
+                      itemGammaMinus);
+  viewerMenu->setAccel(m_accel->shortcut("Zoom In").keyCodeQt(),
+                       itemViewerZoomIn);
+  viewerMenu->setAccel(m_accel->shortcut("Zoom Out").keyCodeQt(),
+                       itemViewerZoomOut);
+  viewerMenu->setAccel(m_accel->shortcut("Rotate 90").keyCodeQt(),
+                       itemRotate90);
+  viewerMenu->setAccel(m_accel->shortcut("Rotate 180").keyCodeQt(),
+                       itemRotate180);
+  viewerMenu->setAccel(m_accel->shortcut("Rotate 270").keyCodeQt(),
+                       itemRotate270);
+  viewerMenu->setAccel(m_accel->shortcut("Flip Horizontally").keyCodeQt(),
+                       itemViewerFlipH);
+  viewerMenu->setAccel(m_accel->shortcut("Flip Vertically").keyCodeQt(),
+                       itemViewerFlipV);
+  viewerMenu->setAccel(m_accel->shortcut("Close Viewer").keyCodeQt(),
+                       itemViewerClose);
+  viewerMenu->setAccel(KStdAccel::print().keyCodeQt(), itemViewerPrint);
+  viewerMenu->setAccel(KStdAccel::save().keyCodeQt(),  itemViewerSave);
 }
 
 

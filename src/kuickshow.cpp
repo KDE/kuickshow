@@ -517,12 +517,11 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	k = static_cast<QKeyEvent *>( e );
 
     if ( k ) {
-	if ( KStdAccel::isEqual( k, KStdAccel::quit() )) {
+        if ( KStdAccel::quit().contains( KKey( k ) ) ) {
 	    saveSettings();
 	    exit(0);
-	}
-	
-	else if ( KStdAccel::isEqual( k, KStdAccel::help() ) ) {
+        }
+        else if ( KStdAccel::help().contains( KKey( k ) ) ) {
 	    appHelpActivated();
 	    return true;
 	}
