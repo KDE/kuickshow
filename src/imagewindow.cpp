@@ -80,6 +80,7 @@ ImageWindow::ImageWindow( ImData *_idata, QWidget *parent, const char *name )
 
 ImageWindow::~ImageWindow()
 {
+	kdata->save();
 }
 
 
@@ -120,6 +121,8 @@ void ImageWindow::init()
     
     setCentralWidget(&image);
     
+    setBackgroundColor(kdata->backgroundColor);
+    
     connect( &image, SIGNAL( loaded( KuickImage * )),
             this, SLOT( loaded( KuickImage * )));
 }
@@ -145,7 +148,7 @@ void ImageWindow::setupActions()
                  this, SLOT( zoomOut() ),
                  m_actions, "zoom_out" );
     new KAction( i18n("Restore Original Size"), Key_O,
-                 &image, SLOT( showImageOriginalSize() ),
+                 this, SLOT( showImageOriginalSize() ),
                  m_actions, "original_size" );
     new KAction( i18n("Maximize"), Key_M,
                  this, SLOT( maximize() ),
@@ -212,12 +215,16 @@ void ImageWindow::setupActions()
     new KAction( i18n("Scroll Right"), Key_Right,
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
-
+		 
+    new KAction( i18n("Hide Toolbar"), Key_T,
+                 this, SLOT( slotToggleToolBar() ),
+                 m_actions, "toggle_toolbar" );
+		 
 #if KDE_IS_VERSION(3,2,0)
     KShortcut cut(Key_Return);
     cut.append(KStdAccel::shortcut(KStdAccel::FullScreen));
 
-    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );		     
+    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0, "toggle_fullscreen");		     
     
     action->setShortcut(cut);
     action->setIcon(QString("window_fullscreen"));
@@ -242,7 +249,15 @@ void ImageWindow::setupActions()
     m_actions->action("zoom_in")->setIcon(QString("viewmag+"));
     m_actions->action("zoom_out")->setIcon(QString("viewmag-"));
     m_actions->action("original_size")->setIcon(QString("viewmag1"));
-    m_actions->action("maximize")->setIcon(QString("vewmagfit"));
+    m_actions->action("maximize")->setIcon(QString("viewmagfit"));
+    m_actions->action("close_image")->setIcon(QString("fileclose"));
+    m_actions->action("rotate270")->setIcon(QString("rotate_cw"));
+    m_actions->action("rotate90")->setIcon(QString("rotate_ccw"));
+    m_actions->action("rotate180")->setIcon(QString("rotate"));
+    m_actions->action("save_image_as")->setIcon(QString("filesaveas"));
+    m_actions->action("print_image")->setIcon(QString("fileprint"));
+    m_actions->action("reload_image")->setIcon(QString("reload"));
+    m_actions->action("toggle_toolbar")->setIcon(QString("showmenu"));
     
     m_actions->action("previous_image")->plug( toolBar() );
     m_actions->action("next_image")->plug( toolBar() );
@@ -251,8 +266,16 @@ void ImageWindow::setupActions()
     m_actions->action("zoom_out")->plug( toolBar() );
     m_actions->action("original_size")->plug( toolBar() );
     m_actions->action("maximize")->plug( toolBar() );
+    toolBar()->insertLineSeparator();
+    m_actions->action("toggle_toolbar")->plug( toolBar());
+
+    toolBar()->insertLineSeparator();
+    action->plug(toolBar());
     
     toolBar()->setTitle(i18n("Navigation"));
+    
+    setToolBarVisible(kdata->showImageWindowToolBar);
+    
 }
 
 void ImageWindow::showImage()
@@ -273,17 +296,26 @@ void ImageWindow::setFullscreen( bool enable )
         showNormal();
     }
 
+    m_actions->action("toggle_fullscreen")->setIcon(QString((enable)?"window_nofullscreen":"window_fullscreen"));
+    
     myIsFullscreen = enable;
     centerImage(); // ### really necessary (multihead!)
     showImage();
 }
 
+void ImageWindow::showImageOriginalSize()
+{
+	image.showImageOriginalSize();
+	
+	QSize s=image.originalImageSize();
+	resizeOptimal(s.width(), s.height());
+}
 
 void ImageWindow::updateGeometry( int imWidth, int imHeight )
 {
-//     qDebug("::updateGeometry: %i, %i", imWidth, imHeight);
+     qDebug("::updateGeometry: %i, %i", imWidth, imHeight);
 
-    if ( imWidth != width() || imHeight != height() ) {
+    if ( imWidth != image.width() || imHeight != image.height() ) {
 	if ( myIsFullscreen ) {
 	    centerImage();
 	    showImage();
@@ -309,20 +341,29 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 void ImageWindow::centerImage()
 {
     int w, h;
-    if ( myIsFullscreen )
+    /*if ( myIsFullscreen )
     {
         QRect desktopRect = KGlobalSettings::desktopGeometry( this );
         w = desktopRect.width();
         h = desktopRect.height();
     }
     else
-    {
+    {*/
         w = image.width();
         h = image.height();
-    }
+    /*}*/
 
+    if (w == 0 || h == 0)
+    {
+    	xpos=ypos=0;
+	image.setViewportPosition(QPoint(-xpos, -ypos));
+	return;
+    }
+    
     xpos = w/2 - image.imageWidth()/2;
     ypos = h/2 - image.imageHeight()/2;
+    //kdDebug() << "Centering image to " << -xpos << ", " << -ypos << endl;
+    image.setViewportPosition(QPoint(-xpos, -ypos));
 }
 
 
@@ -387,6 +428,9 @@ bool ImageWindow::showNextImage( const QString& filename )
     }
 
     else {
+    	int w=image.imageWidth();
+	int h=image.imageHeight();
+	updateGeometry(w, h);
 	centerImage();
 	showImage();
 	return true;
@@ -456,12 +500,18 @@ void ImageWindow::scrollRight()
 void ImageWindow::zoomIn()
 {
     image.zoomImage( kdata->zoomSteps );
+    QRect r=image.getViewport();
+    xpos=-r.x();
+    ypos=-r.x();
 }
 
 void ImageWindow::zoomOut()
 {
     Q_ASSERT( kdata->zoomSteps != 0 );
     image.zoomImage( 1.0 / kdata->zoomSteps );
+    QRect r=image.getViewport();
+    xpos=-r.x();
+    ypos=-r.x();
 }
 
 ///
@@ -829,6 +879,9 @@ void ImageWindow::setPopupMenu()
     m_actions->action("properties")->plug( viewerMenu );
 
     viewerMenu->insertSeparator();
+    m_actions->action("toggle_toolbar")->plug( viewerMenu );
+    
+    viewerMenu->insertSeparator();
     m_actions->action("close_image")->plug( viewerMenu );
 }
 
@@ -1044,7 +1097,7 @@ int ImageWindow::desktopHeight( bool totalScreen ) const
     }
 }
 
-QSize ImageWindow::maxImageSize() const
+QSize ImageWindow::maxWindowSize()
 {
     if ( myIsFullscreen ) {
         return KGlobalSettings::desktopGeometry(topLevelWidget()).size();
@@ -1054,21 +1107,86 @@ QSize ImageWindow::maxImageSize() const
     }
 }
 
-void ImageWindow::resizeOptimal( int w, int h )
+QSize ImageWindow::maxImageSize()
 {
-    QSize s = maxImageSize();
+    QSize windowsize=maxWindowSize();
+    
+    if (!toolBar()->isVisible())
+    	return windowsize;
+    
+    //Subtract toolbar dimensions if toolbar is showing   
+    switch (toolBar()->barPos())
+    {
+    	case KToolBar::Unmanaged:
+    	case KToolBar::Floating:
+		return windowsize;
+		
+	case KToolBar::Flat:
+	case KToolBar::Top:
+	case KToolBar::Bottom:
+		windowsize.setHeight(windowsize.height()-toolBar()->height());
+		return windowsize;
+		
+	case KToolBar::Left:
+	case KToolBar::Right:
+		windowsize.setWidth(windowsize.width()-toolBar()->width());
+		return windowsize;
+		
+	default:
+		kdDebug() << "Unknown KToolBar::BarPosition" << endl;
+		return windowsize;
+    }
+}
+
+void ImageWindow::resizeOptimal( int nw, int nh )
+{
+    int w=nw;
+    int h=nh;
+
+    QSize s = maxWindowSize();
     int mw = s.width();
     int mh = s.height();
+
+    if (toolBar()->isVisible())
+    {    
+	//Add toolbar dimensions if toolbar is showing   
+	switch (toolBar()->barPos())
+	{
+		case KToolBar::Unmanaged:
+		case KToolBar::Floating:
+			break;
+			
+		case KToolBar::Flat:
+		case KToolBar::Top:
+		case KToolBar::Bottom:
+			h+=toolBar()->height();
+			break;
+			
+		case KToolBar::Left:
+		case KToolBar::Right:
+			w+=toolBar()->width();
+			break;
+			
+		default:
+			kdDebug() << "Unknown KToolBar::BarPosition" << endl;
+			break;
+	}
+    }
+    
     int neww = (w >= mw) ? mw : w;
     int newh = (h >= mh) ? mh : h;
-
+    
     if ( neww == width() && newh == height() )
     {
 	centerImage();
 	showImage();
     }
     else
-	resize( neww, newh ); // also centers the image
+    {
+	resize( neww, newh );
+	centerImage();
+	showImage();
+    }
 }
 
 void ImageWindow::maximize()
@@ -1099,5 +1217,26 @@ void ImageWindow::slotProperties()
     (void) new KPropertiesDialog( url, this, "props dialog", true );
 }
 
+void ImageWindow::setToolBarVisible(bool visible)
+{
+	if (visible)
+	{
+		m_actions->action("toggle_toolbar")->setText(i18n("Hide Toolbar"));
+		toolBar()->show();
+	}
+	else
+	{
+		m_actions->action("toggle_toolbar")->setText(i18n("Show Toolbar"));
+		toolBar()->hide();
+	}
+	
+	kdata->showImageWindowToolBar=visible;
+}
+
+void ImageWindow::slotToggleToolBar()
+{
+	setToolBarVisible(!toolBar()->isVisible());
+
+}
 
 #include "imagewindow.moc"

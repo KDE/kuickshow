@@ -45,6 +45,8 @@ public:
   void		setFullscreen( bool );
   bool 		isFullscreen() 	const { return myIsFullscreen; }
 
+  void		setToolBarVisible(bool visible);
+  
   void          addBrightness( int );
   void 		addContrast( int );
   void 		addGamma( int );
@@ -84,6 +86,7 @@ public slots:
   void 		toggleFullscreen();
   void 		maximize();
   void		loaded( KuickImage * );
+  void		showImageOriginalSize();
 
 signals:
   void 		sigFocusWindow( ImageWindow * );
@@ -143,12 +146,14 @@ protected slots:
   void          slotRequestPrevious()       { emit requestImage( this, -1 ); }
   void          reload();
   void          slotProperties();
+  void		slotToggleToolBar();
 
 
 private:
   int 		desktopWidth( bool totalScreen = false ) const;
   int 		desktopHeight( bool totalScreen = false ) const;
-  QSize		maxImageSize() const;
+  QSize		maxImageSize();
+  QSize		maxWindowSize();
   void 		setupActions();
   void 		setPopupMenu();
 
