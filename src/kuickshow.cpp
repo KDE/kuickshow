@@ -61,6 +61,9 @@
 #include <kstdguiitem.h>
 #include <kimageio.h>
 
+// Test
+#include <kdebug.h>
+
 #include "aboutwidget.h"
 #include "filewidget.h"
 #include "imdata.h"
@@ -493,6 +496,10 @@ void KuickShow::showImage( const KFileItem *fi,
                      this, SLOT( messageCantLoadImage(const QString &) ));
             connect( m_viewer, SIGNAL( requestImage( ImageWindow *, int )),
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
+	    connect( m_viewer, SIGNAL( pauseSlideshow() ),
+                     this, SLOT( slotPauseSlideshow() ) );
+	    
+
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
                 // after showing, otherwise we get some bogus geometry()
@@ -543,7 +550,7 @@ void KuickShow::showImage( const KFileItem *fi,
 }
 
 void KuickShow::startSlideShow()
-{
+{ 
     if (kdata->slideshowPlayRandom) {
     	startSlideShowRandom();
     } else {
@@ -1206,9 +1213,21 @@ void KuickShow::deleteAllViewers()
         (*it)->disconnect( SIGNAL( destroyed() ), this, SLOT( viewerDeleted() ));
         (*it)->close( true );
     }
+    
 
     s_viewers.clear();
     m_viewer = 0L;
+}
+void KuickShow::slotPauseSlideshow()
+{
+    if (m_slideTimer->isActive()) 
+    {
+	m_slideTimer->stop();
+    }
+    else
+    {
+    	m_slideTimer->start( kdata->slideDelay );
+    }
 }
 
 KActionCollection * KuickShow::actionCollection() const

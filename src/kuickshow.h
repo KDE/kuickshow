@@ -81,7 +81,6 @@ public:
     // overridden to make KDCOPActionProxy work -- all our actions are not
     // in the mainwindow's collection, but in the filewidget's.
     virtual KActionCollection* actionCollection() const;
-
     
 protected:
     virtual void	readProperties( KConfig * );
@@ -120,6 +119,7 @@ private slots:
     void                slotOpenURL();
     void		slotSetURL( const KURL& );
     void		slotURLComboReturnPressed();
+    void		slotPauseSlideshow();
 //     void                invalidateImages( const KFileItemList& items );
 
 private:

@@ -223,6 +223,10 @@ void ImageWindow::setupActions()
     new KAction( i18n("Hide Toolbar"), Key_T,
                  this, SLOT( slotToggleToolBar() ),
                  m_actions, "toggle_toolbar" );
+    new KAction (i18n("Pause Slideshow"), Key_Space,
+    		this,SLOT( slotPauseSlideshow() ),
+		m_actions, "pause_slideshow" );
+		
 		 
 #if KDE_IS_VERSION(3,2,0)
     KShortcut cut(Key_Return);

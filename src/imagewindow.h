@@ -93,6 +93,7 @@ signals:
   // go advance images back/forth
   void          requestImage( ImageWindow *, int advance );
   void 		sigBadImage( const QString& );
+  void		pauseSlideshow();
 
 protected:
   ~ImageWindow(); // deletes itself, just call close( true );
@@ -149,7 +150,7 @@ protected slots:
   void          reload();
   void          slotProperties();
   void		slotToggleToolBar();
-
+  void		slotPauseSlideshow()	    { emit pauseSlideshow();}
 
 private:
   int 		desktopWidth( bool totalScreen = false ) const;
