@@ -47,6 +47,7 @@
 #include <kpropertiesdialog.h>
 #include <kstdaccel.h>
 #include <kstandarddirs.h>
+#include <kglobalsettings.h>
 #include <ktempfile.h>
 #include <kwin.h>
 #include <netwm.h>
@@ -240,19 +241,7 @@ void ImageWindow::setFullscreen( bool enable )
 	// oldGeometry.x(), oldGeometry.y(),
 	// oldGeometry.width(), oldGeometry.height());
 
-        QDesktopWidget *desktop = QApplication::desktop();
-        QRect r;
-        KConfig gc("kdeglobals", false, false);
-        gc.setGroup("Windows");
-
-        if (desktop->isVirtualDesktop() &&
-            gc.readBoolEntry("XineramaEnabled", true) &&
-            gc.readBoolEntry("XineramaPlacementEnabled", true)) {
-            int screen = desktop->screenNumber(this);
-            r = desktop->screenGeometry(screen);
-        } else {
-            r = desktop->geometry();
-        }
+        QRect r = KGlobalSettings::desktopGeometry(this);
         
         setFixedSize( r.size() );
 
