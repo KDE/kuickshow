@@ -196,13 +196,13 @@ void KuickShow::initGUI( const KURL& startDir )
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
 
-    (void) new KAction( i18n("Show Image"), KShortcut(),
-                        this, SLOT( slotShowInOtherWindow() ),
-			coll, "kuick_showInOtherWindow" );
-    (void) new KAction( i18n("Show Image in Active Window"), KShortcut(),
-			this, SLOT( slotShowInSameWindow() ),
-			coll, "kuick_showInSameWindow" );
-
+    KAction *showInOther = new KAction( i18n("Show Image"), KShortcut(),
+                                        this, SLOT( slotShowInOtherWindow() ),
+                                        coll, "kuick_showInOtherWindow" );
+    KAction *showInSame = new KAction( i18n("Show Image in Active Window"), 
+                                       KShortcut(),
+                                       this, SLOT( slotShowInSameWindow() ),
+                                       coll, "kuick_showInSameWindow" );
 
     KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit");
 
@@ -214,6 +214,8 @@ void KuickShow::initGUI( const KURL& startDir )
     KMenuBar *mBar = menuBar();
     QPopupMenu *fileMenu = new QPopupMenu( mBar, "file" );
     open->plug( fileMenu );
+    showInOther->plug( fileMenu );
+    showInSame->plug( fileMenu );
     fileMenu->insertSeparator();
     slide->plug( fileMenu );
     print->plug( fileMenu );
@@ -349,6 +351,8 @@ void KuickShow::slotHighlighted( const KFileItem *fi )
 
     bool image = FileWidget::isImage( fi );
     fileWidget->actionCollection()->action("kuick_print")->setEnabled( image );
+    fileWidget->actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
+    fileWidget->actionCollection()->action("kuick_showInOtherWindow")->setEnabled( image );
 }
 
 void KuickShow::dirSelected( const KURL& url )
@@ -643,17 +647,17 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	    // is used for zooming in the imagewindow
 	    if ( !fileWidget )
             {
-                if ( key != Key_Escape && key != Key_Shift ) 
+                if ( key != Key_Escape && key != Key_Shift )
                 {
                     KURL start;
                     QFileInfo fi( m_viewer->filename() );
                     start.setPath( fi.dirPath( true ) );
                     initGUI( start );
 
-                    // the fileBrowser will list the start-directory 
-                    // asynchronously so we can't immediately continue. There 
-                    // is no current-item and no next-item (actually no item 
-                    // at all). So we tell the browser the initial 
+                    // the fileBrowser will list the start-directory
+                    // asynchronously so we can't immediately continue. There
+                    // is no current-item and no next-item (actually no item
+                    // at all). So we tell the browser the initial
                     // current-item and wait for it to tell us when it's ready.
                     // Then we will replay this KeyEvent.
                     fileWidget->setInitialItem( fi.fileName() );
@@ -662,12 +666,12 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                              SLOT( slotReplayEvent() ));
                     return true;
                 }
-                
+
                 return KMainWindow::eventFilter( o, e );
 	    }
 
             // we definitely have a fileWidget here!
-            
+
  	    // FIXME: make all this stuff via KStdAccel and KAccel ->slots
 
             KKey kkey( key );
