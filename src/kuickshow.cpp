@@ -723,7 +723,7 @@ void KuickShow::saveSettings()
 void KuickShow::messageCantLoadImage( const QString& filename )
 {
     m_viewer->clearFocus();
-    QString tmp = i18n("Sorry, I can't load the image %1.\n"
+    QString tmp = i18n("Unable to load the image %1.\n"
 	    "Perhaps the file format is unsupported or "
                       "your Imlib is not installed properly.").arg(filename);
     KMessageBox::sorry( 0L, tmp, i18n("Image Error") );
