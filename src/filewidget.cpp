@@ -350,6 +350,20 @@ KFileItem * FileWidget::getItem( WhichItem which, bool onlyImage ) const
 
     return 0L;
 }
+QValueVector<KFileItem *> FileWidget::getCompleteFileList()
+{
+	QValueVector <KFileItem *> itemVector;
+	itemVector.clear();
+	KFileItemListIterator it( *(fileView()->items()) );
+	
+	while (it.current())
+	{
+		if ( isImage( it.current() ) ) 
+			itemVector.push_back (it.current());
+		++it;
+	}
+	return  itemVector;
+}
 
 void FileWidget::slotViewChanged()
 {

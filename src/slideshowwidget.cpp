@@ -36,7 +36,8 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
 
     m_fullScreen = new QCheckBox( i18n("Switch to &full-screen"), this );
     m_startWithCurrent = new QCheckBox( i18n("Start with &current image"), this);
-
+    m_randomSlideshow = new QCheckBox(i18n("Show Images in &random order"),this);
+    
     m_delayTime = new KIntNumInput( this, "delay time" );
     m_delayTime->setLabel( i18n("De&lay between slides:") );
     m_delayTime->setSuffix( i18n(" sec") );
@@ -49,6 +50,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
     
     layout->addWidget( m_fullScreen );
     layout->addWidget( m_startWithCurrent );
+    layout->addWidget( m_randomSlideshow );
     layout->addWidget( m_delayTime );
     layout->addWidget( m_cycles );
     layout->addStretch( 1 );
@@ -66,6 +68,7 @@ void SlideShowWidget::loadSettings( const KuickData& data )
     m_cycles->setValue( data.slideshowCycles );
     m_fullScreen->setChecked( data.slideshowFullscreen );
     m_startWithCurrent->setChecked( !data.slideshowStartAtFirst );
+    m_randomSlideshow->setChecked( data.slideshowPlayRandom );
 }
 
 void SlideShowWidget::applySettings( KuickData& data )
@@ -74,6 +77,7 @@ void SlideShowWidget::applySettings( KuickData& data )
     data.slideshowCycles = m_cycles->value();
     data.slideshowFullscreen = m_fullScreen->isChecked();
     data.slideshowStartAtFirst = !m_startWithCurrent->isChecked();
+    data.slideshowPlayRandom = m_randomSlideshow->isChecked();
 }
 
 #include "slideshowwidget.moc"

@@ -22,6 +22,7 @@
 #include <qevent.h>
 
 #include <kdiroperator.h>
+#include <qvaluevector.h>
 
 class FileFinder;
 class KFileItem;
@@ -55,6 +56,7 @@ public:
     KFileItem * getNext( bool go=true );
     KFileItem * getPrevious( bool go=true );
 
+    QValueVector<KFileItem *> getCompleteFileList();
 
     KFileItem *getItem( WhichItem which, bool onlyImage ) const;
 

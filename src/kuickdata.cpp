@@ -79,6 +79,7 @@ void KuickData::load()
   slideDelay   = kc->readNumEntry( "SlideShowDelay", def.slideDelay );
   slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
   slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", false );
+  slideshowPlayRandom = kc->readBoolEntry( "SlideshowPlayRandom", false );
 
   preloadImage = kc->readBoolEntry( "PreloadNextImage", def.preloadImage );
 
@@ -140,6 +141,7 @@ void KuickData::save()
   kc->writeEntry( "SlideShowDelay", slideDelay );
   kc->writeEntry( "SlideshowCycles", slideshowCycles );
   kc->writeEntry( "SlideshowFullscreen", slideshowFullscreen );
+  kc->writeEntry( "SlideshowPlayRandom", slideshowPlayRandom );
 
   kc->writeEntry( "PreloadNextImage", preloadImage );
 

@@ -45,6 +45,7 @@ public:
     uint        slideshowCycles;
     bool        slideshowFullscreen :1;
     bool        slideshowStartAtFirst :1;
+    bool 	slideshowPlayRandom :1;
 
     int 	brightnessSteps;
     int 	contrastSteps;

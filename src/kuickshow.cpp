@@ -544,20 +544,61 @@ void KuickShow::showImage( const KFileItem *fi,
 
 void KuickShow::startSlideShow()
 {
-    KFileItem *item = kdata->slideshowStartAtFirst ?
-                      fileWidget->gotoFirstImage() :
-                      fileWidget->getCurrentItem(false);
+    if (kdata->slideshowPlayRandom) {
+    	startSlideShowRandom();
+    } else {
+	KFileItem *item = kdata->slideshowStartAtFirst ?
+			fileWidget->gotoFirstImage() :
+			fileWidget->getCurrentItem(false);
+	
+	if ( item ) {
+		m_slideshowCycle = 1;
+		fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
+		showImage( item, !oneWindowAction->isChecked(),
+			kdata->slideshowFullscreen );
+		m_slideTimer->start( kdata->slideDelay );
+	}
+    }
+}
 
-    if ( item ) {
+void KuickShow::startSlideShowRandom()
+{
+    m_randomItem.clear();
+    KFileItem *item = NULL;
+    fileWidget->hide();
+    
+    // Adds all item in a vector
+    m_randomItem = fileWidget->getCompleteFileList();
+   
+    // Finished!
+    fileWidget->show();
+    // Shuffle vector
+    size_t n = m_randomItem.size();
+
+    for (size_t i = 0; i < n; ++i) {
+	size_t j = kapp->random() % n;
+
+	KFileItem *it = m_randomItem[i];
+	m_randomItem[i] = m_randomItem[j];
+	m_randomItem[j] = it;
+    }
+    
+    // Starts slide show
+    if ( n ) {
+	item = m_randomItem.front();
+	m_randomSlideIndex = 1;
+	
         m_slideshowCycle = 1;
-        fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
-        showImage( item, !oneWindowAction->isChecked(),
+	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
+	
+	showImage( item, !oneWindowAction->isChecked(),
                    kdata->slideshowFullscreen );
+	
         m_slideTimer->start( kdata->slideDelay );
     }
 }
 
-void KuickShow::nextSlide()
+void KuickShow::nextRandomSlide()
 {
     if ( !m_viewer ) {
         m_slideshowCycle = 1;
@@ -565,24 +606,61 @@ void KuickShow::nextSlide()
         return;
     }
 
-    KFileItem *item = fileWidget->getNext( true );
-    if ( !item ) { // last image
-        if ( m_slideshowCycle < kdata->slideshowCycles
-             || kdata->slideshowCycles == 0 ) {
-            item = fileWidget->gotoFirstImage();
-            if ( item ) {
-                nextSlide( item );
-                m_slideshowCycle++;
-                return;
-            }
-        }
-
-        m_viewer->close( true );
+    if (m_randomItem.size() == m_randomSlideIndex) {
+	m_viewer->close( true );
         fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
-        return;
+	m_slideTimer->stop();
+	return;
     }
+    
+    KFileItem *item = m_randomItem[m_randomSlideIndex ++];
 
-    nextSlide( item );
+    if ( item ) {
+	nextRandomSlide( item );
+        m_slideshowCycle++;
+        return;
+    }    
+
+    nextRandomSlide( item );
+}
+
+void KuickShow::nextRandomSlide( KFileItem *item )
+{
+    m_viewer->showNextImage( item->url().path() );
+    fileWidget->setCurrentItem( item );
+    m_slideTimer->start( kdata->slideDelay );
+}
+
+void KuickShow::nextSlide()
+{
+    if (kdata->slideshowPlayRandom) {
+    	nextRandomSlide();
+    } else {
+	if ( !m_viewer ) {
+		m_slideshowCycle = 1;
+		fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
+		return;
+	}
+	KFileItem *item= fileWidget->getNext( true );
+	
+	if ( !item ) { // last image
+		if ( m_slideshowCycle < kdata->slideshowCycles
+		|| kdata->slideshowCycles == 0 ) {
+		item = fileWidget->gotoFirstImage();
+		if ( item ) {
+			nextSlide( item );
+			m_slideshowCycle++;
+			return;
+		}
+		}
+	
+		m_viewer->close( true );
+		fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
+		return;
+	}
+	
+	nextSlide( item );
+	}
 }
 
 void KuickShow::nextSlide( KFileItem *item )

@@ -22,14 +22,16 @@
 #include <qevent.h>
 #include <qguardedptr.h>
 #include <qstring.h>
+
 #include <qvaluelist.h>
+
 
 #include <kfileitem.h>
 #include <kmainwindow.h>
 #include <kurl.h>
 
 #include "aboutwidget.h"
-
+#include <qvaluevector.h>
 class FileWidget;
 class ImageWindow;
 class ImData;
@@ -100,8 +102,11 @@ private slots:
     void		configuration();
     void	      	about();
     void 		startSlideShow();
+    void 		startSlideShowRandom();
     void 		nextSlide();
     void                nextSlide( KFileItem *item );
+    void 		nextRandomSlide();
+    void                nextRandomSlide( KFileItem *item );
     void		viewerDeleted();
     void 		slotDropped( const KFileItem *, QDropEvent *, const KURL::List &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
@@ -139,6 +144,8 @@ private:
     QTimer              *m_slideTimer;
     KAction             *m_toggleBrowserAction;
     QGuardedPtr<AboutWidget> aboutWidget;
+    QValueVector<KFileItem *> m_randomItem;
+    size_t		m_randomSlideIndex;
 };
 
 #endif
