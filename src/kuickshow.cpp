@@ -198,6 +198,8 @@ void KuickShow::initGUI( const KURL& startDir )
     m_accel = coll->accel();
 
     KToolBar *tBar = toolBar();
+    tBar->setText( i18n( "&Main Toolbar" ) );
+
     coll->action("up")->plug( tBar );
     coll->action("back")->plug( tBar );
     coll->action("forward")->plug( tBar );
