@@ -53,9 +53,10 @@ public:
     int 	maxUpScale;
     uint 	maxWidth, maxHeight;
 
+    uint        slideshowCycles;
 
-    bool 	flipVertically;
-    bool 	flipHorizontally;
+    bool 	flipVertically   :1;
+    bool 	flipHorizontally :1;
     int 	rotation;
 
     QColor      backgroundColor;

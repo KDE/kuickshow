@@ -68,26 +68,6 @@ protected:
     virtual void	readProperties( KConfig * );
     void 		initImlibParams( ImData *, ImlibInitParams * );
 
-private:
-    void 		initGUI( const KURL& startDir );
-    bool	       	eventFilter( QObject *, QEvent * );
-    void 		initImlib();
-    void 		saveProperties( KConfig * );
-    void 		saveSettings();
-    bool 		haveBrowser() const;
-    void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );
-    void                toggleBrowser( bool show );
-
-    uint 		viewItem, renameItem, deleteItem, printItem;
-
-    FileWidget   	*fileWidget;
-    KuickConfigDialog 	*dialog;
-    ImlibData           *id;
-    ImageWindow 	*m_viewer;
-    KToggleAction 	*newWindowAction;
-    KAccel 		*m_accel;
-    DelayedRepeatEvent  *m_delayedRepeatItem;
-
 private slots:
     void 		slotQuit() { delete this; }
     void 		slotPrint();
@@ -113,6 +93,28 @@ private slots:
 
     void		slotReplayEvent();
     void        slotReplayAdvance();
+
+private:
+    void 		initGUI( const KURL& startDir );
+    bool	       	eventFilter( QObject *, QEvent * );
+    void 		initImlib();
+    void 		saveProperties( KConfig * );
+    void 		saveSettings();
+    bool 		haveBrowser() const;
+    void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );
+    void                toggleBrowser( bool show );
+
+    uint 		viewItem, renameItem, deleteItem, printItem;
+    uint                m_slideshowCycle;
+
+    FileWidget   	*fileWidget;
+    KuickConfigDialog 	*dialog;
+    ImlibData           *id;
+    ImageWindow 	*m_viewer;
+    KToggleAction 	*newWindowAction;
+    KAccel 		*m_accel;
+    DelayedRepeatEvent  *m_delayedRepeatItem;
+    QTimer              *m_slideTimer;
 
 };
 

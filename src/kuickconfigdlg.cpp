@@ -63,8 +63,7 @@ void KuickConfigDialog::applyConfig()
     imageWindow->accel()->writeSettings();
 
     browserKeyChooser->commitChanges();
-    // remove QString::null parameter -- ellis
-    coll->writeShortcutSettings( QString::null );
+    coll->writeShortcutSettings();
 
     KGlobal::config()->sync();
 }

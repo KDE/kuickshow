@@ -68,6 +68,7 @@ QValueList<ImageWindow*> KuickShow::s_viewers;
 
 KuickShow::KuickShow( const char *name )
     : KMainWindow( 0L, name ),
+      m_slideshowCycle( 1 ),
       fileWidget( 0L ),
       dialog( 0L ),
       id( 0L ),
@@ -122,6 +123,9 @@ KuickShow::KuickShow( const char *name )
   else { // don't show browser, when image on commandline
       hide();
   }
+  
+  m_slideTimer = new QTimer( this );
+  connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
 }
 
 
@@ -251,6 +255,10 @@ void KuickShow::viewerDeleted()
 	setActiveWindow();
 	fileWidget->setFocus();
     }
+    
+    // maybe a slideshow was stopped --> enable the action again
+    fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
+    m_slideTimer->stop();
 }
 
 
@@ -346,28 +354,38 @@ void KuickShow::startSlideShow()
 {
     KFileItem *item = fileWidget->gotoFirstImage();
     if ( item ) {
+        m_slideshowCycle = 1;
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
 	showImage( item, !kdata->showInOneWindow );
-	QTimer::singleShot( kdata->slideDelay, this, SLOT( nextSlide() ) );
+        m_slideTimer->start( kdata->slideDelay );
     }
 }
 
 void KuickShow::nextSlide()
 {
     if ( !m_viewer ) {
+        m_slideshowCycle = 1;
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
 	return;
     }
 
     KFileItem *item = fileWidget->getNext( true );
-    if ( !item ) {
+    if ( !item ) { // last image
+        if ( m_slideshowCycle < kdata->slideshowCycles
+           || kdata->slideshowCycles == 0 ) {
+            int cycle = m_slideshowCycle++;
+            startSlideShow(); // resets m_slideshowCycle to 1
+            m_slideshowCycle = cycle;
+            return;
+        }
+        
 	m_viewer->close( true );
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
 	return;
     }
 
     m_viewer->showNextImage( item->url().path() );
-    QTimer::singleShot( kdata->slideDelay, this, SLOT( nextSlide() ) );
+    m_slideTimer->start( kdata->slideDelay );
 }
 
 
@@ -427,7 +445,7 @@ void KuickShow::dropEvent( QDropEvent *e )
 
     if ( hasRemote ) {
 	QString tmp( i18n("You can only drop local files "
-		"onto the image viewer!"));
+                          "onto the image viewer!"));
 	KMessageBox::sorry( this, tmp, i18n("KuickShow Drop Error") );
     }
 }
@@ -610,7 +628,8 @@ void KuickShow::configuration()
 	initGUI( QDir::homeDirPath() );
     }
 
-    dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L, "dialog", false );
+    dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L, 
+                                    "dialog", false );
     dialog->resize( 540, 510 );
     dialog->setIcon( kapp->miniIcon() );
 
@@ -642,7 +661,7 @@ void KuickShow::slotConfigApplied()
 	++it;
     }
 
-	fileWidget->reloadConfiguration();
+    fileWidget->reloadConfiguration();
 }
 
 

@@ -40,6 +40,8 @@ KuickData::KuickData()
   scrollSteps     = 1;
   zoomSteps       = 1.5;
 
+  slideshowCycles = 1;
+
   maxWidth 	  = 8192;
   maxHeight 	  = 8192;
 
@@ -89,6 +91,8 @@ void KuickData::load()
 
   backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
 
+  slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
+
   idata->load( kc );
 }
 
@@ -124,7 +128,9 @@ void KuickData::save()
   kc->writeEntry( "MaximumImageHeight", maxHeight );
 
   kc->writeEntry( "BackgroundColor", backgroundColor );
-  
+
+  kc->writeEntry( "SlideshowCycles", slideshowCycles );
+
   idata->save( kc );
 
   kc->sync();
