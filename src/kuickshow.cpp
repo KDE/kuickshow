@@ -37,6 +37,7 @@
 #include <kmessagebox.h>
 #include <kpopupmenu.h>
 #include <kpropertiesdialog.h>
+#include <kprotocolinfo.h>
 #include <kstatusbar.h>
 #include <kstdaction.h>
 #include <kstandarddirs.h>
@@ -72,7 +73,6 @@ static const int URL_ITEM  = 0;
 static const int META_ITEM = 1;
 
 QValueList<ImageWindow*> KuickShow::s_viewers;
-
 
 KuickShow::KuickShow( const char *name )
     : KMainWindow( 0L, name ),
@@ -114,15 +114,38 @@ KuickShow::KuickShow( const char *name )
       // for remote URLs, we don't know if it's a file or directory, but
       // FileWidget::isImage() should correct in most cases.
       // For non-local non-images, we just assume directory.
+
       if ( FileWidget::isImage( &item ) )
+      {
 	  showImage( &item, true, false, true ); // show in new window, not fullscreen-forced and move to 0,0
 // 	  showImage( &item, true, false, false ); // show in new window, not fullscreen-forced and not moving to 0,0
-      else {
-	  if ( item.isDir() || !url.isLocalFile() ) {
-	      startDir = url;
-	      isDir = true;
-	  }
       }
+      else if ( item.isDir() )
+      {
+          startDir = url;
+          isDir = true;
+      }
+      
+      // need to check remote files
+      else if ( !url.isLocalFile() )
+      {
+          KMimeType::Ptr mime = KMimeType::findByURL( url );
+          QString name = mime->name();
+          if ( name == "application/octet-stream" ) // unknown -> stat()
+              name = KIO::NetAccess::mimetype( url );
+
+          if ( name.startsWith( "image/" ) )
+          {
+              FileWidget::setImage( item, true );
+              showImage( &item, true, false, true );
+          }
+          else // assume directory, KDirLister will tell us if we can't list
+          {
+              startDir = url;
+              isDir = true;
+          }
+      }
+      // else // we don't handle local non-images
   }
 
   if ( args->isSet( "lastdir" ))
@@ -408,6 +431,7 @@ void KuickShow::showImage( const KFileItem *fi,
     fullscreen |= (newWindow && kdata->fullScreen);
 
     if ( FileWidget::isImage( fi ) ) {
+        
 	if ( newWindow ) {
 	    m_viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
 	    s_viewers.append( m_viewer );
@@ -669,8 +693,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
     ImageWindow *window = dynamic_cast<ImageWindow*>( o );
     if ( window ) {
-        // The XWindow used to display Imlib's image is being resized when 
-        // switching images, causing enter- and leaveevents for this 
+        // The XWindow used to display Imlib's image is being resized when
+        // switching images, causing enter- and leaveevents for this
         // ImageWindow, leading to the cursor being unhidden. So we simply
         // don't pass those events to KCursor to prevent that.
         if ( eventType != QEvent::Leave && eventType != QEvent::Enter )
