@@ -55,7 +55,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   cbFullscreen = new QCheckBox( i18n("Fullscreen mode"), this, "boscreen" );
 
   cbPreload = new QCheckBox( i18n("Preload next image"), this, "preload");
-  cbLastdir = new QCheckBox( i18n("Remember last directory"), this, "restart_lastdir");
+  cbLastdir = new QCheckBox( i18n("Remember last folder"), this, "restart_lastdir");
 
   QGridLayout *gridLayout = new QGridLayout( 2, 2 );
   gridLayout->setSpacing( KDialog::spacingHint() );

@@ -29,8 +29,8 @@
 
 static KCmdLineOptions options[] =
 {
-    { "lastdir", I18N_NOOP("Start in the last visited directory, not the "
-			   "current working directory"), 0 },
+    { "lastfolder", I18N_NOOP("Start in the last visited folder, not the "
+			      "current working directory"), 0 },
     { "d", 0, 0 }, // short option for --lastdir
     { "+[files]", I18N_NOOP("Optional image filenames/urls to show"), 0 },
     KCmdLineLastOption

@@ -162,7 +162,7 @@ KuickShow::KuickShow( const char *name )
         // else // we don't handle local non-images
     }
 
-    if ( (kdata->startInLastDir && args->count() == 0) || args->isSet( "lastdir" )) {
+    if ( (kdata->startInLastDir && args->count() == 0) || args->isSet( "lastfolder" )) {
         kc->setGroup( "SessionSettings");
         startDir = kc->readPathEntry( "CurrentDirectory", startDir.url() );
     }
@@ -1152,7 +1152,7 @@ void KuickShow::slotOpenURL()
 {
     KFileDialog dlg(QString::null, kdata->fileFilter, this, "filedialog", true);
     dlg.setMode( KFile::Files | KFile::Directory );
-    dlg.setCaption( i18n("Select Files or Directory to Open") );
+    dlg.setCaption( i18n("Select Files or Folder to Open") );
 
     if ( dlg.exec() == QDialog::Accepted )
     {
