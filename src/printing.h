@@ -63,7 +63,7 @@ private:
     int fromUnitToPixels( float val ) const;
     float pixelsToUnit( int pixels ) const;
 
-    QRadioButton *m_shrinkToFit;
+    QCheckBox *m_shrinkToFit;
     QRadioButton *m_scale;
     KIntNumInput *m_width;
     KIntNumInput *m_height;
