@@ -323,8 +323,8 @@ void KuickShow::initGUI( const KURL& startDir )
     tBar->insertSeparator();
     oneWindowAction->plug( tBar );
     print->plug( tBar );
-    tBar->insertSeparator();
-    about->plug( tBar );
+    //tBar->insertSeparator();
+    //about->plug( tBar );
 
     QPopupMenu *help = helpMenu( QString::null, false );
     mBar->insertItem( KStdGuiItem::help().text() , help );
