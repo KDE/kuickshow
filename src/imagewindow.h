@@ -137,7 +137,10 @@ protected slots:
   void          slotRequestPrevious()       { emit requestImage( this, -1 ); }
   void          reload();
   void          slotProperties();
+  void          pauseSlideShow();
 
+signals:
+  void          pauseSlideShowSignal();
 
 private:
   int 		desktopWidth( bool totalScreen = false ) const;

@@ -215,6 +215,10 @@ void ImageWindow::setupActions()
     new KAction( i18n("Scroll Right"), Key_Right,
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
+    // --------
+    KAction *pause = new KAction( i18n("Pause Slideshow"), Key_P,
+				  this, SLOT( pauseSlideShow() ),
+				  m_actions, "kuick_slideshow_pause" );
 
     KShortcut cut(Key_Return);
     cut.append(KStdAccel::shortcut(KStdAccel::FullScreen));
@@ -387,6 +391,11 @@ bool ImageWindow::showNextImage( const QString& filename )
 void ImageWindow::reload()
 {
     showNextImage( filename() );
+}
+
+void ImageWindow::pauseSlideShow()
+{
+    emit pauseSlideShowSignal();
 }
 
 void ImageWindow::addBrightness( int factor )
@@ -1084,5 +1093,6 @@ void ImageWindow::slotProperties()
     url.setPath( filename() ); // ###
     (void) new KPropertiesDialog( url, this, "props dialog", true );
 }
+
 
 #include "imagewindow.moc"

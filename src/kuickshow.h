@@ -103,6 +103,7 @@ private slots:
     void		configuration();
     void	      	about();
     void 		startSlideShow();
+    void                pauseSlideShow();
     void 		nextSlide();
     void                nextSlide( KFileItem *item );
     void		viewerDeleted();
@@ -143,6 +144,7 @@ private:
     KAccel 		*m_accel;
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;
+    bool                m_slideShowStopped;
     KToggleAction       *m_toggleBrowserAction;
     QGuardedPtr<AboutWidget> aboutWidget;
 };

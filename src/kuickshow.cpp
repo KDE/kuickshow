@@ -96,7 +96,8 @@ KuickShow::KuickShow( const char *name )
       m_viewer( 0L ),
       oneWindowAction( 0L ),
       m_accel( 0L ),
-      m_delayedRepeatItem( 0L )
+      m_delayedRepeatItem( 0L ),
+      m_slideShowStopped(false)
 {
     aboutWidget = 0L;
     kdata = new KuickData;
@@ -497,6 +498,8 @@ void KuickShow::showImage( const KFileItem *fi,
                      this, SLOT( messageCantLoadImage(const QString &) ));
             connect( m_viewer, SIGNAL( requestImage( ImageWindow *, int )),
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
+	    connect( m_viewer, SIGNAL( pauseSlideShowSignal() ), 
+		     this, SLOT( pauseSlideShow() ) );
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
                 // after showing, otherwise we get some bogus geometry()
@@ -558,6 +561,18 @@ void KuickShow::startSlideShow()
         showImage( item, !oneWindowAction->isChecked(),
                    kdata->slideshowFullscreen );
         m_slideTimer->start( kdata->slideDelay );
+    }
+}
+
+void KuickShow::pauseSlideShow()
+{
+    if(m_slideShowStopped) {
+	m_slideTimer->start( kdata->slideDelay );
+	m_slideShowStopped = false;
+    }
+    else {
+	m_slideTimer->stop();
+	m_slideShowStopped = true;
     }
 }
 
