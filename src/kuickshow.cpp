@@ -59,6 +59,7 @@
 #include <kurldrag.h>
 #include <kwin.h>
 #include <kstdguiitem.h>
+#include <kimageio.h>
 
 #include "aboutwidget.h"
 #include "filewidget.h"
@@ -482,7 +483,7 @@ void KuickShow::showImage( const KFileItem *fi,
     if ( FileWidget::isImage( fi ) ) {
 
         if ( newWindow ) {
-            m_viewer = new ImageWindow( kdata->idata, 0L, "image window" );
+            m_viewer = new ImageWindow( kdata->idata, 0L, "ImageWindow" );
             s_viewers.append( m_viewer );
 
             connect( m_viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
@@ -601,7 +602,7 @@ void KuickShow::slotPrint()
     KFileItemListIterator it( *items );
 
     // don't show the image, just print
-    ImageWindow *iw = new ImageWindow( 0, this, "printing image" );
+    ImageWindow *iw = new ImageWindow( 0, this, "PrintingImage" );
     KFileItem *item;
     while ( (item = it.current()) ) {
         if (FileWidget::isImage( item ) && iw->showNextImage( item->url().path()))
@@ -1019,9 +1020,11 @@ void KuickShow::saveSettings()
 void KuickShow::messageCantLoadImage( const QString& filename )
 {
     m_viewer->clearFocus();
-    QString tmp = i18n("Unable to load the image %1.\n"
-                       "Perhaps the file format is unsupported or "
-                       "your Imlib is not installed properly.").arg(filename);
+    QString tmp = i18n("<html><pP>Unable to load the image %1.</p>"
+                       "<p>Perhaps the file format is unsupported.</p><p>Supported Types:</p><ul><li>").arg(filename);
+		       
+    tmp.append(KImageIO::mimeTypes(KImageIO::Reading).join("</li><li>"));
+    tmp.append("</li></ul>");
     KMessageBox::sorry( m_viewer, tmp, i18n("Image Error") );
 }
 
