@@ -177,7 +177,7 @@ off.</para>
 <term><guilabel>Preload next image</guilabel></term>
 <listitem>
 <para>If this is selected, &kuickshow; will load the next image in the
-directory, while you are looking at the current one. This reduces the
+folder, while you are looking at the current one. This reduces the
 delay when you select the next image, and is especially useful for
 slide shows.</para>
 </listitem>
@@ -437,7 +437,7 @@ confirmation</entry>
 <tbody>
 <row>
 <entry><keycap>Return</keycap></entry>
-<entry>Enters a directory, or opens an image window, depending on the
+<entry>Enters a folder, or opens an image window, depending on the
 item selected.</entry>
 </row>
 <row>
@@ -450,11 +450,11 @@ item selected.</entry>
 </row>
 <row>
 <entry><keycap>Home</keycap></entry>
-<entry>Selects the first file or directory</entry>
+<entry>Selects the first file or folder</entry>
 </row>
 <row>
 <entry><keycap>End</keycap></entry>
-<entry>Selects the last file or directory</entry>
+<entry>Selects the last file or folder</entry>
 </row>
 <row>
 <entry><keycap>Space</keycap></entry>
@@ -469,7 +469,7 @@ file will be selected.</entry>
 <row>
 <entry><keycombo
 action="simul">&Ctrl;<keycap>G</keycap></keycombo></entry>
-<entry><quote>Go to</quote> &mdash; lets you enter a directory to go
+<entry><quote>Go to</quote> &mdash; lets you enter a folder to go
 to.</entry>
 </row>
 <row>
@@ -508,7 +508,7 @@ action="simul">&Ctrl;<keycap>Q</keycap></keycombo></entry>
 <tbody>
 <row>
 <entry><mousebutton>Left</mousebutton> click</entry>
-<entry>Enter a directory, or select an image window.</entry>
+<entry>Enter a folder, or select an image window.</entry>
 </row>
 <row>
 <entry><mousebutton>Right</mousebutton> click</entry>
@@ -517,7 +517,7 @@ action="simul">&Ctrl;<keycap>Q</keycap></keycombo></entry>
 <row>
 <entry>Double click</entry>
 <entry>Loads the selected image or enters the selected
-directory</entry>
+folder</entry>
 </row>
 </tbody>
 </tgroup>
