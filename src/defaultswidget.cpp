@@ -268,12 +268,16 @@ void DefaultsWidget::enableWidgets( bool enable )
     gbGeometry->setEnabled( enable );
     gbAdjust->setEnabled( enable );
     gbPreview->setEnabled( enable );
+    updatePreview();
 }
 
 
 const int DefaultsWidget::currentRotation()
 {
-    return comboRotate->currentItem() * 90;
+    if ( cbEnableMods->isChecked() )
+        return comboRotate->currentItem() * 90;
+    else 
+        return ROT_0;
 }
 
 #include "defaultswidget.moc"
