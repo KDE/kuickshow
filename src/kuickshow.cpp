@@ -145,7 +145,7 @@ KuickShow::KuickShow( const char *name )
             QString name = mime->name();
 #if KDE_VERSION >= 310
             if ( name == "application/octet-stream" ) // unknown -> stat()
-                name = KIO::NetAccess::mimetype( url );
+                name = KIO::NetAccess::mimetype( url, this );
 #endif
 
             if ( name.startsWith( "image/" ) )
@@ -466,8 +466,8 @@ void KuickShow::slotSelected( const KFileItem *item )
 }
 
 // downloads item if necessary
-void KuickShow::showFileItem( ImageWindow */*view*/,
-                              const KFileItem */*item*/ )
+void KuickShow::showFileItem( ImageWindow * /*view*/,
+                              const KFileItem * /*item*/ )
 {
 
 }
@@ -1141,7 +1141,7 @@ void KuickShow::toggleBrowser()
         fileWidget->resize( size() ); // ### somehow fileWidget isn't resized!?
         show();
         raise();
-        KWin::setActiveWindow( winId() ); // ### this should not be necessary
+        KWin::activateWindow( winId() ); // ### this should not be necessary
 //         setFocus();
     }
     else if ( !s_viewers.isEmpty() )

@@ -739,7 +739,7 @@ void ImageWindow::dropEvent( QDropEvent *e )
     if ( KURLDrag::decode( e, list ) && !list.isEmpty()) {
         QString tmpFile;
         const KURL &url = list.first();
-        if (KIO::NetAccess::download( url, tmpFile ) )
+        if (KIO::NetAccess::download( url, tmpFile, this ) )
         {
 	    loadImage( tmpFile );
 	    KIO::NetAccess::removeTempFile( tmpFile );
@@ -825,11 +825,10 @@ void ImageWindow::saveImage()
     keepSize->setChecked( true );
     KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this, "filedialog", true
 #if KDE_VERSION >= 310
-                     ,keepSize );
-
-#else
-                    );
+                     ,keepSize
 #endif
+                   );
+
     QString selection = m_saveDirectory.isEmpty() ?
                             m_kuim->filename() :
                             KURL::fromPathOrURL( m_kuim->filename() ).fileName();
