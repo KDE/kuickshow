@@ -26,7 +26,6 @@
 bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
 {
     KPrinter printer;
-    printer.setFullPage( true );
     printer.setDocName( imageWin.filename() );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
