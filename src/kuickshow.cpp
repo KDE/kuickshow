@@ -197,7 +197,7 @@ void KuickShow::initGUI( const KURL& startDir )
     m_accel = coll->accel();
 
     KToolBar *tBar = toolBar();
-    tBar->setText( i18n( "&Main Toolbar" ) );
+    tBar->setText( i18n( "Main Toolbar" ) );
 
     coll->action("up")->plug( tBar );
     coll->action("back")->plug( tBar );
@@ -226,7 +226,7 @@ void KuickShow::initGUI( const KURL& startDir )
                                          false );
     tBar->insertButton( "help", 100,
                         SIGNAL( clicked() ), this, SLOT( appHelpActivated() ));
-    tBar->setDelayedPopup( 100, helpMenu->menu() );
+    tBar->setDelayedPopup( 100, helpMenu->menu(), true );
 
 
     KStatusBar* sBar = statusBar();
