@@ -1046,10 +1046,10 @@ void KuickShow::initImlib()
         id = Imlib_init_with_params( x11Display(), &par );
 
         if ( !id ) {
-            QString tmp = i18n("Can't initialize \"Imlib\".\n"
-                               "Start kuickshow on the command line "
+            QString tmp = i18n("Unable to initialize \"Imlib\".\n"
+                               "Start kuickshow from the command line "
                                "and look for error messages.\n"
-                               "I will quit now.");
+                               "The program will now quit.");
             KMessageBox::error( this, tmp, i18n("Fatal Imlib Error") );
 
             ::exit(1);
