@@ -32,10 +32,7 @@ FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
       m_validCompletion( false ),
       m_fileFinder( 0L )
 {
-
-#if KDE_VERSION >= 220
     setEnableDirHighlighting( true );
-#endif
 
     readConfig( KGlobal::config(), "Filebrowser" );
     setView( KFile::Default );
@@ -105,7 +102,8 @@ void FileWidget::reloadConfiguration()
     }
 }
 
-bool FileWidget::hasFiles() const {
+bool FileWidget::hasFiles() const 
+{
     return (numFiles() > 0);
 }
 
@@ -199,7 +197,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 		return true;
 	    }
         }
-        
+
         k->ignore();
     }
     return KDirOperator::eventFilter( o, e );
@@ -381,11 +379,7 @@ void FileWidget::slotReturnPressed( const QString& t )
 void FileWidget::setCurrentItem( const KFileItem *item )
 {
     if ( item ) {
-#if KDE_VERSION < 290
-	fileView()->setCurrentItem( QString::null, item );
-#else
-    fileView()->setCurrentItem( item );
-#endif
+        fileView()->setCurrentItem( item );
 	fileView()->ensureItemVisible( item );
     }
 }
