@@ -34,13 +34,13 @@ else
   else
     dummy=`echo "$ac_imlib_config" | grep '/imlib-config'`
     if test -z "$dummy"; then
-      AC_MSG_RESULT(no, get Imlib from e.g. http://www.go.dlr.de/fresh/linux/src/imlib-1.9.10.tar.gz)
+      AC_MSG_RESULT(no, get Imlib from e.g. http://freshmeat.net/redir/imlib/4385/url_tgz/imlib-1.9.10.tar.gz)
       ac_imlib_config=""
     else
       LIB_IMLIB=`$ac_imlib_config --libs`
       imlib_config=`echo "$LIB_IMLIB" | grep lImlib`
       if test -z "$imlib_config"; then
-        AC_MSG_RESULT(no, get Imlib from e.g. http://www.go.dlr.de/fresh/linux/src/imlib-1.9.10.tar.gz)
+        AC_MSG_RESULT(no, get Imlib from e.g. http://freshmeat.net/redir/imlib/4385/url_tgz/imlib-1.9.10.tar.gz)
         ac_imlib_config=""
       else
         AC_SUBST(LIB_IMLIB)
@@ -57,6 +57,6 @@ dnl Check if Imlib is installed properly
 KDE_FIND_IMLIB_CONFIG
  
 if test -z "$ac_imlib_config"; then
-dnl  AC_MSG_ERROR([You need to install Imlib 1.x, e.g. http://www.go.dlr.de/fresh/linux/src/imlib-1.9.10.tar.gz if your distributor doesn't have a package])
+dnl  AC_MSG_ERROR([You need to install Imlib 1.x, e.g. http://freshmeat.net/redir/imlib/4385/url_tgz/imlib-1.9.10.tar.gz if your distributor doesn't have a package])
   DO_NOT_COMPILE="$DO_NOT_COMPILE kuickshow"
 fi
