@@ -446,6 +446,11 @@ void FileWidget::slotFinishedLoading()
     emit finished();
 }
 
+QSize FileWidget::sizeHint() const
+{
+  return QSize( 300, 300 );
+}
+   
 void FileWidget::resizeEvent( QResizeEvent *e )
 {
     KDirOperator::resizeEvent( e );

@@ -70,6 +70,7 @@ protected:
     virtual bool eventFilter( QObject *o, QEvent * );
     virtual void resizeEvent( QResizeEvent * );
     virtual void activatedMenu( const KFileItem *, const QPoint& );
+    virtual QSize sizeHint() const;
 
 private slots:
     void slotReturnPressed( const QString& text );

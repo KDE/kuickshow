@@ -193,6 +193,7 @@ KuickShow::~KuickShow()
     delete kdata;
 }
 
+// TODO convert to use xmlui file
 void KuickShow::initGUI( const KURL& startDir )
 {
     fileWidget = new FileWidget( startDir, this, "MainWidget" );
@@ -370,7 +371,8 @@ void KuickShow::initGUI( const KURL& startDir )
     dirSelected( fileWidget->url() );
 
     setCentralWidget( fileWidget );
-    setAutoSaveSettings();
+
+    setupGUI( KMainWindow::Save );
 
     coll->action( "reload" )->setShortcut( KStdAccel::reload() );
     coll->action( "short view" )->setShortcut(Key_F6);
@@ -379,11 +381,6 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action( "mkdir" )->setShortcut(Key_F10);
     coll->action( "preview" )->setShortcut(Key_F11);
     coll->action( "separate dirs" )->setShortcut(Key_F12);
-
-    // ### somehow the filewidget isn't resized at all sometimes, when initGUI
-    // is called lazily, not from this c'tor. (just a tiny little widget in
-    // the upper left corner of the mainwindow. Work around that.
-    fileWidget->resize( size() );
 }
 
 void KuickShow::slotSetURL( const KURL& url )
