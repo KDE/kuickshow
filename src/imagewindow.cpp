@@ -112,6 +112,7 @@ void ImageWindow::init()
     ignore_resize_hack = false;
 
     xpos = 0, ypos = 0;
+    m_width = width(); m_height = height();
     m_numHeads = ScreenCount( x11Display() );
 
     setAcceptDrops( true );
@@ -721,6 +722,10 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 {
     ImlibWidget::resizeEvent( e );
 
+    // to save a lot of calls in scrollImage() for example
+    m_width  = width();
+    m_height = height();
+
     if ( ignore_resize_hack ) {
 	ignore_resize_hack = false;
 	
@@ -734,10 +739,6 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 	    return;
 	}
     }
-
-    // to save a lot of calls in scrollImage() for example
-    m_width  = width();
-    m_height = height();
 
     centerImage();
 }
