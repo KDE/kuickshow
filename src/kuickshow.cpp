@@ -790,6 +790,10 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                         QFileInfo fi( m_viewer->filename() );
                         start.setPath( fi.dirPath( true ) );
                         initGUI( start );
+                        // ### somehow the filewidget isn't resized at all here
+                        // (just a tiny little widget in the upper left corner
+                        // of the mainwindow. Work around that.
+                        fileWidget->resize( size() );
                     }
                     show();
                     raise();
