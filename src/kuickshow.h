@@ -13,6 +13,7 @@
 #define KUICKSHOW_H
 
 #include <qevent.h>
+#include <qguardedptr.h>
 #include <qstring.h>
 #include <qvaluelist.h>
 
@@ -20,6 +21,8 @@
 #include <kurl.h>
 
 #include <Imlib.h>
+
+#include "aboutwidget.h"
 
 class FileWidget;
 class ImageWindow;
@@ -120,6 +123,7 @@ private:
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;
     KAction             *m_toggleBrowserAction;
+    QGuardedPtr<AboutWidget> aboutWidget;
 
 };
 

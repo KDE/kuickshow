@@ -873,7 +873,9 @@ void KuickShow::slotConfigClosed()
 
 void KuickShow::about()
 {
-    AboutWidget *aboutWidget = new AboutWidget( 0L, "about" );
+    if ( !aboutWidget )
+        aboutWidget = new AboutWidget( 0L, "about" );
+
     aboutWidget->adjustSize();
     KDialog::centerOnScreen( aboutWidget );
     aboutWidget->show();
@@ -1081,10 +1083,10 @@ void KuickShow::slotOpenURL()
         for ( ; it != urls.end(); ++it )
         {
             KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
-            if ( item.isDir() )
-                fileWidget->setURL( *it, true );
-            else
+            if ( FileWidget::isImage( &item ) )
                 showImage( &item, true );
+            else
+                fileWidget->setURL( *it, true );
         }
     }
 }
