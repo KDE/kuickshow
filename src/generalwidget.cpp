@@ -63,7 +63,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   ////////////////////////////////////////////////////////////////////////
 
-  QVGroupBox *gbox2 = new QVGroupBox( i18n("Quality / Speed"),
+  QVGroupBox *gbox2 = new QVGroupBox( i18n("Quality/Speed"),
 				     this, "qualitybox" );
   layout->addWidget( gbox2 );
   layout->addStretch();
