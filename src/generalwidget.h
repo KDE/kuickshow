@@ -41,7 +41,7 @@ public:
     void 	applySettings( KuickData& data );
 
 private:
-    QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload;
+    QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload, *cbLastdir;
     QCheckBox   *cbFastRemap, *cbFastRender;
     QCheckBox 	*cbDither16bit, *cbDither8bit, *cbOwnPalette;
 

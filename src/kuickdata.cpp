@@ -58,6 +58,8 @@ KuickData::KuickData()
   maxCachedImages = 4;
   backgroundColor = Qt::black;
 
+  startInLastDir = true;
+
   idata = new ImData;
 }
 
@@ -108,6 +110,8 @@ void KuickData::load()
   maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages",
                                               def.maxCachedImages );
   backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
+
+  startInLastDir = kc->readBoolEntry( "StartInLastDir", true);
 
   idata->load( kc );
 
@@ -168,6 +172,8 @@ void KuickData::save()
 
   kc->writeEntry( "MaxCachedImages", maxCachedImages );
   kc->writeEntry( "BackgroundColor", backgroundColor );
+
+  kc->writeEntry( "StartInLastDir", startInLastDir );
 
   idata->save( kc );
 

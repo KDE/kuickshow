@@ -42,6 +42,9 @@ class KConfig;
 class KToggleAction;
 class AboutWidget;
 
+class KURL;
+class KURLComboBox;
+
 class DelayedRepeatEvent
 {
 public:
@@ -108,6 +111,8 @@ private slots:
     void		slotReplayEvent();
     void                slotReplayAdvance();
     void                slotOpenURL();
+    void		slotSetURL( const KURL& );
+    void		slotURLComboReturnPressed();
 
 private:
     void 		initGUI( const KURL& startDir );
@@ -123,6 +128,7 @@ private:
     uint                m_slideshowCycle;
 
     FileWidget   	*fileWidget;
+    KURLComboBox	*cmbPath;
     KuickConfigDialog 	*dialog;
     ImlibData           *id;
     ImageWindow 	*m_viewer;

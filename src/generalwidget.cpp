@@ -55,6 +55,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   cbFullscreen = new QCheckBox( i18n("Fullscreen mode"), this, "boscreen" );
 
   cbPreload = new QCheckBox( i18n("Preload next image"), this, "preload");
+  cbLastdir = new QCheckBox( i18n("Remember last directory"), this, "restart_lastdir");
 
   QGridLayout *gridLayout = new QGridLayout( 3, 2 );
   gridLayout->setSpacing( KDialog::spacingHint() );
@@ -77,6 +78,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   layout->addWidget( cbFullscreen );
   layout->addWidget( cbPreload );
+  layout->addWidget( cbLastdir );
   layout->addLayout( gridLayout );
 
   ////////////////////////////////////////////////////////////////////////
@@ -127,6 +129,7 @@ void GeneralWidget::loadSettings( const KuickData& data )
     delaySpinBox->setValue( data.slideDelay / 100 );
     cbFullscreen->setChecked( data.fullScreen );
     cbPreload->setChecked( data.preloadImage );
+    cbLastdir->setChecked( data.startInLastDir );
     cbFastRemap->setChecked( idata->fastRemap );
     cbOwnPalette->setChecked( idata->ownPalette );
     cbFastRender->setChecked( idata->fastRender );
@@ -146,6 +149,7 @@ void GeneralWidget::applySettings( KuickData& data)
     data.slideDelay 	  = (delaySpinBox->value() * 100);
     data.fullScreen  	  = cbFullscreen->isChecked();
     data.preloadImage	  = cbPreload->isChecked();
+    data.startInLastDir   = cbLastdir->isChecked();
 
     idata->fastRemap 	  = cbFastRemap->isChecked();
     idata->ownPalette 	  = cbOwnPalette->isChecked();

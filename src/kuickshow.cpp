@@ -24,6 +24,7 @@
 #include <qdialog.h>
 #include <qglobal.h>
 #include <qkeycode.h>
+#include <qlayout.h>
 #include <qsize.h>
 #include <qstring.h>
 
@@ -52,6 +53,8 @@
 #include <kstandarddirs.h>
 #include <kstartupinfo.h>
 #include <ktoolbar.h>
+#include <kurlcombobox.h>
+#include <kurlcompletion.h>
 #include <kurldrag.h>
 #include <kwin.h>
 
@@ -159,8 +162,10 @@ KuickShow::KuickShow( const char *name )
       // else // we don't handle local non-images
   }
 
-  if ( args->isSet( "lastdir" ))
+  if ( kdata->startInLastDir || args->isSet( "lastdir" )) {
+      kc->setGroup( "SessionSettings");
       startDir = kc->readEntry( "CurrentDirectory", startDir.url() );
+  }
 
   if ( s_viewers.isEmpty() || isDir ) {
       initGUI( startDir );
@@ -176,8 +181,7 @@ KuickShow::KuickShow( const char *name )
 
 KuickShow::~KuickShow()
 {
-    if ( fileWidget )
-	saveSettings();
+    saveSettings();
 
     if ( m_viewer )
 	m_viewer->close( true );
@@ -340,6 +344,25 @@ void KuickShow::initGUI( const KURL& startDir )
 
     tBar->show();
 
+    // Address box in address tool bar
+    KToolBar *addressToolBar = toolBar( "address_bar" );
+    const int ID_ADDRESSBAR = 1;
+
+    cmbPath = new KURLComboBox( KURLComboBox::Directories,
+	true, addressToolBar, "address_combo_box" );
+    KURLCompletion *cmpl = new KURLCompletion( KURLCompletion::DirCompletion );
+    cmbPath->setCompletionObject( cmpl );
+    cmbPath->setAutoDeleteCompletionObject( true );
+
+    addressToolBar->insertWidget( ID_ADDRESSBAR, 1, cmbPath);
+    addressToolBar->setItemAutoSized( ID_ADDRESSBAR );
+
+    connect( cmbPath, SIGNAL( urlActivated( const KURL& )),
+    	this, SLOT( slotSetURL( const KURL& )));
+    connect( cmbPath, SIGNAL( returnPressed()),
+	this, SLOT( slotURLComboReturnPressed()));
+
+
     fileWidget->initActions();
     fileWidget->clearHistory();
     dirSelected( fileWidget->url() );
@@ -361,6 +384,16 @@ void KuickShow::initGUI( const KURL& startDir )
     fileWidget->resize( size() );
 }
 
+void KuickShow::slotSetURL( const KURL& url )
+{
+    fileWidget->setURL( url, true );
+}
+
+void KuickShow::slotURLComboReturnPressed()
+{
+    KURL where = KURL::fromPathOrURL( cmbPath->currentText() );
+    slotSetURL( where );
+}
 
 void KuickShow::viewerDeleted()
 {
@@ -370,8 +403,7 @@ void KuickShow::viewerDeleted()
         m_viewer = 0L;
 
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
-	if ( fileWidget )
-	    saveSettings();
+        saveSettings();
 
 	::exit(0);
     }
@@ -424,6 +456,7 @@ void KuickShow::dirSelected( const KURL& url )
     else
 	setCaption( url.prettyURL() );
 
+    cmbPath->setURL( url );
     statusBar()->changeItem( url.prettyURL(), URL_ITEM );
 }
 
@@ -972,10 +1005,11 @@ void KuickShow::saveSettings()
 
     kc->setGroup("SessionSettings");
     kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
-    kc->writeEntry( "CurrentDirectory", fileWidget->url().url() );
 
-    if ( fileWidget )
+    if ( fileWidget ) {
+	kc->writeEntry( "CurrentDirectory", fileWidget->url().url() );
 	fileWidget->writeConfig( kc, "Filebrowser" );
+    }
 
     kc->sync();
 }

@@ -54,6 +54,8 @@ public:
     int 	scrollSteps;
     float	zoomSteps;
 
+    bool startInLastDir      :1;
+
     bool 	preloadImage     :1;
     bool 	autoRotation     :1;
     bool 	fullScreen       :1;
@@ -71,6 +73,7 @@ public:
     Rotation 	rotation;
 
     QColor      backgroundColor;
+
 
 };
 
