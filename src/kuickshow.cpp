@@ -255,7 +255,9 @@ void KuickShow::viewerDeleted()
 
     else if ( haveBrowser() ) {
 	setActiveWindow();
-	fileWidget->setFocus();
+        // This setFocus() call causes problems in the combiview (always the
+        // directory view on the left gets the focus, which is not desired)
+        // fileWidget->setFocus();
     }
 }
 
@@ -522,22 +524,22 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	if ( k ) { // keypress
 	    ret = true;
 	    int key = k->key();
-            
+
 	    // Key_Shift shouldn't load the browser in nobrowser mode, it
 	    // is used for zooming in the imagewindow
 	    if ( !fileWidget )
             {
-                if ( key != Key_Escape && key != Key_Shift ) 
+                if ( key != Key_Escape && key != Key_Shift )
                 {
                     KURL start;
                     QFileInfo fi( m_viewer->filename() );
                     start.setPath( fi.dirPath( true ) );
                     initGUI( start );
 
-                    // the fileBrowser will list the start-directory 
-                    // asynchronously so we can't immediately continue. There 
-                    // is no current-item and no next-item (actually no item 
-                    // at all). So we tell the browser the initial 
+                    // the fileBrowser will list the start-directory
+                    // asynchronously so we can't immediately continue. There
+                    // is no current-item and no next-item (actually no item
+                    // at all). So we tell the browser the initial
                     // current-item and wait for it to tell us when it's ready.
                     // Then we will replay this KeyEvent.
                     fileWidget->setInitialItem( fi.fileName() );
@@ -546,12 +548,12 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                              SLOT( slotReplayEvent() ));
                     return true;
                 }
-                
+
                 return KMainWindow::eventFilter( o, e );
 	    }
 
             // we definitely have a filewidget here!
-            
+
  	    // FIXME: make all this stuff via KStdAccel and KAccel ->slots
 
             KKey kkey( key );
@@ -862,7 +864,7 @@ void KuickShow::toggleBrowser( bool show )
         KuickShow::show();
         raise();
         KWin::setActiveWindow( winId() ); // ### this should not be necessary
-        setFocus();
+//         setFocus();
     }
     else
         hide();
