@@ -28,7 +28,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
 
     m_cycles = new KIntNumInput( m_delayTime, 1, this );
     m_cycles->setLabel( i18n("&Iterations (0 = infinite):") );
-    m_cycles->setSpecialValueText( i18n("inifinite") );
+    m_cycles->setSpecialValueText( i18n("infinite") );
     m_cycles->setRange( 0, 500 );
 
     layout->addWidget( m_fullScreen );
