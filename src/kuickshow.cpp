@@ -25,7 +25,7 @@
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <kcursor.h>
-#include <kfileviewitem.h>
+#include "kfileviewitem.h"
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <klocale.h>
