@@ -833,7 +833,7 @@ void ImageWindow::saveImage()
 {
     if ( !m_kuim )
         return;
-    
+
     KuickData tmp;
     QString file = KFileDialog::getSaveFileName( m_kuim->filename(),
                                                  tmp.fileFilter, this );
@@ -873,6 +873,9 @@ void ImageWindow::toggleFullscreen()
 
 void ImageWindow::loaded( KuickImage *kuim )
 {
+    if ( kdata->autoRotation )
+        autoRotate( kuim );
+    
     if ( !kdata->isModsEnabled ) {
 	kuim->restoreOriginalSize();
     }
@@ -894,10 +897,10 @@ void ImageWindow::autoScale( KuickImage *kuim )
         qSwap( newW, newH );
 
     bool doIt = false;
-    
-    if ( kdata->upScale ) 
+
+    if ( kdata->upScale )
     {
-	if ( (newW < mw) && (newH < mh) ) 
+	if ( (newW < mw) && (newH < mh) )
         {
             doIt = true;
 
@@ -914,14 +917,14 @@ void ImageWindow::autoScale( KuickImage *kuim )
 	}
     }
 
-    if ( kdata->downScale ) 
+    if ( kdata->downScale )
     {
 	// eventually set width and height to the best/max possible screen size
-	if ( (newW > mw) || (newH > mh) ) 
+	if ( (newW > mw) || (newH > mh) )
         {
             doIt = true;
 
-	    if ( newW > mw ) 
+	    if ( newW > mw )
             {
 		float ratio = (float) newW / (float) newH;
 		newW = mw;
@@ -967,7 +970,7 @@ QSize ImageWindow::maxImageSize() const
     if ( myIsFullscreen || initialFullscreen ) {
         int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
 	return QApplication::desktop()->screenGeometry(scnum).size();
-    } 
+    }
     else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
     }

@@ -142,34 +142,7 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
 	return 0L;
     }
 
-    if ( kdata->autoRotation )
-    {
-        KFileMetaInfo metadatas( filename );
-        KFileMetaInfoItem metaitem = metadatas.item("Orientation");
-        if ( metaitem.isValid() )
-        {
-#if QT_VERSION >= 0x030100
-            if ( !metaitem.value().isNull() )
-#endif
-            {
-                switch ( metaitem.value().toInt() )
-                {
-                    case 1:
-                    default:
-                        kuim->rotateAbs( ROT_0 );
-                        break;
-                    case 6:
-                        kuim->rotateAbs( ROT_90 );
-                        break;
-                    case 8:
-                        kuim->rotateAbs( ROT_270 );
-                        break;
-                }
-            }
-        }
-    }
-
-    loaded( kuim ); // maybe upscale/downscale in subclasses
+    loaded( kuim ); // maybe upscale/downscale/rotate in subclasses
 
     return kuim;
 }
@@ -270,6 +243,33 @@ void ImlibWidget::showImageOriginalSize()
     autoUpdate( true );
 
     showImage();
+}
+
+void ImlibWidget::autoRotate( KuickImage *kuim )
+{
+    KFileMetaInfo metadatas( kuim->filename() );
+    KFileMetaInfoItem metaitem = metadatas.item("Orientation");
+    if ( metaitem.isValid() )
+    {
+#if QT_VERSION >= 0x030100
+        if ( !metaitem.value().isNull() )
+#endif
+        {
+            switch ( metaitem.value().toInt() )
+            {
+                case 1:
+                default:
+                    kuim->rotateAbs( ROT_0 );
+                    break;
+                case 6:
+                    kuim->rotateAbs( ROT_90 );
+                    break;
+                case 8:
+                    kuim->rotateAbs( ROT_270 );
+                    break;
+            }
+        }
+    }
 }
 
 

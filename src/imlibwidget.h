@@ -163,6 +163,7 @@ public:
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
+  void          autoRotate( KuickImage *kuim );
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
