@@ -80,13 +80,13 @@ void ImageWindow::init()
 {
 //     KCursor::setAutoHideCursor( this, true, true );
 //     KCursor::setHideCursorDelay( 1500 );
-    
+
     // give the image window a different WM_CLASS
     XClassHint hint;
     hint.res_name = const_cast<char*>( kapp->name() );
     hint.res_class = const_cast<char*>( "ImageWindow" );
     XSetClassHint( x11Display(), winId(), &hint );
-    
+
     viewerMenu = 0L;
     gammaMenu = 0L;
     brightnessMenu = 0L;
@@ -575,13 +575,6 @@ void ImageWindow::contextMenuEvent( QContextMenuEvent *e )
 
     viewerMenu->popup( e->globalPos() );
 }
-
-void ImageWindow::mouseDoubleClickEvent( QMouseEvent *e )
-{
-    if ( e->button() == LeftButton )
-	close( true );
-}
-
 
 void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 {

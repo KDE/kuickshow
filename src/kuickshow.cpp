@@ -774,6 +774,34 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	    }
 	} // keyPressEvent on ImageWindow
 
+
+        // doubleclick closes image window
+        // and shows browser when last window closed via doubleclick
+        else if ( e->type() == QEvent::MouseButtonDblClick )
+        {
+            QMouseEvent *ev = static_cast<QMouseEvent*>( e );
+            if ( ev->button() == LeftButton )
+            {
+                if ( s_viewers.count() == 1 )
+                {
+                    if ( !fileWidget )
+                    {
+                        KURL start;
+                        QFileInfo fi( m_viewer->filename() );
+                        start.setPath( fi.dirPath( true ) );
+                        initGUI( start );
+                    }
+                    show();
+                    raise();
+                }
+
+                window->close( true );
+
+                ev->accept();
+                ret = true;
+            }
+        }
+
     } // isA ImageWindow
 
 
