@@ -14,6 +14,7 @@
 
 #include <qvariant.h>
 
+#include <qcursor.h>
 #include <qevent.h>
 #include <qptrlist.h>
 #include <qtimer.h>
@@ -161,7 +162,7 @@ public:
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
-    
+
   /**
    * @return true if auto-rotation is not possible, e.g. because no metadata
    * about orientation is available
@@ -207,6 +208,7 @@ protected:
   ImlibColorModifier mod;
 
   QString m_filename;
+  QCursor m_oldCursor;
 
   static const int ImlibOffset;
 

@@ -79,8 +79,8 @@ ImageWindow::~ImageWindow()
 
 void ImageWindow::init()
 {
-//     KCursor::setAutoHideCursor( this, true, true );
-//     KCursor::setHideCursorDelay( 1500 );
+    KCursor::setAutoHideCursor( this, true, true );
+    KCursor::setHideCursorDelay( 1500 );
 
     // give the image window a different WM_CLASS
     XClassHint hint;
@@ -537,7 +537,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 void ImageWindow::keyReleaseEvent( QKeyEvent *e )
 {
     if ( e->state() & ShiftButton ) { // Shift-key released
-	setCursor( arrowCursor );
+        setCursor( arrowCursor );
 	if ( transWidget ) {
 	    delete transWidget;
 	    transWidget = 0L;
@@ -871,11 +871,11 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
     if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == 270 )
         qSwap( w, h );
-        
+
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
                                                    w, h );
     bool success = false;
-    
+
     if ( saveIm ) {
         Imlib_apply_modifiers_to_rgb( id, saveIm );
         success = Imlib_save_image( id, saveIm,
