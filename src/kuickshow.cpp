@@ -141,8 +141,6 @@ KuickShow::~KuickShow()
 
 void KuickShow::initGUI( const KURL& startDir )
 {
-    m_accel = new KAccel( this );
-
     fileWidget = new FileWidget( startDir, this, "MainWidget" );
     setFocusProxy( fileWidget );
 
@@ -184,12 +182,12 @@ void KuickShow::initGUI( const KURL& startDir )
     KAction *hidden = coll->action( "show hidden" );
     hidden->setIcon( "lock" );
 
-    (void) new KAction( i18n("Show Image"), 0, this,
-                        SLOT( slotShowInOtherWindow() ),
+    (void) new KAction( i18n("Show Image"), KShortcut(),
+                        this, SLOT( slotShowInOtherWindow() ),
 			coll, "kuick_showInOtherWindow" );
-    (void) new KAction( i18n("Show Image in Active Window"), 0, this,
-			SLOT( slotShowInSameWindow() ), coll,
-			"kuick_showInSameWindow" );
+    (void) new KAction( i18n("Show Image in Active Window"), KShortcut(),
+			this, SLOT( slotShowInSameWindow() ),
+			coll, "kuick_showInSameWindow" );
 
     if ( !coll->action( "properties" ) ) { // maybe KDirOperator did it already
         (void) new KAction( i18n("Properties..."), ALT+Key_Return, this,
@@ -200,10 +198,7 @@ void KuickShow::initGUI( const KURL& startDir )
 
     KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit" );
 
-    // plug in
-    for ( uint i = 0; i < coll->count(); i++ )
-	coll->action( i )->plugAccel( m_accel );
-
+    m_accel = coll->accel();
     m_accel->readSettings();
 
     KToolBar *tBar = toolBar();

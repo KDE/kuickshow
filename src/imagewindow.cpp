@@ -86,15 +86,13 @@ void ImageWindow::init()
             s_handCursor = new QCursor( arrowCursor );
     }
 
-    KAction *action = new KAction( i18n("Show next Image"), KStdAccel::next(),
-                                   this, "next_image" );
-    connect( action, SIGNAL( activated() ), SLOT( slotRequestNext() ));
-    m_actions->insert( action );
+    new KAction( i18n("Show next Image"), KStdAccel::next(),
+                 this, SLOT( slotRequestNext() ),
+                 m_actions, "next_image" );
 
-    action = new KAction( i18n("Show previous Image"), KStdAccel::prior(),
-                          this, "previous_image" );
-    connect( action, SIGNAL( activated() ), SLOT( slotRequestPrevious() ));
-    m_actions->insert( action );
+    new KAction( i18n("Show previous Image"), KStdAccel::prior(),
+                 this, SLOT( slotRequestPrevious() ),
+                 m_actions, "previous_image" );
 
 
     m_accel        = 0L;

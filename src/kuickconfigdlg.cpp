@@ -41,14 +41,10 @@ KuickConfigDialog::KuickConfigDialog( KAccel *browserAccel, QWidget *parent,
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
 
-    //m_imageKeys = imageWindow->accel()->keyDict();
-    //imageKeyChooser = new KKeyChooser( &m_imageKeys, box );
-    imageKeyChooser = new KKeyChooser( imageWindow->accel()->actions(), box );
+    imageKeyChooser = new KKeyChooser( imageWindow->accel(), box );
 
     box = addVBoxPage( i18n("Browser Shortcuts") );
-    //m_browserKeys = browserAccel->keyDict();
-    //browserKeyChooser = new KKeyChooser( &m_browserKeys, box );
-    browserKeyChooser = new KKeyChooser( browserAccel->actions(), box );
+    browserKeyChooser = new KKeyChooser( browserAccel, box );
 
     connect( this, SIGNAL( defaultClicked() ), SLOT( resetDefaults() ));
 }
@@ -63,12 +59,9 @@ void KuickConfigDialog::applyConfig()
     generalWidget->applySettings();
     defaultsWidget->applySettings();
 
-    //KAccel *accel = imageWindow->accel();
-    //accel->setKeyDict( m_imageKeys );
     imageKeyChooser->commitChanges();
     imageWindow->accel()->writeSettings();
 
-    //m_browserAccel->setKeyDict( m_browserKeys );
     browserKeyChooser->commitChanges();
     m_browserAccel->writeSettings();
 
