@@ -111,7 +111,18 @@ void FileWidget::initActions()
 void FileWidget::reloadConfiguration()
 {
     if ( kdata->fileFilter != nameFilter() ) {
-	setNameFilter( kdata->fileFilter );
+	// At first, our list must have folders
+	QStringList mimes;
+	mimes.append("inode/directory");
+
+	// Then, all the images!
+	KMimeType::List l = KMimeType::allMimeTypes();
+	for (KMimeType::List::iterator it = l.begin(); it != l.end(); ++it)
+	    if ((*it)->name().startsWith( "image/" ))
+		mimes.append( (*it)->name() );
+	
+	// Ok, show what we've done
+	setMimeFilter (mimes);
 	updateDir();
     }
 }
