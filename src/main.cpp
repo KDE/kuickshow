@@ -32,7 +32,7 @@ static KCmdLineOptions options[] =
 			   "current working directory"), 0 },
     { "d", 0, 0 }, // short option for --lastdir
     { "+[files]", I18N_NOOP("Optional image filenames/urls to show"), 0 },
-    { 0, 0, 0 }
+    KCmdLineLastOption
 };
 
 int main(int argc, char **argv)
