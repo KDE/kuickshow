@@ -1,0 +1,623 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1-Based Variant V1.0//EN" "dtd/kdex.dtd" [
+  <!ENTITY kappname "&kuickshow;">
+  <!ENTITY package "kdegraphics">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE"><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book lang="&language;">
+
+<bookinfo>
+<title>The &kuickshow; Handbook</title>
+
+<authorgroup>
+<author>
+<firstname>Carsten</firstname>
+<surname>Pfeiffer</surname>
+<affiliation>
+<address><email>pfeiffer@kde.org</email></address>
+</affiliation>
+</author>
+</authorgroup>
+
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+
+<copyright>
+<year>2001</year>
+<holder>Carsten Pfeiffer</holder>
+</copyright>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2002-01-09</date>
+<releaseinfo>1.01.00</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para>
+&kuickshow; is a comfortable image browser/viewer.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>kdegraphics</keyword>
+<keyword>kuickshow</keyword>
+<keyword>image</keyword>
+<keyword>viewer</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>
+&kuickshow; is a comfortable image browser/viewer.  It displays a
+filebrowser where you can select images which are then shown.
+</para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para>The following image formats are supported:</para>
+<itemizedlist>
+<listitem><para>jpg</para>
+</listitem>
+<listitem><para>gif</para>
+</listitem>
+<listitem><para>tiff</para>
+</listitem>
+<listitem><para>png</para>
+</listitem>
+<listitem><para>bmp</para>
+</listitem>
+<listitem><para>psd</para>
+</listitem>
+<listitem><para>xmp</para>
+</listitem>
+<listitem><para>xbm</para>
+</listitem>
+<listitem><para>eim</para>
+</listitem>
+</itemizedlist>
+
+<para>Images can be displayed either in their own window, as large as
+the image, or fullscreen.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title>Using &kuickshow;</title>
+
+<para>Using &kuickshow; is very simple.  The file browser lists files,
+which you can select with a double click, the <keycap>Return</keycap>
+key, or <guimenuitem>View</guimenuitem> in the
+<mousebutton>Right</mousebutton> click popup menu.</para>
+
+<screenshot>
+<screeninfo>Here's a screenshot of &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Screenshot</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title>More &kuickshow; features</title>
+
+<para>The options dialog makes available more possibilities:</para>
+
+<itemizedlist>
+<listitem><para>Images can be automatically shrunk to fit onto the
+screen, if they are larger.</para>
+</listitem>
+<listitem><para>You can configure whether images should show up in
+their own window, or always use the same window.</para>
+</listitem>
+<listitem><para>You can set the delay time for a slide show.</para>
+</listitem>
+<listitem><para>You can tell the browser which file types to show.</para>
+</listitem>
+<listitem><para>You can tweak the speed/quality
+ratio</para></listitem>
+</itemizedlist>
+
+<para>If you are looking for a certain file, just enter the first few
+characters of it's filename in the browser.  A small edit window will
+pop up in the bottom right corner.  When a matching file is found, it
+is highlighted. You can leave the edit window by pressing
+<keycap>Return</keycap> or &Esc;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title>The <guilabel>&kuickshow; Configuration</guilabel>
+Dialog</title>
+
+<para>The <guilabel>&kuickshow; Configuration</guilabel> dialog
+contains 4 tabs.  Two of them, <link
+linkend="general-options"><guilabel>General</guilabel></link>, <link
+linkend="modifications-options"><guilabel>Modifications</guilabel></link>
+configure the operation of &kuickshow;, and the other two,
+<guilabel>Viewer Shortcuts</guilabel> and <guilabel>Browser
+Shortcuts</guilabel> allow you to personalize the keybindings for the
+respective windows.</para>
+
+<sect1 id="general-options">
+<title><guilabel>General</guilabel> Options</title>
+
+<para>The <guilabel>General</guilabel> contains the options to
+configure and tune &kuickshow;.</para>
+
+<variablelist>
+<title><guilabel>Settings</guilabel></title>
+<varlistentry>
+<term><guilabel>Fullscreen mode</guilabel></term>
+<listitem>
+<para>If this is selected,images open in full screen mode.  If the
+image is not large enough to fill the screen, the rest of the screen
+is filled with the background color selected below.  The default is
+off.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Preload next image</guilabel></term>
+<listitem>
+<para>If this is selected, &kuickshow; will load the next image in the
+directory, while you are looking at the current one. This reduces the
+delay when you select the next image, and is especially useful for
+slide shows.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Background color</guilabel></term>
+<listitem>
+<para>Click on the colored bar to select a background color. This is
+used to fill the screen in fullscreen mode, or the window, if you have
+resized it larger than the image.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Show only files with extension:</guilabel></term>
+<listitem>
+<para>You can configure &kuickshow; to only show you some of the file
+types it is capable of.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Slideshow delay (1/10 s):</guilabel></term>
+<listitem>
+<para>The length of time between image changes when you have created a
+slideshow.  You can use the slider, type a new value into the field,
+or use the small arrows to increase or decrease the value.  The
+default is 30, which is 3 seconds.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<variablelist>
+<title><guilabel>Quality / Speed</guilabel></title>
+<varlistentry>
+<term><guilabel>Fast rendering</guilabel></term>
+<listitem><para><!-- LW: Uhm.. help? -->Render things fast.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Dither in HiColor (15/16bit) modes</guilabel></term>
+<listitem><para><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Dither in LowColor (&lt;=8bit) modes</guilabel></term>
+<listitem><para><!-- And here --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Use own color palette</guilabel></term>
+<listitem><para><!-- and this one --></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Fast palette remapping</guilabel></term>
+<listitem>
+<para><!-- and this one --></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Maximum cache size (MB):</guilabel></term>
+<listitem>
+<para><!-- and another --></para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title>The <guilabel>Modifications</guilabel> Tab</title>
+
+<para>Not yet documented</para>
+
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title>Command Reference</title>
+
+<sect1 id="keybindings">
+<title>The Image Window</title>
+
+<para>All the keybindings are configurable from the <link
+linkend="configuration-dialog">Configuration Dialog</link>.</para>
+
+<table>
+<title>Image Window Keyboard Shortcuts</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Key</entry>
+<entry>Action</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><keycap>Page Down</keycap></entry>
+<entry>Load the next image</entry>
+</row>
+<row>
+<entry><keycap>Page Up</keycap></entry>
+<entry>Load the previous image</entry>
+</row>
+<row>
+<entry><keycap>Home</keycap></entry>
+<entry>Loads the first image</entry>
+</row>
+<row>
+<entry><keycap>+</keycap></entry>
+<entry>Zooms into the image</entry>
+</row>
+<row>
+<entry><keycap>-</keycap></entry>
+<entry>Zooms out of the image</entry>
+</row>
+<row>
+<entry><keycap>*</keycap></entry>
+<entry>Flips the image horizontally</entry>
+</row>
+<row>
+<entry><keycap>/</keycap></entry>
+<entry>Flips the image vertically</entry>
+</row>
+<row>
+<entry><keycap>7</keycap></entry>
+<entry>Rotates 270&deg; clockwise (which is also 90&deg;
+counter-clockwise)</entry>
+</row>
+<row>
+<entry><keycap>9</keycap></entry>
+<entry>Rotates 90&deg; clockwise</entry>
+</row>
+<row>
+<entry><keycap>Arrow</keycap> keys</entry>
+<entry>Move the image (or rather, you, the viewer,) if it is larger
+than the screen</entry>
+</row>
+<row>
+<entry><keycap>Return</keycap></entry>
+<entry>Toggles between fullscreen and window mode</entry>
+</row>
+<row>
+<entry><keycap>Space</keycap></entry>
+<entry>Toggles the display of the browser</entry>
+</row>
+<row>
+<entry>&Esc;</entry>
+<entry>Closes the image window.  This will close &kuickshow; entirely,
+if you don't have a browser window open.</entry>
+</row>
+<row>
+<entry><keycap>B</keycap>/<keycombo action="simul">&Shift;<keycap>B</keycap></keycombo></entry>
+<entry>Lightens/darkens the image</entry>
+</row>
+<row>
+<entry><keycap>C</keycap>/<keycombo action="simul">&Shift;<keycap>C</keycap></keycombo></entry>
+<entry>Adds/Removes contrast</entry>
+</row>
+<row>
+<entry><keycap>G</keycap>/<keycombo action="simul">&Shift;<keycap>G</keycap></keycombo></entry>
+<entry>More/less <firstterm>gamma</firstterm></entry>
+</row>
+<row>
+<entry><keycap>O</keycap></entry>
+<entry>Shows the image in original size.  This is only useful when you
+have enabled automatic scaling.</entry>
+</row>
+<row>
+<entry><keycap>Enter</keycap></entry>
+<entry>Redisplays the image with the default settings and
+size.</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo></entry>
+<entry>Opens the <guilabel>Save As</guilabel> dialog</entry>
+</row>
+<row>
+<entry><keycap>Delete</keycap></entry>
+<entry>Deletes the current image.  You will be asked to confirm the
+request.</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Shift;<keycap>Delete</keycap></keycombo></entry>
+<entry>Deletes the current image without asking for
+confirmation</entry>
+</row>
+<row>
+<entry><keycap>F1</keycap></entry>
+<entry>Opens the online help (this file)</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></entry>
+<entry>Quits &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title>Image Window Mouse Usage</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Mouse button</entry>
+<entry>Action</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><mousebutton>Right</mousebutton> click</entry>
+<entry>Opens the context menu, with several options</entry>
+</row>
+<row>
+<entry><mousebutton>Left</mousebutton> drag</entry>
+<entry>Moves the image, if it doesn't fit in the window.</entry>
+</row>
+<row>
+<entry><keycombo action="simul">&Shift;<mousebutton>Left</mousebutton>
+</keycombo> drag</entry>
+<entry>Marks a rectangle you can zoom into.</entry>
+</row>
+<row>
+<entry><mousebutton>Left</mousebutton> double click</entry>
+<entry>Closes the current image</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title>The Browser Window</title>
+
+<table>
+<title>Browser Window Keybindings</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Keybinding</entry>
+<entry>Action</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><keycap>Return</keycap></entry>
+<entry>Enters a directory, or opens an image window, depending on the
+item selected.</entry>
+</row>
+<row>
+<entry><keycap>Page Down</keycap></entry>
+<entry>Advances one page in the list of files</entry>
+</row>
+<row>
+<entry><keycap>Page Up</keycap></entry>
+<entry>Moves back up a page in the list of files</entry>
+</row>
+<row>
+<entry><keycap>Home</keycap></entry>
+<entry>Selects the first file or directory</entry>
+</row>
+<row>
+<entry><keycap>End</keycap></entry>
+<entry>Selects the last file or directory</entry>
+</row>
+<row>
+<entry><keycap>Space</keycap></entry>
+<entry>Toggles showing the browser, if an image window is open</entry>
+</row>
+<row>
+<entry><keycap>any alpha-numeric character</keycap></entry>
+<entry>Opens the edit field used for <quote>completion</quote>.  Enter
+the first characters of a filename to search for, and if found, the
+file will be selected.</entry>
+</row>
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>G</keycap></keycombo></entry>
+<entry><quote>Go to</quote> &mdash; lets you enter a directory to go
+to.</entry>
+</row>
+<row>
+<entry><keycap>Delete</keycap></entry>
+<entry>Deletes the current file.  You will be asked to confirm the
+action.</entry>
+</row>
+<row>
+<entry><keycombo
+action="simul">&Shift;<keycap>Delete</keycap></keycombo></entry>
+<entry>Deletes the current file without asking for
+confirmation.</entry>
+</row>
+<row>
+<entry><keycap>F1</keycap></entry>
+<entry>Opens the online help (this file)</entry>
+</row>
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>Q</keycap></keycombo></entry>
+<entry>Quits &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title>Browser Window Mouse Usage</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Mouse Usage</entry>
+<entry>Action</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry><mousebutton>Left</mousebutton> click</entry>
+<entry>Enter a directory, or select an image window.</entry>
+</row>
+<row>
+<entry><mousebutton>Right</mousebutton> click</entry>
+<entry>Opens a context menu, with several options.</entry>
+</row>
+<row>
+<entry>Double click</entry>
+<entry>Loads the selected image or enters the selected
+directory</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+
+<title>Credits and License</title>
+
+<para>
+&kuickshow;
+</para>
+<para>
+Program copyright 2001,2002 Carsten Pfeiffer <email>pfeiffer@kde.org</email>
+</para>
+
+<para>
+Documentation copyright 2001 Carsten Pfeiffer <email>pfeiffer@kde.org</email>
+</para>
+<para>Converted to DocBook &XML; and extended by Lauri Watts
+<email>lauri@kde.org</email></para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL: do not remove -->
+
+&underGPL;        	 <!-- GPL License -->
+
+</chapter>
+
+<appendix id="installation">
+<title>Installation</title>
+
+<sect1 id="getting-kuickshow">
+<title>How to obtain &kuickshow;</title>
+
+&install.intro.documentation;
+
+</sect1>
+
+<sect1 id="requirements">
+<title>Requirements</title>
+
+<para></para>
+<!--
+List any special requirements for your application here. This should include:
+.Libraries or other software that is not included in kdesupport,
+kdelibs, or kdebase.
+.Hardware requirements like amount of RAM, disk space, graphics card
+capabilities, screen resolution, special expansion cards, etc.
+.Operating systems the app will run on. If your app is designed only for a
+specific OS, (you wrote a graphical LILO configurator for example) put this
+information here.
+
+
+<para>
+In order to successfully use &kuickshow;, you need &kde; 1.1. Foobar.lib is
+required in order to support the advanced &kuickshow; features. &kuickshow; uses
+about 5 megs of memory to run, but this may vary depending on your
+platform and configuration.
+</para>
+
+<para>
+All required libraries as well as &kuickshow; itself can be found
+on <ulink url="ftp://ftp.kapp.org">The &kuickshow; home page</ulink>.
+</para>
+-->
+
+<!-- For a list of updates, you may refer to the application web site
+or the ChangeLog file, or ... 
+<para>
+You can find a list of changes at <ulink
+url="http://apps.kde.org/kapp">http://apps.kde.org/kapp</ulink>.
+</para>-->
+</sect1>
+
+<sect1 id="compilation">
+<title>Compilation and Installation</title>
+
+&install.compile.documentation;
+
+</sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+
