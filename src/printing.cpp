@@ -163,6 +163,7 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     grid->setColStretch( 2, 10 );
 
     m_scale = new QRadioButton( i18n("Print e&xact size: "), widget );
+    m_scale->setEnabled( false ); // ###
     grid->addMultiCellWidget( m_scale, 0, 0, 0, 1 );
     group->insert( m_scale );
     connect( m_scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
@@ -189,7 +190,7 @@ KuickPrintDialogPage::~KuickPrintDialogPage()
 }
 
 void KuickPrintDialogPage::getOptions( QMap<QString,QString>& opts,
-                                       bool incldef )
+                                       bool /*incldef*/ )
 {
     QString t = "true";
     QString f = "false";
@@ -217,15 +218,16 @@ void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
     bool ok;
     int val = opts["app-kuickshow-scale-width-pixels"].toInt( &ok );
     if ( ok )
-        setScaleWidth( val, 1 ); // ###
+        setScaleWidth( val );
     val = opts["app-kuickshow-scale-height-pixels"].toInt( &ok );
     if ( ok )
-        setScaleHeight( val, 1 ); // ###
-
+        setScaleHeight( val );
+    
     if ( m_scale->isChecked() == m_shrinkToFit->isChecked() )
         m_shrinkToFit->setChecked( !m_scale->isChecked() );
 
-    toggleScaling( m_scale->isChecked() );
+    // ### re-enable when implementednn
+     toggleScaling( false && m_scale->isChecked() );
 }
 
 void KuickPrintDialogPage::toggleScaling( bool enable )
@@ -237,22 +239,32 @@ void KuickPrintDialogPage::toggleScaling( bool enable )
 
 int KuickPrintDialogPage::scaleWidth() const
 {
-    return m_width->value(); // ###
+    return fromUnitToPixels( m_width->value() );
 }
 
 int KuickPrintDialogPage::scaleHeight() const
 {
-    return m_height->value(); // ###
+    return fromUnitToPixels( m_height->value() );
 }
 
-void KuickPrintDialogPage::setScaleWidth( int pixels, int unit )
+void KuickPrintDialogPage::setScaleWidth( int pixels )
 {
-    m_width->setValue( pixels ); // ###
+    m_width->setValue( pixelsToUnit( pixels ) );
 }
 
-void KuickPrintDialogPage::setScaleHeight( int pixels, int unit )
+void KuickPrintDialogPage::setScaleHeight( int pixels )
 {
-    m_width->setValue( pixels ); // ###
+    m_width->setValue( pixelsToUnit( pixels ) );
+}
+
+int KuickPrintDialogPage::fromUnitToPixels( float /*value*/ ) const
+{
+    return 1; // ###
+}
+
+float KuickPrintDialogPage::pixelsToUnit( int /*pixels*/ ) const
+{
+    return 1.0; // ###
 }
 
 #include "printing.moc"

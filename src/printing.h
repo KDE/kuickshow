@@ -54,8 +54,11 @@ private:
     int scaleWidth() const;
     int scaleHeight() const;
 
-    void setScaleWidth( int pixels, int unit );
-    void setScaleHeight( int pixels, int unit );
+    void setScaleWidth( int pixels );
+    void setScaleHeight( int pixels );
+
+    int fromUnitToPixels( float val ) const;
+    float pixelsToUnit( int pixels ) const;
 
     QRadioButton *m_shrinkToFit;
     QRadioButton *m_scale;
