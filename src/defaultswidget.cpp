@@ -25,10 +25,10 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   // create all the widgets
 
   gbScale = new QGroupBox( i18n("Scaling"), this );
-  cbDownScale = new QCheckBox( i18n("Shrink image to screensize, if larger"),
+  cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"),
 			       gbScale, "shrinktoscreen" );
 
-  cbUpScale = new QCheckBox( i18n("Scale image to screensize, if smaller, up to factor:"), gbScale, "upscale checkbox" );
+  cbUpScale = new QCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale, "upscale checkbox" );
   connect(cbUpScale, SIGNAL( toggled(bool)), SLOT( slotEnableMaxScale(bool) ));
 
   sbMaxUpScaleFactor = new KIntNumInput( gbScale, "upscale factor" );
@@ -41,7 +41,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   cbFlipHorizontally = new QCheckBox( i18n("Flip horizontally"), gbGeometry );
 
-  lbRotate = new QLabel( i18n("Rotate image about"), gbGeometry );
+  lbRotate = new QLabel( i18n("Rotate image"), gbGeometry );
 
   comboRotate = new KComboBox( gbGeometry, "rotate combobox" );
   comboRotate->insertItem( i18n("0 degrees") );

@@ -456,7 +456,7 @@ void KuickShow::dropEvent( QDropEvent *e )
 
     if ( hasRemote ) {
 	QString tmp( i18n("You can only drop local files\n"
-		"onto the imageviewer!\n\n"));
+		"onto the image viewer!\n\n"));
 	KMessageBox::sorry( this, tmp, i18n("KuickShow Drop Error") );
     }
 }
@@ -763,9 +763,9 @@ void KuickShow::saveSettings()
 void KuickShow::messageCantLoadImage( const QString& filename )
 {
     viewer->clearFocus();
-    QString tmp = i18n("Sorry, I can't load the image\n %1"
-	    "\nMaybe it has a wrong format or your Imlib\n"
-	    "is not installed properly.").arg(filename);
+    QString tmp = i18n("Sorry, I can't load the image\n %1."
+	    "\nPerhaps the file format is unsupported or\n"
+                      "your Imlib is not installed properly.").arg(filename);
     KMessageBox::sorry( 0L, tmp, i18n("Image Error") );
 }
 
@@ -792,8 +792,8 @@ void KuickShow::initImlib()
 
 	if ( !id ) {
 	    QString tmp = i18n("Can't initialize \"Imlib\".\n"
-		    "Start kuickshow on the commandline and look\n"
-		    "out for some error messages.\n"
+		    "Start kuickshow on the command line\n"
+		    " and look for error messages.\n"
 		    "I will quit now.");
 	    KMessageBox::sorry( this, tmp, i18n("Fatal Imlib error") );
 
@@ -808,7 +808,7 @@ void KuickShow::initImlibParams( ImData *idata, ImlibInitParams *par )
     par->flags = ( PARAMS_REMAP |
 		   PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
 		   PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
-	
+
     par->paletteoverride = idata->ownPalette  ? 1 : 0;
     par->remap           = idata->fastRemap   ? 1 : 0;
     par->fastrender      = idata->fastRender  ? 1 : 0;
