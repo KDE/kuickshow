@@ -181,7 +181,6 @@ public slots:
 
 
 protected:
-  void 		init();
   KuickImage *	loadImageInternal( const QString&  );
   void 		showImage();
   void          setImageModifier();
@@ -213,6 +212,7 @@ protected:
 
 
 private:
+  void 		init();
   bool 		isAutoRendering;
   int 		myMaxImageCache;
   QColor 	myBackgroundColor;
