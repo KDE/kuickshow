@@ -904,7 +904,7 @@ void KuickShow::messageCantLoadImage( const QString& filename )
     QString tmp = i18n("Unable to load the image %1.\n"
 	    "Perhaps the file format is unsupported or "
                       "your Imlib is not installed properly.").arg(filename);
-    KMessageBox::sorry( 0L, tmp, i18n("Image Error") );
+    KMessageBox::sorry( m_viewer, tmp, i18n("Image Error") );
 }
 
 void KuickShow::initImlib()
