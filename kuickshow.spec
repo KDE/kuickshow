@@ -8,7 +8,7 @@ Summary:   KuickShow -- A very fast image viewer/browser
 Version:   %{version}
 Release:   %{release}
 Serial:    %{serial}
-Source:    http://devel-home.kde.org/~pfeiffer/kuickshow/kuickshow-%{version}.tgz
+Source:    http://devel-home.kde.org/~pfeiffer/kuickshow/kuickshow-%{version}.tar.gz
 URL:       http://devel-home.kde.org/~pfeiffer/kuickshow/
 Copyright: GPL
 Packager:  Carsten Pfeiffer <pfeiffer@kde.org>
