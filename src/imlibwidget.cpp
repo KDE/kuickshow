@@ -346,7 +346,9 @@ void ImlibWidget::updateWidget( bool geometryUpdate )
     if ( !kuim )
 	return;
 
-    XUnmapWindow( x11Display(), win ); // remove the old image -> no flicker
+//     if ( geometryUpdate )
+//         XUnmapWindow( x11Display(), win );// remove the old image -> no flicker
+
     XSetWindowBackgroundPixmap( x11Display(), win, kuim->pixmap() );
 
     if ( geometryUpdate )
