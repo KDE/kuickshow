@@ -23,7 +23,7 @@ KuickIO * KuickIO::self( QWidget *parent )
 bool KuickIO::deleteFile( const KURL& url, bool dontAsk )
 {
     if ( !dontAsk ) {
-	QString tmp = i18n( "Really delete the file\n\n%1 ?\n" ).arg(url.prettyURL());
+	QString tmp = i18n( "Really delete the file\n\n%1?\n" ).arg(url.prettyURL());
 	int res = KMessageBox::questionYesNo( s_parent, tmp,
 					     i18n("Delete file?"));
 	if ( res == KMessageBox::No )
