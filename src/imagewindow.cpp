@@ -34,6 +34,7 @@
 #include <kconfig.h>
 #include <kcursor.h>
 #include <kdebug.h>
+#include <kdeversion.h>
 #ifdef KDE_USE_FINAL
 #undef Unsorted
 #endif
@@ -840,8 +841,12 @@ void ImageWindow::saveImage()
     KuickData tmp;
     QCheckBox *keepSize = new QCheckBox( i18n("Keep original Image Size"), 0L);
     keepSize->setChecked( true );
-    KFileDialog dlg( QString::null, tmp.fileFilter, this, "filedialog", true,
-                     keepSize );
+    KFileDialog dlg( QString::null, tmp.fileFilter, this, "filedialog", true
+#if KDE_VERSION >= 310                     
+                     ,keepSize );
+#else
+                    );
+#endif
     dlg.setSelection( m_kuim->filename() );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setCaption( i18n("Save As") );
@@ -863,6 +868,9 @@ void ImageWindow::saveImage()
             }
         }
     }
+#if KDE_VERSION < 310
+    delete keepSize;
+#endif
 }
 
 bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) const

@@ -1,7 +1,7 @@
-%define version 0.8.2
+%define version 0.8.5
 %define release 1
 %define serial  1
-%define prefix /opt/kde2
+%define prefix /opt/kde3
 
 Name:      kuickshow
 Summary:   KuickShow -- A very fast image viewer/browser
@@ -46,18 +46,9 @@ if test -z "$PREFIX"; then
 fi
 
 export KDEDIR="$PREFIX"
-CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -malign-functions=2 -malign-jumps=2 -malign-loops=2 -pipe" LDFLAGS=-s ./configure --prefix="$PREFIX" --enable-final --disable-debug
+CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -pipe" LDFLAGS=-s ./configure --prefix="$PREFIX" --enable-final --disable-debug
 mkdir -p $RPM_BUILD_ROOT
 make
-
-# support objprelink, if available
-PRELINK=1
-which objprelink || PRELINK=0
-if test $PRELINK = 1; then
-	find -name "*.o"  | xargs objprelink
-	find -name "*.lo" | xargs touch
-    make
-fi
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT

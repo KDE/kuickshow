@@ -9,6 +9,7 @@
 
 #include <qkeycode.h>
 
+#include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -32,7 +33,9 @@ FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
 {
     setEnableDirHighlighting( true );
 
+#if KDE_VERSION >= 310
     setViewConfig( KGlobal::config(), "Filebrowser" );
+#endif
     readConfig( KGlobal::config(), "Filebrowser" );
     setView( KFile::Default );
 

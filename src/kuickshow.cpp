@@ -13,6 +13,7 @@
 #include <assert.h>
 
 #include <qdir.h>
+#include <qdesktopwidget.h>
 #include <qdialog.h>
 #include <qglobal.h>
 #include <qkeycode.h>
@@ -26,6 +27,7 @@
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <kcursor.h>
+#include <kdeversion.h>
 #include <kfiledialog.h>
 #include <kfilemetainfo.h>
 #include <kglobal.h>
@@ -131,8 +133,10 @@ KuickShow::KuickShow( const char *name )
       {
           KMimeType::Ptr mime = KMimeType::findByURL( url );
           QString name = mime->name();
+#if KDE_VERSION >= 310
           if ( name == "application/octet-stream" ) // unknown -> stat()
               name = KIO::NetAccess::mimetype( url );
+#endif
 
           if ( name.startsWith( "image/" ) )
           {
@@ -908,7 +912,20 @@ void KuickShow::about()
         aboutWidget = new AboutWidget( 0L, "about" );
 
     aboutWidget->adjustSize();
+
+#if KDE_VERSION >= 310
     KDialog::centerOnScreen( aboutWidget );
+#else
+  QDesktopWidget *desktop = QApplication::desktop();
+  int screen = desktop->screenNumber( aboutWidget );
+  if ( screen == -1 )
+      screen = desktop->primaryScreen();
+
+  QRect r = desktop->screenGeometry( screen );
+  aboutWidget->move( r.center().x() - aboutWidget->width()/2,
+           r.center().y() - aboutWidget->height()/2 );
+#endif
+
     aboutWidget->show();
 }
 
