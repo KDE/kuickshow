@@ -38,7 +38,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   cbPreload = new QCheckBox( i18n("Preload next image"), this, "preload");
 
-  QGridLayout *gridLayout = new QGridLayout( this, 3, 2 );
+  QGridLayout *gridLayout = new QGridLayout( 3, 2 );
   gridLayout->setSpacing( KDialog::spacingHint() );
   QLabel *l0 = new QLabel( i18n("Background color:"), this );
   colorButton = new KColorButton( this );
@@ -48,7 +48,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   QLabel *l2 = new QLabel( i18n("Slideshow delay (1/10 s): "), this );
   delaySpinBox = new KIntNumInput( this, "delay spinbox" );
-  delaySpinBox->setRange( 1, 600 * 2, 5 );
+  delaySpinBox->setRange( 1, 600 * 10, 5 ); // max 10 min
 
   gridLayout->addWidget( l0, 0, 0 );
   gridLayout->addWidget( colorButton, 0, 1 );
@@ -85,7 +85,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   maxCacheSpinBox->setLabel( i18n("Maximum cache size: "), AlignVCenter );
   maxCacheSpinBox->setSuffix( i18n( " MB" ) );
   maxCacheSpinBox->setSpecialValueText( i18n( "Unlimited" ) );
-  maxCacheSpinBox->setRange( 0, 100, 1 );
+  maxCacheSpinBox->setRange( 0, 400, 1 );
 
   loadSettings( *kdata );
   cbFullscreen->setFocus();

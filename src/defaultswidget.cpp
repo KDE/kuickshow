@@ -34,7 +34,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   sbMaxUpScaleFactor = new KIntNumInput( gbScale, "upscale factor" );
   sbMaxUpScaleFactor->setRange( 1, 100, 1, false );
 
-  connect(cbUpScale, SIGNAL( toggled(bool)), sbMaxUpScaleFactor, 
+  connect(cbUpScale, SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
             SLOT( setEnabled(bool) ));
 
   // --
@@ -88,18 +88,18 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
 
   // layout management
-  QVBoxLayout *mainLayout = new QVBoxLayout( this, 0, 
+  QVBoxLayout *mainLayout = new QVBoxLayout( this, 0,
             KDialog::spacingHint(), "main layout" );
 
-  QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale->layout(), 
+  QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale->layout(),
             KDialog::spacingHint());
-  QVBoxLayout *gbGeometryLayout = new QVBoxLayout(gbGeometry->layout(), 
+  QVBoxLayout *gbGeometryLayout = new QVBoxLayout(gbGeometry->layout(),
             KDialog::spacingHint());
-  QGridLayout *gbPreviewLayout = new QGridLayout(gbPreview, 2, 3, 0, 
+  QGridLayout *gbPreviewLayout = new QGridLayout(gbPreview, 2, 3, 0,
             KDialog::spacingHint());
 
-  QHBoxLayout *scaleLayout = new QHBoxLayout( this );
-  QHBoxLayout *rotateLayout = new QHBoxLayout( this );
+  QHBoxLayout *scaleLayout = new QHBoxLayout();
+  QHBoxLayout *rotateLayout = new QHBoxLayout();
 
   mainLayout->addWidget( cbEnableMods );
   mainLayout->addWidget( gbScale );
