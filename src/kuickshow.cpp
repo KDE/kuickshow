@@ -648,8 +648,9 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	return true;    // kapp, to make it really safe
 
     bool ret = false;
+    int eventType = e->type();
     QKeyEvent *k = 0L;
-    if ( e->type() == QEvent::KeyPress )
+    if ( eventType == QEvent::KeyPress )
 	k = static_cast<QKeyEvent *>( e );
 
     if ( k ) {
@@ -667,7 +668,12 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
     ImageWindow *window = dynamic_cast<ImageWindow*>( o );
     if ( window ) {
-//  	KCursor::autoHideEventFilter( o, e );
+        // The XWindow used to display Imlib's image is being resized when 
+        // switching images, causing enter- and leaveevents for this 
+        // ImageWindow, leading to the cursor being unhidden. So we simply
+        // don't pass those events to KCursor to prevent that.
+        if ( eventType != QEvent::Leave && eventType != QEvent::Enter )
+            KCursor::autoHideEventFilter( o, e );
 
 	m_viewer = window;
 	QString img;
@@ -786,7 +792,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
         // doubleclick closes image window
         // and shows browser when last window closed via doubleclick
-        else if ( e->type() == QEvent::MouseButtonDblClick )
+        else if ( eventType == QEvent::MouseButtonDblClick )
         {
             QMouseEvent *ev = static_cast<QMouseEvent*>( e );
             if ( ev->button() == LeftButton )

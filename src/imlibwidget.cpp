@@ -443,12 +443,17 @@ int ImlibWidget::imageHeight() const
 
 void ImlibWidget::setBusyCursor()
 {
+    if ( ownCursor() )
+        m_oldCursor = cursor();
+    else
+        m_oldCursor = QCursor();
+    
     setCursor( KCursor::waitCursor() );
 }
 
 void ImlibWidget::restoreCursor()
 {
-    setCursor( KCursor::arrowCursor() );
+    setCursor( m_oldCursor );
 }
 
 //----------

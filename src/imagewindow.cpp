@@ -79,8 +79,8 @@ ImageWindow::~ImageWindow()
 
 void ImageWindow::init()
 {
-//     KCursor::setAutoHideCursor( this, true, true );
-//     KCursor::setHideCursorDelay( 1500 );
+    KCursor::setAutoHideCursor( this, true, true );
+    KCursor::setHideCursorDelay( 1500 );
 
     // give the image window a different WM_CLASS
     XClassHint hint;

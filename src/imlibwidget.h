@@ -14,6 +14,7 @@
 
 #include <qvariant.h>
 
+#include <qcursor.h>
 #include <qevent.h>
 #include <qptrlist.h>
 #include <qtimer.h>
@@ -207,6 +208,7 @@ protected:
   ImlibColorModifier mod;
 
   QString m_filename;
+  QCursor m_oldCursor;
 
   static const int ImlibOffset;
 
