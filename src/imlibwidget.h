@@ -191,12 +191,15 @@ public:
   void		setViewportSize(const QSize &size) { m_kuim->setViewportSize(size); }
   void		setViewportPosition(const QPoint &point) {m_kuim->setViewportPosition(point); }
   void		setViewport(const QRect &vp) { m_kuim->setViewport(vp); }
-  const QSize	originalImageSize() { if (!imageLoaded()) return QSize(0,0); return QSize(m_kuim->originalWidth(), m_kuim->originalHeight()); }
+  const QRect & getViewport() { return m_kuim->getViewport(); }
+  const QSize	originalImageSize() { if (!imageLoaded()) return QSize(-1,-1); return QSize(m_kuim->originalWidth(), m_kuim->originalHeight()); }
   const QString& imageFilename() { return m_kuim->filename(); }
   
   bool		imageLoaded() { return m_kuim != 0L ; }
   
   void		autoScaleImage(const QSize &maxImageSize);
+  
+  virtual QSize sizeHint() { if (!imageLoaded()) return QSize(-1, -1); return QSize(imageWidth(), imageHeight()); }
   
   /**
    * @return true if auto-rotation is not possible, e.g. because no metadata
@@ -238,7 +241,7 @@ protected:
   bool		needNewCacheImage;
   QString	nextImage;
   
-  int xpos, ypos;	//positioning of the image within the widget
+  //int xpos, ypos;	//positioning of the image within the widget
   
   KuickImage 	*m_kuim;
   ImageCache 	*imageCache;

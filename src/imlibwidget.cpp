@@ -203,20 +203,21 @@ void ImlibWidget::zoomImage( float factor )
 
     if ( wf <= 2.0 || hf <= 2.0 ) // minimum size for an image is 2x2 pixels
 	return;
-
-    QRect vp=m_kuim->getViewport();
+	
+    int neww=(int) wf;
+    int newh=(int) hf;
+	
+    QRect viewport=getViewport();
     
-    QPoint p=vp.topLeft();
-    QPoint vpcenter=vp.center();
-
-    p=vpcenter-p;
+    QPoint topleft=viewport.topLeft();
+    QPoint center=viewport.center();
     
-    p*=(double) factor;
-    m_kuim->setViewportPosition(vpcenter+p);	//recenter the image
+    viewport.setTopLeft((topleft-center)/factor+center);
+    
+    m_kuim->resize( neww, newh );
+
+    setViewportPosition(viewport.topLeft());
         
-    m_kuim->resize( (int) wf, (int) hf );
-    
-
     autoUpdate( false );
 }
 
@@ -594,6 +595,28 @@ QPixmap& KuickImage::getQPixmap()
 
 void KuickImage::renderPixmap()
 {
+	QRect viewport=myViewport;
+	
+	if (viewport.x() < 0 && viewport.width() < width())
+		viewport.moveLeft(0);
+	else if (viewport.right() > width() && viewport.width() < width())
+		viewport.moveRight(width());
+	else if (viewport.width() >= width())
+	{
+		viewport.moveLeft((width()-viewport.width())/2);
+	}    
+		
+	if (viewport.y() < 0 && viewport.height() < height())
+		viewport.moveTop(0);
+	else if (viewport.bottom() > height() && viewport.height() < height())
+		viewport.moveBottom(height());
+	else if (viewport.height() >= height())
+	{
+		viewport.moveTop((height()-viewport.height())/2);
+	}
+	
+	setViewport(viewport);
+
     if ( !myIsDirty )
 	return;
 
@@ -1007,22 +1030,22 @@ void KuickImage::setViewportSize(const QSize &size)
 {
 	myIsDirty=(size == myViewport.size()) ? myIsDirty : true;
 	
-	if (size == myViewport.size())
+	if (size != myViewport.size())
 		kdDebug() << "Setting viewport size to " << size.width() << "x" << size.height() << endl;
 		
 	myViewport.setSize(size);
 }
 
-void	KuickImage::setViewportPosition(const QPoint &point)
+void KuickImage::setViewportPosition(const QPoint &point)
 {
 	myIsDirty=(point == myViewport.topLeft()) ? myIsDirty : true;
 	myViewport.moveTopLeft(point);
 }
 
-void	KuickImage::setViewport(const QRect &vp)
+void KuickImage::setViewport(const QRect &vp)
 {
-	myIsDirty=(vp == myViewport) ? myIsDirty : true;
-	myViewport=vp;
+	setViewportSize(vp.size());
+	setViewportPosition(vp.topLeft());
 }
 
 
