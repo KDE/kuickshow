@@ -85,7 +85,8 @@ KuickShow::KuickShow( const char *name )
       m_accel( 0L ),
       m_delayedRepeatItem( 0L )
 {
-  kdata = new KuickData;
+    aboutWidget = 0L;
+    kdata = new KuickData;
   kdata->load();
 
   initImlib();
@@ -101,7 +102,7 @@ KuickShow::KuickShow( const char *name )
 
   // parse commandline options
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-		
+
   // files to display
   // either a directory to display, an absolute path, a relative path, or a URL
   KURL startDir;
@@ -384,7 +385,7 @@ void KuickShow::dirSelected( const KURL& url )
 	setCaption( url.path() );
     else
 	setCaption( url.prettyURL() );
-	
+
     statusBar()->changeItem( url.prettyURL(), URL_ITEM );
 }
 
@@ -447,7 +448,7 @@ void KuickShow::showImage( const KFileItem *fi,
 
 	    if ( newWindow ) {
 		safeViewer->show();
-		
+
 		if ( !fullscreen && s_viewers.count() == 1 && moveToTopLeft ) {
 		    // the WM might have moved us after showing -> strike back!
 		    // move the first image to 0x0 workarea coord
@@ -774,7 +775,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 QString filename;
                 KIO::NetAccess::download(item->url(), filename);
 		m_viewer->showNextImage( filename );
-		
+
 		if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
 		    if ( FileWidget::isImage( item_next ) )
 			m_viewer->cacheImage( item_next->url().path() ); // ###
@@ -873,12 +874,20 @@ void KuickShow::slotConfigClosed()
 
 void KuickShow::about()
 {
-    AboutWidget *aboutWidget = new AboutWidget( 0L, "about" );
-    aboutWidget->adjustSize();
-    KDialog::centerOnScreen( aboutWidget );
-    aboutWidget->show();
+    if ( !aboutWidget )
+    {
+        aboutWidget = new AboutWidget( 0L, "about" );
+        aboutWidget->adjustSize();
+        KDialog::centerOnScreen( aboutWidget );
+        aboutWidget->show();
+        connect( aboutWidget, SIGNAL(deleteAboutWidget()), this, SLOT( slotAboutWidgetDeleted()));
+    }
 }
 
+void KuickShow::slotAboutWidgetDeleted()
+{
+    aboutWidget = 0L;
+}
 
 // ------ sessionmanagement - load / save current directory -----
 void KuickShow::readProperties( KConfig *kc )
@@ -914,7 +923,7 @@ void KuickShow::saveProperties( KConfig *kc )
     QValueListIterator<ImageWindow*> it;
     for ( it = s_viewers.begin(); it != s_viewers.end(); ++it )
 	urls.append( (*it)->filename() );
-	
+
     kc->writeEntry( "Images shown", urls );
 }
 

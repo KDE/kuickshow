@@ -30,6 +30,7 @@ class KuickConfigDialog;
 class KAccel;
 class KConfig;
 class KToggleAction;
+class AboutWidget;
 
 class DelayedRepeatEvent
 {
@@ -97,7 +98,7 @@ private slots:
     void		slotReplayEvent();
     void                slotReplayAdvance();
     void                slotOpenURL();
-
+    void                slotAboutWidgetDeleted();
 private:
     void 		initGUI( const KURL& startDir );
     bool	       	eventFilter( QObject *, QEvent * );
@@ -120,7 +121,7 @@ private:
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;
     KAction             *m_toggleBrowserAction;
-
+    AboutWidget *aboutWidget;
 };
 
 #endif

@@ -78,6 +78,7 @@ bool AboutWidget::eventFilter( QObject *o, QEvent *e )
     if ( e->type() == QEvent::MouseButtonPress ) {
         QMouseEvent *ev = static_cast<QMouseEvent*>( e );
         if ( !m_homepage->geometry().contains( ev->pos() ) ) {
+            emit deleteAboutWidget();
             delete this;
             return true;
         }
