@@ -984,7 +984,7 @@ void KuickShow::slotOpenURL()
 {
     KFileDialog dlg(QString::null, kdata->fileFilter, this, "filedialog", true);
     dlg.setMode( KFile::Files | KFile::Directory );
-    dlg.setCaption( i18n("Select Files or a Directory to open") );
+    dlg.setCaption( i18n("Select Files or Directory to Open") );
 
     if ( dlg.exec() == QDialog::Accepted )
     {
