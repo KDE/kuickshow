@@ -381,7 +381,11 @@ void FileWidget::slotReturnPressed( const QString& t )
 void FileWidget::setCurrentItem( const KFileViewItem *item )
 {
     if ( item ) {
+#if KDE_VERSION < 290
 	fileView()->setCurrentItem( QString::null, item );
+#else
+    fileView()->setCurrentItem( item );
+#endif
 	fileView()->ensureItemVisible( item );
     }
 }
