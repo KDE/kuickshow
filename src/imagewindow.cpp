@@ -15,6 +15,7 @@
 #include <qcursor.h>
 #include <qdrawutil.h>
 #include <qkeycode.h>
+#include <qpaintdevicemetrics.h>
 #include <qpainter.h>
 #include <qpen.h>
 #include <qpopupmenu.h>
@@ -32,6 +33,7 @@
 #include <kaccel.h>
 #include <kconfig.h>
 #include <kcursor.h>
+#include <kdebug.h>
 #ifdef KDE_USE_FINAL
 #undef Unsorted
 #endif
@@ -841,47 +843,27 @@ void ImageWindow::printImageWithQt( const QString& filename, KPrinter& printer)
 {
     QImage image( filename );
     if ( image.isNull() ) {
-        qDebug("KuickShow: can't load image: %s for printing.", 
-               filename.isNull() ? "(null)" : filename.latin1());
+        kdWarning() << "Can't load image: " << filename << " for printing.\n";
         return;
     }
     
     QPainter p;
     p.begin( &printer );
-    p.setWorldXForm( true );
     
-    QSize printArea = printer.realPageSize();
-    
-    bool landscape = (printer.orientation() == KPrinter::Landscape);
-    
-    // shrink image to pagesize, if necessary (take orientation into account).
-    // ### Better ask user.
-    int iw = landscape ? image.height() : image.width();
-    int ih = landscape ? image.width()  : image.height();
-    
-    if ( printArea.isValid() && 
-         (iw > printArea.width() || ih > printArea.height()) ) {
-        if ( landscape )
-            image = image.smoothScale( printArea.height(), printArea.width(),
-                                       QImage::ScaleMin );
-        else
-            image = image.smoothScale( printArea, QImage::ScaleMin );
-    }
-    
-    if ( landscape ) {
-        p.translate( 0.0, image.width() );
-        p.rotate( -90.0 );
-    }
+    QPaintDeviceMetrics metrics( &printer );
+    int w = metrics.width();
+    int h = metrics.height();
 
-    if ( printer.colorMode() == KPrinter::GrayScale && !image.isGrayscale() ) {
-        // qDebug("*** GRAY ***");
-        KImageEffect::toGray( image );
+    // shrink image to pagesize, if necessary
+    if ( image.width() > w || image.height() > h ) {
+        image = image.smoothScale( w, h, QImage::ScaleMin );
     }
-
-    p.drawImage( 0, 0, image );
+    
+    // center image
+    int x = (w - image.width())/2;
+    int y = (h - image.height())/2;
+    p.drawImage( x, y, image );
     p.end();
-    
-    printer.newPage();
 }
 
 void ImageWindow::saveImage()
