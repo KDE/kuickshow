@@ -315,6 +315,11 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action( "mkdir" )->setShortcut(Key_F10);
     coll->action( "preview" )->setShortcut(Key_F11);
     coll->action( "separate dirs" )->setShortcut(Key_F12);
+
+    // ### somehow the filewidget isn't resized at all sometimes, when initGUI
+    // is called lazily, not from this c'tor. (just a tiny little widget in 
+    // the upper left corner of the mainwindow. Work around that.
+    fileWidget->resize( size() );
 }
 
 
@@ -790,10 +795,6 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                         QFileInfo fi( m_viewer->filename() );
                         start.setPath( fi.dirPath( true ) );
                         initGUI( start );
-                        // ### somehow the filewidget isn't resized at all here
-                        // (just a tiny little widget in the upper left corner
-                        // of the mainwindow. Work around that.
-                        fileWidget->resize( size() );
                     }
                     show();
                     raise();
