@@ -15,6 +15,7 @@
 #include <qevent.h>
 
 #include <kkeydialog.h>
+#include <kaccelbase.h>
 
 #include "logotabdialog.h"
 
@@ -27,14 +28,14 @@ class KuickConfigDialog : public LogoTabDialog
     Q_OBJECT
 
 public:
-    KuickConfigDialog( KAccel *browerAccel, QWidget *parent=0, 
+    KuickConfigDialog( KAccel *browerAccel, QWidget *parent=0,
 		       const char *name=0, bool modal=true);
     ~KuickConfigDialog();
 
     void 		applyConfig();
 
-    KKeyEntryMap 	imageKeys() const { return m_imageKeys; }
-    KKeyEntryMap 	browserKeys() const { return m_browserKeys; }
+    //const KAccelActions& imageKeys() const { return m_imageKeys; }
+    //const KAccelActions& browserKeys() const { return m_browserKeys; }
 
 private slots:
     void 		resetDefaults();
@@ -43,7 +44,7 @@ private:
     DefaultsWidget   *defaultsWidget;
     GeneralWidget    *generalWidget;
     KKeyChooser      *imageKeyChooser, *browserKeyChooser;
-    KKeyEntryMap     m_imageKeys, m_browserKeys;
+    //KAccelActions    m_imageKeys, m_browserKeys;
     KAccel 	     *m_browserAccel;
 
     ImageWindow      *imageWindow;
