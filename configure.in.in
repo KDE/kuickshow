@@ -30,7 +30,7 @@ if test "$imlib_config_given" = "yes"; then
 else
   ac_imlib_config=`which imlib-config`
   if test -z "$ac_imlib_config"; then
-    AC_MSG_RESULT(no, get Imlib from e.g. http://www.go.dlr.de/fresh/linux/src/imlib-1.9.10.tar.gz)
+    AC_MSG_RESULT(no, get Imlib from e.g. http://freshmeat.net/redir/imlib/4385/url_tgz/imlib-1.9.10.tar.gz)
   else
     dummy=`echo "$ac_imlib_config" | grep '/imlib-config'`
     if test -z "$dummy"; then
@@ -38,12 +38,14 @@ else
       ac_imlib_config=""
     else
       LIB_IMLIB=`$ac_imlib_config --libs`
+      IMLIB_CFLAGS=`$ac_imlib_config --cflags`
       imlib_config=`echo "$LIB_IMLIB" | grep lImlib`
       if test -z "$imlib_config"; then
         AC_MSG_RESULT(no, get Imlib from e.g. http://freshmeat.net/redir/imlib/4385/url_tgz/imlib-1.9.10.tar.gz)
         ac_imlib_config=""
       else
         AC_SUBST(LIB_IMLIB)
+        AC_SUBST(IMLIB_CFLAGS)
         AC_MSG_RESULT($ac_imlib_config)
       fi
     fi
