@@ -454,8 +454,8 @@ void KuickShow::dropEvent( QDropEvent *e )
 
 
     if ( hasRemote ) {
-	QString tmp( i18n("You can only drop local files\n"
-		"onto the image viewer!\n\n"));
+	QString tmp( i18n("You can only drop local files "
+		"onto the image viewer!"));
 	KMessageBox::sorry( this, tmp, i18n("KuickShow Drop Error") );
     }
 }
@@ -762,8 +762,8 @@ void KuickShow::saveSettings()
 void KuickShow::messageCantLoadImage( const QString& filename )
 {
     viewer->clearFocus();
-    QString tmp = i18n("Sorry, I can't load the image\n %1."
-	    "\nPerhaps the file format is unsupported or\n"
+    QString tmp = i18n("Sorry, I can't load the image %1.\n"
+	    "Perhaps the file format is unsupported or "
                       "your Imlib is not installed properly.").arg(filename);
     KMessageBox::sorry( 0L, tmp, i18n("Image Error") );
 }
@@ -791,10 +791,10 @@ void KuickShow::initImlib()
 
 	if ( !id ) {
 	    QString tmp = i18n("Can't initialize \"Imlib\".\n"
-		    "Start kuickshow on the command line\n"
-		    " and look for error messages.\n"
+		    "Start kuickshow on the command line "
+		    "and look for error messages.\n"
 		    "I will quit now.");
-	    KMessageBox::sorry( this, tmp, i18n("Fatal Imlib error") );
+	    KMessageBox::error( this, tmp, i18n("Fatal Imlib error") );
 
 	    exit(1);
 	}

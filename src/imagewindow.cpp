@@ -15,7 +15,6 @@
 #include <qcursor.h>
 #include <qdrawutil.h>
 #include <qkeycode.h>
-#include <qmessagebox.h>
 #include <qpainter.h>
 #include <qpen.h>
 #include <qpopupmenu.h>
@@ -40,6 +39,7 @@
 #endif
 #include <kfiledialog.h>
 #include <klocale.h>
+#include <kmessagebox.h>
 #include <kstdaccel.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>
@@ -885,9 +885,9 @@ void ImageWindow::saveImage()
 
     if ( !success ) {
       QString tmp = i18n("Couldn't save the file.\n"
-    		"Perhaps the disk is full, or you don't\n"
+    		"Perhaps the disk is full, or you don't "
     		"have write permission to the file.");
-      QMessageBox::warning( this, i18n("File saving failed"), tmp );
+      KMessageBox::sorry( this, tmp, i18n("File saving failed"));
     }
   }
 }
