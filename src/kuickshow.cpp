@@ -40,6 +40,7 @@
 #include <kstatusbar.h>
 #include <kstdaction.h>
 #include <kstandarddirs.h>
+#include <kstartupinfo.h>
 #include <ktoolbar.h>
 #include <kurldrag.h>
 #include <kwin.h>
@@ -133,6 +134,7 @@ KuickShow::KuickShow( const char *name )
 
   else { // don't show browser, when image on commandline
       hide();
+      KStartupInfo::appStarted();
   }
 }
 
