@@ -317,7 +317,7 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action( "separate dirs" )->setShortcut(Key_F12);
 
     // ### somehow the filewidget isn't resized at all sometimes, when initGUI
-    // is called lazily, not from this c'tor. (just a tiny little widget in 
+    // is called lazily, not from this c'tor. (just a tiny little widget in
     // the upper left corner of the mainwindow. Work around that.
     fileWidget->resize( size() );
 }
@@ -630,11 +630,13 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     }
 
     if ( FileWidget::isImage( item ) ) {
-        view->showNextImage( item->url().path() ); // ###
+	QString filename;
+	KIO::NetAccess::download(item->url(), filename);
+        view->showNextImage( filename );
         if (m_slideTimer->isActive())
 	  m_slideTimer->start( kdata->slideDelay );
 
-        if ( kdata->preloadImage ) // preload next image
+        if ( kdata->preloadImage && item_next->url().isLocalFile() ) // preload next image
             if ( FileWidget::isImage( item_next ) )
                 view->cacheImage( item_next->url().path() ); // ###
     }
@@ -769,9 +771,11 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
 
 	    if ( FileWidget::isImage( item ) ) {
-		m_viewer->showNextImage( item->url().path() ); // ###
+                QString filename;
+                KIO::NetAccess::download(item->url(), filename);
+		m_viewer->showNextImage( filename );
 		
-		if ( kdata->preloadImage ) // preload next image
+		if ( kdata->preloadImage && item_next->url().isLocalFile() ) // preload next image
 		    if ( FileWidget::isImage( item_next ) )
 			m_viewer->cacheImage( item_next->url().path() ); // ###
 

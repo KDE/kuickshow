@@ -155,7 +155,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 	
 	if ( (k->state() & (ControlButton | AltButton)) == 0 ) {
 	    int key = k->key();
- 	    if ( actionCollection()->action("delete")->shortcut().contains( key ) ) 
+ 	    if ( actionCollection()->action("delete")->shortcut().contains( key ) )
             {
                 k->accept();
 		KFileItem *item = getCurrentItem( false );
@@ -202,10 +202,10 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 
 bool FileWidget::isImage( const KFileItem *item )
 {
-    return item && !item->isDir();
+//     return item && !item->isDir();
 
-//     return ( item && item->isReadable() &&
-//  	     item->mimetype().startsWith( "image/") );
+    return ( item && item->isReadable() &&
+             item->mimetype().startsWith( "image/") );
 }
 	
 
