@@ -183,7 +183,8 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     QVButtonGroup *group = new QVButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
     layout->addWidget( group );
-    m_shrinkToFit = new QRadioButton( i18n("Shrink image to &fit, if necessary"), group );
+    // m_shrinkToFit = new QRadioButton( i18n("Shrink image to &fit, if necessary"), group );
+    m_shrinkToFit = new QCheckBox( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit->setChecked( true );
 
     QWidget *widget = new QWidget( group );
