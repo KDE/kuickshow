@@ -34,7 +34,7 @@ KURLWidget::KURLWidget(const QString& text, QWidget *parent, const char *name)
 void KURLWidget::run()
 {
     KURL ku( url() );
-    if ( !ku.isMalformed() ) {
+    if ( ku.isValid() ) {
 	(void) new KRun( ku );
     }
 }
