@@ -642,11 +642,7 @@ void KuickShow::slotConfigApplied()
 	++it;
     }
 
-    if ( kdata->fileFilter != fileWidget->nameFilter() )	{
-	// reload directory contents if filefilter changed
-	fileWidget->setNameFilter( kdata->fileFilter );
-	fileWidget->rereadDir();
-    }
+	fileWidget->reloadConfiguration();
 }
 
 
