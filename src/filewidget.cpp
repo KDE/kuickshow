@@ -202,10 +202,10 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 
 bool FileWidget::isImage( const KFileItem *item )
 {
-    return item && !item->isDir();
+//     return item && !item->isDir();
 
-//     return ( item && item->isReadable() &&
-//  	     item->mimetype().startsWith( "image/") );
+    return ( item && item->isReadable() &&
+             item->mimetype().startsWith( "image/") );
 }
 	
 
