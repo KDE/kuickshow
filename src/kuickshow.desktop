@@ -1,5 +1,8 @@
 [Desktop Entry]
 Name=Kuickshow
+Name[hu]=Kuickshow képnézegető
+Name[ko]=K퀵쇼
+Name[xxx]=xx
 Exec=kuickshow %i %m -caption "%c"
 Icon=kuickshow
 Type=Application
@@ -9,4 +12,11 @@ Terminal=0
 InitialPreference=6
 
 Comment=A very fast imageviewer
-Comment[de]=Ein sehr schneller Bildbetrachter 
+Comment[da]=En meget hurtig billedfremviser
+Comment[he]=מציג תמונות מהיר מאוד
+Comment[hu]=Egy nagyon gyors képnézegető
+Comment[ko]=아주 빠른 그림 보기
+Comment[nl]=een zeer snelle afbeeldingenviewer
+Comment[xxx]=xx
+Comment[zh_TW.Big5]=快速的圖片瀏覽工具
+X-DCOP-ServiceType=Multi
