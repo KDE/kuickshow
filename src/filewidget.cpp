@@ -32,6 +32,7 @@ FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
 {
     setEnableDirHighlighting( true );
 
+    setViewConfig( KGlobal::config(), "Filebrowser" );
     readConfig( KGlobal::config(), "Filebrowser" );
     setView( KFile::Default );
 
