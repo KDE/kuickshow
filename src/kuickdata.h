@@ -38,14 +38,12 @@ public:
     void 	load();
     void 	save();
 
-
-    ImData 	*idata;
-
+    ImData	*idata;
+    
     QString 	fileFilter;
     uint 	slideDelay;
     uint        slideshowCycles;
     bool        slideshowFullscreen :1;
-    bool        slideshowStartAtFirst :1;
 
     int 	brightnessSteps;
     int 	contrastSteps;
@@ -53,8 +51,6 @@ public:
 
     int 	scrollSteps;
     float	zoomSteps;
-
-    bool startInLastDir      :1;
 
     bool 	preloadImage     :1;
     bool 	autoRotation     :1;
@@ -73,7 +69,6 @@ public:
     Rotation 	rotation;
 
     QColor      backgroundColor;
-
 
 };
 

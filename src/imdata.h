@@ -35,19 +35,22 @@ public:
   int 		brightness;
   int 		contrast;
 
+  int		renderQuality;
+  
+  QColor	backgroundColor;
+  
   // -----------------------
 
+  /*
   bool 		ownPalette;
   bool 		fastRemap;
-  bool 		fastRender;
   bool		dither16bit;
   bool 		dither8bit;
-
+  uint          maxCache;
+*/
   uint          gammaFactor;
   uint          brightnessFactor;
   uint          contrastFactor;
-
-  uint          maxCache;
 
 };
 

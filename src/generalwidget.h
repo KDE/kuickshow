@@ -14,7 +14,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
-*/
+ */
 
 #ifndef GENERALWIDGET_H
 #define GENERALWIDGET_H
@@ -27,7 +27,7 @@ class QCheckBox;
 class KColorButton;
 class KLineEdit;
 class KIntNumInput;
-
+class QSlider;
 
 class GeneralWidget : public QWidget
 {
@@ -41,12 +41,14 @@ public:
     void 	applySettings( KuickData& data );
 
 private:
-    QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload, *cbLastdir;
+    QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload;
     QCheckBox   *cbFastRemap, *cbFastRender;
     QCheckBox 	*cbDither16bit, *cbDither8bit, *cbOwnPalette;
 
+    QSlider	*quality;
+    
     KLineEdit   	*editFilter;
-    KIntNumInput 	*maxCacheSpinBox;
+    KIntNumInput 	*delaySpinBox, *maxCacheSpinBox;
 
     KIntNumInput 	*sbMaxWidth, *sbMaxHeight;
     KIntNumInput 	*sbZoomFactor;

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2002 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -14,7 +14,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
-*/
+ */
 
 #include "kuickdata.h"
 
@@ -28,59 +28,25 @@
 #include <qglobal.h>
 #include <qobject.h>
 #include <qpalette.h>
+#include <qpainter.h>
+
+#include <math.h>
 
 #include <kcursor.h>
 #include <kdebug.h>
 #include <kfilemetainfo.h>
+#include <kimageio.h>
+#include <kpixmapio.h>
 
 #include "imlibwidget.h"
 
-const int ImlibWidget::ImlibOffset = 256;
-
-ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
-  QWidget( parent, name, WDestructiveClose )
-{
-    idata 		= _idata;
-    deleteImData 	= false;
-    deleteImlibData 	= true;
-
-    if ( !idata ) { // if no imlib configuration was given, create one ourself
-	idata = new ImData;
-	deleteImData = true;
-    }
-
-    ImlibInitParams par;
-
-    // PARAMS_PALETTEOVERRIDE taken out because of segfault in imlib :o(
-    par.flags = ( PARAMS_REMAP |
-		  PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
-		  PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
-
-    par.paletteoverride = idata->ownPalette ? 1 : 0;
-    par.remap           = idata->fastRemap ? 1 : 0;
-    par.fastrender      = idata->fastRender ? 1 : 0;
-    par.hiquality       = idata->dither16bit ? 1 : 0;
-    par.dither          = idata->dither8bit ? 1 : 0;
-    uint maxcache       = idata->maxCache;
-
-    // 0 == no cache
-    par.imagecachesize  = maxcache * 1024;
-    par.pixmapcachesize = maxcache * 1024;
-
-    id = Imlib_init_with_params( x11Display(), &par );
-
-    init();
-}
-
-
-ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent,
+ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent,
 			  const char *name )
     : QWidget( parent, name, WDestructiveClose )
 {
-    id              = _id;
     idata           = _idata;
     deleteImData    = false;
-    deleteImlibData = false;
+    needNewCacheImage = false;
 
     if ( !idata ) {
 	idata = new ImData;
@@ -90,34 +56,26 @@ ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent,
     init();
 }
 
-
 void ImlibWidget::init()
 {
-    int w = 1; // > 0 for XCreateWindow
-    int h = 1;
     myBackgroundColor = Qt::black;
     m_kuim              = 0L;
 
-    if ( !id )
-	qFatal("ImlibWidget: Imlib not initialized, aborting.");
-
+    xpos=0; ypos=0;
+    
     setAutoRender( true );
 
     setPalette( QPalette( myBackgroundColor ));
-    setBackgroundMode( PaletteBackground );
+    setBackgroundMode( NoBackground );
 
-    imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
+    imageCache = new ImageCache( 4 ); // cache 4 images (FIXME?)
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
     connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
-
-    win = XCreateSimpleWindow(x11Display(), winId(), 0,0,w,h,0,0,0);
 }
 
 ImlibWidget::~ImlibWidget()
 {
     delete imageCache;
-    if ( deleteImlibData && id ) free ( id );
-    if ( win ) XDestroyWindow( x11Display(), win );
     if ( deleteImData ) delete idata;
 }
 
@@ -137,11 +95,11 @@ KURL ImlibWidget::url() const
 KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
 {
     // apply default image modifications
-    mod.brightness = idata->brightness + ImlibOffset;
-    mod.contrast = idata->contrast + ImlibOffset;
-    mod.gamma = idata->gamma + ImlibOffset;
+    mod_brightness = idata->brightness;
+    mod_contrast = idata->contrast;
+    mod_gamma = idata->gamma;
 
-    KuickImage *kuim = imageCache->getKuimage( filename, mod );
+    KuickImage *kuim = imageCache->getKuimage( filename , idata );
     if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
 	kdWarning() << "ImlibWidget: can't load image " << filename << endl;
 	return 0L;
@@ -150,6 +108,26 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
     loaded( kuim ); // maybe upscale/downscale/rotate in subclasses
 
     return kuim;
+}
+
+void ImlibWidget::paintEvent(QPaintEvent *e)
+{
+	QPainter *paint=new QPainter(this);
+
+	e=e;
+	
+	m_kuim->setViewportSize(size());
+	m_kuim->setViewportPosition(QPoint(-xpos, -ypos));
+		
+	paint->drawPixmap(QPoint(0,0), m_kuim->getQPixmap());
+	
+	delete paint;
+	
+	if (needNewCacheImage)
+	{
+		loadImageInternal(nextImage);
+		needNewCacheImage=false;
+	}
 }
 
 // overridden in subclass
@@ -164,6 +142,7 @@ bool ImlibWidget::loadImage( const QString& filename )
 
     if ( kuim ) {
 	m_kuim = kuim;
+	m_kuim->setViewportSize(size());
 	autoUpdate( true ); // -> updateWidget() -> updateGeometry()
 	m_filename = filename;
         return true;
@@ -175,26 +154,21 @@ bool ImlibWidget::loadImage( const QString& filename )
 
 bool ImlibWidget::cacheImage( const QString& filename )
 {
-    KuickImage *kuim = loadImageInternal( filename );
-    if ( kuim ) {
-        kuim->renderPixmap();
-        return true;
-    }
-    return false;
+    nextImage=filename;
+    needNewCacheImage=true;
+    return true;
 }
-
 
 void ImlibWidget::showImage()
 {
-    XMapWindow( x11Display(), win );
-    XSync( x11Display(), False );
+	update();
 }
 
 
 // -256..256
 void ImlibWidget::setBrightness( int factor )
 {
-    mod.brightness = factor + ImlibOffset;
+    mod_brightness = factor;
     setImageModifier();
 
     autoUpdate();
@@ -204,7 +178,7 @@ void ImlibWidget::setBrightness( int factor )
 // -256..256
 void ImlibWidget::setContrast( int factor )
 {
-    mod.contrast = factor + ImlibOffset;
+    mod_contrast = factor;
     setImageModifier();
 
     autoUpdate();
@@ -214,7 +188,7 @@ void ImlibWidget::setContrast( int factor )
 // -256..256
 void ImlibWidget::setGamma( int factor )
 {
-    mod.gamma = factor + ImlibOffset;
+    mod_gamma = factor;
     setImageModifier();
 
     autoUpdate();
@@ -247,7 +221,6 @@ void ImlibWidget::showImageOriginalSize()
     m_kuim->restoreOriginalSize();
     autoUpdate( true );
 
-    showImage();
 }
 
 bool ImlibWidget::autoRotate( KuickImage *kuim )
@@ -384,27 +357,31 @@ void ImlibWidget::updateWidget( bool geometryUpdate )
 {
     if ( !m_kuim )
 	return;
-
-//     if ( geometryUpdate )
-//         XUnmapWindow( x11Display(), win );// remove the old image -> no flicker
-
-    XSetWindowBackgroundPixmap( x11Display(), win, m_kuim->pixmap() );
-
+	
     if ( geometryUpdate )
+    {
 	updateGeometry( m_kuim->width(), m_kuim->height() );
-
-    XClearWindow( x11Display(), win );
-
-    showImage();
+    }
+    else showImage();
 }
 
+void ImlibWidget::resize(int w, int h)
+{
+	QWidget::resize(w, h);
+	
+	if (m_kuim)
+	{
+		m_kuim->setViewportSize(QSize(w, h));
+	}
+}
 
 // here we just use the size of m_kuim, may be overridden in subclass
 void ImlibWidget::updateGeometry( int w, int h )
 {
-    XMoveWindow( x11Display(), win, 0, 0 ); // center?
-    XResizeWindow( x11Display(), win, w, h );
+    bool show=(w == width() && h == height());
     resize( w, h );
+    if (show)
+    	showImage();
 }
 
 
@@ -433,8 +410,7 @@ void ImlibWidget::setImageModifier()
     if ( !m_kuim )
 	return;
 
-    Imlib_set_image_modifier( id, m_kuim->imlibImage(), &mod );
-    m_kuim->setDirty( true );
+    m_kuim->setColourTransform(mod_brightness, mod_contrast, mod_gamma);
 }
 
 int ImlibWidget::imageWidth() const
@@ -466,17 +442,34 @@ void ImlibWidget::restoreCursor()
 
 
 
-KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
+KuickImage::KuickImage( const QString& filename, QImage* im, ImData * idata)
     : QObject( 0L, 0L )
 {
     myFilename = filename;
-    myIm       = im;
-    myId       = id;
-    myPixmap   = 0L;
-    myWidth    = im->rgb_width;
-    myHeight   = im->rgb_height;
+    myWidth    = im->width();
+    myHeight   = im->height();
     myIsDirty  = true;
+    
+    this->idata=idata;
 
+    /* convert the image to 32-bit which we'll use internally */
+    QImage *newim=new QImage();
+    
+    *newim=im->convertDepth(32);
+
+    mySourceIm  = newim;
+    myIm	= new QImage();
+    *myIm	= newim->copy();
+        
+    if (newim != im)
+    {
+    	delete im;
+    }
+    
+    fastXform(&myIm, FlipNone, ROT_0, idata->brightness, idata->contrast, idata->gamma);
+    
+    myViewport=QRect(0, 0, myWidth, myHeight);
+    
     myOrigWidth  = myWidth;
     myOrigHeight = myHeight;
     myRotation   = ROT_0;
@@ -485,9 +478,8 @@ KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
 
 KuickImage::~KuickImage()
 {
-    if ( myPixmap )
-        Imlib_free_pixmap( myId, myPixmap );
-    Imlib_destroy_image( myId, myIm );
+    delete myIm;
+    delete mySourceIm;
 }
 
 
@@ -516,7 +508,7 @@ void KuickImage::restoreOriginalSize()
 }
 
 
-Pixmap& KuickImage::pixmap()
+QPixmap& KuickImage::getQPixmap()
 {
     if ( myIsDirty )
 	renderPixmap();
@@ -530,26 +522,60 @@ void KuickImage::renderPixmap()
     if ( !myIsDirty )
 	return;
 
-//     qDebug("### rendering: %s", myFilename.latin1());
-
-    if ( myPixmap )
-	Imlib_free_pixmap( myId, myPixmap );
+   //  qDebug("### rendering: %s", myFilename.latin1());
 
     emit startRendering();
 
-// #ifndef NDEBUG
-//     struct timeval tms1, tms2;
-//     gettimeofday( &tms1, NULL );
-// #endif
+#ifndef NDEBUG
+     struct timeval tms1, tms2;
+     gettimeofday( &tms1, NULL );
+#endif
+    
+    QImage scaled;
+    
+    //slow, nice way
+    //scaled=myIm->smoothScale(myWidth, myHeight);
+    
+    /* rescale QImage*/
+    
+    if (myWidth != myOrigWidth || myHeight != myOrigHeight)
+    {
+    	if (idata->renderQuality >= 1)
+    		scaled=smoothTransform();
+	else	scaled=fastTransform();
+    }
+    else scaled=myIm->copy();
+    
+    
+    
+    KPixmapIO io;
+    
+    if (QPixmap::defaultDepth() == scaled.depth())
+    	myPixmap=io.convertToPixmap(scaled);
+    else
+    {
+    	switch (idata->renderQuality)
+	{
+		case 0:
+    			myPixmap.convertFromImage(scaled, ThresholdDither);
+			break;
+			
+		case 1:
+    			myPixmap.convertFromImage(scaled, OrderedDither);
+			break;
+			
+		default:
+		case 2:
+    			myPixmap.convertFromImage(scaled, DiffuseDither);
+			break;
+	}
+    }
 
-    Imlib_render( myId, myIm, myWidth, myHeight );
-    myPixmap = Imlib_move_image( myId, myIm );
-
-// #ifndef NDEBUG
-//     gettimeofday( &tms2, NULL );
-//     qDebug("*** rendering image: %s, took %ld ms", myFilename.latin1(),
-//            (tms2.tv_usec - tms1.tv_usec)/1000);
-// #endif
+#ifndef NDEBUG
+     gettimeofday( &tms2, NULL );
+     qDebug("*** rendering image: %s at %dx%d, took %ld ms", myFilename.latin1(), myWidth, myHeight,
+            (tms2.tv_usec - tms1.tv_usec)/1000+(tms2.tv_sec - tms1.tv_sec)*1000);
+#endif
 
 
     emit stoppedRendering();
@@ -557,28 +583,397 @@ void KuickImage::renderPixmap()
     myIsDirty = false;
 }
 
+QImage KuickImage::smoothTransform()
+{
+	int w=myViewport.width();
+	int h=myViewport.height();
 
+	QImage dst(myViewport.width(), myViewport.height(), myIm->depth(), myIm->numColors(), myIm->bitOrder());
+	
+	QRgb *scanline;
+	
+	int basis_ox, basis_oy, basis_xx, basis_yy;
+	
+	double scalex=myWidth/(double) myIm->width();
+	double scaley=myHeight/(double) myIm->height();
+	
+	basis_ox=(int) (myViewport.left()*4096.0/scalex);
+	basis_oy=(int) (myViewport.top()*4096.0/scaley);
+	basis_xx=(int) (4096.0/scalex);
+	basis_yy=(int) (4096.0/scaley);
+
+	//qDebug("Basis: (%d, %d), (%d, 0), (0, %d)", basis_ox, basis_oy, basis_xx, basis_yy);
+		
+	int x2, y2;
+	
+	int max_x2=(myIm->width()<<12);
+	int max_y2=(myIm->height()<<12);
+	
+	QRgb background=idata->backgroundColor.rgb();
+	
+	QRgb **imdata=(QRgb **) myIm->jumpTable();
+	
+	int y=0;
+	
+	for (;;)	//fill the top of the target pixmap with the background color
+	{
+		y2=basis_oy+y*basis_yy;
+		
+		if ((y2 >= 0  && (y2 >> 12) < myIm->height()) || y >= h)
+			break;
+		
+		scanline=(QRgb*) dst.scanLine(y);
+		for (int i=0; i < w; i++)
+			*(scanline++)=background; //qRgb(0,255,0);
+		y++;
+	}
+	
+	for (; y < h; y++)
+	{
+		scanline=(QRgb*) dst.scanLine(y);
+	
+		x2=basis_ox;
+		y2=basis_oy+y*basis_yy;
+	
+		if (y2 >= max_y2)
+			break;
+		
+		int x=0;
+		
+		while  ((x2 < 0 || (x2>>12) >= myIm->width()) && x < w)	//fill the left of the target pixmap with the background color
+		{
+			*(scanline++)=background; //qRgb(0,0,255);
+			x2+=basis_xx;
+			x++;
+		}
+		
+		int top=y2 >> 12;
+		int bottom=top+1;
+		if (bottom >= myIm->height())
+			bottom--;						
+				
+		for (; x < w; x++)
+		{
+			int left=x2 >> 12;
+			
+			
+			int right=left+1;
+			
+			if (right >= myIm->width())
+				right=myIm->width()-1;
+
+			unsigned int wx=x2  & 0xfff; //12 bits of precision for reasons which will become clear
+			unsigned int wy=y2 & 0xfff; //12 bits of precision 
+			
+			unsigned int iwx=0xfff-wx;
+			unsigned int iwy=0xfff-wy;
+			
+			QRgb tl, tr, bl, br;
+			
+
+			tl=imdata[top][left];
+			tr=imdata[top][right];
+			bl=imdata[bottom][left];
+			br=imdata[bottom][right];
+
+			/*			
+			tl=getValidPixel(myIm, left, top, x, y);		//these calls are expensive
+			tr=getValidPixel(myIm, right, top, x, y);		//use them to debug segfaults in this function
+			bl=getValidPixel(myIm, left, bottom, x, y);
+			br=getValidPixel(myIm, right, bottom, x, y);
+			*/
+			
+			unsigned int r=(unsigned int) (qRed(tl)*iwx*iwy+qRed(tr)*wx*iwy+qRed(bl)*iwx*wy+qRed(br)*wx*wy); // NB 12+12+8 == 32
+			unsigned int g=(unsigned int) (qGreen(tl)*iwx*iwy+qGreen(tr)*wx*iwy+qGreen(bl)*iwx*wy+qGreen(br)*wx*wy);
+			unsigned int b=(unsigned int) (qBlue(tl)*iwx*iwy+qBlue(tr)*wx*iwy+qBlue(bl)*iwx*wy+qBlue(br)*wx*wy);
+			
+			*(scanline++)=qRgb(r >> 24, g >> 24, b >> 24); //we're actually off by one in 255 here
+			
+			x2+=basis_xx;
+			
+			if (x2 > max_x2)
+			{
+				x++;
+				break;
+			}
+				
+		}
+		
+		while  (x < w)	//fill the right of each scanline with the background colour
+		{
+			*(scanline++)=background; //qRgb(255,0,0);
+			x++;
+		}
+	}
+	
+	for (;;)	//fill the bottom of the target pixmap with the background color
+	{
+		y2=basis_oy+y*basis_yy;
+		
+		if (y >= h)
+			break;
+		
+		scanline=(QRgb*) dst.scanLine(y);
+		for (int i=0; i < w; i++)
+			*(scanline++)=background; //qRgb(255,255,0);
+		y++;
+	}
+	
+	return dst.copy();
+}
+
+QImage KuickImage::fastTransform()
+{
+	int w=myViewport.width();
+	int h=myViewport.height();
+
+	QImage dst(myViewport.width(), myViewport.height(), myIm->depth(), myIm->numColors(), myIm->bitOrder());
+	
+	QWMatrix inverse=myTransform.invert();
+	
+	QRgb *scanline;
+	
+	int basis_ox, basis_oy, basis_xx, basis_xy, basis_yx, basis_yy;
+	
+	double tempx, tempy;
+	
+	inverse.map(myViewport.left(), myViewport.top(), &tempx, &tempy);
+	basis_ox=(int) (tempx*65536.0);
+	basis_oy=(int) (tempy*65536.0);
+	inverse.map(myViewport.left()+1, myViewport.top(), &tempx, &tempy);
+	basis_xx=(int) (tempx*65536.0);
+	basis_xy=(int) (tempy*65536.0);
+	inverse.map(myViewport.left(), myViewport.top()+1, &tempx, &tempy);
+	basis_yx=(int) (tempx*65536.0);
+	basis_yy=(int) (tempy*65536.0);
+	
+	basis_xx-=basis_ox;
+	basis_xy-=basis_oy;
+	basis_yx-=basis_ox;
+	basis_yy-=basis_oy;	
+	
+	int x2, y2;
+	
+	for (int y=0; y < h; y++)
+	{
+		scanline=(QRgb*) dst.scanLine(y);
+	
+		x2=basis_ox+y*basis_yx;
+		y2=basis_oy+y*basis_yy;
+		
+		for (int x=0; x < w; x++)
+		{
+			int left=x2 >> 16;
+			int top=y2 >> 16;
+			/*
+			double wx= x2-(double)left;
+			double wy= y2-(double)top;
+			
+			if (wx > 0.5)
+				left++;
+			if (wy > 0.5)
+				top++;*/
+			
+			*(scanline++)=getValidPixel(myIm, left, top, x, y);
+			
+			x2+=basis_xx;
+			y2+=basis_xy;
+		}
+	}
+	
+	return dst.copy();
+}
+
+void KuickImage::fastXform(QImage **src, FlipMode flip, Rotation rot, int brightness, int contrast, int gamma)
+{
+	QImage *im=*src;
+
+	QImage *dst;
+	
+	int w=im->width();
+	int h=im->height();
+	
+	if ( rot == ROT_90 || rot == ROT_270 )
+        	qSwap( w, h );	
+	
+	dst=new QImage(w, h, im->depth(), im->numColors(), im->bitOrder());
+	
+	QRgb *scanline;
+	
+	int x2, y2;
+
+	int basis_ox=0, basis_oy=0, basis_xx=1, basis_xy=0, basis_yx=0, basis_yy=1;
+	
+	unsigned char colour_lut[256];
+	
+	float contrast_mult=powf(1.05f, contrast); //contrast is a logarithmic scale, with the base chosen so that -100% to +100% does something sensible
+	
+	float gamma_pow=powf(1.01622, -gamma); //so gamma_pow should go between 0.2 and 5 corresponding to inputs of -100 to +100 respectively
+	
+	for (int i=0; i <  256; i++)
+	{
+		int val=i;
+		val=(int)((val-128)*contrast_mult)+128;	
+		val=val+(int) (brightness*2.560f);	//so brightness is a percentage between -100% and +100%
+		
+		val=(int) (255.0f*powf(val/255.0f, gamma_pow));		//gamma is a floating point value greater than zero
+		
+		//do the clamp
+		if (val > 255)
+			val=255;
+		if (val < 0)
+			val=0;
+		colour_lut[i]=(unsigned char) val;
+	}
+	
+	switch (rot)
+	{
+		case ROT_90:
+			basis_ox=h-1;
+			basis_xx=0;
+			basis_xy=1;
+			basis_yy=0;
+			basis_yx=-1;
+			break;
+			
+		case ROT_180:
+			basis_ox=w-1;
+			basis_oy=h-1;
+			basis_xx=-1;
+			basis_yy=-1;
+			break;
+			
+		case ROT_270:
+			basis_oy=w-1;
+			basis_xx=0;
+			basis_xy=-1;
+			basis_yy=0;
+			basis_yx=1;
+			break;
+		default:
+			break;
+	}
+	
+	switch (flip)
+	{
+		case FlipHorizontal:
+			basis_ox=w-1-basis_ox;
+			basis_xx=-basis_xx;
+			basis_yx=-basis_yx;
+			break;
+		
+		case FlipVertical:	
+			basis_oy=h-1-basis_oy;
+			basis_xy=-basis_xy;
+			basis_yy=-basis_yy;
+			break;
+			
+		default:
+			break;
+	}
+	
+	QRgb **imdata=(QRgb**) im->jumpTable();
+	
+	for (int y=0; y < h; y++)
+	{
+		scanline=(QRgb*) dst->scanLine(y);
+	
+		x2=basis_ox+y*basis_yx;
+		y2=basis_oy+y*basis_yy;
+		
+		for (int x=0; x < w; x++)
+		{
+			/*
+			double wx= x2-(double)left;
+			double wy= y2-(double)top;
+			
+			if (wx > 0.5)
+				left++;
+			if (wy > 0.5)
+				top++;*/
+			
+			int r, g , b;
+				
+			QRgb px=imdata[y2][x2];
+			//QRgb px=getValidPixel(im, x2, y2, x, y);
+
+			//lookup transformed colour values
+						
+			r=colour_lut[qRed(px)];
+			g=colour_lut[qGreen(px)];
+			b=colour_lut[qBlue(px)];
+			
+			*(scanline++)=qRgb(r, g, b);
+			//dst->setPixel(x, y, qRgb(r,g,b));
+			
+			x2+=basis_xx;
+			y2+=basis_xy;
+		}
+	}
+	
+	delete im;
+	
+	*src=dst;
+}
+
+QRgb KuickImage::getValidPixel(QImage * im, int x, int y, int dest_x, int dest_y)
+{
+	if (x < 0 || y < 0 || x >= im->width() || y >= im->height())
+	{
+		//qDebug("KuickImage::getValidPixel() : (%d,%d) outside of image when rendering pixel (%d,%d)", x, y, dest_x, dest_y);
+		return idata->backgroundColor.rgb();
+	}
+	
+	QRgb **jumptable=(QRgb **) im->jumpTable();
+	
+	return jumptable[y][x];	//im->pixel does unwanted checking
+}
+
+void KuickImage::setViewportSize(const QSize &size)
+{
+	myIsDirty=(size == myViewport.size()) ? myIsDirty : true;
+	myViewport.setSize(size);
+}
+
+void	KuickImage::setViewportPosition(const QPoint &point)
+{
+	myIsDirty=(point == myViewport.topLeft()) ? myIsDirty : true;
+	myViewport.moveTopLeft(point);
+}
+
+void	KuickImage::setViewport(const QRect &vp)
+{
+	myIsDirty=(vp == myViewport) ? myIsDirty : true;
+	myViewport=vp;
+}
+
+
+/** Rotates the source QImage
+  */
 void KuickImage::rotate( Rotation rot )
 {
+
     if ( rot == ROT_180 ) { 		// rotate 180 degrees
-	Imlib_flip_image_horizontal( myId, myIm );
-	Imlib_flip_image_vertical( myId, myIm );
+	fastXform(&myIm, FlipNone, ROT_180, 0, 0, 0);
     }
 
     else if ( rot == ROT_90 || rot == ROT_270 ) {
 	qSwap( myWidth, myHeight );
-	Imlib_rotate_image( myId, myIm, -1 );
 
-	if ( rot == ROT_90 ) 		// rotate 90 degrees
-	    Imlib_flip_image_horizontal( myId, myIm );
-	else if ( rot == ROT_270 ) 		// rotate 270 degrees
-	    Imlib_flip_image_vertical( myId, myIm );
+	fastXform(&myIm, FlipNone, rot, 0, 0, 0);
     }
 
     myRotation = (Rotation) ((myRotation + rot) % 4);
+    
     myIsDirty = true;
 }
 
+void KuickImage::setColourTransform(int bright, int contrast, int gamma)
+{
+	*myIm=mySourceIm->copy();
+	fastXform(&myIm, myFlipMode, myRotation, bright, contrast, gamma);
+	myIsDirty=true;
+}
 
 bool KuickImage::rotateAbs( Rotation rot )
 {
@@ -605,11 +1000,11 @@ bool KuickImage::rotateAbs( Rotation rot )
 
 void KuickImage::flip( FlipMode flipMode )
 {
-    if ( flipMode & FlipHorizontal )
-	Imlib_flip_image_horizontal( myId, myIm );
-    if ( flipMode & FlipVertical )
-	Imlib_flip_image_vertical( myId, myIm );
 
+    fastXform(&myIm, flipMode, ROT_0, 0, 0, 0);
+
+    //TODO: modify the position of the viewport
+    
     myFlipMode = (FlipMode) (myFlipMode ^ flipMode);
     myIsDirty = true;
 }
@@ -623,16 +1018,18 @@ bool KuickImage::flipAbs( int mode )
 
     if ( ((myFlipMode & FlipHorizontal) && !(mode & FlipHorizontal)) ||
 	 (!(myFlipMode & FlipHorizontal) && (mode & FlipHorizontal)) ) {
-	Imlib_flip_image_horizontal( myId, myIm );
+		fastXform(&myIm, FlipHorizontal, ROT_0, 0, 0, 0);
 	changed = true;
     }
 
     if ( ((myFlipMode & FlipVertical) && !(mode & FlipVertical)) ||
 	 (!(myFlipMode & FlipVertical) && (mode & FlipVertical)) ) {
-	Imlib_flip_image_vertical( myId, myIm );
+		fastXform(&myIm, FlipVertical, ROT_0, 0, 0, 0);
 	changed = true;
     }
 
+    //TODO: modify the position of the viewport
+    
     if ( changed ) {
         myFlipMode = (FlipMode) mode;
         myIsDirty = true;
@@ -648,14 +1045,15 @@ bool KuickImage::flipAbs( int mode )
 
 
 // uhh ugly, we have two lists to map from filename to KuickImage :-/
-ImageCache::ImageCache( ImlibData *id, int maxImages )
+ImageCache::ImageCache( int maxImages )
 {
-    myId        = id;
     idleCount   = 0;
     myMaxImages = maxImages;
     kuickList.setAutoDelete( true );
     fileList.clear();
     kuickList.clear();
+    
+    KImageIO::registerFormats();
 }
 
 
@@ -694,8 +1092,7 @@ void ImageCache::slotIdle()
 }
 
 
-KuickImage * ImageCache::getKuimage( const QString& file,
-				     ImlibColorModifier mod )
+KuickImage * ImageCache::getKuimage( const QString& file, ImData *idata )
 {
     KuickImage *kuim = 0L;
     if ( file.isEmpty() )
@@ -726,8 +1123,8 @@ KuickImage * ImageCache::getKuimage( const QString& file,
 //         gettimeofday( &tms1, NULL );
 // #endif
 
-        ImlibImage *im = Imlib_load_image( myId,
-                                           QFile::encodeName( file ).data() );
+        QImage *im = new QImage(); //create null
+	bool loadsuccess=im->load(file);
 
 // #ifndef NDEBUG
 //         gettimeofday( &tms2, NULL );
@@ -736,11 +1133,10 @@ KuickImage * ImageCache::getKuimage( const QString& file,
 // #endif	
 
         slotIdle();
-	if ( !im )
+	if ( !loadsuccess )
 	    return 0L;
 
-	Imlib_set_image_modifier( myId, im, &mod );
-	kuim = new KuickImage( file, im, myId );
+	kuim = new KuickImage( file, im, idata );
 	connect( kuim, SIGNAL( startRendering() ),   SLOT( slotBusy() ));
 	connect( kuim, SIGNAL( stoppedRendering() ), SLOT( slotIdle() ));
 
@@ -771,3 +1167,4 @@ KuickImage * ImageCache::find( const QString& file )
 }
 */
 #include "imlibwidget.moc"
+

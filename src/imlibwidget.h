@@ -1,13 +1,20 @@
-/****************************************************************************
-** $Id$
-**
-** ImlibWidget: maps an Xlib window with Imlib's contents on a QWidget
-**
-** Created : 98
-**
-** Copyright (C) 1998-2001 by Carsten Pfeiffer.  All rights reserved.
-**
-****************************************************************************/
+/* This file is part of the KDE project
+   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation, version 2.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; see the file COPYING.  If not, write to
+   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+ */
 
 #ifndef IMLIBWIDGET_H
 #define IMLIBWIDGET_H
@@ -19,11 +26,12 @@
 #include <qptrlist.h>
 #include <qtimer.h>
 #include <qwidget.h>
+#include <qwmatrix.h>
 
 #include <kurl.h>
 
+#include <qimage.h>
 // #include those AFTER Qt-includes!
-#include <Imlib.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 // #include <X11/extensions/shape.h>
@@ -40,7 +48,7 @@ class KuickImage : public QObject
   Q_OBJECT
 
 public:
-  KuickImage( const QString& filename, ImlibImage *im, ImlibData *id );
+  KuickImage(const QString& filename, QImage *im, ImData *idata);
   ~KuickImage();
 
   int 		width() 	const { return myWidth;   }
@@ -54,8 +62,8 @@ public:
   bool          rotateAbs( Rotation rot );
   void 		flip( FlipMode flipMode );
   bool 		flipAbs( int mode );
-  ImlibImage *	imlibImage()	const { return myIm;      }
-  Pixmap& 	pixmap();
+  QImage *	getQImage()	const { return myIm;      }
+  QPixmap& 	getQPixmap();
   void 		renderPixmap();
   const QString& filename() 	const { return myFilename;}
 
@@ -64,15 +72,31 @@ public:
   Rotation      absRotation()   const { return myRotation; }
   FlipMode      flipMode()      const { return myFlipMode; }
 
-private:
+  void		setViewportSize(const QSize &size);
+  void		setViewportPosition(const QPoint &point);
+  void		setViewport(const QRect &vp);
+  
+  QImage	smoothTransform();
+  QImage	fastTransform();
+
+  void		setColourTransform(int bright, int contrast, int gamma);
+  
+  void	fastXform(QImage **im, FlipMode flip, Rotation rot, int bright, int contrast, int gamma);
+  
+private:  
+  inline QRgb 	getValidPixel(QImage * im, int x, int y, int dest_x, int dest_y);
+
   int 		myWidth;
   int 		myHeight;
   QString 	myFilename;
-  ImlibImage * 	myIm;
-  ImlibData  * 	myId;
-  Pixmap 	myPixmap;
+  QImage 	*myIm, *mySourceIm;
+  QPixmap	myPixmap;
+  QRect		myViewport;
+  QWMatrix	myTransform;
   bool 		myIsDirty;
 
+  ImData	*idata;
+  
   int 		myOrigWidth;
   int 		myOrigHeight;
   Rotation 	myRotation;
@@ -92,21 +116,20 @@ class ImageCache : public QObject
   Q_OBJECT
 
 public:
-  ImageCache( ImlibData *id, int maxImages=1 );
+  ImageCache( int maxImages=1 );
   ~ImageCache();
 
   void 			setMaxImages( int maxImages );
   int 			maxImages() 		const { return myMaxImages; }
 
-  KuickImage *		getKuimage( const QString& file, ImlibColorModifier  );
+  KuickImage *		getKuimage( const QString& file , ImData *idata );
   //  KuickImage *		find( const QString& filename );
 
 private:
   int 			myMaxImages;
   QStringList		fileList;
   QPtrList<KuickImage>	kuickList;
-  //  QPtrList<ImlibImage>	imList;
-  ImlibData * 		myId;
+
   int 			idleCount;
 
 private slots:
@@ -132,8 +155,6 @@ class ImlibWidget : public QWidget
 public:
 
   ImlibWidget( ImData *_idata=0, QWidget *parent=0, const char *name=0 );
-  ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0,
-	       const char *name=0 );
   virtual ~ImlibWidget();
 
   const QString& filename() 		const { return m_filename; }
@@ -169,8 +190,6 @@ public:
    */
   virtual bool  autoRotate( KuickImage *kuim );
 
-  ImlibData*	getImlibData() const 	       { return id; 		  }
-
 public slots:
   void 		rotate90();
   void 		rotate270();
@@ -190,6 +209,10 @@ protected:
   virtual void 	updateGeometry( int width, int height );
   virtual void  loaded( KuickImage * );
 
+  virtual void resize(int w, int h);
+  
+  virtual void	paintEvent( QPaintEvent *e);
+  
   void 		closeEvent( QCloseEvent * );
 
   inline void	autoUpdate( bool geometryUpdate=false ) {
@@ -197,21 +220,20 @@ protected:
       updateWidget( geometryUpdate );
   }
 
-  bool		stillResizing, deleteImData, deleteImlibData;
+  bool		stillResizing, deleteImData;
   bool          imlibModifierChanged;
-
+  bool		needNewCacheImage;
+  QString	nextImage;
+  
+  int xpos, ypos;	//positioning of the image within the widget
+  
   KuickImage 	*m_kuim;
   ImageCache 	*imageCache;
-  ImlibData     *id;
   ImData    	*idata;
-  Window        win;
-  ImlibColorModifier mod;
+  int mod_gamma, mod_brightness, mod_contrast;
 
   QString m_filename;
   QCursor m_oldCursor;
-
-  static const int ImlibOffset;
-
 
 private:
   void 		init();

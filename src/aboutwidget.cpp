@@ -14,7 +14,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
-*/
+ */
 
 #include <qdatetime.h>
 #include <qevent.h>
@@ -63,7 +63,7 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
     m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
     m_homepage->setAlignment( AlignCenter );
 
-    QLabel *copy = new QLabel("(C) 1998-2004", gBox);
+    QLabel *copy = new QLabel("(C) 1998-2002", gBox);
     copy->setAlignment( AlignCenter );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );

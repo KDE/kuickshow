@@ -14,7 +14,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
-*/
+ */
 
 
 #ifdef index
@@ -40,7 +40,7 @@
 
 KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 				      const char *name, bool modal )
-    : KDialogBase( Tabbed, i18n("Configure"),
+    : KDialogBase( Tabbed, i18n("KuickShow Configuration"),
 		     Help | Default | Ok | Apply | Cancel, Ok,
 		     parent, name, modal )
 {

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2002 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 2001-2002 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -14,7 +14,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
-*/
+ */
 
 #ifndef PRINTING_H
 #define PRINTING_H
@@ -78,7 +78,6 @@ private:
     KIntNumInput *m_height;
     KComboBox *m_units;
     QCheckBox *m_addFileName;
-    QCheckBox *m_blackwhite;
 
 };
 

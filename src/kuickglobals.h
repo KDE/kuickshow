@@ -25,8 +25,8 @@ class KuickGlobals
 {
 public:
     KWinModule winModule;
-
-
+    
+    
 };
 
 

@@ -23,12 +23,10 @@
 #include <qhbox.h>
 #include <qlayout.h>
 #include <qimage.h>
-#include <kimageeffect.h>
 #include <qpaintdevicemetrics.h>
 #include <qpainter.h>
 #include <qradiobutton.h>
 #include <qvbuttongroup.h>
-#include <qcolor.h>
 
 #include <kcombobox.h>
 #include <kdialog.h>
@@ -51,7 +49,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
 
     KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page"));
 
-    if ( printer.setup( parent, i18n("Print %1").arg(printer.docName().section('/', -1)) ) )
+    if ( printer.setup( parent ) )
     {
         KTempFile tmpFile( "kuickshow", ".png" );
         if ( tmpFile.status() == 0 )
@@ -89,11 +87,6 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
 
     QString t = "true";
     QString f = "false";
-
-    // Black & white print?
-    if ( printer.option( "app-kuickshow-blackwhite" ) != f) {
-        image = image.convertDepth( 1, Qt::MonoOnly | Qt::ThresholdDither | Qt::AvoidDither );
-    }
 
     int filenameOffset = 0;
     bool printFilename = printer.option( "app-kuickshow-printFilename" ) != f;
@@ -144,7 +137,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     //
     p.drawImage( x, y, image );
 
-    if ( printFilename )
+    if ( printFilename ) 
     {
         QString fname = minimizeString( originalFileName, fm, w );
         if ( !fname.isEmpty() )
@@ -166,7 +159,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 {
     if ( text.length() <= 5 )
         return QString::null; // no sense to cut that tiny little string
-
+    
     bool changed = false;
     while ( metrics.width( text ) > maxWidth )
     {
@@ -174,7 +167,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
         text.remove( mid, 2 ); // remove 2 characters in the middle
         changed = true;
     }
-
+    
     if ( changed ) // add "..." in the middle
     {
         int mid = text.length() / 2;
@@ -183,7 +176,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 
         text.replace( mid - 1, 3, "..." );
     }
-
+    
     return text;
 }
 
@@ -204,10 +197,6 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     m_addFileName = new QCheckBox( i18n("Print fi&lename below image"), this);
     m_addFileName->setChecked( true );
     layout->addWidget( m_addFileName );
-
-    m_blackwhite = new QCheckBox ( i18n("Print image in &black and white"), this);
-    m_blackwhite->setChecked( false );
-    layout->addWidget (m_blackwhite );
 
     QVButtonGroup *group = new QVButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
@@ -237,12 +226,12 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
 
     m_width = new KIntNumInput( widget, "exact width" );
     grid->addWidget( m_width, 1, 1 );
-    m_width->setLabel( i18n("&Width:" ) );
+    m_width->setLabel( i18n("&Width" ) );
     m_width->setMinValue( 1 );
 
     m_height = new KIntNumInput( widget, "exact height" );
     grid->addWidget( m_height, 2, 1 );
-    m_height->setLabel( i18n("&Height:" ) );
+    m_height->setLabel( i18n("&Height" ) );
     m_height->setMinValue( 1 );
 }
 
@@ -258,7 +247,6 @@ void KuickPrintDialogPage::getOptions( QMap<QString,QString>& opts,
 
 //    ### opts["app-kuickshow-alignment"] = ;
     opts["app-kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
-    opts["app-kuickshow-blackwhite"] = m_blackwhite->isChecked() ? t : f;
     opts["app-kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;
     opts["app-kuickshow-scale"] = m_scale->isChecked() ? t : f;
     opts["app-kuickshow-scale-unit"] = m_units->currentText();
@@ -272,10 +260,6 @@ void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
     QString f = "false";
 
     m_addFileName->setChecked( opts["app-kuickshow-printFilename"] != f );
-    // This sound strange, but if I copy the code on the line above, the checkbox
-    // was always checked. And this isn't the wanted behavior. So, with this works.
-    // KPrint magic ;-)
-    m_blackwhite->setChecked ( false );
     m_shrinkToFit->setChecked( opts["app-kuickshow-shrinkToFit"] != f );
     m_scale->setChecked( opts["app-kuickshow-scale"] == t );
 
@@ -315,12 +299,12 @@ int KuickPrintDialogPage::scaleHeight() const
 
 void KuickPrintDialogPage::setScaleWidth( int pixels )
 {
-    m_width->setValue( (int) pixelsToUnit( pixels ) );
+    m_width->setValue( pixelsToUnit( pixels ) );
 }
 
 void KuickPrintDialogPage::setScaleHeight( int pixels )
 {
-    m_width->setValue( (int) pixelsToUnit( pixels ) );
+    m_width->setValue( pixelsToUnit( pixels ) );
 }
 
 int KuickPrintDialogPage::fromUnitToPixels( float /*value*/ ) const

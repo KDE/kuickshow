@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998-2002 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -14,11 +14,10 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
-*/
+ */
 
 #include <qkeycode.h>
 
-#include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -42,9 +41,7 @@ FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
 {
     setEnableDirHighlighting( true );
 
-#if KDE_VERSION >= 310
     setViewConfig( KGlobal::config(), "Filebrowser" );
-#endif
     readConfig( KGlobal::config(), "Filebrowser" );
     setView( KFile::Default );
 
@@ -111,18 +108,7 @@ void FileWidget::initActions()
 void FileWidget::reloadConfiguration()
 {
     if ( kdata->fileFilter != nameFilter() ) {
-	// At first, our list must have folders
-	QStringList mimes;
-	mimes.append("inode/directory");
-
-	// Then, all the images!
-	KMimeType::List l = KMimeType::allMimeTypes();
-	for (KMimeType::List::iterator it = l.begin(); it != l.end(); ++it)
-	    if ((*it)->name().startsWith( "image/" ))
-		mimes.append( (*it)->name() );
-	
-	// Ok, show what we've done
-	setMimeFilter (mimes);
+	setNameFilter( kdata->fileFilter );
 	updateDir();
     }
 }

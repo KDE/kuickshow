@@ -67,27 +67,30 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   lbRotate = new QLabel( i18n("Rotate image:"), gbGeometry );
 
   comboRotate = new KComboBox( gbGeometry, "rotate combobox" );
-  comboRotate->insertItem( i18n("0 Degrees") );
-  comboRotate->insertItem( i18n("90 Degrees") );
+  comboRotate->insertItem( i18n("No Rotation") );
+  comboRotate->insertItem( i18n("90 Degrees Anticlockwise") );
   comboRotate->insertItem( i18n("180 Degrees") );
-  comboRotate->insertItem( i18n("270 Degrees") );
+  comboRotate->insertItem( i18n("90 Degrees Clockwise") );
 
   // --
 
   gbAdjust = new QVGroupBox( i18n("Adjustments"), this );
 
   sbBrightness = new KIntNumInput( gbAdjust, "brightness spinbox" );
-  sbBrightness->setRange( -256, 256, 1, true );
+  sbBrightness->setRange( -100, 100, 1, true );
   sbBrightness->setLabel( i18n("Brightness:"), AlignVCenter );
+  sbBrightness->setSuffix("%");
 
   sbContrast = new KIntNumInput( sbBrightness, 0,gbAdjust, 10,
 				 "contrast spinbox");
-  sbContrast->setRange( -256, 256, 1, true );
+  sbContrast->setRange( -100, 100, 1, true );
   sbContrast->setLabel( i18n("Contrast:"), AlignVCenter );
+  sbContrast->setSuffix("%");
 
   sbGamma = new KIntNumInput( sbContrast, 0, gbAdjust, 10, "gamma spinbox" );
-  sbGamma->setRange( -256, 256, 1, true );
+  sbGamma->setRange( -100, 100, 1, true );
   sbGamma->setLabel( i18n("Gamma:"), AlignVCenter );
+  sbGamma->setSuffix("%");
 
   // --
 
@@ -98,7 +101,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   imOrig = new ImlibWidget( 0L, gbPreview, "original image" );
 
   lbImFiltered = new QLabel( i18n("Modified"), gbPreview );
-  imFiltered = new ImlibWidget( 0L, imOrig->getImlibData(), gbPreview, "" );
+  imFiltered = new ImlibWidget( 0L, gbPreview, "" );
   connect( imFiltered, SIGNAL( destroyed() ), SLOT( slotNoImage() ));
 
   ////

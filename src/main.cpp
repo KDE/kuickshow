@@ -14,7 +14,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
-*/
+ */
 
 #include <qstring.h>
 
@@ -22,18 +22,17 @@
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <kdebug.h>
 
 #include "kuickshow.h"
 #include "version.h"
 
 static KCmdLineOptions options[] =
 {
-    { "lastfolder", I18N_NOOP("Start in the last visited folder, not the "
-			      "current working folder."), 0 },
+    { "lastdir", I18N_NOOP("Start in the last visited directory, not the "
+			   "current working directory"), 0 },
     { "d", 0, 0 }, // short option for --lastdir
     { "+[files]", I18N_NOOP("Optional image filenames/urls to show"), 0 },
-    KCmdLineLastOption
+    { 0, 0, 0 }
 };
 
 extern "C" int kdemain(int argc, char **argv)

@@ -37,7 +37,7 @@ public:
 
 protected:
   virtual void 	resizeEvent( QResizeEvent * );
-
+  
 private:
   FileView 	*box;
 

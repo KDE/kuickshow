@@ -14,7 +14,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.
-*/
+ */
 
 #ifndef SLIDESHOWWIDGET_H
 #define SLIDESHOWWIDGET_H
@@ -38,7 +38,6 @@ private:
     KIntNumInput *m_delayTime;
     KIntNumInput *m_cycles;
     QCheckBox    *m_fullScreen;
-    QCheckBox    *m_startWithCurrent;
 };
 
 #endif // SLIDESHOWWIDGET_H

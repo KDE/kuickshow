@@ -25,13 +25,14 @@
 
 ImData::ImData()
 {
+  renderQuality	 = 1;
+  /*
   ownPalette     = true;
-  fastRemap      = true;
-  fastRender  	 = true;
+  fastRemap      = true;  
   dither16bit    = false;
   dither8bit     = true;
   maxCache       = 10240;
-
+*/
   gamma          = 0;
   brightness     = 0;
   contrast       = 0;
@@ -39,6 +40,8 @@ ImData::ImData()
   gammaFactor      = 10;
   brightnessFactor = 10;
   contrastFactor   = 10;
+  
+  backgroundColor = Qt::black;
 }
 
 
@@ -46,15 +49,18 @@ void ImData::load( KConfig *kc )
 {
   ImData def;
 
-  kc->setGroup( "ImlibConfiguration" );
+  kc->setGroup( "RenderConfiguration" );
 
+  renderQuality  = kc->readNumEntry( "RenderQuality", def.renderQuality );
+  backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
+  
+/*  
   ownPalette  = kc->readBoolEntry( "UseOwnPalette", def.ownPalette );
   fastRemap   = kc->readBoolEntry( "FastRemapping", def.fastRemap );
-  fastRender  = kc->readBoolEntry( "FastRendering", def.fastRender );
   dither16bit = kc->readBoolEntry( "Dither16Bit", def.dither16bit );
   dither8bit  = kc->readBoolEntry( "Dither8Bit", def.dither8bit );
-
   maxCache    = kc->readNumEntry( "MaxCacheSize", 10240 );
+*/
 
   gamma       = kc->readNumEntry( "GammaDefault", 0 );
   brightness  = kc->readNumEntry( "BrightnessDefault", 0 );
@@ -68,14 +74,17 @@ void ImData::load( KConfig *kc )
 
 void ImData::save( KConfig *kc )
 {
-  kc->setGroup( "ImlibConfiguration" );
+  kc->setGroup( "RenderConfiguration" );
 
+  kc->writeEntry( "RenderQuality", renderQuality );
+  kc->writeEntry( "BackgroundColor", backgroundColor );
+/*
   kc->writeEntry( "UseOwnPalette", ownPalette );
   kc->writeEntry( "FastRemapping", fastRemap );
-  kc->writeEntry( "FastRendering", fastRender );
   kc->writeEntry( "Dither16Bit", dither16bit );
   kc->writeEntry( "Dither8Bit", dither8bit );
   kc->writeEntry( "MaxCacheSize", maxCache );
+*/
 
   kc->writeEntry( "GammaDefault", gamma );
   kc->writeEntry( "BrightnessDefault", brightness );

@@ -30,8 +30,7 @@ KuickData::KuickData()
   fileFilter  = "*.jpeg *.jpg *.gif *.xpm *.ppm *.pgm *.pbm *.pnm *.png *.bmp *.psd *.eim *.tif *.tiff *.xcf";// *.mng";
   slideDelay       = 3000;
   slideshowCycles  = 1;
-  slideshowFullscreen = true;
-  slideshowStartAtFirst = true;
+  slideshowFullscreen = false;
 
   preloadImage     = true;
 
@@ -58,8 +57,6 @@ KuickData::KuickData()
   maxCachedImages = 4;
   backgroundColor = Qt::black;
 
-  startInLastDir = true;
-
   idata = new ImData;
 }
 
@@ -79,8 +76,7 @@ void KuickData::load()
   fileFilter   = kc->readEntry( "FileFilter", def.fileFilter );
   slideDelay   = kc->readNumEntry( "SlideShowDelay", def.slideDelay );
   slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
-  slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", true );
-  slideshowStartAtFirst = kc->readBoolEntry("SlideshowStartAtFirst", true );
+  slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", false );
 
   preloadImage = kc->readBoolEntry( "PreloadNextImage", def.preloadImage );
 
@@ -107,11 +103,8 @@ void KuickData::load()
   maxWidth 	= abs( kc->readNumEntry( "MaximumImageWidth", def.maxWidth ) );
   maxHeight 	= abs( kc->readNumEntry( "MaximumImageHeight", def.maxHeight));
 
-  maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages",
+  maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages", 
                                               def.maxCachedImages );
-  backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
-
-  startInLastDir = kc->readBoolEntry( "StartInLastDir", true);
 
   idata->load( kc );
 
@@ -144,7 +137,6 @@ void KuickData::save()
   kc->writeEntry( "SlideShowDelay", slideDelay );
   kc->writeEntry( "SlideshowCycles", slideshowCycles );
   kc->writeEntry( "SlideshowFullscreen", slideshowFullscreen );
-  kc->writeEntry( "SlideshowStartAtFirst", slideshowStartAtFirst );
 
   kc->writeEntry( "PreloadNextImage", preloadImage );
 
@@ -171,9 +163,6 @@ void KuickData::save()
   kc->writeEntry( "MaximumImageHeight", maxHeight );
 
   kc->writeEntry( "MaxCachedImages", maxCachedImages );
-  kc->writeEntry( "BackgroundColor", backgroundColor );
-
-  kc->writeEntry( "StartInLastDir", startInLastDir );
 
   idata->save( kc );
 
