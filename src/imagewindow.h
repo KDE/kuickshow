@@ -151,6 +151,7 @@ private:
   int 		m_width;
   int 		m_height;
   int           m_numHeads;
+  QString   m_saveDirectory;
 
   KActionCollection *m_actions;
 

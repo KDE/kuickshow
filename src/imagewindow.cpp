@@ -858,13 +858,17 @@ void ImageWindow::saveImage()
     KuickData tmp;
     QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), 0L);
     keepSize->setChecked( true );
-    KFileDialog dlg( QString::null, tmp.fileFilter, this, "filedialog", true
+    KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this, "filedialog", true
 #if KDE_VERSION >= 310
                      ,keepSize );
+
 #else
                     );
 #endif
-    dlg.setSelection( m_kuim->filename() );
+    QString selection = m_saveDirectory.isEmpty() ? 
+                            m_kuim->filename() : 
+                            KURL::fromPathOrURL( m_kuim->filename() ).fileName();
+    dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setCaption( i18n("Save As") );
     if ( dlg.exec() == QDialog::Accepted )
@@ -885,6 +889,11 @@ void ImageWindow::saveImage()
             }
         }
     }
+
+    QString lastDir = dlg.baseURL().path(+1);
+    if ( lastDir != m_saveDirectory )
+        m_saveDirectory = lastDir;
+
 #if KDE_VERSION < 310
     delete keepSize;
 #endif
@@ -1089,6 +1098,5 @@ void ImageWindow::slotProperties()
     url.setPath( filename() ); // ###
     (void) new KPropertiesDialog( url, this, "props dialog", true );
 }
-
 
 #include "imagewindow.moc"
