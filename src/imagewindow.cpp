@@ -221,9 +221,12 @@ void ImageWindow::setupActions()
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
 
-    new KAction( i18n("Toggle Fullscreen Mode"), Key_Return,
-                 this, SLOT( toggleFullscreen() ),
-                 m_actions, "toggle_fullscreen" );
+    KShortcut cut(Key_Return);
+    cut.append(KStdAccel::shortcut(KStdAccel::FullScreen));
+    
+    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
+    action->setShortcut(cut);
+                 
     new KAction( i18n("Reload Image"), Key_Enter,
                  this, SLOT( reload() ),
                  m_actions, "reload_image" );
