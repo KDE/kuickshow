@@ -252,7 +252,7 @@ void KuickShow::initGUI( const KURL& startDir )
                                        KShortcut(),
                                        this, SLOT( slotShowInSameWindow() ),
                                        coll, "kuick_showInSameWindow" );
-    KAction *showFullscreen = new KAction( i18n("Show Image in Fullscreen mode"),
+    KAction *showFullscreen = new KAction( i18n("Show Image in Fullscreen Mode"),
 					   KShortcut(), this, SLOT( slotShowFullscreen() ),
 					   coll, "kuick_showFullscreen" );
 
