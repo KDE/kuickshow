@@ -108,9 +108,10 @@ protected:
   virtual void 	dropEvent( QDropEvent * );
 
 
-    
+
   // popupmenu entries
-  uint 		itemViewerZoomMax, itemViewerZoomOrig, itemViewerZoomIn, itemViewerZoomOut, itemViewerFlipH;
+  uint 		itemViewerZoomMax, itemViewerZoomOrig, itemViewerZoomIn;
+  uint          itemViewerZoomOut, itemViewerFlipH, itemViewerProps;
   uint 		itemRotate90, itemRotate180, itemRotate270;
   uint 		itemViewerFlipV, itemViewerPrint;
   uint          itemViewerSave, itemViewerClose;
@@ -128,6 +129,7 @@ protected:
 
 
   QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
+  QPopupMenu    *sizeMenu, *alignMenu;
   QWidget       *transWidget;
 
   ImageCache * 	imageCache;
@@ -139,6 +141,7 @@ protected slots:
   void          slotRequestNext()           { emit requestImage( this, +1 ); }
   void          slotRequestPrevious()       { emit requestImage( this, -1 ); }
   void          reload();
+  void          slotProperties();
 
 
 private:

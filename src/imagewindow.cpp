@@ -43,6 +43,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprinter.h>
+#include <kpropertiesdialog.h>
 #include <kstdaccel.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>
@@ -771,6 +772,7 @@ void ImageWindow::setPopupMenu()
 					    SLOT( printImage() ));
   itemViewerSave = viewerMenu->insertItem( i18n("Save As..."), this,
 					   SLOT( saveImage() ));
+  viewerMenu->insertItem( i18n("Properties..."), this, SLOT(slotProperties()));
   viewerMenu->insertSeparator();
   itemViewerClose = viewerMenu->insertItem( i18n("Close"), this,
 					    SLOT( close() ));
@@ -983,5 +985,13 @@ void ImageWindow::maximize()
     kdata->upScale = oldUpscale;
     kdata->downScale = oldDownscale;
 }
+
+void ImageWindow::slotProperties()
+{
+    KURL url;
+    url.setPath( filename() ); // ###
+    (void) new KPropertiesDialog( url, this, "props dialog", true );
+}
+
 
 #include "imagewindow.moc"
