@@ -20,7 +20,7 @@
 
 KuickData::KuickData()
 {
-  fileFilter  = "*.jpeg *.jpg *.gif *.xpm *.ppm *.pgm *.png *.bmp *.psd *.eim *.tiff *.xcf";// *.mng";
+  fileFilter  = "*.jpeg *.jpg *.gif *.xpm *.ppm *.pgm *.pbm *.pnm *.png *.bmp *.psd *.eim *.tiff *.xcf";// *.mng";
   slideDelay       = 3000;
   preloadImage     = true;
 
