@@ -106,8 +106,9 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     // shrink image to pagesize, if necessary
     //
     bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
+    QSize imagesize = image.size();
     if ( shrinkToFit && image.width() > w || image.height() > h ) {
-        image = image.smoothScale( w, h, QImage::ScaleMin );
+        imagesize.scale( w, h, QSize::ScaleMin );
     }
 
 
@@ -125,24 +126,24 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     // ### need a GUI for this in KuickPrintDialogPage!
     // x - alignment
     if ( alignment & Qt::AlignHCenter )
-        x = (w - image.width())/2;
+        x = (w - imagesize.width())/2;
     else if ( alignment & Qt::AlignLeft )
         x = 0;
     else if ( alignment & Qt::AlignRight )
-        x = w - image.width();
+        x = w - imagesize.width();
 
     // y - alignment
     if ( alignment & Qt::AlignVCenter )
-        y = (h - image.height())/2;
+        y = (h - imagesize.height())/2;
     else if ( alignment & Qt::AlignTop )
         y = 0;
     else if ( alignment & Qt::AlignBottom )
-        y = h - image.height();
+        y = h - imagesize.height();
 
     //
     // perform the actual drawing
     //
-    p.drawImage( x, y, image );
+    p.drawImage( QRect( x, y, imagesize.width(), imagesize.height()), image );
 
     if ( printFilename )
     {
