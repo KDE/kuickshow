@@ -71,9 +71,11 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     QString t = "true";
     QString f = "false";
 
+    int filenameOffset = 0;
     bool printFilename = printer.option( "kuickshow-printFilename" ) != f;
     if ( printFilename ) {
-        h -= fm.lineSpacing(); // ### assuming the filename fits into one line
+        filenameOffset = fm.lineSpacing() + 14;
+        h -= filenameOffset; // ### assuming the filename fits into one line
     }
 
     //
@@ -96,6 +98,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     int x = 0;
     int y = 0;
 
+    // ### need a GUI for this in KuickPrintDialogPage!
     // x - alignment
     if ( alignment & Qt::AlignHCenter )
         x = (w - image.width())/2;
@@ -112,10 +115,6 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     else if ( alignment & Qt::AlignBottom )
         y = h - image.height();
 
-
-
-
-
     //
     // perform the actual drawing
     //
@@ -124,7 +123,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     if ( printFilename ) {
         int fw = fm.width( originalFileName );
         int x = (w - fw)/2;
-        int y = h - fm.lineSpacing(); // ### assumption as above
+        int y = metrics.height() - filenameOffset/2; // ### assumption as above
         p.drawText( x, y, originalFileName );
     }
 
