@@ -1,7 +1,7 @@
 ## Makefile.am for kuickshow
 
 bin_PROGRAMS = kuickshow
-lib_LTLIBRARIES = kuickshow.la
+lib_LTLIBRARIES = kdeinit_kuickshow.la
 
 # set the include path for X, qt and KDE
 INCLUDES = $(all_includes)
@@ -9,16 +9,16 @@ KDE_CXXFLAGS = $(IMLIB_CFLAGS)
 CLEANFILES = dummy.cpp
 METASOURCES = AUTO
 
-kuickshow_la_LDFLAGS = $(all_libraries) -module -avoid-version
-kuickshow_la_LIBADD  = $(LIB_KDEPRINT) $(LIB_IMLIB)
-kuickshow_la_SOURCES =	kuickshow.cpp \
+kdeinit_kuickshow_la_LDFLAGS = $(all_libraries) -module -avoid-version
+kdeinit_kuickshow_la_LIBADD  = $(LIB_KDEPRINT) $(LIB_IMLIB)
+kdeinit_kuickshow_la_SOURCES =	kuickshow.cpp \
 	aboutwidget.cpp     generalwidget.cpp  kuickconfigdlg.cpp  main.cpp \
 	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \
 	imdata.cpp filefinder.cpp kurlwidget.cpp filewidget.cpp \
 	kuickio.cpp kuick.cpp imlibwidget.cpp slideshowwidget.cpp printing.cpp
 
 # now the kuickshow binary
-kuickshow_LDADD = kuickshow.la $(LIB_KIO) $(LIB_IMLIB)
+kuickshow_LDADD = kdeinit_kuickshow.la $(LIB_KIO) $(LIB_IMLIB)
 kuickshow_SOURCES = dummy.cpp
 kuickshow_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
