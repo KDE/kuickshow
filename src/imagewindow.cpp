@@ -74,6 +74,8 @@ void ImageWindow::init()
 {
 //   KCursor::setAutoHideCursor( this, true, true );
 
+    m_actions = new KActionCollection( this );
+    
     if ( !s_handCursor ) {
         QString file = locate( "appdata", "pics/handcursor.png" );
         if ( !file.isEmpty() )
@@ -82,7 +84,18 @@ void ImageWindow::init()
             s_handCursor = new QCursor( arrowCursor );
     }
 
-    m_accel 	 = 0L;
+    KAction *action = new KAction( i18n("Show next Image"), KStdAccel::next(),
+                                   this, "next_image" );
+    connect( action, SIGNAL( activated() ), SLOT( slotRequestNext() ));
+    m_actions->insert( action );
+                      
+    action = new KAction( i18n("Show previous Image"), KStdAccel::prior(),
+                          this, "previous_image" );
+    connect( action, SIGNAL( activated() ), SLOT( slotRequestPrevious() ));
+    m_actions->insert( action );
+                                   
+
+    m_accel        = 0L;
     transWidget    = 0L;
     myIsFullscreen = false;
     initialFullscreen = kdata.fullScreen;
@@ -108,6 +121,9 @@ void ImageWindow::updateAccel()
   // yeah, I know you've waited for them for a long time :o)
   m_accel = new KAccel( this );
 
+  m_actions->action( "next_image" )->plugAccel( m_accel );
+  m_actions->action( "previous_image" )->plugAccel( m_accel );
+  
   m_accel->insertItem( i18n("Scroll Up"),	 "Scroll Up",         "Up" );
   m_accel->insertItem( i18n("Scroll Down"),      "Scroll Down",       "Down" );
   m_accel->insertItem( i18n("Scroll Left"),      "Scroll Left",       "Left" );
@@ -221,7 +237,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 	xpos = 0; ypos = 0;
 	XMoveWindow( x11Display(), win, 0, 0 );
     }
-    
+
     QString caption = i18n( "Filename (Imagewidth x Imageheight)",
                             "%1 (%2 x %3)" );
     caption = caption.arg( kuim->filename() ).
@@ -295,14 +311,14 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 //     load image from disk / get from cache
 //     loaded(); // apply modifications, scale
 //     render pixmap
-// 
+//
 // updateWidget();
 //     XUnmapWindow();
 //     XSetWindowBackgroundPixmap()
 //     resize window to fit image size, center image
 //     XClearWindow(); // repaint
 //     XMapWindow(), XSync();
-// 
+//
 bool ImageWindow::showNextImage( const QString& filename )
 {
     if ( !loadImage( filename ) ) {
@@ -426,18 +442,30 @@ void ImageWindow::lessGamma()
 ////
 // event handlers
 
+void ImageWindow::wheelEvent( QWheelEvent *e )
+{
+    e->accept();
+    static const int WHEEL_DELTA = 120;
+    int delta = e->delta();
+    
+    if ( delta == 0 )
+        return;
+    
+    int steps = delta / WHEEL_DELTA;
+    emit requestImage( this, -steps );
+}
 
 void ImageWindow::keyPressEvent( QKeyEvent *e )
 {
     uint key = e->key();
-    if ( key == Key_Escape || key == KStdAccel::close() )
+    if ( key == Key_Escape || KStdAccel::isEqual( e, KStdAccel::close() ))
 	close( true );
-    else if ( key == KStdAccel::save() )
+    else if ( KStdAccel::isEqual( e, KStdAccel::save() ))
 	saveImage();
 
     else {
-	e->ignore();
-	return;
+ 	e->ignore();
+ 	return;
     }
 
     e->accept();

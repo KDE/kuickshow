@@ -93,6 +93,7 @@ private slots:
     void		viewerDeleted();
     void 		dropEvent( QDropEvent * );
     void 		slotSetActiveViewer( ImageWindow *i ) { viewer = i; }
+    void                slotAdvanceImage( ImageWindow *, int steps );
 
     void 		slotShowInSameWindow();
     void 		slotShowInOtherWindow();

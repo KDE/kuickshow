@@ -16,6 +16,8 @@
 
 #include <qevent.h>
 
+#include <kaction.h>
+
 #include "imlibwidget.h"
 
 class QCursor;
@@ -51,6 +53,8 @@ public:
 
   KAccel * 	accel() const { return m_accel; }
 
+  KActionCollection * actionCollection() const { return m_actions; }
+
   /**
    * Resizes image to @p w, @p h, but takes into account the workarea, so
    * it won't ever get a bigger size than the workarea.
@@ -78,7 +82,8 @@ public slots:
 
 signals:
   void 		sigFocusWindow( ImageWindow * );
-
+  // go advance images back/forth
+  void          requestImage( ImageWindow *, int advance );
 
 protected:
   ~ImageWindow(); // deletes itself, just call close( true );
@@ -88,6 +93,7 @@ protected:
   virtual void	updateGeometry( int imWidth, int imHeight );
   virtual void  loaded( KuickImage * );
 
+  virtual void  wheelEvent( QWheelEvent * );
   virtual void	keyPressEvent( QKeyEvent * );
   virtual void 	keyReleaseEvent( QKeyEvent * );
   virtual void 	mousePressEvent( QMouseEvent * );
@@ -128,6 +134,8 @@ protected:
 
 protected slots:
   void 		saveImage();
+  void          slotRequestNext()           { emit requestImage( this, +1 ); }
+  void          slotRequestPrevious()       { emit requestImage( this, -1 ); }
 
 
 private:
@@ -141,12 +149,14 @@ private:
   int 		m_height;
   int           m_numHeads;
 
+  KActionCollection *m_actions;
+
   // Qt resizes us even if we just request a move(). This sucks when
   // switching from fullscreen to window mode, as we will be resized twice.
   bool 		ignore_resize_hack;
 
   KAccel * 	m_accel;
-    
+
   static QCursor * s_handCursor;
 
 };

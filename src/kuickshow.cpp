@@ -198,7 +198,7 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action( "reload" )->setAccel( KStdAccel::reload() );
 
     KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit" );
-    
+
     // plug in
     for ( uint i = 0; i < coll->count(); i++ )
 	coll->action( i )->plugAccel( m_accel );
@@ -314,7 +314,8 @@ void KuickShow::showImage( const KFileViewItem *fi, bool newWin )
 		     this, SLOT( slotSetActiveViewer( ImageWindow * ) ));
 	    connect( viewer, SIGNAL( sigBadImage(const QString& ) ),
 		     this, SLOT( messageCantLoadImage(const QString &) ));
-
+            connect( viewer, SIGNAL( requestImage( ImageWindow *, int )), 
+                     this, SLOT( slotAdvanceImage( ImageWindow *, int )));
 	    if ( s_viewers.count() == 1 ) {
 		// we have to move to 0x0 before showing _and_
 		// after showing, otherwise we get some bogus geometry()
@@ -465,6 +466,32 @@ void KuickShow::show()
     (void) Kuick::frameSize( winId() );
 }
 
+void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
+{
+    KFileViewItem *item      = 0L; // to be shown
+    KFileViewItem *item_next = 0L; // to be cached
+    
+    if ( steps > 0 ) {
+        for ( int i = 0; i < steps; i++ )
+            item = fileWidget->getNext( true );
+        item_next = fileWidget->getNext( false );
+    }
+    
+    else if ( steps < 0 ) {
+        for ( int i = steps; i < 0; i++ )
+            item = fileWidget->getPrevious( true );
+        item_next = fileWidget->getPrevious( false );
+    }
+
+    if ( FileWidget::isImage( item ) ) {
+        viewer->showNextImage( item->url().path() ); // ###
+		
+        if ( kdata.preloadImage ) // preload next image
+            if ( FileWidget::isImage( item_next ) )
+                viewer->cacheImage( item_next->url().path() ); // ###
+    }
+}
+
 bool KuickShow::eventFilter( QObject *o, QEvent *e )
 {
     if ( m_lockEvents ) // we probably need to install an eventFilter over
@@ -521,16 +548,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 		return true;
 	    }
 
-	    // FIXME: make all this stuff via KStdAccel and KAccel ->slots
-	    if ( KStdAccel::isEqual( k, KStdAccel::prior() ) ) {
-		item = fileWidget->getPrevious( true );
-		item_next = fileWidget->getPrevious( false );
-	    }
-
-	    else if ( KStdAccel::isEqual( k, KStdAccel::next() ) ) {
-		item = fileWidget->getNext( true );
-		item_next = fileWidget->getNext( false );
-	    }
+ 	    // FIXME: make all this stuff via KStdAccel and KAccel ->slots
 
 	    switch( key ) {
 	    case Key_Home: {

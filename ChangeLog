@@ -1,3 +1,12 @@
+Sat Aug 25 02:58:31 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (init): 
+	mouse-wheel can switch between images now, per request of
+	Bill Benken <bilben1@home.com>
+
+	* also fixed the KStdAccel::save() and close() accels not working
+	in the image window
+
 <pre>
 Sat Aug  4 03:37:50 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 
