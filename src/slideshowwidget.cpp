@@ -16,7 +16,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setSpacing( KDialog::spacingHint() );
 
-    m_fullScreen = new QCheckBox( i18n("Switch to &fullscreen"), this );
+    m_fullScreen = new QCheckBox( i18n("Switch to &full-screen"), this );
     
     m_delayTime = new KIntNumInput( this, "delay time" );
     m_delayTime->setLabel( i18n("De&lay between slides:") );
