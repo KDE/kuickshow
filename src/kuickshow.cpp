@@ -61,9 +61,6 @@
 #include <kstdguiitem.h>
 #include <kimageio.h>
 
-// Test
-#include <kdebug.h>
-
 #include "aboutwidget.h"
 #include "filewidget.h"
 #include "imdata.h"
