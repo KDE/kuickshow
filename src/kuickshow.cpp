@@ -86,6 +86,10 @@ KuickShow::KuickShow( const char *name )
   initImlib();
   resize( 400, 500 );
 
+  m_slideTimer = new QTimer( this );
+  connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
+
+  
   KConfig *kc = KGlobal::config();
 
   bool isDir = false; // true if we get a directory on the commandline
@@ -125,9 +129,6 @@ KuickShow::KuickShow( const char *name )
   else { // don't show browser, when image on commandline
       hide();
   }
-
-  m_slideTimer = new QTimer( this );
-  connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
 }
 
 
@@ -139,7 +140,7 @@ KuickShow::~KuickShow()
     if ( m_viewer )
 	m_viewer->close( true );
 
-    delete id;
+    free( id );
     kapp->quit();
 
     delete kdata;
@@ -223,7 +224,7 @@ void KuickShow::initGUI( const KURL& startDir )
     KHelpMenu *helpMenu = new KHelpMenu( this,
                                          KGlobal::instance()->aboutData(),
                                          false );
-    tBar->insertButton( "help", 100, 
+    tBar->insertButton( "help", 100,
                         SIGNAL( clicked() ), this, SLOT( appHelpActivated() ));
     tBar->setDelayedPopup( 100, helpMenu->menu() );
 
@@ -253,9 +254,11 @@ void KuickShow::initGUI( const KURL& startDir )
 
 void KuickShow::viewerDeleted()
 {
-    s_viewers.remove( (ImageWindow*) sender() );
-    m_viewer = 0L;
-
+    ImageWindow *viewer = (ImageWindow*) sender();
+    s_viewers.remove( viewer );
+    if ( viewer == m_viewer )
+        m_viewer = 0L;
+    
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
 	if ( fileWidget )
 	    saveSettings();
@@ -268,8 +271,10 @@ void KuickShow::viewerDeleted()
 	fileWidget->setFocus();
     }
 
-    // maybe a slideshow was stopped --> enable the action again
-    fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
+    if ( fileWidget )
+        // maybe a slideshow was stopped --> enable the action again
+        fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
+    
     m_slideTimer->stop();
 }
 
@@ -336,21 +341,31 @@ void KuickShow::showImage( const KFileItem *fi,
 	    m_viewer->installEventFilter( this );
 	}
 
+        // for some strange reason, m_viewer sometimes changes during the
+        // next few lines of code, so as a workaround, we use safeViewer here.
+        // This happens when calling KuickShow with two or more remote-url
+        // arguments on the commandline, where the first one is loaded properly
+        // and the second isn't (e.g. because it is a pdf or something else,
+        // Imlib can't load).
+        ImageWindow *safeViewer = m_viewer;
+        
 	QString filename;
 	KIO::NetAccess::download(fi->url(), filename);
 
-	if ( !m_viewer->showNextImage( filename ) )
-	    m_viewer->close( true ); // couldn't load image, close window
+	if ( !safeViewer->showNextImage( filename ) ) {
+            m_viewer = safeViewer;
+	    safeViewer->close( true ); // couldn't load image, close window
+        }
 	else {
-            m_viewer->setFullscreen( fullscreen );
+            safeViewer->setFullscreen( fullscreen );
 
 	    if ( newWindow ) {
-		m_viewer->show();
+		safeViewer->show();
 		
 		if ( !fullscreen && s_viewers.count() == 1 ) {
 		    // the WM might have moved us after showing -> strike back!
 		    // move the first image to 0x0 workarea coord
-		    m_viewer->move( Kuick::workArea().topLeft() );
+		    safeViewer->move( Kuick::workArea().topLeft() );
 		}
 	    }
 
@@ -358,8 +373,10 @@ void KuickShow::showImage( const KFileItem *fi,
   		KFileItem *item = 0L;                 // don't move cursor
   		item = fileWidget->getItem( FileWidget::Next, true );
   		if ( item )
-  		    m_viewer->cacheImage( item->url().path() ); // FIXME
+  		    safeViewer->cacheImage( item->url().path() ); // FIXME
   	    }
+            
+            m_viewer = safeViewer;
 	} // m_viewer created successfully
     } // isImage
 }
