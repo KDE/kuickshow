@@ -49,6 +49,8 @@
 #include "imagewindow.h"
 #include "kuick.h"
 #include "kuickdata.h"
+#include <kiconloader.h>
+#include <qapplication.h>
 
 QCursor *ImageWindow::s_handCursor = 0L;
 
