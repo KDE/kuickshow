@@ -396,7 +396,7 @@ void ImageWindow::zoomIn()
 
 void ImageWindow::zoomOut()
 {
-    ASSERT( kdata.zoomSteps != 0 );
+    Q_ASSERT( kdata.zoomSteps != 0 );
     zoomImage( 1.0 / kdata.zoomSteps );
 }
 

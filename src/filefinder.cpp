@@ -6,6 +6,7 @@
 
 #include <qkeycode.h>
 
+#include <kapp.h>
 #include <kconfig.h>
 #include <kglobal.h>
 #include <kcompletionbox.h>
