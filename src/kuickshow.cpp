@@ -29,7 +29,7 @@
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kpropsdlg.h>
+#include <kpropertiesdialog.h>
 #include <kstatusbar.h>
 #include <kstdaction.h>
 #include <kstandarddirs.h>

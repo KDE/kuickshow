@@ -14,7 +14,7 @@
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <kpopupmenu.h>
-#include <kpropsdlg.h>
+#include <kpropertiesdialog.h>
 #include <kurlcompletion.h>
 
 #include "filefinder.h"
