@@ -505,7 +505,9 @@ void KuickShow::showImage( const KFileItem *fi,
 
 void KuickShow::startSlideShow()
 {
-    KFileItem *item = fileWidget->gotoFirstImage();
+    KFileItem *item = kdata->slideshowStartAtFirst ?
+                      fileWidget->gotoFirstImage() : 
+                      fileWidget->getCurrentItem(false);
 
     if ( item ) {
         m_slideshowCycle = 1;

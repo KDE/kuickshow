@@ -35,6 +35,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
     layout->setSpacing( KDialog::spacingHint() );
 
     m_fullScreen = new QCheckBox( i18n("Switch to &full-screen"), this );
+    m_startWithCurrent = new QCheckBox( i18n("Start with &current image"), this);
 
     m_delayTime = new KIntNumInput( this, "delay time" );
     m_delayTime->setLabel( i18n("De&lay between slides:") );
@@ -45,8 +46,9 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
     m_cycles->setLabel( i18n("&Iterations (0 = infinite):") );
     m_cycles->setSpecialValueText( i18n("infinite") );
     m_cycles->setRange( 0, 500 );
-
+    
     layout->addWidget( m_fullScreen );
+    layout->addWidget( m_startWithCurrent );
     layout->addWidget( m_delayTime );
     layout->addWidget( m_cycles );
     layout->addStretch( 1 );
@@ -58,11 +60,12 @@ SlideShowWidget::~SlideShowWidget()
 {
 }
 
-void SlideShowWidget:: loadSettings( const KuickData& data )
+void SlideShowWidget::loadSettings( const KuickData& data )
 {
     m_delayTime->setValue( data.slideDelay / 1000 );
     m_cycles->setValue( data.slideshowCycles );
     m_fullScreen->setChecked( data.slideshowFullscreen );
+    m_startWithCurrent->setChecked( !data.slideshowStartAtFirst );
 }
 
 void SlideShowWidget::applySettings( KuickData& data )
@@ -70,6 +73,7 @@ void SlideShowWidget::applySettings( KuickData& data )
     data.slideDelay = m_delayTime->value() * 1000;
     data.slideshowCycles = m_cycles->value();
     data.slideshowFullscreen = m_fullScreen->isChecked();
+    data.slideshowStartAtFirst = !m_startWithCurrent->isChecked();
 }
 
 #include "slideshowwidget.moc"

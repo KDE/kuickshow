@@ -38,6 +38,7 @@ private:
     KIntNumInput *m_delayTime;
     KIntNumInput *m_cycles;
     QCheckBox    *m_fullScreen;
+    QCheckBox    *m_startWithCurrent;
 };
 
 #endif // SLIDESHOWWIDGET_H

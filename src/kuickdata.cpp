@@ -31,6 +31,7 @@ KuickData::KuickData()
   slideDelay       = 3000;
   slideshowCycles  = 1;
   slideshowFullscreen = false;
+  slideshowStartAtFirst = true;
 
   preloadImage     = true;
 
@@ -77,6 +78,7 @@ void KuickData::load()
   slideDelay   = kc->readNumEntry( "SlideShowDelay", def.slideDelay );
   slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
   slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", false );
+  slideshowStartAtFirst = kc->readBoolEntry("SlideshowStartAtFirst", true );
 
   preloadImage = kc->readBoolEntry( "PreloadNextImage", def.preloadImage );
 
@@ -138,6 +140,7 @@ void KuickData::save()
   kc->writeEntry( "SlideShowDelay", slideDelay );
   kc->writeEntry( "SlideshowCycles", slideshowCycles );
   kc->writeEntry( "SlideshowFullscreen", slideshowFullscreen );
+  kc->writeEntry( "SlideshowStartAtFirst", slideshowStartAtFirst );
 
   kc->writeEntry( "PreloadNextImage", preloadImage );
 
