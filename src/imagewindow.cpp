@@ -223,10 +223,10 @@ void ImageWindow::setupActions()
 
     KShortcut cut(Key_Return);
     cut.append(KStdAccel::shortcut(KStdAccel::FullScreen));
-    
+
     KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
     action->setShortcut(cut);
-                 
+
     new KAction( i18n("Reload Image"), Key_Enter,
                  this, SLOT( reload() ),
                  m_actions, "reload_image" );
@@ -310,10 +310,9 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     }
 
     QString caption = i18n( "Filename (Imagewidth x Imageheight)",
-                            "%1 (%2 x %3)" );
-    caption = caption.arg( m_kuim->filename() ).
-              arg( m_kuim->originalWidth() ).
-              arg( m_kuim->originalHeight() );
+                            "%3 (%1 x %2)" );
+    caption = caption.arg( m_kuim->originalWidth() ).
+              arg( m_kuim->originalHeight() ).arg( m_kuim->filename() );
     setCaption( kapp->makeStdCaption( caption ) );
 }
 
