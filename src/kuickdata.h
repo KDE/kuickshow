@@ -59,6 +59,8 @@ public:
     bool 	autoRotation     :1;
     bool 	fullScreen       :1;
 
+    bool	showImageWindowToolBar	:1;
+    
     // default image modifications
     bool 	isModsEnabled :1;
 

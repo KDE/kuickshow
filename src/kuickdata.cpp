@@ -42,6 +42,8 @@ KuickData::KuickData()
   flipVertically   = false;
   flipHorizontally = false;
 
+  showImageWindowToolBar = true;
+  
   maxUpScale       = 3;
   rotation         = ROT_0;
 
@@ -80,6 +82,7 @@ void KuickData::load()
 
   preloadImage = kc->readBoolEntry( "PreloadNextImage", def.preloadImage );
 
+  showImageWindowToolBar = kc->readBoolEntry( "ShowImageWindowToolBar", def.showImageWindowToolBar );
   fullScreen = kc->readBoolEntry( "Fullscreen", def.fullScreen);
   autoRotation = kc->readBoolEntry( "AutoRotation", def.autoRotation);
   downScale  = kc->readBoolEntry( "ShrinkToScreenSize", def.downScale );
@@ -140,6 +143,7 @@ void KuickData::save()
 
   kc->writeEntry( "PreloadNextImage", preloadImage );
 
+  kc->writeEntry( "ShowImageWindowToolBar", showImageWindowToolBar );
   kc->writeEntry( "Fullscreen", fullScreen  );
   kc->writeEntry( "AutoRotation", autoRotation  );
   kc->writeEntry( "ShrinkToScreenSize", downScale );
