@@ -109,10 +109,10 @@ void ImlibWidget::init()
 
 ImlibWidget::~ImlibWidget()
 {
-    if ( deleteImlibData ) delete id;
+    delete imageCache;
+    if ( deleteImlibData && id ) free ( id );
     if ( win ) XDestroyWindow( x11Display(), win );
     if ( deleteImData ) delete idata;
-    delete imageCache;
 }
 
 KURL ImlibWidget::url() const
