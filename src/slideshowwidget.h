@@ -7,12 +7,12 @@
 #ifndef SLIDESHOWWIDGET_H
 #define SLIDESHOWWIDGET_H
 
-#include "basewidget.h"
+#include "kuickdata.h"
 
 class QCheckBox;
 class KIntNumInput;
 
-class SlideShowWidget : public BaseWidget
+class SlideShowWidget : public QWidget
 {
     Q_OBJECT
 public:

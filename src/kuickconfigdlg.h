@@ -16,14 +16,14 @@
 
 #include <kkeydialog.h>
 
-#include "logotabdialog.h"
+#include <kdialogbase.h>
 
 class GeneralWidget;
 class DefaultsWidget;
 class SlideShowWidget;
 class ImageWindow;
 
-class KuickConfigDialog : public LogoTabDialog
+class KuickConfigDialog : public KDialogBase
 {
     Q_OBJECT
 

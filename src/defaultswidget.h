@@ -8,7 +8,7 @@
 #ifndef DEFAULTSWIDGET_H
 #define DEFAULTSWIDGET_H
 
-#include "basewidget.h"
+#include "kuickdata.h"
 
 class ImlibWidget;
 class ImData;
@@ -19,7 +19,7 @@ class QLabel;
 class KComboBox;
 class KIntNumInput;
 
-class DefaultsWidget : public BaseWidget
+class DefaultsWidget : public QWidget
 {
   Q_OBJECT
 
@@ -54,7 +54,6 @@ private:
 
 private slots:
   void 		updatePreview();
-  void 		slotEnableMaxScale( bool );
   void 		slotNoImage()		{ imFiltered = 0L; }
   void 		enableWidgets( bool );
 

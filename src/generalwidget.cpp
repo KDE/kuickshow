@@ -4,30 +4,43 @@
 #include <qtooltip.h>
 #include <qvgroupbox.h>
 
+#include <kapplication.h>
 #include <kcolorbutton.h>
 #include <kdialog.h>
 #include <kiconloader.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <knuminput.h>
+#include <kurllabel.h>
 
 #include "generalwidget.h"
 
 GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
-  : BaseWidget( "logo", parent, name )
+  : QWidget( parent, name )
 {
-  setTitle( i18n("Settings") );
-
   QVBoxLayout *layout = new QVBoxLayout( this );
   layout->setSpacing( KDialog::spacingHint() );
-  layout->setMargin( KDialog::marginHint() + 4 );
+
+  QPixmap pixmap = UserIcon( "logo" );
+  KURLLabel *logo = new KURLLabel( this );
+  logo->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
+  logo->setPixmap( pixmap );
+  logo->setFixedSize( pixmap.size() );
+  logo->setTipText( i18n( "Open KuickShow Website" ) );
+  logo->setUseTips( true );
+
+  connect( logo, SIGNAL( leftClickedURL( const QString & ) ),
+            SLOT( slotURLClicked( const QString & ) ) );
+
+  layout->addWidget( logo, 0, AlignRight );
 
   cbFullscreen = new QCheckBox( i18n("Fullscreen mode"), this, "boscreen" );
 
   cbPreload = new QCheckBox( i18n("Preload next image"), this, "preload");
 
-  QGridLayout *gridLayout = new QGridLayout( 3, 3 );
-  QLabel *l0 = new QLabel( i18n("Background color"), this );
+  QGridLayout *gridLayout = new QGridLayout( this, 3, 2 );
+  gridLayout->setSpacing( KDialog::spacingHint() );
+  QLabel *l0 = new QLabel( i18n("Background color:"), this );
   colorButton = new KColorButton( this );
 
   QLabel *l1 = new QLabel( i18n("Show only files with extension: "), this, "label" );
@@ -35,8 +48,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   QLabel *l2 = new QLabel( i18n("Slideshow delay (1/10 s): "), this );
   delaySpinBox = new KIntNumInput( this, "delay spinbox" );
-  delaySpinBox->setRange( 1, 600 * 30, 5 ); // 30 min
-  QToolTip::add( delaySpinBox, i18n("default: 30 = 3 seconds") );
+  delaySpinBox->setRange( 1, 600 * 2, 5 );
 
   gridLayout->addWidget( l0, 0, 0 );
   gridLayout->addWidget( colorButton, 0, 1 );
@@ -45,11 +57,9 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   gridLayout->addWidget( l2, 2, 0 );
   gridLayout->addWidget( delaySpinBox, 2, 1 );
 
-  layout->addSpacing( 4 * KDialog::marginHint() );
   layout->addWidget( cbFullscreen );
   layout->addWidget( cbPreload );
   layout->addLayout( gridLayout );
-  layout->addSpacing( 10 );
 
   ////////////////////////////////////////////////////////////////////////
 
@@ -72,11 +82,10 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   cbFastRemap = new QCheckBox( i18n("Fast palette remapping"), gbox2, "remap");
 
   maxCacheSpinBox = new KIntNumInput( gbox2, "editmaxcache" );
-  maxCacheSpinBox->setLabel( i18n("Maximum cache size (MB): "), AlignVCenter );
-  maxCacheSpinBox->setRange( 0, 500, 1 );
-  QToolTip::add( maxCacheSpinBox, i18n("0 = don't limit") );
-
-  pixLabel->raise();
+  maxCacheSpinBox->setLabel( i18n("Maximum cache size: "), AlignVCenter );
+  maxCacheSpinBox->setSuffix( i18n( " MB" ) );
+  maxCacheSpinBox->setSpecialValueText( i18n( "Unlimited" ) );
+  maxCacheSpinBox->setRange( 0, 100, 1 );
 
   loadSettings( *kdata );
   cbFullscreen->setFocus();
@@ -84,6 +93,11 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
 GeneralWidget::~GeneralWidget()
 {
+}
+
+void GeneralWidget::slotURLClicked( const QString & url )
+{
+  kapp->invokeBrowser( url );
 }
 
 void GeneralWidget::loadSettings( const KuickData& data )

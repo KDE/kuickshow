@@ -27,7 +27,7 @@
 
 KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 				      const char *name, bool modal )
-    : LogoTabDialog( KJanusWidget::Tabbed, i18n("KuickShow Configuration"),
+    : KDialogBase( Tabbed, i18n("KuickShow Configuration"),
 		     Help | Default | Ok | Apply | Cancel, Ok,
 		     parent, name, modal )
 {

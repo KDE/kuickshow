@@ -14,7 +14,7 @@
 #include "defaultswidget.h"
 
 DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
-  : BaseWidget( QString::null, parent, name )
+  : QWidget( parent, name )
 {
   imFiltered = 0L;
 
@@ -24,23 +24,29 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   // create all the widgets
 
   gbScale = new QGroupBox( i18n("Scaling"), this );
+  gbScale->setColumnLayout( 0, Qt::Horizontal );
+
   cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"),
 			       gbScale, "shrinktoscreen" );
 
   cbUpScale = new QCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale, "upscale checkbox" );
-  connect(cbUpScale, SIGNAL( toggled(bool)), SLOT( slotEnableMaxScale(bool) ));
 
   sbMaxUpScaleFactor = new KIntNumInput( gbScale, "upscale factor" );
-  sbMaxUpScaleFactor->setRange( 1, 1000, 1, false );
+  sbMaxUpScaleFactor->setRange( 1, 100, 1, false );
+
+  connect(cbUpScale, SIGNAL( toggled(bool)), sbMaxUpScaleFactor, 
+            SLOT( setEnabled(bool) ));
 
   // --
 
   gbGeometry = new QGroupBox( i18n("Geometry"), this );
+  gbGeometry->setColumnLayout( 0, Qt::Horizontal );
+
   cbFlipVertically = new QCheckBox( i18n("Flip vertically"), gbGeometry );
 
   cbFlipHorizontally = new QCheckBox( i18n("Flip horizontally"), gbGeometry );
 
-  lbRotate = new QLabel( i18n("Rotate image"), gbGeometry );
+  lbRotate = new QLabel( i18n("Rotate image:"), gbGeometry );
 
   comboRotate = new KComboBox( gbGeometry, "rotate combobox" );
   comboRotate->insertItem( i18n("0 degrees") );
@@ -54,16 +60,16 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   sbBrightness = new KIntNumInput( gbAdjust, "brightness spinbox" );
   sbBrightness->setRange( -256, 256, 1, true );
-  sbBrightness->setLabel( i18n("Brightness"), AlignVCenter );
+  sbBrightness->setLabel( i18n("Brightness:"), AlignVCenter );
 
   sbContrast = new KIntNumInput( sbBrightness, 0,gbAdjust, 10,
 				 "contrast spinbox");
   sbContrast->setRange( -256, 256, 1, true );
-  sbContrast->setLabel( i18n("Contrast"), AlignVCenter );
+  sbContrast->setLabel( i18n("Contrast:"), AlignVCenter );
 
   sbGamma = new KIntNumInput( sbContrast, 0, gbAdjust, 10, "gamma spinbox" );
   sbGamma->setRange( -256, 256, 1, true );
-  sbGamma->setLabel( i18n("Gamma"), AlignVCenter );
+  sbGamma->setLabel( i18n("Gamma:"), AlignVCenter );
 
   // --
 
@@ -82,15 +88,18 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
 
   // layout management
-  QVBoxLayout *mainLayout = new QVBoxLayout( this, 10, -1, "main layout" );
+  QVBoxLayout *mainLayout = new QVBoxLayout( this, 0, 
+            KDialog::spacingHint(), "main layout" );
 
-  QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale, 10, 5, "scale lay");
-  QVBoxLayout *gbGeometryLayout = new QVBoxLayout(gbGeometry, 10, 5,"geo lay");
-  QGridLayout *gbPreviewLayout = new QGridLayout(gbPreview, 2, 3, 0, -1, "vi");
+  QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale->layout(), 
+            KDialog::spacingHint());
+  QVBoxLayout *gbGeometryLayout = new QVBoxLayout(gbGeometry->layout(), 
+            KDialog::spacingHint());
+  QGridLayout *gbPreviewLayout = new QGridLayout(gbPreview, 2, 3, 0, 
+            KDialog::spacingHint());
 
-  QHBoxLayout *scaleLayout = new QHBoxLayout( -1, "scale sublayout" );
-  QHBoxLayout *rotateLayout = new QHBoxLayout( -1, "rotate sublayout" );
-
+  QHBoxLayout *scaleLayout = new QHBoxLayout( this );
+  QHBoxLayout *rotateLayout = new QHBoxLayout( this );
 
   mainLayout->addWidget( cbEnableMods );
   mainLayout->addWidget( gbScale );
@@ -99,19 +108,18 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   hl->addWidget( gbAdjust );
   mainLayout->addLayout( hl );
   mainLayout->addWidget( gbPreview );
+  mainLayout->addStretch();
 
   // --
 
-  gbScaleLayout->addSpacing( 6 );
-  gbScaleLayout->addWidget( cbDownScale, 0, AlignLeft );
-  gbScaleLayout->addLayout( scaleLayout, 0 );
+  gbScaleLayout->addWidget( cbDownScale );
+  gbScaleLayout->addLayout( scaleLayout );
 
   scaleLayout->addWidget( cbUpScale );
   scaleLayout->addWidget( sbMaxUpScaleFactor );
 
   // --
 
-  gbGeometryLayout->addSpacing( 6 );
   gbGeometryLayout->addWidget( cbFlipVertically, 0, AlignLeft );
   gbGeometryLayout->addWidget( cbFlipHorizontally, 0, AlignLeft );
   gbGeometryLayout->addLayout( rotateLayout, 0 );
@@ -259,12 +267,7 @@ void DefaultsWidget::enableWidgets( bool enable )
 
     gbGeometry->setEnabled( enable );
     gbAdjust->setEnabled( enable );
-}
-
-
-void DefaultsWidget::slotEnableMaxScale( bool enable )
-{
-    sbMaxUpScaleFactor->setEnabled( enable );
+    gbPreview->setEnabled( enable );
 }
 
 

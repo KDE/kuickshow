@@ -7,16 +7,17 @@
 #ifndef GENERALWIDGET_H
 #define GENERALWIDGET_H
 
+#include <qwidget.h>
+
+#include "kuickdata.h"
+
 class QCheckBox;
 class KColorButton;
 class KLineEdit;
 class KIntNumInput;
 
-#include "basewidget.h"
 
-class KuickData;
-
-class GeneralWidget : public BaseWidget
+class GeneralWidget : public QWidget
 {
     Q_OBJECT
 
@@ -42,6 +43,7 @@ private:
 
 private slots:
     void 	useOwnPalette();
+    void slotURLClicked( const QString & );
 
 };
 

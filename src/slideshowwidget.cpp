@@ -9,13 +9,12 @@
 
 
 SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
-    : BaseWidget( QString::null, parent, name )
+    : QWidget( parent, name )
 {
 //     setTitle( i18n("Slideshow") );
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setSpacing( KDialog::spacingHint() );
-    layout->setMargin( KDialog::marginHint() + 4 );
 
     m_fullScreen = new QCheckBox( i18n("Switch to &fullscreen"), this );
     
