@@ -1,13 +1,20 @@
-/****************************************************************************
-** $Id$
-**
-** KuickShow - a fast and comfortable image viewer based on Rasterman's Imlib
-**
-** Created : 98
-**
-** Copyright (C) 1998-2002 by Carsten Pfeiffer.  All rights reserved.
-**
-****************************************************************************/
+/* This file is part of the KDE project
+   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
+
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public
+   License as published by the Free Software Foundation, version 2.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; see the file COPYING.  If not, write to
+   the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+*/
 
 #include <stdio.h>
 #include <assert.h>
@@ -127,7 +134,7 @@ KuickShow::KuickShow( const char *name )
           startDir = url;
           isDir = true;
       }
-      
+
       // need to check remote files
       else if ( !url.isLocalFile() )
       {
@@ -435,7 +442,7 @@ void KuickShow::showImage( const KFileItem *fi,
     fullscreen |= (newWindow && kdata->fullScreen);
 
     if ( FileWidget::isImage( fi ) ) {
-        
+
 	if ( newWindow ) {
 	    m_viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
 	    s_viewers.append( m_viewer );
