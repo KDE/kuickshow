@@ -22,9 +22,6 @@ public:
     virtual void loadSettings( const KuickData& data );
     virtual void applySettings( KuickData& data );
 
-private slots:
-    void updateSecondsSuffix( int ); 
-    
 private:
     KIntNumInput *m_delayTime;
     KIntNumInput *m_cycles;

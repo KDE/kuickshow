@@ -21,10 +21,8 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
     
     m_delayTime = new KIntNumInput( this, "delay time" );
     m_delayTime->setLabel( i18n("De&lay between slides:") );
-    m_delayTime->setSuffix( i18n(" seconds") );
+    m_delayTime->setSuffix( i18n(" sec") );
     m_delayTime->setRange( 1, 60 * 60 ); // 1 hour
-    connect( m_delayTime, SIGNAL( valueChanged( int )),
-             SLOT( updateSecondsSuffix( int ) ));
 
     m_cycles = new KIntNumInput( m_delayTime, 1, this );
     m_cycles->setLabel( i18n("&Iterations (0 = infinite):") );
@@ -48,8 +46,6 @@ void SlideShowWidget:: loadSettings( const KuickData& data )
     m_delayTime->setValue( data.slideDelay / 1000 );
     m_cycles->setValue( data.slideshowCycles );
     m_fullScreen->setChecked( data.slideshowFullscreen );
-
-    updateSecondsSuffix( data.slideDelay );
 }
 
 void SlideShowWidget::applySettings( KuickData& data )
@@ -57,12 +53,6 @@ void SlideShowWidget::applySettings( KuickData& data )
     data.slideDelay = m_delayTime->value() * 1000;
     data.slideshowCycles = m_cycles->value();
     data.slideshowFullscreen = m_fullScreen->isChecked();
-}
-
-void SlideShowWidget::updateSecondsSuffix( int seconds )
-{
-    m_delayTime->setSuffix( (seconds == 1) ? 
-                            i18n(" second") : i18n(" seconds") );
 }
 
 #include "slideshowwidget.moc"
