@@ -132,7 +132,7 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
     }
 
     loaded( myKuim ); // maybe upscale/downscale in subclasses
-    
+
     return myKuim;
 }
 
@@ -148,7 +148,7 @@ bool ImlibWidget::loadImage( const QString& filename )
 
     if ( myKuim ) {
 	kuim = myKuim;
-        
+
 	autoUpdate( true ); // -> updateWidget() -> updateGeometry()
 	m_filename = filename;
         return true;
@@ -347,7 +347,9 @@ void ImlibWidget::updateWidget( bool geometryUpdate )
     if ( !kuim )
 	return;
 
-    XUnmapWindow( x11Display(), win ); // remove the old image -> no flicker
+//     if ( geometryUpdate )
+//         XUnmapWindow( x11Display(), win );// remove the old image -> no flicker
+
     XSetWindowBackgroundPixmap( x11Display(), win, kuim->pixmap() );
 
     if ( geometryUpdate )
