@@ -31,6 +31,7 @@
 #include <qdragobject.h>
 
 #include <kaccel.h>
+#include <kapplication.h>
 #include <kconfig.h>
 #include <kcursor.h>
 #include <kdebug.h>
@@ -246,7 +247,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     caption = caption.arg( kuim->filename() ).
               arg( kuim->originalWidth() ).
               arg( kuim->originalHeight() );
-    setCaption( caption );
+    setCaption( kapp->makeStdCaption( caption ));
 }
 
 

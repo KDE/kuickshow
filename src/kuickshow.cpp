@@ -5,7 +5,7 @@
 **
 ** Created : 98
 **
-** Copyright (C) 1998-2001 by Carsten Pfeiffer.  All rights reserved.
+** Copyright (C) 1998-2002 by Carsten Pfeiffer.  All rights reserved.
 **
 ****************************************************************************/
 
@@ -263,7 +263,6 @@ void KuickShow::viewerDeleted()
 void KuickShow::slotHighlighted( const KFileItem *fi )
 {
     QString size;
-    //size.sprintf( " %.1f kb", (float) fi->size()/1024 );
     size = i18n("%1 kb").arg(KGlobal::locale()->formatNumber((float)fi->size()/1024, 1));
     statusBar()->changeItem( size, SIZE_ITEM );
     statusBar()->changeItem( fi->url().prettyURL(), URL_ITEM );
@@ -546,24 +545,21 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
  	    // FIXME: make all this stuff via KStdAccel and KAccel ->slots
 
-	    switch( key ) {
-	    case Key_Home: {
+            KKey kkey( key );
+            if ( KStdAccel::home().contains( kkey ) )
+            {
 		item = fileWidget->gotoFirstImage();
 		item_next = fileWidget->getNext( false );
-		break;
 	    }
 
-	    case Key_End: {
+            else if ( KStdAccel::end().contains( kkey ) )
+            {
 		item = fileWidget->gotoLastImage();
 		item_next = fileWidget->getPrevious( false );
-		break;
 	    }
 
-	    case Key_Enter:
-		item = fileWidget->getCurrentItem( true );
-		break;
-
-	    case Key_Delete: {
+            else if ( fileWidget->actionCollection()->action("delete")->shortcut().contains( key ))
+            {
 		KFileItem *cur = fileWidget->getCurrentItem( false );
 		item = fileWidget->getNext( false ); // don't move
 		if ( !item )
@@ -573,20 +569,22 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                                 m_viewer->url() );
                 KFileItemList list;
                 list.append( &it );
-                fileWidget->del( list, (k->state() & ShiftButton) == 0 );
+                if ( fileWidget->del(list, window,
+                                     (k->state() & ShiftButton) == 0) == 0L )
+                    return true; // aborted deletion
+
                 // ### check failure asynchronously and restore old item?
                 fileWidget->setCurrentItem( item );
-		break;
 	    }
-
-	    case Key_Space: {
+            
+            else if ( key == Key_Space ) 
+            {
                 toggleBrowser( !haveBrowser() );
 		return true; // don't pass keyEvent
 	    }
 
-	    default:
+            else
 		ret = false;
-	    }
 
 
 	    if ( FileWidget::isImage( item ) ) {
@@ -832,6 +830,8 @@ void KuickShow::slotReplayAdvance()
     m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
 
     // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
+    // Sigh. According to qt-bugs, they won't fix this bug ever. So you can't
+    // rely on sorting to be correct before the QIconView has been show()n.
     if ( fileWidget && fileWidget->view() ) {
         QWidget *widget = fileWidget->view()->widget();
         if ( widget->inherits( "QIconView" ) || widget->child(0, "QIconView" ) ){
