@@ -27,6 +27,7 @@
 #include <kcursor.h>
 #include <kglobal.h>
 #include <kiconloader.h>
+#include <kio/netaccess.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kpropertiesdialog.h>
@@ -92,11 +93,10 @@ KuickShow::KuickShow( const char *name )
 		
   // files to display
   // either a directory to display, an absolute path, a relative path, or a URL
-  KURL base;
-  base.setPath( QDir::currentDirPath() + '/' );
-  KURL startDir = base;
+  KURL startDir;
+  startDir.setPath( QDir::currentDirPath() + '/' );
   for ( int i = 0; i < args->count(); i++ ) {
-      KURL url( base, args->arg( i ) );
+      KURL url = args->url( i );
       KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url, false );
 
       // for remote URLs, we don't know if it's a file or directory, but
@@ -330,7 +330,8 @@ void KuickShow::showImage( const KFileItem *fi,
 	    m_viewer->installEventFilter( this );
 	}
 
-	QString filename = fi->url().path();
+	QString filename;
+	KIO::NetAccess::download(fi->url(), filename);
 
 	if ( !m_viewer->showNextImage( filename ) )
 	    m_viewer->close( true ); // couldn't load image, close window
