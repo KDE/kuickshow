@@ -122,10 +122,6 @@ void ImageWindow::updateAccel()
   // yeah, I know you've waited for them for a long time :o)
   m_accel = new KAccel( this );
 
-  m_actions->action( "next_image" )->plugAccel( m_accel );
-  m_actions->action( "previous_image" )->plugAccel( m_accel );
-
-
   m_accel->insert( "Scroll Up", i18n( "Scroll Up" ), QString::null,
                    Key_Up, this, SLOT( scrollUp() ) );
   m_accel->insert( "Scroll Down", i18n( "Scroll Down" ), QString::null,
@@ -457,6 +453,7 @@ void ImageWindow::wheelEvent( QWheelEvent *e )
 void ImageWindow::keyPressEvent( QKeyEvent *e )
 {
     uint key = e->key();
+
     if ( key == Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
 	close( true );
     else if ( KStdAccel::save().contains( KKey( e ) ) )
