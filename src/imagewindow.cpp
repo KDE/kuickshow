@@ -118,7 +118,6 @@ void ImageWindow::init()
 
     transWidget    = 0L;
     myIsFullscreen = false;
-    initialFullscreen = kdata->fullScreen;
     ignore_resize_hack = false;
 
     xpos = 0, ypos = 0;
@@ -244,44 +243,10 @@ void ImageWindow::setFullscreen( bool enable )
     xpos = 0; ypos = 0;
 
     if ( enable && !myIsFullscreen ) { // set Fullscreen
-        KWin::Info info = KWin::info( winId() );
-        oldGeometry = info.frameGeometry;
-
-	// qDebug("** oldGeometry: %i, %i, %i, %i",
-	// oldGeometry.x(), oldGeometry.y(),
-	// oldGeometry.width(), oldGeometry.height());
-
-        QRect r = KGlobalSettings::desktopGeometry(this);
-
-        setFixedSize( r.size() );
-
-        KWin::setType( winId(), NET::Override );
-        KWin::setState( winId(), NET::StaysOnTop );
-
-        setGeometry( r );
-        // qApp->processEvents(); // not necessary anymore
-
+        showFullScreen();
     }
-
     else if ( !enable && myIsFullscreen ) { // go into window mode
-        bool wasInitialFullscreen = initialFullscreen;
-        initialFullscreen = false;
-	
-        ignore_resize_hack = true; //ignore the resizeEvent triggered by move()
-        move( oldGeometry.topLeft() );
-        setMinimumSize(0,0);
-        myIsFullscreen = false; // we want resizeOptimal to use window-mode
-        resizeOptimal( imageWidth(), imageHeight() ); // resizeEvent centers
-
-        KWin::setType( winId(), NET::Normal );
-        KWin::clearState( winId(), NET::StaysOnTop );
-
-        // hack around kwin not giving us a decoration, when going into window
-        // mode and initially started in fullscreen mode
-        if ( wasInitialFullscreen ) {
-            hide();
-            show();
-        }
+        showNormal();
     }
 
     myIsFullscreen = enable;
@@ -865,8 +830,8 @@ void ImageWindow::saveImage()
 #else
                     );
 #endif
-    QString selection = m_saveDirectory.isEmpty() ? 
-                            m_kuim->filename() : 
+    QString selection = m_saveDirectory.isEmpty() ?
+                            m_kuim->filename() :
                             KURL::fromPathOrURL( m_kuim->filename() ).fileName();
     dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
@@ -1049,7 +1014,7 @@ int ImageWindow::desktopHeight( bool totalScreen ) const
 
 QSize ImageWindow::maxImageSize() const
 {
-    if ( myIsFullscreen || initialFullscreen ) {
+    if ( myIsFullscreen ) {
         return KGlobalSettings::desktopGeometry(topLevelWidget()).size();
     }
     else {

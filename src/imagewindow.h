@@ -124,8 +124,6 @@ protected:
   int 		xzoom, yzoom;  // used for zooming the image with the mouse
   uint 		xposPress, yposPress;
 
-  QRect 	oldGeometry;
-
 
   QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;
@@ -147,7 +145,6 @@ private:
   void 		setPopupMenu();
 
   bool 		myIsFullscreen;
-  bool 		initialFullscreen;
   int 		m_width;
   int 		m_height;
   int           m_numHeads;
