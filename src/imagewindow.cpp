@@ -44,6 +44,8 @@
 #undef Unsorted
 #endif
 #include <kfiledialog.h>
+#include <kglobalsettings.h>
+#include <kio/netaccess.h>
 #include <kiconloader.h>
 #include <kimageeffect.h>
 #include <klocale.h>
@@ -53,6 +55,7 @@
 #include <kstdaccel.h>
 #include <kstandarddirs.h>
 #include <ktempfile.h>
+#include <kurldrag.h>
 #include <kwin.h>
 #include <netwm.h>
 
@@ -102,12 +105,8 @@ void ImageWindow::init()
 
     transWidget    = 0L;
     myIsFullscreen = false;
-    initialFullscreen = kdata->fullScreen;
-    ignore_resize_hack = false;
 
     xpos = 0, ypos = 0;
-    m_width = width(); m_height = height();
-    m_numHeads = ScreenCount( x11Display() );
 
     setAcceptDrops( true );
     setBackgroundColor( kdata->backgroundColor );
@@ -206,9 +205,12 @@ void ImageWindow::setupActions()
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
 
-    new KAction( i18n("Toggle Fullscreen mode"), Key_Return,
-                 this, SLOT( toggleFullscreen() ),
-                 m_actions, "toggle_fullscreen" );
+    KShortcut cut(Key_Return);
+    cut.append(KStdAccel::shortcut(KStdAccel::FullScreen));
+
+    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
+    action->setShortcut(cut);
+
     new KAction( i18n("Reload Image"), Key_Enter,
                  this, SLOT( reload() ),
                  m_actions, "reload_image" );
@@ -226,43 +228,11 @@ void ImageWindow::setFullscreen( bool enable )
     xpos = 0; ypos = 0;
 
     if ( enable && !myIsFullscreen ) { // set Fullscreen
-        KWin::Info info = KWin::info( winId() );
-        oldGeometry = info.frameGeometry;
-
-	// qDebug("** oldGeometry: %i, %i, %i, %i",
-	// oldGeometry.x(), oldGeometry.y(),
-	// oldGeometry.width(), oldGeometry.height());
-
-        int scnum = QApplication::desktop()->screenNumber(this);
-        setFixedSize( QApplication::desktop()->screenGeometry(scnum).size() );
-
-        KWin::setType( winId(), NET::Override );
-        KWin::setState( winId(), NET::StaysOnTop );
-
-        setGeometry( QApplication::desktop()->screenGeometry(scnum) );
-        // qApp->processEvents(); // not necessary anymore
-
+        showFullScreen();
     }
 
     else if ( !enable && myIsFullscreen ) { // go into window mode
-        bool wasInitialFullscreen = initialFullscreen;
-        initialFullscreen = false;
-	
-        ignore_resize_hack = true; //ignore the resizeEvent triggered by move()
-        move( oldGeometry.topLeft() );
-        setMinimumSize(0,0);
-        myIsFullscreen = false; // we want resizeOptimal to use window-mode
-        resizeOptimal( imageWidth(), imageHeight() ); // resizeEvent centers
-
-        KWin::setType( winId(), NET::Normal );
-        KWin::clearState( winId(), NET::StaysOnTop );
-
-        // hack around kwin not giving us a decoration, when going into window
-        // mode and initially started in fullscreen mode
-        if ( wasInitialFullscreen ) {
-            hide();
-            show();
-        }
+        showNormal();
     }
 
     myIsFullscreen = enable;
@@ -274,7 +244,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 {
 //     qDebug("::updateGeometry: %i, %i", imWidth, imHeight);
 
-    if ( imWidth != (int) m_width || imHeight != (int) m_height ) {
+    if ( imWidth != width() || imHeight != height() ) {
 	if ( myIsFullscreen ) {
 	    centerImage();
 	    showImage();
@@ -289,24 +259,31 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     }
 
     QString caption = i18n( "Filename (Imagewidth x Imageheight)",
-                            "%1 (%2 x %3)" );
-    caption = caption.arg( m_kuim->filename() ).
-              arg( m_kuim->originalWidth() ).
-              arg( m_kuim->originalHeight() );
+                            "%3 (%1 x %2)" );
+    caption = caption.arg( m_kuim->originalWidth() ).
+              arg( m_kuim->originalHeight() ).arg( m_kuim->filename() );
     setCaption( kapp->makeStdCaption( caption ) );
 }
 
 
 void ImageWindow::centerImage()
 {
-    // Modified by Evan for his Multi-Head (2 screens)
-    // This should center on the first head
-    if ( myIsFullscreen && m_numHeads > 1 && ((m_numHeads % 2) == 0) )
-        xpos = ((m_width/m_numHeads) / 2) - imageWidth()/2;
+    int w, h;
+    if ( myIsFullscreen )
+    {
+        QRect desktopRect = KGlobalSettings::desktopGeometry( this );
+        w = desktopRect.width();
+        h = desktopRect.height();
+    }
     else
-        xpos = m_width/2 - imageWidth()/2;
+    {
+        w = width();
+        h = height();
+    }
 
-    ypos = m_height/2 - imageHeight()/2;
+    xpos = w/2 - imageWidth()/2;
+    ypos = h/2 - imageHeight()/2;
+
     //XMoveWindow( x11Display(), win, xpos, ypos );
 }
 
@@ -316,16 +293,16 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
     xpos += x;
     ypos += y;
 
-    int cwlocal = m_width;
-    int chlocal = m_height;
+    int cwlocal = width();
+    int chlocal = height();
 
     int iw = imageWidth();
     int ih = imageHeight();
 
-    if ( myIsFullscreen || m_width > desktopWidth() )
+    if ( myIsFullscreen || width() > desktopWidth() )
 	cwlocal = desktopWidth();
 
-    if ( myIsFullscreen || m_height > desktopHeight() )
+    if ( myIsFullscreen || height() > desktopHeight() )
 	chlocal = desktopHeight();
 
     if ( restrict ) { // don't allow scrolling in certain cases
@@ -420,22 +397,22 @@ void ImageWindow::addGamma( int factor )
 
 void ImageWindow::scrollUp()
 {
-    scrollImage( 0, kdata->scrollSteps );
+    scrollImage( 0, 20 * kdata->scrollSteps );
 }
 
 void ImageWindow::scrollDown()
 {
-    scrollImage( 0, - kdata->scrollSteps );
+    scrollImage( 0, - 20 * kdata->scrollSteps );
 }
 
 void ImageWindow::scrollLeft()
 {
-    scrollImage( kdata->scrollSteps, 0 );
+    scrollImage( 20 * kdata->scrollSteps, 0 );
 }
 
 void ImageWindow::scrollRight()
 {
-    scrollImage( - kdata->scrollSteps, 0 );
+    scrollImage( -20 * kdata->scrollSteps, 0 );
 }
 
 ///
@@ -509,6 +486,8 @@ void ImageWindow::wheelEvent( QWheelEvent *e )
 void ImageWindow::keyPressEvent( QKeyEvent *e )
 {
     uint key = e->key();
+    if ( key == Key_Shift )
+        updateCursor( ZoomCursor );
 
     if ( key == Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
 	close( true );
@@ -526,7 +505,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 void ImageWindow::keyReleaseEvent( QKeyEvent *e )
 {
     if ( e->state() & ShiftButton ) { // Shift-key released
-	setCursor( arrowCursor );
+	updateCursor();
 	if ( transWidget ) {
 	    delete transWidget;
 	    transWidget = 0L;
@@ -549,12 +528,32 @@ void ImageWindow::mousePressEvent( QMouseEvent *e )
 
     if ( e->button() == LeftButton ) {
         if ( e->state() & ShiftButton )
-            setCursor( arrowCursor ); // need a magnify-cursor
+            updateCursor( ZoomCursor );
         else
             setCursor( *s_handCursor );
     }
 
     ImlibWidget::mousePressEvent( e );
+}
+
+void ImageWindow::updateCursor( KuickCursor cursor )
+{
+    switch ( cursor )
+    {
+        case ZoomCursor:
+            setCursor( arrowCursor ); // need a magnify-cursor
+            break;
+        case MoveCursor:
+            setCursor( *s_handCursor );
+            break;
+        case DefaultCursor:
+        default:
+            if ( imageWidth() > width() || imageHeight() > height() )
+                setCursor( *s_handCursor );
+            else
+                setCursor( arrowCursor );
+            break;
+    }
 }
 
 void ImageWindow::contextMenuEvent( QContextMenuEvent *e )
@@ -577,7 +576,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
-	    transWidget->setGeometry( 0, 0, m_width, m_height );
+	    transWidget->setGeometry( 0, 0, width(), height() );
 	    transWidget->setBackgroundMode( NoBackground );
 	}
 
@@ -621,7 +620,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 
 void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 {
-    setCursor( arrowCursor );
+    updateCursor();
 
     if ( transWidget ) {
        // destroy the transparent widget, used for showing the rectangle (zoom)
@@ -664,8 +663,8 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     neww = botX - topX;
     newh = botY - topY;
 
-    factorx = ((float) m_width / (float) neww);
-    factory = ((float) m_height / (float) newh);
+    factorx = ((float) width() / (float) neww);
+    factory = ((float) height() / (float) newh);
 
     if ( factorx < factory ) // use the smaller factor
 	factor = factorx;
@@ -684,9 +683,9 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     int xtmp = - (int) (factor * abs(xpos - topX) );
     int ytmp = - (int) (factor * abs(ypos - topY) );
 
-    // if image has different ratio (m_width/m_height), center it
-    int xcenter = (m_width  - (int) (neww * factor)) / 2;
-    int ycenter = (m_height - (int) (newh * factor)) / 2;
+    // if image has different ratio (width()/height()), center it
+    int xcenter = (width()  - (int) (neww * factor)) / 2;
+    int ycenter = (height() - (int) (newh * factor)) / 2;
 
     xtmp += xcenter;
     ytmp += ycenter;
@@ -712,25 +711,8 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 {
     ImlibWidget::resizeEvent( e );
 
-    // to save a lot of calls in scrollImage() for example
-    m_width  = width();
-    m_height = height();
-
-    if ( ignore_resize_hack ) {
-	ignore_resize_hack = false;
-	
-	int w = width();
-	int h = height();
-        int scnum = QApplication::desktop()->screenNumber(this);
-	if ( w == QApplication::desktop()->screenGeometry(scnum).width() &&
-	     h == QApplication::desktop()->screenGeometry(scnum).height() &&
-	     imageWidth() < w && imageHeight() < h ) {
-	
-	    return;
-	}
-    }
-
     centerImage();
+    updateCursor();
 }
 
 
@@ -746,11 +728,16 @@ void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 
 void ImageWindow::dropEvent( QDropEvent *e )
 {
-    // FIXME - only preliminary drop-support for now
-    QStringList list;
-    if ( QUriDrag::decodeLocalFiles( e, list ) ) {
-	loadImage( list.first() );
-	updateWidget();
+    KURL::List list;
+    if ( KURLDrag::decode( e, list ) && !list.isEmpty()) {
+        QString tmpFile;
+        const KURL &url = list.first();
+        if (KIO::NetAccess::download( url, tmpFile, this ) )
+        {
+            loadImage( tmpFile );
+            KIO::NetAccess::removeTempFile( tmpFile );
+        }
+        updateWidget();
 	e->accept();
     }
     else
@@ -827,11 +814,18 @@ void ImageWindow::saveImage()
         return;
 
     KuickData tmp;
-    QCheckBox *keepSize = new QCheckBox( i18n("Keep original Image Size"), 0L);
+    QCheckBox *keepSize = new QCheckBox( i18n("Keep original image Size"), 0L);
     keepSize->setChecked( true );
-    KFileDialog dlg( QString::null, tmp.fileFilter, this, "filedialog", true,
-                     keepSize );
-    dlg.setSelection( m_kuim->filename() );
+    KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this, "filedialog", true
+#if KDE_VERSION >= 310
+                     ,keepSize
+#endif
+                   );
+
+    QString selection = m_saveDirectory.isEmpty() ?
+                            m_kuim->filename() :
+                            KURL::fromPathOrURL( m_kuim->filename() ).fileName();
+    dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setCaption( i18n("Save As") );
     if ( dlg.exec() == QDialog::Accepted )
@@ -852,6 +846,14 @@ void ImageWindow::saveImage()
             }
         }
     }
+
+    QString lastDir = dlg.baseURL().path(+1);
+    if ( lastDir != m_saveDirectory )
+        m_saveDirectory = lastDir;
+
+#if KDE_VERSION < 310
+    delete keepSize;
+#endif
 }
 
 bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) const
@@ -992,8 +994,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen )
     {
-        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
-	return QApplication::desktop()->screenGeometry(scnum).width();
+        return KGlobalSettings::desktopGeometry(topLevelWidget()).width();
     } else
 	return Kuick::workArea().width();
 }
@@ -1002,8 +1003,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 int ImageWindow::desktopHeight( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen ) {
-        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
-	return QApplication::desktop()->screenGeometry(scnum).height();
+        return KGlobalSettings::desktopGeometry(topLevelWidget()).height();
     } else {
 	return Kuick::workArea().height();
     }
@@ -1011,9 +1011,8 @@ int ImageWindow::desktopHeight( bool totalScreen ) const
 
 QSize ImageWindow::maxImageSize() const
 {
-    if ( myIsFullscreen || initialFullscreen ) {
-        int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
-	return QApplication::desktop()->screenGeometry(scnum).size();
+    if ( myIsFullscreen ) {
+        return KGlobalSettings::desktopGeometry(topLevelWidget()).size();
     }
     else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
@@ -1028,7 +1027,7 @@ void ImageWindow::resizeOptimal( int w, int h )
     int neww = (w >= mw) ? mw : w;
     int newh = (h >= mh) ? mh : h;
 
-    if ( neww == m_width && newh == m_height )
+    if ( neww == width() && newh == height() )
     {
 	centerImage();
 	showImage();

@@ -103,6 +103,8 @@ protected:
   virtual void 	dragEnterEvent( QDragEnterEvent * );
   virtual void 	dropEvent( QDropEvent * );
   virtual void contextMenuEvent( QContextMenuEvent * );
+  enum KuickCursor { DefaultCursor = 0, ZoomCursor, MoveCursor };
+  void         updateCursor( KuickCursor cursor = DefaultCursor );
 
 
 
@@ -122,8 +124,6 @@ protected:
   int 		xzoom, yzoom;  // used for zooming the image with the mouse
   uint 		xposPress, yposPress;
 
-  QRect 	oldGeometry;
-
 
   QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;
@@ -141,20 +141,13 @@ private:
   int 		desktopWidth( bool totalScreen = false ) const;
   int 		desktopHeight( bool totalScreen = false ) const;
   QSize		maxImageSize() const;
-  void          setupActions();
+  void 		setupActions();
   void 		setPopupMenu();
 
   bool 		myIsFullscreen;
-  bool 		initialFullscreen;
-  int 		m_width;
-  int 		m_height;
-  int           m_numHeads;
+  QString   m_saveDirectory;
 
   KActionCollection *m_actions;
-
-  // Qt resizes us even if we just request a move(). This sucks when
-  // switching from fullscreen to window mode, as we will be resized twice.
-  bool 		ignore_resize_hack;
 
   static QCursor * s_handCursor;
 };

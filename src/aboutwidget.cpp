@@ -63,7 +63,7 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
     m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
     m_homepage->setAlignment( AlignCenter );
 
-    QLabel *copy = new QLabel("(C) 1998-2002", gBox);
+    QLabel *copy = new QLabel("(C) 1998-2004", gBox);
     copy->setAlignment( AlignCenter );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );
