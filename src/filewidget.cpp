@@ -10,7 +10,6 @@
 #include <qkeycode.h>
 
 #include <kapplication.h> // KDE_VERSION
-#include <kfilereader.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
