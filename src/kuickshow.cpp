@@ -145,12 +145,13 @@ KuickShow::KuickShow( const char *name )
         {
             KMimeType::Ptr mime = KMimeType::findByURL( url );
             QString name = mime->name();
-#if KDE_VERSION >= 310
             if ( name == "application/octet-stream" ) // unknown -> stat()
                 name = KIO::NetAccess::mimetype( url, this );
-#endif
 
-            if ( name.startsWith( "image/" ) )
+	    // text/* is a hack for bugs.kde.org-attached-images urls.
+	    // The real problem here is that NetAccess::mimetype does a HTTP HEAD, which doesn't
+	    // always return the right mimetype. The rest of KDE start a get() instead....
+            if ( name.startsWith( "image/" ) || name.startsWith( "text/" ) )
             {
                 FileWidget::setImage( item, true );
                 showImage( &item, true, false, true );
