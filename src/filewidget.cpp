@@ -100,8 +100,8 @@ void FileWidget::initActions()
 
 void FileWidget::reloadConfiguration()
 {
-    if ( kdata.fileFilter != nameFilter() ) {
-	setNameFilter( kdata.fileFilter );
+    if ( kdata->fileFilter != nameFilter() ) {
+	setNameFilter( kdata->fileFilter );
 	rereadDir();
     }
 }

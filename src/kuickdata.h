@@ -63,6 +63,6 @@ public:
 };
 
 
-extern KuickData kdata;
+extern KuickData* kdata;
 
 #endif

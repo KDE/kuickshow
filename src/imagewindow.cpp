@@ -98,7 +98,7 @@ void ImageWindow::init()
     m_accel        = 0L;
     transWidget    = 0L;
     myIsFullscreen = false;
-    initialFullscreen = kdata.fullScreen;
+    initialFullscreen = kdata->fullScreen;
     ignore_resize_hack = false;
 
     xpos = 0, ypos = 0;
@@ -106,7 +106,7 @@ void ImageWindow::init()
 
     setAcceptDrops( true );
     updateAccel();
-    setBackgroundColor( kdata.backgroundColor );
+    setBackgroundColor( kdata->backgroundColor );
 
     static QPixmap imageIcon = UserIcon( "imageviewer-medium" );
     static QPixmap miniImageIcon = UserIcon( "imageviewer-small" );
@@ -369,68 +369,68 @@ void ImageWindow::addGamma( int factor )
 
 void ImageWindow::scrollUp()
 {
-    scrollImage( 0, kdata.scrollSteps );
+    scrollImage( 0, kdata->scrollSteps );
 }
 
 void ImageWindow::scrollDown()
 {
-    scrollImage( 0, - kdata.scrollSteps );
+    scrollImage( 0, - kdata->scrollSteps );
 }
 
 void ImageWindow::scrollLeft()
 {
-    scrollImage( kdata.scrollSteps, 0 );
+    scrollImage( kdata->scrollSteps, 0 );
 }
 
 void ImageWindow::scrollRight()
 {
-    scrollImage( - kdata.scrollSteps, 0 );
+    scrollImage( - kdata->scrollSteps, 0 );
 }
 
 ///
 
 void ImageWindow::zoomIn()
 {
-    zoomImage( kdata.zoomSteps );
+    zoomImage( kdata->zoomSteps );
 }
 
 void ImageWindow::zoomOut()
 {
-    Q_ASSERT( kdata.zoomSteps != 0 );
-    zoomImage( 1.0 / kdata.zoomSteps );
+    Q_ASSERT( kdata->zoomSteps != 0 );
+    zoomImage( 1.0 / kdata->zoomSteps );
 }
 
 ///
 
 void ImageWindow::moreBrightness()
 {
-    addBrightness( kdata.brightnessSteps );
+    addBrightness( kdata->brightnessSteps );
 }
 
 void ImageWindow::moreContrast()
 {
-    addContrast( kdata.contrastSteps );
+    addContrast( kdata->contrastSteps );
 }
 
 void ImageWindow::moreGamma()
 {
-    addGamma( kdata.gammaSteps );
+    addGamma( kdata->gammaSteps );
 }
 
 
 void ImageWindow::lessBrightness()
 {
-    addBrightness( - kdata.brightnessSteps );
+    addBrightness( - kdata->brightnessSteps );
 }
 
 void ImageWindow::lessContrast()
 {
-    addContrast( - kdata.contrastSteps );
+    addContrast( - kdata->contrastSteps );
 }
 
 void ImageWindow::lessGamma()
 {
-    addGamma( - kdata.gammaSteps );
+    addGamma( - kdata->gammaSteps );
 }
 
 ///
@@ -621,7 +621,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     w = (uint) ( factor * (float) imageWidth() );
     h = (uint) ( factor * (float) imageHeight() );
 
-    if ( w > kdata.maxWidth || h > kdata.maxHeight ) {
+    if ( w > kdata->maxWidth || h > kdata->maxHeight ) {
 	qDebug("KuickShow: scaling larger than configured maximum -> aborting" );
 	return;
     }
@@ -898,7 +898,7 @@ void ImageWindow::toggleFullscreen()
 // upscale/downscale depending on configuration
 void ImageWindow::loaded( KuickImage *kuim )
 {
-    if ( !(kdata.isModsEnabled || kdata.upScale || kdata.downScale) ) {
+    if ( !(kdata->isModsEnabled || kdata->upScale || kdata->downScale) ) {
 	kuim->restoreOriginalSize();
 	return;
     }
@@ -910,10 +910,10 @@ void ImageWindow::loaded( KuickImage *kuim )
     int mw = s.width();
     int mh = s.height();
 
-    if ( kdata.upScale ) {
+    if ( kdata->upScale ) {
 	if ( (newW < mw) && (newH < mh) ) {
 	    float ratio1, ratio2;
-	    int maxUpScale = kdata.maxUpScale;
+	    int maxUpScale = kdata->maxUpScale;
 
 	    ratio1 = (float) mw / (float) newW;
 	    ratio2 = (float) mh / (float) newH;
@@ -925,7 +925,7 @@ void ImageWindow::loaded( KuickImage *kuim )
 	}
     }
 
-    if ( kdata.downScale ) {
+    if ( kdata->downScale ) {
 	// eventually set width and height to the best/max possible screen size
 	if ( (newW > mw) || (newH > mh) ) {
 	    if ( newW > mw ) {
@@ -993,11 +993,11 @@ void ImageWindow::maximize()
     if ( !kuim )
 	return;
 
-    bool oldUpscale = kdata.upScale;
-    bool oldDownscale = kdata.downScale;
+    bool oldUpscale = kdata->upScale;
+    bool oldDownscale = kdata->downScale;
 
-    kdata.upScale = true;
-    kdata.downScale = true;
+    kdata->upScale = true;
+    kdata->downScale = true;
 
     loaded( kuim );
     updateWidget( true );
@@ -1005,8 +1005,8 @@ void ImageWindow::maximize()
     if ( !myIsFullscreen )
 	resizeOptimal( imageWidth(), imageHeight() );
 
-    kdata.upScale = oldUpscale;
-    kdata.downScale = oldDownscale;
+    kdata->upScale = oldUpscale;
+    kdata->downScale = oldDownscale;
 }
 
 #include "imagewindow.moc"

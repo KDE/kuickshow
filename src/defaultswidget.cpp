@@ -171,7 +171,7 @@ DefaultsWidget::~DefaultsWidget()
 
 void DefaultsWidget::loadSettings()
 {
-    init( kdata );
+    init( *kdata );
 }
 
 void DefaultsWidget::resetDefaults()
@@ -205,18 +205,18 @@ void DefaultsWidget::init( const KuickData& data )
 
 void DefaultsWidget::applySettings()
 {
-    kdata.isModsEnabled = cbEnableMods->isChecked();
+    kdata->isModsEnabled = cbEnableMods->isChecked();
 
-    kdata.downScale  = cbDownScale->isChecked();
-    kdata.upScale    = cbUpScale->isChecked();
-    kdata.maxUpScale = sbMaxUpScaleFactor->value();
+    kdata->downScale  = cbDownScale->isChecked();
+    kdata->upScale    = cbUpScale->isChecked();
+    kdata->maxUpScale = sbMaxUpScaleFactor->value();
 
-    kdata.flipVertically   = cbFlipVertically->isChecked();
-    kdata.flipHorizontally = cbFlipHorizontally->isChecked();
+    kdata->flipVertically   = cbFlipVertically->isChecked();
+    kdata->flipHorizontally = cbFlipHorizontally->isChecked();
 
-    kdata.rotation = currentRotation();
+    kdata->rotation = currentRotation();
 
-    ImData *id = kdata.idata;
+    ImData *id = kdata->idata;
 
     id->brightness = sbBrightness->value();
     id->contrast   = sbContrast->value();

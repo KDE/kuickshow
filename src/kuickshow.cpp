@@ -59,7 +59,7 @@
 #undef KeyPress
 #endif
 
-KuickData kdata;
+KuickData* kdata;
 
 static const int SIZE_ITEM = 0;
 static const int URL_ITEM  = 1;
@@ -77,7 +77,8 @@ KuickShow::KuickShow( const char *name )
       m_accel( 0L ),
       m_delayedRepeatItem( 0L )
 {
-  kdata.load();
+  kdata = new KuickData;
+  kdata->load();
 
   initImlib();
 
@@ -134,6 +135,8 @@ KuickShow::~KuickShow()
 
     delete id;
     kapp->quit();
+
+    delete kdata; kdata = 0;
 }
 
 
@@ -305,7 +308,7 @@ void KuickShow::showImage( const KFileViewItem *fi, bool newWin )
 
     if ( FileWidget::isImage( fi ) ) {
 	if ( newWindow ) {
-	    viewer = new ImageWindow( kdata.idata, id, 0L, "image window" );
+	    viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
 	    s_viewers.append( viewer );
 
 	    connect( viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
@@ -331,19 +334,19 @@ void KuickShow::showImage( const KFileViewItem *fi, bool newWin )
 	    viewer->close( true ); // couldn't load image, close window
 	else {
 	    if ( newWindow ) {
-		if ( kdata.fullScreen )
+		if ( kdata->fullScreen )
 		    viewer->setFullscreen( true );
 
 		viewer->show();
 		
-		if ( !kdata.fullScreen && s_viewers.count() == 1 ) {
+		if ( !kdata->fullScreen && s_viewers.count() == 1 ) {
 		    // the WM might have moved us after showing -> strike back!
 		    // move the first image to 0x0 workarea coord
 		    viewer->move( Kuick::workArea().topLeft() );
 		}
 	    }
 
-  	    if ( kdata.preloadImage && fileWidget ) {
+  	    if ( kdata->preloadImage && fileWidget ) {
   		KFileViewItem *item = 0L;                 // don't move cursor
   		item = fileWidget->getItem( FileWidget::Next, true );
   		if ( item )
@@ -358,8 +361,8 @@ void KuickShow::startSlideShow()
     KFileViewItem *item = fileWidget->gotoFirstImage();
     if ( item ) {
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
-	showImage( item, !kdata.showInOneWindow );
-	QTimer::singleShot( kdata.slideDelay, this, SLOT( nextSlide() ) );
+	showImage( item, !kdata->showInOneWindow );
+	QTimer::singleShot( kdata->slideDelay, this, SLOT( nextSlide() ) );
     }
 }
 
@@ -378,7 +381,7 @@ void KuickShow::nextSlide()
     }
 
     viewer->showNextImage( item->url().path() );
-    QTimer::singleShot( kdata.slideDelay, this, SLOT( nextSlide() ) );
+    QTimer::singleShot( kdata->slideDelay, this, SLOT( nextSlide() ) );
 }
 
 
@@ -503,7 +506,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     if ( FileWidget::isImage( item ) ) {
         view->showNextImage( item->url().path() ); // ###
 		
-        if ( kdata.preloadImage ) // preload next image
+        if ( kdata->preloadImage ) // preload next image
             if ( FileWidget::isImage( item_next ) )
                 view->cacheImage( item_next->url().path() ); // ###
     }
@@ -618,7 +621,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	    if ( FileWidget::isImage( item ) ) {
 		viewer->showNextImage( item->url().path() ); // ###
 		
-		if ( kdata.preloadImage ) // preload next image
+		if ( kdata->preloadImage ) // preload next image
 		    if ( FileWidget::isImage( item_next ) )
 			viewer->cacheImage( item_next->url().path() ); // ###
 
@@ -665,20 +668,20 @@ void KuickShow::slotConfigApplied()
     dialog->applyConfig();
 
     initImlib();
-    kdata.save();
+    kdata->save();
 
     ImageWindow *viewer;
     QValueListIterator<ImageWindow*> it = s_viewers.begin();
     while ( it != s_viewers.end() ) {
         viewer = *it;
 	viewer->updateAccel();
-        viewer->setBackgroundColor( kdata.backgroundColor );
+        viewer->setBackgroundColor( kdata->backgroundColor );
 	++it;
     }
 
-    if ( kdata.fileFilter != fileWidget->nameFilter() )	{
+    if ( kdata->fileFilter != fileWidget->nameFilter() )	{
 	// reload directory contents if filefilter changed
-	fileWidget->setNameFilter( kdata.fileFilter );
+	fileWidget->setNameFilter( kdata->fileFilter );
 	fileWidget->rereadDir();
     }
 }
@@ -768,7 +771,7 @@ void KuickShow::messageCantLoadImage( const QString& filename )
 
 void KuickShow::initImlib()
 {
-    ImData *idata = kdata.idata;
+    ImData *idata = kdata->idata;
     ImlibInitParams par;
     initImlibParams( idata, &par );
 

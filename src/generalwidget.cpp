@@ -89,7 +89,7 @@ GeneralWidget::~GeneralWidget()
 
 void GeneralWidget::loadSettings()
 {
-    init( kdata );
+    init( *kdata );
 }
 
 void GeneralWidget::init( const KuickData& data )
@@ -119,13 +119,13 @@ void GeneralWidget::resetDefaults()
 
 void GeneralWidget::applySettings()
 {
-    ImData *idata = kdata.idata;
+    ImData *idata = kdata->idata;
 
-    kdata.backgroundColor = colorButton->color();
-    kdata.fileFilter      = editFilter->text();
-    kdata.slideDelay 	  = (delaySpinBox->value() * 100);
-    kdata.fullScreen  	  = cbFullscreen->isChecked();
-    kdata.preloadImage 	  = cbPreload->isChecked();
+    kdata->backgroundColor = colorButton->color();
+    kdata->fileFilter      = editFilter->text();
+    kdata->slideDelay 	  = (delaySpinBox->value() * 100);
+    kdata->fullScreen  	  = cbFullscreen->isChecked();
+    kdata->preloadImage	  = cbPreload->isChecked();
     idata->fastRemap 	  = cbFastRemap->isChecked();
     idata->ownPalette 	  = cbOwnPalette->isChecked();
     idata->fastRender 	  = cbFastRender->isChecked();
