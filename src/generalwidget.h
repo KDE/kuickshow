@@ -46,7 +46,7 @@ private:
     QCheckBox 	*cbDither16bit, *cbDither8bit, *cbOwnPalette;
 
     KLineEdit   	*editFilter;
-    KIntNumInput 	*delaySpinBox, *maxCacheSpinBox;
+    KIntNumInput 	*maxCacheSpinBox;
 
     KIntNumInput 	*sbMaxWidth, *sbMaxHeight;
     KIntNumInput 	*sbZoomFactor;

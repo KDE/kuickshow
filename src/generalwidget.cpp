@@ -57,7 +57,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   cbPreload = new QCheckBox( i18n("Preload next image"), this, "preload");
   cbLastdir = new QCheckBox( i18n("Remember last directory"), this, "restart_lastdir");
 
-  QGridLayout *gridLayout = new QGridLayout( 3, 2 );
+  QGridLayout *gridLayout = new QGridLayout( 2, 2 );
   gridLayout->setSpacing( KDialog::spacingHint() );
   QLabel *l0 = new QLabel( i18n("Background color:"), this );
   colorButton = new KColorButton( this );
@@ -65,16 +65,10 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   QLabel *l1 = new QLabel( i18n("Show only files with extension: "), this, "label" );
   editFilter = new KLineEdit( this, "filteredit" );
 
-  QLabel *l2 = new QLabel( i18n("Slideshow delay (1/10 s): "), this );
-  delaySpinBox = new KIntNumInput( this, "delay spinbox" );
-  delaySpinBox->setRange( 1, 600 * 10, 5 ); // max 10 min
-
   gridLayout->addWidget( l0, 0, 0 );
   gridLayout->addWidget( colorButton, 0, 1 );
   gridLayout->addWidget( l1, 1, 0 );
   gridLayout->addWidget( editFilter, 1, 1 );
-  gridLayout->addWidget( l2, 2, 0 );
-  gridLayout->addWidget( delaySpinBox, 2, 1 );
 
   layout->addWidget( cbFullscreen );
   layout->addWidget( cbPreload );
@@ -126,7 +120,6 @@ void GeneralWidget::loadSettings( const KuickData& data )
 
     colorButton->setColor( data.backgroundColor );
     editFilter->setText( data.fileFilter );
-    delaySpinBox->setValue( data.slideDelay / 100 );
     cbFullscreen->setChecked( data.fullScreen );
     cbPreload->setChecked( data.preloadImage );
     cbLastdir->setChecked( data.startInLastDir );
@@ -146,7 +139,6 @@ void GeneralWidget::applySettings( KuickData& data)
 
     data.backgroundColor = colorButton->color();
     data.fileFilter      = editFilter->text();
-    data.slideDelay 	  = (delaySpinBox->value() * 100);
     data.fullScreen  	  = cbFullscreen->isChecked();
     data.preloadImage	  = cbPreload->isChecked();
     data.startInLastDir   = cbLastdir->isChecked();
