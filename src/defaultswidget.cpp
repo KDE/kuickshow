@@ -174,6 +174,10 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
 DefaultsWidget::~DefaultsWidget()
 {
+    // those need to be deleted in the right order, as imFiltered
+    // references ImlibData from imOrig
+    delete imFiltered;
+    delete imOrig;
 }
 
 void DefaultsWidget::loadSettings( const KuickData& data )
