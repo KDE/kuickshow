@@ -34,8 +34,22 @@ class KToggleAction;
 class DelayedRepeatEvent
 {
 public:
+    DelayedRepeatEvent( ImageWindow *view, QKeyEvent *ev ) {
+        viewer = view;
+        event  = ev;
+    }
+    DelayedRepeatEvent( ImageWindow *view, int step ) {
+        viewer = view;
+        steps  = step;
+        event  = 0L;
+    }
+    ~DelayedRepeatEvent() {
+        delete event;
+    }
+
     ImageWindow *viewer;
-    QKeyEvent *event; // leaking the QKeyEvent here :}
+    QKeyEvent *event;
+    int steps;
 };
 
 
@@ -71,7 +85,6 @@ private:
     ImageWindow 	*viewer;
     KToggleAction 	*newWindowAction;
     KAccel 		*m_accel;
-    bool		m_lockEvents;
     DelayedRepeatEvent  *m_delayedRepeatItem;
 
 private slots:
@@ -99,6 +112,7 @@ private slots:
     void 		slotShowInOtherWindow();
 
     void		slotReplayEvent();
+    void        slotReplayAdvance();
 
     void slotDelete(); // ### fallback, remove somewhen
 

@@ -75,7 +75,6 @@ KuickShow::KuickShow( const char *name )
       viewer( 0L ),
       newWindowAction( 0L ),
       m_accel( 0L ),
-      m_lockEvents( false ),
       m_delayedRepeatItem( 0L )
 {
   kdata.load();
@@ -471,6 +470,24 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     KFileViewItem *item      = 0L; // to be shown
     KFileViewItem *item_next = 0L; // to be cached
     
+    // the viewer might not be available yet. Factor this out somewhen.
+    if ( !fileWidget ) {
+        if ( m_delayedRepeatItem )
+            return;
+
+        m_delayedRepeatItem = new DelayedRepeatEvent( view, steps );
+
+        KURL start;
+        QFileInfo fi( view->filename() );
+        start.setPath( fi.dirPath( true ) );
+        initGUI( start );
+        fileWidget->setInitialItem( fi.fileName() );
+
+        connect( fileWidget, SIGNAL( finished() ),
+                 SLOT( slotReplayAdvance() ));
+        return;
+    }
+
     if ( steps > 0 ) {
         for ( int i = 0; i < steps; i++ )
             item = fileWidget->getNext( true );
@@ -484,17 +501,17 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     }
 
     if ( FileWidget::isImage( item ) ) {
-        viewer->showNextImage( item->url().path() ); // ###
+        view->showNextImage( item->url().path() ); // ###
 		
         if ( kdata.preloadImage ) // preload next image
             if ( FileWidget::isImage( item_next ) )
-                viewer->cacheImage( item_next->url().path() ); // ###
+                view->cacheImage( item_next->url().path() ); // ###
     }
 }
 
 bool KuickShow::eventFilter( QObject *o, QEvent *e )
 {
-    if ( m_lockEvents ) // we probably need to install an eventFilter over
+    if ( m_delayedRepeatItem ) // we probably need to install an eventFilter over
 	return true;    // kapp, to make it really safe
 
     bool ret = false;
@@ -808,11 +825,7 @@ bool KuickShow::haveBrowser() const
 
 void KuickShow::delayedRepeatEvent( ImageWindow *w, QKeyEvent *e )
 {
-    m_delayedRepeatItem = new DelayedRepeatEvent;
-    m_delayedRepeatItem->viewer = w;
-    m_delayedRepeatItem->event = new QKeyEvent( *e );
-
-    m_lockEvents = true;
+    m_delayedRepeatItem = new DelayedRepeatEvent( w, new QKeyEvent( *e ) );
 }
 
 void KuickShow::slotReplayEvent()
@@ -820,11 +833,26 @@ void KuickShow::slotReplayEvent()
     disconnect( fileWidget, SIGNAL( finished() ),
 		this, SLOT( slotReplayEvent() ));
 
-    m_lockEvents = false;
-    eventFilter( m_delayedRepeatItem->viewer, m_delayedRepeatItem->event );
-    delete m_delayedRepeatItem->event;
-    delete m_delayedRepeatItem;
-    m_delayedRepeatItem = 0L;
+    DelayedRepeatEvent *e = m_delayedRepeatItem;
+    m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
+
+    eventFilter( e->viewer, e->event );
+    delete e;
+}
+
+void KuickShow::slotReplayAdvance()
+{
+    if ( !m_delayedRepeatItem )
+        return;
+
+    disconnect( fileWidget, SIGNAL( finished() ),
+                this, SLOT( slotReplayAdvance() ));
+
+    DelayedRepeatEvent *e = m_delayedRepeatItem;
+    m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
+
+    slotAdvanceImage( e->viewer, e->steps );
+    delete e;
 }
 
 #include "kuickshow.moc"
