@@ -1,12 +1,12 @@
 ## Makefile.am for kuickshow
 
-bin_PROGRAMS = kuickshow
-lib_LTLIBRARIES = kuickshow.la
+bin_PROGRAMS =
+lib_LTLIBRARIES =
+kdeinit_LTLIBRARIES = kuickshow.la
 
 # set the include path for X, qt and KDE
 INCLUDES = $(all_includes)
 KDE_CXXFLAGS = $(IMLIB_CFLAGS)
-CLEANFILES = dummy.cpp
 METASOURCES = AUTO
 
 kuickshow_la_LDFLAGS = $(all_libraries) -module -avoid-version
@@ -16,12 +16,6 @@ kuickshow_la_SOURCES =	kuickshow.cpp \
 	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \
 	imdata.cpp filefinder.cpp kurlwidget.cpp filewidget.cpp \
 	kuickio.cpp kuick.cpp imlibwidget.cpp slideshowwidget.cpp printing.cpp
-
-# now the kuickshow binary
-kuickshow_LDADD = kuickshow.la $(LIB_KIO) $(LIB_IMLIB)
-kuickshow_SOURCES = dummy.cpp
-kuickshow_LDFLAGS = $(all_libraries) $(KDE_RPATH)
-
 
 # if you "make distclean", this files get removed. If you want to remove
 # them while "make clean", use CLEANFILES
@@ -34,6 +28,3 @@ KDE_ICON = kuickshow
 
  # this is where the kdelnk file will go 
 xdg_apps_DATA = kuickshow.desktop
-
-dummy.cpp:
-	echo "// generated dummy file" > dummy.cpp

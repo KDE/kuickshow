@@ -36,7 +36,7 @@ static KCmdLineOptions options[] =
     KCmdLineLastOption
 };
 
-int main(int argc, char **argv)
+extern "C" int kdemain(int argc, char **argv)
 {
     KAboutData about(
 	  "kuickshow", I18N_NOOP( "KuickShow" ), KUICKSHOWVERSION,
