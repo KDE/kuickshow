@@ -22,6 +22,7 @@
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
+#include <kdebug.h>
 
 #include "kuickshow.h"
 #include "version.h"
