@@ -205,7 +205,7 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action("reload")->plug( tBar );
 
     tBar->insertSeparator();
-    
+
     coll->action( "short view" )->plug( tBar );
     coll->action( "detailed view" )->plug( tBar );
     coll->action( "preview")->plug( tBar );
@@ -567,9 +567,9 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 		// browser the initial current-item and wait for it to tell us
 		// when it's ready. Then we will replay this KeyEvent.
 		fileWidget->setInitialItem( fi.fileName() );
+		delayedRepeatEvent( m_viewer, k );
 		connect( fileWidget, SIGNAL( finished() ),
 			 SLOT( slotReplayEvent() ));
-		delayedRepeatEvent( m_viewer, k );
 		return true;
 	    }
 
@@ -833,6 +833,15 @@ void KuickShow::slotReplayEvent()
 
     eventFilter( e->viewer, e->event );
     delete e;
+    
+    // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
+    if ( fileWidget && fileWidget->view() ) {
+        QWidget *widget = fileWidget->view()->widget();
+        if ( widget->inherits( "QIconView" ) || widget->child(0, "QIconView" ) ){
+            fileWidget->setSorting( fileWidget->sorting() );
+        }
+    }
+    // --------------------------------------------------------------
 }
 
 void KuickShow::slotReplayAdvance()
@@ -845,6 +854,15 @@ void KuickShow::slotReplayAdvance()
 
     DelayedRepeatEvent *e = m_delayedRepeatItem;
     m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
+
+    // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
+    if ( fileWidget && fileWidget->view() ) {
+        QWidget *widget = fileWidget->view()->widget();
+        if ( widget->inherits( "QIconView" ) || widget->child(0, "QIconView" ) ){
+            fileWidget->setSorting( fileWidget->sorting() );
+        }
+    }
+    // --------------------------------------------------------------
 
     slotAdvanceImage( e->viewer, e->steps );
     delete e;
