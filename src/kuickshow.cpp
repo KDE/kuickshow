@@ -428,9 +428,10 @@ void KuickShow::slotHighlighted( const KFileItem *fi )
 {
     KFileItem *item = const_cast<KFileItem *>( fi );
     statusBar()->changeItem( item->getStatusBarInfo(), URL_ITEM );
+    bool image = FileWidget::isImage( fi );
 
     QString meta;
-    if ( FileWidget::isImage( item ) )
+    if ( image )
     {
         KFileMetaInfo info = item->metaInfo();
         if ( info.isValid() )
@@ -447,7 +448,6 @@ void KuickShow::slotHighlighted( const KFileItem *fi )
     }
     statusBar()->changeItem( meta, META_ITEM );
 
-    bool image = FileWidget::isImage( fi );
     fileWidget->actionCollection()->action("kuick_print")->setEnabled( image );
     fileWidget->actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
     fileWidget->actionCollection()->action("kuick_showInOtherWindow")->setEnabled( image );
