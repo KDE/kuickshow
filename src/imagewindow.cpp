@@ -284,15 +284,33 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 
 void ImageWindow::centerImage()
 {
+    int w, h;
+    if ( myIsFullscreen )
+    {
+        QRect desktopRect = KGlobalSettings::desktopGeometry( this );
+        w = desktopRect.width();
+        h = desktopRect.height();
+    }
+    else
+    {
+        w = width();
+        h = height();
+    }
+        
+    xpos = w/2 - imageWidth()/2;
+    ypos = h/2 - imageHeight()/2;
+
+    XMoveWindow( x11Display(), win, xpos, ypos );
+    
     // Modified by Evan for his Multi-Head (2 screens)
     // This should center on the first head
-    if ( myIsFullscreen && m_numHeads > 1 && ((m_numHeads % 2) == 0) )
-        xpos = ((width()/m_numHeads) / 2) - imageWidth()/2;
-    else
-        xpos = width()/2 - imageWidth()/2;
+//     if ( myIsFullscreen && m_numHeads > 1 && ((m_numHeads % 2) == 0) )
+//         xpos = ((width()/m_numHeads) / 2) - imageWidth()/2;
+//     else
+//         xpos = width()/2 - imageWidth()/2;
 
-    ypos = height()/2 - imageHeight()/2;
-    XMoveWindow( x11Display(), win, xpos, ypos );
+//     ypos = height()/2 - imageHeight()/2;
+//     XMoveWindow( x11Display(), win, xpos, ypos );
 }
 
 
