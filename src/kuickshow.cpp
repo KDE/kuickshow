@@ -180,7 +180,6 @@ void KuickShow::initGUI( const KURL& startDir )
 					 "kuick_one window" );
 
     KAction *hidden = coll->action( "show hidden" );
-    hidden->setIcon( "lock" );
 
     (void) new KAction( i18n("Show Image"), KShortcut(),
                         this, SLOT( slotShowInOtherWindow() ),
