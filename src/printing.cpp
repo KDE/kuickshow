@@ -107,7 +107,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     //
     bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
     QSize imagesize = image.size();
-    if ( shrinkToFit && image.width() > w || image.height() > h ) {
+    if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
         imagesize.scale( w, h, QSize::ScaleMin );
     }
 
