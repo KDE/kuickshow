@@ -30,7 +30,7 @@ KuickData::KuickData()
   fileFilter  = "*.jpeg *.jpg *.gif *.xpm *.ppm *.pgm *.pbm *.pnm *.png *.bmp *.psd *.eim *.tif *.tiff *.xcf";// *.mng";
   slideDelay       = 3000;
   slideshowCycles  = 1;
-  slideshowFullscreen = false;
+  slideshowFullscreen = true;
   slideshowStartAtFirst = true;
 
   preloadImage     = true;
@@ -79,7 +79,7 @@ void KuickData::load()
   fileFilter   = kc->readEntry( "FileFilter", def.fileFilter );
   slideDelay   = kc->readNumEntry( "SlideShowDelay", def.slideDelay );
   slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
-  slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", false );
+  slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", true );
   slideshowStartAtFirst = kc->readBoolEntry("SlideshowStartAtFirst", true );
 
   preloadImage = kc->readBoolEntry( "PreloadNextImage", def.preloadImage );
