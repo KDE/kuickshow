@@ -875,18 +875,11 @@ void KuickShow::slotConfigClosed()
 void KuickShow::about()
 {
     if ( !aboutWidget )
-    {
         aboutWidget = new AboutWidget( 0L, "about" );
-        aboutWidget->adjustSize();
-        KDialog::centerOnScreen( aboutWidget );
-        aboutWidget->show();
-        connect( aboutWidget, SIGNAL(deleteAboutWidget()), this, SLOT( slotAboutWidgetDeleted()));
-    }
-}
 
-void KuickShow::slotAboutWidgetDeleted()
-{
-    aboutWidget = 0L;
+    aboutWidget->adjustSize();
+    KDialog::centerOnScreen( aboutWidget );
+    aboutWidget->show();
 }
 
 // ------ sessionmanagement - load / save current directory -----
@@ -1090,10 +1083,10 @@ void KuickShow::slotOpenURL()
         for ( ; it != urls.end(); ++it )
         {
             KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
-            if ( item.isDir() )
-                fileWidget->setURL( *it, true );
-            else
+            if ( FileWidget::isImage( &item ) )
                 showImage( &item, true );
+            else
+                fileWidget->setURL( *it, true );
         }
     }
 }

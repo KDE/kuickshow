@@ -29,8 +29,7 @@ public:
 protected:
     ~AboutWidget();
     bool eventFilter( QObject*, QEvent * );
-signals:
-    void deleteAboutWidget();
+
 private:
     KURLWidget *m_homepage;
 
