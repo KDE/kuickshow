@@ -857,7 +857,7 @@ void ImageWindow::saveImage()
                                    "have write permission to the file.");
                 KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
             }
-        
+
             if ( file == m_kuim->filename() ) {
                 Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
             }
@@ -869,13 +869,13 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
 {
     int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
-    if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == 270 )
+    if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == ROT_270 )
         qSwap( w, h );
-        
+
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
                                                    w, h );
     bool success = false;
-    
+
     if ( saveIm ) {
         Imlib_apply_modifiers_to_rgb( id, saveIm );
         success = Imlib_save_image( id, saveIm,
