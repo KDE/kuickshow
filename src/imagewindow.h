@@ -125,7 +125,6 @@ protected:
 
   QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;
-  ImageCache * 	imageCache;
 
 
 protected slots:
