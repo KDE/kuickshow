@@ -47,6 +47,7 @@ KuickData::KuickData()
   maxWidth 	  = 8192;
   maxHeight 	  = 8192;
 
+  maxCachedImages = 4;
   backgroundColor = Qt::black;
 
   idata = new ImData;
@@ -95,6 +96,8 @@ void KuickData::load()
   maxWidth 	= abs( kc->readNumEntry( "MaximumImageWidth", def.maxWidth ) );
   maxHeight 	= abs( kc->readNumEntry( "MaximumImageHeight", def.maxHeight));
 
+  maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages", 
+                                              def.maxCachedImages );
   backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
 
   idata->load( kc );
@@ -153,6 +156,7 @@ void KuickData::save()
   kc->writeEntry( "MaximumImageWidth", maxWidth );
   kc->writeEntry( "MaximumImageHeight", maxHeight );
 
+  kc->writeEntry( "MaxCachedImages", maxCachedImages );
   kc->writeEntry( "BackgroundColor", backgroundColor );
 
   idata->save( kc );

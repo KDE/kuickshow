@@ -59,7 +59,7 @@ public:
     bool 	upScale          :1;
     int 	maxUpScale;
     uint 	maxWidth, maxHeight;
-
+    uint        maxCachedImages;
     Rotation 	rotation;
 
     QColor      backgroundColor;

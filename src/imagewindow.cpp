@@ -97,6 +97,7 @@ void ImageWindow::init()
     }
 
     setupActions();
+    imageCache->setMaxImages( kdata->maxCachedImages );
 
     transWidget    = 0L;
     myIsFullscreen = false;
