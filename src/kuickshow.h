@@ -95,7 +95,8 @@ private slots:
     void 		slotShowInOtherWindow();
 
     void		slotReplayEvent();
-    void        slotReplayAdvance();
+    void                slotReplayAdvance();
+    void                slotOpenURL();
 
 private:
     void 		initGUI( const KURL& startDir );

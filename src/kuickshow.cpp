@@ -19,17 +19,20 @@
 #include <qsize.h>
 #include <qstring.h>
 
+#include <kaboutdata.h>
 #include <kaccel.h>
 #include <kaction.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <kcursor.h>
+#include <kfiledialog.h>
 #include <kglobal.h>
 #include <khelpmenu.h>
 #include <kiconloader.h>
 #include <kio/netaccess.h>
 #include <klocale.h>
+#include <kmenubar.h>
 #include <kmessagebox.h>
 #include <kpopupmenu.h>
 #include <kpropertiesdialog.h>
@@ -165,15 +168,18 @@ void KuickShow::initGUI( const KURL& startDir )
 	     this, SLOT( dirSelected( const KURL& )) );
 
     // setup actions
+    KAction *open = KStdAction::open( this, SLOT( slotOpenURL() ),
+                                      coll, "openURL" );
+
     KAction *print = KStdAction::print( this, SLOT( slotPrint() ),
 					coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configuration"), "configure", 
+    KAction *configure = new KAction( i18n("Configure %1...").arg( KGlobal::instance()->aboutData()->programName() ), "configure",
                                       KShortcut(),
 				      this, SLOT( configuration() ),
 				      coll, "kuick_configure" );
-    KAction *slide = new KAction( i18n("Slideshow" ), "ksslide", 
+    KAction *slide = new KAction( i18n("Start Slideshow" ), "ksslide",
                                   KShortcut( Key_F2 ),
 				  this, SLOT( startSlideShow() ),
 				  coll, "kuick_slideshow" );
@@ -182,7 +188,7 @@ void KuickShow::initGUI( const KURL& startDir )
 				  this, SLOT( about() ), coll, "about" );
 
     oneWindowAction = new KToggleAction( i18n("Open only one Image Window"),
-					 "window_new", 
+					 "window_new",
                                          KShortcut( CTRL+Key_N ), coll,
 					 "kuick_one window" );
 
@@ -197,7 +203,6 @@ void KuickShow::initGUI( const KURL& startDir )
 			this, SLOT( slotShowInSameWindow() ),
 			coll, "kuick_showInSameWindow" );
 
-    coll->action( "reload" )->setShortcut( KStdAccel::reload() );
 
     KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit");
 
@@ -205,6 +210,50 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->readShortcutSettings( QString::null );
     m_accel = coll->accel();
 
+    // menubar
+    KMenuBar *mBar = menuBar();
+    QPopupMenu *fileMenu = new QPopupMenu( mBar, "file" );
+    open->plug( fileMenu );
+    fileMenu->insertSeparator();
+    slide->plug( fileMenu );
+    print->plug( fileMenu );
+    fileMenu->insertSeparator();
+    quit->plug( fileMenu );
+
+    QPopupMenu *editMenu = new QPopupMenu( mBar, "edit" );
+    coll->action("mkdir")->plug( editMenu );
+    coll->action("delete")->plug( editMenu );
+    editMenu->insertSeparator();
+    coll->action("properties")->plug( editMenu );
+
+
+    // remove the Sorting submenu (and the separator below)
+    // from the main contextmenu
+    KActionMenu *sortingMenu = static_cast<KActionMenu*>( coll->action("sorting menu"));
+    KActionMenu *mainActionMenu = static_cast<KActionMenu*>( coll->action("popupMenu"));
+    QPopupMenu *mainPopup = mainActionMenu->popupMenu();
+    int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
+    int separatorId = mainPopup->idAt( sortingIndex + 1 );
+    QMenuItem *separatorItem = mainPopup->findItem( separatorId );
+    if ( separatorItem && separatorItem->isSeparator() )
+        mainPopup->removeItem( separatorId );
+    mainActionMenu->remove( sortingMenu );
+
+    // add the sorting menu and a separator into the View menu
+    KActionMenu *viewActionMenu = static_cast<KActionMenu*>( coll->action("view menu"));
+    viewActionMenu->popupMenu()->insertSeparator( 0 );
+    sortingMenu->plug( viewActionMenu->popupMenu(), 0 ); // on top of the menu
+
+
+    QPopupMenu *settingsMenu = new QPopupMenu( mBar, "settings" );
+    configure->plug( settingsMenu );
+
+    mBar->insertItem( i18n("&File"), fileMenu );
+    mBar->insertItem( i18n("&Edit"), editMenu );
+    viewActionMenu->plug( mBar );
+    mBar->insertItem( i18n("&Settings"), settingsMenu );
+
+    // toolbar
     KToolBar *tBar = toolBar();
     tBar->setText( i18n( "Main Toolbar" ) );
 
@@ -227,15 +276,10 @@ void KuickShow::initGUI( const KURL& startDir )
     oneWindowAction->plug( tBar );
     print->plug( tBar );
     tBar->insertSeparator();
-    quit->plug( tBar );
     about->plug( tBar );
 
-    KHelpMenu *helpMenu = new KHelpMenu( this,
-                                         KGlobal::instance()->aboutData(),
-                                         false );
-    tBar->insertButton( "help", 100,
-                        SIGNAL( clicked() ), this, SLOT( appHelpActivated() ));
-    tBar->setDelayedPopup( 100, helpMenu->menu(), true );
+    QPopupMenu *help = helpMenu( QString::null, false );
+    mBar->insertItem( i18n("&Help"), help );
 
 
     KStatusBar* sBar = statusBar();
@@ -258,6 +302,14 @@ void KuickShow::initGUI( const KURL& startDir )
 
     setCentralWidget( fileWidget );
     setAutoSaveSettings();
+
+    coll->action( "reload" )->setShortcut( KStdAccel::reload() );
+    coll->action( "short view" )->setShortcut(Key_F6);
+    coll->action( "detailed view" )->setShortcut(Key_F7);
+    coll->action( "show hidden" )->setShortcut(Key_F8);
+    coll->action( "mkdir" )->setShortcut(Key_F10);
+    coll->action( "preview" )->setShortcut(Key_F11);
+    coll->action( "separate dirs" )->setShortcut(Key_F12);
 }
 
 
@@ -632,7 +684,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                               m_viewer->url() );
                 KFileItemList list;
                 list.append( &it );
-                if ( fileWidget->del(list, window, 
+                if ( fileWidget->del(list, window,
                                      (k->state() & ShiftButton) == 0) == 0L )
                     return true; // aborted deletion
 
@@ -917,6 +969,27 @@ void KuickShow::toggleBrowser()
     }
     else if ( !s_viewers.isEmpty() )
         hide();
+}
+
+void KuickShow::slotOpenURL()
+{
+    KFileDialog dlg(QString::null, kdata->fileFilter, this, "filedialog", true);
+    dlg.setMode( KFile::Files | KFile::Directory );
+    dlg.setCaption( i18n("Select Files or a Directory to open") );
+
+    if ( dlg.exec() == QDialog::Accepted )
+    {
+        KURL::List urls = dlg.selectedURLs();
+        KURL::List::ConstIterator it = urls.begin();
+        for ( ; it != urls.end(); ++it )
+        {
+            KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
+            if ( item.isDir() )
+                fileWidget->setURL( *it, true );
+            else
+                showImage( &item, true );
+        }
+    }
 }
 
 void KuickShow::deleteAllViewers()
