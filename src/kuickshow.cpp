@@ -1004,7 +1004,8 @@ void KuickShow::saveSettings()
     KConfig *kc = KGlobal::config();
 
     kc->setGroup("SessionSettings");
-    kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
+    if ( oneWindowAction )
+	kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
 	kc->writeEntry( "CurrentDirectory", fileWidget->url().url() );
