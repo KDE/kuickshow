@@ -57,6 +57,7 @@
 #include <kurlcompletion.h>
 #include <kurldrag.h>
 #include <kwin.h>
+#include <kstdguiitem.h>
 
 #include "aboutwidget.h"
 #include "filewidget.h"
@@ -327,7 +328,7 @@ void KuickShow::initGUI( const KURL& startDir )
     about->plug( tBar );
 
     QPopupMenu *help = helpMenu( QString::null, false );
-    mBar->insertItem( i18n("&Help"), help );
+    mBar->insertItem( KStdGuiItem::help().text() , help );
 
 
     KStatusBar* sBar = statusBar();
