@@ -187,7 +187,7 @@ void KuickShow::initGUI( const KURL& startDir )
     (void) new KAction( i18n("Show Image"), 0, this,
                         SLOT( slotShowInOtherWindow() ),
 			coll, "kuick_showInOtherWindow" );
-    (void) new KAction( i18n("Show Image in active window"), 0, this,
+    (void) new KAction( i18n("Show Image in Active Window"), 0, this,
 			SLOT( slotShowInSameWindow() ), coll,
 			"kuick_showInSameWindow" );
 
