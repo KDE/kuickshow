@@ -35,7 +35,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
     layout->setSpacing( KDialog::spacingHint() );
 
     m_fullScreen = new QCheckBox( i18n("Switch to &full-screen"), this );
-    m_startWithCurrent = new QCheckBox( i18n("Start with &current image"), this);
+    m_startWithCurrent = new QCheckBox( i18n("S&tart with current image"), this);
 
     m_delayTime = new KIntNumInput( this, "delay time" );
     m_delayTime->setLabel( i18n("De&lay between slides:") );
@@ -46,7 +46,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
     m_cycles->setLabel( i18n("&Iterations (0 = infinite):") );
     m_cycles->setSpecialValueText( i18n("infinite") );
     m_cycles->setRange( 0, 500 );
-    
+
     layout->addWidget( m_fullScreen );
     layout->addWidget( m_startWithCurrent );
     layout->addWidget( m_delayTime );
