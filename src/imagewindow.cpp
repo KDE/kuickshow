@@ -177,12 +177,10 @@ void ImageWindow::setupActions()
     new KAction( i18n("Print Image..."), KStdAccel::print(),
                  this, SLOT( printImage() ),
                  m_actions, "print_image" );
-    new KAction( i18n("Save As..."), KStdAccel::save(),
-                 this, SLOT( saveImage() ),
+    KStdAction::saveAs( this, SLOT( saveImage() ),
                  m_actions, "save_image_as" );
 
-    new KAction( i18n("Close"), Key_Q,
-                 this, SLOT( close() ),
+    KStdAction::close( this, SLOT( close() ),
                  m_actions, "close_image" );
     // --------
     new KAction( i18n("More Brightness"), Key_B,
