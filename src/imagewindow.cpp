@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998-2004 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -296,12 +296,12 @@ void ImageWindow::centerImage()
         w = width();
         h = height();
     }
-        
+
     xpos = w/2 - imageWidth()/2;
     ypos = h/2 - imageHeight()/2;
 
     XMoveWindow( x11Display(), win, xpos, ypos );
-    
+
     // Modified by Evan for his Multi-Head (2 screens)
     // This should center on the first head
 //     if ( myIsFullscreen && m_numHeads > 1 && ((m_numHeads % 2) == 0) )
@@ -426,22 +426,22 @@ void ImageWindow::addGamma( int factor )
 
 void ImageWindow::scrollUp()
 {
-    scrollImage( 0, kdata->scrollSteps );
+    scrollImage( 0, 20 * kdata->scrollSteps );
 }
 
 void ImageWindow::scrollDown()
 {
-    scrollImage( 0, - kdata->scrollSteps );
+    scrollImage( 0, - 20 * kdata->scrollSteps );
 }
 
 void ImageWindow::scrollLeft()
 {
-    scrollImage( kdata->scrollSteps, 0 );
+    scrollImage( 20 * kdata->scrollSteps, 0 );
 }
 
 void ImageWindow::scrollRight()
 {
-    scrollImage( - kdata->scrollSteps, 0 );
+    scrollImage( - 20 * kdata->scrollSteps, 0 );
 }
 
 ///
