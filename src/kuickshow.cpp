@@ -269,7 +269,8 @@ void KuickShow::viewerDeleted()
 void KuickShow::slotHighlighted( const KFileViewItem *fi )
 {
     QString size;
-    size.sprintf( " %.1f kb", (float) fi->size()/1024 );
+    //size.sprintf( " %.1f kb", (float) fi->size()/1024 );
+    size = i18n("%1 kb").arg(KGlobal::locale()->formatNumber((float)fi->size()/1024, 1));
     statusBar()->changeItem( size, SIZE_ITEM );
     statusBar()->changeItem( fi->url().prettyURL(), URL_ITEM );
 
@@ -451,8 +452,8 @@ void KuickShow::dropEvent( QDropEvent *e )
 
 
     if ( hasRemote ) {
-	QString tmp( i18n("You can only drop local files\n") );
-	tmp += i18n("onto the imageviewer!\n\n");
+	QString tmp( i18n("You can only drop local files\n"
+		"onto the imageviewer!\n\n"));
 	KMessageBox::sorry( this, tmp, i18n("KuickShow Drop Error") );
     }
 }
@@ -724,10 +725,9 @@ void KuickShow::saveSettings()
 void KuickShow::messageCantLoadImage( const QString& filename )
 {
     viewer->clearFocus();
-    QString tmp = i18n("Sorry, I can't load the image\n\"");
-    tmp += filename;
-    tmp += i18n("\"\nMaybe it has a wrong format or your Imlib\n");
-    tmp += i18n("is not installed properly.");
+    QString tmp = i18n("Sorry, I can't load the image\n %1"
+	    "\nMaybe it has a wrong format or your Imlib\n"
+	    "is not installed properly.").arg(filename);
     KMessageBox::sorry( 0L, tmp, i18n("Image Error") );
 }
 
@@ -753,10 +753,10 @@ void KuickShow::initImlib()
 	id = Imlib_init_with_params( x11Display(), &par );
 
 	if ( !id ) {
-	    QString tmp = i18n("Can't initialize \"Imlib\".\n");
-	    tmp += i18n("Start kuickshow on the commandline and look\n");
-	    tmp += i18n("out for some error messages.\n");
-	    tmp += i18n("I will quit now.");
+	    QString tmp = i18n("Can't initialize \"Imlib\".\n"
+		    "Start kuickshow on the commandline and look\n"
+		    "out for some error messages.\n"
+		    "I will quit now.");
 	    KMessageBox::sorry( this, tmp, i18n("Fatal Imlib error") );
 
 	    exit(1);

@@ -23,9 +23,7 @@ KuickIO * KuickIO::self( QWidget *parent )
 bool KuickIO::deleteFile( const KURL& url, bool dontAsk )
 {
     if ( !dontAsk ) {
-	QString tmp = i18n( "Really delete the file\n\n" );
-	tmp += url.prettyURL();
-	tmp += i18n( " ?\n" );
+	QString tmp = i18n( "Really delete the file\n\n%1 ?\n" ).arg(url.prettyURL());
 	int res = KMessageBox::questionYesNo( s_parent, tmp,
 					     i18n("Delete file?"));
 	if ( res == KMessageBox::No )
@@ -39,8 +37,7 @@ bool KuickIO::deleteFile( const KURL& url, bool dontAsk )
 	if ( unlink( QFile::encodeName( url.path(-1)) ) < 0 ) {
 	    deleted = KIO::NetAccess::del( url );
 	    if ( !deleted ) {
-		QString tmp = i18n( "Sorry, I can't delete the file\n\n" );
-		tmp += url.prettyURL();
+		QString tmp = i18n( "Sorry, I can't delete the file\n\n%1").arg(url.prettyURL());
 		KMessageBox::sorry( s_parent, tmp, i18n( "Delete failed" ) );
 	    }
 	}

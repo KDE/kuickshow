@@ -849,9 +849,9 @@ void ImageWindow::saveImage()
     }
 
     if ( !success ) {
-      QString tmp = i18n("Couldn't save the file,\n");
-      tmp += i18n("maybe this disk is full, or you don't\n");
-      tmp += i18n("have write permissions to the file.");
+      QString tmp = i18n("Couldn't save the file,\n"
+    		"maybe this disk is full, or you don't\n"
+    		"have write permissions to the file.");
       QMessageBox::warning( this, i18n("File saving failed"), tmp );
     }
   }
