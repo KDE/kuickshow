@@ -224,7 +224,7 @@ void ImageWindow::setupActions()
     KShortcut cut(Key_Return);
     cut.append(KStdAccel::shortcut(KStdAccel::FullScreen));
 
-    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
+    KAction *action = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
     action->setShortcut(cut);
 
     new KAction( i18n("Reload Image"), Key_Enter,
