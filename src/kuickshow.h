@@ -24,7 +24,7 @@
 class FileWidget;
 class ImageWindow;
 class ImData;
-class KFileViewItem;
+class KFileItem;
 class KuickConfigDialog;
 
 class KAccel;
@@ -94,10 +94,10 @@ private slots:
     void 		slotConfigApplied();
     void 		slotConfigClosed();
     void 		messageCantLoadImage( const QString& );
-    void         	showImage(const KFileViewItem *, bool newWin = false);
-    void 		showFileItem( ImageWindow *, const KFileViewItem * );
-    void		slotHighlighted( const KFileViewItem * );
-    void 		slotSelected( const KFileViewItem * );
+    void         	showImage(const KFileItem *, bool newWin = false);
+    void 		showFileItem( ImageWindow *, const KFileItem * );
+    void		slotHighlighted( const KFileItem * );
+    void 		slotSelected( const KFileItem * );
     void		dirSelected( const KURL& );
     void		configuration();
     void	      	about();

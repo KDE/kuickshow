@@ -34,22 +34,22 @@ public:
 
     void setInitialItem( const QString& filename );
 
-    KFileViewItem *getCurrentItem( bool onlyImage ) const {
+    KFileItem *getCurrentItem( bool onlyImage ) const {
 	return getItem( Current, onlyImage );
     }
 
-    void setCurrentItem( const KFileViewItem * );
+    void setCurrentItem( const KFileItem * );
     void setCurrentItem( const QString& filename ) {
 	KDirOperator::setCurrentItem( filename );
     }
 
-    KFileViewItem * gotoFirstImage();
-    KFileViewItem * gotoLastImage();
-    KFileViewItem * getNext( bool go=true );
-    KFileViewItem * getPrevious( bool go=true );
+    KFileItem * gotoFirstImage();
+    KFileItem * gotoLastImage();
+    KFileItem * getNext( bool go=true );
+    KFileItem * getPrevious( bool go=true );
 
 
-    KFileViewItem *getItem( WhichItem which, bool onlyImage ) const;
+    KFileItem *getItem( WhichItem which, bool onlyImage ) const;
 
     static bool isImage( const KFileItem * );
 
@@ -61,7 +61,7 @@ signals:
 protected:
     virtual bool eventFilter( QObject *o, QEvent * );
     virtual void resizeEvent( QResizeEvent * );
-    virtual void activatedMenu( const KFileViewItem * );
+    virtual void activatedMenu( const KFileItem *, const QPoint& );
 
 private slots:
     void slotReturnPressed( const QString& text );
@@ -70,7 +70,7 @@ private slots:
 
     void slotItemsCleared();
     void slotItemDeleted( KFileItem * );
-    void slotHighlighted( const KFileViewItem * );
+    void slotHighlighted( const KFileItem * );
 
     void slotFinishedLoading();
 

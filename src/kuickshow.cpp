@@ -96,7 +96,7 @@ KuickShow::KuickShow( const char *name )
   KURL startDir = base;
   for ( int i = 0; i < args->count(); i++ ) {
       KURL url( base, args->arg( i ) );
-      KFileViewItem item( -1, -1, url, false );
+      KFileItem item( -1, -1, url, false );
 
       // for remote URLs, we don't know if it's a file or directory, but
       // FileWidget::isImage() should correct in most cases.
@@ -149,11 +149,11 @@ void KuickShow::initGUI( const KURL& startDir )
 
     KActionCollection *coll = fileWidget->actionCollection();
 
-    connect( fileWidget, SIGNAL( fileSelected( const KFileViewItem * ) ),
-	     this, SLOT( slotSelected( const KFileViewItem * ) ));
+    connect( fileWidget, SIGNAL( fileSelected( const KFileItem * ) ),
+	     this, SLOT( slotSelected( const KFileItem * ) ));
 
-    connect( fileWidget, SIGNAL( fileHighlighted( const KFileViewItem * )),
-	     this, SLOT( slotHighlighted( const KFileViewItem * ) ));
+    connect( fileWidget, SIGNAL( fileHighlighted( const KFileItem * )),
+	     this, SLOT( slotHighlighted( const KFileItem * ) ));
 
     connect( fileWidget, SIGNAL( urlEntered( const KURL&  )),
 	     this, SLOT( dirSelected( const KURL& )) );
@@ -268,7 +268,7 @@ void KuickShow::viewerDeleted()
 }
 
 
-void KuickShow::slotHighlighted( const KFileViewItem *fi )
+void KuickShow::slotHighlighted( const KFileItem *fi )
 {
     QString size;
     //size.sprintf( " %.1f kb", (float) fi->size()/1024 );
@@ -290,19 +290,19 @@ void KuickShow::dirSelected( const KURL& url )
     statusBar()->changeItem( url.prettyURL(), URL_ITEM );
 }
 
-void KuickShow::slotSelected( const KFileViewItem *item )
+void KuickShow::slotSelected( const KFileItem *item )
 {
     showImage( item, !newWindowAction->isChecked() );
 }
 
 // downloads item if necessary
 void KuickShow::showFileItem( ImageWindow */*view*/,
-			      const KFileViewItem */*item*/ )
+			      const KFileItem */*item*/ )
 {
 
 }
 
-void KuickShow::showImage( const KFileViewItem *fi, bool newWin )
+void KuickShow::showImage( const KFileItem *fi, bool newWin )
 {
     bool newWindow = !viewer || newWin;
 
@@ -347,7 +347,7 @@ void KuickShow::showImage( const KFileViewItem *fi, bool newWin )
 	    }
 
   	    if ( kdata->preloadImage && fileWidget ) {
-  		KFileViewItem *item = 0L;                 // don't move cursor
+  		KFileItem *item = 0L;                 // don't move cursor
   		item = fileWidget->getItem( FileWidget::Next, true );
   		if ( item )
   		    viewer->cacheImage( item->url().path() ); // FIXME
@@ -358,7 +358,7 @@ void KuickShow::showImage( const KFileViewItem *fi, bool newWin )
 
 void KuickShow::startSlideShow()
 {
-    KFileViewItem *item = fileWidget->gotoFirstImage();
+    KFileItem *item = fileWidget->gotoFirstImage();
     if ( item ) {
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
 	showImage( item, !kdata->showInOneWindow );
@@ -373,7 +373,7 @@ void KuickShow::nextSlide()
 	return;
     }
 
-    KFileViewItem *item = fileWidget->getNext( true );
+    KFileItem *item = fileWidget->getNext( true );
     if ( !item ) {
 	viewer->close( true );
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
@@ -389,11 +389,11 @@ void KuickShow::nextSlide()
 // FIXME: maybe print with QPainter?
 void KuickShow::slotPrint()
 {
-    const KFileViewItemList *items = fileWidget->selectedItems();
+    const KFileItemList *items = fileWidget->selectedItems();
     if ( !items )
 	return;
 
-    KFileViewItemListIterator it( *items );
+    KFileItemListIterator it( *items );
 
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow( 0, id, this, "printing image" );
@@ -410,7 +410,7 @@ void KuickShow::slotPrint()
 // deletes the selected files in the filebrowser
 void KuickShow::slotDelete()
 {
-    KFileViewItem *item = fileWidget->getCurrentItem( false );
+    KFileItem *item = fileWidget->getCurrentItem( false );
     if ( item )
         KuickIO::self( this )->deleteFile( item->url(), false );
 }
@@ -445,7 +445,7 @@ void KuickShow::dropEvent( QDropEvent *e )
 	    if ( !u.fileName().isEmpty() )
 		dir = u;
 	    else {
-		KFileViewItem item( -1, -1, u, false );
+		KFileItem item( -1, -1, u, false );
 		showImage( &item, true );
 	    }
 	}
@@ -470,8 +470,8 @@ void KuickShow::show()
 
 void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 {
-    KFileViewItem *item      = 0L; // to be shown
-    KFileViewItem *item_next = 0L; // to be cached
+    KFileItem *item      = 0L; // to be shown
+    KFileItem *item_next = 0L; // to be cached
     
     // the viewer might not be available yet. Factor this out somewhen.
     if ( !fileWidget ) {
@@ -541,8 +541,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 	
 	viewer = window;
 	QString img;
-	KFileViewItem *item = 0L;      // the image to be shown
-	KFileViewItem *item_next = 0L; // the image to be cached
+	KFileItem *item = 0L;      // the image to be shown
+	KFileItem *item_next = 0L; // the image to be cached
 
 	if ( k ) { // keypress
 	    ret = true;
@@ -588,7 +588,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 		break;
 
 	    case Key_Delete: {
-		KFileViewItem *cur = fileWidget->getCurrentItem( false );
+		KFileItem *cur = fileWidget->getCurrentItem( false );
 		item = fileWidget->getNext( false ); // don't move
 		if ( !item )
 		    item = fileWidget->getPrevious( false );
@@ -718,7 +718,7 @@ void KuickShow::readProperties( KConfig *kc )
     QStringList images = kc->readListEntry( "Images shown" );
     QStringList::Iterator it;
     for ( it = images.begin(); it != images.end(); ++it ) {
-	KFileViewItem item( -1, -1, *it, false );
+	KFileItem item( -1, -1, *it, false );
 	if ( item.isReadable() )
 	    showImage( &item, true );
     }
@@ -754,7 +754,7 @@ void KuickShow::saveSettings()
     kc->writeEntry( "CurrentDirectory", fileWidget->url().url() );
 
     if ( fileWidget )
-	fileWidget->saveConfig( kc, "Filebrowser" );
+	fileWidget->writeConfig( kc, "Filebrowser" );
 
     kc->sync();
 }
