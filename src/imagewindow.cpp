@@ -90,11 +90,11 @@ void ImageWindow::init()
             s_handCursor = new QCursor( arrowCursor );
     }
 
-    new KAction( i18n("Show next Image"), KStdAccel::next(),
+    new KAction( i18n("Show Next Image"), KStdAccel::next(),
                  this, SLOT( slotRequestNext() ),
                  m_actions, "next_image" );
 
-    new KAction( i18n("Show previous Image"), KStdAccel::prior(),
+    new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
                  this, SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
 
@@ -150,7 +150,7 @@ void ImageWindow::updateAccel()
                    Key_7, this, SLOT( rotate270() ) );
   m_accel->insert( "Maximize", i18n( "Maximize" ), QString::null,
                    Key_M, this, SLOT( maximize() ) );
-  m_accel->insert( "OriginalSize", i18n( "Restore original size" ), QString::null,
+  m_accel->insert( "OriginalSize", i18n( "Restore Original Size" ), QString::null,
                    Key_O, this, SLOT( showImageOriginalSize() ));
   m_accel->insert( "More Brightness", i18n( "More Brightness" ), QString::null,
                    Key_B, this, SLOT( moreBrightness() ) );
@@ -735,9 +735,9 @@ void ImageWindow::setPopupMenu()
   itemGammaPlus = gammaMenu->insertItem( i18n("+"), this, SLOT( moreGamma() ));
   itemGammaMinus = gammaMenu->insertItem( i18n("-"), this,SLOT( lessGamma() ));
 
-  itemViewerZoomIn = viewerMenu->insertItem( i18n("Zoom in"), this,
+  itemViewerZoomIn = viewerMenu->insertItem( i18n("Zoom In"), this,
 					     SLOT( zoomIn() ));
-  itemViewerZoomOut = viewerMenu->insertItem( i18n("Zoom out"), this,
+  itemViewerZoomOut = viewerMenu->insertItem( i18n("Zoom Out"), this,
 					      SLOT( zoomOut() ));
   viewerMenu->insertSeparator();
   itemRotate90    = viewerMenu->insertItem( i18n("Rotate 90 degrees"), this,
@@ -747,18 +747,18 @@ void ImageWindow::setPopupMenu()
   itemRotate270   = viewerMenu->insertItem( i18n("Rotate 270 degrees"), this,
 					    SLOT( rotate270() ));
   viewerMenu->insertSeparator();
-  itemViewerFlipH = viewerMenu->insertItem( i18n("Flip horizontally"), this,
+  itemViewerFlipH = viewerMenu->insertItem( i18n("Flip Horizontally"), this,
 					    SLOT( flipHoriz() ));
-  itemViewerFlipV = viewerMenu->insertItem( i18n("Flip vertically"), this,
+  itemViewerFlipV = viewerMenu->insertItem( i18n("Flip Vertically"), this,
 					    SLOT( flipVert() ));
   viewerMenu->insertSeparator();
   viewerMenu->insertItem( i18n("Brightness"), brightnessMenu );
   viewerMenu->insertItem( i18n("Contrast"), contrastMenu );
   viewerMenu->insertItem( i18n("Gamma"), gammaMenu );
   viewerMenu->insertSeparator();
-  itemViewerPrint = viewerMenu->insertItem( i18n("Print image..."), this,
+  itemViewerPrint = viewerMenu->insertItem( i18n("Print Image..."), this,
 					    SLOT( printImage() ));
-  itemViewerSave = viewerMenu->insertItem( i18n("Save as..."), this,
+  itemViewerSave = viewerMenu->insertItem( i18n("Save As..."), this,
 					   SLOT( saveImage() ));
   viewerMenu->insertSeparator();
   itemViewerClose = viewerMenu->insertItem( i18n("Close"), this,

@@ -163,7 +163,7 @@ void KuickShow::initGUI( const KURL& startDir )
     // setup actions
     KAction *print = KStdAction::print( this, SLOT( slotPrint() ),
 					coll, "kuick_print" );
-    print->setText( i18n("Print image...") );
+    print->setText( i18n("Print Image...") );
 
     KAction *configure = new KAction( i18n("Configuration"), "configure", 0,
 				      this, SLOT( configuration() ),
