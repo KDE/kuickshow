@@ -104,8 +104,10 @@ protected:
   virtual void 	resizeEvent( QResizeEvent * );
   virtual void 	dragEnterEvent( QDragEnterEvent * );
   virtual void 	dropEvent( QDropEvent * );
-  virtual void contextMenuEvent( QContextMenuEvent * );
+  virtual void  contextMenuEvent( QContextMenuEvent * );
 
+  enum KuickCursor { DefaultCursor = 0, ZoomCursor, MoveCursor };
+  void 	updateCursor( KuickCursor cursor = DefaultCursor );
 
 
   // popupmenu entries
@@ -145,16 +147,10 @@ private:
   void 		setPopupMenu();
 
   bool 		myIsFullscreen;
-  int 		m_width;
-  int 		m_height;
   int           m_numHeads;
   QString   m_saveDirectory;
 
   KActionCollection *m_actions;
-
-  // Qt resizes us even if we just request a move(). This sucks when
-  // switching from fullscreen to window mode, as we will be resized twice.
-  bool 		ignore_resize_hack;
 
   static QCursor * s_handCursor;
 };

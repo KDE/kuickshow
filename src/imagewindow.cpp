@@ -118,10 +118,8 @@ void ImageWindow::init()
 
     transWidget    = 0L;
     myIsFullscreen = false;
-    ignore_resize_hack = false;
 
     xpos = 0, ypos = 0;
-    m_width = width(); m_height = height();
     m_numHeads = ScreenCount( x11Display() );
 
     setAcceptDrops( true );
@@ -260,7 +258,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     //  XMoveWindow( x11Display(), win, 0, 0 );
     XResizeWindow( x11Display(), win, imWidth, imHeight );
 
-    if ( imWidth != (int) m_width || imHeight != (int) m_height ) {
+    if ( imWidth != width() || imHeight != height() ) {
 	if ( myIsFullscreen ) {
 	    centerImage();
 	}
@@ -274,6 +272,8 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 	XMoveWindow( x11Display(), win, 0, 0 );
     }
 
+    updateCursor();
+	
     QString caption = i18n( "Filename (Imagewidth x Imageheight)",
                             "%3 (%1 x %2)" );
     caption = caption.arg( m_kuim->originalWidth() ).
@@ -287,11 +287,11 @@ void ImageWindow::centerImage()
     // Modified by Evan for his Multi-Head (2 screens)
     // This should center on the first head
     if ( myIsFullscreen && m_numHeads > 1 && ((m_numHeads % 2) == 0) )
-        xpos = ((m_width/m_numHeads) / 2) - imageWidth()/2;
+        xpos = ((width()/m_numHeads) / 2) - imageWidth()/2;
     else
-        xpos = m_width/2 - imageWidth()/2;
+        xpos = width()/2 - imageWidth()/2;
 
-    ypos = m_height/2 - imageHeight()/2;
+    ypos = height()/2 - imageHeight()/2;
     XMoveWindow( x11Display(), win, xpos, ypos );
 }
 
@@ -301,16 +301,16 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
     xpos += x;
     ypos += y;
 
-    int cwlocal = m_width;
-    int chlocal = m_height;
+    int cwlocal = width();
+    int chlocal = height();
 
     int iw = imageWidth();
     int ih = imageHeight();
 
-    if ( myIsFullscreen || m_width > desktopWidth() )
+    if ( myIsFullscreen || width() > desktopWidth() )
 	cwlocal = desktopWidth();
 
-    if ( myIsFullscreen || m_height > desktopHeight() )
+    if ( myIsFullscreen || height() > desktopHeight() )
 	chlocal = desktopHeight();
 
     if ( restrict ) { // don't allow scrolling in certain cases
@@ -498,14 +498,17 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 {
     uint key = e->key();
 
+    if ( key == Key_Shift )
+        updateCursor( ZoomCursor );
+	
     if ( key == Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
-	close( true );
+        close( true );
     else if ( KStdAccel::save().contains( KKey( e ) ) )
-	saveImage();
+        saveImage();
 
     else {
- 	e->ignore();
- 	return;
+        e->ignore();
+        return;
     }
 
     e->accept();
@@ -514,11 +517,11 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 void ImageWindow::keyReleaseEvent( QKeyEvent *e )
 {
     if ( e->state() & ShiftButton ) { // Shift-key released
-        setCursor( arrowCursor );
-	if ( transWidget ) {
-	    delete transWidget;
-	    transWidget = 0L;
-	}
+        updateCursor();
+        if ( transWidget ) {
+            delete transWidget;
+            transWidget = 0L;
+        }
     }
 
     e->accept();
@@ -537,9 +540,9 @@ void ImageWindow::mousePressEvent( QMouseEvent *e )
 
     if ( e->button() == LeftButton ) {
         if ( e->state() & ShiftButton )
-            setCursor( arrowCursor ); // need a magnify-cursor
+            updateCursor( ZoomCursor );
         else
-            setCursor( *s_handCursor );
+            updateCursor( MoveCursor );
     }
 
     ImlibWidget::mousePressEvent( e );
@@ -555,6 +558,26 @@ void ImageWindow::contextMenuEvent( QContextMenuEvent *e )
     viewerMenu->popup( e->globalPos() );
 }
 
+void ImageWindow::updateCursor( KuickCursor cursor )
+{
+    switch ( cursor )
+    {
+        case ZoomCursor:
+            setCursor( arrowCursor ); // need a magnify-cursor
+            break;
+        case MoveCursor:
+            setCursor( *s_handCursor );
+            break;
+        case DefaultCursor:
+        default:
+            if ( imageWidth() > width() || imageHeight() > height() )
+                setCursor( *s_handCursor );
+            else
+                setCursor( arrowCursor );
+            break;
+    }
+}
+
 void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 {
     if ( !(e->state() & LeftButton) ) { // only handle LeftButton actions
@@ -565,7 +588,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
-	    transWidget->setGeometry( 0, 0, m_width, m_height );
+	    transWidget->setGeometry( 0, 0, width(), height() );
 	    transWidget->setBackgroundMode( NoBackground );
 	}
 
@@ -609,7 +632,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 
 void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 {
-    setCursor( arrowCursor );
+    updateCursor();
 
     if ( transWidget ) {
        // destroy the transparent widget, used for showing the rectangle (zoom)
@@ -652,8 +675,8 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     neww = botX - topX;
     newh = botY - topY;
 
-    factorx = ((float) m_width / (float) neww);
-    factory = ((float) m_height / (float) newh);
+    factorx = ((float) width() / (float) neww);
+    factory = ((float) height() / (float) newh);
 
     if ( factorx < factory ) // use the smaller factor
 	factor = factorx;
@@ -672,9 +695,9 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     int xtmp = - (int) (factor * abs(xpos - topX) );
     int ytmp = - (int) (factor * abs(ypos - topY) );
 
-    // if image has different ratio (m_width/m_height), center it
-    int xcenter = (m_width  - (int) (neww * factor)) / 2;
-    int ycenter = (m_height - (int) (newh * factor)) / 2;
+    // if image has different ratio (width()/height()), center it
+    int xcenter = (width()  - (int) (neww * factor)) / 2;
+    int ycenter = (height() - (int) (newh * factor)) / 2;
 
     xtmp += xcenter;
     ytmp += ycenter;
@@ -700,25 +723,8 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 {
     ImlibWidget::resizeEvent( e );
 
-    // to save a lot of calls in scrollImage() for example
-    m_width  = width();
-    m_height = height();
-
-    if ( ignore_resize_hack ) {
-	ignore_resize_hack = false;
-	
-	int w = width();
-	int h = height();
-        QRect r = KGlobalSettings::desktopGeometry(this);
-
-	if ( w == r.width() && h == r.height() &&
-	     imageWidth() < w && imageHeight() < h ) {
-	
-	    return;
-	}
-    }
-
     centerImage();
+    updateCursor();
 }
 
 
@@ -1029,7 +1035,7 @@ void ImageWindow::resizeOptimal( int w, int h )
     int neww = (w >= mw) ? mw : w;
     int newh = (h >= mh) ? mh : h;
 
-    if ( neww == m_width && newh == m_height )
+    if ( neww == width() && newh == height() )
 	centerImage();
     else
 	resize( neww, newh ); // also centers the image
