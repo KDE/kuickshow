@@ -15,6 +15,7 @@
 #include <qcursor.h>
 #include <qdrawutil.h>
 #include <qkeycode.h>
+#include <qpaintdevicemetrics.h>
 #include <qpainter.h>
 #include <qpen.h>
 #include <qpopupmenu.h>
@@ -32,6 +33,7 @@
 #include <kaccel.h>
 #include <kconfig.h>
 #include <kcursor.h>
+#include <kdebug.h>
 #ifdef KDE_USE_FINAL
 #undef Unsorted
 #endif
@@ -840,44 +842,29 @@ void ImageWindow::printImageWithQt( const QString& filename, KPrinter& printer)
 {
     QImage image( filename );
     if ( image.isNull() ) {
-        qDebug("KuickShow: can't load image: %s for printing.",
-               filename.isNull() ? "(null)" : filename.latin1());
+        kdWarning() << "Can't load image: " << filename << " for printing.\n";
         return;
     }
 
     QPainter p;
     p.begin( &printer );
-    p.setWorldXForm( true );
 
-    QSize printArea = printer.realPageSize();
+    QPaintDeviceMetrics metrics( &printer );
+    int w = metrics.width();
+    int h = metrics.height(); // ### seems to be larger than papersize
 
-    bool landscape = (printer.orientation() == KPrinter::Landscape);
+    // shrink image to pagesize, if necessary
+    int iw = image.width();
+    int ih = image.height();
 
-    // shrink image to pagesize, if necessary (take orientation into account).
-    // ### Better ask user.
-    int iw = landscape ? image.height() : image.width();
-    int ih = landscape ? image.width()  : image.height();
-
-    if ( printArea.isValid() && 
-         (iw > printArea.width() || ih > printArea.height()) ) {
-        if ( landscape )
-            image = image.smoothScale( printArea.height(), printArea.width(),
-                                       QImage::ScaleMin );
-        else
-            image = image.smoothScale( printArea, QImage::ScaleMin );
+    if ( iw > w || ih > h ) {
+        image = image.smoothScale( w, h, QImage::ScaleMin );
     }
 
-    if ( landscape ) {
-        p.translate( 0.0, image.width() );
-        p.rotate( -90.0 );
-    }
-
-    if ( printer.colorMode() == KPrinter::GrayScale && !image.isGrayscale() ) {
-        // qDebug("*** GRAY ***");
-        KImageEffect::toGray( image );
-    }
-    
-    p.drawImage( 0, 0, image );
+    // center image
+    int x = (w - iw)/2;
+//     int y = (h = ih)/2; // ### h too large -> y too large
+    p.drawImage( x, 0, image );
     p.end();
 
     printer.newPage();
