@@ -140,7 +140,7 @@ KuickShow::~KuickShow()
     delete id;
     kapp->quit();
 
-    delete kdata; kdata = 0;
+    delete kdata;
 }
 
 
@@ -296,10 +296,10 @@ void KuickShow::showFileItem( ImageWindow */*view*/,
 
 }
 
-void KuickShow::showImage( const KFileItem *fi, 
+void KuickShow::showImage( const KFileItem *fi,
                            bool newWindow, bool fullscreen )
 {
-    newWindow |= !m_viewer;
+    newWindow  |= !m_viewer;
     fullscreen |= (newWindow && kdata->fullScreen);
 
     if ( FileWidget::isImage( fi ) ) {
@@ -330,7 +330,7 @@ void KuickShow::showImage( const KFileItem *fi,
 	    m_viewer->close( true ); // couldn't load image, close window
 	else {
             m_viewer->setFullscreen( fullscreen );
-            
+
 	    if ( newWindow ) {
 		m_viewer->show();
 		
@@ -358,7 +358,7 @@ void KuickShow::startSlideShow()
     if ( item ) {
         m_slideshowCycle = 1;
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
-	showImage( item, !oneWindowAction->isChecked(), 
+	showImage( item, !oneWindowAction->isChecked(),
                    kdata->slideshowFullscreen );
         m_slideTimer->start( kdata->slideDelay );
     }
@@ -523,7 +523,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
     if ( k ) {
         if ( KStdAccel::quit().contains( KKey( k ) ) ) {
 	    saveSettings();
-	    exit(0);
+            deleteAllViewers();
+	    ::exit(0);
         }
         else if ( KStdAccel::help().contains( KKey( k ) ) ) {
 	    appHelpActivated();
@@ -781,7 +782,7 @@ void KuickShow::initImlib()
 		    "I will quit now.");
 	    KMessageBox::error( this, tmp, i18n("Fatal Imlib error") );
 
-	    exit(1);
+	    ::exit(1);
 	}
     }
 }
@@ -855,6 +856,18 @@ void KuickShow::toggleBrowser( bool show )
     }
     else
         hide();
+}
+
+void KuickShow::deleteAllViewers()
+{
+    QValueListIterator<ImageWindow*> it = s_viewers.begin();
+    for ( ; it != s_viewers.end(); ++it ) {
+        (*it)->blockSignals( true ); // don't call viewerDeleted()
+        (*it)->close( true );
+    }
+    
+    s_viewers.clear();
+    m_viewer = 0L;
 }
 
 #include "kuickshow.moc"

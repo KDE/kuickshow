@@ -12,10 +12,10 @@
 
 #include <stdlib.h>
 
+#include <qapplication.h>
 #include <qcursor.h>
 #include <qdrawutil.h>
 #include <qkeycode.h>
-#include <qpaintdevicemetrics.h>
 #include <qpainter.h>
 #include <qpen.h>
 #include <qpopupmenu.h>
@@ -52,8 +52,7 @@
 #include "imagewindow.h"
 #include "kuick.h"
 #include "kuickdata.h"
-#include "version.h"
-#include <qapplication.h>
+#include "printing.h"
 
 #undef GrayScale
 
@@ -807,62 +806,11 @@ void ImageWindow::printImage()
 {
     if ( !kuim )
         return;
-
-  KPrinter printer;
-  printer.setFullPage( true );
-  printer.setDocName( kuim->filename() );
-  printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
-
-  if ( printer.setup( this ) )
-  {
-      QString tmpName;
-      bool ok = false;
-
-      KTempFile tmpFile( "kuickshow", ".png" );
-      if ( tmpFile.status() == 0 )
-      {
-          tmpFile.setAutoDelete( true );
-          tmpName = tmpFile.name();
-
-          ok = saveImage( tmpName );
-      }
-
-      if ( ok )
-          printImageWithQt( tmpName, printer );
-      else
-          qDebug("KuickShow: Couldn't print image."); // FIXME, show messagebox
-  }
-
-//   if ( Imlib_save_image( id, kuim->imlibImage(),
-//                          QFile::encodeName( tmpName ).data(), &info ) == 0 )
-
-}
-
-void ImageWindow::printImageWithQt( const QString& filename, KPrinter& printer)
-{
-    QImage image( filename );
-    if ( image.isNull() ) {
-        kdWarning() << "Can't load image: " << filename << " for printing.\n";
-        return;
+    
+    if ( !Printing::printImage( *this ) )
+    {
+//         ### KMESSAGEBOX
     }
-
-    QPainter p;
-    p.begin( &printer );
-
-    QPaintDeviceMetrics metrics( &printer );
-    int w = metrics.width();
-    int h = metrics.height();
-
-    // shrink image to pagesize, if necessary
-    if ( image.width() > w || image.height() > h ) {
-        image = image.smoothScale( w, h, QImage::ScaleMin );
-    }
-
-    // center image
-    int x = (w - image.width())/2;
-    int y = (h - image.height())/2;
-    p.drawImage( x, y, image );
-    p.end();
 }
 
 void ImageWindow::saveImage()
@@ -882,7 +830,7 @@ void ImageWindow::saveImage()
     }
 }
 
-bool ImageWindow::saveImage( const QString& filename )
+bool ImageWindow::saveImage( const QString& filename ) const
 {
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, kuim->imlibImage(),
                                                    kuim->width(),

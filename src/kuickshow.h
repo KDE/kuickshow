@@ -105,6 +105,7 @@ private:
     bool 		haveBrowser() const;
     void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );
     void                toggleBrowser( bool show );
+    void                deleteAllViewers();
 
     uint 		viewItem, renameItem, deleteItem, printItem;
     uint                m_slideshowCycle;

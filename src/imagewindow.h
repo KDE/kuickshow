@@ -28,7 +28,6 @@ class QTimer;
 class QWidget;
 
 class KAccel;
-class KPrinter;
 
 class ImageWindow : public ImlibWidget
 {
@@ -63,6 +62,8 @@ public:
   void resizeOptimal( int w, int h );
 
   void updateAccel();
+
+  bool          saveImage( const QString& filename ) const;
 
 public slots:
   void 		zoomIn();
@@ -134,15 +135,12 @@ protected:
 
 
 protected slots:
-  void 		saveImage();
+void 		saveImage();
   void          slotRequestNext()           { emit requestImage( this, +1 ); }
   void          slotRequestPrevious()       { emit requestImage( this, -1 ); }
 
 
 private:
-  bool          saveImage( const QString& filename );
-  void          printImageWithQt( const QString& filename, KPrinter& printer );
-
   int 		desktopWidth( bool totalScreen = false ) const;
   int 		desktopHeight( bool totalScreen = false ) const;
   QSize		maxImageSize() const;
