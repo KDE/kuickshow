@@ -247,6 +247,9 @@ void ImlibWidget::showImageOriginalSize()
 bool ImlibWidget::autoRotate( KuickImage *kuim )
 {
     KFileMetaInfo metadatas( kuim->filename() );
+    if ( !metadatas.isValid() )
+        return false;
+
     KFileMetaInfoItem metaitem = metadatas.item("Orientation");
     if ( !metaitem.isValid()
 #if QT_VERSION >= 0x030100
@@ -254,8 +257,8 @@ bool ImlibWidget::autoRotate( KuickImage *kuim )
 #endif
         )
         return false;
-        
-        
+
+
     switch ( metaitem.value().toInt() )
     {
         case 1:
@@ -269,7 +272,7 @@ bool ImlibWidget::autoRotate( KuickImage *kuim )
             kuim->rotateAbs( ROT_270 );
             break;
     }
-    
+
     return true;
 }
 
