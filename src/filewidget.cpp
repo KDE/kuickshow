@@ -130,7 +130,8 @@ void FileWidget::findCompletion( const QString& text )
 	 text.find('/') != -1 ) {
 	QString t = m_fileFinder->completionObject()->makeCompletion( text );
 
-	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup)
+	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
+            m_fileFinder->completionMode() == KGlobalSettings::CompletionPopupAuto)
 	    m_fileFinder->setCompletedItems(
 			      m_fileFinder->completionObject()->allMatches() );
 	else
