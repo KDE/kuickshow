@@ -82,7 +82,7 @@ public:
     // in the mainwindow's collection, but in the filewidget's.
     virtual KActionCollection* actionCollection() const;
 
-    
+
 protected:
     virtual void	readProperties( KConfig * );
     void 		initImlibParams( ImData *, ImlibInitParams * );
@@ -142,7 +142,7 @@ private:
     KAccel 		*m_accel;
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;
-    KAction             *m_toggleBrowserAction;
+    KToggleAction       *m_toggleBrowserAction;
     QGuardedPtr<AboutWidget> aboutWidget;
 };
 

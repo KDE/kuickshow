@@ -239,7 +239,8 @@ void KuickShow::initGUI( const KURL& startDir )
                                          KShortcut( CTRL+Key_N ), coll,
                                          "kuick_one window" );
 
-    m_toggleBrowserAction = new KToggleAction( i18n("Show/Hide File Browser"), KShortcut( Key_Space ), coll, "toggleBrowser" );
+    m_toggleBrowserAction = new KToggleAction( i18n("Show File Browser"), KShortcut( Key_Space ), coll, "toggleBrowser" );
+    m_toggleBrowserAction->setCheckedState(i18n("Hide File Browser"));
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
 
