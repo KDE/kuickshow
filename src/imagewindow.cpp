@@ -177,40 +177,42 @@ void ImageWindow::setFullscreen( bool enable )
     xpos = 0; ypos = 0;
 
     if ( enable && !myIsFullscreen ) { // set Fullscreen
-	KWin::Info info = KWin::info( winId() );
-	oldGeometry = info.frameGeometry;
+        KWin::Info info = KWin::info( winId() );
+        oldGeometry = info.frameGeometry;
 
 	// qDebug("** oldGeometry: %i, %i, %i, %i",
 	// oldGeometry.x(), oldGeometry.y(),
 	// oldGeometry.width(), oldGeometry.height());
 
         int scnum = QApplication::desktop()->screenNumber(this);
-	setFixedSize( QApplication::desktop()->screenGeometry(scnum).size() );
+        setFixedSize( QApplication::desktop()->screenGeometry(scnum).size() );
 
-	KWin::setType( winId(), NET::Override );
-	KWin::setState( winId(), NET::StaysOnTop );
+        KWin::setType( winId(), NET::Override );
+        KWin::setState( winId(), NET::StaysOnTop );
 
-	setGeometry( QApplication::desktop()->screenGeometry(scnum) );
-	// qApp->processEvents(); // not necessary anymore
+        setGeometry( QApplication::desktop()->screenGeometry(scnum) );
+        // qApp->processEvents(); // not necessary anymore
     }
 
     else if ( !enable && myIsFullscreen ) { // go into window mode
-	bool wasInitialFullscreen = initialFullscreen;
-	initialFullscreen = false;
+        bool wasInitialFullscreen = initialFullscreen;
+        initialFullscreen = false;
 	
-	ignore_resize_hack = true; //ignore the resizeEvent triggered by move()
-	move( oldGeometry.topLeft() );
- 	setMinimumSize(0,0);
-	myIsFullscreen = false; // we want resizeOptimal to use window-mode
-	resizeOptimal( imageWidth(), imageHeight() ); // resizeEvent centers
+        ignore_resize_hack = true; //ignore the resizeEvent triggered by move()
+        move( oldGeometry.topLeft() );
+        setMinimumSize(0,0);
+        myIsFullscreen = false; // we want resizeOptimal to use window-mode
+        resizeOptimal( imageWidth(), imageHeight() ); // resizeEvent centers
 
-	KWin::setType( winId(), NET::Normal );
-	KWin::clearState( winId(), NET::StaysOnTop );
+        KWin::setType( winId(), NET::Normal );
+        KWin::clearState( winId(), NET::StaysOnTop );
 
-	// hack around kwin not giving us a decoration, when going into window
-	// mode and initially started in fullscreen mode
-	if ( wasInitialFullscreen )
-	    hide(); show();
+        // hack around kwin not giving us a decoration, when going into window
+        // mode and initially started in fullscreen mode
+        if ( wasInitialFullscreen ) {
+            hide();
+            show();
+        }
     }
 
     myIsFullscreen = enable;
@@ -799,44 +801,34 @@ void ImageWindow::setPopupAccels()
   viewerMenu->setAccel(KStdAccel::save().keyCodeQt(),  itemViewerSave);
 }
 
-
 void ImageWindow::printImage()
 {
     if ( !kuim )
         return;
-    
+
   KPrinter printer;
   printer.setFullPage( true );
   printer.setDocName( kuim->filename() );
   printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
-    
-  if ( printer.setup( this ) ) 
+
+  if ( printer.setup( this ) )
   {
-      bool ofile = printer.outputToFile();
-      bool ok = true;
       QString tmpName;
-      
+      bool ok = false;
+
       KTempFile tmpFile( "kuickshow", ".png" );
-      if ( tmpFile.status() == 0 ) 
+      if ( tmpFile.status() == 0 )
       {
           tmpFile.setAutoDelete( true );
-          tmpName = ofile ? printer.outputFileName() : tmpFile.name();
+          tmpName = tmpFile.name();
 
-          if ( !saveImage( tmpName ) )
-              ok = false;
+          ok = saveImage( tmpName );
       }
+
+      if ( ok )
+          printImageWithQt( tmpName, printer );
       else
-          ok = false;
-      
-      if ( !ok ) {
           qDebug("KuickShow: Couldn't print image."); // FIXME, show messagebox
-          return;
-      }
-      
-      if ( ofile ) // done, user just wanted that postscript file
-          return;
-
-      printImageWithQt( tmpName, printer );
   }
 
 //   if ( Imlib_save_image( id, kuim->imlibImage(),
@@ -848,32 +840,33 @@ void ImageWindow::printImageWithQt( const QString& filename, KPrinter& printer)
 {
     QImage image( filename );
     if ( image.isNull() ) {
-        qDebug("KuickShow: can't load image: %s for printing.", 
+        qDebug("KuickShow: can't load image: %s for printing.",
                filename.isNull() ? "(null)" : filename.latin1());
         return;
     }
-    
+
     QPainter p;
     p.begin( &printer );
     p.setWorldXForm( true );
-    
+
     QSize printArea = printer.realPageSize();
-    
+
     bool landscape = (printer.orientation() == KPrinter::Landscape);
-    
+
     // shrink image to pagesize, if necessary (take orientation into account).
     // ### Better ask user.
     int iw = landscape ? image.height() : image.width();
     int ih = landscape ? image.width()  : image.height();
-    
-    if ( iw > printArea.width() || ih > printArea.height() ) {
+
+    if ( printArea.isValid() && 
+         (iw > printArea.width() || ih > printArea.height()) ) {
         if ( landscape )
             image = image.smoothScale( printArea.height(), printArea.width(),
                                        QImage::ScaleMin );
         else
             image = image.smoothScale( printArea, QImage::ScaleMin );
     }
-    
+
     if ( landscape ) {
         p.translate( 0.0, image.width() );
         p.rotate( -90.0 );
@@ -883,10 +876,10 @@ void ImageWindow::printImageWithQt( const QString& filename, KPrinter& printer)
         // qDebug("*** GRAY ***");
         KImageEffect::toGray( image );
     }
-
+    
     p.drawImage( 0, 0, image );
     p.end();
-    
+
     printer.newPage();
 }
 
@@ -897,7 +890,7 @@ void ImageWindow::saveImage()
     file = KFileDialog::getSaveFileName( kuim->filename(), tmp.fileFilter );
     if ( !file.isEmpty() )
     {
-        if ( !saveImage( file ) ) 
+        if ( !saveImage( file ) )
         {
             QString tmp = i18n("Couldn't save the file.\n"
                                "Perhaps the disk is full, or you don't "
@@ -910,12 +903,12 @@ void ImageWindow::saveImage()
 bool ImageWindow::saveImage( const QString& filename )
 {
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, kuim->imlibImage(),
-                                                   kuim->width(), 
+                                                   kuim->width(),
                                                    kuim->height() );
     if ( saveIm ) {
         Imlib_apply_modifiers_to_rgb( id, saveIm );
-        bool success = Imlib_save_image( id, saveIm, 
-                                         QFile::encodeName( filename ).data(), 
+        bool success = Imlib_save_image( id, saveIm,
+                                         QFile::encodeName( filename ).data(),
                                          NULL );
         Imlib_kill_image( id, saveIm );
         return success;
