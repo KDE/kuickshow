@@ -945,14 +945,15 @@ void ImageWindow::autoScale( KuickImage *kuim )
 }
 
 // only called when kdata->isModsEnabled is true
-void ImageWindow::autoRotate( KuickImage *kuim )
+bool ImageWindow::autoRotate( KuickImage *kuim )
 {
-    if ( kdata->autoRotation )
-        ImlibWidget::autoRotate( kuim ); // use meta data orientation
-    else
+    if ( kdata->autoRotation && ImlibWidget::autoRotate( kuim ) )
+        return true;
+
+    else // rotation by metadata not available or not configured
     {
         // only apply default mods to newly loaded images
-        
+
         // ### actually we should have a dirty flag ("neverManuallyFlipped")
         if ( kuim->flipMode() == FlipNone )
         {
@@ -961,18 +962,20 @@ void ImageWindow::autoRotate( KuickImage *kuim )
                 flipMode |= FlipVertical;
             if ( kdata->flipHorizontally )
                 flipMode |= FlipHorizontal;
-        
+
             kuim->flipAbs( flipMode );
         }
-        
+
         if ( kuim->absRotation() == ROT_0 )
             kuim->rotateAbs( kdata->rotation );
     }
+    
+    return true;
 }
 
 int ImageWindow::desktopWidth( bool totalScreen ) const
 {
-    if ( myIsFullscreen || totalScreen ) 
+    if ( myIsFullscreen || totalScreen )
     {
         int scnum = QApplication::desktop()->screenNumber(topLevelWidget());
 	return QApplication::desktop()->screenGeometry(scnum).width();

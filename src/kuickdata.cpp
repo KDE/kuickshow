@@ -29,7 +29,7 @@ KuickData::KuickData()
 
   isModsEnabled    = true;
   fullScreen       = false;
-  autoRotation     = false;
+  autoRotation     = true;
   downScale 	   = true;
   upScale 	   = false;
   flipVertically   = false;

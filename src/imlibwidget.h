@@ -161,7 +161,12 @@ public:
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
-  virtual void autoRotate( KuickImage *kuim );
+    
+  /**
+   * @return true if auto-rotation is not possible, e.g. because no metadata
+   * about orientation is available
+   */
+  virtual bool  autoRotate( KuickImage *kuim );
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
