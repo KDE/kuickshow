@@ -11,6 +11,8 @@
 
 #include <klineedit.h>
 
+class KURLCompletion;
+
 class FileFinder : public KLineEdit
 {
     Q_OBJECT
@@ -19,6 +21,12 @@ public:
     FileFinder( QWidget *parent=0, const char *name=0 );
     ~FileFinder();
 
+    KURLCompletion *completion() {
+        return static_cast<KURLCompletion*>( completionObject() );
+    }
+
+    virtual void hide();
+    
 signals:
     void enterDir( const QString& );
 

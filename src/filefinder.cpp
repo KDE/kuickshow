@@ -73,6 +73,12 @@ void FileFinder::keyPressEvent( QKeyEvent *e )
     }
 }
 
+void FileFinder::hide()
+{
+    KLineEdit::hide();
+    parentWidget()->setFocus();
+}
+
 void FileFinder::slotAccept( const QString& dir )
 {
     hide();
