@@ -72,6 +72,7 @@ private slots:
     void slotItemDeleted( KFileItem * );
     void slotHighlighted( const KFileItem * );
 
+    void slotURLEntered( const KURL& url );
     void slotFinishedLoading();
 
 private:

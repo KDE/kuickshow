@@ -9,7 +9,6 @@
 
 #include <qkeycode.h>
 
-#include <kapplication.h> // KDE_VERSION
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -53,6 +52,9 @@ FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
     connect( this, SIGNAL( fileHighlighted( const KFileItem * )),
 	     SLOT( slotHighlighted( const KFileItem * )));
 
+    connect( this, SIGNAL(urlEntered(const KURL&)),
+             SLOT( slotURLEntered( const KURL& )));
+    
     // should actually be KDirOperator's job!
     connect( this, SIGNAL( finishedLoading() ), SLOT( slotFinishedLoading() ));
 }
@@ -125,12 +127,12 @@ void FileWidget::findCompletion( const QString& text )
 {
     if ( text.at(0) == '/' || text.at(0) == '~' ||
 	 text.find('/') != -1 ) {
-	QString t = m_fileFinder->completionObject()->makeCompletion( text );
+	QString t = m_fileFinder->completion()->makeCompletion( text );
 
 	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
             m_fileFinder->completionMode() == KGlobalSettings::CompletionPopupAuto)
 	    m_fileFinder->setCompletedItems(
-			      m_fileFinder->completionObject()->allMatches() );
+			      m_fileFinder->completion()->allMatches() );
 	else
             if ( !t.isNull() )
                 m_fileFinder->setCompletedText( t );
@@ -347,7 +349,7 @@ void FileWidget::slotReturnPressed( const QString& t )
 	text += '/';
 
     if ( text.at(0) == '/' || text.at(0) == '~' ) {
-	QString dir = (static_cast<KURLCompletion*>( m_fileFinder->completionObject() ))->replacedPath( text );
+	QString dir = m_fileFinder->completion()->replacedPath( text );
 	
 	KURL url;
 	url.setPath( dir );
@@ -355,9 +357,8 @@ void FileWidget::slotReturnPressed( const QString& t )
     }
 
     else if ( text.find('/') != (int) text.length() -1 ) { // relative path
-	QString dir = (static_cast<KURLCompletion*>( m_fileFinder->completionObject() ))->replacedPath( text );
-	KURL u = url();
-	u.addPath( dir );
+	QString dir = m_fileFinder->completion()->replacedPath( text );
+	KURL u( url(), dir );
 	setURL( u, true );
     }
 
@@ -384,6 +385,12 @@ void FileWidget::setCurrentItem( const KFileItem *item )
 void FileWidget::setInitialItem( const QString& filename )
 {
     m_initialName = filename;
+}
+
+void FileWidget::slotURLEntered( const KURL& url )
+{
+    if ( m_fileFinder )
+        m_fileFinder->completion()->setDir( url.path() );
 }
 
 void FileWidget::slotFinishedLoading()

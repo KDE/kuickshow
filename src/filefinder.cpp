@@ -30,7 +30,7 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
              SLOT( hide() ));
     connect( completionBox(), SIGNAL( activated( const QString& ) ),
              SLOT( slotAccept( const QString& )));
-    connect( this, SIGNAL( returnPressed( const QString& )), 
+    connect( this, SIGNAL( returnPressed( const QString& )),
              SLOT( slotAccept( const QString& ) ));
 
     KURLCompletion *comp = new KURLCompletion();
@@ -39,10 +39,10 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     setCompletionObject( comp, false );
     setAutoDeleteCompletionObject( true );
     setFocusPolicy( ClickFocus );
-    
+
     KConfig *config = KGlobal::config();
     KConfigGroupSaver cs( config, "GeneralConfiguration" );
-    setCompletionMode( (KGlobalSettings::Completion) 
+    setCompletionMode( (KGlobalSettings::Completion)
                config->readNumEntry( "FileFinderCompletionMode",
                                      KGlobalSettings::completionMode()));
 }
@@ -71,6 +71,12 @@ void FileFinder::keyPressEvent( QKeyEvent *e )
     else {
 	KLineEdit::keyPressEvent( e );
     }
+}
+
+void FileFinder::hide()
+{
+    KLineEdit::hide();
+    parentWidget()->setFocus();
 }
 
 void FileFinder::slotAccept( const QString& dir )
