@@ -151,7 +151,7 @@ void ImageWindow::setupActions()
                  this, SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
-    new KAction( i18n("Flip Horicontally"), Key_Asterisk,
+    new KAction( i18n("Flip Horizontally"), Key_Asterisk,
                  this, SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
     new KAction( i18n("Flip Vertically"), Key_Slash,
