@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 
     about.addAuthor( "Carsten Pfeiffer", 0, "pfeiffer@kde.org",
 		     "http://devel-home.kde.org/~pfeiffer/" );
-    about.addCredit( "Rober Hamberger", 0, "Robert.Hamberger@AUDI.DE" );
+    about.addCredit( "Rober Hamberger", 0, "rh474@bingo-ev.de" );
     about.addCredit( "Thorsten Scheuermann", 0, "uddn@rz.uni-karlsruhe.de" );
 
     KCmdLineArgs::init( argc, argv, &about );
