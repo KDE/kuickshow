@@ -5,7 +5,7 @@
 **
 ** Created : 98
 **
-** Copyright (C) 1998-2001 by Carsten Pfeiffer.  All rights reserved.
+** Copyright (C) 1998-2002 by Carsten Pfeiffer.  All rights reserved.
 **
 ****************************************************************************/
 
@@ -89,7 +89,7 @@ KuickShow::KuickShow( const char *name )
   m_slideTimer = new QTimer( this );
   connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
 
-  
+
   KConfig *kc = KGlobal::config();
 
   bool isDir = false; // true if we get a directory on the commandline
@@ -109,7 +109,8 @@ KuickShow::KuickShow( const char *name )
       // FileWidget::isImage() should correct in most cases.
       // For non-local non-images, we just assume directory.
       if ( FileWidget::isImage( &item ) )
-	  showImage( &item, true ); // show in new window
+	  showImage( &item, true, false, true ); // show in new window, not fullscreen-forced and move to 0,0
+// 	  showImage( &item, true, false, false ); // show in new window, not fullscreen-forced and not moving to 0,0
       else {
 	  if ( item.isDir() || !url.isLocalFile() ) {
 	      startDir = url;
@@ -168,18 +169,26 @@ void KuickShow::initGUI( const KURL& startDir )
 					coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configuration"), "configure", 0,
+    KAction *configure = new KAction( i18n("Configuration"), "configure", 
+                                      KShortcut(),
 				      this, SLOT( configuration() ),
 				      coll, "kuick_configure" );
-    KAction *slide = new KAction( i18n("Slideshow" ), "ksslide", Key_F2,
+    KAction *slide = new KAction( i18n("Slideshow" ), "ksslide", 
+                                  KShortcut( Key_F2 ),
 				  this, SLOT( startSlideShow() ),
 				  coll, "kuick_slideshow" );
-    KAction *about = new KAction( i18n( "About KuickShow" ), "about", 0,
-				  this, SLOT( about() ), coll );
+    KAction *about = new KAction( i18n( "About KuickShow" ), "about",
+                                  KShortcut(),
+				  this, SLOT( about() ), coll, "about" );
 
     oneWindowAction = new KToggleAction( i18n("Open only one Image Window"),
-					 "window_new", CTRL+Key_N, coll,
+					 "window_new", 
+                                         KShortcut( CTRL+Key_N ), coll,
 					 "kuick_one window" );
+
+    m_toggleBrowserAction = new KToggleAction( i18n("Show/Hide the File Browser"), KShortcut( Key_Space ), coll, "toggleBrowser" );
+    connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
+             SLOT( toggleBrowser() ));
 
     (void) new KAction( i18n("Show Image"), KShortcut(),
                         this, SLOT( slotShowInOtherWindow() ),
@@ -258,7 +267,7 @@ void KuickShow::viewerDeleted()
     s_viewers.remove( viewer );
     if ( viewer == m_viewer )
         m_viewer = 0L;
-    
+
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
 	if ( fileWidget )
 	    saveSettings();
@@ -274,7 +283,7 @@ void KuickShow::viewerDeleted()
     if ( fileWidget )
         // maybe a slideshow was stopped --> enable the action again
         fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
-    
+
     m_slideTimer->stop();
 }
 
@@ -282,7 +291,6 @@ void KuickShow::viewerDeleted()
 void KuickShow::slotHighlighted( const KFileItem *fi )
 {
     QString size;
-    //size.sprintf( " %.1f kb", (float) fi->size()/1024 );
     size = i18n("%1 kb").arg(KGlobal::locale()->formatNumber((float)fi->size()/1024, 1));
     statusBar()->changeItem( size, SIZE_ITEM );
     statusBar()->changeItem( fi->url().prettyURL(), URL_ITEM );
@@ -314,7 +322,7 @@ void KuickShow::showFileItem( ImageWindow */*view*/,
 }
 
 void KuickShow::showImage( const KFileItem *fi,
-                           bool newWindow, bool fullscreen )
+                           bool newWindow, bool fullscreen, bool moveToTopLeft )
 {
     newWindow  |= !m_viewer;
     fullscreen |= (newWindow && kdata->fullScreen);
@@ -331,7 +339,7 @@ void KuickShow::showImage( const KFileItem *fi,
 		     this, SLOT( messageCantLoadImage(const QString &) ));
             connect( m_viewer, SIGNAL( requestImage( ImageWindow *, int )),
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
-	    if ( s_viewers.count() == 1 ) {
+	    if ( s_viewers.count() == 1 && moveToTopLeft ) {
 		// we have to move to 0x0 before showing _and_
 		// after showing, otherwise we get some bogus geometry()
 		m_viewer->move( Kuick::workArea().topLeft() );
@@ -348,7 +356,7 @@ void KuickShow::showImage( const KFileItem *fi,
         // and the second isn't (e.g. because it is a pdf or something else,
         // Imlib can't load).
         ImageWindow *safeViewer = m_viewer;
-        
+
 	QString filename;
 	KIO::NetAccess::download(fi->url(), filename);
 
@@ -362,7 +370,7 @@ void KuickShow::showImage( const KFileItem *fi,
 	    if ( newWindow ) {
 		safeViewer->show();
 		
-		if ( !fullscreen && s_viewers.count() == 1 ) {
+		if ( !fullscreen && s_viewers.count() == 1 && moveToTopLeft ) {
 		    // the WM might have moved us after showing -> strike back!
 		    // move the first image to 0x0 workarea coord
 		    safeViewer->move( Kuick::workArea().topLeft() );
@@ -375,7 +383,7 @@ void KuickShow::showImage( const KFileItem *fi,
   		if ( item )
   		    safeViewer->cacheImage( item->url().path() ); // FIXME
   	    }
-            
+
             m_viewer = safeViewer;
 	} // m_viewer created successfully
     } // isImage
@@ -568,7 +576,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
     ImageWindow *window = dynamic_cast<ImageWindow*>( o );
     if ( window ) {
-// 	KCursor::autoHideEventFilter( o, e );
+//  	KCursor::autoHideEventFilter( o, e );
 
 	m_viewer = window;
 	QString img;
@@ -601,24 +609,21 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
  	    // FIXME: make all this stuff via KStdAccel and KAccel ->slots
 
-	    switch( key ) {
-	    case Key_Home: {
+            KKey kkey( key );
+            if ( KStdAccel::home().contains( kkey ) )
+            {
 		item = fileWidget->gotoFirstImage();
 		item_next = fileWidget->getNext( false );
-		break;
 	    }
 
-	    case Key_End: {
+            else if ( KStdAccel::end().contains( kkey ) )
+            {
 		item = fileWidget->gotoLastImage();
 		item_next = fileWidget->getPrevious( false );
-		break;
 	    }
 
-	    case Key_Enter:
-		item = fileWidget->getCurrentItem( true );
-		break;
-
-	    case Key_Delete: {
+            else if ( fileWidget->actionCollection()->action("delete")->shortcut().contains( key ))
+            {
 		KFileItem *cur = fileWidget->getCurrentItem( false );
 		item = fileWidget->getNext( false ); // don't move
 		if ( !item )
@@ -627,20 +632,22 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                               m_viewer->url() );
                 KFileItemList list;
                 list.append( &it );
-                fileWidget->del( list, (k->state() & ShiftButton) == 0 );
+                if ( fileWidget->del(list, window, 
+                                     (k->state() & ShiftButton) == 0) == 0L )
+                    return true; // aborted deletion
+
                 // ### check failure asynchronously and restore old item?
                 fileWidget->setCurrentItem( item );
-		break;
 	    }
 
-	    case Key_Space: {
-                toggleBrowser( !haveBrowser() );
+	    else if ( m_toggleBrowserAction->shortcut().contains( key ) )
+            {
+                toggleBrowser();
 		return true; // don't pass keyEvent
 	    }
 
-	    default:
+            else
 		ret = false;
-	    }
 
 
 	    if ( FileWidget::isImage( item ) ) {
@@ -883,6 +890,8 @@ void KuickShow::slotReplayAdvance()
     m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
 
     // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
+    // Sigh. According to qt-bugs, they won't fix this bug ever. So you can't
+    // rely on sorting to be correct before the QIconView has been show()n.
     if ( fileWidget && fileWidget->view() ) {
         QWidget *widget = fileWidget->view()->widget();
         if ( widget->inherits( "QIconView" ) || widget->child(0, "QIconView" ) ){
@@ -895,18 +904,18 @@ void KuickShow::slotReplayAdvance()
     delete e;
 }
 
-void KuickShow::toggleBrowser( bool show )
+void KuickShow::toggleBrowser()
 {
-    if ( show ) {
+    if ( !haveBrowser() ) {
         if ( m_viewer && m_viewer->isFullscreen() )
             m_viewer->setFullscreen( false );
         fileWidget->resize( size() ); // ### somehow fileWidget isn't resized!?
-        KuickShow::show();
+        show();
         raise();
         KWin::setActiveWindow( winId() ); // ### this should not be necessary
         setFocus();
     }
-    else
+    else if ( !s_viewers.isEmpty() )
         hide();
 }
 

@@ -108,7 +108,7 @@ protected:
   virtual void 	dropEvent( QDropEvent * );
 
 
-
+    
   // popupmenu entries
   uint 		itemViewerZoomMax, itemViewerZoomOrig, itemViewerZoomIn, itemViewerZoomOut, itemViewerFlipH;
   uint 		itemRotate90, itemRotate180, itemRotate270;
@@ -135,9 +135,10 @@ protected:
 
 
 protected slots:
-void 		saveImage();
+  void 		saveImage();
   void          slotRequestNext()           { emit requestImage( this, +1 ); }
   void          slotRequestPrevious()       { emit requestImage( this, -1 ); }
+  void          reload();
 
 
 private:

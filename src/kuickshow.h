@@ -69,13 +69,14 @@ protected:
     void 		initImlibParams( ImData *, ImlibInitParams * );
 
 private slots:
+    void                toggleBrowser();
     void 		slotQuit() { delete this; }
     void 		slotPrint();
     void 		slotConfigApplied();
     void 		slotConfigClosed();
     void 		messageCantLoadImage( const QString& );
     void         	showImage(const KFileItem *, bool newWindow = false,
-                                  bool fullscreen = false );
+                                  bool fullscreen = false, bool moveToTopLeft = true );
     void 		showFileItem( ImageWindow *, const KFileItem * );
     void		slotHighlighted( const KFileItem * );
     void 		slotSelected( const KFileItem * );
@@ -104,7 +105,6 @@ private:
     void 		saveSettings();
     bool 		haveBrowser() const;
     void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );
-    void                toggleBrowser( bool show );
     void                deleteAllViewers();
 
     uint 		viewItem, renameItem, deleteItem, printItem;
@@ -118,6 +118,7 @@ private:
     KAccel 		*m_accel;
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;
+    KAction             *m_toggleBrowserAction;
 
 };
 

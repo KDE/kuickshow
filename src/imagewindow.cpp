@@ -12,7 +12,6 @@
 
 #include <stdlib.h>
 
-#include <qapplication.h>
 #include <qcursor.h>
 #include <qdrawutil.h>
 #include <qkeycode.h>
@@ -31,6 +30,7 @@
 #include <qdragobject.h>
 
 #include <kaccel.h>
+#include <kapplication.h>
 #include <kconfig.h>
 #include <kcursor.h>
 #include <kdebug.h>
@@ -78,7 +78,8 @@ ImageWindow::~ImageWindow()
 
 void ImageWindow::init()
 {
-//   KCursor::setAutoHideCursor( this, true, true );
+//     KCursor::setAutoHideCursor( this, true, true );
+//     KCursor::setHideCursorDelay( 1500 );
 
     m_actions = new KActionCollection( this );
 
@@ -168,6 +169,8 @@ void ImageWindow::updateAccel()
                    Key_Return, this, SLOT( toggleFullscreen() ) );
   m_accel->insert( "Close", i18n( "Close Viewer" ), QString::null,
                    Key_Q, this, SLOT( close() ) );
+  m_accel->insert( "Reload", i18n("Reload Image" ), QString::null, Key_Enter,
+                   this, SLOT( reload() ) );
 
   m_accel->readSettings();
 }
@@ -245,7 +248,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     caption = caption.arg( kuim->filename() ).
               arg( kuim->originalWidth() ).
               arg( kuim->originalHeight() );
-    setCaption( caption );
+    setCaption( kapp->makeStdCaption( caption ) );
 }
 
 
@@ -335,6 +338,10 @@ bool ImageWindow::showNextImage( const QString& filename )
     }
 }
 
+void ImageWindow::reload()
+{
+    showNextImage( filename() );
+}
 
 void ImageWindow::addBrightness( int factor )
 {
@@ -814,7 +821,7 @@ void ImageWindow::printImage()
 {
     if ( !kuim )
         return;
-    
+
     if ( !Printing::printImage( *this ) )
     {
 //         ### KMESSAGEBOX

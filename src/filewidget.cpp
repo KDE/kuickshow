@@ -66,7 +66,7 @@ void FileWidget::initActions()
 {
     int index = 0;
     KActionCollection *coll = actionCollection();
-    KActionSeparator *sep = new KActionSeparator( coll );
+    KActionSeparator *sep = new KActionSeparator( coll, "kuicksep" );
     KActionMenu *menu = static_cast<KActionMenu*>( coll->action("popupMenu") );
 
     menu->insert( coll->action("kuick_showInOtherWindow"), index++ );
@@ -101,7 +101,7 @@ void FileWidget::reloadConfiguration()
     }
 }
 
-bool FileWidget::hasFiles() const 
+bool FileWidget::hasFiles() const
 {
     return (numFiles() > 0);
 }
@@ -155,12 +155,8 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 	
 	if ( (k->state() & (ControlButton | AltButton)) == 0 ) {
 	    int key = k->key();
-	    if ( key == Key_Space && !KuickShow::s_viewers.isEmpty() ) {
-		topLevelWidget()->hide();
-                k->accept();
-		return true;
-	    }
-	    else if ( key == Key_Delete ) {
+ 	    if ( actionCollection()->action("delete")->shortcut().contains( key ) ) 
+            {
                 k->accept();
 		KFileItem *item = getCurrentItem( false );
 		if ( item ) {
