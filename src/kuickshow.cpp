@@ -252,6 +252,9 @@ void KuickShow::initGUI( const KURL& startDir )
                                        KShortcut(),
                                        this, SLOT( slotShowInSameWindow() ),
                                        coll, "kuick_showInSameWindow" );
+    KAction *showFullscreen = new KAction( i18n("Show Image in Fullscreen mode"),
+					   KShortcut(), this, SLOT( slotShowFullscreen() ),
+					   coll, "kuick_showFullscreen" );
 
     KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit");
 
@@ -265,6 +268,7 @@ void KuickShow::initGUI( const KURL& startDir )
     open->plug( fileMenu );
     showInOther->plug( fileMenu );
     showInSame->plug( fileMenu );
+    showFullscreen->plug( fileMenu );
     fileMenu->insertSeparator();
     slide->plug( fileMenu );
     print->plug( fileMenu );
@@ -449,6 +453,7 @@ void KuickShow::slotHighlighted( const KFileItem *fi )
     fileWidget->actionCollection()->action("kuick_print")->setEnabled( image );
     fileWidget->actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
     fileWidget->actionCollection()->action("kuick_showInOtherWindow")->setEnabled( image );
+    fileWidget->actionCollection()->action("kuick_showFullscreen")->setEnabled( image );
 }
 
 void KuickShow::dirSelected( const KURL& url )
@@ -620,6 +625,11 @@ void KuickShow::slotShowInOtherWindow()
 void KuickShow::slotShowInSameWindow()
 {
     showImage( fileWidget->getCurrentItem( false ), false );
+}
+
+void KuickShow::slotShowFullscreen()
+{
+    showImage( fileWidget->getCurrentItem( false ), false, true );
 }
 
 void KuickShow::slotDropped( const KFileItem *, QDropEvent *, const KURL::List &urls)

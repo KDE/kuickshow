@@ -112,6 +112,7 @@ private slots:
 
     void 		slotShowInSameWindow();
     void 		slotShowInOtherWindow();
+    void                slotShowFullscreen();
 
     void		slotReplayEvent();
     void                slotReplayAdvance();

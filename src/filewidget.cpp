@@ -86,6 +86,7 @@ void FileWidget::initActions()
 
     menu->insert( coll->action("kuick_showInOtherWindow"), index++ );
     menu->insert( coll->action("kuick_showInSameWindow"), index++ );
+    menu->insert( coll->action("kuick_showFullscreen"), index++ );
     menu->insert( sep, index++ );
 
     // support for older kdelibs, remove somewhen...
@@ -137,6 +138,7 @@ void FileWidget::activatedMenu( const KFileItem *item, const QPoint& pos )
     bool image = isImage( item );
     actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
     actionCollection()->action("kuick_showInOtherWindow")->setEnabled( image );
+    actionCollection()->action("kuick_showFullscreen")->setEnabled( image );
     actionCollection()->action("kuick_print")->setEnabled( image );
     actionCollection()->action("properties")->setEnabled( item );
 
