@@ -164,7 +164,7 @@ KuickShow::KuickShow( const char *name )
 
   if ( (kdata->startInLastDir && args->count() == 0) || args->isSet( "lastdir" )) {
       kc->setGroup( "SessionSettings");
-      startDir = kc->readEntry( "CurrentDirectory", startDir.url() );
+      startDir = kc->readPathEntry( "CurrentDirectory", startDir.url() );
   }
 
   if ( s_viewers.isEmpty() || isDir ) {
@@ -963,13 +963,13 @@ void KuickShow::about()
 void KuickShow::readProperties( KConfig *kc )
 {
     assert( fileWidget ); // from SM, we should always have initGUI on startup
-    QString dir = kc->readEntry( "CurrentDirectory" );
+    QString dir = kc->readPathEntry( "CurrentDirectory" );
     if ( !dir.isEmpty() ) {
 	fileWidget->setURL( dir, true );
 	fileWidget->clearHistory();
     }
 
-    QStringList images = kc->readListEntry( "Images shown" );
+    QStringList images = kc->readPathListEntry( "Images shown" );
     QStringList::Iterator it;
     for ( it = images.begin(); it != images.end(); ++it ) {
 	KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it, false );
@@ -986,7 +986,7 @@ void KuickShow::readProperties( KConfig *kc )
 
 void KuickShow::saveProperties( KConfig *kc )
 {
-    kc->writeEntry( "CurrentDirectory", fileWidget->url().url() );
+    kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
     kc->writeEntry( "Browser visible", fileWidget->isVisible() );
 
     QStringList urls;
@@ -994,7 +994,7 @@ void KuickShow::saveProperties( KConfig *kc )
     for ( it = s_viewers.begin(); it != s_viewers.end(); ++it )
 	urls.append( (*it)->filename() );
 
-    kc->writeEntry( "Images shown", urls );
+    kc->writePathEntry( "Images shown", urls );
 }
 
 // --------------------------------------------------------------
@@ -1008,7 +1008,7 @@ void KuickShow::saveSettings()
 	kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
-	kc->writeEntry( "CurrentDirectory", fileWidget->url().url() );
+	kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
 	fileWidget->writeConfig( kc, "Filebrowser" );
     }
 
