@@ -65,7 +65,6 @@ public:
   void 		setDirty( bool d )    { myIsDirty = d;    }
   bool 		isDirty() 	const { return myIsDirty; }
   Rotation absRotation()        const { return myRotation; }
-  void setRotationValue( Rotation rot ) { myRotation = rot; }
 
 private:
   int 		myWidth;

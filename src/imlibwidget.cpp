@@ -19,6 +19,7 @@
 
 #include <qcolor.h>
 #include <qfile.h>
+#include <qglobal.h>
 #include <qobject.h>
 #include <qpalette.h>
 
@@ -141,15 +142,17 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
 	return 0L;
     }
 
-    if ( kdata->autoRotation ) 
+    if ( kdata->autoRotation )
     {
         KFileMetaInfo metadatas( filename );
         KFileMetaInfoItem metaitem = metadatas.item("Orientation");
-        if ( metaitem.isValid() ) 
+        if ( metaitem.isValid() )
         {
+#if QT_VERSION >= 0x030100
             if ( !metaitem.value().isNull() )
+#endif
             {
-                switch ( metaitem.value().toInt() ) 
+                switch ( metaitem.value().toInt() )
                 {
                     case 1:
                     default:
@@ -287,7 +290,6 @@ void ImlibWidget::rotate90()
 
     m_kuim->rotate( ROT_90 );
     autoUpdate( true );
-    m_kuim->setRotationValue( (Rotation) ((m_kuim->absRotation() + ROT_90) % 4) );
 }
 
 void ImlibWidget::rotate180()
@@ -297,7 +299,6 @@ void ImlibWidget::rotate180()
 
     m_kuim->rotate( ROT_180 );
     autoUpdate();
-    m_kuim->setRotationValue( (Rotation) ((m_kuim->absRotation() + ROT_180) % 4) );
 }
 
 void ImlibWidget::rotate270()
@@ -307,7 +308,6 @@ void ImlibWidget::rotate270()
 
     m_kuim->rotate( ROT_270 );
     autoUpdate( true );
-    m_kuim->setRotationValue( (Rotation) ((m_kuim->absRotation() + ROT_270) % 4) );
 }
 
 
@@ -503,7 +503,7 @@ void KuickImage::renderPixmap()
 	return;
 
 //     qDebug("### rendering: %s", myFilename.latin1());
-    
+
     if ( myPixmap )
 	Imlib_free_pixmap( myId, myPixmap );
 
@@ -547,6 +547,7 @@ void KuickImage::rotate( Rotation rot )
 	    Imlib_flip_image_vertical( myId, myIm );
     }
 
+    myRotation = (Rotation) ((myRotation + rot) % 4);
     myIsDirty = true;
 }
 
@@ -580,8 +581,6 @@ void KuickImage::rotateAbs( Rotation rot )
         rotate( clockWise ? ROT_270 : ROT_90 );
 	break;
     }
-
-    myRotation = (Rotation) ((myRotation + rot) % 4);
 }
 
 //----------
