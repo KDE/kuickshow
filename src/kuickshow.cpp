@@ -73,7 +73,7 @@ KuickShow::KuickShow( const char *name )
       dialog( 0L ),
       id( 0L ),
       m_viewer( 0L ),
-      newWindowAction( 0L ),
+      oneWindowAction( 0L ),
       m_accel( 0L ),
       m_delayedRepeatItem( 0L )
 {
@@ -123,7 +123,7 @@ KuickShow::KuickShow( const char *name )
   else { // don't show browser, when image on commandline
       hide();
   }
-  
+
   m_slideTimer = new QTimer( this );
   connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
 }
@@ -175,7 +175,7 @@ void KuickShow::initGUI( const KURL& startDir )
 				  this, SLOT( about() ), coll );
     KAction *help = KStdAction::help( this, SLOT( appHelpActivated() ),
 				      coll, "kuick_help" );
-    newWindowAction = new KToggleAction( i18n("Open only one image window"),
+    oneWindowAction = new KToggleAction( i18n("Open only one image window"),
 					 "window_new", CTRL+Key_N, coll,
 					 "kuick_one window" );
 
@@ -209,7 +209,7 @@ void KuickShow::initGUI( const KURL& startDir )
     slide->plug( tBar );
     tBar->insertSeparator();
     hidden->plug( tBar );
-    newWindowAction->plug( tBar );
+    oneWindowAction->plug( tBar );
     print->plug( tBar );
     tBar->insertSeparator();
     quit->plug( tBar );
@@ -226,7 +226,7 @@ void KuickShow::initGUI( const KURL& startDir )
     KConfig *kc = KGlobal::config();
     kc->setGroup("SessionSettings");
     bool oneWindow = kc->readBoolEntry("OpenImagesInActiveWindow", true );
-    newWindowAction->setChecked( oneWindow );
+    oneWindowAction->setChecked( oneWindow );
 
     tBar->show();
 
@@ -255,7 +255,7 @@ void KuickShow::viewerDeleted()
 	setActiveWindow();
 	fileWidget->setFocus();
     }
-    
+
     // maybe a slideshow was stopped --> enable the action again
     fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
     m_slideTimer->stop();
@@ -286,7 +286,7 @@ void KuickShow::dirSelected( const KURL& url )
 
 void KuickShow::slotSelected( const KFileItem *item )
 {
-    showImage( item, !newWindowAction->isChecked() );
+    showImage( item, !oneWindowAction->isChecked() );
 }
 
 // downloads item if necessary
@@ -296,9 +296,11 @@ void KuickShow::showFileItem( ImageWindow */*view*/,
 
 }
 
-void KuickShow::showImage( const KFileItem *fi, bool newWin )
+void KuickShow::showImage( const KFileItem *fi, 
+                           bool newWindow, bool fullscreen )
 {
-    bool newWindow = !m_viewer || newWin;
+    newWindow |= !m_viewer;
+    fullscreen |= (newWindow && kdata->fullScreen);
 
     if ( FileWidget::isImage( fi ) ) {
 	if ( newWindow ) {
@@ -327,13 +329,12 @@ void KuickShow::showImage( const KFileItem *fi, bool newWin )
 	if ( !m_viewer->showNextImage( filename ) )
 	    m_viewer->close( true ); // couldn't load image, close window
 	else {
+            m_viewer->setFullscreen( fullscreen );
+            
 	    if ( newWindow ) {
-		if ( kdata->fullScreen )
-		    m_viewer->setFullscreen( true );
-
 		m_viewer->show();
 		
-		if ( !kdata->fullScreen && s_viewers.count() == 1 ) {
+		if ( !fullscreen && s_viewers.count() == 1 ) {
 		    // the WM might have moved us after showing -> strike back!
 		    // move the first image to 0x0 workarea coord
 		    m_viewer->move( Kuick::workArea().topLeft() );
@@ -353,10 +354,12 @@ void KuickShow::showImage( const KFileItem *fi, bool newWin )
 void KuickShow::startSlideShow()
 {
     KFileItem *item = fileWidget->gotoFirstImage();
+
     if ( item ) {
         m_slideshowCycle = 1;
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
-	showImage( item, !kdata->showInOneWindow );
+	showImage( item, !oneWindowAction->isChecked(), 
+                   kdata->slideshowFullscreen );
         m_slideTimer->start( kdata->slideDelay );
     }
 }
@@ -373,24 +376,30 @@ void KuickShow::nextSlide()
     if ( !item ) { // last image
         if ( m_slideshowCycle < kdata->slideshowCycles
            || kdata->slideshowCycles == 0 ) {
-            int cycle = m_slideshowCycle++;
-            startSlideShow(); // resets m_slideshowCycle to 1
-            m_slideshowCycle = cycle;
-            return;
+            item = fileWidget->gotoFirstImage();
+            if ( item ) {
+                nextSlide( item );
+                m_slideshowCycle++;
+                return;
+            }
         }
-        
+
 	m_viewer->close( true );
 	fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
 	return;
     }
 
+    nextSlide( item );
+}
+
+void KuickShow::nextSlide( KFileItem *item )
+{
     m_viewer->showNextImage( item->url().path() );
     m_slideTimer->start( kdata->slideDelay );
 }
 
 
 // prints the selected files in the filebrowser
-// FIXME: maybe print with QPainter?
 void KuickShow::slotPrint()
 {
     const KFileItemList *items = fileWidget->selectedItems();
@@ -628,7 +637,7 @@ void KuickShow::configuration()
 	initGUI( QDir::homeDirPath() );
     }
 
-    dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L, 
+    dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L,
                                     "dialog", false );
     dialog->resize( 540, 510 );
     dialog->setIcon( kapp->miniIcon() );
@@ -675,11 +684,7 @@ void KuickShow::about()
 {
     AboutWidget *aboutWidget = new AboutWidget( 0L, "about" );
     aboutWidget->adjustSize();
-    int scnum = QApplication::desktop()->screenNumber(this);
-    QRect d = QApplication::desktop()->screenGeometry(scnum);
-    QPoint p( d.center().x() - aboutWidget->width()/2,
-	      d.center().y() - aboutWidget->height()/2 );
-    aboutWidget->move( p );
+    KDialog::centerOnScreen( aboutWidget );
     aboutWidget->show();
 }
 
@@ -729,7 +734,7 @@ void KuickShow::saveSettings()
     KConfig *kc = KGlobal::config();
 
     kc->setGroup("SessionSettings");
-    kc->writeEntry( "OpenImagesInActiveWindow", newWindowAction->isChecked() );
+    kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
     kc->writeEntry( "CurrentDirectory", fileWidget->url().url() );
 
     if ( fileWidget )

@@ -20,6 +20,8 @@
 #include "imagewindow.h"
 #include "defaultswidget.h"
 #include "generalwidget.h"
+#include "slideshowwidget.h"
+
 #include "kuickdata.h"
 
 
@@ -30,20 +32,23 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 		     parent, name, modal )
 {
     coll = _coll;
-    QVBox *box = addVBoxPage( i18n("General") );
+    QVBox *box = addVBoxPage( i18n("&General") );
     generalWidget = new GeneralWidget( box, "general widget" );
 
-    box = addVBoxPage( i18n("Modifications") );
+    box = addVBoxPage( i18n("&Modifications") );
     defaultsWidget = new DefaultsWidget( box, "defaults widget" );
 
-    box = addVBoxPage( i18n("Viewer Shortcuts") );
+    box = addVBoxPage( i18n("&Slideshow") );
+    slideshowWidget = new SlideShowWidget( box, "slideshow widget" );
+
+    box = addVBoxPage( i18n("&Viewer Shortcuts") );
 
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
 
     imageKeyChooser = new KKeyChooser( imageWindow->accel(), box );
 
-    box = addVBoxPage( i18n("Browser Shortcuts") );
+    box = addVBoxPage( i18n("Bro&wser Shortcuts") );
     browserKeyChooser = new KKeyChooser( coll, box );
 
     connect( this, SIGNAL( defaultClicked() ), SLOT( resetDefaults() ));
@@ -58,6 +63,7 @@ void KuickConfigDialog::applyConfig()
 {
     generalWidget->applySettings( *kdata );
     defaultsWidget->applySettings( *kdata );
+    slideshowWidget->applySettings( *kdata );
 
     imageKeyChooser->commitChanges();
     imageWindow->accel()->writeSettings();
@@ -74,6 +80,8 @@ void KuickConfigDialog::resetDefaults()
     KuickData data;
     generalWidget->loadSettings( data );
     defaultsWidget->loadSettings( data );
+    slideshowWidget->loadSettings( data );
+
     imageKeyChooser->allDefault();
     browserKeyChooser->allDefault();
 }

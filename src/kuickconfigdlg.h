@@ -20,6 +20,7 @@
 
 class GeneralWidget;
 class DefaultsWidget;
+class SlideShowWidget;
 class ImageWindow;
 
 class KuickConfigDialog : public LogoTabDialog
@@ -39,6 +40,7 @@ private slots:
 private:
     DefaultsWidget   *defaultsWidget;
     GeneralWidget    *generalWidget;
+    SlideShowWidget  *slideshowWidget;
     KKeyChooser      *imageKeyChooser, *browserKeyChooser;
     KActionCollection *coll;
 

@@ -74,7 +74,8 @@ private slots:
     void 		slotConfigApplied();
     void 		slotConfigClosed();
     void 		messageCantLoadImage( const QString& );
-    void         	showImage(const KFileItem *, bool newWin = false);
+    void         	showImage(const KFileItem *, bool newWindow = false,
+                                  bool fullscreen = false );
     void 		showFileItem( ImageWindow *, const KFileItem * );
     void		slotHighlighted( const KFileItem * );
     void 		slotSelected( const KFileItem * );
@@ -83,6 +84,7 @@ private slots:
     void	      	about();
     void 		startSlideShow();
     void 		nextSlide();
+    void                nextSlide( KFileItem *item );
     void		viewerDeleted();
     void 		dropEvent( QDropEvent * );
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
@@ -111,7 +113,7 @@ private:
     KuickConfigDialog 	*dialog;
     ImlibData           *id;
     ImageWindow 	*m_viewer;
-    KToggleAction 	*newWindowAction;
+    KToggleAction 	*oneWindowAction;
     KAccel 		*m_accel;
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;

@@ -29,13 +29,12 @@ public:
     void 	save();
 
 
+    ImData 	*idata;
+
     QString 	fileFilter;
     uint 	slideDelay;
-    bool 	preloadImage;
-    bool 	showInOneWindow;
-    ImData 	*idata;
-    bool 	fullScreen;
-
+    uint        slideshowCycles;
+    bool        slideshowFullscreen :1;
 
     int 	brightnessSteps;
     int 	contrastSteps;
@@ -44,19 +43,19 @@ public:
     int 	scrollSteps;
     float	zoomSteps;
 
+    bool 	preloadImage     :1;
+    bool 	fullScreen       :1;
 
     // default image modifications
-    bool 	isModsEnabled;
-
-    bool 	downScale;
-    bool 	upScale;
-    int 	maxUpScale;
-    uint 	maxWidth, maxHeight;
-
-    uint        slideshowCycles;
+    bool 	isModsEnabled :1;
 
     bool 	flipVertically   :1;
     bool 	flipHorizontally :1;
+    bool 	downScale        :1;
+    bool 	upScale          :1;
+    int 	maxUpScale;
+    uint 	maxWidth, maxHeight;
+
     int 	rotation;
 
     QColor      backgroundColor;

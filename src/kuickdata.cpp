@@ -22,6 +22,9 @@ KuickData::KuickData()
 {
   fileFilter  = "*.jpeg *.jpg *.gif *.xpm *.ppm *.pgm *.png *.bmp *.psd *.eim *.tiff *.xcf";// *.mng";
   slideDelay       = 3000;
+  slideshowCycles  = 1;
+  slideshowFullscreen = false;
+
   preloadImage     = true;
 
   isModsEnabled    = true;
@@ -39,8 +42,6 @@ KuickData::KuickData()
   gammaSteps      = 1;
   scrollSteps     = 1;
   zoomSteps       = 1.5;
-
-  slideshowCycles = 1;
 
   maxWidth 	  = 8192;
   maxHeight 	  = 8192;
@@ -65,6 +66,9 @@ void KuickData::load()
   kc->setGroup( "GeneralConfiguration" );
   fileFilter   = kc->readEntry( "FileFilter", def.fileFilter );
   slideDelay   = kc->readNumEntry( "SlideShowDelay", def.slideDelay );
+  slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
+  slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", false );
+
   preloadImage = kc->readBoolEntry( "PreloadNextImage", def.preloadImage );
 
   fullScreen = kc->readBoolEntry( "Fullscreen", def.fullScreen);
@@ -91,8 +95,6 @@ void KuickData::load()
 
   backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
 
-  slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
-
   idata->load( kc );
 }
 
@@ -104,6 +106,9 @@ void KuickData::save()
 
   kc->writeEntry( "FileFilter", fileFilter );
   kc->writeEntry( "SlideShowDelay", slideDelay );
+  kc->writeEntry( "SlideshowCycles", slideshowCycles );
+  kc->writeEntry( "SlideshowFullscreen", slideshowFullscreen );
+
   kc->writeEntry( "PreloadNextImage", preloadImage ? "yes" : "no" );
 
   kc->writeEntry( "Fullscreen", fullScreen ? "yes" : "no" );
@@ -128,8 +133,6 @@ void KuickData::save()
   kc->writeEntry( "MaximumImageHeight", maxHeight );
 
   kc->writeEntry( "BackgroundColor", backgroundColor );
-
-  kc->writeEntry( "SlideshowCycles", slideshowCycles );
 
   idata->save( kc );
 

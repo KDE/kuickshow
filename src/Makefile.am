@@ -16,7 +16,8 @@ kuickshow_la_SOURCES =	kuickshow.cpp \
 	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \
 	imdata.cpp          basewidget.cpp \
 	filefinder.cpp      kurlwidget.cpp logo.cpp filewidget.cpp \
-	logotabdialog.cpp  kuickio.cpp    kuick.cpp imlibwidget.cpp
+	logotabdialog.cpp  kuickio.cpp    kuick.cpp imlibwidget.cpp \
+	slideshowwidget.cpp
 
 # now the kuickshow binary
 kuickshow_LDADD = kuickshow.la $(LIB_KIO) $(LIB_IMLIB)
