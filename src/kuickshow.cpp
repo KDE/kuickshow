@@ -1090,15 +1090,18 @@ void KuickShow::initImlib()
 
 void KuickShow::initImlibParams( ImData *idata, ImlibInitParams *par )
 {
-    par->flags = ( PARAMS_REMAP |
+    par->flags = ( PARAMS_REMAP | PARAMS_VISUALID |
                    PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
                    PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
+
+    Visual* defaultvis = DefaultVisual(x11Display(), x11Screen());
 
     par->paletteoverride = idata->ownPalette  ? 1 : 0;
     par->remap           = idata->fastRemap   ? 1 : 0;
     par->fastrender      = idata->fastRender  ? 1 : 0;
     par->hiquality       = idata->dither16bit ? 1 : 0;
     par->dither          = idata->dither8bit  ? 1 : 0;
+    par->visualid	 = defaultvis->visualid;
     uint maxcache        = idata->maxCache;
 
     // 0 == no cache
