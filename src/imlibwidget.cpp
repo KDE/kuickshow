@@ -462,6 +462,24 @@ void ImlibWidget::restoreCursor()
     setCursor( m_oldCursor );
 }
 
+// Reparenting a widget in Qt in fact means destroying the old X window of the widget
+// and creating a new one. And since the X window used for the Imlib image is a child
+// of this widget's X window, destroying this widget's X window would mean also
+// destroying the Imlib image X window. Therefore it needs to be temporarily reparented
+// away and reparented back to the new X window.
+// Reparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
+void ImlibWidget::reparent( QWidget* parent, WFlags f, const QPoint& p, bool showIt )
+{
+    XWindowAttributes attr;
+    XGetWindowAttributes( x11Display(), win, &attr );
+    XUnmapWindow( x11Display(), win );
+    XReparentWindow( x11Display(), win, attr.root, 0, 0 );
+    QWidget::reparent( parent, f, p, showIt );
+    XReparentWindow( x11Display(), win, winId(), attr.x, attr.y );
+    if( attr.map_state != IsUnmapped )
+        XMapWindow( x11Display(), win );
+}
+
 //----------
 
 
