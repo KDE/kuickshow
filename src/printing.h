@@ -27,7 +27,8 @@ class Printing
 {
 public:
     static bool printImage( const ImageWindow& imageWin, QWidget *parent = 0L);
-    static bool printImageWithQt( const QString& filename, KPrinter& printer );
+    static bool printImageWithQt( const QString& filename, KPrinter& printer,
+                                  const QString& originalFileName );
 
 private:
     static void addConfigPages();

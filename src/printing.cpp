@@ -39,7 +39,8 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
         {
             tmpFile.setAutoDelete( true );
             if ( imageWin.saveImage( tmpFile.name() ) )
-                return printImageWithQt( tmpFile.name(), printer );
+                return printImageWithQt( tmpFile.name(), printer,
+                                         imageWin.filename() );
         }
 
         return false;
@@ -48,7 +49,8 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
     return true; // user aborted
 }
 
-bool Printing::printImageWithQt( const QString& filename, KPrinter& printer)
+bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
+                                 const QString& originalFileName )
 {
     QImage image( filename );
     if ( image.isNull() ) {
@@ -120,10 +122,10 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer)
     p.drawImage( x, y, image );
 
     if ( printFilename ) {
-        int fw = fm.width( filename );
+        int fw = fm.width( originalFileName );
         int x = (w - fw)/2;
         int y = h - fm.lineSpacing(); // ### assumption as above
-        p.drawText( x, y, filename );
+        p.drawText( x, y, originalFileName );
     }
 
     p.end();
