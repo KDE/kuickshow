@@ -196,7 +196,7 @@ void KuickShow::initGUI( const KURL& startDir )
                             SLOT( slotShowProperties() ), coll, "properties" );
     }
 
-    coll->action( "reload" )->setAccel( KStdAccel::reload() );
+    coll->action( "reload" )->setShortcut( KStdAccel::reload() );
 
     KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit" );
 
