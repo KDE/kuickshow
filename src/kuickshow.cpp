@@ -430,16 +430,19 @@ void KuickShow::slotHighlighted( const KFileItem *fi )
     statusBar()->changeItem( item->getStatusBarInfo(), URL_ITEM );
 
     QString meta;
-    KFileMetaInfo info = item->metaInfo();
-    if ( info.isValid() )
+    if ( FileWidget::isImage( item ) )
     {
-        meta = info.item( KFileMimeTypeInfo::Size ).string();
-        KFileMetaInfoGroup group = info.group( "Technical" );
-        if ( group.isValid() )
+        KFileMetaInfo info = item->metaInfo();
+        if ( info.isValid() )
         {
-            QString bpp = group.item( "BitDepth" ).string();
-            if ( !bpp.isEmpty() )
-                meta.append( ", " ).append( bpp );
+            meta = info.item( KFileMimeTypeInfo::Size ).string();
+            KFileMetaInfoGroup group = info.group( "Technical" );
+            if ( group.isValid() )
+            {
+                QString bpp = group.item( "BitDepth" ).string();
+                if ( !bpp.isEmpty() )
+                    meta.append( ", " ).append( bpp );
+            }
         }
     }
     statusBar()->changeItem( meta, META_ITEM );
