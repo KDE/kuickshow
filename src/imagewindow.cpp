@@ -851,23 +851,18 @@ void ImageWindow::printImageWithQt( const QString& filename, KPrinter& printer)
 
     QPaintDeviceMetrics metrics( &printer );
     int w = metrics.width();
-    int h = metrics.height(); // ### seems to be larger than papersize
+    int h = metrics.height();
 
     // shrink image to pagesize, if necessary
-    int iw = image.width();
-    int ih = image.height();
-
-    if ( iw > w || ih > h ) {
+    if ( image.width() > w || image.height() > h ) {
         image = image.smoothScale( w, h, QImage::ScaleMin );
     }
 
     // center image
-    int x = (w - iw)/2;
-//     int y = (h = ih)/2; // ### h too large -> y too large
-    p.drawImage( x, 0, image );
+    int x = (w - image.width())/2;
+    int y = (h - image.height())/2;
+    p.drawImage( x, y, image );
     p.end();
-
-    printer.newPage();
 }
 
 void ImageWindow::saveImage()
