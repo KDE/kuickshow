@@ -578,10 +578,21 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
         QFileInfo fi( view->filename() );
         start.setPath( fi.dirPath( true ) );
         initGUI( start );
-        fileWidget->setInitialItem( fi.fileName() );
 
-        connect( fileWidget, SIGNAL( finished() ),
-                 SLOT( slotReplayAdvance() ));
+        // see eventFilter() for explanation and similar code 
+        if ( fileWidget->dirLister()->isFinished() &&
+             fileWidget->dirLister()->rootItem() )
+        {
+            fileWidget->setCurrentItem( fi.fileName() );
+            QTimer::singleShot( 0, this, SLOT( slotReplayAdvance()));
+        }
+        else
+        {
+            fileWidget->setInitialItem( fi.fileName() );
+            connect( fileWidget, SIGNAL( finished() ),
+                     SLOT( slotReplayAdvance() ));
+        }
+
         return;
     }
 
@@ -661,10 +672,31 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     // at all). So we tell the browser the initial
                     // current-item and wait for it to tell us when it's ready.
                     // Then we will replay this KeyEvent.
-                    fileWidget->setInitialItem( fi.fileName() );
                     delayedRepeatEvent( m_viewer, k );
-                    connect( fileWidget, SIGNAL( finished() ),
-                             SLOT( slotReplayEvent() ));
+
+                    // OK, once again, we have a problem with the now async and
+                    // sync KDirLister :( If the startDir is already cached by
+                    // KDirLister, we won't ever get that finished() signal
+                    // because it is emitted before we can connect(). So if
+                    // our dirlister has a rootFileItem, we assume the 
+                    // directory is read already and simply call 
+                    // slotReplayEvent() without the need for the finished()
+                    // signal.
+
+                    // see slotAdvanceImage() for similar code
+                    if ( fileWidget->dirLister()->isFinished() &&
+                         fileWidget->dirLister()->rootItem() )
+                    {
+                        fileWidget->setCurrentItem( fi.fileName() );
+                        QTimer::singleShot( 0, this, SLOT( slotReplayEvent()));
+                    }
+                    else
+                    {
+                        fileWidget->setInitialItem( fi.fileName() );
+                        connect( fileWidget, SIGNAL( finished() ),
+                                 SLOT( slotReplayEvent() ));
+                    }
+                    
                     return true;
                 }
 

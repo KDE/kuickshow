@@ -84,7 +84,7 @@ void ImageWindow::init()
     gammaMenu = 0L;
     brightnessMenu = 0L;
     contrastMenu = 0L;
-    
+
 
     m_actions = new KActionCollection( this );
 
@@ -119,7 +119,7 @@ void ImageWindow::updateActions()
     m_actions->readShortcutSettings();
 }
 
-void ImageWindow::setupActions() 
+void ImageWindow::setupActions()
 {
     new KAction( i18n("Show Next Image"), KStdAccel::next(),
                  this, SLOT( slotRequestNext() ),
@@ -212,7 +212,7 @@ void ImageWindow::setupActions()
     new KAction( i18n("Properties..."), ALT + Key_Return,
                  this, SLOT( slotProperties() ),
                  m_actions, "properties" );
-    
+
     m_actions->readShortcutSettings();
 }
 
@@ -560,10 +560,10 @@ void ImageWindow::mousePressEvent( QMouseEvent *e )
 void ImageWindow::contextMenuEvent( QContextMenuEvent *e )
 {
     e->accept();
-    
+
     if ( !viewerMenu )
         setPopupMenu();
-    
+
     viewerMenu->popup( e->globalPos() );
 }
 
@@ -780,11 +780,11 @@ void ImageWindow::setPopupMenu()
     brightnessMenu = new QPopupMenu( viewerMenu );
     m_actions->action("more_brightness")->plug(brightnessMenu);
     m_actions->action("less_brightness")->plug(brightnessMenu);
-  
+
     contrastMenu = new QPopupMenu( viewerMenu );
     m_actions->action("more_contrast")->plug(contrastMenu);
     m_actions->action("less_contrast")->plug(contrastMenu);
-  
+
     gammaMenu = new QPopupMenu( viewerMenu );
     m_actions->action("more_gamma")->plug(gammaMenu);
     m_actions->action("less_gamma")->plug(gammaMenu);
@@ -814,7 +814,7 @@ void ImageWindow::setPopupMenu()
 
     viewerMenu->insertSeparator();
     m_actions->action("close_image")->plug( viewerMenu );
-} 
+}
 
 void ImageWindow::printImage()
 {
@@ -823,7 +823,8 @@ void ImageWindow::printImage()
 
     if ( !Printing::printImage( *this ) )
     {
-//         ### KMESSAGEBOX
+        KMessageBox::sorry( this, i18n("Unable to print the image."), 
+                            i18n("Printing Failed") );
     }
 }
 
@@ -831,7 +832,9 @@ void ImageWindow::saveImage()
 {
     QString file;
     KuickData tmp;
-    file = KFileDialog::getSaveFileName( kuim->filename(), tmp.fileFilter );
+    file = KFileDialog::getSaveFileName( kuim->filename(), tmp.fileFilter,
+                                         this );
+    file = filename();
     if ( !file.isEmpty() )
     {
         if ( !saveImage( file ) )
