@@ -226,7 +226,7 @@ void ImageWindow::setupActions()
                  this, SLOT( reload() ),
                  m_actions, "reload_image" );
 
-    new KAction( i18n("Properties..."), ALT + Key_Return,
+    new KAction( i18n("Properties"), ALT + Key_Return,
                  this, SLOT( slotProperties() ),
                  m_actions, "properties" );
 
