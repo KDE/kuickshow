@@ -28,16 +28,11 @@
 // #include <X11/extensions/shape.h>
 
 #include "imdata.h"
+#include "kuickdata.h"
 
 
 // hmm, global declaration for now
-typedef 	int FlipMode;
-#define 	FlipHorizontal 	(1 << 1)
-#define 	FlipVertical 	(1 << 2)
-#define 	FlipNone 	~FlipHorizontal & ~FlipVertical
-enum Rotation { ROT_0=0, ROT_90=1, ROT_180=2, ROT_270=3 };
-
-
+enum FlipMode { FlipNone = 0, FlipHorizontal = 1, FlipVertical = 2 };
 
 class KuickImage : public QObject
 {
@@ -55,8 +50,9 @@ public:
   void 		resize( int width, int height );
   void 		restoreOriginalSize();
   void 		rotate( Rotation rot );
-  void          rotateAbs( Rotation rot );
+  bool          rotateAbs( Rotation rot );
   void 		flip( FlipMode flipMode );
+  bool 		flipAbs( int mode );
   ImlibImage *	imlibImage()	const { return myIm;      }
   Pixmap& 	pixmap();
   void 		renderPixmap();
@@ -64,7 +60,8 @@ public:
 
   void 		setDirty( bool d )    { myIsDirty = d;    }
   bool 		isDirty() 	const { return myIsDirty; }
-  Rotation absRotation()        const { return myRotation; }
+  Rotation      absRotation()   const { return myRotation; }
+  FlipMode      flipMode()      const { return myFlipMode; }
 
 private:
   int 		myWidth;
@@ -78,6 +75,7 @@ private:
   int 		myOrigWidth;
   int 		myOrigHeight;
   Rotation 	myRotation;
+  FlipMode 	myFlipMode;
 
 signals:
   void 		startRendering();
@@ -146,13 +144,13 @@ public:
   void 		setContrast( int );
   void 		setGamma( int );
   void 		setRotation( Rotation );
-  void 		setFlipMode( FlipMode mode );
+  void 		setFlipMode( int mode );
 
   int 		brightness() 		 const;
   int 		contrast()		 const;
   int 		gamma() 		 const;
   Rotation 	rotation() 		 const { return m_kuim ? m_kuim->absRotation() : ROT_0; }
-  FlipMode	flipMode() 		 const { return myFlipMode; 	  }
+  FlipMode	flipMode() 		 const { return m_kuim ? m_kuim->flipMode() : FlipNone; }
 
   int 		imageWidth() 		 const;
   int 		imageHeight() 		 const;
@@ -163,7 +161,7 @@ public:
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
-  void          autoRotate( KuickImage *kuim );
+  virtual void autoRotate( KuickImage *kuim );
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
@@ -211,7 +209,6 @@ protected:
 
 private:
   bool 		isAutoRendering;
-  FlipMode 	myFlipMode;
   int 		myMaxImageCache;
   QColor 	myBackgroundColor;
 

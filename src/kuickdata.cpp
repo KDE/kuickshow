@@ -36,7 +36,7 @@ KuickData::KuickData()
   flipHorizontally = false;
 
   maxUpScale       = 3;
-  rotation         = 0;
+  rotation         = ROT_0;
 
   brightnessSteps = 1;
   contrastSteps   = 1;
@@ -80,7 +80,7 @@ void KuickData::load()
   flipHorizontally = kc->readBoolEntry( "FlipHorizontally",
 					def.flipHorizontally );
   maxUpScale       = kc->readNumEntry( "MaxUpscale Factor", def.maxUpScale );
-  rotation         = kc->readNumEntry( "Rotation", def.rotation );
+  rotation         = (Rotation) kc->readNumEntry( "Rotation", def.rotation );
 
   isModsEnabled    = kc->readBoolEntry( "ApplyDefaultModifications",
 					def.isModsEnabled );
@@ -98,6 +98,24 @@ void KuickData::load()
   backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
 
   idata->load( kc );
+
+  // compatibility with KuickShow <= 0.8.3
+  switch ( rotation )
+  {
+      case 90:
+          rotation = ROT_90;
+          break;
+      case 180:
+          rotation = ROT_180;
+          break;
+      case 270:
+          rotation = ROT_270;
+          break;
+      default:
+          if ( (rotation < ROT_0) || (rotation > ROT_270) )
+              rotation = ROT_0;
+          break;
+  }
 }
 
 

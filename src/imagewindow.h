@@ -55,6 +55,7 @@ public:
    */
   void resizeOptimal( int w, int h );
   void autoScale( KuickImage *kuim );
+  virtual void autoRotate( KuickImage *kuim );
 
   bool          saveImage( const QString& filename ) const;
 

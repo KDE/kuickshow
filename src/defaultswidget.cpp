@@ -185,7 +185,7 @@ void DefaultsWidget::loadSettings( const KuickData& data )
     cbFlipVertically->setChecked( data.flipVertically );
     cbFlipHorizontally->setChecked( data.flipHorizontally );
 
-    comboRotate->setCurrentItem( data.rotation / 90 );
+    comboRotate->setCurrentItem( data.rotation );
 
     ImData *id = data.idata;
 
@@ -230,26 +230,8 @@ void DefaultsWidget::updatePreview()
     flipMode |= cbFlipVertically->isChecked() ? FlipVertical : FlipNone;
     imFiltered->setFlipMode( flipMode );
 
-    switch ( currentRotation() ) {
-    case 0: {
-	imFiltered->setRotation( ROT_0 );
-	break;
-    }
-    case 90: {
-	imFiltered->setRotation( ROT_90 );
-	break;
-    }
-    case 180: {
-	imFiltered->setRotation( ROT_180 );
-	break;
-    }
-    case 270: {
-	imFiltered->setRotation( ROT_270 );
-	break;
-    }
-    default:
-	qDebug("kuickshow: oups, what rotation did you select???");
-    }
+    int rotation = cbEnableMods->isChecked() ? currentRotation() : ROT_0;
+    imFiltered->setRotation( (Rotation) rotation );
 
     imFiltered->setBrightness( sbBrightness->value() );
     imFiltered->setContrast( sbContrast->value() );
@@ -272,12 +254,9 @@ void DefaultsWidget::enableWidgets( bool enable )
 }
 
 
-const int DefaultsWidget::currentRotation()
+int DefaultsWidget::currentRotation() const
 {
-    if ( cbEnableMods->isChecked() )
-        return comboRotate->currentItem() * 90;
-    else 
-        return ROT_0;
+    return comboRotate->currentItem();
 }
 
 #include "defaultswidget.moc"

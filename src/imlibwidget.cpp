@@ -89,7 +89,6 @@ void ImlibWidget::init()
 {
     int w = 1; // > 0 for XCreateWindow
     int h = 1;
-    myFlipMode        = FlipNone;
     myBackgroundColor = Qt::black;
     m_kuim              = 0L;
 
@@ -276,9 +275,10 @@ void ImlibWidget::autoRotate( KuickImage *kuim )
 void ImlibWidget::setRotation( Rotation rot )
 {
     if ( m_kuim )
-        m_kuim->rotateAbs( rot );
-
-    autoUpdate( true );
+    {
+        if ( m_kuim->rotateAbs( rot ) )
+            autoUpdate( true );
+    }
 }
 
 
@@ -332,30 +332,13 @@ void ImlibWidget::flipVert()
 // end slots
 
 
-void ImlibWidget::setFlipMode( FlipMode mode )
+void ImlibWidget::setFlipMode( int mode )
 {
     if ( !m_kuim )
-	return;
+        return;
 
-    bool changed = false;
-
-    if ( (myFlipMode & FlipHorizontal) && !(mode & FlipHorizontal) ||
-	 (!(myFlipMode & FlipHorizontal) && mode & FlipHorizontal) ) {
-	Imlib_flip_image_horizontal( id, m_kuim->imlibImage() );
-	changed = true;
-    }
-
-    if ( (myFlipMode & FlipVertical) && (mode & ~FlipVertical) ||
-	 ((myFlipMode & ~FlipVertical) && mode & FlipVertical) ) {
-	Imlib_flip_image_vertical( id, m_kuim->imlibImage() );
-	changed = true;
-    }
-
-    if ( changed ) {
-	m_kuim->setDirty( true );
+    if ( m_kuim->flipAbs( mode ) )
 	autoUpdate();
-	myFlipMode = mode;
-    }
 }
 
 
@@ -454,6 +437,7 @@ KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
     myOrigWidth  = myWidth;
     myOrigHeight = myHeight;
     myRotation   = ROT_0;
+    myFlipMode   = FlipNone;
 }
 
 KuickImage::~KuickImage()
@@ -552,20 +536,10 @@ void KuickImage::rotate( Rotation rot )
 }
 
 
-void KuickImage::flip( FlipMode flipMode )
-{
-    if ( flipMode & FlipHorizontal )
-	Imlib_flip_image_horizontal( myId, myIm );
-    if ( flipMode & FlipVertical )
-	Imlib_flip_image_vertical( myId, myIm );
-
-    myIsDirty = true;
-}
-
-void KuickImage::rotateAbs( Rotation rot )
+bool KuickImage::rotateAbs( Rotation rot )
 {
     if ( myRotation == rot )
-	return;
+	return false;
 
     int diff = rot - myRotation;
     bool clockWise = (diff > 0);
@@ -581,7 +555,49 @@ void KuickImage::rotateAbs( Rotation rot )
         rotate( clockWise ? ROT_270 : ROT_90 );
 	break;
     }
+
+    return true;
 }
+
+void KuickImage::flip( FlipMode flipMode )
+{
+    if ( flipMode & FlipHorizontal )
+	Imlib_flip_image_horizontal( myId, myIm );
+    if ( flipMode & FlipVertical )
+	Imlib_flip_image_vertical( myId, myIm );
+
+    myFlipMode = (FlipMode) (myFlipMode ^ flipMode);
+    myIsDirty = true;
+}
+
+bool KuickImage::flipAbs( int mode )
+{
+    if ( myFlipMode == mode )
+	return false;
+
+    bool changed = false;
+
+    if ( ((myFlipMode & FlipHorizontal) && !(mode & FlipHorizontal)) ||
+	 (!(myFlipMode & FlipHorizontal) && (mode & FlipHorizontal)) ) {
+	Imlib_flip_image_horizontal( myId, myIm );
+	changed = true;
+    }
+
+    if ( ((myFlipMode & FlipVertical) && !(mode & FlipVertical)) ||
+	 (!(myFlipMode & FlipVertical) && (mode & FlipVertical)) ) {
+	Imlib_flip_image_vertical( myId, myIm );
+	changed = true;
+    }
+
+    if ( changed ) {
+        myFlipMode = (FlipMode) mode;
+        myIsDirty = true;
+        return true;
+    }
+
+    return false;
+}
+
 
 //----------
 

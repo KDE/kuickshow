@@ -19,6 +19,9 @@
 
 class KConfig;
 
+// values are also used as combobox index defaultswidget.*
+enum Rotation { ROT_0=0, ROT_90=1, ROT_180=2, ROT_270=3 };
+
 class KuickData
 {
 public:
@@ -57,7 +60,7 @@ public:
     int 	maxUpScale;
     uint 	maxWidth, maxHeight;
 
-    int 	rotation;
+    Rotation 	rotation;
 
     QColor      backgroundColor;
 
