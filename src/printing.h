@@ -78,6 +78,7 @@ private:
     KIntNumInput *m_height;
     KComboBox *m_units;
     QCheckBox *m_addFileName;
+    QCheckBox *m_blackwhite;
 
 };
 

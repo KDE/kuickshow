@@ -23,10 +23,12 @@
 #include <qhbox.h>
 #include <qlayout.h>
 #include <qimage.h>
+#include <kimageeffect.h>
 #include <qpaintdevicemetrics.h>
 #include <qpainter.h>
 #include <qradiobutton.h>
 #include <qvbuttongroup.h>
+#include <qcolor.h>
 
 #include <kcombobox.h>
 #include <kdialog.h>
@@ -87,6 +89,11 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
 
     QString t = "true";
     QString f = "false";
+
+    // Black & white print?
+    if ( printer.option( "app-kuickshow-blackwhite" ) != f) {
+        image = image.convertDepth( 1, Qt::MonoOnly | Qt::ThresholdDither | Qt::AvoidDither );
+    }
 
     int filenameOffset = 0;
     bool printFilename = printer.option( "app-kuickshow-printFilename" ) != f;
@@ -198,6 +205,10 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     m_addFileName->setChecked( true );
     layout->addWidget( m_addFileName );
 
+    m_blackwhite = new QCheckBox ( i18n("Print image in &black and white"), this);
+    m_blackwhite->setChecked( false );
+    layout->addWidget (m_blackwhite );
+
     QVButtonGroup *group = new QVButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
     layout->addWidget( group );
@@ -247,6 +258,7 @@ void KuickPrintDialogPage::getOptions( QMap<QString,QString>& opts,
 
 //    ### opts["app-kuickshow-alignment"] = ;
     opts["app-kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
+    opts["app-kuickshow-blackwhite"] = m_blackwhite->isChecked() ? t : f;
     opts["app-kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;
     opts["app-kuickshow-scale"] = m_scale->isChecked() ? t : f;
     opts["app-kuickshow-scale-unit"] = m_units->currentText();
@@ -260,6 +272,10 @@ void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
     QString f = "false";
 
     m_addFileName->setChecked( opts["app-kuickshow-printFilename"] != f );
+    // This sound strange, but if I copy the code on the line above, the checkbox
+    // was always checked. And this isn't the wanted behavior. So, with this works.
+    // KPrint magic ;-)
+    m_blackwhite->setChecked ( false );
     m_shrinkToFit->setChecked( opts["app-kuickshow-shrinkToFit"] != f );
     m_scale->setChecked( opts["app-kuickshow-scale"] == t );
 
