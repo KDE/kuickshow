@@ -177,12 +177,10 @@ void ImageWindow::setupActions()
     new KAction( i18n("Print Image..."), KStdAccel::print(),
                  this, SLOT( printImage() ),
                  m_actions, "print_image" );
-    new KAction( i18n("Save As..."), KStdAccel::save(),
-                 this, SLOT( saveImage() ),
+    KStdAction::saveAs( this, SLOT( saveImage() ),
                  m_actions, "save_image_as" );
 
-    new KAction( i18n("Close"), Key_Q,
-                 this, SLOT( close() ),
+    KStdAction::close( this, SLOT( close() ),
                  m_actions, "close_image" );
     // --------
     new KAction( i18n("More Brightness"), Key_B,
@@ -273,7 +271,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     }
 
     updateCursor();
-	
+
     QString caption = i18n( "Filename (Imagewidth x Imageheight)",
                             "%3 (%1 x %2)" );
     caption = caption.arg( m_kuim->originalWidth() ).
@@ -518,7 +516,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 
     if ( key == Key_Shift )
         updateCursor( ZoomCursor );
-	
+
     if ( key == Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
         close( true );
     else if ( KStdAccel::save().contains( KKey( e ) ) )
@@ -603,7 +601,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
     }
 
     if ( e->state() & ShiftButton ) {
-	
+
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
 	    transWidget->setGeometry( 0, 0, width(), height() );
@@ -616,10 +614,10 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
  	p.eraseRect( transWidget->rect() );
 	transWidget->show();
 	qApp->processOneEvent();
-	
+
 	int width  = e->x() - xposPress;
 	int height = e->y() - yposPress;
-	
+
 	if ( width < 0 ) {
 	    width = abs( width );
 	    xzoom = e->x();
@@ -682,7 +680,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     }
 
     if ( yposPress > y ) {
-	topY = y;	
+	topY = y;
 	botY = yposPress;
     }
     else {
