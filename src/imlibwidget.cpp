@@ -261,12 +261,39 @@ bool ImlibWidget::autoRotate( KuickImage *kuim )
 
     switch ( metaitem.value().toInt() )
     {
+        //  Orientation:
+        //  1:      normal
+        //  2:      flipped horizontally
+        //  3:      ROT 180
+        //  4:      flipped vertically
+        //  5:      ROT 90 -> flip horizontally
+        //  6:      ROT 90
+        //  7:      ROT 90 -> flip vertically
+        //  8:      ROT 270
+
         case 1:
         default:
             kuim->rotateAbs( ROT_0 );
             break;
+        case 2:
+            kuim->flipAbs( FlipHorizontal );
+            break;
+        case 3:
+            kuim->rotateAbs( ROT_180 );
+            break;
+        case 4:
+            kuim->flipAbs( FlipVertical );
+            break;
+        case 5:
+            kuim->rotateAbs( ROT_90 );
+            kuim->flipAbs( FlipHorizontal );
+            break;
         case 6:
             kuim->rotateAbs( ROT_90 );
+            break;
+        case 7:
+            kuim->rotateAbs( ROT_90 );
+            kuim->flipAbs( FlipVertical );
             break;
         case 8:
             kuim->rotateAbs( ROT_270 );
@@ -447,7 +474,8 @@ KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
 
 KuickImage::~KuickImage()
 {
-    Imlib_free_pixmap( myId, myPixmap );
+    if ( myPixmap )
+        Imlib_free_pixmap( myId, myPixmap );
     Imlib_destroy_image( myId, myIm );
 }
 
