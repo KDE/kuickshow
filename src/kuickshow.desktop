@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Kuickshow
+Name[af]=Vinnig-vertoon
 Name[ar]=عرض سريع
 Name[eo]=Rapidmontrilo
 Name[fr]=KuickShow
@@ -20,7 +21,7 @@ Terminal=0
 InitialPreference=6
 
 GenericName=Image Viewer
-GenericName[af]=beeld aansig
+GenericName[af]=Beeld Aansig
 GenericName[ar]=عارض صور
 GenericName[bg]=Преглед на Изображения
 GenericName[bs]=Preglednik slika
