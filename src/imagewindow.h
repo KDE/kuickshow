@@ -110,7 +110,7 @@ protected:
 
 
   // popupmenu entries
-  uint 		itemViewerZoomIn, itemViewerZoomOut, itemViewerFlipH;
+  uint 		itemViewerZoomMax, itemViewerZoomOrig, itemViewerZoomIn, itemViewerZoomOut, itemViewerFlipH;
   uint 		itemRotate90, itemRotate180, itemRotate270;
   uint 		itemViewerFlipV, itemViewerPrint;
   uint          itemViewerSave, itemViewerClose;

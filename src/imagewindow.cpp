@@ -739,6 +739,10 @@ void ImageWindow::setPopupMenu()
 					     SLOT( zoomIn() ));
   itemViewerZoomOut = viewerMenu->insertItem( i18n("Zoom Out"), this,
 					      SLOT( zoomOut() ));
+  itemViewerZoomOrig = viewerMenu->insertItem( i18n("Restore Original Size"), this,
+					      SLOT( showImageOriginalSize() ));
+  itemViewerZoomMax = viewerMenu->insertItem( i18n("Maximize"), this,
+					      SLOT( maximize() ));
   viewerMenu->insertSeparator();
   itemRotate90    = viewerMenu->insertItem( i18n("Rotate 90 degrees"), this,
 					    SLOT( rotate90() ));
@@ -786,6 +790,10 @@ void ImageWindow::setPopupAccels()
                        itemViewerZoomIn);
   viewerMenu->setAccel(m_accel->shortcut("Zoom Out").keyCodeQt(),
                        itemViewerZoomOut);
+  viewerMenu->setAccel(m_accel->shortcut("OriginalSize").keyCodeQt(),
+                       itemViewerZoomOrig);
+  viewerMenu->setAccel(m_accel->shortcut("Maximize").keyCodeQt(),
+                       itemViewerZoomMax);
   viewerMenu->setAccel(m_accel->shortcut("Rotate 90").keyCodeQt(),
                        itemRotate90);
   viewerMenu->setAccel(m_accel->shortcut("Rotate 180").keyCodeQt(),
