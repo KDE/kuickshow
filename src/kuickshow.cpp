@@ -201,7 +201,7 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action("reload")->plug( tBar );
 
     tBar->insertSeparator();
-    
+
     coll->action( "short view" )->plug( tBar );
     coll->action( "detailed view" )->plug( tBar );
     coll->action( "preview")->plug( tBar );
@@ -568,12 +568,14 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 		item = fileWidget->getNext( false ); // don't move
 		if ( !item )
 		    item = fileWidget->getPrevious( false );
-		
-		if ( KuickIO::self(m_viewer)->deleteFile( m_viewer->filename(),
-                                                    k->state() & ShiftButton) )
-		    fileWidget->setCurrentItem( item );
-		else
-		    item = cur; // restore old current item
+
+                KFileItem it( KFileItem::Unknown, KFileItem::Unknown,
+                                m_viewer->url() );
+                KFileItemList list;
+                list.append( &it );
+                fileWidget->del( list, (k->state() & ShiftButton) == 0 );
+                // ### check failure asynchronously and restore old item?
+                fileWidget->setCurrentItem( item );
 		break;
 	    }
 
@@ -807,7 +809,7 @@ void KuickShow::slotReplayEvent()
 
     eventFilter( e->viewer, e->event );
     delete e;
-    
+
     // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
     if ( fileWidget && fileWidget->view() ) {
         QWidget *widget = fileWidget->view()->widget();

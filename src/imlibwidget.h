@@ -19,6 +19,8 @@
 #include <qtimer.h>
 #include <qwidget.h>
 
+#include <kurl.h>
+
 // #include those AFTER Qt-includes!
 #include <Imlib.h>
 #include <X11/Xlib.h>
@@ -135,6 +137,7 @@ public:
   virtual ~ImlibWidget();
 
   const QString& filename() 		const { return m_filename; }
+  KURL          url()                   const;
   bool		loadImage( const QString& filename );
   bool 		cacheImage( const QString& filename );
   void 		zoomImage( float );

@@ -114,6 +114,16 @@ ImlibWidget::~ImlibWidget()
     delete imageCache;
 }
 
+KURL ImlibWidget::url() const
+{
+    KURL url;
+    if ( m_filename.at(0) == '/' )
+        url.setPath( m_filename );
+    else
+        url = m_filename;
+    
+    return url;
+}
 
 // tries to load "filename" and returns the according KuickImage *
 // or 0L if unsuccessful
@@ -131,7 +141,7 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
     }
 
     loaded( myKuim ); // maybe upscale/downscale in subclasses
-    
+
     return myKuim;
 }
 
@@ -147,7 +157,7 @@ bool ImlibWidget::loadImage( const QString& filename )
 
     if ( myKuim ) {
 	kuim = myKuim;
-        
+
 	autoUpdate( true ); // -> updateWidget() -> updateGeometry()
 	m_filename = filename;
         return true;
