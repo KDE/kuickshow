@@ -20,6 +20,7 @@ Terminal=0
 InitialPreference=6
 
 GenericName=Image Viewer
+GenericName[af]=beeld aansig
 GenericName[ar]=عارض صور
 GenericName[bg]=Преглед на Изображения
 GenericName[bs]=Preglednik slika
