@@ -13,10 +13,10 @@ imlib_config_given=NO
 ac_imlib_config=""
 
 AC_ARG_WITH(imlib-config,
-        [  --with-imlib-config     directory where \"imlib-config\" lies ],
-        [  ac_imlib_config="$withval/imlib-config"
-           imlib_config_given=yes
-        ])
+AC_HELP_STRING([--with-imlib-config=DIR],[directory where "imlib-config" is located]),
+[  ac_imlib_config="$withval/imlib-config"
+   imlib_config_given=yes
+])
 
 if test "$imlib_config_given" = "yes"; then
   if test ! -r $ac_imlib_config; then
