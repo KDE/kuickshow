@@ -1,7 +1,8 @@
 [Desktop Entry]
+Encoding=UTF-8
 Name=Kuickshow
 Name[ar]=عرض سريع
-Name[fr]=Afficheur d'images
+Name[fr]=KuickShow
 Name[hu]=Kuickshow képnézegető
 Name[ko]=K퀵쇼
 Name[sl]=Pregledovalnik slik Kuickshow
@@ -16,4 +17,23 @@ Terminal=0
 InitialPreference=6
 
 Comment=Image Viewer
+Comment[ar]=عارض صور
+Comment[da]=Billedfremviser
+Comment[de]=Bildbetrachter
+Comment[es]=Visor de imágenes
+Comment[fi]=Kuvannäyttäjä
+Comment[fr]=Afficheur d'images
+Comment[he]=מציג תמונות
+Comment[hu]=Képnézegető program
+Comment[it]=Visualizzatore di immagini
+Comment[lt]=Paveikslėlių žiūriklis
+Comment[lv]=Attēlu Skatītājs
+Comment[nn]=Biletevisar
+Comment[pt]=Visualizador de Imagens
+Comment[pt_BR]=Visualizador de Imagens
+Comment[sk]=Prehliadač obrázkov
+Comment[sv]=Bildvisare
+Comment[ta]=¯Õì ¸¡ðÊ
+Comment[xx]=xx
+Comment[zh_TW]=影像檢視器
 X-DCOP-ServiceType=Multi
