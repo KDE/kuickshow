@@ -85,6 +85,8 @@ signals:
   void 		sigFocusWindow( ImageWindow * );
   // go advance images back/forth
   void          requestImage( ImageWindow *, int advance );
+  void		nextSlideRequested();
+  void		prevSlideRequested();
 
 protected:
   ~ImageWindow(); // deletes itself, just call close( true );
@@ -108,7 +110,6 @@ protected:
 
   enum KuickCursor { DefaultCursor = 0, ZoomCursor, MoveCursor };
   void 	updateCursor( KuickCursor cursor = DefaultCursor );
-
 
   // popupmenu entries
   uint 		itemViewerZoomMax, itemViewerZoomOrig, itemViewerZoomIn;

@@ -492,6 +492,7 @@ void KuickShow::showImage( const KFileItem *fi,
             m_viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
             s_viewers.append( m_viewer );
 
+	    connect( m_viewer, SIGNAL( nextSlideRequested() ), this, SLOT( nextSlide() ));
             connect( m_viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
             connect( m_viewer, SIGNAL( sigFocusWindow( ImageWindow *) ),
                      this, SLOT( slotSetActiveViewer( ImageWindow * ) ));
@@ -561,14 +562,16 @@ void KuickShow::startSlideShow()
         fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
         showImage( item, !oneWindowAction->isChecked(),
                    kdata->slideshowFullscreen );
-        m_slideTimer->start( kdata->slideDelay );
+	if(kdata->slideDelay)
+            m_slideTimer->start( kdata->slideDelay );
     }
 }
 
 void KuickShow::pauseSlideShow()
 {
     if(m_slideShowStopped) {
-	m_slideTimer->start( kdata->slideDelay );
+	if(kdata->slideDelay)
+	    m_slideTimer->start( kdata->slideDelay );
 	m_slideShowStopped = false;
     }
     else {
@@ -608,7 +611,8 @@ void KuickShow::nextSlide()
 void KuickShow::nextSlide( KFileItem *item )
 {
     m_viewer->showNextImage( item->url().path() );
-    m_slideTimer->start( kdata->slideDelay );
+    if(kdata->slideDelay)
+        m_slideTimer->start( kdata->slideDelay );
 }
 
 
@@ -718,7 +722,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
         QString filename;
         KIO::NetAccess::download(item->url(), filename, this);
         view->showNextImage( filename );
-        if (m_slideTimer->isActive())
+        if (m_slideTimer->isActive() && kdata->slideDelay)
             m_slideTimer->start( kdata->slideDelay );
 
         if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
