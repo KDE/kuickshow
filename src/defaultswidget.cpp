@@ -17,10 +17,14 @@
 */
 
 #include <qcheckbox.h>
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qvgroupbox.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QGridLayout>
 
 #include <kcombobox.h>
 #include <kdialog.h>
@@ -41,7 +45,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // create all the widgets
 
-  gbScale = new QGroupBox( i18n("Scaling"), this );
+  gbScale = new Q3GroupBox( i18n("Scaling"), this );
   gbScale->setColumnLayout( 0, Qt::Horizontal );
 
   cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"),
@@ -57,7 +61,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbGeometry = new QGroupBox( i18n("Geometry"), this );
+  gbGeometry = new Q3GroupBox( i18n("Geometry"), this );
   gbGeometry->setColumnLayout( 0, Qt::Horizontal );
 
   cbFlipVertically = new QCheckBox( i18n("Flip vertically"), gbGeometry );
@@ -91,7 +95,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbPreview = new QGroupBox( i18n("Preview"), this );
+  gbPreview = new Q3GroupBox( i18n("Preview"), this );
   gbPreview->setAlignment( AlignCenter );
 
   lbImOrig = new QLabel( i18n("Original"), gbPreview );
@@ -138,12 +142,12 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbGeometryLayout->addWidget( cbFlipVertically, 0, AlignLeft );
-  gbGeometryLayout->addWidget( cbFlipHorizontally, 0, AlignLeft );
+  gbGeometryLayout->addWidget( cbFlipVertically, 0, Qt::AlignLeft );
+  gbGeometryLayout->addWidget( cbFlipHorizontally, 0, Qt::AlignLeft );
   gbGeometryLayout->addLayout( rotateLayout, 0 );
 
-  rotateLayout->addWidget( lbRotate, 0, AlignLeft );
-  rotateLayout->addWidget( comboRotate, 0, AlignLeft );
+  rotateLayout->addWidget( lbRotate, 0, Qt::AlignLeft );
+  rotateLayout->addWidget( comboRotate, 0, Qt::AlignLeft );
 
   // --
 

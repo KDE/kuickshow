@@ -20,9 +20,12 @@
 #define KUICKSHOW_H
 
 #include <qevent.h>
-#include <qguardedptr.h>
+#include <qpointer.h>
 #include <qstring.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <QDropEvent>
 
 #include <kfileitem.h>
 #include <kmainwindow.h>
@@ -76,7 +79,7 @@ public:
     ~KuickShow();
 
     virtual void 	show();
-    static QValueList<ImageWindow*>  s_viewers;
+    static Q3ValueList<ImageWindow*>  s_viewers;
 
     // overridden to make KDCOPActionProxy work -- all our actions are not
     // in the mainwindow's collection, but in the filewidget's.
@@ -146,7 +149,7 @@ private:
     QTimer              *m_slideTimer;
     bool                m_slideShowStopped;
     KToggleAction       *m_toggleBrowserAction;
-    QGuardedPtr<AboutWidget> aboutWidget;
+    QPointer<AboutWidget> aboutWidget;
 };
 
 #endif

@@ -20,6 +20,9 @@
 #define FILEFINDER_H
 
 #include <qevent.h>
+//Added by qt3to4:
+#include <QFocusEvent>
+#include <QKeyEvent>
 
 #include <klineedit.h>
 

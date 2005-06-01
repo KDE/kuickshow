@@ -22,8 +22,8 @@
 #endif
 #include "kuickconfigdlg.h"
 
-#include <qkeycode.h>
-#include <qvbox.h>
+#include <qnamespace.h>
+#include <q3vbox.h>
 
 #include <kaccel.h>
 #include <kconfig.h>
@@ -45,7 +45,7 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 		     parent, name, modal )
 {
     coll = _coll;
-    QVBox *box = addVBoxPage( i18n("&General") );
+    Q3VBox *box = addVBoxPage( i18n("&General") );
     generalWidget = new GeneralWidget( box, "general widget" );
 
     box = addVBoxPage( i18n("&Modifications") );

@@ -29,6 +29,8 @@
 #include <qimage.h>
 #include <qobject.h>
 #include <qpalette.h>
+//Added by qt3to4:
+#include <QCloseEvent>
 
 #include <kcursor.h>
 #include <kdebug.h>
@@ -40,7 +42,7 @@
 const int ImlibWidget::ImlibOffset = 256;
 
 ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
-  QWidget( parent, name, WDestructiveClose )
+  QWidget( parent, name, Qt::WDestructiveClose )
 {
     idata 		= _idata;
     deleteImData 	= false;
@@ -80,7 +82,7 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
 
 ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent,
 			  const char *name )
-    : QWidget( parent, name, WDestructiveClose )
+    : QWidget( parent, name, Qt::WDestructiveClose )
 {
     id              = _id;
     idata           = _idata;
@@ -473,7 +475,7 @@ void ImlibWidget::restoreCursor()
 // destroying the Imlib image X window. Therefore it needs to be temporarily reparented
 // away and reparented back to the new X window.
 // Reparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
-void ImlibWidget::reparent( QWidget* parent, WFlags f, const QPoint& p, bool showIt )
+void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt )
 {
     XWindowAttributes attr;
     XGetWindowAttributes( x11Display(), win, &attr );

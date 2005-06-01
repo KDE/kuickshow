@@ -16,7 +16,10 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include <qkeycode.h>
+#include <qnamespace.h>
+//Added by qt3to4:
+#include <QFocusEvent>
+#include <QKeyEvent>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -75,7 +78,7 @@ void FileFinder::focusOutEvent( QFocusEvent *e )
 void FileFinder::keyPressEvent( QKeyEvent *e )
 {
     int key = e->key();
-    if ( key == Key_Escape ) {
+    if ( key == Qt::Key_Escape ) {
         hide();
         e->accept();
     }

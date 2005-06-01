@@ -23,11 +23,19 @@
 #include <qdesktopwidget.h>
 #include <qdialog.h>
 #include <qglobal.h>
-#include <qkeycode.h>
+#include <qnamespace.h>
 #include <qlayout.h>
 #include <qsize.h>
 #include <qstring.h>
-
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <QEvent>
+#include <QDropEvent>
+#include <QLabel>
+#include <Q3ValueList>
+#include <Q3PopupMenu>
+#include <QMouseEvent>
+#include <QMenuItem>
 #include <kaboutdata.h>
 #include <kaccel.h>
 #include <kaction.h>
@@ -85,7 +93,7 @@ KuickData* kdata;
 static const int URL_ITEM  = 0;
 static const int META_ITEM = 1;
 
-QValueList<ImageWindow*> KuickShow::s_viewers;
+Q3ValueList<ImageWindow*> KuickShow::s_viewers;
 
 KuickShow::KuickShow( const char *name )
     : KMainWindow( 0L, name ),
@@ -230,7 +238,7 @@ void KuickShow::initGUI( const KURL& startDir )
                                       this, SLOT( configuration() ),
                                       coll, "kuick_configure" );
     KAction *slide = new KAction( i18n("Start Slideshow" ), "ksslide",
-                                  KShortcut( Key_F2 ),
+                                  KShortcut( Qt::Key_F2 ),
                                   this, SLOT( startSlideShow() ),
                                   coll, "kuick_slideshow" );
     KAction *about = new KAction( i18n( "About KuickShow" ), "about",
@@ -239,10 +247,10 @@ void KuickShow::initGUI( const KURL& startDir )
 
     oneWindowAction = new KToggleAction( i18n("Open Only One Image Window"),
                                          "window_new",
-                                         KShortcut( CTRL+Key_N ), coll,
+                                         KShortcut( Qt::CTRL+Qt::Key_N ), coll,
                                          "kuick_one window" );
 
-    m_toggleBrowserAction = new KToggleAction( i18n("Show File Browser"), KShortcut( Key_Space ), coll, "toggleBrowser" );
+    m_toggleBrowserAction = new KToggleAction( i18n("Show File Browser"), KShortcut( Qt::Key_Space ), coll, "toggleBrowser" );
     m_toggleBrowserAction->setCheckedState(i18n("Hide File Browser"));
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
@@ -266,7 +274,7 @@ void KuickShow::initGUI( const KURL& startDir )
 
     // menubar
     KMenuBar *mBar = menuBar();
-    QPopupMenu *fileMenu = new QPopupMenu( mBar, "file" );
+    Q3PopupMenu *fileMenu = new Q3PopupMenu( mBar, "file" );
     open->plug( fileMenu );
     showInOther->plug( fileMenu );
     showInSame->plug( fileMenu );
@@ -277,7 +285,7 @@ void KuickShow::initGUI( const KURL& startDir )
     fileMenu->insertSeparator();
     quit->plug( fileMenu );
 
-    QPopupMenu *editMenu = new QPopupMenu( mBar, "edit" );
+    Q3PopupMenu *editMenu = new Q3PopupMenu( mBar, "edit" );
     coll->action("mkdir")->plug( editMenu );
     coll->action("delete")->plug( editMenu );
     editMenu->insertSeparator();
@@ -288,7 +296,7 @@ void KuickShow::initGUI( const KURL& startDir )
     // from the main contextmenu
     KActionMenu *sortingMenu = static_cast<KActionMenu*>( coll->action("sorting menu"));
     KActionMenu *mainActionMenu = static_cast<KActionMenu*>( coll->action("popupMenu"));
-    QPopupMenu *mainPopup = mainActionMenu->popupMenu();
+    Q3PopupMenu *mainPopup = mainActionMenu->popupMenu();
     int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
     int separatorId = mainPopup->idAt( sortingIndex + 1 );
     QMenuItem *separatorItem = mainPopup->findItem( separatorId );
@@ -302,7 +310,7 @@ void KuickShow::initGUI( const KURL& startDir )
     sortingMenu->plug( viewActionMenu->popupMenu(), 0 ); // on top of the menu
 
 
-    QPopupMenu *settingsMenu = new QPopupMenu( mBar, "settings" );
+    Q3PopupMenu *settingsMenu = new Q3PopupMenu( mBar, "settings" );
     configure->plug( settingsMenu );
 
     mBar->insertItem( i18n("&File"), fileMenu );
@@ -335,14 +343,14 @@ void KuickShow::initGUI( const KURL& startDir )
     tBar->insertSeparator();
     about->plug( tBar );
 
-    QPopupMenu *help = helpMenu( QString::null, false );
+    Q3PopupMenu *help = helpMenu( QString::null, false );
     mBar->insertItem( KStdGuiItem::help().text() , help );
 
 
     KStatusBar* sBar = statusBar();
     sBar->insertItem( "           ", URL_ITEM, 10 );
     sBar->insertItem( "                          ", META_ITEM, 2 );
-    sBar->setItemAlignment(URL_ITEM, QLabel::AlignVCenter | QLabel::AlignLeft);
+    sBar->setItemAlignment(URL_ITEM, Qt::AlignVCenter | Qt::AlignLeft);
 
     fileWidget->setFocus();
 
@@ -381,12 +389,12 @@ void KuickShow::initGUI( const KURL& startDir )
     setupGUI( KMainWindow::Save );
 
     coll->action( "reload" )->setShortcut( KStdAccel::reload() );
-    coll->action( "short view" )->setShortcut(Key_F6);
-    coll->action( "detailed view" )->setShortcut(Key_F7);
-    coll->action( "show hidden" )->setShortcut(Key_F8);
-    coll->action( "mkdir" )->setShortcut(Key_F10);
-    coll->action( "preview" )->setShortcut(Key_F11);
-    coll->action( "separate dirs" )->setShortcut(Key_F12);
+    coll->action( "short view" )->setShortcut(Qt::Key_F6);
+    coll->action( "detailed view" )->setShortcut(Qt::Key_F7);
+    coll->action( "show hidden" )->setShortcut(Qt::Key_F8);
+    coll->action( "mkdir" )->setShortcut(Qt::Key_F10);
+    coll->action( "preview" )->setShortcut(Qt::Key_F11);
+    coll->action( "separate dirs" )->setShortcut(Qt::Key_F12);
 }
 
 void KuickShow::slotSetURL( const KURL& url )
@@ -773,13 +781,13 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             ret = true;
             int key = k->key();
 
-            // Key_Shift shouldn't load the browser in nobrowser mode, it
+            // Qt::Key_Shift shouldn't load the browser in nobrowser mode, it
             // is used for zooming in the imagewindow
-            // Key_Alt shouldn't either - otherwise Alt+F4 doesn't work, the
+            // Qt::Key_Alt shouldn't either - otherwise Alt+F4 doesn't work, the
             // F4 gets eaten (by NetAccess' modal dialog maybe?)
             if ( !fileWidget )
             {
-                if ( key != Key_Escape && key != Key_Shift && key != Key_Alt )
+                if ( key != Qt::Key_Escape && key != Qt::Key_Shift && key != Qt::Key_Alt )
                 {
                     KURL start;
                     QFileInfo fi( m_viewer->filename() );
@@ -826,13 +834,13 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             // we definitely have a fileWidget here!
 
             KKey kkey( k );
-            if ( key == Key_Home || KStdAccel::home().contains( kkey ) )
+            if ( key == Qt::Key_Home || KStdAccel::home().contains( kkey ) )
             {
                 item = fileWidget->gotoFirstImage();
                 item_next = fileWidget->getNext( false );
             }
 
-            else if ( key == Key_End || KStdAccel::end().contains( kkey ) )
+            else if ( key == Qt::Key_End || KStdAccel::end().contains( kkey ) )
             {
                 item = fileWidget->gotoLastImage();
                 item_next = fileWidget->getPrevious( false );
@@ -850,7 +858,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 KFileItemList list;
                 list.append( &it );
                 if ( fileWidget->del(list, window,
-                                     (k->state() & ShiftButton) == 0) == 0L )
+                                     (k->state() & Qt::ShiftModifier) == 0) == 0L )
                     return true; // aborted deletion
 
                 // ### check failure asynchronously and restore old item?
@@ -886,7 +894,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
         else if ( eventType == QEvent::MouseButtonDblClick )
         {
             QMouseEvent *ev = static_cast<QMouseEvent*>( e );
-            if ( ev->button() == LeftButton )
+            if ( ev->button() == Qt::LeftButton )
             {
                 if ( s_viewers.count() == 1 )
                 {
@@ -951,7 +959,7 @@ void KuickShow::slotConfigApplied()
     kdata->save();
 
     ImageWindow *viewer;
-    QValueListIterator<ImageWindow*> it = s_viewers.begin();
+    Q3ValueListIterator<ImageWindow*> it = s_viewers.begin();
     while ( it != s_viewers.end() ) {
         viewer = *it;
         viewer->updateActions();
@@ -1023,7 +1031,7 @@ void KuickShow::saveProperties( KConfig *kc )
     kc->writeEntry( "Browser visible", fileWidget->isVisible() );
 
     QStringList urls;
-    QValueListIterator<ImageWindow*> it;
+    Q3ValueListIterator<ImageWindow*> it;
     for ( it = s_viewers.begin(); it != s_viewers.end(); ++it )
         urls.append( (*it)->filename() );
 
@@ -1208,7 +1216,7 @@ void KuickShow::slotOpenURL()
 
 void KuickShow::deleteAllViewers()
 {
-    QValueListIterator<ImageWindow*> it = s_viewers.begin();
+    Q3ValueListIterator<ImageWindow*> it = s_viewers.begin();
     for ( ; it != s_viewers.end(); ++it ) {
         (*it)->disconnect( SIGNAL( destroyed() ), this, SLOT( viewerDeleted() ));
         (*it)->close( true );

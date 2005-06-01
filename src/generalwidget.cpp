@@ -20,7 +20,10 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtooltip.h>
-#include <qvgroupbox.h>
+//Added by qt3to4:
+#include <QPixmap>
+#include <QVBoxLayout>
+#include <QGridLayout>
 
 #include <kapplication.h>
 #include <kcolorbutton.h>

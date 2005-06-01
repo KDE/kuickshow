@@ -19,8 +19,10 @@
 #include <qdatetime.h>
 #include <qevent.h>
 #include <qglobal.h>
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qlabel.h>
+//Added by qt3to4:
+#include <QMouseEvent>
 
 #include <kwin.h>
 #include <kstandarddirs.h>
@@ -32,20 +34,20 @@
 #include "aboutwidget.h"
 
 AboutWidget::AboutWidget( QWidget *parent, const char *name )
-    : QVBox( parent, name )
+    : Q3VBox( parent, name )
 {
     KWin::setType( winId(), NET::Override );
     KWin::setState( winId(), NET::StaysOnTop | NET::SkipTaskbar );
 
     setFrameStyle( WinPanel | Raised );
 
-    QGroupBox *gBox = new QGroupBox( 1, Horizontal, this);
+    Q3GroupBox *gBox = new Q3GroupBox( 1, Qt::Horizontal, this);
     gBox->setGeometry( 10, 10, width()-20, height()-20 );
-    gBox->setAlignment( AlignHCenter );
+    gBox->setAlignment( Qt::AlignHCenter );
     gBox->installEventFilter( this );
 
-    gBox->setPalette( QPalette( QColor( white ) ) );
-    gBox->setBackgroundMode( PaletteBackground );
+    gBox->setPalette( QPalette( QColor( Qt::white ) ) );
+    gBox->setBackgroundMode( Qt::PaletteBackground );
 
     int hour = QTime::currentTime().hour();
     QString file;
@@ -57,14 +59,14 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
 
     QLabel *authors = new QLabel("Kuickshow " KUICKSHOWVERSION
 				 " was brought to you by", gBox);
-    authors->setAlignment( AlignCenter );
+    authors->setAlignment( Qt::AlignCenter );
 
     m_homepage = new KURLWidget("Carsten Pfeiffer", gBox);
     m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
-    m_homepage->setAlignment( AlignCenter );
+    m_homepage->setAlignment( Qt::AlignCenter );
 
     QLabel *copy = new QLabel("(C) 1998-2004", gBox);
-    copy->setAlignment( AlignCenter );
+    copy->setAlignment( Qt::AlignCenter );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );
     if ( im->loadImage( file ) )
@@ -90,6 +92,6 @@ bool AboutWidget::eventFilter( QObject *o, QEvent *e )
         }
     }
 
-    return QVBox::eventFilter( o, e );
+    return Q3VBox::eventFilter( o, e );
 }
 #include "aboutwidget.moc"
