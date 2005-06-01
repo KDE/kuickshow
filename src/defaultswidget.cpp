@@ -20,7 +20,6 @@
 #include <q3groupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qvgroupbox.h>
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -78,7 +77,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbAdjust = new QVGroupBox( i18n("Adjustments"), this );
+  gbAdjust = new Q3GroupBox (1, Qt::Horizontal, i18n("Adjustments"), this );
 
   sbBrightness = new KIntNumInput( gbAdjust, "brightness spinbox" );
   sbBrightness->setRange( -256, 256, 1, true );

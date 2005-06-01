@@ -24,7 +24,7 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QGridLayout>
-
+#include <Q3GroupBox>
 #include <kapplication.h>
 #include <kcolorbutton.h>
 #include <kdialog.h>
@@ -53,7 +53,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   connect( logo, SIGNAL( leftClickedURL( const QString & ) ),
             SLOT( slotURLClicked( const QString & ) ) );
 
-  layout->addWidget( logo, 0, AlignRight );
+  layout->addWidget( logo, 0, Qt::AlignRight );
 
   cbFullscreen = new QCheckBox( i18n("Fullscreen mode"), this, "boscreen" );
 
@@ -80,7 +80,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   ////////////////////////////////////////////////////////////////////////
 
-  QVGroupBox *gbox2 = new QVGroupBox( i18n("Quality/Speed"),
+  Q3GroupBox *gbox2 = new Q3GroupBox (1, Qt::Horizontal, i18n("Quality/Speed"),
 				     this, "qualitybox" );
   layout->addWidget( gbox2 );
   layout->addStretch();
@@ -99,7 +99,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   cbFastRemap = new QCheckBox( i18n("Fast palette remapping"), gbox2, "remap");
 
   maxCacheSpinBox = new KIntNumInput( gbox2, "editmaxcache" );
-  maxCacheSpinBox->setLabel( i18n("Maximum cache size: "), AlignVCenter );
+  maxCacheSpinBox->setLabel( i18n("Maximum cache size: "), Qt::AlignVCenter );
   maxCacheSpinBox->setSuffix( i18n( " MB" ) );
   maxCacheSpinBox->setSpecialValueText( i18n( "Unlimited" ) );
   maxCacheSpinBox->setRange( 0, 400, 1 );
