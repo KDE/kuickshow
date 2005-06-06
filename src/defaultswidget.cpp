@@ -52,7 +52,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   cbUpScale = new QCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale, "upscale checkbox" );
 
-  sbMaxUpScaleFactor = new KIntNumInput( gbScale, "upscale factor" );
+  sbMaxUpScaleFactor = new KIntNumInput( gbScale/*, "upscale factor"*/ );
   sbMaxUpScaleFactor->setRange( 1, 100, 1, false );
 
   connect(cbUpScale, SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
@@ -79,23 +79,23 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   gbAdjust = new Q3GroupBox (1, Qt::Horizontal, i18n("Adjustments"), this );
 
-  sbBrightness = new KIntNumInput( gbAdjust, "brightness spinbox" );
+  sbBrightness = new KIntNumInput( gbAdjust/*, "brightness spinbox"*/ );
   sbBrightness->setRange( -256, 256, 1, true );
-  sbBrightness->setLabel( i18n("Brightness:"), AlignVCenter );
+  sbBrightness->setLabel( i18n("Brightness:"), Qt::AlignVCenter );
 
-  sbContrast = new KIntNumInput( sbBrightness, 0,gbAdjust, 10,
-				 "contrast spinbox");
+  sbContrast = new KIntNumInput( sbBrightness, 0,gbAdjust, 10/*,
+				 "contrast spinbox"*/);
   sbContrast->setRange( -256, 256, 1, true );
-  sbContrast->setLabel( i18n("Contrast:"), AlignVCenter );
+  sbContrast->setLabel( i18n("Contrast:"), Qt::AlignVCenter );
 
-  sbGamma = new KIntNumInput( sbContrast, 0, gbAdjust, 10, "gamma spinbox" );
+  sbGamma = new KIntNumInput( sbContrast, 0, gbAdjust, 10/*, "gamma spinbox"*/ );
   sbGamma->setRange( -256, 256, 1, true );
-  sbGamma->setLabel( i18n("Gamma:"), AlignVCenter );
+  sbGamma->setLabel( i18n("Gamma:"), Qt::AlignVCenter );
 
   // --
 
   gbPreview = new Q3GroupBox( i18n("Preview"), this );
-  gbPreview->setAlignment( AlignCenter );
+  gbPreview->setAlignment( Qt::AlignCenter );
 
   lbImOrig = new QLabel( i18n("Original"), gbPreview );
   imOrig = new ImlibWidget( 0L, gbPreview, "original image" );
@@ -153,10 +153,10 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   if ( imFiltered ) { // assume, if one is ok, all are ok
       gbPreviewLayout->setMargin( 10 );
       gbPreviewLayout->setSpacing( KDialog::spacingHint() );
-      gbPreviewLayout->addWidget( lbImOrig, 0, 0, AlignCenter );
-      gbPreviewLayout->addWidget( imOrig,   1, 0, AlignCenter | AlignTop );
-      gbPreviewLayout->addWidget( lbImFiltered, 0, 2, AlignCenter );
-      gbPreviewLayout->addWidget( imFiltered,   1, 2, AlignCenter | AlignTop );
+      gbPreviewLayout->addWidget( lbImOrig, 0, 0, Qt::AlignCenter );
+      gbPreviewLayout->addWidget( imOrig,   1, 0, Qt::AlignCenter | Qt::AlignTop );
+      gbPreviewLayout->addWidget( lbImFiltered, 0, 2, Qt::AlignCenter );
+      gbPreviewLayout->addWidget( imFiltered,   1, 2, Qt::AlignCenter | Qt::AlignTop );
   }
 
 

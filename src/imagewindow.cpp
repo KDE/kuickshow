@@ -655,10 +655,10 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	    yzoom = e->y();
 	}
 
-	QPen pen( Qt::white, 1, DashLine );
+	QPen pen( Qt::white, 1, Qt::DashLine );
 	p.setPen( pen );     // for drawing white dashed line
 	p.drawRect( xzoom, yzoom, width, height );
-	p.setPen( DotLine ); // defaults to black dotted line pen
+	p.setPen( Qt::DotLine ); // defaults to black dotted line pen
 	p.drawRect( xzoom, yzoom, width, height );
 	p.flush();
     }

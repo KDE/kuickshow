@@ -98,7 +98,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   cbFastRemap = new QCheckBox( i18n("Fast palette remapping"), gbox2, "remap");
 
-  maxCacheSpinBox = new KIntNumInput( gbox2, "editmaxcache" );
+  maxCacheSpinBox = new KIntNumInput( gbox2/*, "editmaxcache"*/ );
   maxCacheSpinBox->setLabel( i18n("Maximum cache size: "), Qt::AlignVCenter );
   maxCacheSpinBox->setSuffix( i18n( " MB" ) );
   maxCacheSpinBox->setSpecialValueText( i18n( "Unlimited" ) );
