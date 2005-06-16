@@ -25,7 +25,7 @@
 #include <qpainter.h>
 #include <qpen.h>
 #include <q3popupmenu.h>
-
+#include <QBitmap>
 #ifdef KDE_USE_FINAL
 #undef GrayScale
 #undef Color
@@ -118,7 +118,7 @@ void ImageWindow::init()
     if ( !s_handCursor ) {
         QString file = locate( "appdata", "pics/handcursor.png" );
         if ( !file.isEmpty() )
-            s_handCursor = new QCursor( file );
+            s_handCursor = new QCursor( QBitmap(file) );
         else
             s_handCursor = new QCursor( Qt::arrowCursor );
     }
@@ -660,7 +660,9 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	p.drawRect( xzoom, yzoom, width, height );
 	p.setPen( Qt::DotLine ); // defaults to black dotted line pen
 	p.drawRect( xzoom, yzoom, width, height );
-	p.flush();
+
+#warning "qt4 what will replace p.flush() ????? "	
+	//p.flush();
     }
 
     else { // move the image

@@ -27,10 +27,11 @@
 #include <QVBoxLayout>
 #include <QGridLayout>
 #include <kimageeffect.h>
+#include <Q3VButtonGroup>
 #include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 #include <qradiobutton.h>
-#include <qvbuttongroup.h>
+//#include <qvbuttongroup.h>
 #include <qcolor.h>
 
 #include <kcombobox.h>
@@ -111,7 +112,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
     QSize imagesize = image.size();
     if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
-        imagesize.scale( w, h, QSize::ScaleMin );
+        imagesize.scale( w, h, Qt::ScaleMin );
     }
 
 
@@ -239,12 +240,12 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     m_units->insertItem( i18n("Centimeters") );
     m_units->insertItem( i18n("Inches") );
 
-    m_width = new KIntNumInput( widget, "exact width" );
+    m_width = new KIntNumInput( widget/*, "exact width"*/ );
     grid->addWidget( m_width, 1, 1 );
     m_width->setLabel( i18n("&Width:" ) );
     m_width->setMinValue( 1 );
 
-    m_height = new KIntNumInput( widget, "exact height" );
+    m_height = new KIntNumInput( widget/*, "exact height"*/ );
     grid->addWidget( m_height, 2, 1 );
     m_height->setLabel( i18n("&Height:" ) );
     m_height->setMinValue( 1 );

@@ -111,7 +111,7 @@ void ImlibWidget::init()
     setAutoRender( true );
 
     setPalette( QPalette( myBackgroundColor ));
-    setBackgroundMode( PaletteBackground );
+    setBackgroundMode( Qt::PaletteBackground );
 
     imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));

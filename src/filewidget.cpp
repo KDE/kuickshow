@@ -22,7 +22,7 @@
 #include <QResizeEvent>
 #include <QEvent>
 #include <Q3PopupMenu>
-
+#include <QMenuItem>
 #include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>

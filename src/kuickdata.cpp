@@ -109,7 +109,8 @@ void KuickData::load()
 
   maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages",
                                               def.maxCachedImages );
-  backgroundColor = kc->readColorEntry( "BackgroundColor", &Qt::black );
+  QColor _col(Qt::black);
+  backgroundColor = kc->readColorEntry( "BackgroundColor", &_col );
 
   startInLastDir = kc->readBoolEntry( "StartInLastDir", true);
 

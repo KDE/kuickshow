@@ -53,7 +53,7 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     comp->setReplaceEnv( true );
     setCompletionObject( comp, false );
     setAutoDeleteCompletionObject( true );
-    setFocusPolicy( ClickFocus );
+    setFocusPolicy( Qt::ClickFocus );
 
     KConfig *config = KGlobal::config();
     KConfigGroupSaver cs( config, "GeneralConfiguration" );
