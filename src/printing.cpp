@@ -31,7 +31,7 @@
 #include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 #include <qradiobutton.h>
-//#include <qvbuttongroup.h>
+//
 #include <qcolor.h>
 
 #include <kcombobox.h>
