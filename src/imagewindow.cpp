@@ -143,6 +143,9 @@ void ImageWindow::setupActions()
     new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
                  this, SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
+    new KAction( i18n("Delete Image"), Key_Delete,
+                 this, SLOT( imageDelete() ),
+                 m_actions, "delete_image" );
 
     new KAction( i18n("Zoom In"), Key_Plus,
                  this, SLOT( zoomIn() ),
@@ -501,6 +504,11 @@ void ImageWindow::lessGamma()
     addGamma( - kdata->gammaSteps );
 }
 
+void ImageWindow::imageDelete()
+{
+    emit deleteImage();
+}
+
 ///
 
 
@@ -834,6 +842,7 @@ void ImageWindow::setPopupMenu()
     viewerMenu->insertItem( i18n("Gamma"), gammaMenu );
     viewerMenu->insertSeparator();
 
+    m_actions->action("delete_image")->plug( viewerMenu );
     m_actions->action("print_image")->plug( viewerMenu );
     m_actions->action("save_image_as")->plug( viewerMenu );
     m_actions->action("properties")->plug( viewerMenu );

@@ -502,6 +502,8 @@ void KuickShow::showImage( const KFileItem *fi,
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
 	    connect( m_viewer, SIGNAL( pauseSlideShowSignal() ), 
 		     this, SLOT( pauseSlideShow() ) );
+            connect( m_viewer, SIGNAL (deleteImage ()),
+                     this, SLOT (slotDeleteImage ()));
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
                 // after showing, otherwise we get some bogus geometry()
@@ -549,6 +551,21 @@ void KuickShow::showImage( const KFileItem *fi,
             m_viewer = safeViewer;
         } // m_viewer created successfully
     } // isImage
+}
+
+void KuickShow::slotDeleteImage()
+{
+    KFileItemList list;
+    KFileItem *item = fileWidget->getCurrentItem(false);
+    list.append (item);
+    KFileItem *next = fileWidget->getNext(true);
+    if (!next)
+        next = fileWidget->getPrevious(true);
+        if (next)
+        showImage(next, false);
+    else
+        m_viewer->close(true);
+    fileWidget->del(list, false,false);
 }
 
 void KuickShow::startSlideShow()

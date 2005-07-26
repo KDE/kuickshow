@@ -121,6 +121,7 @@ private slots:
     void		slotSetURL( const KURL& );
     void		slotURLComboReturnPressed();
 //     void                invalidateImages( const KFileItemList& items );
+    void		slotDeleteImage();
 
 private:
     void 		initGUI( const KURL& startDir );

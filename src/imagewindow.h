@@ -80,11 +80,13 @@ public slots:
   void 	        printImage();
   void 		toggleFullscreen();
   void 		maximize();
+  void 		imageDelete();
 
 signals:
   void 		sigFocusWindow( ImageWindow * );
   // go advance images back/forth
   void          requestImage( ImageWindow *, int advance );
+  void          deleteImage();
   void		nextSlideRequested();
   void		prevSlideRequested();
 
