@@ -16,9 +16,11 @@
 
 #include <qcursor.h>
 #include <qevent.h>
-#include <qptrlist.h>
+#include <q3ptrlist.h>
 #include <qtimer.h>
 #include <qwidget.h>
+//Added by qt3to4:
+#include <QCloseEvent>
 
 #include <kurl.h>
 
@@ -106,7 +108,7 @@ private:
   
   int 			myMaxImages;
   QStringList		fileList;
-  QPtrList<KuickImage>	kuickList;
+  Q3PtrList<KuickImage>	kuickList;
   //  QPtrList<ImlibImage>	imList;
   ImlibData * 		myId;
   int 			idleCount;
@@ -173,7 +175,7 @@ public:
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
-  virtual void  reparent( QWidget* parent, WFlags f, const QPoint& p, bool showIt = FALSE );
+  virtual void  reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt = FALSE );
 
 public slots:
   void 		rotate90();

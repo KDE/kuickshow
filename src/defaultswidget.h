@@ -20,6 +20,8 @@
 #define DEFAULTSWIDGET_H
 
 #include "kuickdata.h"
+//Added by qt3to4:
+#include <QLabel>
 
 class ImlibWidget;
 class ImData;
@@ -46,19 +48,19 @@ private:
 
   QCheckBox 	*cbEnableMods;
 
-  QGroupBox 	*gbScale;
+  Q3GroupBox 	*gbScale;
   QCheckBox 	*cbUpScale, *cbDownScale;
   KIntNumInput 	*sbMaxUpScaleFactor;
 
-  QGroupBox 	*gbAdjust;
+  Q3GroupBox 	*gbAdjust;
   KIntNumInput 	*sbBrightness, *sbContrast, *sbGamma;
 
-  QGroupBox 	*gbGeometry;
+  Q3GroupBox 	*gbGeometry;
   QLabel 	*lbRotate;
   KComboBox 	*comboRotate;
   QCheckBox 	*cbFlipVertically, *cbFlipHorizontally;
 
-  QGroupBox 	*gbPreview;
+  Q3GroupBox 	*gbPreview;
   QLabel 	*lbImOrig, *lbImFiltered;
   ImlibWidget 	*imOrig, *imFiltered;
 

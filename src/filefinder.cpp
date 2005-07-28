@@ -16,7 +16,10 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qkeycode.h>
+#include <qnamespace.h>
+//Added by qt3to4:
+#include <QFocusEvent>
+#include <QKeyEvent>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -50,7 +53,7 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     comp->setReplaceEnv( true );
     setCompletionObject( comp, false );
     setAutoDeleteCompletionObject( true );
-    setFocusPolicy( ClickFocus );
+    setFocusPolicy( Qt::ClickFocus );
 
     KConfig *config = KGlobal::config();
     KConfigGroupSaver cs( config, "GeneralConfiguration" );
@@ -75,7 +78,7 @@ void FileFinder::focusOutEvent( QFocusEvent *e )
 void FileFinder::keyPressEvent( QKeyEvent *e )
 {
     int key = e->key();
-    if ( key == Key_Escape ) {
+    if ( key == Qt::Key_Escape ) {
         hide();
         e->accept();
     }

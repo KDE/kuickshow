@@ -16,8 +16,13 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qkeycode.h>
-
+#include <qnamespace.h>
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <QResizeEvent>
+#include <QEvent>
+#include <Q3PopupMenu>
+#include <QMenuItem>
 #include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
@@ -97,7 +102,7 @@ void FileWidget::initActions()
     // so we move it to the real bottom
     menu->remove( coll->action( "properties" ) );
 
-    QPopupMenu *pMenu = menu->popupMenu();
+    Q3PopupMenu *pMenu = menu->popupMenu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
     QMenuItem *mItem = pMenu->findItem( lastItemId );
     if ( mItem && !mItem->isSeparator() )
@@ -181,7 +186,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
     if ( e->type() == QEvent::KeyPress ) {
 	QKeyEvent *k = static_cast<QKeyEvent*>( e );
 	
-	if ( (k->state() & (ControlButton | AltButton)) == 0 ) {
+	if ( (k->state() & (Qt::ControlModifier | Qt::AltModifier)) == 0 ) {
 	    int key = k->key();
  	    if ( actionCollection()->action("delete")->shortcut().contains( key ) )
             {
@@ -190,7 +195,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 		if ( item ) {
                     KFileItemList list;
                     list.append( item );
-		    del( list, (k->state() & ShiftButton) == 0 );
+		    del( list, (k->state() & Qt::ShiftModifier) == 0 );
                 }
 		return true;
 	    }

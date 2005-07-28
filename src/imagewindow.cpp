@@ -21,11 +21,11 @@
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qdrawutil.h>
-#include <qkeycode.h>
+#include <qnamespace.h>
 #include <qpainter.h>
 #include <qpen.h>
-#include <qpopupmenu.h>
-
+#include <q3popupmenu.h>
+#include <QBitmap>
 #ifdef KDE_USE_FINAL
 #undef GrayScale
 #undef Color
@@ -34,6 +34,16 @@
 #include <qstring.h>
 #include <qstringlist.h>
 #include <qtimer.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QPixmap>
+#include <QFocusEvent>
+#include <QKeyEvent>
+#include <QDropEvent>
+#include <QContextMenuEvent>
+#include <QResizeEvent>
+#include <QDragEnterEvent>
+#include <QMouseEvent>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -108,9 +118,9 @@ void ImageWindow::init()
     if ( !s_handCursor ) {
         QString file = locate( "appdata", "pics/handcursor.png" );
         if ( !file.isEmpty() )
-            s_handCursor = new QCursor( file );
+            s_handCursor = new QCursor( QBitmap(file) );
         else
-            s_handCursor = new QCursor( arrowCursor );
+            s_handCursor = new QCursor( Qt::arrowCursor );
     }
 
     setupActions();
@@ -147,33 +157,33 @@ void ImageWindow::setupActions()
                  this, SLOT( imageDelete() ),
                  m_actions, "delete_image" );
 
-    new KAction( i18n("Zoom In"), Key_Plus,
+    new KAction( i18n("Zoom In"), Qt::Key_Plus,
                  this, SLOT( zoomIn() ),
                  m_actions, "zoom_in" );
-    new KAction( i18n("Zoom Out"), Key_Minus,
+    new KAction( i18n("Zoom Out"), Qt::Key_Minus,
                  this, SLOT( zoomOut() ),
                  m_actions, "zoom_out" );
-    new KAction( i18n("Restore Original Size"), Key_O,
+    new KAction( i18n("Restore Original Size"), Qt::Key_O,
                  this, SLOT( showImageOriginalSize() ),
                  m_actions, "original_size" );
-    new KAction( i18n("Maximize"), Key_M,
+    new KAction( i18n("Maximize"), Qt::Key_M,
                  this, SLOT( maximize() ),
                  m_actions, "maximize" );
 
-    new KAction( i18n("Rotate 90 Degrees"), Key_9,
+    new KAction( i18n("Rotate 90 Degrees"), Qt::Key_9,
                  this, SLOT( rotate90() ),
                  m_actions, "rotate90" );
-    new KAction( i18n("Rotate 180 Degrees"), Key_8,
+    new KAction( i18n("Rotate 180 Degrees"), Qt::Key_8,
                  this, SLOT( rotate180() ),
                  m_actions, "rotate180" );
-    new KAction( i18n("Rotate 270 Degrees"), Key_7,
+    new KAction( i18n("Rotate 270 Degrees"), Qt::Key_7,
                  this, SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
-    new KAction( i18n("Flip Horizontally"), Key_Asterisk,
+    new KAction( i18n("Flip Horizontally"), Qt::Key_Asterisk,
                  this, SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
-    new KAction( i18n("Flip Vertically"), Key_Slash,
+    new KAction( i18n("Flip Vertically"), Qt::Key_Slash,
                  this, SLOT( flipVert() ),
                  m_actions, "flip_vertically" );
 
@@ -186,60 +196,60 @@ void ImageWindow::setupActions()
     KStdAction::close( this, SLOT( close() ),
                  m_actions, "close_image" );
     // --------
-    new KAction( i18n("More Brightness"), Key_B,
+    new KAction( i18n("More Brightness"), Qt::Key_B,
                  this, SLOT( moreBrightness() ),
                  m_actions, "more_brightness" );
-    new KAction( i18n("Less Brightness"), SHIFT + Key_B,
+    new KAction( i18n("Less Brightness"), Qt::SHIFT + Qt::Key_B,
                  this, SLOT( lessBrightness() ),
                  m_actions, "less_brightness" );
-    new KAction( i18n("More Contrast"), Key_C,
+    new KAction( i18n("More Contrast"), Qt::Key_C,
                  this, SLOT( moreContrast() ),
                  m_actions, "more_contrast" );
-    new KAction( i18n("Less Contrast"), SHIFT + Key_C,
+    new KAction( i18n("Less Contrast"), Qt::SHIFT + Qt::Key_C,
                  this, SLOT( lessContrast() ),
                  m_actions, "less_contrast" );
-    new KAction( i18n("More Gamma"), Key_G,
+    new KAction( i18n("More Gamma"), Qt::Key_G,
                  this, SLOT( moreGamma() ),
                  m_actions, "more_gamma" );
-    new KAction( i18n("Less Gamma"), SHIFT + Key_G,
+    new KAction( i18n("Less Gamma"), Qt::SHIFT + Qt::Key_G,
                  this, SLOT( lessGamma() ),
                  m_actions, "less_gamma" );
 
     // --------
-    new KAction( i18n("Scroll Up"), Key_Up,
+    new KAction( i18n("Scroll Up"), Qt::Key_Up,
                  this, SLOT( scrollUp() ),
                  m_actions, "scroll_up" );
-    new KAction( i18n("Scroll Down"), Key_Down,
+    new KAction( i18n("Scroll Down"), Qt::Key_Down,
                  this, SLOT( scrollDown() ),
                  m_actions, "scroll_down" );
-    new KAction( i18n("Scroll Left"), Key_Left,
+    new KAction( i18n("Scroll Left"), Qt::Key_Left,
                  this, SLOT( scrollLeft() ),
                  m_actions, "scroll_left" );
-    new KAction( i18n("Scroll Right"), Key_Right,
+    new KAction( i18n("Scroll Right"), Qt::Key_Right,
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
     // --------
-    KAction *pause = new KAction( i18n("Pause Slideshow"), Key_P,
+    KAction *pause = new KAction( i18n("Pause Slideshow"), Qt::Key_P,
 				  this, SLOT( pauseSlideShow() ),
 				  m_actions, "kuick_slideshow_pause" );
 
     KAction *fullscreenAction = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
 
-    new KAction( i18n("Reload Image"), Key_Enter,
+    new KAction( i18n("Reload Image"), Qt::Key_Enter,
                  this, SLOT( reload() ),
                  m_actions, "reload_image" );
 
-    new KAction( i18n("Properties"), ALT + Key_Return,
+    new KAction( i18n("Properties"), Qt::ALT + Qt::Key_Return,
                  this, SLOT( slotProperties() ),
                  m_actions, "properties" );
 
     m_actions->readShortcutSettings();
 
     // Unfortunately there is no KAction::setShortcutDefault() :-/
-    // so add Key_Return as fullscreen shortcut _after_ readShortcutSettings()
+    // so add Qt::Key_Return as fullscreen shortcut _after_ readShortcutSettings()
     KShortcut cut( fullscreenAction->shortcut() );
     if ( cut == fullscreenAction->shortcutDefault() ) {
-	cut.append(KKey(Key_Return));
+	cut.append(KKey(Qt::Key_Return));
 	fullscreenAction->setShortcut(cut);
     }
 }
@@ -535,16 +545,16 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 {
     uint key = e->key();
 
-    if ( key == Key_Shift )
+    if ( key == Qt::Key_Shift )
         updateCursor( ZoomCursor );
 	
-    if ( key == Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
+    if ( key == Qt::Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
         close( true );
     else if ( KStdAccel::save().contains( KKey( e ) ) )
         saveImage();
-    else if ( key == Key_Right || key == Key_Down )
+    else if ( key == Qt::Key_Right || key == Qt::Key_Down )
         emit nextSlideRequested();
-    else if ( key == Key_Left || key == Key_Up )
+    else if ( key == Qt::Key_Left || key == Qt::Key_Up )
         emit prevSlideRequested(); // For future use...
 
     else {
@@ -557,7 +567,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 
 void ImageWindow::keyReleaseEvent( QKeyEvent *e )
 {
-    if ( e->state() & ShiftButton ) { // Shift-key released
+    if ( e->state() & Qt::ShiftButton ) { // Shift-key released
         updateCursor();
         if ( transWidget ) {
             delete transWidget;
@@ -579,8 +589,8 @@ void ImageWindow::mousePressEvent( QMouseEvent *e )
     xposPress = xmove;
     yposPress = ymove;
 
-    if ( e->button() == LeftButton ) {
-        if ( e->state() & ShiftButton )
+    if ( e->button() == Qt::LeftButton ) {
+        if ( e->state() & Qt::ShiftButton )
             updateCursor( ZoomCursor );
         else
             updateCursor( MoveCursor );
@@ -604,7 +614,7 @@ void ImageWindow::updateCursor( KuickCursor cursor )
     switch ( cursor )
     {
         case ZoomCursor:
-            setCursor( arrowCursor ); // need a magnify-cursor
+            setCursor( Qt::arrowCursor ); // need a magnify-cursor
             break;
         case MoveCursor:
             setCursor( *s_handCursor );
@@ -614,23 +624,23 @@ void ImageWindow::updateCursor( KuickCursor cursor )
             if ( imageWidth() > width() || imageHeight() > height() )
                 setCursor( *s_handCursor );
             else
-                setCursor( arrowCursor );
+                setCursor( Qt::arrowCursor );
             break;
     }
 }
 
 void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 {
-    if ( !(e->state() & LeftButton) ) { // only handle LeftButton actions
+    if ( !(e->state() & Qt::LeftButton) ) { // only handle Qt::LeftButton actions
 	return;
     }
 
-    if ( e->state() & ShiftButton ) {
+    if ( e->state() & Qt::ShiftButton ) {
 	
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
 	    transWidget->setGeometry( 0, 0, width(), height() );
-	    transWidget->setBackgroundMode( NoBackground );
+	    transWidget->setBackgroundMode( Qt::NoBackground );
 	}
 
   	transWidget->hide();
@@ -653,12 +663,14 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	    yzoom = e->y();
 	}
 
-	QPen pen( Qt::white, 1, DashLine );
+	QPen pen( Qt::white, 1, Qt::DashLine );
 	p.setPen( pen );     // for drawing white dashed line
 	p.drawRect( xzoom, yzoom, width, height );
-	p.setPen( DotLine ); // defaults to black dotted line pen
+	p.setPen( Qt::DotLine ); // defaults to black dotted line pen
 	p.drawRect( xzoom, yzoom, width, height );
-	p.flush();
+
+#warning "qt4 what will replace p.flush() ????? "	
+	//p.flush();
     }
 
     else { // move the image
@@ -682,7 +694,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     }
 
     // only proceed if shift-Key is still pressed
-    if ( !(e->button() == LeftButton && e->state() & ShiftButton) )
+    if ( !(e->button() == Qt::LeftButton && e->state() & Qt::ShiftButton) )
 	return;
 
     int neww, newh, topX, topY, botX, botY;
@@ -805,21 +817,21 @@ void ImageWindow::dropEvent( QDropEvent *e )
 
 void ImageWindow::setPopupMenu()
 {
-    viewerMenu = new QPopupMenu( this );
+    viewerMenu = new Q3PopupMenu( this );
 
     m_actions->action("next_image")->plug( viewerMenu );
     m_actions->action("previous_image")->plug( viewerMenu );
     viewerMenu->insertSeparator();
 
-    brightnessMenu = new QPopupMenu( viewerMenu );
+    brightnessMenu = new Q3PopupMenu( viewerMenu );
     m_actions->action("more_brightness")->plug(brightnessMenu);
     m_actions->action("less_brightness")->plug(brightnessMenu);
 
-    contrastMenu = new QPopupMenu( viewerMenu );
+    contrastMenu = new Q3PopupMenu( viewerMenu );
     m_actions->action("more_contrast")->plug(contrastMenu);
     m_actions->action("less_contrast")->plug(contrastMenu);
 
-    gammaMenu = new QPopupMenu( viewerMenu );
+    gammaMenu = new Q3PopupMenu( viewerMenu );
     m_actions->action("more_gamma")->plug(gammaMenu);
     m_actions->action("less_gamma")->plug(gammaMenu);
 

@@ -20,13 +20,23 @@
 #define IMAGEWINDOW_H
 
 #include <qevent.h>
+//Added by qt3to4:
+#include <QContextMenuEvent>
+#include <QMouseEvent>
+#include <QDragEnterEvent>
+#include <QWheelEvent>
+#include <QFocusEvent>
+#include <QKeyEvent>
+#include <QResizeEvent>
+#include <Q3PopupMenu>
+#include <QDropEvent>
 
 #include <kaction.h>
 
 #include "imlibwidget.h"
 
 class QCursor;
-class QPopupMenu;
+class Q3PopupMenu;
 class QRect;
 class QString;
 class QTimer;
@@ -130,7 +140,7 @@ protected:
   uint 		xposPress, yposPress;
 
 
-  QPopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
+  Q3PopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;
 
 

@@ -19,15 +19,19 @@
 #include <qcheckbox.h>
 #include <qfont.h>
 #include <qfontmetrics.h>
-#include <qgrid.h>
-#include <qhbox.h>
+#include <q3grid.h>
+#include <q3hbox.h>
 #include <qlayout.h>
 #include <qimage.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QGridLayout>
 #include <kimageeffect.h>
-#include <qpaintdevicemetrics.h>
+#include <Q3VButtonGroup>
+#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 #include <qradiobutton.h>
-#include <qvbuttongroup.h>
+//
 #include <qcolor.h>
 
 #include <kcombobox.h>
@@ -80,7 +84,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     QPainter p;
     p.begin( &printer );
 
-    QPaintDeviceMetrics metrics( &printer );
+    Q3PaintDeviceMetrics metrics( &printer );
     p.setFont( KGlobalSettings::generalFont() );
     QFontMetrics fm = p.fontMetrics();
 
@@ -108,7 +112,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
     QSize imagesize = image.size();
     if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
-        imagesize.scale( w, h, QSize::ScaleMin );
+        imagesize.scale( w, h, Qt::ScaleMin );
     }
 
 
@@ -210,7 +214,7 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     m_blackwhite->setChecked( false );
     layout->addWidget (m_blackwhite );
 
-    QVButtonGroup *group = new QVButtonGroup( i18n("Scaling"), this );
+    Q3VButtonGroup *group = new Q3VButtonGroup( i18n("Scaling"), this );
     group->setRadioButtonExclusive( true );
     layout->addWidget( group );
     // m_shrinkToFit = new QRadioButton( i18n("Shrink image to &fit, if necessary"), group );
@@ -231,17 +235,17 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     connect( m_scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
 
     m_units = new KComboBox( false, widget, "unit combobox" );
-    grid->addWidget( m_units, 0, 2, AlignLeft );
+    grid->addWidget( m_units, 0, 2, Qt::AlignLeft );
     m_units->insertItem( i18n("Millimeters") );
     m_units->insertItem( i18n("Centimeters") );
     m_units->insertItem( i18n("Inches") );
 
-    m_width = new KIntNumInput( widget, "exact width" );
+    m_width = new KIntNumInput( widget/*, "exact width"*/ );
     grid->addWidget( m_width, 1, 1 );
     m_width->setLabel( i18n("&Width:" ) );
     m_width->setMinValue( 1 );
 
-    m_height = new KIntNumInput( widget, "exact height" );
+    m_height = new KIntNumInput( widget/*, "exact height"*/ );
     grid->addWidget( m_height, 2, 1 );
     m_height->setLabel( i18n("&Height:" ) );
     m_height->setMinValue( 1 );

@@ -19,6 +19,8 @@
 #include "fileview.h"
 #include "kuickdata.h"
 #include "mainwidget.h"
+//Added by qt3to4:
+#include <QResizeEvent>
 
 
 MainWidget::MainWidget( QString startDir, QWidget *parent,

@@ -17,10 +17,13 @@
 */
 
 #include <qcheckbox.h>
-#include <qgroupbox.h>
+#include <q3groupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qvgroupbox.h>
+//Added by qt3to4:
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QGridLayout>
 
 #include <kcombobox.h>
 #include <kdialog.h>
@@ -41,7 +44,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // create all the widgets
 
-  gbScale = new QGroupBox( i18n("Scaling"), this );
+  gbScale = new Q3GroupBox( i18n("Scaling"), this );
   gbScale->setColumnLayout( 0, Qt::Horizontal );
 
   cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"),
@@ -49,7 +52,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   cbUpScale = new QCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale, "upscale checkbox" );
 
-  sbMaxUpScaleFactor = new KIntNumInput( gbScale, "upscale factor" );
+  sbMaxUpScaleFactor = new KIntNumInput( gbScale/*, "upscale factor"*/ );
   sbMaxUpScaleFactor->setRange( 1, 100, 1, false );
 
   connect(cbUpScale, SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
@@ -57,7 +60,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbGeometry = new QGroupBox( i18n("Geometry"), this );
+  gbGeometry = new Q3GroupBox( i18n("Geometry"), this );
   gbGeometry->setColumnLayout( 0, Qt::Horizontal );
 
   cbFlipVertically = new QCheckBox( i18n("Flip vertically"), gbGeometry );
@@ -74,25 +77,25 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbAdjust = new QVGroupBox( i18n("Adjustments"), this );
+  gbAdjust = new Q3GroupBox (1, Qt::Horizontal, i18n("Adjustments"), this );
 
-  sbBrightness = new KIntNumInput( gbAdjust, "brightness spinbox" );
+  sbBrightness = new KIntNumInput( gbAdjust/*, "brightness spinbox"*/ );
   sbBrightness->setRange( -256, 256, 1, true );
-  sbBrightness->setLabel( i18n("Brightness:"), AlignVCenter );
+  sbBrightness->setLabel( i18n("Brightness:"), Qt::AlignVCenter );
 
-  sbContrast = new KIntNumInput( sbBrightness, 0,gbAdjust, 10,
-				 "contrast spinbox");
+  sbContrast = new KIntNumInput( sbBrightness, 0,gbAdjust, 10/*,
+				 "contrast spinbox"*/);
   sbContrast->setRange( -256, 256, 1, true );
-  sbContrast->setLabel( i18n("Contrast:"), AlignVCenter );
+  sbContrast->setLabel( i18n("Contrast:"), Qt::AlignVCenter );
 
-  sbGamma = new KIntNumInput( sbContrast, 0, gbAdjust, 10, "gamma spinbox" );
+  sbGamma = new KIntNumInput( sbContrast, 0, gbAdjust, 10/*, "gamma spinbox"*/ );
   sbGamma->setRange( -256, 256, 1, true );
-  sbGamma->setLabel( i18n("Gamma:"), AlignVCenter );
+  sbGamma->setLabel( i18n("Gamma:"), Qt::AlignVCenter );
 
   // --
 
-  gbPreview = new QGroupBox( i18n("Preview"), this );
-  gbPreview->setAlignment( AlignCenter );
+  gbPreview = new Q3GroupBox( i18n("Preview"), this );
+  gbPreview->setAlignment( Qt::AlignCenter );
 
   lbImOrig = new QLabel( i18n("Original"), gbPreview );
   imOrig = new ImlibWidget( 0L, gbPreview, "original image" );
@@ -138,22 +141,22 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  gbGeometryLayout->addWidget( cbFlipVertically, 0, AlignLeft );
-  gbGeometryLayout->addWidget( cbFlipHorizontally, 0, AlignLeft );
+  gbGeometryLayout->addWidget( cbFlipVertically, 0, Qt::AlignLeft );
+  gbGeometryLayout->addWidget( cbFlipHorizontally, 0, Qt::AlignLeft );
   gbGeometryLayout->addLayout( rotateLayout, 0 );
 
-  rotateLayout->addWidget( lbRotate, 0, AlignLeft );
-  rotateLayout->addWidget( comboRotate, 0, AlignLeft );
+  rotateLayout->addWidget( lbRotate, 0, Qt::AlignLeft );
+  rotateLayout->addWidget( comboRotate, 0, Qt::AlignLeft );
 
   // --
 
   if ( imFiltered ) { // assume, if one is ok, all are ok
       gbPreviewLayout->setMargin( 10 );
       gbPreviewLayout->setSpacing( KDialog::spacingHint() );
-      gbPreviewLayout->addWidget( lbImOrig, 0, 0, AlignCenter );
-      gbPreviewLayout->addWidget( imOrig,   1, 0, AlignCenter | AlignTop );
-      gbPreviewLayout->addWidget( lbImFiltered, 0, 2, AlignCenter );
-      gbPreviewLayout->addWidget( imFiltered,   1, 2, AlignCenter | AlignTop );
+      gbPreviewLayout->addWidget( lbImOrig, 0, 0, Qt::AlignCenter );
+      gbPreviewLayout->addWidget( imOrig,   1, 0, Qt::AlignCenter | Qt::AlignTop );
+      gbPreviewLayout->addWidget( lbImFiltered, 0, 2, Qt::AlignCenter );
+      gbPreviewLayout->addWidget( imFiltered,   1, 2, Qt::AlignCenter | Qt::AlignTop );
   }
 
 

@@ -20,11 +20,11 @@
 #define ABOUTWIDGET_H
 
 #include <qevent.h>
-#include <qvbox.h>
+#include <q3vbox.h>
 
 class KURLWidget;
 
-class AboutWidget : public QVBox
+class AboutWidget : public Q3VBox
 {
     Q_OBJECT
 
