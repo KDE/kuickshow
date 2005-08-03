@@ -153,7 +153,7 @@ void ImageWindow::setupActions()
     new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
                  this, SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
-    new KAction( i18n("Delete Image"), Key_Delete,
+    new KAction( i18n("Delete Image"), Qt::Key_Delete,
                  this, SLOT( imageDelete() ),
                  m_actions, "delete_image" );
 
