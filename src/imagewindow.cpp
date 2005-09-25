@@ -567,7 +567,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 
 void ImageWindow::keyReleaseEvent( QKeyEvent *e )
 {
-    if ( e->state() & Qt::ShiftButton ) { // Shift-key released
+    if ( e->state() & Qt::ShiftModifier ) { // Shift-key released
         updateCursor();
         if ( transWidget ) {
             delete transWidget;
@@ -590,7 +590,7 @@ void ImageWindow::mousePressEvent( QMouseEvent *e )
     yposPress = ymove;
 
     if ( e->button() == Qt::LeftButton ) {
-        if ( e->state() & Qt::ShiftButton )
+        if ( e->state() & Qt::ShiftModifier )
             updateCursor( ZoomCursor );
         else
             updateCursor( MoveCursor );
@@ -635,7 +635,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	return;
     }
 
-    if ( e->state() & Qt::ShiftButton ) {
+    if ( e->state() & Qt::ShiftModifier ) {
 	
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
@@ -694,7 +694,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     }
 
     // only proceed if shift-Key is still pressed
-    if ( !(e->button() == Qt::LeftButton && e->state() & Qt::ShiftButton) )
+    if ( !(e->button() == Qt::LeftButton && e->state() & Qt::ShiftModifier) )
 	return;
 
     int neww, newh, topX, topY, botX, botY;

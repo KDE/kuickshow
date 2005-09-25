@@ -128,7 +128,7 @@ KuickShow::KuickShow( const char *name )
     // files to display
     // either a directory to display, an absolute path, a relative path, or a URL
     KURL startDir;
-    startDir.setPath( QDir::currentDirPath() + '/' );
+    startDir.setPath( QDir::currentPath() + '/' );
     for ( int i = 0; i < args->count(); i++ ) {
         KURL url = args->url( i );
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url, false );
@@ -711,7 +711,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 
         KURL start;
         QFileInfo fi( view->filename() );
-        start.setPath( fi.dirPath( true ) );
+        start.setPath( fi.absolutePath() );
         initGUI( start );
 
         // see eventFilter() for explanation and similar code
@@ -808,7 +808,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 {
                     KURL start;
                     QFileInfo fi( m_viewer->filename() );
-                    start.setPath( fi.dirPath( true ) );
+                    start.setPath( fi.absolutePath() );
                     initGUI( start );
 
                     // the fileBrowser will list the start-directory
@@ -919,7 +919,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     {
                         KURL start;
                         QFileInfo fi( m_viewer->filename() );
-                        start.setPath( fi.dirPath( true ) );
+                        start.setPath( fi.absolutePath() );
                         initGUI( start );
                     }
                     show();
@@ -947,8 +947,8 @@ void KuickShow::configuration()
 {
     if ( !m_accel ) {
         KURL start;
-        start.setPath( QDir::homeDirPath() );
-        initGUI( KURL::fromPathOrURL( QDir::homeDirPath() ) );
+        start.setPath( QDir::homePath() );
+        initGUI( KURL::fromPathOrURL( QDir::homePath() ) );
     }
 
     dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L,
@@ -1096,7 +1096,7 @@ void KuickShow::initImlib()
         qWarning("*** KuickShow: Whoops, can't initialize imlib, trying my own palettefile now.");
         QString paletteFile = locate( "data", "kuickshow/im_palette.pal" );
         // FIXME - does the qstrdup() cure the segfault in imlib eventually?
-        char *file = qstrdup( paletteFile.local8Bit() );
+        char *file = qstrdup( paletteFile.toLocal8Bit() );
         par.palettefile = file;
         par.flags |= PARAMS_PALETTEFILE;
 
