@@ -27,7 +27,7 @@
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kpropertiesdialog.h>
 #include <kurlcompletion.h>
 

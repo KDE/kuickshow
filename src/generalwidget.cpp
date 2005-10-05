@@ -33,6 +33,7 @@
 #include <klocale.h>
 #include <knuminput.h>
 #include <kurllabel.h>
+#include <ktoolinvocation.h>
 
 #include "generalwidget.h"
 
@@ -114,7 +115,7 @@ GeneralWidget::~GeneralWidget()
 
 void GeneralWidget::slotURLClicked( const QString & url )
 {
-  kapp->invokeBrowser( url );
+  KToolInvocation::invokeBrowser( url );
 }
 
 void GeneralWidget::loadSettings( const KuickData& data )

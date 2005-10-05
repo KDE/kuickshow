@@ -45,7 +45,7 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 		     parent, name, modal )
 {
     coll = _coll;
-    Q3VBox *box = addVBoxPage( i18n("&General") );
+    KVBox *box = addVBoxPage( i18n("&General") );
     generalWidget = new GeneralWidget( box, "general widget" );
 
     box = addVBoxPage( i18n("&Modifications") );

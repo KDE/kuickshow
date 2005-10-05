@@ -53,7 +53,7 @@
 #include <klocale.h>
 #include <kmenubar.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kpropertiesdialog.h>
 #include <kprotocolinfo.h>
 #include <kstatusbar.h>
