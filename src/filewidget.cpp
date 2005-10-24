@@ -41,7 +41,7 @@
 #endif
 
 FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
-    : KDirOperator( url, parent, name ),
+    : KDirOperator( url, parent ),
       m_validCompletion( false ),
       m_fileFinder( 0L )
 {
@@ -102,7 +102,7 @@ void FileWidget::initActions()
     // so we move it to the real bottom
     menu->remove( coll->action( "properties" ) );
 
-    Q3PopupMenu *pMenu = menu->popupMenu();
+    QMenu *pMenu = menu->popupMenu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
     QMenuItem *mItem = pMenu->findItem( lastItemId );
     if ( mItem && !mItem->isSeparator() )

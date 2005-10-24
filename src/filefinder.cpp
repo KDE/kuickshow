@@ -30,7 +30,7 @@
 #include "filefinder.h"
 
 FileFinder::FileFinder( QWidget *parent, const char *name )
-    : KLineEdit( parent, name )
+    : KLineEdit( parent )
 {
     // make this widget just as large, as the font is + 8 Pixels
     int height = fontMetrics().height() + 8;

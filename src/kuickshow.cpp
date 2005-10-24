@@ -63,7 +63,6 @@
 #include <ktoolbar.h>
 #include <kurlcombobox.h>
 #include <kurlcompletion.h>
-#include <kurldrag.h>
 #include <kwin.h>
 #include <kstdguiitem.h>
 
@@ -296,7 +295,7 @@ void KuickShow::initGUI( const KURL& startDir )
     // from the main contextmenu
     KActionMenu *sortingMenu = static_cast<KActionMenu*>( coll->action("sorting menu"));
     KActionMenu *mainActionMenu = static_cast<KActionMenu*>( coll->action("popupMenu"));
-    Q3PopupMenu *mainPopup = mainActionMenu->popupMenu();
+    QMenu *mainPopup = mainActionMenu->popupMenu();
     int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
     int separatorId = mainPopup->idAt( sortingIndex + 1 );
     QMenuItem *separatorItem = mainPopup->findItem( separatorId );
@@ -343,7 +342,7 @@ void KuickShow::initGUI( const KURL& startDir )
     tBar->insertSeparator();
     about->plug( tBar );
 
-    Q3PopupMenu *help = helpMenu( QString::null, false );
+    KMenu *help = helpMenu( QString::null, false );
     mBar->insertItem( KStdGuiItem::help().text() , help );
 
 
@@ -366,7 +365,7 @@ void KuickShow::initGUI( const KURL& startDir )
     const int ID_ADDRESSBAR = 1;
 
     cmbPath = new KURLComboBox( KURLComboBox::Directories,
-                                true, addressToolBar, "address_combo_box" );
+                                true, addressToolBar );
     KURLCompletion *cmpl = new KURLCompletion( KURLCompletion::DirCompletion );
     cmbPath->setCompletionObject( cmpl );
     cmbPath->setAutoDeleteCompletionObject( true );

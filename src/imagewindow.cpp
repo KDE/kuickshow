@@ -66,7 +66,6 @@
 #include <ktempfile.h>
 #include <kwin.h>
 #include <netwm.h>
-#include <kurldrag.h>
 #include <kio/netaccess.h>
 
 #include "imagewindow.h"
@@ -794,8 +793,8 @@ void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 void ImageWindow::dropEvent( QDropEvent *e )
 {
     // FIXME - only preliminary drop-support for now
-    KURL::List list;
-    if ( KURLDrag::decode( e, list ) && !list.isEmpty()) {
+	KURL::List list = KURL::List::fromMimeData( e->mimeData() );
+    if ( !list.isEmpty()) {
         QString tmpFile;
         const KURL &url = list.first();
         if (KIO::NetAccess::download( url, tmpFile, this ) )

@@ -67,7 +67,8 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   colorButton = new KColorButton( this );
 
   QLabel *l1 = new QLabel( i18n("Show only files with extension: "), this, "label" );
-  editFilter = new KLineEdit( this, "filteredit" );
+  editFilter = new KLineEdit( this );
+  editFilter->setObjectName( "filteredit" );
 
   gridLayout->addWidget( l0, 0, 0 );
   gridLayout->addWidget( colorButton, 0, 1 );

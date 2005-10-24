@@ -198,7 +198,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 
 
 KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
-    : KPrintDialogPage( parent, name )
+    : KPrintDialogPage( parent )
 {
     setTitle( i18n("Image Settings") );
 
@@ -234,7 +234,8 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     group->insert( m_scale );
     connect( m_scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
 
-    m_units = new KComboBox( false, widget, "unit combobox" );
+    m_units = new KComboBox( false, widget );
+    m_units->setObjectName( "unit combobox" );
     grid->addWidget( m_units, 0, 2, Qt::AlignLeft );
     m_units->insertItem( i18n("Millimeters") );
     m_units->insertItem( i18n("Centimeters") );

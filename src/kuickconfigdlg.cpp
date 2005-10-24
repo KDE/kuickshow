@@ -23,7 +23,7 @@
 #include "kuickconfigdlg.h"
 
 #include <qnamespace.h>
-#include <q3vbox.h>
+#include <kvbox.h>
 
 #include <kaccel.h>
 #include <kconfig.h>
