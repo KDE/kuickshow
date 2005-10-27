@@ -119,7 +119,7 @@ void ImageWindow::init()
         if ( !file.isEmpty() )
             s_handCursor = new QCursor( QBitmap(file) );
         else
-            s_handCursor = new QCursor( Qt::arrowCursor );
+            s_handCursor = new QCursor( Qt::ArrowCursor );
     }
 
     setupActions();
@@ -613,7 +613,7 @@ void ImageWindow::updateCursor( KuickCursor cursor )
     switch ( cursor )
     {
         case ZoomCursor:
-            setCursor( Qt::arrowCursor ); // need a magnify-cursor
+            setCursor( Qt::ArrowCursor ); // need a magnify-cursor
             break;
         case MoveCursor:
             setCursor( *s_handCursor );
@@ -623,7 +623,7 @@ void ImageWindow::updateCursor( KuickCursor cursor )
             if ( imageWidth() > width() || imageHeight() > height() )
                 setCursor( *s_handCursor );
             else
-                setCursor( Qt::arrowCursor );
+                setCursor( Qt::ArrowCursor );
             break;
     }
 }
