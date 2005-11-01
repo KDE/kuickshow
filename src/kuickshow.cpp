@@ -953,7 +953,7 @@ void KuickShow::configuration()
     dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L,
                                     "dialog", false );
     dialog->resize( 540, 510 );
-    dialog->setIcon( kapp->miniIcon() );
+    dialog->setIcon( qApp->windowIcon().pixmap(IconSize(KIcon::Small),IconSize(KIcon::Small)) );
 
     connect( dialog, SIGNAL( okClicked() ),
              this, SLOT( slotConfigApplied() ) );
