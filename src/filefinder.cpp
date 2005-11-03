@@ -56,17 +56,17 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     setFocusPolicy( Qt::ClickFocus );
 
     KConfig *config = KGlobal::config();
-    KConfigGroupSaver cs( config, "GeneralConfiguration" );
+    KConfigGroup cs( config, "GeneralConfiguration" );
     setCompletionMode( (KGlobalSettings::Completion)
-               config->readNumEntry( "FileFinderCompletionMode",
+               cs.readNumEntry( "FileFinderCompletionMode",
                                      KGlobalSettings::completionMode()));
 }
 
 FileFinder::~FileFinder()
 {
     KConfig *config = KGlobal::config();
-    KConfigGroupSaver cs( config, "GeneralConfiguration" );
-    config->writeEntry( "FileFinderCompletionMode", completionMode() );
+    KConfigGroup cs( config, "GeneralConfiguration" );
+    cs.writeEntry( "FileFinderCompletionMode", completionMode() );
 }
 
 void FileFinder::focusOutEvent( QFocusEvent *e )
