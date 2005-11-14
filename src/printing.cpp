@@ -84,12 +84,11 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     QPainter p;
     p.begin( &printer );
 
-    Q3PaintDeviceMetrics metrics( &printer );
     p.setFont( KGlobalSettings::generalFont() );
     QFontMetrics fm = p.fontMetrics();
 
-    int w = metrics.width();
-    int h = metrics.height();
+    int w = printer.width();
+    int h = printer.height();
 
     QString t = "true";
     QString f = "false";
@@ -156,7 +155,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
         {
             int fw = fm.width( fname );
             int x = (w - fw)/2;
-            int y = metrics.height() - filenameOffset/2;
+            int y = printer.height() - filenameOffset/2;
             p.drawText( x, y, fname );
         }
     }
