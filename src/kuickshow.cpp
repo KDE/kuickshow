@@ -18,7 +18,7 @@
 
 #include <stdio.h>
 #include <assert.h>
-
+#include <qtextstream.h>
 #include <qdir.h>
 #include <qdesktopwidget.h>
 #include <qdialog.h>
