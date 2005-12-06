@@ -145,7 +145,7 @@ Wed Mar  7 21:25:15 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 	set our nice icon so that kicker can show it in the taskbar for 
 	example. Thanks to Florian for the hint :)
 
-	* i18n fix (° -> degrees), and s/-90/270/, another one from Florian
+	* i18n fix (Â° -> degrees), and s/-90/270/, another one from Florian
 
 	* resizeOptimal(): if we don't resize because we already have the right
 	size, call centerImage()
