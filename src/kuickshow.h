@@ -22,7 +22,6 @@
 #include <qevent.h>
 #include <qpointer.h>
 #include <qstring.h>
-#include <q3valuelist.h>
 //Added by qt3to4:
 #include <QKeyEvent>
 #include <QDropEvent>
@@ -79,7 +78,7 @@ public:
     ~KuickShow();
 
     virtual void 	show();
-    static Q3ValueList<ImageWindow*>  s_viewers;
+    static QList<ImageWindow*>  s_viewers;
 
     // overridden to make KDCOPActionProxy work -- all our actions are not
     // in the mainwindow's collection, but in the filewidget's.

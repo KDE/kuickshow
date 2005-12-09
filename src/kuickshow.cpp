@@ -32,7 +32,6 @@
 #include <QEvent>
 #include <QDropEvent>
 #include <QLabel>
-#include <Q3ValueList>
 #include <Q3PopupMenu>
 #include <QMouseEvent>
 #include <QMenuItem>
@@ -92,7 +91,7 @@ KuickData* kdata;
 static const int URL_ITEM  = 0;
 static const int META_ITEM = 1;
 
-Q3ValueList<ImageWindow*> KuickShow::s_viewers;
+QList<ImageWindow*> KuickShow::s_viewers;
 
 KuickShow::KuickShow( const char *name )
     : KMainWindow( 0L, name ),
@@ -975,7 +974,7 @@ void KuickShow::slotConfigApplied()
     kdata->save();
 
     ImageWindow *viewer;
-    Q3ValueListIterator<ImageWindow*> it = s_viewers.begin();
+    QList<ImageWindow*>::Iterator it = s_viewers.begin();
     while ( it != s_viewers.end() ) {
         viewer = *it;
         viewer->updateActions();
@@ -1047,7 +1046,7 @@ void KuickShow::saveProperties( KConfig *kc )
     kc->writeEntry( "Browser visible", fileWidget->isVisible() );
 
     QStringList urls;
-    Q3ValueListIterator<ImageWindow*> it;
+    QList<ImageWindow*>::Iterator it;
     for ( it = s_viewers.begin(); it != s_viewers.end(); ++it )
         urls.append( (*it)->filename() );
 
@@ -1232,7 +1231,7 @@ void KuickShow::slotOpenURL()
 
 void KuickShow::deleteAllViewers()
 {
-    Q3ValueListIterator<ImageWindow*> it = s_viewers.begin();
+    QList<ImageWindow*>::Iterator it = s_viewers.begin();
     for ( ; it != s_viewers.end(); ++it ) {
         (*it)->disconnect( SIGNAL( destroyed() ), this, SLOT( viewerDeleted() ));
         (*it)->close( true );
