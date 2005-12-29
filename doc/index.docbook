@@ -17,22 +17,21 @@
 <firstname>Carsten</firstname>
 <surname>Pfeiffer</surname>
 <affiliation>
-<address><email>pfeiffer@kde.org</email></address>
+<address>&Carsten.Pfeiffer.mail;</address>
 </affiliation>
 </author>
-</authorgroup>
-
 <!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
 
 <copyright>
 <year>2001</year>
-<holder>Carsten Pfeiffer</holder>
+<holder>&Carsten.Pfeiffer;</holder>
 </copyright>
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2002-01-09</date>
-<releaseinfo>1.01.00</releaseinfo>
+<date>2005-12-29</date>
+<releaseinfo>0.8.7</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -76,11 +75,19 @@ filebrowser where you can select images which are then shown.
 </listitem>
 <listitem><para>psd</para>
 </listitem>
-<listitem><para>xmp</para>
+<listitem><para>xpm</para>
 </listitem>
-<listitem><para>xbm</para>
+<listitem><para>ppm</para>
+</listitem>
+<listitem><para>pgm</para>
+</listitem>
+<listitem><para>pbm</para>
+</listitem>
+<listitem><para>pnm</para>
 </listitem>
 <listitem><para>eim</para>
+</listitem>
+<listitem><para>xcf</para>
 </listitem>
 </itemizedlist>
 
@@ -93,9 +100,8 @@ the image, or fullscreen.</para>
 <title>Using &kuickshow;</title>
 
 <para>Using &kuickshow; is very simple.  The file browser lists files,
-which you can select with a double click, the <keycap>Return</keycap>
-key, or <guimenuitem>View</guimenuitem> in the
-<mousebutton>Right</mousebutton> click popup menu.</para>
+which you can select with a &LMB; click or the <keycap>Return</keycap>
+key.</para>
 
 <screenshot>
 <screeninfo>Here's a screenshot of &kuickshow;</screeninfo>
@@ -153,7 +159,7 @@ linkend="modifications-options"><guilabel>Modifications</guilabel></link>
 and <link linkend="slideshow-options"><guilabel>Slideshow</guilabel></link> 
 configure the operation of &kuickshow;, and the other two,
 <guilabel>Viewer Shortcuts</guilabel> and <guilabel>Browser
-Shortcuts</guilabel> allow you to personalize the keybindings for the
+Shortcuts</guilabel> allow you to personalize the shortcuts for the
 respective windows.</para>
 
 <sect1 id="general-options">
@@ -163,11 +169,10 @@ respective windows.</para>
 configure and tune &kuickshow;.</para>
 
 <variablelist>
-<title><guilabel>Settings</guilabel></title>
 <varlistentry>
 <term><guilabel>Fullscreen mode</guilabel></term>
 <listitem>
-<para>If this is selected,images open in full screen mode.  If the
+<para>If this is selected, images open in full screen mode.  If the
 image is not large enough to fill the screen, the rest of the screen
 is filled with the background color selected below.  The default is
 off.</para>
@@ -185,7 +190,15 @@ slide shows.</para>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Background color</guilabel></term>
+<term><guilabel>Remember last folder</guilabel></term>
+<listitem>
+<para>If this is selected, &kuickshow; saves the name of the last folder on exit.
+On next start &kuickshow; will open this folder in the browser window.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Background color:</guilabel></term>
 <listitem>
 <para>Click on the colored bar to select a background color. This is
 used to fill the screen in fullscreen mode, or the window, if you have
@@ -204,7 +217,7 @@ types it is capable of.</para>
 </variablelist>
 
 <variablelist>
-<title><guilabel>Quality / Speed</guilabel></title>
+<title><guilabel>Quality/Speed</guilabel></title>
 <varlistentry>
 <term><guilabel>Fast rendering</guilabel></term>
 <listitem><para><!-- LW: Uhm.. help? -->Render things fast.</para>
@@ -253,7 +266,76 @@ types it is capable of.</para>
 <sect1 id="modifications-options">
 <title>The <guilabel>Modifications</guilabel> Tab</title>
 
-<para>Not yet documented</para>
+<para>Check <guilabel>Apply default image modifications</guilabel> to open an image 
+with these modifications in &kuickshow;.</para>
+
+<variablelist>
+<title><guilabel>Scaling</guilabel></title>
+<varlistentry>
+<term><guilabel>Shrink image to screen size, if larger</guilabel></term>
+<listitem>
+<para>If this is selected, large images are displayed in maximized window. The default is
+on.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Shrink image to screen size, if smaler, up to factor:</guilabel></term>
+<listitem>
+<para>If this is selected, &kuickshow; increases the magnification of small images up to 
+the selected factor.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title><guilabel>Geometry</guilabel></title>
+<varlistentry>
+<term><guilabel>Flip vertically</guilabel></term>
+<listitem><para>Flips the image hvertically.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Flip horizontally</guilabel></term>
+<listitem><para>Flips the image horizontally.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Rotate image</guilabel></term>
+<listitem><para>Rotates the image to 0, 90, 180 or 270 degrees.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title><guilabel>Adjustments</guilabel></title>
+<varlistentry>
+<term><guilabel>Brightness:</guilabel></term>
+<listitem><para>Lightens/darkens the image.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Contrast:</guilabel></term>
+<listitem><para>Adds/Removes contrast.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Gamma:</guilabel></term>
+<listitem><para>More/less gamma.
+</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para>A <guilabel>Preview</guilabel> of the <guilabel>Original</guilabel> 
+and <guilabel>Modified</guilabel> image is displayed below this options.</para>
 
 </sect1>
 
@@ -265,13 +347,13 @@ types it is capable of.</para>
 <varlistentry>
 <term><guilabel>Switch to full-screen</guilabel></term>
 <listitem>
-<para>Indicates if KuickShow should switch to full-screen mode 
+<para>Indicates if &kuickshow; should switch to full-screen mode 
 when starting the slideshow.
 </para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Start with current image:</guilabel></term>
+<term><guilabel>Start with current image</guilabel></term>
 <listitem>
 <para>Indicates if the slideshow should start with the first 
 image in the folder or with the image which is selected.
@@ -289,7 +371,7 @@ default is 3 seconds.</para>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Iterations:</guilabel></term>
+<term><guilabel>Iterations (0 = infinite):</guilabel></term>
 <listitem>
 <para>The amount of iterations. If set to 0 it will loop untill you 
 abort the slideshow. You can use the slider, type a new value into the 
@@ -301,6 +383,289 @@ default is 1.</para>
 </variablelist>
 </sect1>
 
+<sect1 id="shortcuts-options">
+<title>The <guimenu>Shortcuts</guimenu> Tabs</title> 
+<para>Change the shortcuts for the different modes of &kuickshow;
+in the <guilabel>Viewer Shortcuts</guilabel> and the <guilabel>Browser Shortcuts</guilabel> tabs.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title>Menu Reference</title>
+
+<sect1 id="file-menu">
+<title>The <guimenu>File</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Open</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Opens a new image</action> in &kuickshow;.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Show Image</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Displays </action> the selected image in a new image 
+window.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Show Image in Aktive Window</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Displays </action>the selected image in the active image 
+window.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Show Image in Fullscreen Mode</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Displays</action> the selected image in fullscreen mode.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycap>F2</keycap></shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Start Slideshow</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Starts</action> a slideshow of the images in the folder.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;
+<keycap>P</keycap></keycombo></shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Print Image...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Prints the image</action>.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycombo action="simul">
+&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Quit</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Quits</action> &kuickshow;. If you have several
+images windows open, all of them are closed.</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title>The <guimenu>Edit</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycap>F10</keycap></shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>New Folder...</guimenuitem></menuchoice>
+</term>
+<listitem>
+<para><action>Create</action> a new folder.</para> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycombo action="simul">
+<keycap>&Shift;</keycap><keycap>Delete</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Delete</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Deletes</action> the current file.  You will be asked to confirm the
+action.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycombo action="simul">
+<keycap>&Alt;</keycap><keycap>Return</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Properties</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Displays</action> the properties of the current image file.</para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title>The <guimenu>View</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycap>F6</keycap></shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Short View</guimenuitem>
+</menuchoice></term>
+<listitem><para>If this option is selected, only the names of the files and folders will be shown.</para>
+<para>Compare this to detailed view.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycap>F7</keycap></shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Detailed View</guimenuitem>
+</menuchoice></term>
+<listitem><para>If this option is selected, the names, sizes, dates, permissions, file owners and group ownerships are shown.</para>
+<para>Compare this to short view.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycap>F8</keycap></shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Show Hidden Files</guimenuitem>
+</menuchoice></term>
+<listitem><para>This will toggle between revealing and hiding normally hidden files.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut><keycap>F12</keycap></shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Separate Folders</guimenuitem>
+</menuchoice></term>
+<listitem><para>Use this option to toggle between a 2 pane view of the file system (one pane for the folders
+and one pane for the files) and a one pane view of the file system with folders and files.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Large Icons</guimenuitem>
+</menuchoice></term>
+<listitem><para>Display the image files in the folder with large icons. 
+This item is only available in <guimenuitem>Short View</guimenuitem> mode.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Small Icons</guimenuitem>
+</menuchoice></term>
+<listitem><para>Display the image files in the folder with small icons. 
+This item is only available in <guimenuitem>Short View</guimenuitem> mode.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Thumbnail Previews</guimenuitem>
+</menuchoice></term>
+<listitem><para>Display a preview of the images in the folder. This item is only available in <guimenuitem>Short View</guimenuitem> mode.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycombo action="simul">
+&Ctrl;<keycap>-</keycap></keycombo></shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Zoom Out</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Reduces the image size by ten percent</action>. Again
+this refers to the <emphasis>current</emphasis> size of the
+image.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice><shortcut><keycombo action="simul">
+&Ctrl;<keycap>+</keycap></keycombo></shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Zoom In</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Enlarges the image by ten percent</action>. Notice that
+this refers to the <emphasis>current</emphasis> size of the
+picture.</para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-menu">
+<title>The <guimenu>Settings</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure &kuickshow;...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Opens a dialog for changing some options</action> as
+described in the section <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+
+<sect1 id="help-menu">
+<title>The <guimenu>Help</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term>
+<menuchoice>
+<shortcut>
+<keycombo action="simul"><keycap>F1</keycap></keycombo>
+</shortcut>
+<guimenu>Help</guimenu>
+<guimenuitem>&kappname; Handbook</guimenuitem>
+</menuchoice>
+</term>
+<listitem><para><action>Invokes the &kde; Help system</action> starting at the
+&kappname; help pages. (this document).</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Help</guimenu>
+<guimenuitem>Report Bug...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Opens the Bug report dialog</action> where you can
+report a bug or request a <quote>wishlist</quote> feature.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Help</guimenu>
+<guimenuitem>About &kappname;</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>This will display version and author
+information.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Help</guimenu>
+<guimenuitem>About KDE</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>This displays the &kde; version and other basic
+information.</action></para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
 </chapter>
 
 <chapter id="commands">
@@ -309,7 +674,7 @@ default is 1.</para>
 <sect1 id="keybindings">
 <title>The Image Window</title>
 
-<para>All the keybindings are configurable from the <link
+<para>All the shortcuts are configurable from the <link
 linkend="configuration-dialog">Configuration Dialog</link>.</para>
 
 <table>
@@ -335,6 +700,10 @@ linkend="configuration-dialog">Configuration Dialog</link>.</para>
 <entry>Loads the first image</entry>
 </row>
 <row>
+<entry><keycap>End</keycap></entry>
+<entry>Loads the last image</entry>
+</row>
+<row>
 <entry><keycap>+</keycap></entry>
 <entry>Zooms into the image</entry>
 </row>
@@ -356,8 +725,12 @@ linkend="configuration-dialog">Configuration Dialog</link>.</para>
 counter-clockwise)</entry>
 </row>
 <row>
-<entry><keycap>9</keycap></entry>
+<entry><keycap>8</keycap></entry>
 <entry>Rotates 90&deg; clockwise</entry>
+</row>
+<row>
+<entry><keycap>9</keycap></entry>
+<entry>Rotates 180&deg; clockwise</entry>
 </row>
 <row>
 <entry><keycap>Arrow</keycap> keys</entry>
@@ -414,11 +787,15 @@ request.</entry>
 confirmation</entry>
 </row>
 <row>
+<entry><keycombo action="simul">&Alt;<keycap>Return</keycap></keycombo></entry>
+<entry>Displays the properties of the image</entry>
+</row>
+<row>
 <entry><keycap>F1</keycap></entry>
 <entry>Opens the online help (this file)</entry>
 </row>
 <row>
-<entry><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></entry>
+<entry><keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo></entry>
 <entry>Quits &kuickshow;</entry>
 </row>
 </tbody>
@@ -576,14 +953,14 @@ distribution. -->
 &kuickshow;
 </para>
 <para>
-Program copyright 1998-2002 Carsten Pfeiffer <email>pfeiffer@kde.org</email>
+Program copyright 1998-2002 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail;
 </para>
 
 <para>
-Documentation copyright 2001 Carsten Pfeiffer <email>pfeiffer@kde.org</email>
+Documentation copyright 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail;
 </para>
-<para>Converted to DocBook &XML; and extended by Lauri Watts
-<email>lauri@kde.org</email></para>
+<para>Converted to DocBook &XML; and extended by &Lauri.Watts;
+&Lauri.Watts.mail;</para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
