@@ -206,7 +206,7 @@ void KuickShow::initGUI( const KURL& startDir )
     KActionCollection *coll = fileWidget->actionCollection();
 
     redirectDeleteAndTrashActions(coll);
-    
+
     connect( fileWidget, SIGNAL( fileSelected( const KFileItem * ) ),
              this, SLOT( slotSelected( const KFileItem * ) ));
 
@@ -400,7 +400,7 @@ void KuickShow::redirectDeleteAndTrashActions(KActionCollection *coll)
         action->disconnect(fileWidget);
         connect(action, SIGNAL(activated()), this, SLOT(slotDeleteCurrentImage()));
     }
-    
+
     action = coll->action("trash");
     if (action)
     {
@@ -660,7 +660,7 @@ void KuickShow::tryShowNextImage()
     // entire directory after a file was deleted/trashed!?
     if (!m_viewer)
         return;
-    
+
     if (next)
         showImage(next, false);
     else
@@ -1160,7 +1160,7 @@ void KuickShow::messageCantLoadImage( const QString& filename )
     QString tmp = i18n("Unable to load the image %1.\n"
                        "Perhaps the file format is unsupported or "
                        "your Imlib is not installed properly.").arg(filename);
-    KMessageBox::sorry( m_viewer, tmp, i18n("Image Error") );
+    KMessageBox::information( m_viewer, tmp, i18n("Image Error"), "kuick_cant_load_image" );
 }
 
 void KuickShow::initImlib()
