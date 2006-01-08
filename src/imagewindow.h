@@ -81,12 +81,14 @@ public slots:
   void 		toggleFullscreen();
   void 		maximize();
   void 		imageDelete();
+  void 		imageTrash();
 
 signals:
   void 		sigFocusWindow( ImageWindow * );
   // go advance images back/forth
   void          requestImage( ImageWindow *, int advance );
-  void          deleteImage();
+  void          deleteImage(ImageWindow *viewer);
+  void          trashImage(ImageWindow *viewer);
   void		nextSlideRequested();
   void		prevSlideRequested();
 
@@ -95,6 +97,7 @@ protected:
 
   void 		init();
   void 		centerImage();
+  void          addAlternativeShortcut( KAction *action, int key );
   virtual void	updateGeometry( int imWidth, int imHeight );
   virtual void  loaded( KuickImage * );
 

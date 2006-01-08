@@ -32,10 +32,10 @@
 #include "aboutwidget.h"
 
 AboutWidget::AboutWidget( QWidget *parent, const char *name )
-    : QVBox( parent, name )
+    : QVBox( parent, name, Qt::WShowModal )
 {
     KWin::setType( winId(), NET::Override );
-    KWin::setState( winId(), NET::StaysOnTop | NET::SkipTaskbar );
+    KWin::setState( winId(), NET::SkipTaskbar );
 
     setFrameStyle( WinPanel | Raised );
 
@@ -63,7 +63,7 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
     m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
     m_homepage->setAlignment( AlignCenter );
 
-    QLabel *copy = new QLabel("(C) 1998-2004", gBox);
+    QLabel *copy = new QLabel("(C) 1998-2006", gBox);
     copy->setAlignment( AlignCenter );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );
@@ -85,7 +85,7 @@ bool AboutWidget::eventFilter( QObject *o, QEvent *e )
     if ( e->type() == QEvent::MouseButtonPress ) {
         QMouseEvent *ev = static_cast<QMouseEvent*>( e );
         if ( !m_homepage->geometry().contains( ev->pos() ) ) {
-            delete this;
+            deleteLater();
             return true;
         }
     }

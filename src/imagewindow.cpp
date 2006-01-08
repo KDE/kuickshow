@@ -143,9 +143,13 @@ void ImageWindow::setupActions()
     new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
                  this, SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
-    new KAction( i18n("Delete Image"), Key_Delete,
+
+    new KAction( i18n("Delete Image"), SHIFT + Key_Delete,
                  this, SLOT( imageDelete() ),
                  m_actions, "delete_image" );
+    new KAction( i18n("Move Image to Trash"), Key_Delete,
+                 this, SLOT( imageTrash() ),
+                 m_actions, "trash_image" );
 
     new KAction( i18n("Zoom In"), Key_Plus,
                  this, SLOT( zoomIn() ),
@@ -219,15 +223,15 @@ void ImageWindow::setupActions()
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
     // --------
-    KAction *pause = new KAction( i18n("Pause Slideshow"), Key_P,
-				  this, SLOT( pauseSlideShow() ),
-				  m_actions, "kuick_slideshow_pause" );
+    new KAction( i18n("Pause Slideshow"), Key_P,
+                 this, SLOT( pauseSlideShow() ),
+                 m_actions, "kuick_slideshow_pause" );
 
     KAction *fullscreenAction = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
 
-    new KAction( i18n("Reload Image"), Key_Enter,
-                 this, SLOT( reload() ),
-                 m_actions, "reload_image" );
+    KAction *reloadAction = new KAction( i18n("Reload Image"), KStdAccel::shortcut(KStdAccel::Reload),
+                                         this, SLOT( reload() ),
+                                         m_actions, "reload_image" );
 
     new KAction( i18n("Properties"), ALT + Key_Return,
                  this, SLOT( slotProperties() ),
@@ -237,10 +241,16 @@ void ImageWindow::setupActions()
 
     // Unfortunately there is no KAction::setShortcutDefault() :-/
     // so add Key_Return as fullscreen shortcut _after_ readShortcutSettings()
-    KShortcut cut( fullscreenAction->shortcut() );
-    if ( cut == fullscreenAction->shortcutDefault() ) {
-	cut.append(KKey(Key_Return));
-	fullscreenAction->setShortcut(cut);
+    addAlternativeShortcut(fullscreenAction, Key_Return);
+    addAlternativeShortcut(reloadAction, Key_Enter);
+}
+
+void ImageWindow::addAlternativeShortcut(KAction *action, int key)
+{
+    KShortcut cut( action->shortcut() );
+    if (cut == action->shortcutDefault()) {
+        cut.append(KKey(key));
+        action->setShortcut(cut);
     }
 }
 
@@ -506,7 +516,12 @@ void ImageWindow::lessGamma()
 
 void ImageWindow::imageDelete()
 {
-    emit deleteImage();
+    emit deleteImage(this);
+}
+
+void ImageWindow::imageTrash()
+{
+    emit trashImage(this);
 }
 
 ///

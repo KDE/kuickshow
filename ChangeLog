@@ -1,3 +1,31 @@
+<pre>
+Sun Jan  8 09:47:39 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* fix crash when deleting the last image without having a browser
+
+Sat Jan  7 23:27:32 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* fix deleting images from image window and browser!
+	
+	* support moving to trash and make that the default
+
+	* refactor delayed execution of events/actions (for when the browser window needs to
+	be loaded lazily)
+	
+Sat Jan  7 22:36:25 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (addAlternativeShortcut):
+	use F5 as default shortcut for "Reload image", keep Enter as alternative
+
+Sat Jan  7 22:33:30 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/aboutwidget.cpp: 
+	fixed crash (right-clicking on about widget)
+
+	* made the about widget not always-on-top, but a modal widget,
+	which prevents error messages from being hidden below the about
+	widget (i.e. when clicking the homepage link while being offline)
+
 Sat Aug 25 02:58:31 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* src/imagewindow.cpp (init): 
@@ -7,7 +35,6 @@ Sat Aug 25 02:58:31 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 	* also fixed the KStdAccel::save() and close() accels not working
 	in the image window
 
-<pre>
 Sat Aug  4 03:37:50 2001  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* now completely smooth, flicker-free switching between images

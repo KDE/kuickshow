@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998-2006 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -58,6 +58,8 @@
 #include <kurldrag.h>
 #include <kwin.h>
 #include <kstdguiitem.h>
+
+#include <kdebug.h>
 
 #include "aboutwidget.h"
 #include "filewidget.h"
@@ -203,6 +205,8 @@ void KuickShow::initGUI( const KURL& startDir )
 
     KActionCollection *coll = fileWidget->actionCollection();
 
+    redirectDeleteAndTrashActions(coll);
+    
     connect( fileWidget, SIGNAL( fileSelected( const KFileItem * ) ),
              this, SLOT( slotSelected( const KFileItem * ) ));
 
@@ -377,7 +381,6 @@ void KuickShow::initGUI( const KURL& startDir )
     dirSelected( fileWidget->url() );
 
     setCentralWidget( fileWidget );
-
     setupGUI( KMainWindow::Save );
 
     coll->action( "reload" )->setShortcut( KStdAccel::reload() );
@@ -387,6 +390,23 @@ void KuickShow::initGUI( const KURL& startDir )
     coll->action( "mkdir" )->setShortcut(Key_F10);
     coll->action( "preview" )->setShortcut(Key_F11);
     coll->action( "separate dirs" )->setShortcut(Key_F12);
+}
+
+void KuickShow::redirectDeleteAndTrashActions(KActionCollection *coll)
+{
+    KAction *action = coll->action("delete");
+    if (action)
+    {
+        action->disconnect(fileWidget);
+        connect(action, SIGNAL(activated()), this, SLOT(slotDeleteCurrentImage()));
+    }
+    
+    action = coll->action("trash");
+    if (action)
+    {
+        action->disconnect(fileWidget);
+        connect(action, SIGNAL(activated()), this, SLOT(slotTrashCurrentImage()));
+    }
 }
 
 void KuickShow::slotSetURL( const KURL& url )
@@ -500,10 +520,12 @@ void KuickShow::showImage( const KFileItem *fi,
                      this, SLOT( messageCantLoadImage(const QString &) ));
             connect( m_viewer, SIGNAL( requestImage( ImageWindow *, int )),
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
-	    connect( m_viewer, SIGNAL( pauseSlideShowSignal() ), 
+	    connect( m_viewer, SIGNAL( pauseSlideShowSignal() ),
 		     this, SLOT( pauseSlideShow() ) );
-            connect( m_viewer, SIGNAL (deleteImage ()),
-                     this, SLOT (slotDeleteImage ()));
+            connect( m_viewer, SIGNAL (deleteImage (ImageWindow *)),
+                     this, SLOT (slotDeleteCurrentImage (ImageWindow *)));
+            connect( m_viewer, SIGNAL (trashImage (ImageWindow *)),
+                     this, SLOT (slotTrashCurrentImage (ImageWindow *)));
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
                 // after showing, otherwise we get some bogus geometry()
@@ -553,19 +575,103 @@ void KuickShow::showImage( const KFileItem *fi,
     } // isImage
 }
 
-void KuickShow::slotDeleteImage()
+void KuickShow::slotDeleteCurrentImage()
 {
+    performDeleteCurrentImage(fileWidget);
+}
+
+void KuickShow::slotTrashCurrentImage()
+{
+    performTrashCurrentImage(fileWidget);
+}
+
+void KuickShow::slotDeleteCurrentImage(ImageWindow *viewer)
+{
+    if (!fileWidget) {
+        delayAction(new DelayedRepeatEvent(viewer, DelayedRepeatEvent::DeleteCurrentFile, 0L));
+        return;
+    }
+    performDeleteCurrentImage(viewer);
+}
+
+void KuickShow::slotTrashCurrentImage(ImageWindow *viewer)
+{
+    if (!fileWidget) {
+        delayAction(new DelayedRepeatEvent(viewer, DelayedRepeatEvent::TrashCurrentFile, 0L));
+        return;
+    }
+    performTrashCurrentImage(viewer);
+}
+
+void KuickShow::performDeleteCurrentImage(QWidget *parent)
+{
+    assert(fileWidget != 0L);
+
     KFileItemList list;
     KFileItem *item = fileWidget->getCurrentItem(false);
     list.append (item);
+
+    if (KMessageBox::warningContinueCancel(
+            parent,
+            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>").arg(item->url().pathOrURL()),
+            i18n("Delete File"),
+            KStdGuiItem::del(),
+            "Kuick_delete_current_image")
+        != KMessageBox::Continue)
+    {
+        return;
+    }
+
+    tryShowNextImage();
+    fileWidget->del(list, false, false);
+}
+
+void KuickShow::performTrashCurrentImage(QWidget *parent)
+{
+    assert(fileWidget != 0L);
+
+    KFileItemList list;
+    KFileItem *item = fileWidget->getCurrentItem(false);
+    list.append (item);
+
+    if (KMessageBox::warningContinueCancel(
+            parent,
+            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>").arg(item->url().pathOrURL()),
+            i18n("Trash File"),
+            KGuiItem(i18n("to trash", "&Trash"),"edittrash"),
+            "Kuick_trash_current_image")
+        != KMessageBox::Continue)
+    {
+        return;
+    }
+
+    tryShowNextImage();
+    fileWidget->trash(list, false, false);
+}
+
+void KuickShow::tryShowNextImage()
+{
+    // move to next file item even if we have no viewer
     KFileItem *next = fileWidget->getNext(true);
     if (!next)
         next = fileWidget->getPrevious(true);
-        if (next)
+
+    // FIXME: why is this necessary at all? Why does KDirOperator suddenly re-read the
+    // entire directory after a file was deleted/trashed!?
+    if (!m_viewer)
+        return;
+    
+    if (next)
         showImage(next, false);
     else
-        m_viewer->close(true);
-    fileWidget->del(list, false,false);
+    {
+        if (!haveBrowser())
+        {
+            // ### when simply calling toggleBrowser(), this main window is completely messed up
+            QTimer::singleShot(0, this, SLOT(toggleBrowser()));
+        }
+        m_viewer->deleteLater();
+    }
 }
 
 void KuickShow::startSlideShow()
@@ -699,27 +805,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
         if ( m_delayedRepeatItem )
             return;
 
-        m_delayedRepeatItem = new DelayedRepeatEvent( view, steps );
-
-        KURL start;
-        QFileInfo fi( view->filename() );
-        start.setPath( fi.dirPath( true ) );
-        initGUI( start );
-
-        // see eventFilter() for explanation and similar code
-        if ( fileWidget->dirLister()->isFinished() &&
-             fileWidget->dirLister()->rootItem() )
-        {
-            fileWidget->setCurrentItem( fi.fileName() );
-            QTimer::singleShot( 0, this, SLOT( slotReplayAdvance()));
-        }
-        else
-        {
-            fileWidget->setInitialItem( fi.fileName() );
-            connect( fileWidget, SIGNAL( finished() ),
-                     SLOT( slotReplayAdvance() ));
-        }
-
+        delayAction(new DelayedRepeatEvent( view, DelayedRepeatEvent::AdvanceViewer, new int(steps) ));
         return;
     }
 
@@ -773,6 +859,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
 
     ImageWindow *window = dynamic_cast<ImageWindow*>( o );
+
     if ( window ) {
         // The XWindow used to display Imlib's image is being resized when
         // switching images, causing enter- and leaveevents for this
@@ -794,6 +881,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             // is used for zooming in the imagewindow
             // Key_Alt shouldn't either - otherwise Alt+F4 doesn't work, the
             // F4 gets eaten (by NetAccess' modal dialog maybe?)
+
             if ( !fileWidget )
             {
                 if ( key != Key_Escape && key != Key_Shift && key != Key_Alt )
@@ -857,6 +945,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             else if ( fileWidget->actionCollection()->action("delete")->shortcut().contains( key ))
             {
+                kdDebug() << "WOW, deletion happens here!" << endl;
 //      KFileItem *cur = fileWidget->getCurrentItem( false );
                 (void) fileWidget->getCurrentItem( false );
                 item = fileWidget->getNext( false ); // don't move
@@ -910,7 +999,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     if ( !fileWidget )
                     {
                         KURL start;
-                        QFileInfo fi( m_viewer->filename() );
+                        QFileInfo fi( window->filename() );
                         start.setPath( fi.dirPath( true ) );
                         initGUI( start );
                     }
@@ -933,7 +1022,6 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
     return KMainWindow::eventFilter( o, e );
 }
-
 
 void KuickShow::configuration()
 {
@@ -1161,17 +1249,8 @@ void KuickShow::slotReplayEvent()
     // --------------------------------------------------------------
 }
 
-void KuickShow::slotReplayAdvance()
+void KuickShow::replayAdvance(DelayedRepeatEvent *event)
 {
-    if ( !m_delayedRepeatItem )
-        return;
-
-    disconnect( fileWidget, SIGNAL( finished() ),
-                this, SLOT( slotReplayAdvance() ));
-
-    DelayedRepeatEvent *e = m_delayedRepeatItem;
-    m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
-
     // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
     // Sigh. According to qt-bugs, they won't fix this bug ever. So you can't
     // rely on sorting to be correct before the QIconView has been show()n.
@@ -1183,8 +1262,62 @@ void KuickShow::slotReplayAdvance()
     }
     // --------------------------------------------------------------
 
-    slotAdvanceImage( e->viewer, e->steps );
-    delete e;
+    slotAdvanceImage( event->viewer, *(int *) (event->data) );
+}
+
+void KuickShow::delayAction(DelayedRepeatEvent *event)
+{
+    if (m_delayedRepeatItem)
+        return;
+
+    m_delayedRepeatItem = event;
+
+    KURL start;
+    QFileInfo fi( event->viewer->filename() );
+    start.setPath( fi.dirPath( true ) );
+    initGUI( start );
+
+    // see eventFilter() for explanation and similar code
+    if ( fileWidget->dirLister()->isFinished() &&
+         fileWidget->dirLister()->rootItem() )
+    {
+        fileWidget->setCurrentItem( fi.fileName() );
+        QTimer::singleShot( 0, this, SLOT( doReplay()));
+    }
+    else
+    {
+        fileWidget->setInitialItem( fi.fileName() );
+        connect( fileWidget, SIGNAL( finished() ),
+                 SLOT( doReplay() ));
+    }
+}
+
+void KuickShow::doReplay()
+{
+    if (!m_delayedRepeatItem)
+        return;
+
+    disconnect( fileWidget, SIGNAL( finished() ),
+                this, SLOT( doReplay() ));
+
+    switch (m_delayedRepeatItem->action)
+    {
+        case DelayedRepeatEvent::DeleteCurrentFile:
+            performDeleteCurrentImage((QWidget *) m_delayedRepeatItem->data);
+            break;
+        case DelayedRepeatEvent::TrashCurrentFile:
+            performTrashCurrentImage((QWidget *) m_delayedRepeatItem->data);
+            break;
+        case DelayedRepeatEvent::AdvanceViewer:
+            replayAdvance(m_delayedRepeatItem);
+            break;
+        default:
+            kdWarning() << "doReplay: unknown action -- ignoring: " << m_delayedRepeatItem->action << endl;
+            break;
+    }
+
+    delete m_delayedRepeatItem;
+    m_delayedRepeatItem = 0L;
 }
 
 void KuickShow::toggleBrowser()

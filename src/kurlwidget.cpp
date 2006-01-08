@@ -35,7 +35,7 @@ void KURLWidget::run()
 {
     KURL ku( url() );
     if ( ku.isValid() ) {
-	(void) new KRun( ku );
+	(void) new KRun( ku, this );
     }
 }
 
