@@ -646,15 +646,16 @@ void KuickShow::slotPrint()
     if ( !items )
         return;
 
-    KFileItemListIterator it( *items );
+	KFileItemList::const_iterator it = items->begin();
+	const KFileItemList::const_iterator end = items->end();
 
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow( 0, id, this, "printing image" );
     KFileItem *item;
-    while ( (item = it.current()) ) {
+	for ( ; it != end; ++it ) {
+		item = (*it);
         if (FileWidget::isImage( item ) && iw->loadImage( item->url().path()))
             iw->printImage();
-        ++it;
     }
 
     iw->close( true );
