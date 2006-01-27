@@ -646,7 +646,7 @@ void KuickShow::performTrashCurrentImage(QWidget *parent)
     }
 
     tryShowNextImage();
-    fileWidget->trash(list, false, false);
+    fileWidget->trash(list, parent, false, false);
 }
 
 void KuickShow::tryShowNextImage()
