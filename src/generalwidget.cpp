@@ -44,7 +44,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   layout->setSpacing( KDialog::spacingHint() );
 
   QPixmap pixmap = UserIcon( "logo" );
-  KURLLabel *logo = new KURLLabel( this );
+  KUrlLabel *logo = new KUrlLabel( this );
   logo->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
   logo->setPixmap( pixmap );
   logo->setFixedSize( pixmap.size() );

@@ -141,7 +141,7 @@ public:
   virtual ~ImlibWidget();
 
   const QString& filename() 		const { return m_filename; }
-  KURL          url()                   const;
+  KUrl          url()                   const;
   bool		loadImage( const QString& filename );
   bool 		cacheImage( const QString& filename );
   void 		zoomImage( float );

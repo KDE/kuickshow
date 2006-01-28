@@ -21,7 +21,7 @@
 
 #include <kurllabel.h>
 
-class KURLWidget : public KURLLabel
+class KURLWidget : public KUrlLabel
 {
     Q_OBJECT
 

@@ -44,8 +44,8 @@ class KConfig;
 class KToggleAction;
 class AboutWidget;
 
-class KURL;
-class KURLComboBox;
+class KUrl;
+class KUrlComboBox;
 
 class DelayedRepeatEvent
 {
@@ -101,7 +101,7 @@ private slots:
     void 		showFileItem( ImageWindow *, const KFileItem * );
     void		slotHighlighted( const KFileItem * );
     void 		slotSelected( const KFileItem * );
-    void		dirSelected( const KURL& );
+    void		dirSelected( const KUrl& );
     void		configuration();
     void	      	about();
     void 		startSlideShow();
@@ -109,7 +109,7 @@ private slots:
     void 		nextSlide();
     void                nextSlide( KFileItem *item );
     void		viewerDeleted();
-    void 		slotDropped( const KFileItem *, QDropEvent *, const KURL::List &);
+    void 		slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
 
@@ -120,13 +120,13 @@ private slots:
     void		slotReplayEvent();
     void                slotReplayAdvance();
     void                slotOpenURL();
-    void		slotSetURL( const KURL& );
+    void		slotSetURL( const KUrl& );
     void		slotURLComboReturnPressed();
 //     void                invalidateImages( const KFileItemList& items );
     void		slotDeleteImage();
 
 private:
-    void 		initGUI( const KURL& startDir );
+    void 		initGUI( const KUrl& startDir );
     bool	       	eventFilter( QObject *, QEvent * );
     void 		initImlib();
     void 		saveProperties( KConfig * );
@@ -139,7 +139,7 @@ private:
     uint                m_slideshowCycle;
 
     FileWidget   	*fileWidget;
-    KURLComboBox	*cmbPath;
+    KUrlComboBox	*cmbPath;
     KuickConfigDialog 	*dialog;
     ImlibData           *id;
     ImageWindow 	*m_viewer;

@@ -40,7 +40,7 @@
 #undef KeyPress
 #endif
 
-FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
+FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *name )
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
       m_fileFinder( 0L )
@@ -70,8 +70,8 @@ FileWidget::FileWidget( const KURL& url, QWidget *parent, const char *name )
     connect( this, SIGNAL( fileHighlighted( const KFileItem * )),
 	     SLOT( slotHighlighted( const KFileItem * )));
 
-    connect( this, SIGNAL(urlEntered(const KURL&)),
-             SLOT( slotURLEntered( const KURL& )));
+    connect( this, SIGNAL(urlEntered(const KUrl&)),
+             SLOT( slotURLEntered( const KUrl& )));
 
     // should actually be KDirOperator's job!
     connect( this, SIGNAL( finishedLoading() ), SLOT( slotFinishedLoading() ));
@@ -399,14 +399,14 @@ void FileWidget::slotReturnPressed( const QString& t )
     if ( text.at(0) == '/' || text.at(0) == '~' ) {
 	QString dir = m_fileFinder->completion()->replacedPath( text );
 	
-	KURL url;
+	KUrl url;
 	url.setPath( dir );
 	setURL( url, true );
     }
 
     else if ( text.find('/') != (int) text.length() -1 ) { // relative path
 	QString dir = m_fileFinder->completion()->replacedPath( text );
-	KURL u( url(), dir );
+	KUrl u( url(), dir );
 	setURL( u, true );
     }
 
@@ -435,7 +435,7 @@ void FileWidget::setInitialItem( const QString& filename )
     m_initialName = filename;
 }
 
-void FileWidget::slotURLEntered( const KURL& url )
+void FileWidget::slotURLEntered( const KUrl& url )
 {
     if ( m_fileFinder )
         m_fileFinder->completion()->setDir( url.path() );

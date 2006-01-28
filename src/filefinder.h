@@ -26,7 +26,7 @@
 
 #include <klineedit.h>
 
-class KURLCompletion;
+class KUrlCompletion;
 
 class FileFinder : public KLineEdit
 {
@@ -36,8 +36,8 @@ public:
     FileFinder( QWidget *parent=0, const char *name=0 );
     ~FileFinder();
 
-    KURLCompletion *completion() {
-        return static_cast<KURLCompletion*>( completionObject() );
+    KUrlCompletion *completion() {
+        return static_cast<KUrlCompletion*>( completionObject() );
     }
 
     virtual void hide();

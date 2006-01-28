@@ -48,7 +48,7 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     connect( this, SIGNAL( returnPressed( const QString& )),
              SLOT( slotAccept( const QString& ) ));
 
-    KURLCompletion *comp = new KURLCompletion();
+    KUrlCompletion *comp = new KUrlCompletion();
     comp->setReplaceHome( true );
     comp->setReplaceEnv( true );
     setCompletionObject( comp, false );

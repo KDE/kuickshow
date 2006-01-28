@@ -128,9 +128,9 @@ ImlibWidget::~ImlibWidget()
     if ( deleteImData ) delete idata;
 }
 
-KURL ImlibWidget::url() const
+KUrl ImlibWidget::url() const
 {
-    KURL url;
+    KUrl url;
     if ( m_filename.at(0) == '/' )
         url.setPath( m_filename );
     else
@@ -790,7 +790,7 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 {
     kdDebug() << "Trying to load " << fileName << " with KImageIO..." << endl;
 
-    KImageIO::registerFormats();
+    
 
     QImage image( fileName );
     if ( image.isNull() )

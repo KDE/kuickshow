@@ -793,10 +793,10 @@ void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 void ImageWindow::dropEvent( QDropEvent *e )
 {
     // FIXME - only preliminary drop-support for now
-	KURL::List list = KURL::List::fromMimeData( e->mimeData() );
+	KUrl::List list = KUrl::List::fromMimeData( e->mimeData() );
     if ( !list.isEmpty()) {
         QString tmpFile;
-        const KURL &url = list.first();
+        const KUrl &url = list.first();
         if (KIO::NetAccess::download( url, tmpFile, this ) )
         {
 	    loadImage( tmpFile );
@@ -890,7 +890,7 @@ void ImageWindow::saveImage()
 
     QString selection = m_saveDirectory.isEmpty() ?
                             m_kuim->filename() :
-                            KURL::fromPathOrURL( m_kuim->filename() ).fileName();
+                            KUrl::fromPathOrURL( m_kuim->filename() ).fileName();
     dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setCaption( i18n("Save As") );
@@ -1117,7 +1117,7 @@ void ImageWindow::maximize()
 
 void ImageWindow::slotProperties()
 {
-    KURL url;
+    KUrl url;
     url.setPath( filename() ); // ###
     (void) new KPropertiesDialog( url, this, "props dialog", true );
 }

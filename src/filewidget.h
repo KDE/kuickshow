@@ -35,7 +35,7 @@ class FileWidget : public KDirOperator
 public:
     enum WhichItem { Previous, Next, Current };
 
-    FileWidget( const KURL& url, QWidget *parent = 0L, const char *name = 0L );
+    FileWidget( const KUrl& url, QWidget *parent = 0L, const char *name = 0L );
     ~FileWidget();
 
     bool hasFiles() const;
@@ -83,7 +83,7 @@ private slots:
     void slotItemDeleted( KFileItem * );
     void slotHighlighted( const KFileItem * );
 
-    void slotURLEntered( const KURL& url );
+    void slotURLEntered( const KUrl& url );
     void slotFinishedLoading();
 
 private:

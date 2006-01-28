@@ -24,7 +24,7 @@
 #include "kurlwidget.h"
 
 KURLWidget::KURLWidget(const QString& text, QWidget *parent, const char *name)
-    : KURLLabel( parent )
+    : KUrlLabel( parent )
 {
     setText( text );
     connect( this, SIGNAL( leftClickedURL() ), SLOT( run() ));
@@ -33,7 +33,7 @@ KURLWidget::KURLWidget(const QString& text, QWidget *parent, const char *name)
 
 void KURLWidget::run()
 {
-    KURL ku( url() );
+    KUrl ku( url() );
     if ( ku.isValid() ) {
 	(void) new KRun( ku,this );
     }
