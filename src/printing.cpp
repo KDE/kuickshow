@@ -77,7 +77,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
 {
     QImage image( filename );
     if ( image.isNull() ) {
-        kdWarning() << "Can't load image: " << filename << " for printing.\n";
+        kWarning() << "Can't load image: " << filename << " for printing.\n";
         return false;
     }
 
