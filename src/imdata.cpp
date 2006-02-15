@@ -54,15 +54,15 @@ void ImData::load( KConfig *kc )
   dither16bit = kc->readBoolEntry( "Dither16Bit", def.dither16bit );
   dither8bit  = kc->readBoolEntry( "Dither8Bit", def.dither8bit );
 
-  maxCache    = kc->readNumEntry( "MaxCacheSize", 10240 );
+  maxCache    = kc->readEntry( "MaxCacheSize", 10240 );
 
-  gamma       = kc->readNumEntry( "GammaDefault", 0 );
-  brightness  = kc->readNumEntry( "BrightnessDefault", 0 );
-  contrast    = kc->readNumEntry( "ContrastDefault", 0 );
+  gamma       = kc->readEntry( "GammaDefault", 0 );
+  brightness  = kc->readEntry( "BrightnessDefault", 0 );
+  contrast    = kc->readEntry( "ContrastDefault", 0 );
 
-  gammaFactor      = abs( kc->readNumEntry( "GammaFactor", 10 ) );
-  brightnessFactor = abs( kc->readNumEntry( "BrightnessFactor", 10 ) );
-  contrastFactor   = abs( kc->readNumEntry( "ContrastFactor", 10 ) );
+  gammaFactor      = abs( kc->readEntry( "GammaFactor", 10 ) );
+  brightnessFactor = abs( kc->readEntry( "BrightnessFactor", 10 ) );
+  contrastFactor   = abs( kc->readEntry( "ContrastFactor", 10 ) );
 }
 
 

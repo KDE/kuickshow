@@ -77,7 +77,7 @@ void KuickData::load()
 
   kc->setGroup( "GeneralConfiguration" );
   fileFilter   = kc->readEntry( "FileFilter", def.fileFilter );
-  slideDelay   = kc->readNumEntry( "SlideShowDelay", def.slideDelay );
+  slideDelay   = kc->readEntry( "SlideShowDelay", def.slideDelay );
   slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
   slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", true );
   slideshowStartAtFirst = kc->readBoolEntry("SlideshowStartAtFirst", true );
@@ -91,21 +91,21 @@ void KuickData::load()
   flipVertically   = kc->readBoolEntry( "FlipVertically", def.flipVertically );
   flipHorizontally = kc->readBoolEntry( "FlipHorizontally",
 					def.flipHorizontally );
-  maxUpScale       = kc->readNumEntry( "MaxUpscale Factor", def.maxUpScale );
-  rotation         = (Rotation) kc->readNumEntry( "Rotation", def.rotation );
+  maxUpScale       = kc->readEntry( "MaxUpscale Factor", def.maxUpScale );
+  rotation         = (Rotation) kc->readEntry( "Rotation", int(def.rotation) );
 
   isModsEnabled    = kc->readBoolEntry( "ApplyDefaultModifications",
 					def.isModsEnabled );
 
-  brightnessSteps = kc->readNumEntry("BrightnessStepSize",def.brightnessSteps);
-  contrastSteps   = kc->readNumEntry("ContrastStepSize", def.contrastSteps);
-  gammaSteps      = kc->readNumEntry("GammaStepSize", def.gammaSteps);
-  scrollSteps     = kc->readNumEntry("ScrollingStepSize", def.scrollSteps);
+  brightnessSteps = kc->readEntry("BrightnessStepSize",def.brightnessSteps);
+  contrastSteps   = kc->readEntry("ContrastStepSize", def.contrastSteps);
+  gammaSteps      = kc->readEntry("GammaStepSize", def.gammaSteps);
+  scrollSteps     = kc->readEntry("ScrollingStepSize", def.scrollSteps);
   zoomSteps       = kc->readDoubleNumEntry("ZoomStepSize", def.zoomSteps);
 
 
-  maxWidth 	= abs( kc->readNumEntry( "MaximumImageWidth", def.maxWidth ) );
-  maxHeight 	= abs( kc->readNumEntry( "MaximumImageHeight", def.maxHeight));
+  maxWidth 	= abs( kc->readEntry( "MaximumImageWidth", def.maxWidth ) );
+  maxHeight 	= abs( kc->readEntry( "MaximumImageHeight", def.maxHeight));
 
   maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages",
                                               def.maxCachedImages );

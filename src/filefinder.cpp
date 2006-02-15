@@ -58,8 +58,8 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     KConfig *config = KGlobal::config();
     KConfigGroup cs( config, "GeneralConfiguration" );
     setCompletionMode( (KGlobalSettings::Completion)
-               cs.readNumEntry( "FileFinderCompletionMode",
-                                     KGlobalSettings::completionMode()));
+               cs.readEntry( "FileFinderCompletionMode",
+                                     int(KGlobalSettings::completionMode())));
 }
 
 FileFinder::~FileFinder()
