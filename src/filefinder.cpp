@@ -66,7 +66,7 @@ FileFinder::~FileFinder()
 {
     KConfig *config = KGlobal::config();
     KConfigGroup cs( config, "GeneralConfiguration" );
-    cs.writeEntry( "FileFinderCompletionMode", completionMode() );
+    cs.writeEntry( "FileFinderCompletionMode", int(completionMode()) );
 }
 
 void FileFinder::focusOutEvent( QFocusEvent *e )

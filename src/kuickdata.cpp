@@ -156,7 +156,7 @@ void KuickData::save()
   kc->writeEntry( "FlipVertically", flipVertically );
   kc->writeEntry( "FlipHorizontally", flipHorizontally );
   kc->writeEntry( "MaxUpscale Factor", maxUpScale );
-  kc->writeEntry( "Rotation", rotation );
+  kc->writeEntry( "Rotation", int(rotation) );
 
   kc->writeEntry( "ApplyDefaultModifications", isModsEnabled );
 
@@ -166,7 +166,7 @@ void KuickData::save()
   kc->writeEntry( "GammaStepSize", gammaSteps );
 
   kc->writeEntry( "ScrollingStepSize", scrollSteps );
-  kc->writeEntry( "ZoomStepSize", zoomSteps );
+  kc->writeEntry( "ZoomStepSize", int(zoomSteps) );
 
   kc->writeEntry( "MaximumImageWidth", maxWidth );
   kc->writeEntry( "MaximumImageHeight", maxHeight );
