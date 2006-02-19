@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Kuickshow
+Name[fr]=KuickShow
 Name[x-test]=xxKuickshowxx
 Exec=kuickshow -caption "%c" %U
 Icon=kuickshow
@@ -11,6 +12,7 @@ Terminal=false
 InitialPreference=6
 
 GenericName=Image Viewer
+GenericName[fr]=Afficheur d'images
 GenericName[x-test]=xxImage Viewerxx
 X-DCOP-ServiceType=Multi
 Categories=Qt;KDE;Graphics;
