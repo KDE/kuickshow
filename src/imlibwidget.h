@@ -103,7 +103,7 @@ public:
 
 private:
   ImlibImage *		loadImageWithQt( const QString& filename ) const;
-  
+
   int 			myMaxImages;
   QStringList		fileList;
   QPtrList<KuickImage>	kuickList;
@@ -142,7 +142,7 @@ public:
   KURL          url()                   const;
   bool		loadImage( const QString& filename );
   bool 		cacheImage( const QString& filename );
-  void 		zoomImage( float );
+  void   	zoomImage( float );
   void 		setBrightness( int );
   void 		setContrast( int );
   void 		setGamma( int );
@@ -193,6 +193,7 @@ protected:
   void 		updateWidget( bool geometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
   virtual void  loaded( KuickImage * );
+  virtual bool  canZoomTo( int newWidth, int newHeight );
 
   void 		closeEvent( QCloseEvent * );
 

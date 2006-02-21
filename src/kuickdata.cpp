@@ -52,8 +52,7 @@ KuickData::KuickData()
   scrollSteps     = 1;
   zoomSteps       = 1.5;
 
-  maxWidth 	  = 8192;
-  maxHeight 	  = 8192;
+  maxZoomFactor	  = 4.0;
 
   maxCachedImages = 4;
   backgroundColor = Qt::black;
@@ -103,9 +102,7 @@ void KuickData::load()
   scrollSteps     = kc->readNumEntry("ScrollingStepSize", def.scrollSteps);
   zoomSteps       = kc->readDoubleNumEntry("ZoomStepSize", def.zoomSteps);
 
-
-  maxWidth 	= abs( kc->readNumEntry( "MaximumImageWidth", def.maxWidth ) );
-  maxHeight 	= abs( kc->readNumEntry( "MaximumImageHeight", def.maxHeight));
+  maxZoomFactor   = kc->readDoubleNumEntry( "MaximumZoomFactorByDesktop", def.maxZoomFactor );
 
   maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages",
                                               def.maxCachedImages );
@@ -167,8 +164,7 @@ void KuickData::save()
   kc->writeEntry( "ScrollingStepSize", scrollSteps );
   kc->writeEntry( "ZoomStepSize", zoomSteps );
 
-  kc->writeEntry( "MaximumImageWidth", maxWidth );
-  kc->writeEntry( "MaximumImageHeight", maxHeight );
+  kc->writeEntry( "MaximumZoomFactorByDesktop", maxZoomFactor );
 
   kc->writeEntry( "MaxCachedImages", maxCachedImages );
   kc->writeEntry( "BackgroundColor", backgroundColor );

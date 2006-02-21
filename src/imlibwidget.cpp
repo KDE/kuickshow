@@ -231,16 +231,22 @@ void ImlibWidget::zoomImage( float factor )
     if ( factor == 1 || factor == 0 || !m_kuim )
 	return;
 
-    float wf, hf;
+    int newWidth  = (int) (factor * (float) m_kuim->width());
+    int newHeight = (int) (factor * (float) m_kuim->height());
 
-    wf = (float) m_kuim->width() * factor;
-    hf = (float) m_kuim->height() * factor;
+    if ( canZoomTo( newWidth, newHeight ) )
+    {
+        m_kuim->resize( newWidth, newHeight );
+        autoUpdate( true );
+    }
+}
 
-    if ( wf <= 2.0 || hf <= 2.0 ) // minimum size for an image is 2x2 pixels
-	return;
+bool ImlibWidget::canZoomTo( int newWidth, int newHeight )
+{
+    if ( newWidth <= 2 || newHeight <= 2 ) // minimum size for an image is 2x2 pixels
+	return false;
 
-    m_kuim->resize( (int) wf, (int) hf );
-    autoUpdate( true );
+    return true;
 }
 
 
@@ -807,10 +813,10 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
     const int NUM_BYTES_NEW  = 3; // 24 bpp
     uchar *newImageData = new uchar[numPixels * NUM_BYTES_NEW];
     uchar *newData = newImageData;
-    
+
     int w = image.width();
     int h = image.height();
-    
+
     for (int y = 0; y < h; y++) {
 	QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
 	for (int x = 0; x < w; x++) {
@@ -820,10 +826,10 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 	    *(newData++) = qBlue(pixel);
 	}
     }
-    
+
     ImlibImage *im = Imlib_create_image_from_data( myId, newImageData, NULL,
                                                    image.width(), image.height() );
-		    
+		
     delete[] newImageData;
 
     return im;

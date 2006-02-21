@@ -68,7 +68,7 @@ public:
     bool 	downScale        :1;
     bool 	upScale          :1;
     int 	maxUpScale;
-    uint 	maxWidth, maxHeight;
+    float 	maxZoomFactor;
     uint        maxCachedImages;
     Rotation 	rotation;
 

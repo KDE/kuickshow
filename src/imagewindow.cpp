@@ -51,6 +51,7 @@
 #include <kprinter.h>
 #include <kpropertiesdialog.h>
 #include <kstdaccel.h>
+#include <kstdguiitem.h>
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>
 #include <ktempfile.h>
@@ -743,10 +744,8 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     w = (uint) ( factor * (float) imageWidth() );
     h = (uint) ( factor * (float) imageHeight() );
 
-    if ( w > kdata->maxWidth || h > kdata->maxHeight ) {
-	qDebug("KuickShow: scaling larger than configured maximum -> aborting" );
+    if ( !canZoomTo( w, h ) )
 	return;
-    }
 
     int xtmp = - (int) (factor * abs(xpos - topX) );
     int ytmp = - (int) (factor * abs(ypos - topY) );
@@ -1117,6 +1116,31 @@ void ImageWindow::maximize()
 
     kdata->upScale = oldUpscale;
     kdata->downScale = oldDownscale;
+}
+
+bool ImageWindow::canZoomTo( int newWidth, int newHeight )
+{
+    if ( !ImlibWidget::canZoomTo( newWidth, newHeight ) )
+        return false;
+    
+    QSize desktopSize = KGlobalSettings::desktopGeometry(topLevelWidget()).size();
+
+    int desktopArea = desktopSize.width() * desktopSize.height();
+    int imageArea = newWidth * newHeight;
+    
+    if ( imageArea > desktopArea * kdata->maxZoomFactor )
+    {
+        return KMessageBox::warningContinueCancel(
+            this,
+            i18n("You are about to view a very large image (%1 x %2 pixels), which can be very resource-consuming and even make your computer hang.\nDo you want to continue?")
+            .arg( newWidth ).arg( newHeight ),
+            QString::null,
+            KStdGuiItem::cont(),
+            "ImageWindow_confirm_very_large_window"
+            ) == KMessageBox::Continue;
+    }
+    
+    return true;
 }
 
 void ImageWindow::slotProperties()

@@ -100,6 +100,7 @@ protected:
   void          addAlternativeShortcut( KAction *action, int key );
   virtual void	updateGeometry( int imWidth, int imHeight );
   virtual void  loaded( KuickImage * );
+  virtual bool  canZoomTo( int newWidth, int newHeight );
 
   virtual void  wheelEvent( QWheelEvent * );
   virtual void	keyPressEvent( QKeyEvent * );
