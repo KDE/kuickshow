@@ -1143,6 +1143,18 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
     return true;
 }
 
+void ImageWindow::rotated( KuickImage *kuim, int rotation )
+{
+    if ( !m_kuim )
+        return;
+
+    ImlibWidget::rotated( kuim, rotation );
+    
+    if ( rotation == ROT_90 || rotation == ROT_270 )
+        autoScale( kuim );
+}
+
+
 void ImageWindow::slotProperties()
 {
     KURL url;

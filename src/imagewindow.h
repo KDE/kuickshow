@@ -101,6 +101,7 @@ protected:
   virtual void	updateGeometry( int imWidth, int imHeight );
   virtual void  loaded( KuickImage * );
   virtual bool  canZoomTo( int newWidth, int newHeight );
+  virtual void  rotated( KuickImage *kuim, int rotation );
 
   virtual void  wheelEvent( QWheelEvent * );
   virtual void	keyPressEvent( QKeyEvent * );

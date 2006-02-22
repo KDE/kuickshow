@@ -338,6 +338,7 @@ void ImlibWidget::rotate90()
 	return;
 
     m_kuim->rotate( ROT_90 );
+    rotated( m_kuim, ROT_90 );
     autoUpdate( true );
 }
 
@@ -347,6 +348,7 @@ void ImlibWidget::rotate180()
 	return;
 
     m_kuim->rotate( ROT_180 );
+    rotated( m_kuim, ROT_180 );
     autoUpdate();
 }
 
@@ -356,6 +358,7 @@ void ImlibWidget::rotate270()
 	return;
 
     m_kuim->rotate( ROT_270 );
+    rotated( m_kuim, ROT_270 );
     autoUpdate( true );
 }
 
@@ -489,6 +492,10 @@ void ImlibWidget::reparent( QWidget* parent, WFlags f, const QPoint& p, bool sho
     XReparentWindow( x11Display(), win, winId(), attr.x, attr.y );
     if( attr.map_state != IsUnmapped )
         XMapWindow( x11Display(), win );
+}
+
+void ImlibWidget::rotated( KuickImage *kuim, int rotation )
+{
 }
 
 //----------

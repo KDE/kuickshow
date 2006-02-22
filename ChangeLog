@@ -1,4 +1,17 @@
 <pre>
+Wed Feb 22 01:03:07 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/imagewindow.cpp (rotated): 
+	auto-scale image on rotation
+
+Wed Feb 22 00:01:02 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* add a warning messagebox when zooming to larger than 
+	4 * desktop area size. The "4*" is configurable in 
+	[GeneralConfiguration]
+	MaximumZoomFactorByDesktop=4.0
+
+
 Sun Jan  8 09:47:39 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* fix crash when deleting the last image without having a browser

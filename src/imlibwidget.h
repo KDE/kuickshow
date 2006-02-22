@@ -50,7 +50,7 @@ public:
 
   void 		resize( int width, int height );
   void 		restoreOriginalSize();
-  void 		rotate( Rotation rot );
+  void	        rotate( Rotation rot );
   bool          rotateAbs( Rotation rot );
   void 		flip( FlipMode flipMode );
   bool 		flipAbs( int mode );
@@ -176,9 +176,9 @@ public:
   virtual void  reparent( QWidget* parent, WFlags f, const QPoint& p, bool showIt = FALSE );
 
 public slots:
-  void 		rotate90();
-  void 		rotate270();
-  void 		rotate180();
+  void	        rotate90();
+  void	        rotate270();
+  void	        rotate180();
   void 		flipHoriz();
   void 		flipVert();
   void 		showImageOriginalSize();
@@ -194,6 +194,7 @@ protected:
   virtual void 	updateGeometry( int width, int height );
   virtual void  loaded( KuickImage * );
   virtual bool  canZoomTo( int newWidth, int newHeight );
+  virtual void  rotated( KuickImage *kuim, int rotation );
 
   void 		closeEvent( QCloseEvent * );
 
