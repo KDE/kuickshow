@@ -123,7 +123,21 @@ KuickShow::KuickShow( const char *name )
     // either a directory to display, an absolute path, a relative path, or a URL
     KURL startDir;
     startDir.setPath( QDir::currentDirPath() + '/' );
-    for ( int i = 0; i < args->count(); i++ ) {
+    
+    int numArgs = args->count();
+    if ( numArgs >= 10 )
+    {
+        if ( KMessageBox::warningYesNo(
+                 this,
+                 i18n("Do you really want to display these %1 images at the same time? This might be quite resource intensive and could overload your computer.\nIf you choose %2, only the first image will be shown.").arg(numArgs).arg(KStdGuiItem::no().plainText()),
+                 i18n("Display %1 images?").arg(numArgs))
+             != KMessageBox::Yes)
+        {
+            numArgs = 1;
+        }
+    }
+        
+    for ( int i = 0; i < numArgs; i++ ) {
         KURL url = args->url( i );
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url, false );
 
