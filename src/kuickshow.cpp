@@ -123,7 +123,7 @@ KuickShow::KuickShow( const char *name )
     // either a directory to display, an absolute path, a relative path, or a URL
     KURL startDir;
     startDir.setPath( QDir::currentDirPath() + '/' );
-    
+
     int numArgs = args->count();
     if ( numArgs >= 10 )
     {
@@ -136,7 +136,7 @@ KuickShow::KuickShow( const char *name )
             numArgs = 1;
         }
     }
-        
+
     for ( int i = 0; i < numArgs; i++ ) {
         KURL url = args->url( i );
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url, false );
@@ -526,7 +526,6 @@ void KuickShow::showImage( const KFileItem *fi,
             m_viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
             s_viewers.append( m_viewer );
 
-	    connect( m_viewer, SIGNAL( nextSlideRequested() ), this, SLOT( nextSlide() ));
             connect( m_viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
             connect( m_viewer, SIGNAL( sigFocusWindow( ImageWindow *) ),
                      this, SLOT( slotSetActiveViewer( ImageWindow * ) ));

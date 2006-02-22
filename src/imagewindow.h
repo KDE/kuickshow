@@ -89,8 +89,6 @@ signals:
   void          requestImage( ImageWindow *, int advance );
   void          deleteImage(ImageWindow *viewer);
   void          trashImage(ImageWindow *viewer);
-  void		nextSlideRequested();
-  void		prevSlideRequested();
 
 protected:
   ~ImageWindow(); // deletes itself, just call close( true );

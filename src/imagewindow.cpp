@@ -558,10 +558,6 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
         close( true );
     else if ( KStdAccel::save().contains( KKey( e ) ) )
         saveImage();
-    else if ( key == Key_Right || key == Key_Down )
-        emit nextSlideRequested();
-    else if ( key == Key_Left || key == Key_Up )
-        emit prevSlideRequested(); // For future use...
 
     else {
         e->ignore();
