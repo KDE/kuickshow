@@ -1,4 +1,16 @@
 <pre>
+Wed Feb 22 02:14:24 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp, imagewindow.*
+	remove nextSlideRequested() and prevSlideRequested() patch, you
+	can already navigate with PageUp/Down. The arrow-keys are used for
+	scrolling.
+	
+Wed Feb 22 01:31:54 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* src/kuickshow.cpp (KuickShow): 
+	warn before loading >= 10 images at once from the commandline
+	
 Wed Feb 22 01:03:07 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* src/imagewindow.cpp (rotated): 
