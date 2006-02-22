@@ -89,6 +89,8 @@ ImageWindow::~ImageWindow()
 
 void ImageWindow::init()
 {
+    setFocusPolicy( QWidget::StrongFocus );
+    
     KCursor::setAutoHideCursor( this, true, true );
     KCursor::setHideCursorDelay( 1500 );
 
@@ -623,6 +625,9 @@ void ImageWindow::updateCursor( KuickCursor cursor )
             break;
         case DefaultCursor:
         default:
+            if ( isCursorHidden() )
+                return;
+            
             if ( imageWidth() > width() || imageHeight() > height() )
                 setCursor( *s_handCursor );
             else
@@ -764,8 +769,9 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 }
 
 
-void ImageWindow::focusInEvent( QFocusEvent * )
+void ImageWindow::focusInEvent( QFocusEvent *ev )
 {
+    ImlibWidget::focusInEvent( ev );
     emit sigFocusWindow( this );
 }
 
@@ -1150,7 +1156,6 @@ void ImageWindow::rotated( KuickImage *kuim, int rotation )
         autoScale( kuim );
 }
 
-
 void ImageWindow::slotProperties()
 {
     KURL url;
@@ -1158,4 +1163,23 @@ void ImageWindow::slotProperties()
     (void) new KPropertiesDialog( url, this, "props dialog", true );
 }
 
+void ImageWindow::setBusyCursor()
+{
+    // avoid busy cursor in fullscreen mode
+    if ( !isFullscreen() )
+        ImlibWidget::setBusyCursor();
+}
+
+void ImageWindow::restoreCursor()
+{
+    // avoid busy cursor in fullscreen mode
+    if ( !isFullscreen() )
+        ImlibWidget::restoreCursor();
+}
+
+bool ImageWindow::isCursorHidden() const
+{
+    return cursor().shape() == Qt::BlankCursor;
+}
+    
 #include "imagewindow.moc"

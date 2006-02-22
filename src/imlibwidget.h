@@ -227,8 +227,8 @@ private:
 
 
 protected slots:
-  void 		setBusyCursor();
-  void 		restoreCursor();
+  virtual void 	setBusyCursor();
+  virtual void	restoreCursor();
 
 
 signals:

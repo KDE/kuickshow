@@ -144,6 +144,8 @@ protected slots:
   void          reload();
   void          slotProperties();
   void          pauseSlideShow();
+  virtual void  setBusyCursor();
+  virtual void  restoreCursor();
 
 signals:
   void          pauseSlideShowSignal();
@@ -154,6 +156,7 @@ private:
   QSize		maxImageSize() const;
   void          setupActions();
   void 		setPopupMenu();
+  bool          isCursorHidden() const;
 
   bool 		myIsFullscreen;
   int           m_numHeads;

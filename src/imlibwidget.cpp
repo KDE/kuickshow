@@ -473,7 +473,8 @@ void ImlibWidget::setBusyCursor()
 
 void ImlibWidget::restoreCursor()
 {
-    setCursor( m_oldCursor );
+    if ( cursor().shape() == KCursor::waitCursor().shape() ) // only if nobody changed the cursor in the meantime!
+         setCursor( m_oldCursor );
 }
 
 // Reparenting a widget in Qt in fact means destroying the old X window of the widget
@@ -494,7 +495,7 @@ void ImlibWidget::reparent( QWidget* parent, WFlags f, const QPoint& p, bool sho
         XMapWindow( x11Display(), win );
 }
 
-void ImlibWidget::rotated( KuickImage *kuim, int rotation )
+void ImlibWidget::rotated( KuickImage *, int )
 {
 }
 

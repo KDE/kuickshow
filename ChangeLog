@@ -1,4 +1,8 @@
 <pre>
+Wed Feb 22 16:02:58 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* make autohide-cursor finally work
+
 Wed Feb 22 02:14:24 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* src/kuickshow.cpp, imagewindow.*
