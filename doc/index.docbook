@@ -293,7 +293,7 @@ the selected factor.</para>
 <title><guilabel>Geometry</guilabel></title>
 <varlistentry>
 <term><guilabel>Flip vertically</guilabel></term>
-<listitem><para>Flips the image hvertically.</para>
+<listitem><para>Flips the image vertically.</para>
 </listitem>
 </varlistentry>
 
