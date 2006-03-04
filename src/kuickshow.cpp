@@ -1065,8 +1065,9 @@ void KuickShow::saveSettings()
         kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
+		KConfigGroup group( kc, "Filebrowser" );
         kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
-        fileWidget->writeConfig( kc, "Filebrowser" );
+        fileWidget->writeConfig( &group);
     }
 
     kc->sync();
@@ -1211,7 +1212,7 @@ void KuickShow::toggleBrowser()
 
 void KuickShow::slotOpenURL()
 {
-    KFileDialog dlg(QString::null, kdata->fileFilter, this, "filedialog", true);
+    KFileDialog dlg(QString::null, kdata->fileFilter, this);
     dlg.setMode( KFile::Files | KFile::Directory );
     dlg.setCaption( i18n("Select Files or Folder to Open") );
 

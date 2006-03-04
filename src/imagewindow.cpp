@@ -882,11 +882,7 @@ void ImageWindow::saveImage()
     KuickData tmp;
     QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), 0L);
     keepSize->setChecked( true );
-    KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this, "filedialog", true
-#if KDE_VERSION >= 310
-                     ,keepSize
-#endif
-                   );
+    KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this,keepSize);
 
     QString selection = m_saveDirectory.isEmpty() ?
                             m_kuim->filename() :
