@@ -260,8 +260,6 @@ void FileWidget::setImage( KFileItem& item, bool enable )
 
 KFileItem * FileWidget::gotoFirstImage()
 {
-#warning "kde4: port it";
-#if 0
     const KFileItemList *lst(fileView()->items() );
     KFileItemList::const_iterator it = lst->begin();
     const KFileItemList::const_iterator end = lst->end();
@@ -273,7 +271,6 @@ KFileItem * FileWidget::gotoFirstImage()
         }
 
     }
-#endif
     return 0L;
 }
 
@@ -323,18 +320,20 @@ KFileItem * FileWidget::getPrevious( bool go )
 // this sucks! Use KFileView::currentFileItem() when implemented
 KFileItem * FileWidget::getItem( WhichItem which, bool onlyImage ) const
 {
-#warning "kde4: port it"
+#warning "kde4 porting";
 #if 0
-    KFileItemListIterator it( *(fileView()->items()) );
-
-    while ( it.current() ) { // find the iterator to the current item
-	if ( it.current()->url() == m_currentURL )
-	    break;
-
-	++it;
+    const KFileItemList *lst(fileView()->items() );
+    KFileItemList::const_iterator it = lst->begin();
+    const KFileItemList::const_iterator end = lst->end();
+    KFileItem *item = 0L;
+    for ( ; it != end ; ++it ) {
+        if ( it->url() == m_currentURL )
+        {
+            item = it;
+            break;
+        }
     }
-
-    if ( it.current() ) {
+    if ( item ) {
 	switch ( which ) {
 	case Previous: {
 	    --it;
