@@ -47,10 +47,9 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *name )
 {
     setEnableDirHighlighting( true );
 
-#if KDE_VERSION >= 310
-    setViewConfig( KGlobal::config(), "Filebrowser" );
-#endif
-    readConfig( KGlobal::config(), "Filebrowser" );
+	KConfigGroup group(KGlobal::config(), "Filebrowser");
+    setViewConfig( &group );
+    readConfig( &group );
     setView( KFile::Default );
 
     // setOnlyDoubleClickSelectsFiles( true );
@@ -126,7 +125,7 @@ void FileWidget::reloadConfiguration()
 	for (KMimeType::List::iterator it = l.begin(); it != l.end(); ++it)
 	    if ((*it)->name().startsWith( "image/" ))
 		mimes.append( (*it)->name() );
-	
+
 	// Ok, show what we've done
 	setMimeFilter (mimes);
 	updateDir();
@@ -170,7 +169,7 @@ void FileWidget::findCompletion( const QString& text )
 
 	return;
     }
-	
+
     QString file = makeDirCompletion( text );
     if ( file.isNull() )
 	file = makeCompletion( text );
@@ -185,7 +184,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 {
     if ( e->type() == QEvent::KeyPress ) {
 	QKeyEvent *k = static_cast<QKeyEvent*>( e );
-	
+
 	if ( (k->state() & (Qt::ControlModifier | Qt::AltModifier)) == 0 ) {
 	    int key = k->key();
  	    if ( actionCollection()->action("delete")->shortcut().contains( key ) )
@@ -199,11 +198,11 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
                 }
 		return true;
 	    }
-	
+
 	    const QString& text = k->text();
 	    if ( !text.isEmpty() && text.unicode()->isPrint() ) {
                 k->accept();
-		
+
                 if ( !m_fileFinder ) {
 		    m_fileFinder = new FileFinder( this, "file finder" );
 		    connect( m_fileFinder, SIGNAL( completion(const QString&)),
@@ -223,7 +222,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 		m_fileFinder->setFocus();
 		if ( first )
 		    findCompletion( text );
-		
+
 		return true;
 	    }
         }
@@ -250,7 +249,7 @@ bool FileWidget::isImage( const KFileItem *item )
     }
     return false;
 }
-	
+
 void FileWidget::setImage( KFileItem& item, bool enable )
 {
     if ( enable )
@@ -261,21 +260,27 @@ void FileWidget::setImage( KFileItem& item, bool enable )
 
 KFileItem * FileWidget::gotoFirstImage()
 {
-    KFileItemListIterator it( *(fileView()->items()) );
+#warning "kde4: port it";
+#if 0
+    const KFileItemList *lst(fileView()->items() );
+    KFileItemList::const_iterator it = lst->begin();
+    const KFileItemList::const_iterator end = lst->end();
+    for ( ; it != end ; ++it ) {
+        if ( isImage( *it ) )
+        {
+            setCurrentItem( *it );
+	    return *it;
+        }
 
-    while ( it.current() ) {
-	if ( isImage( it.current() ) ) {
-	    setCurrentItem( it.current() );
-	    return it.current();
-	}
-	++it;
     }
-
+#endif
     return 0L;
 }
 
 KFileItem * FileWidget::gotoLastImage()
 {
+#warning "kde4 ;port it"
+#if 0
     KFileItemListIterator it( *(fileView()->items()) );
     it.toLast();
 
@@ -286,7 +291,7 @@ KFileItem * FileWidget::gotoLastImage()
 	}
 	--it;
     }
-
+#endif
     return 0L;
 }
 
@@ -318,6 +323,8 @@ KFileItem * FileWidget::getPrevious( bool go )
 // this sucks! Use KFileView::currentFileItem() when implemented
 KFileItem * FileWidget::getItem( WhichItem which, bool onlyImage ) const
 {
+#warning "kde4: port it"
+#if 0
     KFileItemListIterator it( *(fileView()->items()) );
 
     while ( it.current() ) { // find the iterator to the current item
@@ -348,13 +355,13 @@ KFileItem * FileWidget::getItem( WhichItem which, bool onlyImage ) const
 	    }
 	    return 0L; // no further item / image
 	}
-	
+
 	case Current:
 	default:
 	    return it.current();
 	}
     }
-
+#endif
     return 0L;
 }
 
@@ -398,7 +405,7 @@ void FileWidget::slotReturnPressed( const QString& t )
 
     if ( text.at(0) == '/' || text.at(0) == '~' ) {
 	QString dir = m_fileFinder->completion()->replacedPath( text );
-	
+
 	KUrl url;
 	url.setPath( dir );
 	setURL( url, true );
@@ -443,6 +450,8 @@ void FileWidget::slotURLEntered( const KUrl& url )
 
 void FileWidget::slotFinishedLoading()
 {
+#warning "kde4: port it"
+#if 0
     KFileItem *current = getCurrentItem( false );
     if ( !m_initialName.isEmpty() )
 	setCurrentItem( m_initialName );
@@ -451,13 +460,14 @@ void FileWidget::slotFinishedLoading()
 
     m_initialName = QString::null;
     emit finished();
+#endif
 }
 
 QSize FileWidget::sizeHint() const
 {
   return QSize( 300, 300 );
 }
-   
+
 void FileWidget::resizeEvent( QResizeEvent *e )
 {
     KDirOperator::resizeEvent( e );

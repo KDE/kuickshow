@@ -243,12 +243,12 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     m_width = new KIntNumInput( widget/*, "exact width"*/ );
     grid->addWidget( m_width, 1, 1 );
     m_width->setLabel( i18n("&Width:" ) );
-    m_width->setMinValue( 1 );
+    m_width->setMinimum( 1 );
 
     m_height = new KIntNumInput( widget/*, "exact height"*/ );
     grid->addWidget( m_height, 2, 1 );
     m_height->setLabel( i18n("&Height:" ) );
-    m_height->setMinValue( 1 );
+    m_height->setMinimum( 1 );
 }
 
 KuickPrintDialogPage::~KuickPrintDialogPage()
