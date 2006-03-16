@@ -56,9 +56,14 @@ fi
 
 dnl #### now some kuickshow stuff ###
 dnl Check if Imlib is installed properly
+KDE_PKG_CHECK_MODULES(IMLIB, imlib >= 1.9.10, 
+  LIB_IMLIB=$IMLIB_LIBS
+  AC_SUBST(LIB_IMLIB)
+,
 KDE_FIND_IMLIB_CONFIG
+)
  
-if test -z "$ac_imlib_config"; then
+if test -z "$LIB_IMLIB"; then
 dnl  AC_MSG_ERROR([You need to install Imlib 1.x, e.g. http://freshmeat.net/redir/imlib/4385/url_tgz/imlib-1.9.10.tar.gz if your distributor doesn't have a package])
   DO_NOT_COMPILE="$DO_NOT_COMPILE kuickshow"
 fi

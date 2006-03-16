@@ -1,4 +1,4 @@
-if test -z "$ac_imlib_config"; then
+if test -z "$LIB_IMLIB"; then
   echo ""
   echo "You're missing Imlib 1.x. The graphics browser/viewer KuickShow"
   echo "won't be compiled without Imlib."
