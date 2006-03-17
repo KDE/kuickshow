@@ -53,7 +53,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
 
     if ( printer.setup( parent, i18n("Print %1").arg(printer.docName().section('/', -1)) ) )
     {
-        KTempFile tmpFile( "kuickshow", ".png" );
+        KTempFile tmpFile( QString::null, ".png" );
         if ( tmpFile.status() == 0 )
         {
             tmpFile.setAutoDelete( true );
