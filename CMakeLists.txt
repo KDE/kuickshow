@@ -1,4 +1,5 @@
 kde4_header()
+project(kuickshow)
 
 add_subdirectory( src ) 
 add_subdirectory( misc ) 
