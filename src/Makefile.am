@@ -15,7 +15,8 @@ kuickshow_la_SOURCES =	kuickshow.cpp \
 	aboutwidget.cpp     generalwidget.cpp  kuickconfigdlg.cpp  main.cpp \
 	defaultswidget.cpp  imagewindow.cpp    kuickdata.cpp  \
 	imdata.cpp filefinder.cpp kurlwidget.cpp filewidget.cpp \
-	kuickio.cpp kuick.cpp imlibwidget.cpp slideshowwidget.cpp printing.cpp
+	kuick.cpp imlibwidget.cpp slideshowwidget.cpp printing.cpp \
+	kuickfile.cpp kuickimage.cpp filecache.cpp
 
 # if you "make distclean", this files get removed. If you want to remove
 # them while "make clean", use CLEANFILES

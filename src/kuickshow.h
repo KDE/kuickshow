@@ -45,6 +45,8 @@ class AboutWidget;
 class KURL;
 class KURLComboBox;
 
+class KuickFile;
+
 class DelayedRepeatEvent
 {
 public:
@@ -104,7 +106,7 @@ private slots:
     void 		slotPrint();
     void 		slotConfigApplied();
     void 		slotConfigClosed();
-    void 		messageCantLoadImage( const QString& );
+    void 		messageCantLoadImage( const KuickFile * file, const QString& message);
     void         	showImage(const KFileItem *, bool newWindow = false,
                                   bool fullscreen = false, bool moveToTopLeft = true );
     void 		showFileItem( ImageWindow *, const KFileItem * );

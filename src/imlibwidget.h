@@ -31,61 +31,8 @@
 #include "imdata.h"
 #include "kuickdata.h"
 
-
-// hmm, global declaration for now
-enum FlipMode { FlipNone = 0, FlipHorizontal = 1, FlipVertical = 2 };
-
-class KuickImage : public QObject
-{
-  Q_OBJECT
-
-public:
-  KuickImage( const QString& filename, ImlibImage *im, ImlibData *id );
-  ~KuickImage();
-
-  int 		width() 	const { return myWidth;   }
-  int 		height()	const { return myHeight;  }
-  int 		originalWidth() const { return myOrigWidth; }
-  int 		originalHeight() const { return myOrigHeight; }
-
-  void 		resize( int width, int height );
-  void 		restoreOriginalSize();
-  void	        rotate( Rotation rot );
-  bool          rotateAbs( Rotation rot );
-  void 		flip( FlipMode flipMode );
-  bool 		flipAbs( int mode );
-  ImlibImage *	imlibImage()	const { return myIm;      }
-  Pixmap& 	pixmap();
-  void 		renderPixmap();
-  const QString& filename() 	const { return myFilename;}
-
-  void 		setDirty( bool d )    { myIsDirty = d;    }
-  bool 		isDirty() 	const { return myIsDirty; }
-  Rotation      absRotation()   const { return myRotation; }
-  FlipMode      flipMode()      const { return myFlipMode; }
-
-private:
-  int 		myWidth;
-  int 		myHeight;
-  QString 	myFilename;
-  ImlibImage * 	myIm;
-  ImlibData  * 	myId;
-  Pixmap 	myPixmap;
-  bool 		myIsDirty;
-
-  int 		myOrigWidth;
-  int 		myOrigHeight;
-  Rotation 	myRotation;
-  FlipMode 	myFlipMode;
-
-signals:
-  void 		startRendering();
-  void 		stoppedRendering();
-};
-
-
-// ------------------------------------------
-
+class KuickFile;
+class KuickImage;
 
 class ImageCache : public QObject
 {
@@ -98,14 +45,13 @@ public:
   void 			setMaxImages( int maxImages );
   int 			maxImages() 		const { return myMaxImages; }
 
-  KuickImage *		getKuimage( const QString& file, ImlibColorModifier  );
-  //  KuickImage *		find( const QString& filename );
+  KuickImage *		getKuimage( KuickFile * file, ImlibColorModifier  );
 
 private:
   ImlibImage *		loadImageWithQt( const QString& filename ) const;
 
   int 			myMaxImages;
-  QStringList		fileList;
+  QValueList<KuickFile*>fileList;
   QPtrList<KuickImage>	kuickList;
   //  QPtrList<ImlibImage>	imList;
   ImlibData * 		myId;
@@ -124,7 +70,6 @@ signals:
 
 // ------------------------------------------
 
-
 class QColor;
 
 class ImlibWidget : public QWidget
@@ -138,10 +83,11 @@ public:
 	       const char *name=0 );
   virtual ~ImlibWidget();
 
-  const QString& filename() 		const { return m_filename; }
   KURL          url()                   const;
-  bool		loadImage( const QString& filename );
-  bool 		cacheImage( const QString& filename );
+  KuickFile *   currentFile()           const;
+  bool		loadImage( KuickFile * file );
+  bool		loadImage( const KURL& url );
+  bool 		cacheImage(const KURL& url );
   void   	zoomImage( float );
   void 		setBrightness( int );
   void 		setContrast( int );
@@ -149,11 +95,11 @@ public:
   void 		setRotation( Rotation );
   void 		setFlipMode( int mode );
 
-  int 		brightness() 		 const;
-  int 		contrast()		 const;
-  int 		gamma() 		 const;
-  Rotation 	rotation() 		 const { return m_kuim ? m_kuim->absRotation() : ROT_0; }
-  FlipMode	flipMode() 		 const { return m_kuim ? m_kuim->flipMode() : FlipNone; }
+  int 		brightness() 		 const; // ### no impl!
+  int 		contrast()		 const; // ### no impl!
+  int 		gamma() 		 const; // ### no impl!
+  Rotation 	rotation() 		 const;
+  FlipMode	flipMode() 		 const;
 
   int 		imageWidth() 		 const;
   int 		imageHeight() 		 const;
@@ -186,7 +132,7 @@ public slots:
 
 
 protected:
-  KuickImage *	loadImageInternal( const QString&  );
+  KuickImage *	loadImageInternal( KuickFile * file );
   void 		showImage();
   void          setImageModifier();
   void 		rotate( int );
@@ -213,7 +159,8 @@ protected:
   Window        win;
   ImlibColorModifier mod;
 
-  QString m_filename;
+  KuickFile *m_kuickFile;
+  QValueList<KuickFile*> m_files;
   QCursor m_oldCursor;
 
   static const int ImlibOffset;
@@ -227,12 +174,13 @@ private:
 
 
 protected slots:
+  bool 		cacheImage( KuickFile *file );
   virtual void 	setBusyCursor();
   virtual void	restoreCursor();
 
 
 signals:
-  void 		sigBadImage( const QString& );
+  void 		sigImageError( const KuickFile * file, const QString& );
 
 };
 

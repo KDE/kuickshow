@@ -43,10 +43,11 @@
 #include "printing.h"
 #include "version.h"
 
-bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
+bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
 {
+    QString imageURL = imageWin.url().prettyURL();
     KPrinter printer;
-    printer.setDocName( imageWin.filename() );
+    printer.setDocName( imageURL );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
     KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page"));
@@ -59,7 +60,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
             tmpFile.setAutoDelete( true );
             if ( imageWin.saveImage( tmpFile.name(), true ) )
                 return printImageWithQt( tmpFile.name(), printer,
-                                         imageWin.filename() );
+                                         imageURL );
         }
 
         return false;

@@ -22,6 +22,7 @@
 #include <qevent.h>
 
 #include <kaction.h>
+#include <kurl.h>
 
 #include "imlibwidget.h"
 
@@ -32,6 +33,8 @@ class QString;
 class QTimer;
 class QWidget;
 
+class KuickFile;
+
 class ImageWindow : public ImlibWidget
 {
   Q_OBJECT
@@ -41,7 +44,8 @@ public:
 	       const char *name=0 );
   ImageWindow( ImData *_idata=0, QWidget *parent=0, const char *name=0 );
 
-  bool 		showNextImage( const QString& filename );
+  bool 		showNextImage( KuickFile * file );
+  bool 		showNextImage( const KURL& url );
   void 		scrollImage( int, int, bool restrict=true );
   void		setFullscreen( bool );
   bool 		isFullscreen() 	const { return myIsFullscreen; }
@@ -62,7 +66,7 @@ public:
   void autoScale( KuickImage *kuim );
   virtual bool autoRotate( KuickImage *kuim );
 
-  bool          saveImage( const QString& filename, bool keepOriginalSize ) const;
+  bool          saveImage( const KURL& dest, bool keepOriginalSize );
 
 public slots:
   void 		zoomIn();
@@ -113,6 +117,7 @@ protected:
   virtual void 	dropEvent( QDropEvent * );
   virtual void  contextMenuEvent( QContextMenuEvent * );
 
+  void 			showWindow();
   enum KuickCursor { DefaultCursor = 0, ZoomCursor, MoveCursor };
   void 	updateCursor( KuickCursor cursor = DefaultCursor );
 

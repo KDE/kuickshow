@@ -63,11 +63,12 @@
 
 #include "aboutwidget.h"
 #include "filewidget.h"
+#include "filecache.h"
 #include "imdata.h"
 #include "imagewindow.h"
 #include "imlibwidget.h"
 #include "kuick.h"
-#include "kuickio.h"
+#include "kuickfile.h"
 
 #ifdef index
 #undef index
@@ -205,6 +206,7 @@ KuickShow::~KuickShow()
     if ( m_viewer )
         m_viewer->close( true );
 
+    delete FileCache::self();
     free( id );
     kapp->quit();
 
@@ -443,7 +445,7 @@ void KuickShow::viewerDeleted()
 
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
         saveSettings();
-
+        delete FileCache::self();
         ::exit(0);
     }
 
@@ -524,13 +526,14 @@ void KuickShow::showImage( const KFileItem *fi,
 
         if ( newWindow ) {
             m_viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
+            m_viewer->setFullscreen( fullscreen );
             s_viewers.append( m_viewer );
 
             connect( m_viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
             connect( m_viewer, SIGNAL( sigFocusWindow( ImageWindow *) ),
                      this, SLOT( slotSetActiveViewer( ImageWindow * ) ));
-            connect( m_viewer, SIGNAL( sigBadImage(const QString& ) ),
-                     this, SLOT( messageCantLoadImage(const QString &) ));
+            connect( m_viewer, SIGNAL( sigImageError(const KuickFile *, const QString& ) ),
+                     this, SLOT( messageCantLoadImage(const KuickFile *, const QString &) ));
             connect( m_viewer, SIGNAL( requestImage( ImageWindow *, int )),
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
 	    connect( m_viewer, SIGNAL( pauseSlideShowSignal() ),
@@ -556,18 +559,19 @@ void KuickShow::showImage( const KFileItem *fi,
         // Imlib can't load).
         ImageWindow *safeViewer = m_viewer;
 
-        QString filename;
-        KIO::NetAccess::download(fi->url(), filename, this);
+//        file->waitForDownload( this );
+//        QString filename;
+//        KIO::NetAccess::download(fi->url(), filename, this);
 
-        if ( !safeViewer->showNextImage( filename ) ) {
+        if ( !safeViewer->showNextImage( fi->url() ) ) {
             m_viewer = safeViewer;
             safeViewer->close( true ); // couldn't load image, close window
         }
         else {
-            safeViewer->setFullscreen( fullscreen );
+//            safeViewer->setFullscreen( fullscreen );
 
             if ( newWindow ) {
-                safeViewer->show();
+//                safeViewer->show();
 
                 if ( !fullscreen && s_viewers.count() == 1 && moveToTopLeft ) {
                     // the WM might have moved us after showing -> strike back!
@@ -580,7 +584,7 @@ void KuickShow::showImage( const KFileItem *fi,
                 KFileItem *item = 0L;                 // don't move cursor
                 item = fileWidget->getItem( FileWidget::Next, true );
                 if ( item )
-                    safeViewer->cacheImage( item->url().path() ); // FIXME
+                    safeViewer->cacheImage( item->url() );
             }
 
             m_viewer = safeViewer;
@@ -669,8 +673,8 @@ void KuickShow::tryShowNextImage()
     if (!next)
         next = fileWidget->getPrevious(true);
 
-    // FIXME: why is this necessary at all? Why does KDirOperator suddenly re-read the
-    // entire directory after a file was deleted/trashed!?
+    // ### why is this necessary at all? Why does KDirOperator suddenly re-read the
+    // entire directory after a file was deleted/trashed!? (KDirNotify is the reason)
     if (!m_viewer)
         return;
 
@@ -746,7 +750,7 @@ void KuickShow::nextSlide()
 
 void KuickShow::nextSlide( KFileItem *item )
 {
-    m_viewer->showNextImage( item->url().path() );
+    m_viewer->showNextImage( item->url() );
     if(kdata->slideDelay)
         m_slideTimer->start( kdata->slideDelay );
 }
@@ -765,7 +769,7 @@ void KuickShow::slotPrint()
     ImageWindow *iw = new ImageWindow( 0, id, this, "printing image" );
     KFileItem *item;
     while ( (item = it.current()) ) {
-        if (FileWidget::isImage( item ) && iw->loadImage( item->url().path()))
+        if (FileWidget::isImage( item ) && iw->loadImage( item->url() ))
             iw->printImage();
         ++it;
     }
@@ -835,15 +839,17 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     }
 
     if ( FileWidget::isImage( item ) ) {
-        QString filename;
-        KIO::NetAccess::download(item->url(), filename, this);
-        view->showNextImage( filename );
+//        QString filename;
+//        KIO::NetAccess::download(item->url(), filename, this);
+        view->showNextImage( item->url() );
         if (m_slideTimer->isActive() && kdata->slideDelay)
             m_slideTimer->start( kdata->slideDelay );
 
-        if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
+        if ( kdata->preloadImage && item_next ) { // preload next image
             if ( FileWidget::isImage( item_next ) )
-                view->cacheImage( item_next->url().path() ); // ###
+                view->cacheImage( item_next->url() );
+        }
+        
     }
 }
 
@@ -862,6 +868,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
         if ( KStdAccel::quit().contains( KKey( k ) ) ) {
             saveSettings();
             deleteAllViewers();
+            delete FileCache::self();
             ::exit(0);
         }
         else if ( KStdAccel::help().contains( KKey( k ) ) ) {
@@ -899,10 +906,10 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             {
                 if ( key != Key_Escape && key != Key_Shift && key != Key_Alt )
                 {
-                    KURL start;
-                    QFileInfo fi( m_viewer->filename() );
-                    start.setPath( fi.dirPath( true ) );
-                    initGUI( start );
+                    KuickFile *file = m_viewer->currentFile();
+//                    QFileInfo fi( m_viewer->filename() );
+//                    start.setPath( fi.dirPath( true ) );
+                    initGUI( file->url().upURL() );
 
                     // the fileBrowser will list the start-directory
                     // asynchronously so we can't immediately continue. There
@@ -925,12 +932,12 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     if ( fileWidget->dirLister()->isFinished() &&
                          fileWidget->dirLister()->rootItem() )
                     {
-                        fileWidget->setCurrentItem( fi.fileName() );
+                        fileWidget->setCurrentItem( file->url().fileName() );
                         QTimer::singleShot( 0, this, SLOT( slotReplayEvent()));
                     }
                     else
                     {
-                        fileWidget->setInitialItem( fi.fileName() );
+                        fileWidget->setInitialItem( file->url().fileName() );
                         connect( fileWidget, SIGNAL( finished() ),
                                  SLOT( slotReplayEvent() ));
                     }
@@ -987,13 +994,14 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
 
             if ( FileWidget::isImage( item ) ) {
-                QString filename;
-                KIO::NetAccess::download(item->url(), filename, this);
-                m_viewer->showNextImage( filename );
+//                QString filename;
+//                KIO::NetAccess::download(item->url(), filename, this);
+                m_viewer->showNextImage( item->url() );
 
-                if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
+                if ( kdata->preloadImage && item_next ) { // preload next image
                     if ( FileWidget::isImage( item_next ) )
-                        m_viewer->cacheImage( item_next->url().path() ); // ###
+                        m_viewer->cacheImage( item_next->url() );
+                }
 
                 ret = true; // don't pass keyEvent
             }
@@ -1011,10 +1019,10 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 {
                     if ( !fileWidget )
                     {
-                        KURL start;
-                        QFileInfo fi( window->filename() );
-                        start.setPath( fi.dirPath( true ) );
-                        initGUI( start );
+//                        KURL start;
+//                        QFileInfo fi( window->filename() );
+//                        start.setPath( fi.dirPath( true ) );
+                        initGUI( window->currentFile()->url().fileName() );
                     }
                     show();
                     raise();
@@ -1143,7 +1151,13 @@ void KuickShow::saveProperties( KConfig *kc )
     QStringList urls;
     QValueListIterator<ImageWindow*> it;
     for ( it = s_viewers.begin(); it != s_viewers.end(); ++it )
-        urls.append( (*it)->filename() );
+    {
+        const KURL& url = (*it)->currentFile()->url();
+        if ( url.isLocalFile() )
+            urls.append( url.path() );
+        else
+            urls.append( url.prettyURL() ); // ### check if writePathEntry( prettyURL ) works!
+    }
 
     kc->writePathEntry( "Images shown", urls );
 }
@@ -1159,7 +1173,7 @@ void KuickShow::saveSettings()
         kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
-        kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
+        kc->writePathEntry( "CurrentDirectory", fileWidget->url().prettyURL() ); // ### was url().url()
         fileWidget->writeConfig( kc, "Filebrowser" );
     }
 
@@ -1167,13 +1181,10 @@ void KuickShow::saveSettings()
 }
 
 
-void KuickShow::messageCantLoadImage( const QString& filename )
+void KuickShow::messageCantLoadImage( const KuickFile *, const QString& message )
 {
     m_viewer->clearFocus();
-    QString tmp = i18n("Unable to load the image %1.\n"
-                       "Perhaps the file format is unsupported or "
-                       "your Imlib is not installed properly.").arg(filename);
-    KMessageBox::information( m_viewer, tmp, i18n("Image Error"), "kuick_cant_load_image" );
+    KMessageBox::information( m_viewer, message, i18n("Error"), "kuick_cant_load_image" );
 }
 
 void KuickShow::initImlib()
@@ -1188,7 +1199,7 @@ void KuickShow::initImlib()
 
         qWarning("*** KuickShow: Whoops, can't initialize imlib, trying my own palettefile now.");
         QString paletteFile = locate( "data", "kuickshow/im_palette.pal" );
-        // FIXME - does the qstrdup() cure the segfault in imlib eventually?
+        // ### - does the qstrdup() cure the segfault in imlib eventually?
         char *file = qstrdup( paletteFile.local8Bit() );
         par.palettefile = file;
         par.flags |= PARAMS_PALETTEFILE;
@@ -1204,6 +1215,7 @@ void KuickShow::initImlib()
                                "The program will now quit.");
             KMessageBox::error( this, tmp, i18n("Fatal Imlib Error") );
 
+            delete FileCache::self();
             ::exit(1);
         }
     }
@@ -1212,7 +1224,7 @@ void KuickShow::initImlib()
 
 void KuickShow::initImlibParams( ImData *idata, ImlibInitParams *par )
 {
-    par->flags = ( PARAMS_REMAP | PARAMS_VISUALID |
+    par->flags = ( PARAMS_REMAP | PARAMS_VISUALID | PARAMS_SHAREDMEM | PARAMS_SHAREDPIXMAPS |
                    PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
                    PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
@@ -1223,6 +1235,8 @@ void KuickShow::initImlibParams( ImData *idata, ImlibInitParams *par )
     par->fastrender      = idata->fastRender  ? 1 : 0;
     par->hiquality       = idata->dither16bit ? 1 : 0;
     par->dither          = idata->dither8bit  ? 1 : 0;
+    par->sharedmem       = 1;
+    par->sharedpixmaps   = 1;
     par->visualid	 = defaultvis->visualid;
     uint maxcache        = idata->maxCache;
 
@@ -1285,21 +1299,21 @@ void KuickShow::delayAction(DelayedRepeatEvent *event)
 
     m_delayedRepeatItem = event;
 
-    KURL start;
-    QFileInfo fi( event->viewer->filename() );
-    start.setPath( fi.dirPath( true ) );
-    initGUI( start );
+    KURL url = event->viewer->currentFile()->url();
+//    QFileInfo fi( event->viewer->filename() );
+//    start.setPath( fi.dirPath( true ) );
+    initGUI( url.upURL() );
 
     // see eventFilter() for explanation and similar code
     if ( fileWidget->dirLister()->isFinished() &&
          fileWidget->dirLister()->rootItem() )
     {
-        fileWidget->setCurrentItem( fi.fileName() );
+        fileWidget->setCurrentItem( url.fileName() );
         QTimer::singleShot( 0, this, SLOT( doReplay()));
     }
     else
     {
-        fileWidget->setInitialItem( fi.fileName() );
+        fileWidget->setInitialItem( url.fileName() );
         connect( fileWidget, SIGNAL( finished() ),
                  SLOT( doReplay() ));
     }

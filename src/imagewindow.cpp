@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2004 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998-2006 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -21,6 +21,7 @@
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qdrawutil.h>
+#include <qfileinfo.h>
 #include <qkeycode.h>
 #include <qpainter.h>
 #include <qpen.h>
@@ -60,10 +61,14 @@
 #include <kurldrag.h>
 #include <kio/netaccess.h>
 
+#include "filecache.h"
 #include "imagewindow.h"
 #include "kuick.h"
 #include "kuickdata.h"
+#include "kuickfile.h"
+#include "kuickimage.h"
 #include "printing.h"
+
 
 #undef GrayScale
 
@@ -257,20 +262,27 @@ void ImageWindow::addAlternativeShortcut(KAction *action, int key)
     }
 }
 
+void ImageWindow::showWindow()
+{
+	if ( myIsFullscreen )
+		showFullScreen();
+	else
+		showNormal();
+}
 
 void ImageWindow::setFullscreen( bool enable )
 {
     xpos = 0; ypos = 0;
 
-    if ( enable && !myIsFullscreen ) { // set Fullscreen
-        showFullScreen();
-    }
-    else if ( !enable && myIsFullscreen ) { // go into window mode
-        showNormal();
-    }
+//    if ( enable && !myIsFullscreen ) { // set Fullscreen
+//        showFullScreen();
+//    }
+//    else if ( !enable && myIsFullscreen ) { // go into window mode
+//        showNormal();
+//    }
 
     myIsFullscreen = enable;
-    centerImage(); // ### really necessary (multihead!)
+//    centerImage(); // ### really necessary (multihead!)
 }
 
 
@@ -299,7 +311,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     QString caption = i18n( "Filename (Imagewidth x Imageheight)",
                             "%3 (%1 x %2)" );
     caption = caption.arg( m_kuim->originalWidth() ).
-              arg( m_kuim->originalHeight() ).arg( m_kuim->filename() );
+              arg( m_kuim->originalHeight() ).arg( m_kuim->url().prettyURL() );
     setCaption( kapp->makeStdCaption( caption ) );
 }
 
@@ -394,15 +406,40 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 //     XClearWindow(); // repaint
 //     XMapWindow(), XSync();
 //
-bool ImageWindow::showNextImage( const QString& filename )
+bool ImageWindow::showNextImage( const KURL& url )
 {
-    if ( !loadImage( filename ) ) {
-	emit sigBadImage( filename );
-	return false;
+    KuickFile *file = FileCache::self()->getFile( url );
+    switch ( file->waitForDownload( this ) ) {
+    	case KuickFile::ERROR:
+    	{
+    	    QString tmp = i18n("Unable to download the image from %1.").arg(url.prettyURL());
+	        emit sigImageError( file, tmp );
+	        return false;
+    	}
+	    case KuickFile::CANCELED:
+	    	return false; // just abort, no error message
+	    default:
+	    	break; // go on...
+    }
+
+    return showNextImage( file );
+}
+
+bool ImageWindow::showNextImage( KuickFile *file )
+{
+    if ( !loadImage( file ) ) {
+   	    QString tmp = i18n("Unable to load the image %1.\n"
+                       "Perhaps the file format is unsupported or "
+                       "your Imlib is not installed properly.").arg(file->url().prettyURL());
+        emit sigImageError( file, tmp );
+        return false;
     }
 
     else {
 	// updateWidget( true ); // already called from loadImage()
+	if ( !isVisible() )
+		showWindow();
+		
 	showImage();
 	return true;
     }
@@ -410,7 +447,7 @@ bool ImageWindow::showNextImage( const QString& filename )
 
 void ImageWindow::reload()
 {
-    showNextImage( filename() );
+    showNextImage( currentFile() );
 }
 
 void ImageWindow::pauseSlideShow()
@@ -894,26 +931,29 @@ void ImageWindow::saveImage()
                    );
 
     QString selection = m_saveDirectory.isEmpty() ?
-                            m_kuim->filename() :
-                            KURL::fromPathOrURL( m_kuim->filename() ).fileName();
-    dlg.setSelection( selection );
+                            m_kuim->url().url() :
+                            m_kuim->url().fileName();
     dlg.setOperationMode( KFileDialog::Saving );
+    dlg.setMode( KFile::File );
+    dlg.setSelection( selection );
     dlg.setCaption( i18n("Save As") );
     if ( dlg.exec() == QDialog::Accepted )
     {
-        QString file = dlg.selectedFile();
-        if ( !file.isEmpty() )
+        KURL url = dlg.selectedURL();
+        if ( url.isValid() )
         {
-            if ( !saveImage( file, keepSize->isChecked() ) )
+            if ( !saveImage( url, keepSize->isChecked() ) )
             {
                 QString tmp = i18n("Couldn't save the file.\n"
                                    "Perhaps the disk is full, or you don't "
                                    "have write permission to the file.");
                 KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
             }
-
-            if ( file == m_kuim->filename() ) {
-                Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+			else
+			{
+	            if ( url.equals( m_kuim->url() )) {
+	                Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+	            }
             }
         }
     }
@@ -927,7 +967,7 @@ void ImageWindow::saveImage()
 #endif
 }
 
-bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) const
+bool ImageWindow::saveImage( const KURL& dest, bool keepOriginalSize )
 {
     int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
@@ -938,11 +978,37 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
                                                    w, h );
     bool success = false;
 
-    if ( saveIm ) {
+	QString saveFile;
+	if ( dest.isLocalFile() )
+		saveFile = dest.path();
+	else 
+	{
+		QString extension = QFileInfo( dest.fileName() ).extension();
+		if ( !extension.isEmpty() )
+			extension.prepend( '.' );
+		
+		KTempFile tmpFile( QString::null, extension );
+		if ( tmpFile.status() != 0 )
+			return false;
+		tmpFile.close();
+		if ( tmpFile.status() != 0 )
+			return false;
+		saveFile = tmpFile.name();		
+	}
+	
+    if ( saveIm ) 
+    {
         Imlib_apply_modifiers_to_rgb( id, saveIm );
         success = Imlib_save_image( id, saveIm,
-                                    QFile::encodeName( filename ).data(),
+                                    QFile::encodeName( saveFile ).data(),
                                     NULL );
+        if ( success && !dest.isLocalFile() ) 
+        {
+        	if ( isFullscreen() )
+        		toggleFullscreen(); // otherwise upload window would block us invisibly
+        	success = KIO::NetAccess::upload( saveFile, dest, const_cast<ImageWindow*>( this ) );
+        }
+                                    
         Imlib_kill_image( id, saveIm );
     }
 
@@ -952,6 +1018,7 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
 void ImageWindow::toggleFullscreen()
 {
     setFullscreen( !myIsFullscreen );
+    showWindow();
 }
 
 void ImageWindow::loaded( KuickImage *kuim )
@@ -1158,9 +1225,7 @@ void ImageWindow::rotated( KuickImage *kuim, int rotation )
 
 void ImageWindow::slotProperties()
 {
-    KURL url;
-    url.setPath( filename() ); // ###
-    (void) new KPropertiesDialog( url, this, "props dialog", true );
+    (void) new KPropertiesDialog( currentFile()->url(), this, "props dialog", true );
 }
 
 void ImageWindow::setBusyCursor()
