@@ -1,4 +1,23 @@
 <pre>
+Fri Mar 31 02:04:21 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
+
+	* fixed one of the most long-standing bugs: non-local browsing
+	  (i.e. you can browse remote directories like local ones now, flipping
+	   through the images with PageUp/Down etc., including pre-loading
+	   images)
+	   Browsing through /media should work now, but can be improved by
+	   not"downloading" from there. Framework to do this is there, though.
+
+	* also allow saving to remote URLs
+	
+	* fixed image not being completely maximized when opening image in
+	  fullscreen mode
+	* performance improvement
+	
+	* layed groundwork for fixing #48812 and #101986
+	
+	* make sure all temporary files get deleted
+
 Wed Feb 22 16:02:58 2006  Carsten Pfeiffer  <pfeiffer@kde.org>
 
 	* make autohide-cursor finally work
