@@ -19,7 +19,7 @@
 namespace KIO {
     class Job;
     class FileCopyJob;
-};
+}
 
 class KuickFile : public QObject
 {
