@@ -160,7 +160,6 @@ protected:
   ImlibColorModifier mod;
 
   KuickFile *m_kuickFile;
-  QValueList<KuickFile*> m_files;
   QCursor m_oldCursor;
 
   static const int ImlibOffset;
