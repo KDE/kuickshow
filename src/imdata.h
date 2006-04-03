@@ -37,11 +37,13 @@ public:
 
   // -----------------------
 
-  bool 		ownPalette;
-  bool 		fastRemap;
-  bool 		fastRender;
-  bool		dither16bit;
-  bool 		dither8bit;
+  bool 		ownPalette		:1;
+  bool 		fastRemap		:1;
+  bool 		fastRender		:1;
+  bool		dither16bit		:1;
+  bool 		dither8bit		:1;
+  bool		smoothScale		:1;
+  
 
   uint          gammaFactor;
   uint          brightnessFactor;

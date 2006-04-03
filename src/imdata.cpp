@@ -30,6 +30,7 @@ ImData::ImData()
   fastRender  	 = true;
   dither16bit    = false;
   dither8bit     = true;
+  smoothScale    = true; // ### false
   maxCache       = 10240;
 
   gamma          = 0;
@@ -53,6 +54,7 @@ void ImData::load( KConfig *kc )
   fastRender  = kc->readBoolEntry( "FastRendering", def.fastRender );
   dither16bit = kc->readBoolEntry( "Dither16Bit", def.dither16bit );
   dither8bit  = kc->readBoolEntry( "Dither8Bit", def.dither8bit );
+  smoothScale = kc->readBoolEntry( "SmoothScaling", def.smoothScale );
 
   maxCache    = kc->readNumEntry( "MaxCacheSize", 10240 );
 
@@ -76,6 +78,7 @@ void ImData::save( KConfig *kc )
   kc->writeEntry( "Dither16Bit", dither16bit );
   kc->writeEntry( "Dither8Bit", dither8bit );
   kc->writeEntry( "MaxCacheSize", maxCache );
+  kc->writeEntry( "SmoothScaling", smoothScale );
 
   kc->writeEntry( "GammaDefault", gamma );
   kc->writeEntry( "BrightnessDefault", brightness );

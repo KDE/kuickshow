@@ -795,7 +795,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     xtmp += xcenter;
     ytmp += ycenter;
 
-    m_kuim->resize( w, h );
+    m_kuim->resize( w, h, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
     XResizeWindow( x11Display(), win, w, h );
     updateWidget( false );
 
@@ -1023,14 +1023,15 @@ void ImageWindow::toggleFullscreen()
 
 void ImageWindow::loaded( KuickImage *kuim )
 {
-    if ( !kdata->isModsEnabled ) {
-	kuim->restoreOriginalSize();
-    }
-    else
-    {
-        autoRotate( kuim );
-        autoScale( kuim );
-    }
+	if ( !kdata->isModsEnabled ) {
+		// ### BUG: should be "restorePreviousSize"
+		kuim->restoreOriginalSize();
+	}
+	else
+	{
+		autoRotate( kuim );
+		autoScale( kuim );
+	}
 }
 
 // upscale/downscale depending on configuration
@@ -1091,7 +1092,7 @@ void ImageWindow::autoScale( KuickImage *kuim )
     }
 
     if ( doIt )
-        kuim->resize( newW, newH );
+        kuim->resize( newW, newH, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
 }
 
 // only called when kdata->isModsEnabled is true
@@ -1220,7 +1221,7 @@ void ImageWindow::rotated( KuickImage *kuim, int rotation )
     ImlibWidget::rotated( kuim, rotation );
     
     if ( rotation == ROT_90 || rotation == ROT_270 )
-        autoScale( kuim );
+        autoScale( kuim ); // ### BUG: only autoScale when configured!
 }
 
 void ImageWindow::slotProperties()

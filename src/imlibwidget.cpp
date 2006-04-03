@@ -280,7 +280,7 @@ void ImlibWidget::zoomImage( float factor )
 
     if ( canZoomTo( newWidth, newHeight ) )
     {
-        m_kuim->resize( newWidth, newHeight );
+        m_kuim->resize( newWidth, newHeight, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
         autoUpdate( true );
     }
 }
