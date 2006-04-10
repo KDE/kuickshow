@@ -231,7 +231,7 @@ void KuickShow::initGUI( const KUrl& startDir )
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configure %1...").arg( KGlobal::instance()->aboutData()->programName() ), "configure",
+    KAction *configure = new KAction( i18n("Configure %1...", KGlobal::instance()->aboutData()->programName() ), "configure",
                                       KShortcut(),
                                       this, SLOT( configuration() ),
                                       coll, "kuick_configure" );
@@ -1079,7 +1079,7 @@ void KuickShow::messageCantLoadImage( const QString& filename )
     m_viewer->clearFocus();
     QString tmp = i18n("Unable to load the image %1.\n"
                        "Perhaps the file format is unsupported or "
-                       "your Imlib is not installed properly.").arg(filename);
+                       "your Imlib is not installed properly.", filename);
     KMessageBox::sorry( m_viewer, tmp, i18n("Image Error") );
 }
 

@@ -55,7 +55,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
 
     KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page"));
 
-    if ( printer.setup( parent, i18n("Print %1").arg(printer.docName().section('/', -1)) ) )
+    if ( printer.setup( parent, i18n("Print %1", printer.docName().section('/', -1)) ) )
     {
         KTempFile tmpFile( QString::null, ".png" );
         if ( tmpFile.status() == 0 )

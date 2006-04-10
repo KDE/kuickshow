@@ -292,10 +292,10 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
 
     updateCursor();
 	
-    QString caption = i18n( "Filename (Imagewidth x Imageheight)",
-                            "%3 (%1 x %2)" );
-    caption = caption.arg( m_kuim->originalWidth() ).
-              arg( m_kuim->originalHeight() ).arg( m_kuim->filename() );
+    QString caption = i18nc( "Filename (Imagewidth x Imageheight)",
+                             "%3 (%1 x %2)",
+                             m_kuim->originalWidth(), m_kuim->originalHeight(),
+                             m_kuim->filename() );
     setCaption( kapp->makeStdCaption( caption ) );
 }
 
