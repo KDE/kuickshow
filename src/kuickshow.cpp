@@ -36,7 +36,7 @@
 #include <QMouseEvent>
 #include <QMenuItem>
 #include <kaboutdata.h>
-#include <kaccel.h>
+
 #include <kaction.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>

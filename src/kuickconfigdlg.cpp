@@ -25,7 +25,7 @@
 #include <qnamespace.h>
 #include <kvbox.h>
 
-#include <kaccel.h>
+
 #include <kconfig.h>
 #include <kglobal.h>
 #include <klocale.h>
