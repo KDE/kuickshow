@@ -64,7 +64,7 @@
 #include <kurlcompletion.h>
 #include <kwin.h>
 #include <kstdguiitem.h>
-
+#include <kstdaccel.h>
 #include "aboutwidget.h"
 #include "filewidget.h"
 #include "imdata.h"
