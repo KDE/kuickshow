@@ -28,7 +28,7 @@ kde4_automoc(${kuickshow_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
 
-target_link_libraries(kdeinit_kuickshow  ${KDE4_KDE3SUPPORT_LIBRARIES} kdeprint )
+target_link_libraries(kdeinit_kuickshow  ${KDE4_KDE3SUPPORT_LIBS} kdeprint )
 
 install_targets(${LIB_INSTALL_DIR} kdeinit_kuickshow )
 
