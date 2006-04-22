@@ -147,14 +147,12 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   // --
 
-  if ( imFiltered ) { // assume, if one is ok, all are ok
-      gbPreviewLayout->setMargin( 10 );
-      gbPreviewLayout->setSpacing( KDialog::spacingHint() );
-      gbPreviewLayout->addWidget( lbImOrig, 0, 0, AlignCenter );
-      gbPreviewLayout->addWidget( imOrig,   1, 0, AlignCenter | AlignTop );
-      gbPreviewLayout->addWidget( lbImFiltered, 0, 2, AlignCenter );
-      gbPreviewLayout->addWidget( imFiltered,   1, 2, AlignCenter | AlignTop );
-  }
+  gbPreviewLayout->setMargin( 10 );
+  gbPreviewLayout->setSpacing( KDialog::spacingHint() );
+  gbPreviewLayout->addWidget( lbImOrig, 0, 0, AlignCenter );
+  gbPreviewLayout->addWidget( imOrig,   1, 0, AlignCenter | AlignTop );
+  gbPreviewLayout->addWidget( lbImFiltered, 0, 2, AlignCenter );
+  gbPreviewLayout->addWidget( imFiltered,   1, 2, AlignCenter | AlignTop );
 
 
   ////
