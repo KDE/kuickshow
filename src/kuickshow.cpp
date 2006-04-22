@@ -817,6 +817,9 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     KFileItem *item      = 0L; // to be shown
     KFileItem *item_next = 0L; // to be cached
 
+    if ( steps == 0 )
+        return;
+
     // the viewer might not be available yet. Factor this out somewhen.
     if ( !fileWidget ) {
         if ( m_delayedRepeatItem )
