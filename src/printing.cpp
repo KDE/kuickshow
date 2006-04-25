@@ -222,7 +222,7 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
 
     QWidget *widget = new QWidget( group );
     QGridLayout *grid = new QGridLayout( widget, 3, 3 );
-    grid->addColSpacing( 0, 30 );
+    grid->addItem( new QSpacerItem( 30, 0 ), 0, 0 );
     grid->setColStretch( 0, 0 );
     grid->setColStretch( 1, 1 );
     grid->setColStretch( 2, 10 );

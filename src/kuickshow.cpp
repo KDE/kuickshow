@@ -770,12 +770,12 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
         k = static_cast<QKeyEvent *>( e );
 
     if ( k ) {
-        if ( KStdAccel::quit().contains( KKey( k ) ) ) {
+        if ( KStdAccel::quit().contains( k->key() ) ) {
             saveSettings();
             deleteAllViewers();
             ::exit(0);
         }
-        else if ( KStdAccel::help().contains( KKey( k ) ) ) {
+        else if ( KStdAccel::help().contains( k->key() ) ) {
             appHelpActivated();
             return true;
         }
@@ -852,14 +852,13 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             // we definitely have a fileWidget here!
 
-            KKey kkey( k );
-            if ( key == Qt::Key_Home || KStdAccel::home().contains( kkey ) )
+            if ( key == Qt::Key_Home || KStdAccel::home().contains( k->key() ) )
             {
                 item = fileWidget->gotoFirstImage();
                 item_next = fileWidget->getNext( false );
             }
 
-            else if ( key == Qt::Key_End || KStdAccel::end().contains( kkey ) )
+            else if ( key == Qt::Key_End || KStdAccel::end().contains( k->key() ) )
             {
                 item = fileWidget->gotoLastImage();
                 item_next = fileWidget->getPrevious( false );
