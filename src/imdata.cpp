@@ -30,7 +30,7 @@ ImData::ImData()
   fastRender  	 = true;
   dither16bit    = false;
   dither8bit     = true;
-  smoothScale    = true; // ### false
+  smoothScale    = false;
   maxCache       = 10240;
 
   gamma          = 0;

@@ -42,7 +42,7 @@ public:
 
 private:
     QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload, *cbLastdir;
-    QCheckBox   *cbFastRemap, *cbFastRender;
+    QCheckBox   *cbSmoothScale, *cbFastRemap, *cbFastRender;
     QCheckBox 	*cbDither16bit, *cbDither8bit, *cbOwnPalette;
 
     KLineEdit   	*editFilter;

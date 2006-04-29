@@ -6,6 +6,7 @@
 #include <klocale.h>
 #include <kprogress.h>
 #include <kio/job.h>
+#include <kio/netaccess.h>
 #include <ktempfile.h>
 
 #include "filecache.h"
@@ -18,10 +19,13 @@ KuickFile::KuickFile(const KURL& url)
       m_progress( 0L ),
       m_currentProgress( 0 )
 {
-    if ( m_url.isLocalFile() )
+    if ( m_url.isLocalFile())
         m_localFile = m_url.path();
-
-    // ### KDE4: special support for "mostLocalURL"
+    else {
+    	const KURL& mostLocal = KIO::NetAccess::mostLocalURL( m_url, 0L );
+    	if ( mostLocal.isValid() && mostLocal.isLocalFile() )
+    		m_localFile = mostLocal.path();
+    }
 }
 
 KuickFile::~KuickFile()
@@ -60,8 +64,6 @@ bool KuickFile::download()
     m_localFile = QString::null;
     m_currentProgress = 0;
     
-
-    // ### KDE4: special support for "mostLocalURL"
 
     QString ext;
     QString fileName = m_url.fileName();
@@ -138,7 +140,7 @@ void KuickFile::slotResult( KIO::Job *job )
 
     if ( job->error() != 0 ) {
     	m_currentProgress = 0;
-        kdWarning() << "ERROR: " << job->errorString() << endl;
+        kdWarning() << "ERROR: KuickFile::slotResult: " << job->errorString() << endl;
         QString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destURL().path();
         QFile::remove( canceledFile );
         m_progress->topLevelWidget()->hide();

@@ -82,6 +82,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   layout->addWidget( gbox2 );
   layout->addStretch();
 
+  cbSmoothScale = new QCheckBox( i18n("Smooth scaling"), gbox2, "smoothscale" );
   cbFastRender = new QCheckBox( i18n("Fast rendering"), gbox2, "fastrender" );
   cbDither16bit = new QCheckBox( i18n("Dither in HiColor (15/16bit) modes"),
 				 gbox2, "dither16bit" );
@@ -125,6 +126,7 @@ void GeneralWidget::loadSettings( const KuickData& data )
     cbLastdir->setChecked( data.startInLastDir );
     cbFastRemap->setChecked( idata->fastRemap );
     cbOwnPalette->setChecked( idata->ownPalette );
+    cbSmoothScale->setChecked( idata->smoothScale );
     cbFastRender->setChecked( idata->fastRender );
     cbDither16bit->setChecked( idata->dither16bit );
     cbDither8bit->setChecked( idata->dither8bit );
@@ -143,6 +145,7 @@ void GeneralWidget::applySettings( KuickData& data)
     data.preloadImage	  = cbPreload->isChecked();
     data.startInLastDir   = cbLastdir->isChecked();
 
+    idata->smoothScale    = cbSmoothScale->isChecked();
     idata->fastRemap 	  = cbFastRemap->isChecked();
     idata->ownPalette 	  = cbOwnPalette->isChecked();
     idata->fastRender 	  = cbFastRender->isChecked();
