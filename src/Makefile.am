@@ -21,8 +21,6 @@ kuickshow_la_SOURCES =	kuickshow.cpp \
 # them while "make clean", use CLEANFILES
 DISTCLEANFILES = $(METASOURCES)
 
-messages:
-	$(XGETTEXT) *.cpp *.h -o $(podir)/kuickshow.pot
 
 KDE_ICON = kuickshow
 
