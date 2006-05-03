@@ -61,7 +61,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   cbPreload = new QCheckBox( i18n("Preload next image"), this, "preload");
   cbLastdir = new QCheckBox( i18n("Remember last folder"), this, "restart_lastdir");
 
-  QGridLayout *gridLayout = new QGridLayout( 2, 2 );
+  QGridLayout *gridLayout = new QGridLayout();
   gridLayout->setSpacing( KDialog::spacingHint() );
   QLabel *l0 = new QLabel( i18n("Background color:"), this );
   colorButton = new KColorButton( this );

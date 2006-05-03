@@ -221,7 +221,7 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     m_shrinkToFit->setChecked( true );
 
     QWidget *widget = new QWidget( group );
-    QGridLayout *grid = new QGridLayout( widget, 3, 3 );
+    QGridLayout *grid = new QGridLayout( widget );
     grid->addItem( new QSpacerItem( 30, 0 ), 0, 0 );
     grid->setColStretch( 0, 0 );
     grid->setColStretch( 1, 1 );
