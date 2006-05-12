@@ -1,4 +1,3 @@
-kde4_header()
 project(kuickshow)
 
 add_subdirectory( src ) 
@@ -11,7 +10,6 @@ add_subdirectory( pics )
 ########### install files ###############
 
 
-kde4_footer()
 
 
 
