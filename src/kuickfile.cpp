@@ -125,9 +125,15 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
 		m_currentProgress = 0;
 	}
     // ### when aborted, remove KuickImage from FileCache?
+
+    if ( canceled )
+        return CANCELED;
+
+    if ( !isAvailable() )
+        return ERROR;
     
     // ### use custom progress dialog with OK, SKIP, CANCEL?
-     return canceled ? CANCELED : OK;
+     return OK;
 }
 
 void KuickFile::slotResult( KIO::Job *job )
