@@ -46,6 +46,7 @@
 #include <kmenubar.h>
 #include <kmessagebox.h>
 #include <kpopupmenu.h>
+#include <kprotocolinfo.h>
 #include <kpropertiesdialog.h>
 #include <kprotocolinfo.h>
 #include <kstatusbar.h>
@@ -216,7 +217,11 @@ KuickShow::~KuickShow()
 // TODO convert to use xmlui file
 void KuickShow::initGUI( const KURL& startDir )
 {
-    fileWidget = new FileWidget( startDir, this, "MainWidget" );
+	KURL startURL( startDir );
+	if ( !KProtocolInfo::supportsListing( startURL ) )
+		startURL = KURL();
+
+    fileWidget = new FileWidget( startURL, this, "MainWidget" );
     setFocusProxy( fileWidget );
 
     KActionCollection *coll = fileWidget->actionCollection();
@@ -859,7 +864,9 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 bool KuickShow::eventFilter( QObject *o, QEvent *e )
 {
     if ( m_delayedRepeatItem ) // we probably need to install an eventFilter over
+	{
         return true;    // kapp, to make it really safe
+	}
 
     bool ret = false;
     int eventType = e->type();
@@ -932,13 +939,19 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     // signal.
 
                     // see slotAdvanceImage() for similar code
-                    if ( fileWidget->dirLister()->isFinished() &&
-                         fileWidget->dirLister()->rootItem() )
+                    if ( fileWidget->dirLister()->isFinished() )
                     {
-                        fileWidget->setCurrentItem( file->url().fileName() );
-                        QTimer::singleShot( 0, this, SLOT( slotReplayEvent()));
+                        if ( fileWidget->dirLister()->rootItem() )
+                        {
+                            fileWidget->setCurrentItem( file->url().fileName() );
+                            QTimer::singleShot( 0, this, SLOT( slotReplayEvent()));
+                        }
+                        else // finished, but no root-item -- probably an error, kill repeat-item!
+                        {
+                            abortDelayedEvent();
+                        }
                     }
-                    else
+                    else // not finished yet
                     {
                         fileWidget->setInitialItem( file->url().fileName() );
                         connect( fileWidget, SIGNAL( finished() ),
@@ -1256,6 +1269,12 @@ bool KuickShow::haveBrowser() const
 void KuickShow::delayedRepeatEvent( ImageWindow *w, QKeyEvent *e )
 {
     m_delayedRepeatItem = new DelayedRepeatEvent( w, new QKeyEvent( *e ) );
+}
+
+void KuickShow::abortDelayedEvent()
+{
+    delete m_delayedRepeatItem;
+    m_delayedRepeatItem = 0L;
 }
 
 void KuickShow::slotReplayEvent()
