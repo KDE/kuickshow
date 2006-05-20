@@ -146,7 +146,10 @@ void KuickFile::slotResult( KIO::Job *job )
 
     if ( job->error() != 0 ) {
     	m_currentProgress = 0;
-        kdWarning() << "ERROR: KuickFile::slotResult: " << job->errorString() << endl;
+
+        if ( job->error() != KIO::ERR_USER_CANCELED )
+            kdWarning() << "ERROR: KuickFile::slotResult: " << job->errorString() << endl;
+
         QString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destURL().path();
         QFile::remove( canceledFile );
         m_progress->topLevelWidget()->hide();
