@@ -20,7 +20,7 @@ class FileCache
 {
 public:
     static FileCache * self();
-    ~FileCache();
+    static void shutdown();
 
     KuickFile * getFile( const KURL& url );
     void setLimit( int numFiles );
@@ -34,6 +34,8 @@ public:
 private:
     static FileCache *s_self;
     FileCache();
+    ~FileCache();
+
     KTempDir * createTempDir();
     QCache<KuickFile> m_files;
 

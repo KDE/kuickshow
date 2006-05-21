@@ -23,6 +23,15 @@ FileCache::~FileCache()
     delete m_tempDir;
 }
 
+void FileCache::shutdown()
+{
+    if ( s_self )
+    {
+        delete s_self;
+        s_self = 0L;
+    }
+}
+
 FileCache * FileCache::self()
 {
     if ( !s_self )
@@ -65,7 +74,10 @@ KTempDir * FileCache::createTempDir()
     KTempDir *dir = new KTempDir( dirName );
     dir->setAutoDelete( true );
     if ( dir->status() != 0L )
+    {
+        delete dir;
         return 0L;
+    }
 
     return dir;
 }

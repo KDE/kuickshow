@@ -207,7 +207,7 @@ KuickShow::~KuickShow()
     if ( m_viewer )
         m_viewer->close( true );
 
-    delete FileCache::self();
+    FileCache::shutdown();
     free( id );
     kapp->quit();
 
@@ -450,7 +450,7 @@ void KuickShow::viewerDeleted()
 
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
         saveSettings();
-        delete FileCache::self();
+        FileCache::shutdown();
         ::exit(0);
     }
 
@@ -878,7 +878,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
         if ( KStdAccel::quit().contains( KKey( k ) ) ) {
             saveSettings();
             deleteAllViewers();
-            delete FileCache::self();
+            FileCache::shutdown();
             ::exit(0);
         }
         else if ( KStdAccel::help().contains( KKey( k ) ) ) {
@@ -1231,7 +1231,7 @@ void KuickShow::initImlib()
                                "The program will now quit.");
             KMessageBox::error( this, tmp, i18n("Fatal Imlib Error") );
 
-            delete FileCache::self();
+            FileCache::shutdown();
             ::exit(1);
         }
     }
