@@ -886,7 +886,7 @@ void ImageWindow::saveImage()
 
     QString selection = m_saveDirectory.isEmpty() ?
                             m_kuim->filename() :
-                            KUrl::fromPathOrURL( m_kuim->filename() ).fileName();
+                            KUrl::fromPathOrUrl( m_kuim->filename() ).fileName();
     dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setCaption( i18n("Save As") );

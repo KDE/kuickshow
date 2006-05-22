@@ -402,7 +402,7 @@ void KuickShow::slotSetURL( const KUrl& url )
 
 void KuickShow::slotURLComboReturnPressed()
 {
-    KUrl where = KUrl::fromPathOrURL( cmbPath->currentText() );
+    KUrl where = KUrl::fromPathOrUrl( cmbPath->currentText() );
     slotSetURL( where );
 }
 
@@ -469,10 +469,10 @@ void KuickShow::dirSelected( const KUrl& url )
     if ( url.isLocalFile() )
         setCaption( url.path() );
     else
-        setCaption( url.prettyURL() );
+        setCaption( url.prettyUrl() );
 
     cmbPath->setURL( url );
-    statusBar()->changeItem( url.prettyURL(), URL_ITEM );
+    statusBar()->changeItem( url.prettyUrl(), URL_ITEM );
 }
 
 void KuickShow::slotSelected( const KFileItem *item )
@@ -949,7 +949,7 @@ void KuickShow::configuration()
     if ( !m_accel ) {
         KUrl start;
         start.setPath( QDir::homePath() );
-        initGUI( KUrl::fromPathOrURL( QDir::homePath() ) );
+        initGUI( KUrl::fromPathOrUrl( QDir::homePath() ) );
     }
 
     dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L,
@@ -1024,14 +1024,14 @@ void KuickShow::readProperties( KConfig *kc )
     assert( fileWidget ); // from SM, we should always have initGUI on startup
     QString dir = kc->readPathEntry( "CurrentDirectory" );
     if ( !dir.isEmpty() ) {
-        fileWidget->setURL( KUrl::fromPathOrURL( dir ), true );
+        fileWidget->setURL( KUrl::fromPathOrUrl( dir ), true );
         fileWidget->clearHistory();
     }
 
     QStringList images = kc->readPathListEntry( "Images shown" );
     QStringList::Iterator it;
     for ( it = images.begin(); it != images.end(); ++it ) {
-        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KUrl::fromPathOrURL( *it ), false );
+        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KUrl::fromPathOrUrl( *it ), false );
         if ( item.isReadable() )
             showImage( &item, true );
     }
