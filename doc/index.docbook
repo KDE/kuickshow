@@ -158,8 +158,9 @@ linkend="general-options"><guilabel>General</guilabel></link>, <link
 linkend="modifications-options"><guilabel>Modifications</guilabel></link> 
 and <link linkend="slideshow-options"><guilabel>Slideshow</guilabel></link> 
 configure the operation of &kuickshow;, and the other two,
-<guilabel>Viewer Shortcuts</guilabel> and <guilabel>Browser
-Shortcuts</guilabel> allow you to personalize the shortcuts for the
+<link linkend="shortcuts-options"><guilabel>Viewer Shortcuts</guilabel></link> 
+and <link linkend="shortcuts-options"><guilabel>Browser Shortcuts</guilabel></link> 
+allow you to personalize the shortcuts for the
 respective windows.</para>
 
 <sect1 id="general-options">
