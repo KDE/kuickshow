@@ -4,7 +4,7 @@
 
 ########### install files ###############
 
-install_files( ${DATA_INSTALL_DIR}/kuickshow FILES im_palette.pal )
+install( FILES im_palette.pal  DESTINATION  ${DATA_INSTALL_DIR}/kuickshow )
 
 
 

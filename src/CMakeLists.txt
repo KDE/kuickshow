@@ -29,14 +29,14 @@ kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
 
 target_link_libraries(kdeinit_kuickshow  ${KDE4_KDE3SUPPORT_LIBS} kdeprint )
 
-install_targets(${LIB_INSTALL_DIR} kdeinit_kuickshow )
+install(TARGETS kdeinit_kuickshow  DESTINATION ${LIB_INSTALL_DIR} )
 
 target_link_libraries( kuickshow kdeinit_kuickshow )
 install_targets(/bin kuickshow )
 
 ########### install files ###############
 
-install_files( ${XDG_APPS_DIR} FILES kuickshow.desktop )
+install( FILES kuickshow.desktop  DESTINATION  ${XDG_APPS_DIR} )
 
 kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
 
