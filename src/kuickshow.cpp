@@ -1220,7 +1220,7 @@ void KuickShow::slotOpenURL()
 
     if ( dlg.exec() == QDialog::Accepted )
     {
-        KUrl::List urls = dlg.selectedURLs();
+        KUrl::List urls = dlg.selectedUrls();
         KUrl::List::ConstIterator it = urls.begin();
         for ( ; it != urls.end(); ++it )
         {
