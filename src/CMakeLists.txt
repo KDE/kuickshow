@@ -32,7 +32,7 @@ target_link_libraries(kdeinit_kuickshow  ${KDE4_KDE3SUPPORT_LIBS} kdeprint )
 install(TARGETS kdeinit_kuickshow  DESTINATION ${LIB_INSTALL_DIR} )
 
 target_link_libraries( kuickshow kdeinit_kuickshow )
-install_targets(/bin kuickshow )
+install(TARGETS kuickshow  DESTINATION ${BIN_INSTALL_DIR} )
 
 ########### install files ###############
 
