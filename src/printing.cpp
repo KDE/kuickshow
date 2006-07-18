@@ -223,9 +223,9 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     QWidget *widget = new QWidget( group );
     QGridLayout *grid = new QGridLayout( widget );
     grid->addItem( new QSpacerItem( 30, 0 ), 0, 0 );
-    grid->setColStretch( 0, 0 );
-    grid->setColStretch( 1, 1 );
-    grid->setColStretch( 2, 10 );
+    grid->setColumnStretch( 0, 0 );
+    grid->setColumnStretch( 1, 1 );
+    grid->setColumnStretch( 2, 10 );
 
     m_scale = new QRadioButton( i18n("Print e&xact size: "), widget );
     m_scale->setEnabled( false ); // ###
