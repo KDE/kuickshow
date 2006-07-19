@@ -40,10 +40,13 @@
 
 KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 				      const char *name, bool modal )
-    : KDialogBase( Tabbed, i18n("Configure"),
-		     Help | Default | Ok | Apply | Cancel, Ok,
-		     parent, name, modal )
+    : KPageDialog( parent )
 {
+    setButtons( Help | Default | Ok | Apply | Cancel );
+    setDefaultButton( Ok );
+    setModal( modal );
+    setCaption( i18n("Configure") );
+    setFaceType( Tabbed );
     coll = _coll;
     KVBox *box = addVBoxPage( i18n("&General") );
     generalWidget = new GeneralWidget( box, "general widget" );

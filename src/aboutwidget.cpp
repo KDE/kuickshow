@@ -53,16 +53,16 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
     QString file;
 
     if ( hour >= 10 && hour < 16 )
-	file = locate("appdata", "pics/kuickshow-day.jpg");
+	file = KStandardDirs::locate("appdata", "pics/kuickshow-day.jpg");
     else
-	file = locate("appdata", "pics/kuickshow-night.jpg");
+	file = KStandardDirs::locate("appdata", "pics/kuickshow-night.jpg");
 
     QLabel *authors = new QLabel("Kuickshow " KUICKSHOWVERSION
 				 " was brought to you by", gBox);
     authors->setAlignment( Qt::AlignCenter );
 
     m_homepage = new KURLWidget("Carsten Pfeiffer", gBox);
-    m_homepage->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
+    m_homepage->setUrl( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
     m_homepage->setAlignment( Qt::AlignCenter );
 
     QLabel *copy = new QLabel("(C) 1998-2004", gBox);

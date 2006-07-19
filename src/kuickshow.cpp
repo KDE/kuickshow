@@ -36,13 +36,14 @@
 #include <QMouseEvent>
 #include <QMenuItem>
 #include <kaboutdata.h>
-
+#include <kactioncollection.h>
 #include <kaction.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <kcursor.h>
 #include <kdeversion.h>
+#include <kactionmenu.h>
 #include <kfiledialog.h>
 #include <kfilemetainfo.h>
 #include <kglobal.h>
@@ -354,7 +355,7 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     KConfig *kc = KGlobal::config();
     kc->setGroup("SessionSettings");
-    bool oneWindow = kc->readBoolEntry("OpenImagesInActiveWindow", true );
+    bool oneWindow = kc->readEntry("OpenImagesInActiveWindow", true );
     oneWindowAction->setChecked( oneWindow );
 
     tBar->show();
@@ -506,7 +507,7 @@ void KuickShow::showImage( const KFileItem *fi,
                      this, SLOT( messageCantLoadImage(const QString &) ));
             connect( m_viewer, SIGNAL( requestImage( ImageWindow *, int )),
                      this, SLOT( slotAdvanceImage( ImageWindow *, int )));
-	    connect( m_viewer, SIGNAL( pauseSlideShowSignal() ), 
+	    connect( m_viewer, SIGNAL( pauseSlideShowSignal() ),
 		     this, SLOT( pauseSlideShow() ) );
             connect( m_viewer, SIGNAL (deleteImage ()),
                      this, SLOT (slotDeleteImage ()));
@@ -1037,7 +1038,7 @@ void KuickShow::readProperties( KConfig *kc )
     }
 
     if ( !s_viewers.isEmpty() ) {
-        bool visible = kc->readBoolEntry( "Browser visible", true );
+        bool visible = kc->readEntry( "Browser visible", true );
         if ( !visible )
             hide();
     }
@@ -1096,7 +1097,7 @@ void KuickShow::initImlib()
         initImlibParams( idata, &par );
 
         qWarning("*** KuickShow: Whoops, can't initialize imlib, trying my own palettefile now.");
-        QString paletteFile = locate( "data", "kuickshow/im_palette.pal" );
+        QString paletteFile = KStandardDirs::locate( "data", "kuickshow/im_palette.pal" );
         // FIXME - does the qstrdup() cure the segfault in imlib eventually?
         char *file = qstrdup( paletteFile.toLocal8Bit() );
         par.palettefile = file;
@@ -1214,7 +1215,7 @@ void KuickShow::toggleBrowser()
 
 void KuickShow::slotOpenURL()
 {
-    KFileDialog dlg(QString::null, kdata->fileFilter, this);
+    KFileDialog dlg(KUrl(), kdata->fileFilter, this);
     dlg.setMode( KFile::Files | KFile::Directory );
     dlg.setCaption( i18n("Select Files or Folder to Open") );
 

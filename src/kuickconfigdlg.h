@@ -23,14 +23,14 @@
 
 #include <kkeydialog.h>
 
-#include <kdialogbase.h>
+#include <kpagedialog.h>
 
 class GeneralWidget;
 class DefaultsWidget;
 class SlideShowWidget;
 class ImageWindow;
 
-class KuickConfigDialog : public KDialogBase
+class KuickConfigDialog : public KPageDialog
 {
     Q_OBJECT
 

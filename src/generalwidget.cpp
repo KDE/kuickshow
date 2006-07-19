@@ -45,7 +45,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   QPixmap pixmap = UserIcon( "logo" );
   KUrlLabel *logo = new KUrlLabel( this );
-  logo->setURL( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
+  logo->setUrl( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
   logo->setPixmap( pixmap );
   logo->setFixedSize( pixmap.size() );
   logo->setTipText( i18n( "Open KuickShow Website" ) );
