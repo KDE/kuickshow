@@ -17,7 +17,7 @@
 */
 
 #include <stdlib.h>
-
+#include <kactioncollection.h>
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qdrawutil.h>
@@ -291,7 +291,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     }
 
     updateCursor();
-	
+
     QString caption = i18nc( "Filename (Imagewidth x Imageheight)",
                              "%3 (%1 x %2)",
                              m_kuim->originalWidth(), m_kuim->originalHeight(),
@@ -546,7 +546,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 
     if ( key == Qt::Key_Shift )
         updateCursor( ZoomCursor );
-	
+
     if ( key == Qt::Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
         close( true );
     else if ( KStdAccel::save().contains( KKey( e ) ) )
@@ -635,7 +635,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
     }
 
     if ( e->state() & Qt::ShiftModifier ) {
-	
+
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
 	    transWidget->setGeometry( 0, 0, width(), height() );
@@ -648,10 +648,10 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
  	p.eraseRect( transWidget->rect() );
 	transWidget->show();
 	qApp->processOneEvent();
-	
+
 	int width  = e->x() - xposPress;
 	int height = e->y() - yposPress;
-	
+
 	if ( width < 0 ) {
 	    width = abs( width );
 	    xzoom = e->x();
@@ -668,7 +668,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	p.setPen( Qt::DotLine ); // defaults to black dotted line pen
 	p.drawRect( xzoom, yzoom, width, height );
 
-#warning "qt4 what will replace p.flush() ????? "	
+#warning "qt4 what will replace p.flush() ????? "
 	//p.flush();
     }
 
@@ -716,7 +716,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     }
 
     if ( yposPress > y ) {
-	topY = y;	
+	topY = y;
 	botY = yposPress;
     }
     else {
@@ -909,7 +909,7 @@ void ImageWindow::saveImage()
         }
     }
 
-    QString lastDir = dlg.baseURL().path(+1);
+    QString lastDir = dlg.baseUrl().path(+1);
     if ( lastDir != m_saveDirectory )
         m_saveDirectory = lastDir;
 

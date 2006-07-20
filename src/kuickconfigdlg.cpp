@@ -48,23 +48,28 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     setCaption( i18n("Configure") );
     setFaceType( Tabbed );
     coll = _coll;
-    KVBox *box = addVBoxPage( i18n("&General") );
+    KVBox *box = new KVBox();
+    addPage( box, i18n("&General") );
     generalWidget = new GeneralWidget( box, "general widget" );
 
-    box = addVBoxPage( i18n("&Modifications") );
+    box = new KVBox();
+    addPage( box, i18n("&Modifications") );
     defaultsWidget = new DefaultsWidget( box, "defaults widget" );
 
-    box = addVBoxPage( i18n("&Slideshow") );
+    box = new KVBox();
+    addPage( box, i18n("&Slideshow")  );
     slideshowWidget = new SlideShowWidget( box, "slideshow widget" );
 
-    box = addVBoxPage( i18n("&Viewer Shortcuts") );
+    box = new KVBox();
+    addPage( box, i18n("&Viewer Shortcuts") );
 
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
 
     imageKeyChooser = new KKeyChooser( imageWindow->actionCollection(), box );
 
-    box = addVBoxPage( i18n("Bro&wser Shortcuts") );
+    box = new KVBox();
+    addPage( box, i18n("Bro&wser Shortcuts") );
     browserKeyChooser = new KKeyChooser( coll, box );
 
     connect( this, SIGNAL( defaultClicked() ), SLOT( resetDefaults() ));

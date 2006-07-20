@@ -175,7 +175,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   connect( comboRotate,  SIGNAL( activated(int) ), SLOT( updatePreview() ));
 
 
-  QString filename = locate( "data", "kuickshow/pics/calibrate.png" );
+  QString filename = KStandardDirs::locate( "data", "kuickshow/pics/calibrate.png" );
   if ( !imOrig->loadImage( filename ) )
     imOrig = 0L; // FIXME - display some errormessage!
   if ( !imFiltered->loadImage( filename ) )
@@ -209,7 +209,7 @@ void DefaultsWidget::loadSettings( const KuickData& data )
     cbFlipVertically->setChecked( data.flipVertically );
     cbFlipHorizontally->setChecked( data.flipHorizontally );
 
-    comboRotate->setCurrentItem( data.rotation );
+    comboRotate->setCurrentIndex( ( int )data.rotation );
 
     ImData *id = data.idata;
 
