@@ -30,7 +30,9 @@
 #include <kmenu.h>
 #include <kpropertiesdialog.h>
 #include <kurlcompletion.h>
-
+#include <kactioncollection.h>
+#include <kactionmenu.h>
+#include <kseparatoraction.h>
 #include "filefinder.h"
 #include "filewidget.h"
 #include "kuickdata.h"
@@ -85,7 +87,7 @@ void FileWidget::initActions()
 {
     int index = 0;
     KActionCollection *coll = actionCollection();
-    KActionSeparator *sep = new KActionSeparator( coll, "kuicksep" );
+    KSeparatorAction*sep = new KSeparatorAction( coll, "kuicksep" );
     KActionMenu *menu = static_cast<KActionMenu*>( coll->action("popupMenu") );
 
     menu->insert( coll->action("kuick_showInOtherWindow"), index++ );
