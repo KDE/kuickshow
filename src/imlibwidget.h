@@ -175,7 +175,7 @@ public:
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
-  virtual void  reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt = FALSE );
+  virtual void  reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt = false );
 
 public slots:
   void 		rotate90();

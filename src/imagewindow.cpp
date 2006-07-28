@@ -897,7 +897,7 @@ void ImageWindow::saveImage()
         {
             if ( !saveImage( file, keepSize->isChecked() ) )
             {
-                QString tmp = i18n("Couldn't save the file.\n"
+                QString tmp = i18n("Could not save the file.\n"
                                    "Perhaps the disk is full, or you don't "
                                    "have write permission to the file.");
                 KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
