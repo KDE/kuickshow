@@ -278,16 +278,16 @@ void KuickShow::initGUI( const KUrl& startDir )
     showInOther->plug( fileMenu );
     showInSame->plug( fileMenu );
     showFullscreen->plug( fileMenu );
-    fileMenu->insertSeparator();
+    fileMenu->addSeparator();
     slide->plug( fileMenu );
     print->plug( fileMenu );
-    fileMenu->insertSeparator();
+    fileMenu->addSeparator();
     quit->plug( fileMenu );
 
     Q3PopupMenu *editMenu = new Q3PopupMenu( mBar, "edit" );
     coll->action("mkdir")->plug( editMenu );
     coll->action("delete")->plug( editMenu );
-    editMenu->insertSeparator();
+    editMenu->addSeparator();
     coll->action("properties")->plug( editMenu );
 
 
@@ -327,19 +327,19 @@ void KuickShow::initGUI( const KUrl& startDir )
     coll->action("home")->plug( tBar );
     coll->action("reload")->plug( tBar );
 
-    tBar->insertSeparator();
+    tBar->addSeparator();
 
     coll->action( "short view" )->plug( tBar );
     coll->action( "detailed view" )->plug( tBar );
     coll->action( "preview")->plug( tBar );
 
-    tBar->insertSeparator();
+    tBar->addSeparator();
     configure->plug( tBar );
     slide->plug( tBar );
-    tBar->insertSeparator();
+    tBar->addSeparator();
     oneWindowAction->plug( tBar );
     print->plug( tBar );
-    tBar->insertSeparator();
+    tBar->addSeparator();
     about->plug( tBar );
 
     KMenu *help = helpMenu( QString::null, false );
