@@ -38,7 +38,7 @@ install(TARGETS kuickshow  DESTINATION ${BIN_INSTALL_DIR} )
 
 install( FILES kuickshow.desktop  DESTINATION  ${XDG_APPS_DIR} )
 
-kde4_install_icons( ${ICON_INSTALL_DIR}  hicolor )
+kde4_install_icons( ${ICON_INSTALL_DIR}   )
 
 
 
