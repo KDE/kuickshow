@@ -140,7 +140,7 @@ ratio</para></listitem>
 </itemizedlist>
 
 <para>If you are looking for a certain file, just enter the first few
-characters of it's filename in the browser.  A small edit window will
+characters of its filename in the browser.  A small edit window will
 pop up in the bottom right corner.  When a matching file is found, it
 is highlighted. You can leave the edit window by pressing
 <keycap>Return</keycap> or &Esc;.</para>
