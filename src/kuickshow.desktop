@@ -12,6 +12,7 @@ Name[pt_BR]=KRápida Exibição
 Name[ta]=விரைவுகாட்சி
 Name[th]=ดูภาพด่วน - K
 Name[ven]=Musumbedzo wa kuick
+Name[zh_TW]=Kuickshow 快秀
 Name[zu]=I Kuickshow
 Exec=kuickshow %i %m -caption "%c" %U
 Icon=kuickshow
