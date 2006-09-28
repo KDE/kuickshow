@@ -190,7 +190,8 @@ KuickShow::KuickShow( const char *name )
 
     if ( s_viewers.isEmpty() || isDir ) {
         initGUI( startDir );
-        show();
+	if (!kapp->isRestored()) // during session management, readProperties() will show()
+            show();
     }
 
     else { // don't show browser, when image on commandline
@@ -522,7 +523,7 @@ void KuickShow::showFileItem( ImageWindow * /*view*/,
 
 }
 
-void KuickShow::showImage( const KFileItem *fi,
+bool KuickShow::showImage( const KFileItem *fi,
                            bool newWindow, bool fullscreen, bool moveToTopLeft )
 {
     newWindow  |= !m_viewer;
@@ -593,8 +594,11 @@ void KuickShow::showImage( const KFileItem *fi,
             }
 
             m_viewer = safeViewer;
+	    return true;
         } // m_viewer created successfully
     } // isImage
+
+    return false;
 }
 
 void KuickShow::slotDeleteCurrentImage()
@@ -1144,25 +1148,32 @@ void KuickShow::readProperties( KConfig *kc )
         fileWidget->clearHistory();
     }
 
+    const KURL& listedURL = fileWidget->url();
     QStringList images = kc->readPathListEntry( "Images shown" );
     QStringList::Iterator it;
+    bool hasCurrentURL = false;
+
     for ( it = images.begin(); it != images.end(); ++it ) {
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KURL::fromPathOrURL( *it ), false );
         if ( item.isReadable() )
-            showImage( &item, true );
+            if ( showImage( &item, true ) ) {
+	        // Set the current URL in the file widget, if possible
+                if ( !hasCurrentURL && listedURL.isParentOf( item.url() ))
+                    fileWidget->setInitialItem( item.url().fileName() );
+		    hasCurrentURL = true;
+	    }
     }
 
-    if ( !s_viewers.isEmpty() ) {
-        bool visible = kc->readBoolEntry( "Browser visible", true );
-        if ( !visible )
-            hide();
-    }
+    bool visible = kc->readBoolEntry( "Browser visible", false );
+    if ( visible || s_viewers.isEmpty() )
+        show();
 }
 
 void KuickShow::saveProperties( KConfig *kc )
 {
-    kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
-    kc->writeEntry( "Browser visible", fileWidget->isVisible() );
+    kc->writeEntry( "Browser visible", fileWidget && fileWidget->isVisible() );
+    if (fileWidget)
+        kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
 
     QStringList urls;
     QValueListIterator<ImageWindow*> it;

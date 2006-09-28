@@ -107,7 +107,7 @@ private slots:
     void 		slotConfigApplied();
     void 		slotConfigClosed();
     void 		messageCantLoadImage( const KuickFile * file, const QString& message);
-    void         	showImage(const KFileItem *, bool newWindow = false,
+    bool         	showImage(const KFileItem *, bool newWindow = false,
                                   bool fullscreen = false, bool moveToTopLeft = true );
     void 		showFileItem( ImageWindow *, const KFileItem * );
     void		slotHighlighted( const KFileItem * );

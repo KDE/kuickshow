@@ -54,8 +54,9 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 
     KApplication app;
 
-    if ( app.isRestored() )
-	RESTORE( KuickShow )
+    if ( app.isRestored() ) {
+        (new KuickShow())->restore( 1, false ); // don't show automatically
+    }
     else {
 	KuickShow *k = new KuickShow( "kuickshow" );
 	app.setMainWidget( k );
