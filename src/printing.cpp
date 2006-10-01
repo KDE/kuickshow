@@ -41,7 +41,7 @@
 #include <kglobalsettings.h>
 #include <knuminput.h>
 #include <kprinter.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 
 #include "imagewindow.h"
 #include "printing.h"
@@ -57,12 +57,12 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
 
     if ( printer.setup( parent, i18n("Print %1", printer.docName().section('/', -1)) ) )
     {
-        KTempFile tmpFile( QString::null, ".png" );
-        if ( tmpFile.status() == 0 )
+        KTemporaryFile tmpFile;
+        tmpFile.setSuffix(".png");
+        if ( tmpFile.open() )
         {
-            tmpFile.setAutoDelete( true );
-            if ( imageWin.saveImage( tmpFile.name(), true ) )
-                return printImageWithQt( tmpFile.name(), printer,
+            if ( imageWin.saveImage( tmpFile.fileName(), true ) )
+                return printImageWithQt( tmpFile.fileName(), printer,
                                          imageWin.filename() );
         }
 
