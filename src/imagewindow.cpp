@@ -63,7 +63,7 @@
 #include <kstdaccel.h>
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kwin.h>
 #include <netwm.h>
 #include <kio/netaccess.h>
