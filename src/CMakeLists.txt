@@ -23,7 +23,7 @@ set(kuickshow_KDEINIT_SRCS
    slideshowwidget.cpp 
    printing.cpp )
 
-kde4_automoc(${kuickshow_KDEINIT_SRCS})
+kde4_automoc(kuickshow ${kuickshow_KDEINIT_SRCS})
 
 kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
 
