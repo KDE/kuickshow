@@ -278,7 +278,9 @@ KFileItem * FileWidget::gotoFirstImage()
 
 KFileItem * FileWidget::gotoLastImage()
 {
+#ifdef __GNUC__
 #warning "kde4 ;port it"
+#endif	
 #if 0
     KFileItemListIterator it( *(fileView()->items()) );
     it.toLast();
@@ -322,7 +324,9 @@ KFileItem * FileWidget::getPrevious( bool go )
 // this sucks! Use KFileView::currentFileItem() when implemented
 KFileItem * FileWidget::getItem( WhichItem which, bool onlyImage ) const
 {
+#ifdef __GNUC__
 #warning "kde4 porting";
+#endif	
 #if 0
     const KFileItemList *lst(fileView()->items() );
     KFileItemList::const_iterator it = lst->begin();
@@ -451,7 +455,9 @@ void FileWidget::slotURLEntered( const KUrl& url )
 
 void FileWidget::slotFinishedLoading()
 {
+#ifdef __GNUC__
 #warning "kde4: port it"
+#endif	
 #if 0
     KFileItem *current = getCurrentItem( false );
     if ( !m_initialName.isEmpty() )

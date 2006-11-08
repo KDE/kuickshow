@@ -668,7 +668,9 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	p.setPen( Qt::DotLine ); // defaults to black dotted line pen
 	p.drawRect( xzoom, yzoom, width, height );
 
+#ifdef __GNUC__
 #warning "qt4 what will replace p.flush() ????? "
+#endif	
 	//p.flush();
     }
 
