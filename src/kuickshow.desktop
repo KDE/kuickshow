@@ -14,5 +14,5 @@ InitialPreference=6
 GenericName=Image Viewer
 GenericName[fr]=Afficheur d'images
 GenericName[x-test]=xxImage Viewerxx
-X-DCOP-ServiceType=Multi
+X-DBUS-StartupType=Multi
 Categories=Qt;KDE;Graphics;
