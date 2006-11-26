@@ -16,14 +16,12 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qtooltip.h>
+#include "kurlwidget.moc"
 
 #include <kurl.h>
 #include <krun.h>
 
-#include "kurlwidget.h"
-
-KURLWidget::KURLWidget(const QString& text, QWidget *parent, const char *name)
+KURLWidget::KURLWidget(const QString& text, QWidget *parent)
     : KUrlLabel( parent )
 {
     setText( text );
@@ -35,8 +33,6 @@ void KURLWidget::run()
 {
     KUrl ku( url() );
     if ( ku.isValid() ) {
-	(void) new KRun( ku,this );
+	(void) new KRun( ku, this );
     }
 }
-
-#include "kurlwidget.moc"

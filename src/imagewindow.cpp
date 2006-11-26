@@ -18,6 +18,8 @@
 
 #include <stdlib.h>
 #include <kactioncollection.h>
+#include <kstdaction.h>
+#include <ktogglefullscreenaction.h>
 #include <qcheckbox.h>
 #include <qcursor.h>
 #include <qdrawutil.h>
@@ -115,7 +117,7 @@ void ImageWindow::init()
     m_actions = new KActionCollection( this );
 
     if ( !s_handCursor ) {
-        QString file = locate( "appdata", "pics/handcursor.png" );
+        QString file = KStandardDirs::locate( "appdata", "pics/handcursor.png" );
         if ( !file.isEmpty() )
             s_handCursor = new QCursor( QBitmap(file) );
         else
@@ -141,7 +143,7 @@ void ImageWindow::init()
 
 void ImageWindow::updateActions()
 {
-    m_actions->readShortcutSettings();
+    m_actions->readSettings();
 }
 
 void ImageWindow::setupActions()
@@ -233,6 +235,7 @@ void ImageWindow::setupActions()
 				  m_actions, "kuick_slideshow_pause" );
 
     KAction *fullscreenAction = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
+    fullscreenAction->setDefaultShortcut(Qt::Key_Return);
 
     new KAction( i18n("Reload Image"), Qt::Key_Enter,
                  this, SLOT( reload() ),
@@ -242,15 +245,7 @@ void ImageWindow::setupActions()
                  this, SLOT( slotProperties() ),
                  m_actions, "properties" );
 
-    m_actions->readShortcutSettings();
-
-    // Unfortunately there is no KAction::setShortcutDefault() :-/
-    // so add Qt::Key_Return as fullscreen shortcut _after_ readShortcutSettings()
-    KShortcut cut( fullscreenAction->shortcut() );
-    if ( cut == fullscreenAction->shortcutDefault() ) {
-	cut.append(KKey(Qt::Key_Return));
-	fullscreenAction->setShortcut(cut);
-    }
+    m_actions->readSettings();
 }
 
 
@@ -542,14 +537,14 @@ void ImageWindow::wheelEvent( QWheelEvent *e )
 
 void ImageWindow::keyPressEvent( QKeyEvent *e )
 {
-    uint key = e->key();
+    uint key = e->key() | e->modifiers();
 
     if ( key == Qt::Key_Shift )
         updateCursor( ZoomCursor );
 
-    if ( key == Qt::Key_Escape || KStdAccel::close().contains( KKey( e ) ) )
+    if ( key == Qt::Key_Escape || KStdAccel::close().contains( key ) )
         close( true );
-    else if ( KStdAccel::save().contains( KKey( e ) ) )
+    else if ( KStdAccel::save().contains( key ) )
         saveImage();
     else if ( key == Qt::Key_Right || key == Qt::Key_Down )
         emit nextSlideRequested();
@@ -911,7 +906,7 @@ void ImageWindow::saveImage()
         }
     }
 
-    QString lastDir = dlg.baseUrl().path(+1);
+    QString lastDir = dlg.baseUrl().path(KUrl::AddTrailingSlash);
     if ( lastDir != m_saveDirectory )
         m_saveDirectory = lastDir;
 

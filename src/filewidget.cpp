@@ -23,6 +23,9 @@
 #include <QEvent>
 #include <Q3PopupMenu>
 #include <QMenuItem>
+
+#include <kactioncollection.h>
+#include <kactionmenu.h>
 #include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
@@ -85,34 +88,32 @@ FileWidget::~FileWidget()
 
 void FileWidget::initActions()
 {
-    int index = 0;
     KActionCollection *coll = actionCollection();
-    KSeparatorAction*sep = new KSeparatorAction( coll, "kuicksep" );
     KActionMenu *menu = static_cast<KActionMenu*>( coll->action("popupMenu") );
 
-    menu->insert( coll->action("kuick_showInOtherWindow"), index++ );
-    menu->insert( coll->action("kuick_showInSameWindow"), index++ );
-    menu->insert( coll->action("kuick_showFullscreen"), index++ );
-    menu->insert( sep, index++ );
+    menu->addAction(coll->action("kuick_showInOtherWindow"));
+    menu->addAction(coll->action("kuick_showInSameWindow"));
+    menu->addAction(coll->action("kuick_showFullscreen"));
+    menu->addSeparator();
 
     // support for older kdelibs, remove somewhen...
     if ( coll->action("kuick_delete") )
-        menu->insert( coll->action("kuick_delete"), 9 );
+        menu->addAction( coll->action("kuick_delete") );
 
     // properties dialog is now in kfile, but not at the right position,
     // so we move it to the real bottom
     menu->remove( coll->action( "properties" ) );
 
-    QMenu *pMenu = menu->popupMenu();
+    KMenu *pMenu = menu->popupMenu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
     QMenuItem *mItem = pMenu->findItem( lastItemId );
     if ( mItem && !mItem->isSeparator() )
-        menu->insert( sep );
+        menu->addSeparator();
 
     // those at the bottom
-    menu->insert( coll->action("kuick_print") );
-    menu->insert( sep );
-    menu->insert( coll->action("properties") );
+    menu->addAction(coll->action("kuick_print") );
+    menu->addSeparator();
+    menu->addAction(coll->action("properties") );
 }
 
 void FileWidget::reloadConfiguration()
@@ -413,13 +414,13 @@ void FileWidget::slotReturnPressed( const QString& t )
 
 	KUrl url;
 	url.setPath( dir );
-	setURL( url, true );
+	setUrl( url, true );
     }
 
     else if ( text.find('/') != (int) text.length() -1 ) { // relative path
 	QString dir = m_fileFinder->completion()->replacedPath( text );
 	KUrl u( url(), dir );
-	setURL( u, true );
+	setUrl( u, true );
     }
 
     else if ( m_validCompletion ) {
@@ -427,7 +428,7 @@ void FileWidget::slotReturnPressed( const QString& t )
 
 	if ( item ) {
 	    if ( item->isDir() )
-		setURL( item->url(), true );
+		setUrl( item->url(), true );
 	    else
 		emit fileSelected( item );
 	}

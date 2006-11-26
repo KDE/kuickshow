@@ -38,6 +38,7 @@
 #include <kaboutdata.h>
 #include <kactioncollection.h>
 #include <kaction.h>
+#include <kactionmenu.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kconfig.h>
@@ -150,7 +151,7 @@ KuickShow::KuickShow( const char *name )
         // need to check remote files
         else if ( !url.isLocalFile() )
         {
-            KMimeType::Ptr mime = KMimeType::findByURL( url );
+            KMimeType::Ptr mime = KMimeType::findByUrl( url );
             QString name = mime->name();
             if ( name == "application/octet-stream" ) // unknown -> stat()
                 name = KIO::NetAccess::mimetype( url, this );
@@ -250,7 +251,7 @@ void KuickShow::initGUI( const KUrl& startDir )
                                          "kuick_one window" );
 
     m_toggleBrowserAction = new KToggleAction( i18n("Show File Browser"), KShortcut( Qt::Key_Space ), coll, "toggleBrowser" );
-    m_toggleBrowserAction->setCheckedState(i18n("Hide File Browser"));
+    m_toggleBrowserAction->setCheckedState(KGuiItem(i18n("Hide File Browser")));
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
 
@@ -268,8 +269,8 @@ void KuickShow::initGUI( const KUrl& startDir )
     KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit");
 
     // remove QString::null parameter -- ellis
-    coll->readShortcutSettings( QString::null );
-    m_accel = coll->accel();
+//    coll->readShortcutSettings( QString::null );
+//    m_accel = coll->accel();
 
     // menubar
     KMenuBar *mBar = menuBar();
@@ -296,16 +297,18 @@ void KuickShow::initGUI( const KUrl& startDir )
     KActionMenu *sortingMenu = static_cast<KActionMenu*>( coll->action("sorting menu"));
     KActionMenu *mainActionMenu = static_cast<KActionMenu*>( coll->action("popupMenu"));
     QMenu *mainPopup = mainActionMenu->popupMenu();
+/*
     int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
     int separatorId = mainPopup->idAt( sortingIndex + 1 );
     QMenuItem *separatorItem = mainPopup->findItem( separatorId );
     if ( separatorItem && separatorItem->isSeparator() )
         mainPopup->removeItem( separatorId );
     mainActionMenu->remove( sortingMenu );
+*/
 
     // add the sorting menu and a separator into the View menu
     KActionMenu *viewActionMenu = static_cast<KActionMenu*>( coll->action("view menu"));
-    viewActionMenu->popupMenu()->insertSeparator( 0 );
+    viewActionMenu->popupMenu()->addSeparator();
     sortingMenu->plug( viewActionMenu->popupMenu(), 0 ); // on top of the menu
 
 
@@ -318,8 +321,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     mBar->insertItem( i18n("&Settings"), settingsMenu );
 
     // toolbar
-    KToolBar *tBar = toolBar();
-    tBar->setText( i18n( "Main Toolbar" ) );
+    KToolBar *tBar = toolBar(i18n("Main Toolbar"));
 
     coll->action("up")->plug( tBar );
     coll->action("back")->plug( tBar );
@@ -370,8 +372,8 @@ void KuickShow::initGUI( const KUrl& startDir )
     cmbPath->setCompletionObject( cmpl );
     cmbPath->setAutoDeleteCompletionObject( true );
 
-    addressToolBar->insertWidget( ID_ADDRESSBAR, 1, cmbPath);
-    addressToolBar->setItemAutoSized( ID_ADDRESSBAR );
+//    addressToolBar->addWidget( ID_ADDRESSBAR, 1, cmbPath);
+//    addressToolBar->setItemAutoSized( ID_ADDRESSBAR );
 
     connect( cmbPath, SIGNAL( urlActivated( const KUrl& )),
              this, SLOT( slotSetURL( const KUrl& )));
@@ -398,7 +400,7 @@ void KuickShow::initGUI( const KUrl& startDir )
 
 void KuickShow::slotSetURL( const KUrl& url )
 {
-    fileWidget->setURL( url, true );
+    fileWidget->setUrl( url, true );
 }
 
 void KuickShow::slotURLComboReturnPressed()
@@ -472,7 +474,7 @@ void KuickShow::dirSelected( const KUrl& url )
     else
         setCaption( url.prettyUrl() );
 
-    cmbPath->setURL( url );
+    cmbPath->setUrl( url );
     statusBar()->changeItem( url.prettyUrl(), URL_ITEM );
 }
 
@@ -686,7 +688,7 @@ void KuickShow::slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &
         if ( FileWidget::isImage( &item ) )
             showImage( &item, true );
         else
-            fileWidget->setURL( *it, true );
+            fileWidget->setUrl( *it, true );
     }
 }
 
@@ -1025,7 +1027,7 @@ void KuickShow::readProperties( KConfig *kc )
     assert( fileWidget ); // from SM, we should always have initGUI on startup
     QString dir = kc->readPathEntry( "CurrentDirectory" );
     if ( !dir.isEmpty() ) {
-        fileWidget->setURL( KUrl::fromPathOrUrl( dir ), true );
+        fileWidget->setUrl( KUrl::fromPathOrUrl( dir ), true );
         fileWidget->clearHistory();
     }
 
@@ -1229,7 +1231,7 @@ void KuickShow::slotOpenURL()
             if ( FileWidget::isImage( &item ) )
                 showImage( &item, true );
             else
-                fileWidget->setURL( *it, true );
+                fileWidget->setUrl( *it, true );
         }
     }
 }

@@ -22,7 +22,7 @@
 #include <qevent.h>
 #include <q3vbox.h>
 
-class KURLWidget;
+class KUrlLabel;
 
 class AboutWidget : public Q3VBox
 {
@@ -36,7 +36,7 @@ protected:
     bool eventFilter( QObject*, QEvent * );
 
 private:
-    KURLWidget *m_homepage;
+    KUrlLabel *m_homepage;
 
 };
 
