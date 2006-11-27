@@ -154,37 +154,37 @@ void ImageWindow::setupActions()
     new KAction( i18n("Show Previous Image"), KStdAccel::prior(),
                  this, SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
-    new KAction( i18n("Delete Image"), Qt::Key_Delete,
+    new KAction( i18n("Delete Image"), KShortcut(Qt::Key_Delete),
                  this, SLOT( imageDelete() ),
                  m_actions, "delete_image" );
 
-    new KAction( i18n("Zoom In"), Qt::Key_Plus,
+    new KAction( i18n("Zoom In"), KShortcut(Qt::Key_Plus),
                  this, SLOT( zoomIn() ),
                  m_actions, "zoom_in" );
-    new KAction( i18n("Zoom Out"), Qt::Key_Minus,
+    new KAction( i18n("Zoom Out"), KShortcut(Qt::Key_Minus),
                  this, SLOT( zoomOut() ),
                  m_actions, "zoom_out" );
-    new KAction( i18n("Restore Original Size"), Qt::Key_O,
+    new KAction( i18n("Restore Original Size"), KShortcut(Qt::Key_O),
                  this, SLOT( showImageOriginalSize() ),
                  m_actions, "original_size" );
-    new KAction( i18n("Maximize"), Qt::Key_M,
+    new KAction( i18n("Maximize"), KShortcut(Qt::Key_M),
                  this, SLOT( maximize() ),
                  m_actions, "maximize" );
 
-    new KAction( i18n("Rotate 90 Degrees"), Qt::Key_9,
+    new KAction( i18n("Rotate 90 Degrees"), KShortcut(Qt::Key_9),
                  this, SLOT( rotate90() ),
                  m_actions, "rotate90" );
-    new KAction( i18n("Rotate 180 Degrees"), Qt::Key_8,
+    new KAction( i18n("Rotate 180 Degrees"), KShortcut(Qt::Key_8),
                  this, SLOT( rotate180() ),
                  m_actions, "rotate180" );
-    new KAction( i18n("Rotate 270 Degrees"), Qt::Key_7,
+    new KAction( i18n("Rotate 270 Degrees"), KShortcut(Qt::Key_7),
                  this, SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
-    new KAction( i18n("Flip Horizontally"), Qt::Key_Asterisk,
+    new KAction( i18n("Flip Horizontally"), KShortcut(Qt::Key_Asterisk),
                  this, SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
-    new KAction( i18n("Flip Vertically"), Qt::Key_Slash,
+    new KAction( i18n("Flip Vertically"), KShortcut(Qt::Key_Slash),
                  this, SLOT( flipVert() ),
                  m_actions, "flip_vertically" );
 
@@ -197,51 +197,51 @@ void ImageWindow::setupActions()
     KStdAction::close( this, SLOT( close() ),
                  m_actions, "close_image" );
     // --------
-    new KAction( i18n("More Brightness"), Qt::Key_B,
+    new KAction( i18n("More Brightness"), KShortcut(Qt::Key_B),
                  this, SLOT( moreBrightness() ),
                  m_actions, "more_brightness" );
-    new KAction( i18n("Less Brightness"), Qt::SHIFT + Qt::Key_B,
+    new KAction( i18n("Less Brightness"), KShortcut(Qt::SHIFT + Qt::Key_B),
                  this, SLOT( lessBrightness() ),
                  m_actions, "less_brightness" );
-    new KAction( i18n("More Contrast"), Qt::Key_C,
+    new KAction( i18n("More Contrast"), KShortcut(Qt::Key_C),
                  this, SLOT( moreContrast() ),
                  m_actions, "more_contrast" );
-    new KAction( i18n("Less Contrast"), Qt::SHIFT + Qt::Key_C,
+    new KAction( i18n("Less Contrast"), KShortcut(Qt::SHIFT + Qt::Key_C),
                  this, SLOT( lessContrast() ),
                  m_actions, "less_contrast" );
-    new KAction( i18n("More Gamma"), Qt::Key_G,
+    new KAction( i18n("More Gamma"), KShortcut(Qt::Key_G),
                  this, SLOT( moreGamma() ),
                  m_actions, "more_gamma" );
-    new KAction( i18n("Less Gamma"), Qt::SHIFT + Qt::Key_G,
+    new KAction( i18n("Less Gamma"), KShortcut(Qt::SHIFT + Qt::Key_G),
                  this, SLOT( lessGamma() ),
                  m_actions, "less_gamma" );
 
     // --------
-    new KAction( i18n("Scroll Up"), Qt::Key_Up,
+    new KAction( i18n("Scroll Up"), KShortcut(Qt::Key_Up),
                  this, SLOT( scrollUp() ),
                  m_actions, "scroll_up" );
-    new KAction( i18n("Scroll Down"), Qt::Key_Down,
+    new KAction( i18n("Scroll Down"), KShortcut(Qt::Key_Down),
                  this, SLOT( scrollDown() ),
                  m_actions, "scroll_down" );
-    new KAction( i18n("Scroll Left"), Qt::Key_Left,
+    new KAction( i18n("Scroll Left"), KShortcut(Qt::Key_Left),
                  this, SLOT( scrollLeft() ),
                  m_actions, "scroll_left" );
-    new KAction( i18n("Scroll Right"), Qt::Key_Right,
+    new KAction( i18n("Scroll Right"), KShortcut(Qt::Key_Right),
                  this, SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
     // --------
-    KAction *pause = new KAction( i18n("Pause Slideshow"), Qt::Key_P,
+    KAction *pause = new KAction( i18n("Pause Slideshow"), KShortcut(Qt::Key_P),
 				  this, SLOT( pauseSlideShow() ),
 				  m_actions, "kuick_slideshow_pause" );
 
     KAction *fullscreenAction = KStdAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
-    fullscreenAction->setDefaultShortcut(Qt::Key_Return);
+    fullscreenAction->setDefaultShortcut(KShortcut(Qt::Key_Return));
 
-    new KAction( i18n("Reload Image"), Qt::Key_Enter,
+    new KAction( i18n("Reload Image"), KShortcut(Qt::Key_Enter),
                  this, SLOT( reload() ),
                  m_actions, "reload_image" );
 
-    new KAction( i18n("Properties"), Qt::ALT + Qt::Key_Return,
+    new KAction( i18n("Properties"), KShortcut(Qt::ALT + Qt::Key_Return),
                  this, SLOT( slotProperties() ),
                  m_actions, "properties" );
 
