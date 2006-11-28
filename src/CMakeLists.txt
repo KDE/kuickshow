@@ -1,6 +1,5 @@
 
-
-
+include_directories(${IMLIB_INCLUDE_DIR})
 
 ########### next target ###############
 
