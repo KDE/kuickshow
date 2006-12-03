@@ -102,7 +102,7 @@ void FileWidget::initActions()
 
     // properties dialog is now in kfile, but not at the right position,
     // so we move it to the real bottom
-    menu->remove( coll->action( "properties" ) );
+    menu->menu()->removeAction( coll->action( "properties" ) );
 
     KMenu *pMenu = menu->popupMenu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
@@ -190,7 +190,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 
 	if ( (k->state() & (Qt::ControlModifier | Qt::AltModifier)) == 0 ) {
 	    int key = k->key();
- 	    if ( actionCollection()->action("delete")->shortcut().contains( key ) )
+ 	    if ( actionCollection()->action("delete")->shortcuts().contains( key ) )
             {
                 k->accept();
 		KFileItem *item = getCurrentItem( false );
