@@ -815,48 +815,48 @@ void ImageWindow::setPopupMenu()
 {
     viewerMenu = new Q3PopupMenu( this );
 
-    m_actions->action("next_image")->plug( viewerMenu );
-    m_actions->action("previous_image")->plug( viewerMenu );
+    viewerMenu->addAction(m_actions->action("next_image"));
+    viewerMenu->addAction(m_actions->action("previous_image"));
     viewerMenu->insertSeparator();
 
     brightnessMenu = new Q3PopupMenu( viewerMenu );
-    m_actions->action("more_brightness")->plug(brightnessMenu);
-    m_actions->action("less_brightness")->plug(brightnessMenu);
+    brightnessMenu->addAction(m_actions->action("more_brightness"));
+    brightnessMenu->addAction(m_actions->action("less_brightness"));
 
     contrastMenu = new Q3PopupMenu( viewerMenu );
-    m_actions->action("more_contrast")->plug(contrastMenu);
-    m_actions->action("less_contrast")->plug(contrastMenu);
+    contrastMenu->addAction(m_actions->action("more_contrast"));
+    contrastMenu->addAction(m_actions->action("less_contrast"));
 
     gammaMenu = new Q3PopupMenu( viewerMenu );
-    m_actions->action("more_gamma")->plug(gammaMenu);
-    m_actions->action("less_gamma")->plug(gammaMenu);
+    gammaMenu->addAction(m_actions->action("more_gamma"));
+    gammaMenu->addAction(m_actions->action("less_gamma"));
 
-    m_actions->action("zoom_in")->plug( viewerMenu );
-    m_actions->action("zoom_out")->plug( viewerMenu );
-    m_actions->action("original_size")->plug( viewerMenu );
-    m_actions->action("maximize")->plug( viewerMenu );
-
-    viewerMenu->insertSeparator();
-    m_actions->action("rotate90")->plug( viewerMenu );
-    m_actions->action("rotate180")->plug( viewerMenu );
-    m_actions->action("rotate270")->plug( viewerMenu );
+    viewerMenu->addAction(m_actions->action("zoom_in"));
+    viewerMenu->addAction(m_actions->action("zoom_out"));
+    viewerMenu->addAction(m_actions->action("original_size"));
+    viewerMenu->addAction(m_actions->action("maximize"));
 
     viewerMenu->insertSeparator();
-    m_actions->action("flip_vertically")->plug( viewerMenu );
-    m_actions->action("flip_horicontally")->plug( viewerMenu );
+    viewerMenu->addAction(m_actions->action("rotate90"));
+    viewerMenu->addAction(m_actions->action("rotate180"));
+    viewerMenu->addAction(m_actions->action("rotate270"));
+
+    viewerMenu->insertSeparator();
+    viewerMenu->addAction(m_actions->action("flip_vertically"));
+    viewerMenu->addAction(m_actions->action("flip_horicontally"));
     viewerMenu->insertSeparator();
     viewerMenu->insertItem( i18n("Brightness"), brightnessMenu );
     viewerMenu->insertItem( i18n("Contrast"), contrastMenu );
     viewerMenu->insertItem( i18n("Gamma"), gammaMenu );
     viewerMenu->insertSeparator();
 
-    m_actions->action("delete_image")->plug( viewerMenu );
-    m_actions->action("print_image")->plug( viewerMenu );
-    m_actions->action("save_image_as")->plug( viewerMenu );
-    m_actions->action("properties")->plug( viewerMenu );
+    viewerMenu->addAction(m_actions->action("delete_image"));
+    viewerMenu->addAction(m_actions->action("print_image"));
+    viewerMenu->addAction(m_actions->action("save_image_as"));
+    viewerMenu->addAction(m_actions->action("properties"));
 
     viewerMenu->insertSeparator();
-    m_actions->action("close_image")->plug( viewerMenu );
+    viewerMenu->addAction(m_actions->action("close_image"));
 }
 
 void ImageWindow::printImage()

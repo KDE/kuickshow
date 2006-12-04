@@ -286,10 +286,10 @@ void KuickShow::initGUI( const KUrl& startDir )
     quit->plug( fileMenu );
 
     Q3PopupMenu *editMenu = new Q3PopupMenu( mBar, "edit" );
-    coll->action("mkdir")->plug( editMenu );
-    coll->action("delete")->plug( editMenu );
+    editMenu->addAction(coll->action("mkdir"));
+    editMenu->addAction(coll->action("delete"));
     editMenu->addSeparator();
-    coll->action("properties")->plug( editMenu );
+    editMenu->addAction(coll->action("properties"));
 
 
     // remove the Sorting submenu (and the separator below)
@@ -323,17 +323,17 @@ void KuickShow::initGUI( const KUrl& startDir )
     // toolbar
     KToolBar *tBar = toolBar(i18n("Main Toolbar"));
 
-    coll->action("up")->plug( tBar );
-    coll->action("back")->plug( tBar );
-    coll->action("forward")->plug( tBar );
-    coll->action("home")->plug( tBar );
-    coll->action("reload")->plug( tBar );
+    tBar->addAction(coll->action("up"));
+    tBar->addAction(coll->action("back"));
+    tBar->addAction(coll->action("forward"));
+    tBar->addAction(coll->action("home"));
+    tBar->addAction(coll->action("reload"));
 
     tBar->addSeparator();
 
-    coll->action( "short view" )->plug( tBar );
-    coll->action( "detailed view" )->plug( tBar );
-    coll->action( "preview")->plug( tBar );
+    tBar->addAction(coll->action( "short view" ));
+    tBar->addAction(coll->action( "detailed view" ));
+    tBar->addAction(coll->action( "preview"));
 
     tBar->addSeparator();
     configure->plug( tBar );
@@ -389,13 +389,13 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     setupGUI( KMainWindow::Save );
 
-    coll->action( "reload" )->setShortcut( KStdAccel::reload() );
-    coll->action( "short view" )->setShortcut(Qt::Key_F6);
-    coll->action( "detailed view" )->setShortcut(Qt::Key_F7);
-    coll->action( "show hidden" )->setShortcut(Qt::Key_F8);
-    coll->action( "mkdir" )->setShortcut(Qt::Key_F10);
-    coll->action( "preview" )->setShortcut(Qt::Key_F11);
-    coll->action( "separate dirs" )->setShortcut(Qt::Key_F12);
+    qobject_cast<KAction *>(coll->action( "reload" ))->setShortcut( KStdAccel::reload() );
+    qobject_cast<KAction *>(coll->action( "short view" ))->setShortcut(Qt::Key_F6);
+    qobject_cast<KAction *>(coll->action( "detailed view" ))->setShortcut(Qt::Key_F7);
+    qobject_cast<KAction *>(coll->action( "show hidden" ))->setShortcut(Qt::Key_F8);
+    qobject_cast<KAction *>(coll->action( "mkdir" ))->setShortcut(Qt::Key_F10);
+    qobject_cast<KAction *>(coll->action( "preview" ))->setShortcut(Qt::Key_F11);
+    qobject_cast<KAction *>(coll->action( "separate dirs" ))->setShortcut(Qt::Key_F12);
 }
 
 void KuickShow::slotSetURL( const KUrl& url )
@@ -867,7 +867,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 item_next = fileWidget->getPrevious( false );
             }
 
-            else if ( fileWidget->actionCollection()->action("delete")->shortcut().contains( key ))
+            else if ( fileWidget->actionCollection()->action("delete")->shortcuts().contains( key ))
             {
 //      KFileItem *cur = fileWidget->getCurrentItem( false );
                 (void) fileWidget->getCurrentItem( false );
@@ -886,7 +886,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 fileWidget->setCurrentItem( item );
             }
 
-            else if ( m_toggleBrowserAction->shortcut().contains( key ) )
+            else if ( m_toggleBrowserAction->shortcuts().contains( key ) )
             {
                 toggleBrowser();
                 return true; // don't pass keyEvent
