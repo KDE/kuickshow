@@ -131,7 +131,7 @@ KuickShow::KuickShow( const char *name )
     {
         // Even though the 1st i18n string will never be used, it needs to exist for plural handling - mhunter
         if ( KMessageBox::warningYesNo(
-                 this,w
+                 this,
                  i18n("Do you really want to display this 1 image at the same time? This might be quite resource intensive and could overload your computer.i<br>If you choose %1, only the first image will be shown.", 
                       "Do you really want to display these %n images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.", numArgs).arg(KStdGuiItem::no().plainText()),
                  i18n("Display Multiple Images?"))
