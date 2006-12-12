@@ -207,7 +207,8 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
                 k->accept();
 
                 if ( !m_fileFinder ) {
-		    m_fileFinder = new FileFinder( this, "file finder" );
+		    m_fileFinder = new FileFinder( this );
+		    m_fileFinder->setObjectName( "file finder" );
 		    connect( m_fileFinder, SIGNAL( completion(const QString&)),
 			     SLOT( findCompletion( const QString& )));
 		    connect( m_fileFinder,
