@@ -909,10 +909,6 @@ void ImageWindow::saveImage()
     QString lastDir = dlg.baseUrl().path(KUrl::AddTrailingSlash);
     if ( lastDir != m_saveDirectory )
         m_saveDirectory = lastDir;
-
-#if KDE_VERSION < 310
-    delete keepSize;
-#endif
 }
 
 bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) const
