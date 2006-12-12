@@ -29,7 +29,7 @@
 
 #include "filefinder.h"
 
-FileFinder::FileFinder( QWidget *parent, const char *name )
+FileFinder::FileFinder( QWidget *parent )
     : KLineEdit( parent )
 {
     // make this widget just as large, as the font is + 8 Pixels
@@ -71,7 +71,7 @@ FileFinder::~FileFinder()
 
 void FileFinder::focusOutEvent( QFocusEvent *e )
 {
-    if ( e->reason() != QFocusEvent::Popup )
+    if ( e->reason() != Qt::PopupFocusReason )
         hide();
 }
 
