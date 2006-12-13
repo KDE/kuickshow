@@ -291,7 +291,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
                              "%3 (%1 x %2)",
                              m_kuim->originalWidth(), m_kuim->originalHeight(),
                              m_kuim->filename() );
-    setWindowTitle( KInstance::makeStandardCaption( caption, this ) );
+    setWindowTitle( KDialog::makeStandardCaption( caption, this ) );
 }
 
 
