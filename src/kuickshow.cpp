@@ -58,7 +58,7 @@
 #include <kpropertiesdialog.h>
 #include <kprotocolinfo.h>
 #include <kstatusbar.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kstandarddirs.h>
 #include <kstartupinfo.h>
 #include <ktoolbar.h>
@@ -226,10 +226,10 @@ void KuickShow::initGUI( const KUrl& startDir )
              this, SLOT( slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &)) );
 
     // setup actions
-    KAction *open = KStdAction::open( this, SLOT( slotOpenURL() ),
+    KAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
                                       coll, "openURL" );
 
-    KAction *print = KStdAction::print( this, SLOT( slotPrint() ),
+    KAction *print = KStandardAction::print( this, SLOT( slotPrint() ),
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
@@ -266,7 +266,7 @@ void KuickShow::initGUI( const KUrl& startDir )
 					   KShortcut(), this, SLOT( slotShowFullscreen() ),
 					   coll, "kuick_showFullscreen" );
 
-    KAction *quit = KStdAction::quit( this, SLOT(slotQuit()), coll, "quit");
+    KAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll, "quit");
 
     // remove QString::null parameter -- ellis
 //    coll->readShortcutSettings( QString::null );
