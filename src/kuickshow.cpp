@@ -233,17 +233,18 @@ void KuickShow::initGUI( const KUrl& startDir )
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configure %1...", KGlobal::instance()->aboutData()->programName() ), "configure",
-                                      KShortcut(),
-                                      this, SLOT( configuration() ),
-                                      coll, "kuick_configure" );
-    KAction *slide = new KAction( i18n("Start Slideshow" ), "ksslide",
-                                  KShortcut( Qt::Key_F2 ),
-                                  this, SLOT( startSlideShow() ),
-                                  coll, "kuick_slideshow" );
-    KAction *about = new KAction( i18n( "About KuickShow" ), "about",
-                                  KShortcut(),
-                                  this, SLOT( about() ), coll, "about" );
+    KAction *configure = new KAction( i18n("Configure %1..."), coll, "kuick_configure" );
+    configure->setIcon( KIcon( "configure" ) );
+    connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
+
+    KAction *slide = new KAction( i18n("Start Slideshow" ), coll, "kuick_slideshow" );
+    slide->setIcon( KIcon("ksslide" ));
+    slide->setShortcut( Qt::Key_F2 );
+    connect( slide, SIGNAL( triggered() ), this, SLOT( startSlideShow() ));
+
+    KAction *about = new KAction( i18n( "About KuickShow" ), coll, "about" );
+    about->setIcon( KIcon("about") );
+    connect( about, SIGNAL( triggered() ), this, SLOT( about() ) );
 
     oneWindowAction = new KToggleAction( i18n("Open Only One Image Window"),
                                          "window_new",
@@ -255,16 +256,14 @@ void KuickShow::initGUI( const KUrl& startDir )
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
 
-    KAction *showInOther = new KAction( i18n("Show Image"), KShortcut(),
-                                        this, SLOT( slotShowInOtherWindow() ),
-                                        coll, "kuick_showInOtherWindow" );
-    KAction *showInSame = new KAction( i18n("Show Image in Active Window"),
-                                       KShortcut(),
-                                       this, SLOT( slotShowInSameWindow() ),
-                                       coll, "kuick_showInSameWindow" );
-    KAction *showFullscreen = new KAction( i18n("Show Image in Fullscreen Mode"),
-					   KShortcut(), this, SLOT( slotShowFullscreen() ),
-					   coll, "kuick_showFullscreen" );
+    KAction *showInOther = new KAction( i18n("Show Image"), coll, "kuick_showInOtherWindow" );
+    connect( showInOther, SIGNAL( triggered() ), SLOT( slotShowInOtherWindow() ));
+
+    KAction *showInSame = new KAction( i18n("Show Image in Active Window"), coll, "kuick_showInSameWindow" );
+    connect( showInSame, SIGNAL( triggered() ), this, SLOT( slotShowInSameWindow() ) );
+
+    KAction *showFullscreen = new KAction( i18n("Show Image in Fullscreen Mode"), coll, "kuick_showFullscreen" );
+    connect( showFullscreen, SIGNAL( triggered() ), this, SLOT( slotShowFullscreen() ) );
 
     KAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll, "quit");
 
@@ -275,15 +274,15 @@ void KuickShow::initGUI( const KUrl& startDir )
     // menubar
     KMenuBar *mBar = menuBar();
     Q3PopupMenu *fileMenu = new Q3PopupMenu( mBar, "file" );
-    open->plug( fileMenu );
-    showInOther->plug( fileMenu );
-    showInSame->plug( fileMenu );
-    showFullscreen->plug( fileMenu );
+    fileMenu->addAction(open);
+    fileMenu->addAction(showInOther);
+    fileMenu->addAction(showInSame);
+    fileMenu->addAction(showFullscreen);
     fileMenu->addSeparator();
-    slide->plug( fileMenu );
-    print->plug( fileMenu );
+    fileMenu->addAction(slide);
+    fileMenu->addAction(print);
     fileMenu->addSeparator();
-    quit->plug( fileMenu );
+    fileMenu->addAction(quit);
 
     Q3PopupMenu *editMenu = new Q3PopupMenu( mBar, "edit" );
     editMenu->addAction(coll->action("mkdir"));
@@ -309,15 +308,15 @@ void KuickShow::initGUI( const KUrl& startDir )
     // add the sorting menu and a separator into the View menu
     KActionMenu *viewActionMenu = static_cast<KActionMenu*>( coll->action("view menu"));
     viewActionMenu->popupMenu()->addSeparator();
-    sortingMenu->plug( viewActionMenu->popupMenu(), 0 ); // on top of the menu
+    viewActionMenu->popupMenu()->addAction(sortingMenu); //, 0 ); // on top of the menu
 
 
     Q3PopupMenu *settingsMenu = new Q3PopupMenu( mBar, "settings" );
-    configure->plug( settingsMenu );
+    settingsMenu->addAction(configure);
 
     mBar->insertItem( i18n("&File"), fileMenu );
     mBar->insertItem( i18n("&Edit"), editMenu );
-    viewActionMenu->plug( mBar );
+    mBar->addAction(viewActionMenu);
     mBar->insertItem( i18n("&Settings"), settingsMenu );
 
     // toolbar
@@ -336,13 +335,13 @@ void KuickShow::initGUI( const KUrl& startDir )
     tBar->addAction(coll->action( "preview"));
 
     tBar->addSeparator();
-    configure->plug( tBar );
-    slide->plug( tBar );
+    tBar->addAction(configure);
+    tBar->addAction(slide);
     tBar->addSeparator();
-    oneWindowAction->plug( tBar );
-    print->plug( tBar );
+    tBar->addAction(oneWindowAction);
+    tBar->addAction(print);
     tBar->addSeparator();
-    about->plug( tBar );
+    tBar->addAction(about);
 
     KMenu *help = helpMenu( QString::null, false );
     mBar->insertItem( KStdGuiItem::help().text() , help );
