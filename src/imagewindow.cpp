@@ -252,7 +252,7 @@ void ImageWindow::setupActions()
     connect( pause, SIGNAL( triggered() ), this, SLOT( pauseSlideShow() ) );
 
     KAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
-    fullscreenAction->setDefaultShortcut(KShortcut(Qt::Key_Return));
+    fullscreenAction->setShortcut(KShortcut(Qt::Key_Return), KAction::DefaultShortcut);
 
     KAction *reloadImage = new KAction( i18n("Reload Image"), m_actions, "reload_image" );
     reloadImage->setShortcut(Qt::Key_Enter);
