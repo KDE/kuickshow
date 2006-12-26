@@ -1123,9 +1123,8 @@ void ImageWindow::maximize()
 
 void ImageWindow::slotProperties()
 {
-    KUrl url;
-    url.setPath( filename() ); // ###
-    (void) new KPropertiesDialog( url, this, "props dialog", true );
+    KPropertiesDialog dlg( KUrl(filename()), this );
+    dlg.exec();
 }
 
 #include "imagewindow.moc"
