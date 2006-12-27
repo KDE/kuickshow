@@ -62,7 +62,7 @@
 #include <kmessagebox.h>
 #include <kprinter.h>
 #include <kpropertiesdialog.h>
-#include <kstdaccel.h>
+#include <kstandardshortcut.h>
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>
 #include <ktemporaryfile.h>
@@ -149,11 +149,11 @@ void ImageWindow::updateActions()
 void ImageWindow::setupActions()
 {
     KAction* nextImage = new KAction( i18n("Show Next Image"), m_actions, "next_image" );
-    nextImage->setShortcut( KStdAccel::next() );
+    nextImage->setShortcut( KStandardShortcut::next() );
     connect( nextImage, SIGNAL( triggered() ), this, SLOT( slotRequestNext() ) );
 
     KAction* showPreviousImage = new KAction( i18n("Show Previous Image"), m_actions, "previous_image" );
-    showPreviousImage->setShortcut(KStdAccel::prior());
+    showPreviousImage->setShortcut(KStandardShortcut::prior());
     connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( slotRequestPrevious() ) );
 
     KAction* deleteImage = new KAction( i18n("Delete Image"), m_actions, "delete_image" );
@@ -197,7 +197,7 @@ void ImageWindow::setupActions()
     connect( flipVeri, SIGNAL( triggered() ), this, SLOT( flipVert() ) );
 
     KAction *printImage = new KAction( i18n("Print Image..."), m_actions, "print_image" );
-    printImage->setShortcut(KStdAccel::print());
+    printImage->setShortcut(KStandardShortcut::print());
     connect( printImage, SIGNAL( triggered() ), this, SLOT( printImage() ) );
 
     KStandardAction::saveAs( this, SLOT( saveImage() ),
@@ -559,9 +559,9 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
     if ( key == Qt::Key_Shift )
         updateCursor( ZoomCursor );
 
-    if ( key == Qt::Key_Escape || KStdAccel::close().contains( key ) )
+    if ( key == Qt::Key_Escape || KStandardShortcut::close().contains( key ) )
         close( true );
-    else if ( KStdAccel::save().contains( key ) )
+    else if ( KStandardShortcut::save().contains( key ) )
         saveImage();
     else if ( key == Qt::Key_Right || key == Qt::Key_Down )
         emit nextSlideRequested();

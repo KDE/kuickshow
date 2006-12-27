@@ -65,8 +65,8 @@
 #include <kurlcombobox.h>
 #include <kurlcompletion.h>
 #include <kwin.h>
-#include <kstdguiitem.h>
-#include <kstdaccel.h>
+#include <KStandardGuiItem>
+#include <kstandardshortcut.h>
 #include "aboutwidget.h"
 #include "filewidget.h"
 #include "imdata.h"
@@ -344,7 +344,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     tBar->addAction(about);
 
     KMenu *help = helpMenu( QString::null, false );
-    mBar->insertItem( KStdGuiItem::help().text() , help );
+    mBar->insertItem( KStandardGuiItem::help().text() , help );
 
 
     KStatusBar* sBar = statusBar();
@@ -388,7 +388,7 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     setupGUI( KMainWindow::Save );
 
-    qobject_cast<KAction *>(coll->action( "reload" ))->setShortcut( KStdAccel::reload() );
+    qobject_cast<KAction *>(coll->action( "reload" ))->setShortcut( KStandardShortcut::reload() );
     qobject_cast<KAction *>(coll->action( "short view" ))->setShortcut(Qt::Key_F6);
     qobject_cast<KAction *>(coll->action( "detailed view" ))->setShortcut(Qt::Key_F7);
     qobject_cast<KAction *>(coll->action( "show hidden" ))->setShortcut(Qt::Key_F8);
@@ -772,12 +772,12 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
         k = static_cast<QKeyEvent *>( e );
 
     if ( k ) {
-        if ( KStdAccel::quit().contains( k->key() ) ) {
+        if ( KStandardShortcut::quit().contains( k->key() ) ) {
             saveSettings();
             deleteAllViewers();
             ::exit(0);
         }
-        else if ( KStdAccel::help().contains( k->key() ) ) {
+        else if ( KStandardShortcut::help().contains( k->key() ) ) {
             appHelpActivated();
             return true;
         }
@@ -854,13 +854,13 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             // we definitely have a fileWidget here!
 
-            if ( key == Qt::Key_Home || KStdAccel::home().contains( k->key() ) )
+            if ( key == Qt::Key_Home || KStandardShortcut::home().contains( k->key() ) )
             {
                 item = fileWidget->gotoFirstImage();
                 item_next = fileWidget->getNext( false );
             }
 
-            else if ( key == Qt::Key_End || KStdAccel::end().contains( k->key() ) )
+            else if ( key == Qt::Key_End || KStandardShortcut::end().contains( k->key() ) )
             {
                 item = fileWidget->gotoLastImage();
                 item_next = fileWidget->getPrevious( false );
