@@ -553,7 +553,7 @@ void KuickImage::renderPixmap()
     if ( !myIsDirty )
 	return;
 
-//     qDebug("### rendering: %s", myFilename.latin1());
+//     qDebug("### rendering: %s", myFilename.toLatin1());
 
     if ( myPixmap )
 	Imlib_free_pixmap( myId, myPixmap );
@@ -570,7 +570,7 @@ void KuickImage::renderPixmap()
 
 // #ifndef NDEBUG
 //     gettimeofday( &tms2, NULL );
-//     qDebug("*** rendering image: %s, took %ld ms", myFilename.latin1(),
+//     qDebug("*** rendering image: %s, took %ld ms", myFilename.toLatin1(),
 //            (tms2.tv_usec - tms1.tv_usec)/1000);
 // #endif
 
@@ -754,7 +754,7 @@ KuickImage * ImageCache::getKuimage( const QString& file,
 
 // #ifndef NDEBUG
 //         gettimeofday( &tms2, NULL );
-//         qDebug("*** LOADING image: %s, took %ld ms", file.latin1(),
+//         qDebug("*** LOADING image: %s, took %ld ms", file.toLatin1(),
 //                (tms2.tv_usec - tms1.tv_usec)/1000);
 // #endif	
 
@@ -775,7 +775,7 @@ KuickImage * ImageCache::getKuimage( const QString& file,
     }
 
     if ( kuickList.count() > (uint) myMaxImages ) {
-//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).latin1());
+//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).toLatin1());
 	kuickList.removeLast();
 	fileList.remove( fileList.fromLast() );
     }
