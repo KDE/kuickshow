@@ -51,7 +51,7 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   logo->setTipText( i18n( "Open KuickShow Website" ) );
   logo->setUseTips( true );
 
-  connect( logo, SIGNAL( leftClickedURL( const QString & ) ),
+  connect( logo, SIGNAL( leftClickedUrl( const QString & ) ),
             SLOT( slotURLClicked( const QString & ) ) );
 
   layout->addWidget( logo, 0, Qt::AlignRight );
