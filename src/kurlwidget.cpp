@@ -25,7 +25,7 @@ KURLWidget::KURLWidget(const QString& text, QWidget *parent)
     : KUrlLabel( parent )
 {
     setText( text );
-    connect( this, SIGNAL( leftClickedURL() ), SLOT( run() ));
+    connect( this, SIGNAL( leftClickedUrl() ), SLOT( run() ));
     setUseTips( true );
 }
 
