@@ -226,46 +226,57 @@ void KuickShow::initGUI( const KUrl& startDir )
              this, SLOT( slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &)) );
 
     // setup actions
-    KAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
-                                      coll, "openURL" );
+    QAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
+                                      coll );
+    coll->addAction( "openURL", open );
 
-    KAction *print = KStandardAction::print( this, SLOT( slotPrint() ),
-                                        coll, "kuick_print" );
+    QAction *print = KStandardAction::print( this, SLOT( slotPrint() ),
+                                        coll );
+    coll->addAction( "kuick_print", print );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = new KAction( i18n("Configure %1..."), coll, "kuick_configure" );
+    QAction *configure = coll->addAction( "kuick_configure" );
+    configure->setText( i18n("Configure %1...") );
     configure->setIcon( KIcon( "configure" ) );
     connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
 
-    KAction *slide = new KAction( i18n("Start Slideshow" ), coll, "kuick_slideshow" );
+    QAction *slide = coll->addAction( "kuick_slideshow" );
+    slide->setText( i18n("Start Slideshow" ) );
     slide->setIcon( KIcon("ksslide" ));
     slide->setShortcut( Qt::Key_F2 );
     connect( slide, SIGNAL( triggered() ), this, SLOT( startSlideShow() ));
 
-    KAction *about = new KAction( i18n( "About KuickShow" ), coll, "about" );
+    QAction *about = coll->addAction( "about" );
+    about->setText( i18n( "About KuickShow" ) );
     about->setIcon( KIcon("about") );
     connect( about, SIGNAL( triggered() ), this, SLOT( about() ) );
 
-    oneWindowAction = new KToggleAction( i18n("Open Only One Image Window"),
-                                         "window_new",
-                                         KShortcut( Qt::CTRL+Qt::Key_N ), coll,
-                                         "kuick_one window" );
+    oneWindowAction = coll->add<KToggleAction>( "kuick_one window" );
+    oneWindowAction->setText( i18n("Open Only One Image Window") );
+    oneWindowAction->setIcon( KIcon( "window_new" ) );
+    oneWindowAction->setShortcut( Qt::CTRL+Qt::Key_N );
 
-    m_toggleBrowserAction = new KToggleAction( i18n("Show File Browser"), KShortcut( Qt::Key_Space ), coll, "toggleBrowser" );
+    m_toggleBrowserAction = coll->add<KToggleAction>( "toggleBrowser" );
+    m_toggleBrowserAction->setText( i18n("Show File Browser") );
+    m_toggleBrowserAction->setShortcut( Qt::Key_Space );
     m_toggleBrowserAction->setCheckedState(KGuiItem(i18n("Hide File Browser")));
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
 
-    KAction *showInOther = new KAction( i18n("Show Image"), coll, "kuick_showInOtherWindow" );
+    QAction *showInOther = coll->addAction( "kuick_showInOtherWindow" );
+    showInOther->setText( i18n("Show Image") );
     connect( showInOther, SIGNAL( triggered() ), SLOT( slotShowInOtherWindow() ));
 
-    KAction *showInSame = new KAction( i18n("Show Image in Active Window"), coll, "kuick_showInSameWindow" );
+    QAction *showInSame = coll->addAction( "kuick_showInSameWindow" );
+    showInSame->setText( i18n("Show Image in Active Window") );
     connect( showInSame, SIGNAL( triggered() ), this, SLOT( slotShowInSameWindow() ) );
 
-    KAction *showFullscreen = new KAction( i18n("Show Image in Fullscreen Mode"), coll, "kuick_showFullscreen" );
+    QAction *showFullscreen = coll->addAction( "kuick_showFullscreen" );
+    showFullscreen->setText( i18n("Show Image in Fullscreen Mode") );
     connect( showFullscreen, SIGNAL( triggered() ), this, SLOT( slotShowFullscreen() ) );
 
-    KAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll, "quit");
+    QAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll);
+    coll->addAction( "quit", quit );
 
     // remove QString::null parameter -- ellis
 //    coll->readShortcutSettings( QString::null );

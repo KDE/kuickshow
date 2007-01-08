@@ -148,73 +148,92 @@ void ImageWindow::updateActions()
 
 void ImageWindow::setupActions()
 {
-    KAction* nextImage = new KAction( i18n("Show Next Image"), m_actions, "next_image" );
+    QAction *nextImage = m_actions->addAction( "next_image" );
+    nextImage->setText( i18n("Show Next Image") );
     nextImage->setShortcut( KStandardShortcut::next() );
     connect( nextImage, SIGNAL( triggered() ), this, SLOT( slotRequestNext() ) );
 
-    KAction* showPreviousImage = new KAction( i18n("Show Previous Image"), m_actions, "previous_image" );
+    QAction* showPreviousImage = m_actions->addAction( "previous_image" );
+    showPreviousImage->setText( i18n("Show Previous Image") );
     showPreviousImage->setShortcut(KStandardShortcut::prior());
     connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( slotRequestPrevious() ) );
 
-    KAction* deleteImage = new KAction( i18n("Delete Image"), m_actions, "delete_image" );
+    QAction* deleteImage = m_actions->addAction( "delete_image" );
+    deleteImage->setText( i18n("Delete Image") );
     deleteImage->setShortcut(Qt::Key_Delete);
     connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( imageDelete() ) );
 
-    KAction* zoomIn = new KAction( i18n("Zoom In"), m_actions, "zoom_in" );
+    QAction* zoomIn = m_actions->addAction( "zoom_in" );
+    zoomIn->setText( i18n("Zoom In") );
     zoomIn->setShortcut(Qt::Key_Plus),
     connect( zoomIn, SIGNAL( triggered() ), this, SLOT( zoomIn() ));
 
-    KAction *zoomOut = new KAction( i18n("Zoom Out"), m_actions, "zoom_out" );
+    QAction *zoomOut = m_actions->addAction( "zoom_out");
+    zoomOut->setText( i18n("Zoom Out") );
+
     zoomOut->setShortcut(Qt::Key_Minus);
     connect( zoomOut, SIGNAL( triggered() ), this, SLOT( zoomOut() ) );
 
-    KAction *restoreSize = new KAction( i18n("Restore Original Size"), m_actions, "original_size" );
+    QAction *restoreSize = m_actions->addAction( "original_size" );
+    restoreSize->setText( i18n("Restore Original Size") );
     restoreSize->setShortcut(Qt::Key_O);
     connect( restoreSize, SIGNAL( triggered() ), this, SLOT( showImageOriginalSize() ) );
 
-    KAction *maximize = new KAction( i18n("Maximize"), m_actions, "maximize" );
+    QAction *maximize = m_actions->addAction( "maximize" );
+    maximize->setText( i18n("Maximize") );
     maximize->setShortcut(Qt::Key_M);
     connect( maximize, SIGNAL( triggered() ), this, SLOT( maximize() ) );
 
-    KAction *rotate90 = new KAction( i18n("Rotate 90 Degrees"), m_actions, "rotate90" );
+    QAction *rotate90 = m_actions->addAction( "rotate90" );
+    rotate90->setText( i18n("Rotate 90 Degrees") );
     rotate90->setShortcut(Qt::Key_9);
     connect( rotate90, SIGNAL( triggered() ), this, SLOT( rotate90() ) );
 
-    KAction *rotate180 = new KAction( i18n("Rotate 180 Degrees"), m_actions, "rotate180" );
+    QAction *rotate180 = m_actions->addAction( "rotate180" );
+    rotate180->setText( i18n("Rotate 180 Degrees") );
     rotate180->setShortcut(Qt::Key_8);
     connect( rotate180, SIGNAL( triggered() ), this, SLOT( rotate180() ) );
 
-    KAction *rotate270 = new KAction( i18n("Rotate 270 Degrees"), m_actions, "rotate270" );
+    QAction *rotate270 = m_actions->addAction( "rotate270" );
+    rotate270->setText( i18n("Rotate 270 Degrees") );
     rotate270->setShortcut(Qt::Key_7);
     connect( rotate270, SIGNAL( triggered() ), this, SLOT( rotate270() ) );
 
-    KAction *flipHori = new KAction( i18n("Flip Horizontally"), m_actions, "flip_horicontally" );
+    QAction *flipHori = m_actions->addAction( "flip_horicontally" );
+    flipHori->setText( i18n("Flip Horizontally") );
+
     flipHori->setShortcut(Qt::Key_Asterisk);
     connect( flipHori, SIGNAL( triggered() ), this, SLOT( flipHoriz() ) );
 
-    KAction *flipVeri = new KAction( i18n("Flip Vertically"), m_actions, "flip_vertically" );
+    QAction *flipVeri = m_actions->addAction( "flip_vertically" );
+    flipVeri->setText( i18n("Flip Vertically") );
     flipVeri->setShortcut(Qt::Key_Slash);
     connect( flipVeri, SIGNAL( triggered() ), this, SLOT( flipVert() ) );
 
-    KAction *printImage = new KAction( i18n("Print Image..."), m_actions, "print_image" );
+    QAction *printImage = m_actions->addAction( "print_image" );
+    printImage->setText( i18n("Print Image...") );
     printImage->setShortcut(KStandardShortcut::print());
     connect( printImage, SIGNAL( triggered() ), this, SLOT( printImage() ) );
 
-    KStandardAction::saveAs( this, SLOT( saveImage() ),
-                 m_actions, "save_image_as" );
+    QAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
+    m_actions->addAction( "save_image_as",  a );
 
-    KStandardAction::close( this, SLOT( close() ),
-                 m_actions, "close_image" );
+    a = KStandardAction::close( this, SLOT( close() ),
+                 m_actions);
+    m_actions->addAction( "close_image", a );
     // --------
-    KAction *moreBrighteness = new KAction( i18n("More Brightness"), m_actions, "more_brightness" );
+    QAction *moreBrightness = m_actions->addAction( "more_brightness" );
+    moreBrightness->setText( i18n("More Brightness") );
     moreBrighteness->setShortcut(Qt::Key_B);
     connect( moreBrighteness, SIGNAL( triggered() ), this, SLOT( moreBrightness() ) );
 
-    KAction *lessBrightness = new KAction( i18n("Less Brightness"), m_actions, "less_brightness" );
+    QAction *lessBrightness = m_actions->addAction( "less_brightness" );
+    lessBrightness->setText(  i18n("Less Brightness") );
     lessBrightness->setShortcut(Qt::SHIFT + Qt::Key_B);
     connect( lessBrightness, SIGNAL( triggered() ), this, SLOT( lessBrightness() ) );
 
-    KAction *moreContrast = new KAction( i18n("More Contrast"), m_actions, "more_contrast" );
+    QAction *moreContrast = m_actions->addAction( "more_contrast" );
+    moreContrast->setText( i18n("More Contrast") );
     moreContrast->setShortcut(Qt::Key_C);
     connect( moreContrast, SIGNAL( triggered() ), this, SLOT( moreContrast() ) );
 
@@ -682,7 +701,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 
 #ifdef __GNUC__
 #warning "qt4 what will replace p.flush() ????? "
-#endif	
+#endif
 	//p.flush();
     }
 
