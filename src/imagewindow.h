@@ -41,6 +41,7 @@ class QRect;
 class QString;
 class QTimer;
 class QWidget;
+class KActionCollection;
 
 class ImageWindow : public ImlibWidget
 {

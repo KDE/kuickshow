@@ -35,7 +35,6 @@
 #include <kurlcompletion.h>
 #include <kactioncollection.h>
 #include <kactionmenu.h>
-#include <kseparatoraction.h>
 #include "filefinder.h"
 #include "filewidget.h"
 #include "kuickdata.h"

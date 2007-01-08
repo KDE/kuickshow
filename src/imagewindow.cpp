@@ -150,12 +150,12 @@ void ImageWindow::setupActions()
 {
     QAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
-    nextImage->setShortcut( KStandardShortcut::next() );
+    qobject_cast<KAction*>( nextImage )->setShortcut( KStandardShortcut::next() );
     connect( nextImage, SIGNAL( triggered() ), this, SLOT( slotRequestNext() ) );
 
     QAction* showPreviousImage = m_actions->addAction( "previous_image" );
     showPreviousImage->setText( i18n("Show Previous Image") );
-    showPreviousImage->setShortcut(KStandardShortcut::prior());
+    qobject_cast<KAction*>( showPreviousImage )->setShortcut(KStandardShortcut::prior());
     connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( slotRequestPrevious() ) );
 
     QAction* deleteImage = m_actions->addAction( "delete_image" );
@@ -212,7 +212,7 @@ void ImageWindow::setupActions()
 
     QAction *printImage = m_actions->addAction( "print_image" );
     printImage->setText( i18n("Print Image...") );
-    printImage->setShortcut(KStandardShortcut::print());
+    qobject_cast<KAction*>( printImage )->setShortcut(KStandardShortcut::print());
     connect( printImage, SIGNAL( triggered() ), this, SLOT( printImage() ) );
 
     QAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
@@ -222,8 +222,8 @@ void ImageWindow::setupActions()
                  m_actions);
     m_actions->addAction( "close_image", a );
     // --------
-    QAction *moreBrightness = m_actions->addAction( "more_brightness" );
-    moreBrightness->setText( i18n("More Brightness") );
+    QAction *moreBrighteness = m_actions->addAction( "more_brightness" );
+    moreBrighteness->setText( i18n("More Brightness") );
     moreBrighteness->setShortcut(Qt::Key_B);
     connect( moreBrighteness, SIGNAL( triggered() ), this, SLOT( moreBrightness() ) );
 
@@ -237,47 +237,61 @@ void ImageWindow::setupActions()
     moreContrast->setShortcut(Qt::Key_C);
     connect( moreContrast, SIGNAL( triggered() ), this, SLOT( moreContrast() ) );
 
-    KAction *lessContrast = new KAction( i18n("Less Contrast"), m_actions, "less_contrast" );
+    QAction *lessContrast = m_actions->addAction( "less_contrast" );
+    lessContrast->setText( i18n("Less Contrast") );
     lessContrast->setShortcut(Qt::SHIFT + Qt::Key_C);
     connect( lessContrast, SIGNAL( triggered() ), this, SLOT( lessContrast() ) );
 
-    KAction *moreGamma = new KAction( i18n("More Gamma"), m_actions, "more_gamma" );
+    QAction *moreGamma = m_actions->addAction( "more_gamma" );
+    moreGamma->setText( i18n("More Gamma") );
+
     moreGamma->setShortcut(Qt::Key_G);
     connect( moreGamma, SIGNAL( triggered() ), this, SLOT( moreGamma() ) );
 
-    KAction *lessGamma = new KAction( i18n("Less Gamma"), m_actions, "less_gamma" );
+    QAction *lessGamma = m_actions->addAction( "less_gamma" );
+    lessGamma->setText( i18n("Less Gamma") );
     lessGamma->setShortcut(Qt::SHIFT + Qt::Key_G);
     connect( lessGamma, SIGNAL( triggered() ), this, SLOT( lessGamma() ) );
 
     // --------
-    KAction *scrollUp = new KAction( i18n("Scroll Up"), m_actions, "scroll_up" );
+    QAction *scrollUp = m_actions->addAction( "scroll_up" );
+    scrollUp->setText( i18n("Scroll Up") );
+
     scrollUp->setShortcut(Qt::Key_Up);
     connect( scrollUp, SIGNAL( triggered() ), this, SLOT( scrollUp() ) );
 
-    KAction *scrollDown = new KAction( i18n("Scroll Down"), m_actions, "scroll_down" );
+    QAction *scrollDown = m_actions->addAction( "scroll_down" );
+    scrollDown->setText( i18n("Scroll Down") );
     scrollDown->setShortcut(Qt::Key_Down);
     connect( scrollDown, SIGNAL( triggered() ), this, SLOT( scrollDown() ) );
 
-    KAction *scrollLeft = new KAction( i18n("Scroll Left"), m_actions, "scroll_left" );
+    QAction *scrollLeft = m_actions->addAction( "scroll_left" );
+    scrollLeft->setText( i18n("Scroll Left") );
     scrollLeft->setShortcut(Qt::Key_Left);
     connect( scrollLeft, SIGNAL( triggered() ), this, SLOT( scrollLeft() ) );
 
-    KAction *scrollRight = new KAction( i18n("Scroll Right"), m_actions, "scroll_right" );
+    QAction *scrollRight = m_actions->addAction( "scroll_right" );
+    scrollRight->setText( i18n("Scroll Right") );
     scrollRight->setShortcut(Qt::Key_Right);
     connect( scrollRight, SIGNAL( triggered() ), this, SLOT( scrollRight() ) );
     // --------
-    KAction *pause = new KAction( i18n("Pause Slideshow"), m_actions, "kuick_slideshow_pause" );
+    QAction *pause = m_actions->addAction( "kuick_slideshow_pause" );
+    pause->setText( i18n("Pause Slideshow") );
     pause->setShortcut(Qt::Key_P);
     connect( pause, SIGNAL( triggered() ), this, SLOT( pauseSlideShow() ) );
-
-    KAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions, 0 );
-    fullscreenAction->setShortcut(KShortcut(Qt::Key_Return), KAction::DefaultShortcut);
-
-    KAction *reloadImage = new KAction( i18n("Reload Image"), m_actions, "reload_image" );
+#warning "kde4 port it"
+#if 0
+    QAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
+    m_actions->addAction( "", fullscreenAction );
+    qobject_cast<KAction*>( fullscreenAction )->setShortcut(KShortcut(Qt::Key_Return), KAction::DefaultShortcut);
+#endif
+    QAction *reloadImage = m_actions->addAction( "reload_image" );
+    reloadImage->setText( i18n("Reload Image") );
     reloadImage->setShortcut(Qt::Key_Enter);
     connect( reloadImage, SIGNAL( triggered() ), this, SLOT( reload() ) );
 
-    KAction *properties = new KAction( i18n("Properties"), m_actions, "properties" );
+    QAction *properties = m_actions->addAction("properties" );
+    properties->setText( i18n("Properties") );
     properties->setShortcut(Qt::ALT + Qt::Key_Return);
     connect( reloadImage, SIGNAL( triggered() ), this, SLOT( slotProperties() ) );
 
