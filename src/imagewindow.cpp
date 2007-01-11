@@ -279,7 +279,9 @@ void ImageWindow::setupActions()
     pause->setText( i18n("Pause Slideshow") );
     pause->setShortcut(Qt::Key_P);
     connect( pause, SIGNAL( triggered() ), this, SLOT( pauseSlideShow() ) );
+#ifdef __GNUC__
 #warning "kde4 port it"
+#endif
 #if 0
     QAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
     m_actions->addAction( "", fullscreenAction );
