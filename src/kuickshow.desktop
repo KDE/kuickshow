@@ -12,6 +12,7 @@ Terminal=false
 InitialPreference=6
 
 GenericName=Image Viewer
+GenericName[el]=Προβολέας εικόνων
 GenericName[fr]=Afficheur d'images
 GenericName[x-test]=xxImage Viewerxx
 X-DBUS-StartupType=Multi
