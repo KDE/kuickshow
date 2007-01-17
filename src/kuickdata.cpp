@@ -78,41 +78,41 @@ void KuickData::load()
   kc->setGroup( "GeneralConfiguration" );
   fileFilter   = kc->readEntry( "FileFilter", def.fileFilter );
   slideDelay   = kc->readEntry( "SlideShowDelay", def.slideDelay );
-  slideshowCycles = kc->readUnsignedNumEntry( "SlideshowCycles", 1 );
-  slideshowFullscreen = kc->readBoolEntry( "SlideshowFullscreen", true );
-  slideshowStartAtFirst = kc->readBoolEntry("SlideshowStartAtFirst", true );
+  slideshowCycles = kc->readEntry( "SlideshowCycles", 1 );
+  slideshowFullscreen = kc->readEntry( "SlideshowFullscreen", true );
+  slideshowStartAtFirst = kc->readEntry("SlideshowStartAtFirst", true );
 
-  preloadImage = kc->readBoolEntry( "PreloadNextImage", def.preloadImage );
+  preloadImage = kc->readEntry( "PreloadNextImage", def.preloadImage );
 
-  fullScreen = kc->readBoolEntry( "Fullscreen", def.fullScreen);
-  autoRotation = kc->readBoolEntry( "AutoRotation", def.autoRotation);
-  downScale  = kc->readBoolEntry( "ShrinkToScreenSize", def.downScale );
-  upScale    = kc->readBoolEntry( "ZoomToScreenSize", def.upScale );
-  flipVertically   = kc->readBoolEntry( "FlipVertically", def.flipVertically );
-  flipHorizontally = kc->readBoolEntry( "FlipHorizontally",
+  fullScreen = kc->readEntry( "Fullscreen", def.fullScreen);
+  autoRotation = kc->readEntry( "AutoRotation", def.autoRotation);
+  downScale  = kc->readEntry( "ShrinkToScreenSize", def.downScale );
+  upScale    = kc->readEntry( "ZoomToScreenSize", def.upScale );
+  flipVertically   = kc->readEntry( "FlipVertically", def.flipVertically );
+  flipHorizontally = kc->readEntry( "FlipHorizontally",
 					def.flipHorizontally );
   maxUpScale       = kc->readEntry( "MaxUpscale Factor", def.maxUpScale );
   rotation         = (Rotation) kc->readEntry( "Rotation", int(def.rotation) );
 
-  isModsEnabled    = kc->readBoolEntry( "ApplyDefaultModifications",
+  isModsEnabled    = kc->readEntry( "ApplyDefaultModifications",
 					def.isModsEnabled );
 
   brightnessSteps = kc->readEntry("BrightnessStepSize",def.brightnessSteps);
   contrastSteps   = kc->readEntry("ContrastStepSize", def.contrastSteps);
   gammaSteps      = kc->readEntry("GammaStepSize", def.gammaSteps);
   scrollSteps     = kc->readEntry("ScrollingStepSize", def.scrollSteps);
-  zoomSteps       = kc->readDoubleNumEntry("ZoomStepSize", def.zoomSteps);
+  zoomSteps       = kc->readEntry("ZoomStepSize", (double)def.zoomSteps);
 
 
   maxWidth 	= abs( kc->readEntry( "MaximumImageWidth", def.maxWidth ) );
   maxHeight 	= abs( kc->readEntry( "MaximumImageHeight", def.maxHeight));
 
-  maxCachedImages = kc->readUnsignedNumEntry( "MaxCachedImages",
+  maxCachedImages = kc->readEntry( "MaxCachedImages",
                                               def.maxCachedImages );
   QColor _col(Qt::black);
-  backgroundColor = kc->readColorEntry( "BackgroundColor", &_col );
+  backgroundColor = kc->readEntry( "BackgroundColor", _col );
 
-  startInLastDir = kc->readBoolEntry( "StartInLastDir", true);
+  startInLastDir = kc->readEntry( "StartInLastDir", true);
 
   idata->load( kc );
 

@@ -48,11 +48,11 @@ void ImData::load( KConfig *kc )
 
   kc->setGroup( "ImlibConfiguration" );
 
-  ownPalette  = kc->readBoolEntry( "UseOwnPalette", def.ownPalette );
-  fastRemap   = kc->readBoolEntry( "FastRemapping", def.fastRemap );
-  fastRender  = kc->readBoolEntry( "FastRendering", def.fastRender );
-  dither16bit = kc->readBoolEntry( "Dither16Bit", def.dither16bit );
-  dither8bit  = kc->readBoolEntry( "Dither8Bit", def.dither8bit );
+  ownPalette  = kc->readEntry( "UseOwnPalette", def.ownPalette );
+  fastRemap   = kc->readEntry( "FastRemapping", def.fastRemap );
+  fastRender  = kc->readEntry( "FastRendering", def.fastRender );
+  dither16bit = kc->readEntry( "Dither16Bit", def.dither16bit );
+  dither8bit  = kc->readEntry( "Dither8Bit", def.dither8bit );
 
   maxCache    = kc->readEntry( "MaxCacheSize", 10240 );
 
