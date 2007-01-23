@@ -236,7 +236,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     print->setText( i18n("Print Image...") );
 
     QAction *configure = coll->addAction( "kuick_configure" );
-    configure->setText( i18n("Configure %1...") );
+    configure->setText( i18n("Configure %1...",KGlobal::instance()->aboutData()->programName() ) );
     configure->setIcon( KIcon( "configure" ) );
     connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
 
