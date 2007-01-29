@@ -67,6 +67,7 @@
 #include <kwin.h>
 #include <KStandardGuiItem>
 #include <kstandardshortcut.h>
+#include <kconfiggroup.h>
 #include "aboutwidget.h"
 #include "filewidget.h"
 #include "imdata.h"
@@ -118,7 +119,7 @@ KuickShow::KuickShow( const char *name )
     connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
 
 
-    KConfig *kc = KGlobal::config();
+    KSharedConfig::Ptr kc = KGlobal::config();
 
     bool isDir = false; // true if we get a directory on the commandline
 
@@ -236,7 +237,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     print->setText( i18n("Print Image...") );
 
     QAction *configure = coll->addAction( "kuick_configure" );
-    configure->setText( i18n("Configure %1...",KGlobal::instance()->aboutData()->programName() ) );
+    configure->setText( i18n("Configure %1...",KGlobal::mainComponent().aboutData()->programName() ) );
     configure->setIcon( KIcon( "configure" ) );
     connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
 
@@ -365,7 +366,7 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     fileWidget->setFocus();
 
-    KConfig *kc = KGlobal::config();
+    KSharedConfig::Ptr kc = KGlobal::config();
     kc->setGroup("SessionSettings");
     bool oneWindow = kc->readEntry("OpenImagesInActiveWindow", true );
     oneWindowAction->setChecked( oneWindow );
@@ -1061,7 +1062,7 @@ void KuickShow::saveProperties( KConfig *kc )
 
 void KuickShow::saveSettings()
 {
-    KConfig *kc = KGlobal::config();
+    KSharedConfig::Ptr kc = KGlobal::config();
 
     kc->setGroup("SessionSettings");
     if ( oneWindowAction )

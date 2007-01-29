@@ -71,7 +71,7 @@ KuickData::~KuickData()
 
 void KuickData::load()
 {
-  KConfig *kc = KGlobal::config();
+  KSharedConfig::Ptr kc = KGlobal::config();
 
   KuickData def;
 
@@ -138,7 +138,7 @@ void KuickData::load()
 
 void KuickData::save()
 {
-  KConfig *kc = KGlobal::config();
+  KSharedConfig::Ptr kc = KGlobal::config();
   kc->setGroup( "GeneralConfiguration" );
 
   kc->writeEntry( "FileFilter", fileFilter );
