@@ -114,7 +114,7 @@ void KuickData::load()
 
   startInLastDir = kc->readEntry( "StartInLastDir", true);
 
-  idata->load( kc );
+  idata->load( kc.data() );
 
   // compatibility with KuickShow <= 0.8.3
   switch ( rotation )
@@ -176,7 +176,7 @@ void KuickData::save()
 
   kc->writeEntry( "StartInLastDir", startInLastDir );
 
-  idata->save( kc );
+  idata->save( kc.data() );
 
   kc->sync();
 }
