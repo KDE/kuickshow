@@ -19,7 +19,7 @@
 #include <stdlib.h>
 
 #include <qcolor.h>
-#include <kconfig.h>
+#include <ksharedconfig.h>
 #include <kglobal.h>
 
 #include "kuickdata.h"
