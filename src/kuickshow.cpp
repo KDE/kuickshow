@@ -366,9 +366,8 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     fileWidget->setFocus();
 
-    KSharedConfig::Ptr kc = KGlobal::config();
-    kc->setGroup("SessionSettings");
-    bool oneWindow = kc->readEntry("OpenImagesInActiveWindow", true );
+    KConfigGroup kc(KGlobal::config(), "SessionSettings");
+    bool oneWindow = kc.readEntry("OpenImagesInActiveWindow", true );
     oneWindowAction->setChecked( oneWindow );
 
     tBar->show();
