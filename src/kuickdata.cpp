@@ -19,7 +19,7 @@
 #include <stdlib.h>
 
 #include <qcolor.h>
-#include <kconfig.h>
+#include <ksharedconfig.h>
 #include <kglobal.h>
 
 #include "kuickdata.h"
@@ -138,45 +138,44 @@ void KuickData::load()
 
 void KuickData::save()
 {
-  KSharedConfig::Ptr kc = KGlobal::config();
-  kc->setGroup( "GeneralConfiguration" );
+  KConfigGroup kc(KGlobal::config(), "GeneralConfiguration");
 
-  kc->writeEntry( "FileFilter", fileFilter );
-  kc->writeEntry( "SlideShowDelay", slideDelay );
-  kc->writeEntry( "SlideshowCycles", slideshowCycles );
-  kc->writeEntry( "SlideshowFullscreen", slideshowFullscreen );
-  kc->writeEntry( "SlideshowStartAtFirst", slideshowStartAtFirst );
+  kc.writeEntry( "FileFilter", fileFilter );
+  kc.writeEntry( "SlideShowDelay", slideDelay );
+  kc.writeEntry( "SlideshowCycles", slideshowCycles );
+  kc.writeEntry( "SlideshowFullscreen", slideshowFullscreen );
+  kc.writeEntry( "SlideshowStartAtFirst", slideshowStartAtFirst );
 
-  kc->writeEntry( "PreloadNextImage", preloadImage );
+  kc.writeEntry( "PreloadNextImage", preloadImage );
 
-  kc->writeEntry( "Fullscreen", fullScreen  );
-  kc->writeEntry( "AutoRotation", autoRotation  );
-  kc->writeEntry( "ShrinkToScreenSize", downScale );
-  kc->writeEntry( "ZoomToScreenSize", upScale );
-  kc->writeEntry( "FlipVertically", flipVertically );
-  kc->writeEntry( "FlipHorizontally", flipHorizontally );
-  kc->writeEntry( "MaxUpscale Factor", maxUpScale );
-  kc->writeEntry( "Rotation", int(rotation) );
+  kc.writeEntry( "Fullscreen", fullScreen  );
+  kc.writeEntry( "AutoRotation", autoRotation  );
+  kc.writeEntry( "ShrinkToScreenSize", downScale );
+  kc.writeEntry( "ZoomToScreenSize", upScale );
+  kc.writeEntry( "FlipVertically", flipVertically );
+  kc.writeEntry( "FlipHorizontally", flipHorizontally );
+  kc.writeEntry( "MaxUpscale Factor", maxUpScale );
+  kc.writeEntry( "Rotation", int(rotation) );
 
-  kc->writeEntry( "ApplyDefaultModifications", isModsEnabled );
+  kc.writeEntry( "ApplyDefaultModifications", isModsEnabled );
 
 
-  kc->writeEntry( "BrightnessStepSize", brightnessSteps );
-  kc->writeEntry( "ContrastStepSize", contrastSteps );
-  kc->writeEntry( "GammaStepSize", gammaSteps );
+  kc.writeEntry( "BrightnessStepSize", brightnessSteps );
+  kc.writeEntry( "ContrastStepSize", contrastSteps );
+  kc.writeEntry( "GammaStepSize", gammaSteps );
 
-  kc->writeEntry( "ScrollingStepSize", scrollSteps );
-  kc->writeEntry( "ZoomStepSize", int(zoomSteps) );
+  kc.writeEntry( "ScrollingStepSize", scrollSteps );
+  kc.writeEntry( "ZoomStepSize", int(zoomSteps) );
 
-  kc->writeEntry( "MaximumImageWidth", maxWidth );
-  kc->writeEntry( "MaximumImageHeight", maxHeight );
+  kc.writeEntry( "MaximumImageWidth", maxWidth );
+  kc.writeEntry( "MaximumImageHeight", maxHeight );
 
-  kc->writeEntry( "MaxCachedImages", maxCachedImages );
-  kc->writeEntry( "BackgroundColor", backgroundColor );
+  kc.writeEntry( "MaxCachedImages", maxCachedImages );
+  kc.writeEntry( "BackgroundColor", backgroundColor );
 
-  kc->writeEntry( "StartInLastDir", startInLastDir );
+  kc.writeEntry( "StartInLastDir", startInLastDir );
 
-  idata->save( kc.data() );
+  idata->save( kc.config() );
 
-  kc->sync();
+  kc.sync();
 }

@@ -42,7 +42,7 @@ ImData::ImData()
 }
 
 
-void ImData::load( KConfig *kc )
+void ImData::load( KConfigBase *kc )
 {
   ImData def;
 
@@ -66,7 +66,7 @@ void ImData::load( KConfig *kc )
 }
 
 
-void ImData::save( KConfig *kc )
+void ImData::save( KConfigBase *kc )
 {
   kc->setGroup( "ImlibConfiguration" );
 
