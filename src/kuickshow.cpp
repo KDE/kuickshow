@@ -254,7 +254,7 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     oneWindowAction = coll->add<KToggleAction>( "kuick_one window" );
     oneWindowAction->setText( i18n("Open Only One Image Window") );
-    oneWindowAction->setIcon( KIcon( "window_new" ) );
+    oneWindowAction->setIcon( KIcon( "window-new" ) );
     oneWindowAction->setShortcut( Qt::CTRL+Qt::Key_N );
 
     m_toggleBrowserAction = coll->add<KToggleAction>( "toggleBrowser" );
