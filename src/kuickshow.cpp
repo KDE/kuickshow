@@ -459,14 +459,10 @@ void KuickShow::slotHighlighted( const KFileItem *fi )
         KFileMetaInfo info = item->metaInfo();
         if ( info.isValid() )
         {
-            meta = info.item( KFileMimeTypeInfo::Size ).string();
-            KFileMetaInfoGroup group = info.group( "Technical" );
-            if ( group.isValid() )
-            {
-                QString bpp = group.item( "BitDepth" ).string();
-                if ( !bpp.isEmpty() )
-                    meta.append( ", " ).append( bpp );
-            }
+            meta = info.item("sizeurl").value().toString();
+            const QString bpp = info.item( "BitDepth" ).value().toString();
+            if ( !bpp.isEmpty() )
+                meta.append( ", " ).append( bpp );
         }
     }
     statusBar()->changeItem( meta, META_ITEM );
