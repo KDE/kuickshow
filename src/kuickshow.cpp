@@ -660,6 +660,8 @@ void KuickShow::performTrashCurrentImage(QWidget *parent)
 
     KFileItemList list;
     KFileItem *item = fileWidget->getCurrentItem(false);
+    if (!item) return;
+
     list.append (item);
 
     if (KMessageBox::warningContinueCancel(
