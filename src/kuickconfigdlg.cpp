@@ -99,9 +99,9 @@ void KuickConfigDialog::resetDefaults()
     generalWidget->loadSettings( data );
     defaultsWidget->loadSettings( data );
     slideshowWidget->loadSettings( data );
-
-    imageKeyChooser->allDefault();
-    browserKeyChooser->allDefault();
+	//TODO port it
+    //imageKeyChooser->allDefault();
+    //browserKeyChooser->allDefault();
 }
 
 #include "kuickconfigdlg.moc"
