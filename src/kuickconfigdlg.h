@@ -21,14 +21,14 @@
 
 #include <qevent.h>
 
-#include <kkeydialog.h>
-
 #include <kpagedialog.h>
 
 class GeneralWidget;
 class DefaultsWidget;
 class SlideShowWidget;
 class ImageWindow;
+class KShortcutsEditor;
+class KActionCollection;
 
 class KuickConfigDialog : public KPageDialog
 {
@@ -48,7 +48,7 @@ private:
     DefaultsWidget   *defaultsWidget;
     GeneralWidget    *generalWidget;
     SlideShowWidget  *slideshowWidget;
-    KKeyChooser      *imageKeyChooser, *browserKeyChooser;
+    KShortcutsEditor      *imageKeyChooser, *browserKeyChooser;
     KActionCollection *coll;
 
     ImageWindow      *imageWindow;

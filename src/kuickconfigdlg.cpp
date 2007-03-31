@@ -28,6 +28,7 @@
 
 #include <kconfig.h>
 #include <kglobal.h>
+#include <kshortcutsdialog.h>
 #include <klocale.h>
 
 #include "imagewindow.h"
@@ -66,11 +67,11 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
 
-    imageKeyChooser = new KKeyChooser( imageWindow->actionCollection(), box );
+    imageKeyChooser = new KShortcutsEditor( imageWindow->actionCollection(), box );
 
     box = new KVBox();
     addPage( box, i18n("Bro&wser Shortcuts") );
-    browserKeyChooser = new KKeyChooser( coll, box );
+    browserKeyChooser = new KShortcutsEditor( coll, box );
 
     connect( this, SIGNAL( defaultClicked() ), SLOT( resetDefaults() ));
 }

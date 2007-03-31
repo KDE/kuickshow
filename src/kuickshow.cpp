@@ -1064,9 +1064,9 @@ void KuickShow::saveSettings()
         kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
-		KConfigGroup group( kc, "Filebrowser" );
+        KConfigGroup group( kc, "Filebrowser" );
         kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
-        fileWidget->writeConfig( &group);
+        fileWidget->writeConfig( group);
     }
 
     kc->sync();

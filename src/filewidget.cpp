@@ -52,9 +52,9 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *name )
 {
     setEnableDirHighlighting( true );
 
-	KConfigGroup group(KGlobal::config(), "Filebrowser");
-    setViewConfig( &group );
-    readConfig( &group );
+    KConfigGroup group(KGlobal::config(), "Filebrowser");
+    setViewConfig( group );
+    readConfig( group );
     setView( KFile::Default );
 
     // setOnlyDoubleClickSelectsFiles( true );
