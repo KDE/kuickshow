@@ -459,7 +459,7 @@ void ImlibWidget::setBusyCursor()
     else
         m_oldCursor = QCursor();
 
-    setCursor( KCursor::waitCursor() );
+    setCursor( Qt::WaitCursor );
 }
 
 void ImlibWidget::restoreCursor()
