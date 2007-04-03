@@ -24,7 +24,7 @@
 //Added by qt3to4:
 #include <QMouseEvent>
 
-#include <kwin.h>
+#include <kwm.h>
 #include <kstandarddirs.h>
 
 #include "imlibwidget.h"
@@ -36,8 +36,8 @@
 AboutWidget::AboutWidget( QWidget *parent, const char *name )
     : Q3VBox( parent, name )
 {
-    KWin::setType( winId(), NET::Override );
-    KWin::setState( winId(), NET::StaysOnTop | NET::SkipTaskbar );
+    KWM::setType( winId(), NET::Override );
+    KWM::setState( winId(), NET::StaysOnTop | NET::SkipTaskbar );
 
     setFrameStyle( WinPanel | Raised );
 

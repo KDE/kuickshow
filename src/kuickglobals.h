@@ -19,7 +19,7 @@
 #ifndef KUICKGLOBALS_H
 #define KUICKGLOBALS_H
 
-#include <kwinmodule.h>
+#include <kwm.h>
 
 class KuickGlobals
 {

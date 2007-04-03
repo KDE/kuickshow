@@ -66,7 +66,7 @@
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>
 #include <ktemporaryfile.h>
-#include <kwin.h>
+#include <kwm.h>
 #include <netwm.h>
 #include <kio/netaccess.h>
 
@@ -138,7 +138,7 @@ void ImageWindow::init()
 
     static QPixmap imageIcon = UserIcon( "imageviewer-medium" );
     static QPixmap miniImageIcon = UserIcon( "imageviewer-small" );
-    KWin::setIcons( winId(), imageIcon, miniImageIcon );
+    KWM::setIcons( winId(), imageIcon, miniImageIcon );
 }
 
 void ImageWindow::updateActions()

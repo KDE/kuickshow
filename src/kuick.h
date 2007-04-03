@@ -22,8 +22,8 @@
 #include <qrect.h>
 #include <qsize.h>
 
-#include <kwin.h>
-#include <kwinmodule.h>
+#include <kwm.h>
+#include <kwm.h>
 
 class Kuick
 {
@@ -34,7 +34,7 @@ public:
 
     static QSize frameSize( WId win = 0L ) {
 	if ( win ) {
-	    KWin::WindowInfo info = KWin::windowInfo(win, NET::WMKDEFrameStrut | NET::WMGeometry);
+	    KWM::WindowInfo info = KWM::windowInfo(win, NET::WMKDEFrameStrut | NET::WMGeometry);
 	    int wborder = info.frameGeometry().width() - info.geometry().width();
 	    int hborder = info.frameGeometry().height() - info.geometry().height();
 	
@@ -57,7 +57,7 @@ public:
 	return s_self;
     }
 
-    KWinModule winModule;
+    KWM winModule;
 
 private:
     Kuick() {}
