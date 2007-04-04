@@ -1,6 +1,8 @@
 
 include_directories(${IMLIB_INCLUDE_DIR})
 
+add_definitions (-DQT3_SUPPORT -DQT3_SUPPORT_WARNINGS)
+
 ########### next target ###############
 
 set(kuickshow_KDEINIT_SRCS 
