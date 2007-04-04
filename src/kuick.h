@@ -29,7 +29,7 @@ class Kuick
 {
 public:
     static QRect workArea() {
-	return self()->winModule.workArea();
+	return KWM::workArea();
     }
 
     static QSize frameSize( WId win = 0L ) {
@@ -56,8 +56,6 @@ public:
 	}
 	return s_self;
     }
-
-    KWM winModule;
 
 private:
     Kuick() {}
