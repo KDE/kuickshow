@@ -28,7 +28,7 @@
 #include <QFocusEvent>
 #include <QKeyEvent>
 #include <QResizeEvent>
-#include <Q3PopupMenu>
+#include <QMenu>
 #include <QDropEvent>
 
 #include <kaction.h>
@@ -36,7 +36,6 @@
 #include "imlibwidget.h"
 
 class QCursor;
-class Q3PopupMenu;
 class QRect;
 class QString;
 class QTimer;
@@ -141,7 +140,7 @@ protected:
   uint 		xposPress, yposPress;
 
 
-  Q3PopupMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
+  QMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;
 
 

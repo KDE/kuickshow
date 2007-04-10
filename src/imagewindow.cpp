@@ -26,7 +26,6 @@
 #include <qnamespace.h>
 #include <qpainter.h>
 #include <qpen.h>
-#include <q3popupmenu.h>
 #include <QBitmap>
 #ifdef KDE_USE_FINAL
 #undef GrayScale
@@ -865,21 +864,21 @@ void ImageWindow::dropEvent( QDropEvent *e )
 
 void ImageWindow::setPopupMenu()
 {
-    viewerMenu = new Q3PopupMenu( this );
+    viewerMenu = new QMenu( this );
 
     viewerMenu->addAction(m_actions->action("next_image"));
     viewerMenu->addAction(m_actions->action("previous_image"));
     viewerMenu->insertSeparator();
 
-    brightnessMenu = new Q3PopupMenu( viewerMenu );
+    brightnessMenu = new QMenu( viewerMenu );
     brightnessMenu->addAction(m_actions->action("more_brightness"));
     brightnessMenu->addAction(m_actions->action("less_brightness"));
 
-    contrastMenu = new Q3PopupMenu( viewerMenu );
+    contrastMenu = new QMenu( viewerMenu );
     contrastMenu->addAction(m_actions->action("more_contrast"));
     contrastMenu->addAction(m_actions->action("less_contrast"));
 
-    gammaMenu = new Q3PopupMenu( viewerMenu );
+    gammaMenu = new QMenu( viewerMenu );
     gammaMenu->addAction(m_actions->action("more_gamma"));
     gammaMenu->addAction(m_actions->action("less_gamma"));
 
