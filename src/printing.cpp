@@ -20,7 +20,6 @@
 #include <qfont.h>
 #include <qfontmetrics.h>
 #include <q3grid.h>
-#include <q3hbox.h>
 #include <qlayout.h>
 #include <qimage.h>
 //Added by qt3to4:
@@ -28,7 +27,6 @@
 #include <QGridLayout>
 #include <kimageeffect.h>
 #include <Q3VButtonGroup>
-#include <q3paintdevicemetrics.h>
 #include <qpainter.h>
 #include <qradiobutton.h>
 //
