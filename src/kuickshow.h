@@ -27,7 +27,7 @@
 #include <QDropEvent>
 
 #include <kfileitem.h>
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 #include <kurl.h>
 
 #include <Imlib.h>
@@ -69,7 +69,7 @@ public:
 };
 
 
-class KuickShow : public KMainWindow
+class KuickShow : public KXmlGuiWindow
 {
     Q_OBJECT
 
