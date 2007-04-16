@@ -97,7 +97,7 @@ static const int META_ITEM = 1;
 QList<ImageWindow*> KuickShow::s_viewers;
 
 KuickShow::KuickShow( const char *name )
-    : KMainWindow( 0L, name ),
+    : KXmlGuiWindow( 0L, name ),
       m_slideshowCycle( 1 ),
       fileWidget( 0L ),
       dialog( 0L ),
@@ -397,7 +397,7 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     setCentralWidget( fileWidget );
 
-    setupGUI( KMainWindow::Save );
+    setupGUI( KXmlGuiWindow::Save );
 
     qobject_cast<KAction *>(coll->action( "reload" ))->setShortcut( KStandardShortcut::reload() );
     qobject_cast<KAction *>(coll->action( "short view" ))->setShortcut(Qt::Key_F6);
@@ -701,7 +701,7 @@ void KuickShow::slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &
 // try to init the WM border as it is 0,0 when the window is not shown yet.
 void KuickShow::show()
 {
-    KMainWindow::show();
+    KXmlGuiWindow::show();
     (void) Kuick::frameSize( winId() );
 }
 
@@ -856,7 +856,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     return true;
                 }
 
-                return KMainWindow::eventFilter( o, e );
+                return KXmlGuiWindow::eventFilter( o, e );
             }
 
             // we definitely have a fileWidget here!
@@ -949,7 +949,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
     if ( ret )
         return true;
 
-    return KMainWindow::eventFilter( o, e );
+    return KXmlGuiWindow::eventFilter( o, e );
 }
 
 
@@ -1247,7 +1247,7 @@ KActionCollection * KuickShow::actionCollection() const
     if ( fileWidget )
         return fileWidget->actionCollection();
 
-    return KMainWindow::actionCollection();
+    return KXmlGuiWindow::actionCollection();
 }
 
 #include "kuickshow.moc"
