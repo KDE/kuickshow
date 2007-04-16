@@ -97,7 +97,7 @@ static const int META_ITEM = 1;
 QList<ImageWindow*> KuickShow::s_viewers;
 
 KuickShow::KuickShow( const char *name )
-    : KXmlGuiWindow( 0L, name ),
+    : KXmlGuiWindow( 0L ),
       m_slideshowCycle( 1 ),
       fileWidget( 0L ),
       dialog( 0L ),
@@ -108,6 +108,7 @@ KuickShow::KuickShow( const char *name )
       m_delayedRepeatItem( 0L ),
       m_slideShowStopped(false)
 {
+    setObjectName(name);
     aboutWidget = 0L;
     kdata = new KuickData;
     kdata->load();
