@@ -64,7 +64,7 @@
 #include <ktoolbar.h>
 #include <kurlcombobox.h>
 #include <kurlcompletion.h>
-#include <kwm.h>
+#include <kwindowsystem.h>
 #include <KStandardGuiItem>
 #include <kstandardshortcut.h>
 #include <kconfiggroup.h>
@@ -1203,7 +1203,7 @@ void KuickShow::toggleBrowser()
         fileWidget->resize( size() ); // ### somehow fileWidget isn't resized!?
         show();
         raise();
-        KWM::activateWindow( winId() ); // ### this should not be necessary
+        KWindowSystem::activateWindow( winId() ); // ### this should not be necessary
 //         setFocus();
     }
     else if ( !s_viewers.isEmpty() )
