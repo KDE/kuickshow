@@ -24,7 +24,6 @@
 #include <QLabel>
 #include <Q3GroupBox>
 class ImlibWidget;
-class ImData;
 
 class QCheckBox;
 class QLabel;

@@ -36,9 +36,7 @@
 #include "imlibwidget.h"
 
 class QCursor;
-class QRect;
 class QString;
-class QTimer;
 class QWidget;
 class KActionCollection;
 
