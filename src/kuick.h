@@ -34,7 +34,7 @@ public:
 
     static QSize frameSize( WId win = 0L ) {
 	if ( win ) {
-	    KWindowInfo info = KWindowSystem::windowInfo(win, NET::WMKDEFrameStrut | NET::WMGeometry);
+	    KWindowInfo info = KWindowSystem::windowInfo(win, NET::WMFrameExtents | NET::WMGeometry);
 	    int wborder = info.frameGeometry().width() - info.geometry().width();
 	    int hborder = info.frameGeometry().height() - info.geometry().height();
 	
