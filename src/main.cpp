@@ -27,29 +27,27 @@
 #include "kuickshow.h"
 #include "version.h"
 
-static KCmdLineOptions options[] =
-{
-    { "lastfolder", I18N_NOOP("Start in the last visited folder, not the "
-			      "current working folder."), 0 },
-    { "d", 0, 0 }, // short option for --lastdir
-    { "+[files]", I18N_NOOP("Optional image filenames/urls to show"), 0 },
-    KCmdLineLastOption
-};
-
 extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 {
     KAboutData about(
-	  "kuickshow", I18N_NOOP( "KuickShow" ), KUICKSHOWVERSION,
-	  I18N_NOOP("A fast and versatile image viewer" ),
-	  KAboutData::License_GPL, "(c) 1998-2002, Carsten Pfeiffer",
-	  0 /*text*/, "http://devel-home.kde.org/~pfeiffer/" );
+	  "kuickshow", 0, ki18n( "KuickShow" ), KUICKSHOWVERSION,
+	  ki18n("A fast and versatile image viewer" ),
+	  KAboutData::License_GPL, ki18n("(c) 1998-2002, Carsten Pfeiffer"),
+	  ki18n(0 /*text*/), "http://devel-home.kde.org/~pfeiffer/" );
 
-    about.addAuthor( "Carsten Pfeiffer", 0, "pfeiffer@kde.org",
+    about.addAuthor( ki18n("Carsten Pfeiffer"), KLocalizedString(), "pfeiffer@kde.org",
 		     "http://devel-home.kde.org/~pfeiffer/" );
-    about.addCredit( "Rober Hamberger", 0, "rh474@bingo-ev.de" );
-    about.addCredit( "Thorsten Scheuermann", 0, "uddn@rz.uni-karlsruhe.de" );
+    about.addCredit( ki18n("Rober Hamberger"), KLocalizedString(), "rh474@bingo-ev.de" );
+    about.addCredit( ki18n("Thorsten Scheuermann"), KLocalizedString(), "uddn@rz.uni-karlsruhe.de" );
 
     KCmdLineArgs::init( argc, argv, &about );
+
+    KCmdLineOptions options;
+    options.add("lastfolder", ki18n("Start in the last visited folder, not the "
+			      "current working folder."));
+    options.add("d");
+    // short option for --lastdir
+    options.add("+[files]", ki18n("Optional image filenames/urls to show"));
     KCmdLineArgs::addCmdLineOptions( options );
 
     KApplication app;
