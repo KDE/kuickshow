@@ -24,8 +24,6 @@ set(kuickshow_KDEINIT_SRCS
    slideshowwidget.cpp 
    printing.cpp )
 
-kde4_automoc(${kuickshow_KDEINIT_SRCS})
-
 kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
 
 target_link_libraries(kdeinit_kuickshow ${IMLIB_LIBRARIES} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KDEPRINT_LIBS} ${KDE4_KFILE_LIBS})
