@@ -150,7 +150,7 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
 
     KuickImage *kuim = imageCache->getKuimage( filename, mod );
     if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
-	kWarning() << "ImlibWidget: can't load image " << filename << endl;
+	kWarning() << "ImlibWidget: can't load image " << filename;
 	return 0L;
     }
 
@@ -788,7 +788,7 @@ KuickImage * ImageCache::getKuimage( const QString& file,
 // isn't anyway, according to Imlib's sources).
 ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 {
-    kDebug() << "Trying to load " << fileName << " with KImageIO..." << endl;
+    kDebug() << "Trying to load " << fileName << " with KImageIO...";
 
     
 
