@@ -56,7 +56,6 @@
 #endif
 #include <kfiledialog.h>
 #include <kiconloader.h>
-#include <kimageeffect.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprinter.h>

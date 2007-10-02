@@ -25,7 +25,6 @@
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QGridLayout>
-#include <kimageeffect.h>
 #include <Q3VButtonGroup>
 #include <qpainter.h>
 #include <qradiobutton.h>
