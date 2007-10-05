@@ -35,6 +35,7 @@
 #include <Q3PopupMenu>
 #include <QMouseEvent>
 #include <QMenuItem>
+#include <QAbstractItemView>
 #include <kaboutdata.h>
 #include <kactioncollection.h>
 #include <kaction.h>
