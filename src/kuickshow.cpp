@@ -35,6 +35,7 @@
 #include <Q3PopupMenu>
 #include <QMouseEvent>
 #include <QMenuItem>
+#include <QAbstractItemView>
 #include <kaboutdata.h>
 #include <kactioncollection.h>
 #include <kaction.h>
@@ -573,7 +574,7 @@ void KuickShow::slotDeleteImage()
 {
     KFileItemList list;
     KFileItem *item = fileWidget->getCurrentItem(false);
-    list.append (item);
+    list.append (*item);
     KFileItem *next = fileWidget->getNext(true);
     if (!next)
         next = fileWidget->getPrevious(true);
@@ -652,12 +653,12 @@ void KuickShow::nextSlide( KFileItem *item )
 // prints the selected files in the filebrowser
 void KuickShow::slotPrint()
 {
-    const KFileItemList *items = fileWidget->selectedItems();
-    if ( !items )
+    const KFileItemList items = fileWidget->selectedItems();
+    if ( !items.isEmpty() )
         return;
 
-	KFileItemList::const_iterator it = items->begin();
-	const KFileItemList::const_iterator end = items->end();
+	KFileItemList::const_iterator it = items.begin();
+	const KFileItemList::const_iterator end = items.end();
 
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow( 0, id, this, "printing image" );
