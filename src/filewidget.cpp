@@ -153,7 +153,7 @@ void FileWidget::activatedMenu( const KFileItem *item, const QPoint& pos )
     if ( actionCollection()->action("kuick_delete") )
         actionCollection()->action("kuick_delete")->setEnabled( hasSelection );
 
-    KDirOperator::activatedMenu( item, pos );
+    KDirOperator::activatedMenu( *item, pos );
 }
 
 void FileWidget::findCompletion( const QString& text )
