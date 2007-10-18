@@ -30,6 +30,8 @@
 #include <qradiobutton.h>
 //
 #include <qcolor.h>
+#include <QtGui/QPrinter>
+#include <QtGui/QPrintDialog>
 
 #include <kcombobox.h>
 #include <kdialog.h>
@@ -37,8 +39,8 @@
 #include <kdebug.h>
 #include <kglobalsettings.h>
 #include <knuminput.h>
-#include <kprinter.h>
 #include <ktemporaryfile.h>
+#include <kdeprintdialog.h>
 
 #include "imagewindow.h"
 #include "printing.h"
@@ -46,13 +48,15 @@
 
 bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
 {
-    KPrinter printer;
+    QPrinter printer;
     printer.setDocName( imageWin.filename() );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
-    KPrinter::addDialogPage( new KuickPrintDialogPage( parent, "kuick page"));
+    KuickPrintDialogPage* dialogPage = new KuickPrintDialogPage( parent, "kuick page");
+    printDialog->setWindowTitle(i18n("Print %1", printer.docName().section('/', -1)));
+    QPrintDialog *printDialog = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << dialogPage, parent);
 
-    if ( printer.setup( parent, i18n("Print %1", printer.docName().section('/', -1)) ) )
+    if (printDialog->exec())
     {
         KTemporaryFile tmpFile;
         tmpFile.setSuffix(".png");
@@ -69,7 +73,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
     return true; // user aborted
 }
 
-bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
+bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, QWidget& dialogPage,
                                  const QString& originalFileName )
 {
     QImage image( filename );
@@ -87,16 +91,13 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     int w = printer.width();
     int h = printer.height();
 
-    QString t = "true";
-    QString f = "false";
-
     // Black & white print?
-    if ( printer.option( "app-kuickshow-blackwhite" ) != f) {
+    if ( dialogPage.printBlackWhite() ) {
         image = image.convertDepth( 1, Qt::MonoOnly | Qt::ThresholdDither | Qt::AvoidDither );
     }
 
     int filenameOffset = 0;
-    bool printFilename = printer.option( "app-kuickshow-printFilename" ) != f;
+    bool printFilename = dialogPage.printFilename();
     if ( printFilename ) {
         filenameOffset = fm.lineSpacing() + 14;
         h -= filenameOffset; // filename goes into one line!
@@ -105,7 +106,7 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     //
     // shrink image to pagesize, if necessary
     //
-    bool shrinkToFit = (printer.option( "app-kuickshow-shrinkToFit" ) != f);
+    bool shrinkToFit = dialofPage.shrinkToFit();
     QSize imagesize = image.size();
     if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
         imagesize.scale( w, h, Qt::ScaleMin );
@@ -115,10 +116,11 @@ bool Printing::printImageWithQt( const QString& filename, KPrinter& printer,
     //
     // align image
     //
-    bool ok = false;
-    int alignment = printer.option("app-kuickshow-alignment").toInt( &ok );
-    if ( !ok )
-        alignment = Qt::AlignCenter; // default
+    // not currently implemented in print options
+    //bool ok = false;
+    //int alignment = printer.option("app-kuickshow-alignment").toInt( &ok );
+    //if ( !ok )
+        int alignment = Qt::AlignCenter; // default
 
     int x = 0;
     int y = 0;
@@ -194,9 +196,9 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 
 
 KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
-    : KPrintDialogPage( parent )
+    : QWidget( parent )
 {
-    setTitle( i18n("Image Settings") );
+    setWindowTitle( i18n("Image Settings") );
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setMargin( KDialog::marginHint() );
@@ -252,54 +254,82 @@ KuickPrintDialogPage::~KuickPrintDialogPage()
 {
 }
 
-void KuickPrintDialogPage::getOptions( QMap<QString,QString>& opts,
-                                       bool /*incldef*/ )
-{
-    QString t = "true";
-    QString f = "false";
-
 //    ### opts["app-kuickshow-alignment"] = ;
-    opts["app-kuickshow-printFilename"] = m_addFileName->isChecked() ? t : f;
-    opts["app-kuickshow-blackwhite"] = m_blackwhite->isChecked() ? t : f;
-    opts["app-kuickshow-shrinkToFit"] = m_shrinkToFit->isChecked() ? t : f;
-    opts["app-kuickshow-scale"] = m_scale->isChecked() ? t : f;
-    opts["app-kuickshow-scale-unit"] = m_units->currentText();
-    opts["app-kuickshow-scale-width-pixels"] = QString::number( scaleWidth() );
-    opts["app-kuickshow-scale-height-pixels"] = QString::number( scaleHeight() );
+
+bool KuickPrintDialogPage::printFilename()
+{
+    return m_addFileName->isChecked();
 }
 
-void KuickPrintDialogPage::setOptions( const QMap<QString,QString>& opts )
+void KuickPrintDialogPage::setPrintFilename( bool addFilename )
 {
-    QString t = "true";
-    QString f = "false";
+    m_addFileName->setChecked( addFilename );
+}
 
-    m_addFileName->setChecked( opts["app-kuickshow-printFilename"] != f );
-    // This sound strange, but if I copy the code on the line above, the checkbox
-    // was always checked. And this isn't the wanted behavior. So, with this works.
-    // KPrint magic ;-)
-    m_blackwhite->setChecked ( false );
-    m_shrinkToFit->setChecked( opts["app-kuickshow-shrinkToFit"] != f );
-    m_scale->setChecked( opts["app-kuickshow-scale"] == t );
+bool KuickPrintDialogPage::printBlackWhite()
+{
+    return m_blackwhite->isChecked();
+}
 
-    m_units->setCurrentItem( opts["app-kuickshow-scale-unit"] );
+void KuickPrintDialogPage::setPrintBlackWhite( bool blackWhite )
+{
+    m_blackwhite->setChecked( blackWhite );
+}
 
-    bool ok;
-    int val = opts["app-kuickshow-scale-width-pixels"].toInt( &ok );
-    if ( ok )
-        setScaleWidth( val );
-    val = opts["app-kuickshow-scale-height-pixels"].toInt( &ok );
-    if ( ok )
-        setScaleHeight( val );
+bool KuickPrintDialogPage::printShrinkToFit()
+{
+    return m_shrinkToFit->isChecked();
+}
 
-    if ( m_scale->isChecked() == m_shrinkToFit->isChecked() )
-        m_shrinkToFit->setChecked( !m_scale->isChecked() );
+void KuickPrintDialogPage::setPrintShrinkToFit( bool shrinkToFit )
+{
+    toggleScaling( !shrinkToFit );
+}
 
-    // ### re-enable when implementednn
-     toggleScaling( false && m_scale->isChecked() );
+bool KuickPrintDialogPage::printScale()
+{
+    return m_scale->isChecked();
+}
+
+void KuickPrintDialogPage::setPrintScale( bool scale )
+{
+    toggleScaling( scale );
+}
+
+QString KuickPrintDialogPage::printScaleUnit()
+{
+    return m_units->currentText();
+}
+
+void KuickPrintDialogPage::setPrintScaleUnit( QString scaleUnit )
+{
+    m_units->setCurrentItem( scaleUnit );
+}
+
+int KuickPrintDialogPage::printScaleWidthPixels()
+{
+    scaleWidth();
+}
+
+void KuickPrintDialogPage::setPrintScaleWidthPixels( int scaleWidth )
+{
+    setScaleWidth();
+}
+
+int KuickPrintDialogPage::printScaleHeightPixels()
+{
+    return scaleHeight();
+}
+
+void KuickPrintDialogPage::setPrintScaleHeightPixels( int scaleHeight )
+{
+    setScaleHeight();
 }
 
 void KuickPrintDialogPage::toggleScaling( bool enable )
 {
+    m_shrinkToFit->setChecked( !enable );
+    m_scale->setChecked( enable );
     m_width->setEnabled( enable );
     m_height->setEnabled( enable );
     m_units->setEnabled( enable );

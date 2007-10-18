@@ -22,12 +22,10 @@
 #include <qfontmetrics.h>
 #include <qstring.h>
 
-#include <kdeprint/kprintdialogpage.h>
-
 class QCheckBox;
 class QRadioButton;
+class QPrinter;
 class KComboBox;
-class KPrinter;
 class KIntNumInput;
 
 class ImageWindow;
@@ -37,7 +35,7 @@ class Printing
 {
 public:
     static bool printImage( const ImageWindow& imageWin, QWidget *parent = 0L);
-    static bool printImageWithQt( const QString& filename, KPrinter& printer,
+    static bool printImageWithQt( const QString& filename, QPrinter& printer, QWidget& dialogPage,
                                   const QString& originalFileName );
 
 private:
@@ -47,7 +45,7 @@ private:
 
 };
 
-class KuickPrintDialogPage : public KPrintDialogPage
+class KuickPrintDialogPage : public QWidget
 {
     Q_OBJECT
 
@@ -55,8 +53,26 @@ public:
     KuickPrintDialogPage( QWidget *parent = 0L, const char *name = 0 );
     ~KuickPrintDialogPage();
 
-    virtual void getOptions(QMap<QString,QString>& opts, bool incldef = false);
-    virtual void setOptions(const QMap<QString,QString>& opts);
+    bool printFilename();
+    void setPrintFilename( bool addFilename );
+
+    bool printBlackWhite();
+    void setPrintBlackWhite( bool blackWhite );
+
+    bool printShrinkToFit();
+    void setPrintShrinkToFit( bool shrinkToFit );
+
+    bool printScale();
+    void setPrintScale( bool scale );
+
+    bool printScaleUnit();
+    void setPrintScaleUnit( QString scaleUnit );
+
+    int printScaleWidthPixels();
+    void setPrintScaleWidthPixels( int scaleWidth );
+
+    int printScaleHeightPixels();
+    void setPrintScaleHeightPixels( int scaleHeight );
 
 private slots:
     void toggleScaling( bool enable );
