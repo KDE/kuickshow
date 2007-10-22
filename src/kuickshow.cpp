@@ -863,7 +863,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             // we definitely have a fileWidget here!
 
-            if ( key == Qt::Key_Home || KStandardShortcut::home().contains( k->key() ) )
+            if ( key == Qt::Key_Home || KStandardShortcut::begin().contains( k->key() ) )
             {
                 item = fileWidget->gotoFirstImage();
                 item_next = fileWidget->getNext( false );
