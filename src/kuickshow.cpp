@@ -662,10 +662,10 @@ void KuickShow::slotPrint()
 
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow( 0, id, this, "printing image" );
-    KFileItem *item;
+    KFileItem item;
 	for ( ; it != end; ++it ) {
 		item = (*it);
-        if (FileWidget::isImage( item ) && iw->loadImage( item->url().path()))
+        if (FileWidget::isImage( &item ) && iw->loadImage( item.url().path()))
             iw->printImage();
     }
 
@@ -729,7 +729,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 
         // see eventFilter() for explanation and similar code
         if ( fileWidget->dirLister()->isFinished() &&
-             fileWidget->dirLister()->rootItem() )
+             !fileWidget->dirLister()->rootItem().isNull() )
         {
             fileWidget->setCurrentItem( fi.fileName() );
             QTimer::singleShot( 0, this, SLOT( slotReplayAdvance()));
@@ -843,7 +843,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
                     // see slotAdvanceImage() for similar code
                     if ( fileWidget->dirLister()->isFinished() &&
-                         fileWidget->dirLister()->rootItem() )
+                         !fileWidget->dirLister()->rootItem().isNull() )
                     {
                         fileWidget->setCurrentItem( fi.fileName() );
                         QTimer::singleShot( 0, this, SLOT( slotReplayEvent()));
@@ -885,7 +885,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 KFileItem it( KFileItem::Unknown, KFileItem::Unknown,
                               m_viewer->url() );
                 KFileItemList list;
-                list.append( &it );
+                list.append( it );
                 if ( fileWidget->del(list, window,
                                      (k->state() & Qt::ShiftModifier) == 0) == 0L )
                     return true; // aborted deletion
