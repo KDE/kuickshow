@@ -58,7 +58,6 @@
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kprinter.h>
 #include <kpropertiesdialog.h>
 #include <kstandardshortcut.h>
 #include <kstandarddirs.h>

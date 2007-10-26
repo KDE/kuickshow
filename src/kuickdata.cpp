@@ -21,6 +21,7 @@
 #include <qcolor.h>
 #include <ksharedconfig.h>
 #include <kglobal.h>
+#include <kconfiggroup.h>
 
 #include "kuickdata.h"
 
