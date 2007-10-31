@@ -21,6 +21,7 @@
 #include <kconfig.h>
 
 #include "imdata.h"
+#include <kconfiggroup.h>
 
 
 ImData::ImData()
@@ -42,48 +43,48 @@ ImData::ImData()
 }
 
 
-void ImData::load( KConfigBase *kc )
+void ImData::load( KSharedConfig::Ptr kc )
 {
   ImData def;
 
-  kc->setGroup( "ImlibConfiguration" );
+  KConfigGroup group( kc, "ImlibConfiguration" );
 
-  ownPalette  = kc->readEntry( "UseOwnPalette", def.ownPalette );
-  fastRemap   = kc->readEntry( "FastRemapping", def.fastRemap );
-  fastRender  = kc->readEntry( "FastRendering", def.fastRender );
-  dither16bit = kc->readEntry( "Dither16Bit", def.dither16bit );
-  dither8bit  = kc->readEntry( "Dither8Bit", def.dither8bit );
+  ownPalette  = group.readEntry( "UseOwnPalette", def.ownPalette );
+  fastRemap   = group.readEntry( "FastRemapping", def.fastRemap );
+  fastRender  = group.readEntry( "FastRendering", def.fastRender );
+  dither16bit = group.readEntry( "Dither16Bit", def.dither16bit );
+  dither8bit  = group.readEntry( "Dither8Bit", def.dither8bit );
 
-  maxCache    = kc->readEntry( "MaxCacheSize", 10240 );
+  maxCache    = group.readEntry( "MaxCacheSize", 10240 );
 
-  gamma       = kc->readEntry( "GammaDefault", 0 );
-  brightness  = kc->readEntry( "BrightnessDefault", 0 );
-  contrast    = kc->readEntry( "ContrastDefault", 0 );
+  gamma       = group.readEntry( "GammaDefault", 0 );
+  brightness  = group.readEntry( "BrightnessDefault", 0 );
+  contrast    = group.readEntry( "ContrastDefault", 0 );
 
-  gammaFactor      = abs( kc->readEntry( "GammaFactor", 10 ) );
-  brightnessFactor = abs( kc->readEntry( "BrightnessFactor", 10 ) );
-  contrastFactor   = abs( kc->readEntry( "ContrastFactor", 10 ) );
+  gammaFactor      = abs( group.readEntry( "GammaFactor", 10 ) );
+  brightnessFactor = abs( group.readEntry( "BrightnessFactor", 10 ) );
+  contrastFactor   = abs( group.readEntry( "ContrastFactor", 10 ) );
 }
 
 
-void ImData::save( KConfigBase *kc )
+void ImData::save( KSharedConfig::Ptr kc )
 {
-  kc->setGroup( "ImlibConfiguration" );
+  KConfigGroup group( kc, "ImlibConfiguration" );
 
-  kc->writeEntry( "UseOwnPalette", ownPalette );
-  kc->writeEntry( "FastRemapping", fastRemap );
-  kc->writeEntry( "FastRendering", fastRender );
-  kc->writeEntry( "Dither16Bit", dither16bit );
-  kc->writeEntry( "Dither8Bit", dither8bit );
-  kc->writeEntry( "MaxCacheSize", maxCache );
+  group.writeEntry( "UseOwnPalette", ownPalette );
+  group.writeEntry( "FastRemapping", fastRemap );
+  group.writeEntry( "FastRendering", fastRender );
+  group.writeEntry( "Dither16Bit", dither16bit );
+  group.writeEntry( "Dither8Bit", dither8bit );
+  group.writeEntry( "MaxCacheSize", maxCache );
 
-  kc->writeEntry( "GammaDefault", gamma );
-  kc->writeEntry( "BrightnessDefault", brightness );
-  kc->writeEntry( "ContrastDefault", contrast );
+  group.writeEntry( "GammaDefault", gamma );
+  group.writeEntry( "BrightnessDefault", brightness );
+  group.writeEntry( "ContrastDefault", contrast );
 
-  kc->writeEntry( "GammaFactor", gammaFactor );
-  kc->writeEntry( "BrightnessFactor", brightnessFactor );
-  kc->writeEntry( "ContrastFactor", contrastFactor );
+  group.writeEntry( "GammaFactor", gammaFactor );
+  group.writeEntry( "BrightnessFactor", brightnessFactor );
+  group.writeEntry( "ContrastFactor", contrastFactor );
 
   kc->sync();
 }

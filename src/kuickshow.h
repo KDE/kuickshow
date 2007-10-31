@@ -86,7 +86,7 @@ public:
 
 
 protected:
-    virtual void	readProperties( KConfig * );
+    virtual void	readProperties( const KConfigGroup& kc );
     void 		initImlibParams( ImData *, ImlibInitParams * );
 
 private slots:
@@ -129,7 +129,7 @@ private:
     void 		initGUI( const KUrl& startDir );
     bool	       	eventFilter( QObject *, QEvent * );
     void 		initImlib();
-    void 		saveProperties( KConfig * );
+    void 		saveProperties( KConfigGroup& kc );
     void 		saveSettings();
     bool 		haveBrowser() const;
     void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );

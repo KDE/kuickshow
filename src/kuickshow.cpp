@@ -177,8 +177,8 @@ KuickShow::KuickShow( const char *name )
     }
 
     if ( (kdata->startInLastDir && args->count() == 0) || args->isSet( "lastfolder" )) {
-        kc->setGroup( "SessionSettings");
-        startDir = kc->readPathEntry( "CurrentDirectory", startDir.url() );
+        KConfigGroup sessGroup(kc, "SessionSettings");
+        startDir = sessGroup.readPathEntry( "CurrentDirectory", startDir.url() );
     }
 
     if ( s_viewers.isEmpty() || isDir ) {
@@ -1018,17 +1018,17 @@ void KuickShow::about()
 }
 
 // ------ sessionmanagement - load / save current directory -----
-void KuickShow::readProperties( KConfig *kc )
+void KuickShow::readProperties( const KConfigGroup& kc )
 {
     assert( fileWidget ); // from SM, we should always have initGUI on startup
-    QString dir = kc->readPathEntry( "CurrentDirectory" );
+    QString dir = kc.readPathEntry( "CurrentDirectory", QString() );
     if ( !dir.isEmpty() ) {
         fileWidget->setUrl( KUrl::fromPathOrUrl( dir ), true );
         fileWidget->clearHistory();
     }
 
-    QStringList images = kc->readPathListEntry( "Images shown" );
-    QStringList::Iterator it;
+    const QStringList images = kc.readPathEntry( "Images shown", QStringList() );
+    QStringList::const_iterator it;
     for ( it = images.begin(); it != images.end(); ++it ) {
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KUrl::fromPathOrUrl( *it ), false );
         if ( item.isReadable() )
@@ -1036,23 +1036,23 @@ void KuickShow::readProperties( KConfig *kc )
     }
 
     if ( !s_viewers.isEmpty() ) {
-        bool visible = kc->readEntry( "Browser visible", true );
+        bool visible = kc.readEntry( "Browser visible", true );
         if ( !visible )
             hide();
     }
 }
 
-void KuickShow::saveProperties( KConfig *kc )
+void KuickShow::saveProperties( KConfigGroup& kc )
 {
-    kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
-    kc->writeEntry( "Browser visible", fileWidget->isVisible() );
+    kc.writePathEntry( "CurrentDirectory", fileWidget->url().url() );
+    kc.writeEntry( "Browser visible", fileWidget->isVisible() );
 
     QStringList urls;
     QList<ImageWindow*>::Iterator it;
     for ( it = s_viewers.begin(); it != s_viewers.end(); ++it )
         urls.append( (*it)->filename() );
 
-    kc->writePathEntry( "Images shown", urls );
+    kc.writePathEntry( "Images shown", urls );
 }
 
 // --------------------------------------------------------------
@@ -1060,14 +1060,13 @@ void KuickShow::saveProperties( KConfig *kc )
 void KuickShow::saveSettings()
 {
     KSharedConfig::Ptr kc = KGlobal::config();
-
-    kc->setGroup("SessionSettings");
+    KConfigGroup sessGroup(kc, "SessionSettings");
     if ( oneWindowAction )
-        kc->writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
+        sessGroup.writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
         KConfigGroup group( kc, "Filebrowser" );
-        kc->writePathEntry( "CurrentDirectory", fileWidget->url().url() );
+        group.writePathEntry( "CurrentDirectory", fileWidget->url().url() );
         fileWidget->writeConfig( group);
     }
 
@@ -1159,14 +1158,6 @@ void KuickShow::slotReplayEvent()
 
     eventFilter( e->viewer, e->event );
     delete e;
-
-    // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
-    if ( fileWidget && fileWidget->view() ) {
-        QWidget *widget = fileWidget->view()->widget();
-        if ( widget->inherits( "QIconView" ) || widget->child(0, "QIconView" ) ){
-            fileWidget->setSorting( fileWidget->sorting() );
-        }
-    }
     // --------------------------------------------------------------
 }
 
@@ -1181,6 +1172,7 @@ void KuickShow::slotReplayAdvance()
     DelayedRepeatEvent *e = m_delayedRepeatItem;
     m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
 
+#if 0
     // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
     // Sigh. According to qt-bugs, they won't fix this bug ever. So you can't
     // rely on sorting to be correct before the QIconView has been show()n.
@@ -1190,6 +1182,7 @@ void KuickShow::slotReplayAdvance()
             fileWidget->setSorting( fileWidget->sorting() );
         }
     }
+#endif
     // --------------------------------------------------------------
 
     slotAdvanceImage( e->viewer, e->steps );

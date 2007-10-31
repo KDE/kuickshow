@@ -1,3 +1,4 @@
+#include <ksharedconfig.h>
 /* This file is part of the KDE project
    Copyright (C) 1998,1999,2000,2001 Carsten Pfeiffer <pfeiffer@kde.org>
 
@@ -26,8 +27,8 @@ public:
   ImData();
   ~ImData() {};
 
-  void 		load( KConfigBase *kc );
-  void 		save( KConfigBase *kc );
+  void 		load( KSharedConfig::Ptr kc );
+  void 		save( KSharedConfig::Ptr kc );
 
   // new stuff..........
 

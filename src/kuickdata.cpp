@@ -76,46 +76,46 @@ void KuickData::load()
 
   KuickData def;
 
-  kc->setGroup( "GeneralConfiguration" );
-  fileFilter   = kc->readEntry( "FileFilter", def.fileFilter );
-  slideDelay   = kc->readEntry( "SlideShowDelay", def.slideDelay );
-  slideshowCycles = kc->readEntry( "SlideshowCycles", 1 );
-  slideshowFullscreen = kc->readEntry( "SlideshowFullscreen", true );
-  slideshowStartAtFirst = kc->readEntry("SlideshowStartAtFirst", true );
+  KConfigGroup generalGroup( kc, "GeneralConfiguration" );
+  fileFilter   = generalGroup.readEntry( "FileFilter", def.fileFilter );
+  slideDelay   = generalGroup.readEntry( "SlideShowDelay", def.slideDelay );
+  slideshowCycles = generalGroup.readEntry( "SlideshowCycles", 1 );
+  slideshowFullscreen = generalGroup.readEntry( "SlideshowFullscreen", true );
+  slideshowStartAtFirst = generalGroup.readEntry("SlideshowStartAtFirst", true );
 
-  preloadImage = kc->readEntry( "PreloadNextImage", def.preloadImage );
+  preloadImage = generalGroup.readEntry( "PreloadNextImage", def.preloadImage );
 
-  fullScreen = kc->readEntry( "Fullscreen", def.fullScreen);
-  autoRotation = kc->readEntry( "AutoRotation", def.autoRotation);
-  downScale  = kc->readEntry( "ShrinkToScreenSize", def.downScale );
-  upScale    = kc->readEntry( "ZoomToScreenSize", def.upScale );
-  flipVertically   = kc->readEntry( "FlipVertically", def.flipVertically );
-  flipHorizontally = kc->readEntry( "FlipHorizontally",
+  fullScreen = generalGroup.readEntry( "Fullscreen", def.fullScreen);
+  autoRotation = generalGroup.readEntry( "AutoRotation", def.autoRotation);
+  downScale  = generalGroup.readEntry( "ShrinkToScreenSize", def.downScale );
+  upScale    = generalGroup.readEntry( "ZoomToScreenSize", def.upScale );
+  flipVertically   = generalGroup.readEntry( "FlipVertically", def.flipVertically );
+  flipHorizontally = generalGroup.readEntry( "FlipHorizontally",
 					def.flipHorizontally );
-  maxUpScale       = kc->readEntry( "MaxUpscale Factor", def.maxUpScale );
-  rotation         = (Rotation) kc->readEntry( "Rotation", int(def.rotation) );
+  maxUpScale       = generalGroup.readEntry( "MaxUpscale Factor", def.maxUpScale );
+  rotation         = (Rotation) generalGroup.readEntry( "Rotation", int(def.rotation) );
 
-  isModsEnabled    = kc->readEntry( "ApplyDefaultModifications",
+  isModsEnabled    = generalGroup.readEntry( "ApplyDefaultModifications",
 					def.isModsEnabled );
 
-  brightnessSteps = kc->readEntry("BrightnessStepSize",def.brightnessSteps);
-  contrastSteps   = kc->readEntry("ContrastStepSize", def.contrastSteps);
-  gammaSteps      = kc->readEntry("GammaStepSize", def.gammaSteps);
-  scrollSteps     = kc->readEntry("ScrollingStepSize", def.scrollSteps);
-  zoomSteps       = kc->readEntry("ZoomStepSize", (double)def.zoomSteps);
+  brightnessSteps = generalGroup.readEntry("BrightnessStepSize",def.brightnessSteps);
+  contrastSteps   = generalGroup.readEntry("ContrastStepSize", def.contrastSteps);
+  gammaSteps      = generalGroup.readEntry("GammaStepSize", def.gammaSteps);
+  scrollSteps     = generalGroup.readEntry("ScrollingStepSize", def.scrollSteps);
+  zoomSteps       = generalGroup.readEntry("ZoomStepSize", (double)def.zoomSteps);
 
 
-  maxWidth 	= abs( kc->readEntry( "MaximumImageWidth", def.maxWidth ) );
-  maxHeight 	= abs( kc->readEntry( "MaximumImageHeight", def.maxHeight));
+  maxWidth 	= abs( generalGroup.readEntry( "MaximumImageWidth", def.maxWidth ) );
+  maxHeight 	= abs( generalGroup.readEntry( "MaximumImageHeight", def.maxHeight));
 
-  maxCachedImages = kc->readEntry( "MaxCachedImages",
+  maxCachedImages = generalGroup.readEntry( "MaxCachedImages",
                                               def.maxCachedImages );
   QColor _col(Qt::black);
-  backgroundColor = kc->readEntry( "BackgroundColor", _col );
+  backgroundColor = generalGroup.readEntry( "BackgroundColor", _col );
 
-  startInLastDir = kc->readEntry( "StartInLastDir", true);
+  startInLastDir = generalGroup.readEntry( "StartInLastDir", true);
 
-  idata->load( kc.data() );
+  idata->load( kc );
 
   // compatibility with KuickShow <= 0.8.3
   switch ( rotation )
@@ -139,44 +139,46 @@ void KuickData::load()
 
 void KuickData::save()
 {
-  KConfigGroup kc(KGlobal::config(), "GeneralConfiguration");
+  KSharedConfig::Ptr kc = KGlobal::config();
 
-  kc.writeEntry( "FileFilter", fileFilter );
-  kc.writeEntry( "SlideShowDelay", slideDelay );
-  kc.writeEntry( "SlideshowCycles", slideshowCycles );
-  kc.writeEntry( "SlideshowFullscreen", slideshowFullscreen );
-  kc.writeEntry( "SlideshowStartAtFirst", slideshowStartAtFirst );
+  KConfigGroup generalGroup(kc, "GeneralConfiguration");
 
-  kc.writeEntry( "PreloadNextImage", preloadImage );
+  generalGroup.writeEntry( "FileFilter", fileFilter );
+  generalGroup.writeEntry( "SlideShowDelay", slideDelay );
+  generalGroup.writeEntry( "SlideshowCycles", slideshowCycles );
+  generalGroup.writeEntry( "SlideshowFullscreen", slideshowFullscreen );
+  generalGroup.writeEntry( "SlideshowStartAtFirst", slideshowStartAtFirst );
 
-  kc.writeEntry( "Fullscreen", fullScreen  );
-  kc.writeEntry( "AutoRotation", autoRotation  );
-  kc.writeEntry( "ShrinkToScreenSize", downScale );
-  kc.writeEntry( "ZoomToScreenSize", upScale );
-  kc.writeEntry( "FlipVertically", flipVertically );
-  kc.writeEntry( "FlipHorizontally", flipHorizontally );
-  kc.writeEntry( "MaxUpscale Factor", maxUpScale );
-  kc.writeEntry( "Rotation", int(rotation) );
+  generalGroup.writeEntry( "PreloadNextImage", preloadImage );
 
-  kc.writeEntry( "ApplyDefaultModifications", isModsEnabled );
+  generalGroup.writeEntry( "Fullscreen", fullScreen  );
+  generalGroup.writeEntry( "AutoRotation", autoRotation  );
+  generalGroup.writeEntry( "ShrinkToScreenSize", downScale );
+  generalGroup.writeEntry( "ZoomToScreenSize", upScale );
+  generalGroup.writeEntry( "FlipVertically", flipVertically );
+  generalGroup.writeEntry( "FlipHorizontally", flipHorizontally );
+  generalGroup.writeEntry( "MaxUpscale Factor", maxUpScale );
+  generalGroup.writeEntry( "Rotation", int(rotation) );
+
+  generalGroup.writeEntry( "ApplyDefaultModifications", isModsEnabled );
 
 
-  kc.writeEntry( "BrightnessStepSize", brightnessSteps );
-  kc.writeEntry( "ContrastStepSize", contrastSteps );
-  kc.writeEntry( "GammaStepSize", gammaSteps );
+  generalGroup.writeEntry( "BrightnessStepSize", brightnessSteps );
+  generalGroup.writeEntry( "ContrastStepSize", contrastSteps );
+  generalGroup.writeEntry( "GammaStepSize", gammaSteps );
 
-  kc.writeEntry( "ScrollingStepSize", scrollSteps );
-  kc.writeEntry( "ZoomStepSize", int(zoomSteps) );
+  generalGroup.writeEntry( "ScrollingStepSize", scrollSteps );
+  generalGroup.writeEntry( "ZoomStepSize", int(zoomSteps) );
 
-  kc.writeEntry( "MaximumImageWidth", maxWidth );
-  kc.writeEntry( "MaximumImageHeight", maxHeight );
+  generalGroup.writeEntry( "MaximumImageWidth", maxWidth );
+  generalGroup.writeEntry( "MaximumImageHeight", maxHeight );
 
-  kc.writeEntry( "MaxCachedImages", maxCachedImages );
-  kc.writeEntry( "BackgroundColor", backgroundColor );
+  generalGroup.writeEntry( "MaxCachedImages", maxCachedImages );
+  generalGroup.writeEntry( "BackgroundColor", backgroundColor );
 
-  kc.writeEntry( "StartInLastDir", startInLastDir );
+  generalGroup.writeEntry( "StartInLastDir", startInLastDir );
 
-  idata->save( kc.config() );
+  idata->save( kc );
 
-  kc.sync();
+  kc->sync();
 }
