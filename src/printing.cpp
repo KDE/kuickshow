@@ -53,8 +53,8 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
     KuickPrintDialogPage* dialogPage = new KuickPrintDialogPage( parent, "kuick page");
-    printDialog->setWindowTitle(i18n("Print %1", printer.docName().section('/', -1)));
     QPrintDialog *printDialog = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << dialogPage, parent);
+    printDialog->setWindowTitle(i18n("Print %1", printer.docName().section('/', -1)));
 
     if (printDialog->exec())
     {
@@ -63,7 +63,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
         if ( tmpFile.open() )
         {
             if ( imageWin.saveImage( tmpFile.fileName(), true ) )
-                return printImageWithQt( tmpFile.fileName(), printer,
+                return printImageWithQt( tmpFile.fileName(), printer, parent,
                                          imageWin.filename() );
         }
 

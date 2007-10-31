@@ -140,9 +140,9 @@ KuickShow::KuickShow( const char *name )
         // FileWidget::isImage() should correct in most cases.
         // For non-local non-images, we just assume directory.
 
-        if ( FileWidget::isImage( &item ) )
+        if ( FileWidget::isImage( item ) )
         {
-            showImage( &item, true, false, true ); // show in new window, not fullscreen-forced and move to 0,0
+            showImage( item, true, false, true ); // show in new window, not fullscreen-forced and move to 0,0
 //    showImage( &item, true, false, false ); // show in new window, not fullscreen-forced and not moving to 0,0
         }
         else if ( item.isDir() )
@@ -165,7 +165,7 @@ KuickShow::KuickShow( const char *name )
             if ( name.startsWith( "image/" ) || name.startsWith( "text/" ) )
             {
                 FileWidget::setImage( item, true );
-                showImage( &item, true, false, true );
+                showImage( item, true, false, true );
             }
             else // assume directory, KDirLister will tell us if we can't list
             {
@@ -453,7 +453,7 @@ void KuickShow::slotHighlighted( const KFileItem *fi )
 {
     KFileItem *item = const_cast<KFileItem *>( fi );
     statusBar()->changeItem( item->getStatusBarInfo(), URL_ITEM );
-    bool image = FileWidget::isImage( fi );
+    bool image = FileWidget::isImage( *fi );
 
     QString meta;
     if ( image )
@@ -488,7 +488,7 @@ void KuickShow::dirSelected( const KUrl& url )
 
 void KuickShow::slotSelected( const KFileItem *item )
 {
-    showImage( item, !oneWindowAction->isChecked() );
+    showImage( *item, !oneWindowAction->isChecked() );
 }
 
 // downloads item if necessary
@@ -498,7 +498,7 @@ void KuickShow::showFileItem( ImageWindow * /*view*/,
 
 }
 
-void KuickShow::showImage( const KFileItem *fi,
+void KuickShow::showImage( const KFileItem& fi,
                            bool newWindow, bool fullscreen, bool moveToTopLeft )
 {
     newWindow  |= !m_viewer;
@@ -539,7 +539,7 @@ void KuickShow::showImage( const KFileItem *fi,
         ImageWindow *safeViewer = m_viewer;
 
         QString filename;
-        KIO::NetAccess::download(fi->url(), filename, this);
+        KIO::NetAccess::download(fi.url(), filename, this);
 
         if ( !safeViewer->showNextImage( filename ) ) {
             m_viewer = safeViewer;
@@ -559,10 +559,10 @@ void KuickShow::showImage( const KFileItem *fi,
             }
 
             if ( kdata->preloadImage && fileWidget ) {
-                KFileItem *item = 0L;                 // don't move cursor
-                item = fileWidget->getItem( FileWidget::Next, true );
-                if ( item )
-                    safeViewer->cacheImage( item->url().path() ); // FIXME
+                // don't move cursor
+                KFileItem item = fileWidget->getItem( FileWidget::Next, true );
+                if ( !item.isNull() )
+                    safeViewer->cacheImage( item.url().path() ); // FIXME
             }
 
             m_viewer = safeViewer;
@@ -573,12 +573,12 @@ void KuickShow::showImage( const KFileItem *fi,
 void KuickShow::slotDeleteImage()
 {
     KFileItemList list;
-    KFileItem *item = fileWidget->getCurrentItem(false);
-    list.append (*item);
-    KFileItem *next = fileWidget->getNext(true);
-    if (!next)
+    KFileItem item = fileWidget->getCurrentItem(false);
+    list.append(item);
+    KFileItem next = fileWidget->getNext(true);
+    if (next.isNull())
         next = fileWidget->getPrevious(true);
-        if (next)
+    if (!next.isNull())
         showImage(next, false);
     else
         m_viewer->close(true);
@@ -587,11 +587,11 @@ void KuickShow::slotDeleteImage()
 
 void KuickShow::startSlideShow()
 {
-    KFileItem *item = kdata->slideshowStartAtFirst ?
+    KFileItem item = kdata->slideshowStartAtFirst ?
                       fileWidget->gotoFirstImage() :
                       fileWidget->getCurrentItem(false);
 
-    if ( item ) {
+    if ( !item.isNull() ) {
         m_slideshowCycle = 1;
         fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
         showImage( item, !oneWindowAction->isChecked(),
@@ -622,12 +622,12 @@ void KuickShow::nextSlide()
         return;
     }
 
-    KFileItem *item = fileWidget->getNext( true );
-    if ( !item ) { // last image
+    KFileItem item = fileWidget->getNext( true );
+    if ( item.isNull() ) { // last image
         if ( m_slideshowCycle < kdata->slideshowCycles
              || kdata->slideshowCycles == 0 ) {
             item = fileWidget->gotoFirstImage();
-            if ( item ) {
+            if ( !item.isNull() ) {
                 nextSlide( item );
                 m_slideshowCycle++;
                 return;
@@ -642,9 +642,9 @@ void KuickShow::nextSlide()
     nextSlide( item );
 }
 
-void KuickShow::nextSlide( KFileItem *item )
+void KuickShow::nextSlide( const KFileItem& item )
 {
-    m_viewer->showNextImage( item->url().path() );
+    m_viewer->showNextImage( item.url().path() );
     if(kdata->slideDelay)
         m_slideTimer->start( kdata->slideDelay );
 }
@@ -665,7 +665,7 @@ void KuickShow::slotPrint()
     KFileItem item;
 	for ( ; it != end; ++it ) {
 		item = (*it);
-        if (FileWidget::isImage( &item ) && iw->loadImage( item.url().path()))
+        if (FileWidget::isImage( item ) && iw->loadImage( item.url().path()))
             iw->printImage();
     }
 
@@ -693,8 +693,8 @@ void KuickShow::slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &
     for ( ; it != urls.end(); ++it )
     {
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
-        if ( FileWidget::isImage( &item ) )
-            showImage( &item, true );
+        if ( FileWidget::isImage( item ) )
+            showImage( item, true );
         else
             fileWidget->setUrl( *it, true );
     }
@@ -709,8 +709,8 @@ void KuickShow::show()
 
 void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 {
-    KFileItem *item      = 0L; // to be shown
-    KFileItem *item_next = 0L; // to be cached
+    KFileItem item; // to be shown
+    KFileItem item_next; // to be cached
 
     if ( steps == 0 )
         return;
@@ -758,14 +758,14 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 
     if ( FileWidget::isImage( item ) ) {
         QString filename;
-        KIO::NetAccess::download(item->url(), filename, this);
+        KIO::NetAccess::download(item.url(), filename, this);
         view->showNextImage( filename );
         if (m_slideTimer->isActive() && kdata->slideDelay)
             m_slideTimer->start( kdata->slideDelay );
 
-        if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
+        if ( kdata->preloadImage && !item_next.isNull() && item_next.url().isLocalFile() ) // preload next image
             if ( FileWidget::isImage( item_next ) )
-                view->cacheImage( item_next->url().path() ); // ###
+                view->cacheImage( item_next.url().path() ); // ###
     }
 }
 
@@ -804,8 +804,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
         m_viewer = window;
         QString img;
-        KFileItem *item = 0L;      // the image to be shown
-        KFileItem *item_next = 0L; // the image to be cached
+        KFileItem item;      // the image to be shown
+        KFileItem item_next; // the image to be cached
 
         if ( k ) { // keypress
             ret = true;
@@ -880,7 +880,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 //      KFileItem *cur = fileWidget->getCurrentItem( false );
                 (void) fileWidget->getCurrentItem( false );
                 item = fileWidget->getNext( false ); // don't move
-                if ( !item )
+                if ( item.isNull() )
                     item = fileWidget->getPrevious( false );
                 KFileItem it( KFileItem::Unknown, KFileItem::Unknown,
                               m_viewer->url() );
@@ -906,12 +906,12 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             if ( FileWidget::isImage( item ) ) {
                 QString filename;
-                KIO::NetAccess::download(item->url(), filename, this);
+                KIO::NetAccess::download(item.url(), filename, this);
                 m_viewer->showNextImage( filename );
 
-                if ( kdata->preloadImage && item_next && item_next->url().isLocalFile() ) // preload next image
+                if ( kdata->preloadImage && !item_next.isNull() && item_next.url().isLocalFile() ) // preload next image
                     if ( FileWidget::isImage( item_next ) )
-                        m_viewer->cacheImage( item_next->url().path() ); // ###
+                        m_viewer->cacheImage( item_next.url().path() ); // ###
 
                 ret = true; // don't pass keyEvent
             }
@@ -1032,7 +1032,7 @@ void KuickShow::readProperties( const KConfigGroup& kc )
     for ( it = images.begin(); it != images.end(); ++it ) {
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KUrl::fromPathOrUrl( *it ), false );
         if ( item.isReadable() )
-            showImage( &item, true );
+            showImage( item, true );
     }
 
     if ( !s_viewers.isEmpty() ) {
@@ -1217,8 +1217,8 @@ void KuickShow::slotOpenURL()
         for ( ; it != urls.end(); ++it )
         {
             KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
-            if ( FileWidget::isImage( &item ) )
-                showImage( &item, true );
+            if ( FileWidget::isImage( item ) )
+                showImage( item, true );
             else
                 fileWidget->setUrl( *it, true );
         }

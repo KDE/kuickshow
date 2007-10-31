@@ -43,24 +43,24 @@ public:
 
     void setInitialItem( const QString& filename );
 
-    KFileItem *getCurrentItem( bool onlyImage ) const {
+    KFileItem getCurrentItem( bool onlyImage ) const {
 	return getItem( Current, onlyImage );
     }
 
-    void setCurrentItem( const KFileItem * );
+    void setCurrentItem( const KFileItem& );
     void setCurrentItem( const QString& filename ) {
 	KDirOperator::setCurrentItem( filename );
     }
 
-    KFileItem * gotoFirstImage();
-    KFileItem * gotoLastImage();
-    KFileItem * getNext( bool go=true );
-    KFileItem * getPrevious( bool go=true );
+    KFileItem gotoFirstImage();
+    KFileItem gotoLastImage();
+    KFileItem getNext( bool go=true );
+    KFileItem getPrevious( bool go=true );
 
 
-    KFileItem *getItem( WhichItem which, bool onlyImage ) const;
+    KFileItem getItem( WhichItem which, bool onlyImage ) const;
 
-    static bool isImage( const KFileItem * );
+    static bool isImage( const KFileItem& );
     static void setImage( KFileItem& item, bool enable );
 
     void initActions();
