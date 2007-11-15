@@ -29,13 +29,13 @@ class KComboBox;
 class KIntNumInput;
 
 class ImageWindow;
-
+class KuickPrintDialogPage;
 
 class Printing
 {
 public:
     static bool printImage( const ImageWindow& imageWin, QWidget *parent = 0L);
-    static bool printImageWithQt( const QString& filename, QPrinter& printer, QWidget& dialogPage,
+    static bool printImageWithQt( const QString& filename, QPrinter& printer, KuickPrintDialogPage& dialogPage,
                                   const QString& originalFileName );
 
 private:
@@ -65,7 +65,7 @@ public:
     bool printScale();
     void setPrintScale( bool scale );
 
-    bool printScaleUnit();
+    QString printScaleUnit();
     void setPrintScaleUnit( QString scaleUnit );
 
     int printScaleWidthPixels();

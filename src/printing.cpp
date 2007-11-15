@@ -63,7 +63,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
         if ( tmpFile.open() )
         {
             if ( imageWin.saveImage( tmpFile.fileName(), true ) )
-                return printImageWithQt( tmpFile.fileName(), printer, parent,
+                return printImageWithQt( tmpFile.fileName(), printer, *dialogPage,
                                          imageWin.filename() );
         }
 
@@ -73,7 +73,7 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
     return true; // user aborted
 }
 
-bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, QWidget& dialogPage,
+bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, KuickPrintDialogPage& dialogPage,
                                  const QString& originalFileName )
 {
     QImage image( filename );
@@ -106,7 +106,7 @@ bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, QWi
     //
     // shrink image to pagesize, if necessary
     //
-    bool shrinkToFit = dialofPage.shrinkToFit();
+    bool shrinkToFit = dialogPage.printShrinkToFit();
     QSize imagesize = image.size();
     if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
         imagesize.scale( w, h, Qt::ScaleMin );
@@ -313,7 +313,7 @@ int KuickPrintDialogPage::printScaleWidthPixels()
 
 void KuickPrintDialogPage::setPrintScaleWidthPixels( int scaleWidth )
 {
-    setScaleWidth();
+    setScaleWidth(scaleWidth);
 }
 
 int KuickPrintDialogPage::printScaleHeightPixels()
@@ -323,7 +323,7 @@ int KuickPrintDialogPage::printScaleHeightPixels()
 
 void KuickPrintDialogPage::setPrintScaleHeightPixels( int scaleHeight )
 {
-    setScaleHeight();
+    setScaleHeight(scaleHeight);
 }
 
 void KuickPrintDialogPage::toggleScaling( bool enable )
