@@ -64,7 +64,7 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *name )
     dirCompletionObject()->setCompletionMode( KGlobalSettings::CompletionAuto);
 
     slotViewChanged();
-    connect( this, SIGNAL( viewChanged( KFileView * )),
+    connect( this, SIGNAL( viewChanged( QAbstractIvemView * )),
 	     SLOT( slotViewChanged() ));
 
     connect( dirLister(), SIGNAL( clear() ), SLOT( slotItemsCleared() ));
