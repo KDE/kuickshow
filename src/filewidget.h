@@ -48,9 +48,6 @@ public:
     }
 
     void setCurrentItem( const KFileItem& );
-    void setCurrentItem( const QString& filename ) {
-	KDirOperator::setCurrentItem( filename );
-    }
 
     KFileItem gotoFirstImage();
     KFileItem gotoLastImage();
@@ -87,7 +84,7 @@ private slots:
     void slotFinishedLoading();
 
 private:
-    KFileView * fileView() const { return (KFileView*) view(); }
+    KFileItemList items() const { return dirLister()->items(); }
 
     bool m_validCompletion;
     FileFinder *m_fileFinder;

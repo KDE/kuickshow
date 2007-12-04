@@ -23,6 +23,7 @@
 #include <QEvent>
 #include <Q3PopupMenu>
 #include <QMenuItem>
+#include <QAbstractItemView>
 
 #include <kactioncollection.h>
 #include <kactionmenu.h>
@@ -64,7 +65,7 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *name )
     dirCompletionObject()->setCompletionMode( KGlobalSettings::CompletionAuto);
 
     slotViewChanged();
-    connect( this, SIGNAL( viewChanged( QAbstractIvemView * )),
+    connect( this, SIGNAL( viewChanged( QAbstractItemView * )),
 	     SLOT( slotViewChanged() ));
 
     connect( dirLister(), SIGNAL( clear() ), SLOT( slotItemsCleared() ));
@@ -264,7 +265,7 @@ void FileWidget::setImage( KFileItem& item, bool enable )
 
 KFileItem FileWidget::gotoFirstImage()
 {
-    const KFileItemList lst( fileView()->items() );
+    const KFileItemList lst( items() );
     KFileItemList::const_iterator it = lst.begin();
     const KFileItemList::const_iterator end = lst.end();
     for ( ; it != end ; ++it ) {
@@ -284,7 +285,7 @@ KFileItem FileWidget::gotoLastImage()
 #warning "kde4 ;port it"
 #endif
 #if 0
-    KFileItemListIterator it( *(fileView()->items()) );
+    KFileItemListIterator it( items() );
     it.toLast();
 
     while ( it.current() ) {
@@ -330,7 +331,7 @@ KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
 #warning "kde4 porting";
 #endif
 #if 0
-    const KFileItemList *lst(fileView()->items() );
+    const KFileItemList *lst( items() );
     KFileItemList::const_iterator it = lst->begin();
     const KFileItemList::const_iterator end = lst->end();
     KFileItem *item = 0L;
@@ -374,7 +375,7 @@ KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
 
 void FileWidget::slotViewChanged()
 {
-    fileView()->widget()->installEventFilter( this );
+    view()->installEventFilter( this );
 }
 
 void FileWidget::slotItemsCleared()
@@ -436,12 +437,9 @@ void FileWidget::slotReturnPressed( const QString& t )
     }
 }
 
+// TODO remove this stub after 10/Dec/2007, KDirOperator::setCurrentItem() was added on 04/Dec/2007
 void FileWidget::setCurrentItem( const KFileItem& item )
 {
-    if ( !item.isNull() ) {
-        fileView()->setCurrentItem( item );
-	fileView()->ensureItemVisible( item );
-    }
 }
 
 void FileWidget::setInitialItem( const QString& filename )
