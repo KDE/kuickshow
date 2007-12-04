@@ -47,7 +47,12 @@ public:
 	return getItem( Current, onlyImage );
     }
 
+    // TODO remove both after 10-Dec-2007
     void setCurrentItem( const KFileItem& );
+    void setCurrentItem( const QString& filename ) {
+      KDirOperator::setCurrentItem( filename );
+    }
+
 
     KFileItem gotoFirstImage();
     KFileItem gotoLastImage();
