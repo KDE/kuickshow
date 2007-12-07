@@ -35,9 +35,8 @@ FileFinder::FileFinder( QWidget *parent, const char *name )
     setFrame( true );
 
     setHandleSignals( true ); // we want the completionbox signals
-#if KDE_VERSION >= 220
     completionBox()->setTabHandling( true );
-#endif
+
     connect( completionBox(), SIGNAL( userCancelled(const QString&) ),
              SLOT( hide() ));
     connect( completionBox(), SIGNAL( activated( const QString& ) ),
