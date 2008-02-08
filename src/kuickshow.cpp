@@ -404,10 +404,10 @@ void KuickShow::initGUI( const KUrl& startDir )
     qobject_cast<KAction *>(coll->action( "reload" ))->setShortcut( KStandardShortcut::reload() );
     qobject_cast<KAction *>(coll->action( "short view" ))->setShortcut(Qt::Key_F6);
     qobject_cast<KAction *>(coll->action( "detailed view" ))->setShortcut(Qt::Key_F7);
-    qobject_cast<KAction *>(coll->action( "show hidden" ))->setShortcut(Qt::Key_F8);
+    //qobject_cast<KAction *>(coll->action( "show hidden" ))->setShortcut(Qt::Key_F8);
     qobject_cast<KAction *>(coll->action( "mkdir" ))->setShortcut(Qt::Key_F10);
     qobject_cast<KAction *>(coll->action( "preview" ))->setShortcut(Qt::Key_F11);
-    qobject_cast<KAction *>(coll->action( "separate dirs" ))->setShortcut(Qt::Key_F12);
+    //qobject_cast<KAction *>(coll->action( "separate dirs" ))->setShortcut(Qt::Key_F12);
 }
 
 void KuickShow::slotSetURL( const KUrl& url )
