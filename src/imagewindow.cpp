@@ -303,10 +303,10 @@ void ImageWindow::setFullscreen( bool enable )
     xpos = 0; ypos = 0;
 
     if ( enable && !myIsFullscreen ) { // set Fullscreen
-        showFullScreen();
+        setWindowState( windowState() | Qt::WindowFullScreen ); // set
     }
     else if ( !enable && myIsFullscreen ) { // go into window mode
-        showNormal();
+        setWindowState( windowState() & ~Qt::WindowFullScreen ); // reset
     }
 
     myIsFullscreen = enable;
