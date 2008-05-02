@@ -1,6 +1,8 @@
 project(kuickshow)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
+SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+
+find_package(IMLIB REQUIRED)
 
 add_subdirectory( src ) 
 add_subdirectory( misc ) 
