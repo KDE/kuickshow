@@ -28,7 +28,7 @@ kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
 
 target_link_libraries(kdeinit_kuickshow ${IMLIB_LIBRARIES} ${KDE4_KDE3SUPPORT_LIBS} ${KDE4_KFILE_LIBS})
 
-install(TARGETS kdeinit_kuickshow  DESTINATION ${LIB_INSTALL_DIR} )
+install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 target_link_libraries( kuickshow kdeinit_kuickshow )
 install(TARGETS kuickshow  DESTINATION ${BIN_INSTALL_DIR} )
