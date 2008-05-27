@@ -31,7 +31,7 @@ target_link_libraries(kdeinit_kuickshow ${IMLIB_LIBRARIES} ${KDE4_KDE3SUPPORT_LI
 install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 target_link_libraries( kuickshow kdeinit_kuickshow )
-install(TARGETS kuickshow  DESTINATION ${BIN_INSTALL_DIR} )
+install(TARGETS kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
