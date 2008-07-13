@@ -63,13 +63,18 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
         if ( tmpFile.open() )
         {
             if ( imageWin.saveImage( tmpFile.fileName(), true ) )
-                return printImageWithQt( tmpFile.fileName(), printer, *dialogPage,
-                                         imageWin.filename() );
-        }
+            {
 
+                bool success = printImageWithQt( tmpFile.fileName(), printer, *dialogPage,
+                                         imageWin.filename() );
+                delete printDialog;
+                return success;
+            }
+        }
+        delete printDialog;
         return false;
     }
-
+    delete printDialog;
     return true; // user aborted
 }
 
