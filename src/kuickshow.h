@@ -99,8 +99,8 @@ private slots:
     void         	showImage(const KFileItem&, bool newWindow = false,
                                   bool fullscreen = false, bool moveToTopLeft = true );
     void 		showFileItem( ImageWindow *, const KFileItem * );
-    void		slotHighlighted( const KFileItem * );
-    void 		slotSelected( const KFileItem * );
+    void		slotHighlighted( const KFileItem& );
+    void 		slotSelected( const KFileItem& );
     void		dirSelected( const KUrl& );
     void		configuration();
     void	      	about();
@@ -109,7 +109,7 @@ private slots:
     void 		nextSlide();
     void                nextSlide( const KFileItem& item );
     void		viewerDeleted();
-    void 		slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &);
+    void 		slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
 

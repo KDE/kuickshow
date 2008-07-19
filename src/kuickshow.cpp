@@ -44,6 +44,7 @@
 #include <kcmdlineargs.h>
 #include <kconfig.h>
 #include <kcursor.h>
+#include <kdebug.h>
 #include <kdeversion.h>
 #include <kactionmenu.h>
 #include <kfiledialog.h>
@@ -214,19 +215,19 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     KActionCollection *coll = fileWidget->actionCollection();
 
-    connect( fileWidget, SIGNAL( fileSelected( const KFileItem * ) ),
-             this, SLOT( slotSelected( const KFileItem * ) ));
+    connect( fileWidget, SIGNAL( fileSelected( const KFileItem& ) ),
+             this, SLOT( slotSelected( const KFileItem& ) ));
 
-    connect( fileWidget, SIGNAL( fileHighlighted( const KFileItem * )),
-             this, SLOT( slotHighlighted( const KFileItem * ) ));
+    connect( fileWidget, SIGNAL( fileHighlighted( const KFileItem& )),
+             this, SLOT( slotHighlighted( const KFileItem& ) ));
 
     connect( fileWidget, SIGNAL( urlEntered( const KUrl&  )),
              this, SLOT( dirSelected( const KUrl& )) );
 
 
     fileWidget->setAcceptDrops(true);
-    connect( fileWidget, SIGNAL( dropped( const KFileItem *, QDropEvent *, const KUrl::List & )),
-             this, SLOT( slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &)) );
+    connect( fileWidget, SIGNAL( dropped( const KFileItem&, QDropEvent *, const KUrl::List & )),
+             this, SLOT( slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &)) );
 
     // setup actions
     QAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
@@ -449,16 +450,18 @@ void KuickShow::viewerDeleted()
 }
 
 
-void KuickShow::slotHighlighted( const KFileItem *fi )
+void KuickShow::slotHighlighted( const KFileItem& item )
 {
-    KFileItem *item = const_cast<KFileItem *>( fi );
-    statusBar()->changeItem( item->getStatusBarInfo(), URL_ITEM );
-    bool image = FileWidget::isImage( *fi );
+kdDebug() << "highlighted: " << endl;
+    QString statusBarInfo = item.isNull() ? QString() : item.getStatusBarInfo();
+
+    statusBar()->changeItem( statusBarInfo, URL_ITEM );
+    bool image = FileWidget::isImage( item );
 
     QString meta;
     if ( image )
     {
-        KFileMetaInfo info = item->metaInfo();
+        KFileMetaInfo info = item.metaInfo();
         if ( info.isValid() )
         {
             meta = info.item("sizeurl").value().toString();
@@ -477,6 +480,8 @@ void KuickShow::slotHighlighted( const KFileItem *fi )
 
 void KuickShow::dirSelected( const KUrl& url )
 {
+kdDebug() << "dirSelected: " << url.prettyUrl() << endl;
+
     if ( url.isLocalFile() )
         setCaption( url.path() );
     else
@@ -486,9 +491,10 @@ void KuickShow::dirSelected( const KUrl& url )
     statusBar()->changeItem( url.prettyUrl(), URL_ITEM );
 }
 
-void KuickShow::slotSelected( const KFileItem *item )
+void KuickShow::slotSelected( const KFileItem& item )
 {
-    showImage( *item, !oneWindowAction->isChecked() );
+kDebug() << "slotSelected" << endl;
+    showImage( item, !oneWindowAction->isChecked() );
 }
 
 // downloads item if necessary
@@ -501,6 +507,9 @@ void KuickShow::showFileItem( ImageWindow * /*view*/,
 void KuickShow::showImage( const KFileItem& fi,
                            bool newWindow, bool fullscreen, bool moveToTopLeft )
 {
+kDebug() << fi.name() << endl;
+
+
     newWindow  |= !m_viewer;
     fullscreen |= (newWindow && kdata->fullScreen);
     if ( FileWidget::isImage( fi ) ) {
@@ -687,7 +696,7 @@ void KuickShow::slotShowFullscreen()
     showImage( fileWidget->getCurrentItem( false ), false, true );
 }
 
-void KuickShow::slotDropped( const KFileItem *, QDropEvent *, const KUrl::List &urls)
+void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &urls)
 {
     KUrl::List::ConstIterator it = urls.begin();
     for ( ; it != urls.end(); ++it )

@@ -47,13 +47,6 @@ public:
 	return getItem( Current, onlyImage );
     }
 
-    // TODO remove both after 10-Dec-2007
-    void setCurrentItem( const KFileItem& );
-    void setCurrentItem( const QString& filename ) {
-      KDirOperator::setCurrentItem( filename );
-    }
-
-
     KFileItem gotoFirstImage();
     KFileItem gotoLastImage();
     KFileItem getNext( bool go=true );
@@ -73,7 +66,7 @@ signals:
 protected:
     virtual bool eventFilter( QObject *o, QEvent * );
     virtual void resizeEvent( QResizeEvent * );
-    virtual void activatedMenu( const KFileItem *, const QPoint& );
+    virtual void activatedMenu( const KFileItem &, const QPoint& );
     virtual QSize sizeHint() const;
 
 private slots:
@@ -82,8 +75,8 @@ private slots:
     void slotViewChanged();
 
     void slotItemsCleared();
-    void slotItemDeleted( KFileItem * );
-    void slotHighlighted( const KFileItem * );
+    void slotItemDeleted( const KFileItem& );
+    void slotHighlighted( const KFileItem& );
 
     void slotURLEntered( const KUrl& url );
     void slotFinishedLoading();

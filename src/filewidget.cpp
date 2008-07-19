@@ -27,6 +27,7 @@
 
 #include <kactioncollection.h>
 #include <kactionmenu.h>
+#include <kdebug.h>
 #include <kdeversion.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
@@ -46,7 +47,7 @@
 #undef KeyPress
 #endif
 
-FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *name )
+FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *)
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
       m_fileFinder( 0L )
@@ -69,11 +70,11 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *name )
 	     SLOT( slotViewChanged() ));
 
     connect( dirLister(), SIGNAL( clear() ), SLOT( slotItemsCleared() ));
-    connect( dirLister(), SIGNAL( deleteItem( KFileItem * ) ),
-	     SLOT( slotItemDeleted( KFileItem *) ));
+    connect( dirLister(), SIGNAL( deleteItem( const KFileItem&  ) ),
+	     SLOT( slotItemDeleted( const KFileItem& ) ));
 
-    connect( this, SIGNAL( fileHighlighted( const KFileItem * )),
-	     SLOT( slotHighlighted( const KFileItem * )));
+    connect( this, SIGNAL( fileHighlighted( const KFileItem& )),
+	     SLOT( slotHighlighted( const KFileItem& )));
 
     connect( this, SIGNAL(urlEntered(const KUrl&)),
              SLOT( slotURLEntered( const KUrl& )));
@@ -141,20 +142,21 @@ bool FileWidget::hasFiles() const
     return (numFiles() > 0);
 }
 
-void FileWidget::activatedMenu( const KFileItem *item, const QPoint& pos )
+void FileWidget::activatedMenu( const KFileItem& item, const QPoint& pos )
 {
-    bool image = isImage( *item );
+    bool image = isImage( item );
     actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
     actionCollection()->action("kuick_showInOtherWindow")->setEnabled( image );
     actionCollection()->action("kuick_showFullscreen")->setEnabled( image );
     actionCollection()->action("kuick_print")->setEnabled( image );
-    actionCollection()->action("properties")->setEnabled( item );
 
-    bool hasSelection = (item != 0L);
+    bool hasSelection = true; //(item != 0L);
+    actionCollection()->action("properties")->setEnabled( hasSelection );
+
     if ( actionCollection()->action("kuick_delete") )
         actionCollection()->action("kuick_delete")->setEnabled( hasSelection );
 
-    KDirOperator::activatedMenu( *item, pos );
+    KDirOperator::activatedMenu( item, pos );
 }
 
 void FileWidget::findCompletion( const QString& text )
@@ -249,8 +251,8 @@ bool FileWidget::isImage( const KFileItem& item )
 //     return item && !item.isDir();
     if ( !item.isNull() )
     {
-        return item.isReadable() && item.mimetype().startsWith( "image/") ||
-            item.extraData( (void*) MY_TYPE ) == (void*) IS_IMAGE;
+        return item.isReadable() && (item.mimetype().startsWith( "image/") ||
+            item.extraData( (void*) MY_TYPE ) == (void*) IS_IMAGE);
     }
     return false;
 }
@@ -284,18 +286,39 @@ KFileItem FileWidget::gotoLastImage()
 #ifdef __GNUC__
 #warning "kde4 ;port it"
 #endif
-#if 0
-    KFileItemListIterator it( items() );
-    it.toLast();
 
-    while ( it.current() ) {
-	if ( isImage( it.current() ) ) {
-	    setCurrentItem( it.current() );
-	    return it.current();
+#if 0
+    QAbstractItemModel *model = view()->model();
+    int numRows = model->rowCount();
+    QModelIndex& index = model->index(numRows - 1, 0); // last item
+    while ( index.isValid() ) {
+        QVariant item = index.data();
+	KFileItem fileItem = item.value<KFileItem>();
+	if (isImage( fileItem )) {
+	    setCurrentItem( fileItem );
+            return fileItem;
 	}
-	--it;
+
+        index = index.parent();
     }
-#endif
+#endif    
+
+    
+    const KFileItemList lst( items() );
+    if ( !lst.isEmpty() ) {
+        KFileItemList::const_iterator it = lst.end();
+        const KFileItemList::const_iterator start = lst.begin();
+
+        do {
+            it--;
+            if ( isImage( *it ) )
+            {
+                setCurrentItem( *it );
+	        return *it;
+            }
+       } while (it != start);
+    }
+
     return KFileItem();
 }
 
@@ -323,53 +346,59 @@ KFileItem FileWidget::getPrevious( bool go )
     return KFileItem();
 }
 
-// returns 0L when there is no previous/next item/image
+// returns a null item when there is no previous/next item/image
 // this sucks! Use KFileView::currentFileItem() when implemented
 KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
 {
 #ifdef __GNUC__
 #warning "kde4 porting";
 #endif
-#if 0
-    const KFileItemList *lst( items() );
-    KFileItemList::const_iterator it = lst->begin();
-    const KFileItemList::const_iterator end = lst->end();
-    KFileItem *item = 0L;
+//#if 0
+    const KFileItemList lst( items() );
+    KFileItemList::const_iterator begin = lst.begin();
+    KFileItemList::const_iterator it = begin;
+    const KFileItemList::const_iterator end = lst.end();
+    bool hasCurrentItem = false;
     for ( ; it != end ; ++it ) {
         if ( it->url() == m_currentURL )
         {
-            item = it;
+            hasCurrentItem = true;
             break;
         }
     }
-    if ( item ) {
+    if (!hasCurrentItem) {
+    	kDebug() << "no current" << endl;
+    }
+    if ( hasCurrentItem ) {
 	switch ( which ) {
 	case Previous: {
-	    --it;
-	    while ( it.current() ) {
-		if ( isImage( it.current() ) || !onlyImage )
-		    return it.current();
-		--it;
-	    }
-	    return 0L; // no previous item / image
+	    do {
+	        --it;
+		if ( isImage( *it ) || !onlyImage )
+		    return *it;
+
+	    } while ( it != begin );
+kDebug() << "no previous" << endl;
+	    return KFileItem(); // no previous item / image
 	}
 
 	case Next: {
 	    ++it;
-	    while ( it.current() ) {
-		if ( isImage( it.current() ) || !onlyImage )
-		    return it.current();
-		++it;
+	    while ( it != end ) {
+		if ( isImage( *it ) || !onlyImage )
+		    return *it;
+	        ++it;
 	    }
-	    return 0L; // no further item / image
+kDebug() << "no next" << endl;
+	    return KFileItem(); // no further item / image
 	}
 
 	case Current:
 	default:
-	    return it.current();
+	    return *it;
 	}
     }
-#endif
+//#endif
     return KFileItem();
 }
 
@@ -383,10 +412,10 @@ void FileWidget::slotItemsCleared()
     m_currentURL = QString::null;
 }
 
-void FileWidget::slotItemDeleted( KFileItem *item )
+void FileWidget::slotItemDeleted( const KFileItem& item )
 {
     KFileItem current = getCurrentItem( false );
-    if ( *item != current ) {
+    if ( item != current ) {
 	return; // all ok, we already have a new current item
     }
 
@@ -398,9 +427,15 @@ void FileWidget::slotItemDeleted( KFileItem *item )
 	m_currentURL = next.url().url();
 }
 
-void FileWidget::slotHighlighted( const KFileItem *item )
+void FileWidget::slotHighlighted( const KFileItem& item )
 {
-    m_currentURL = item->url().url();
+kDebug() << "FileWidget::slotHighlighted" << endl;
+    if ( !item.isNull() ) {
+        m_currentURL = item.url().url();
+    }
+    else {
+        m_currentURL = QString();
+    }
 }
 
 void FileWidget::slotReturnPressed( const QString& t )
@@ -435,11 +470,6 @@ void FileWidget::slotReturnPressed( const QString& t )
 		emit fileSelected( item );
 	}
     }
-}
-
-// TODO remove this stub after 10/Dec/2007, KDirOperator::setCurrentItem() was added on 04/Dec/2007
-void FileWidget::setCurrentItem( const KFileItem& item )
-{
 }
 
 void FileWidget::setInitialItem( const QString& filename )

@@ -1,14 +1,17 @@
 project(kuickshow)
 
-SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules
+)
 
+find_package(KDE4 REQUIRED)
 find_package(IMLIB REQUIRED)
+
+include(KDE4Defaults)
 
 add_subdirectory( src ) 
 add_subdirectory( misc ) 
 add_subdirectory( pics ) 
-
-
 
 
 ########### install files ###############
