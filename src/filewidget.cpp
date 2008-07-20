@@ -24,6 +24,8 @@
 #include <Q3PopupMenu>
 #include <QMenuItem>
 #include <QAbstractItemView>
+#include <QAbstractItemModel>
+#include <QModelIndex>
 
 #include <kactioncollection.h>
 #include <kactionmenu.h>
@@ -265,58 +267,38 @@ void FileWidget::setImage( KFileItem& item, bool enable )
         item.removeExtraData( (void*) MY_TYPE );
 }
 
+#ifdef index
+#undef index
+#endif
+
 KFileItem FileWidget::gotoFirstImage()
 {
-    const KFileItemList lst( items() );
-    KFileItemList::const_iterator it = lst.begin();
-    const KFileItemList::const_iterator end = lst.end();
-    for ( ; it != end ; ++it ) {
-        if ( isImage( *it ) )
-        {
-            setCurrentItem( *it );
-	    return *it;
-        }
+    QModelIndex modelIndex = view()->model()->index( 0, 0 );
+    while ( modelIndex.isValid() ) {
+        KFileItem item = fileItemFor(modelIndex);
+	if ( isImage( item ) ) {
+            setCurrentItem( item );
+	    return item;
+	}
 
+	modelIndex = modelIndex.sibling( modelIndex.row() + 1, modelIndex.column() );
     }
     return KFileItem();
 }
 
 KFileItem FileWidget::gotoLastImage()
 {
-#ifdef __GNUC__
-#warning "kde4 ;port it"
-#endif
-
-#if 0
     QAbstractItemModel *model = view()->model();
     int numRows = model->rowCount();
-    QModelIndex& index = model->index(numRows - 1, 0); // last item
+    QModelIndex index = model->index(numRows - 1, 0); // last item
     while ( index.isValid() ) {
-        QVariant item = index.data();
-	KFileItem fileItem = item.value<KFileItem>();
+	KFileItem fileItem = fileItemFor( index );
 	if (isImage( fileItem )) {
 	    setCurrentItem( fileItem );
             return fileItem;
 	}
 
         index = index.parent();
-    }
-#endif    
-
-    
-    const KFileItemList lst( items() );
-    if ( !lst.isEmpty() ) {
-        KFileItemList::const_iterator it = lst.end();
-        const KFileItemList::const_iterator start = lst.begin();
-
-        do {
-            it--;
-            if ( isImage( *it ) )
-            {
-                setCurrentItem( *it );
-	        return *it;
-            }
-       } while (it != start);
     }
 
     return KFileItem();
@@ -350,55 +332,54 @@ KFileItem FileWidget::getPrevious( bool go )
 // this sucks! Use KFileView::currentFileItem() when implemented
 KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
 {
-#ifdef __GNUC__
-#warning "kde4 porting";
-#endif
-//#if 0
-    const KFileItemList lst( items() );
-    KFileItemList::const_iterator begin = lst.begin();
-    KFileItemList::const_iterator it = begin;
-    const KFileItemList::const_iterator end = lst.end();
-    bool hasCurrentItem = false;
-    for ( ; it != end ; ++it ) {
-        if ( it->url() == m_currentURL )
-        {
-            hasCurrentItem = true;
-            break;
-        }
-    }
-    if (!hasCurrentItem) {
-    	kDebug() << "no current" << endl;
-    }
-    if ( hasCurrentItem ) {
-	switch ( which ) {
-	case Previous: {
-	    do {
-	        --it;
-		if ( isImage( *it ) || !onlyImage )
-		    return *it;
+kdDebug() << "getItem..." << endl;
 
-	    } while ( it != begin );
-kDebug() << "no previous" << endl;
-	    return KFileItem(); // no previous item / image
+    QModelIndex currentIndex = view()->currentIndex();
+    if ( !currentIndex.isValid() ) {
+    	kDebug() << "no current index" << endl;
+        return KFileItem();
+    }
+
+    QModelIndex index = currentIndex;
+    KFileItem item;
+    const int column = index.column();
+    item = fileItemFor( currentIndex );
+    if ( item.isNull() )
+        kDebug() << "### current item is null: " << index.data().typeName() << ", " << currentIndex.data().value<QString>() << endl;
+
+    switch( which ) {
+    case Previous: {
+        index = index.sibling( index.row() - 1, column );
+        while ( index.isValid() ) {
+            item = fileItemFor(index);
+	    if ( !item.isNull() && (!onlyImage || isImage( item )) ) {
+                return item;
+	    }
+            index = index.sibling( index.row() - 1, column );
 	}
 
-	case Next: {
-	    ++it;
-	    while ( it != end ) {
-		if ( isImage( *it ) || !onlyImage )
-		    return *it;
-	        ++it;
+kDebug() << "no previous" << endl;
+        return KFileItem(); // no previous item / image
+    }
+
+    case Next: {
+        index = index.sibling( index.row() + 1, column );
+        while ( index.isValid() ) {
+            item = fileItemFor(index);
+	    if ( !item.isNull() && (!onlyImage || isImage( item )) ) {
+                return item;
 	    }
+            index = index.sibling( index.row() + 1, column );
+	}
+
 kDebug() << "no next" << endl;
 	    return KFileItem(); // no further item / image
-	}
+     }
 
-	case Current:
+     case Current:
 	default:
-	    return *it;
-	}
+	    return fileItemFor(currentIndex);
     }
-//#endif
     return KFileItem();
 }
 

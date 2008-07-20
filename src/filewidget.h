@@ -24,6 +24,7 @@
 #include <QResizeEvent>
 
 #include <kdiroperator.h>
+#include <kdirmodel.h>
 
 class FileFinder;
 class KFileItem;
@@ -82,7 +83,12 @@ private slots:
     void slotFinishedLoading();
 
 private:
-    KFileItemList items() const { return dirLister()->items(); }
+    KFileItem fileItemFor(const QModelIndex& index) const {
+        if (index.isValid()) {
+            return index.data(KDirModel::FileItemRole).value<KFileItem>();
+	}
+	return KFileItem();
+    }
 
     bool m_validCompletion;
     FileFinder *m_fileFinder;

@@ -718,6 +718,7 @@ void KuickShow::show()
 
 void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 {
+kDebug() << "** advance: " << steps << endl;
     KFileItem item; // to be shown
     KFileItem item_next; // to be cached
 
