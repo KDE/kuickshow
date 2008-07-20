@@ -148,22 +148,22 @@ void ImageWindow::setupActions()
     QAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
     qobject_cast<KAction*>( nextImage )->setShortcut( KStandardShortcut::next() );
-    connect( nextImage, SIGNAL( triggered() ), this, SLOT( slotRequestNext() ) );
+    connect( nextImage, SIGNAL( triggered(bool) ), this, SLOT( slotRequestNext() ) );
 
     QAction* showPreviousImage = m_actions->addAction( "previous_image" );
     showPreviousImage->setText( i18n("Show Previous Image") );
     qobject_cast<KAction*>( showPreviousImage )->setShortcut(KStandardShortcut::prior());
-    connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( slotRequestPrevious() ) );
+    connect( showPreviousImage, SIGNAL( triggered(bool) ), this, SLOT( slotRequestPrevious() ) );
 
     QAction* deleteImage = m_actions->addAction( "delete_image" );
     deleteImage->setText( i18n("Delete Image") );
     deleteImage->setShortcut(Qt::Key_Delete);
-    connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( imageDelete() ) );
+    connect( deleteImage, SIGNAL( triggered() ), this, SLOT( imageDelete() ) );
 
     QAction* zoomIn = m_actions->addAction( "zoom_in" );
     zoomIn->setText( i18n("Zoom In") );
     zoomIn->setShortcut(Qt::Key_Plus),
-    connect( zoomIn, SIGNAL( triggered() ), this, SLOT( zoomIn() ));
+    connect( zoomIn, SIGNAL( triggered(bool) ), this, SLOT( zoomIn() ));
 
     QAction *zoomOut = m_actions->addAction( "zoom_out");
     zoomOut->setText( i18n("Zoom Out") );
