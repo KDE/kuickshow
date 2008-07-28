@@ -480,8 +480,6 @@ kdDebug() << "highlighted: " << endl;
 
 void KuickShow::dirSelected( const KUrl& url )
 {
-kdDebug() << "dirSelected: " << url.prettyUrl() << endl;
-
     if ( url.isLocalFile() )
         setCaption( url.path() );
     else
@@ -493,7 +491,6 @@ kdDebug() << "dirSelected: " << url.prettyUrl() << endl;
 
 void KuickShow::slotSelected( const KFileItem& item )
 {
-kDebug() << "slotSelected" << endl;
     showImage( item, !oneWindowAction->isChecked() );
 }
 
@@ -507,9 +504,6 @@ void KuickShow::showFileItem( ImageWindow * /*view*/,
 void KuickShow::showImage( const KFileItem& fi,
                            bool newWindow, bool fullscreen, bool moveToTopLeft )
 {
-kDebug() << fi.name() << endl;
-
-
     newWindow  |= !m_viewer;
     fullscreen |= (newWindow && kdata->fullScreen);
     if ( FileWidget::isImage( fi ) ) {
@@ -718,7 +712,6 @@ void KuickShow::show()
 
 void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 {
-kDebug() << "** advance: " << steps << endl;
     KFileItem item; // to be shown
     KFileItem item_next; // to be cached
 
@@ -909,9 +902,10 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 toggleBrowser();
                 return true; // don't pass keyEvent
             }
-
             else
+            {
                 ret = false;
+            }
 
 
             if ( FileWidget::isImage( item ) ) {
@@ -925,6 +919,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
                 ret = true; // don't pass keyEvent
             }
+
         } // keyPressEvent on ImageWindow
 
 

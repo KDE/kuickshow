@@ -112,6 +112,7 @@ void ImageWindow::init()
 
 
     m_actions = new KActionCollection( this );
+    m_actions->addAssociatedWidget( this );
 
     if ( !s_handCursor ) {
         QString file = KStandardDirs::locate( "appdata", "pics/handcursor.png" );
@@ -148,12 +149,12 @@ void ImageWindow::setupActions()
     QAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
     qobject_cast<KAction*>( nextImage )->setShortcut( KStandardShortcut::next() );
-    connect( nextImage, SIGNAL( triggered(bool) ), this, SLOT( slotRequestNext() ) );
+    connect( nextImage, SIGNAL( triggered() ), this, SLOT( slotRequestNext() ) );
 
     QAction* showPreviousImage = m_actions->addAction( "previous_image" );
     showPreviousImage->setText( i18n("Show Previous Image") );
     qobject_cast<KAction*>( showPreviousImage )->setShortcut(KStandardShortcut::prior());
-    connect( showPreviousImage, SIGNAL( triggered(bool) ), this, SLOT( slotRequestPrevious() ) );
+    connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( slotRequestPrevious() ) );
 
     QAction* deleteImage = m_actions->addAction( "delete_image" );
     deleteImage->setText( i18n("Delete Image") );

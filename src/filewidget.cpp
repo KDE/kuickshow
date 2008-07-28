@@ -410,7 +410,6 @@ void FileWidget::slotItemDeleted( const KFileItem& item )
 
 void FileWidget::slotHighlighted( const KFileItem& item )
 {
-kDebug() << "FileWidget::slotHighlighted" << endl;
     if ( !item.isNull() ) {
         m_currentURL = item.url().url();
     }
