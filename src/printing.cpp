@@ -313,7 +313,7 @@ void KuickPrintDialogPage::setPrintScaleUnit( QString scaleUnit )
 
 int KuickPrintDialogPage::printScaleWidthPixels()
 {
-    scaleWidth();
+    return scaleWidth();
 }
 
 void KuickPrintDialogPage::setPrintScaleWidthPixels( int scaleWidth )

@@ -660,8 +660,8 @@ void KuickShow::slotPrint()
     if ( !items.isEmpty() )
         return;
 
-	KFileItemList::const_iterator it = items.begin();
-	const KFileItemList::const_iterator end = items.end();
+	KFileItemList::const_iterator it = items.constBegin();
+	const KFileItemList::const_iterator end = items.constEnd();
 
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow( 0, id, this, "printing image" );
@@ -692,8 +692,8 @@ void KuickShow::slotShowFullscreen()
 
 void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &urls)
 {
-    KUrl::List::ConstIterator it = urls.begin();
-    for ( ; it != urls.end(); ++it )
+    KUrl::List::ConstIterator it = urls.constBegin();
+    for ( ; it != urls.constEnd(); ++it )
     {
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
         if ( FileWidget::isImage( item ) )
@@ -993,8 +993,8 @@ void KuickShow::slotConfigApplied()
     kdata->save();
 
     ImageWindow *viewer;
-    QList<ImageWindow*>::Iterator it = s_viewers.begin();
-    while ( it != s_viewers.end() ) {
+    QList<ImageWindow*>::ConstIterator it = s_viewers.constBegin();
+    while ( it != s_viewers.constEnd() ) {
         viewer = *it;
         viewer->updateActions();
         ++it;
@@ -1034,7 +1034,7 @@ void KuickShow::readProperties( const KConfigGroup& kc )
 
     const QStringList images = kc.readPathEntry( "Images shown", QStringList() );
     QStringList::const_iterator it;
-    for ( it = images.begin(); it != images.end(); ++it ) {
+    for ( it = images.constBegin(); it != images.constEnd(); ++it ) {
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KUrl::fromPathOrUrl( *it ), false );
         if ( item.isReadable() )
             showImage( item, true );
@@ -1053,8 +1053,8 @@ void KuickShow::saveProperties( KConfigGroup& kc )
     kc.writeEntry( "Browser visible", fileWidget->isVisible() );
 
     QStringList urls;
-    QList<ImageWindow*>::Iterator it;
-    for ( it = s_viewers.begin(); it != s_viewers.end(); ++it )
+    QList<ImageWindow*>::ConstIterator it;
+    for ( it = s_viewers.constBegin(); it != s_viewers.constEnd(); ++it )
         urls.append( (*it)->filename() );
 
     kc.writePathEntry( "Images shown", urls );
@@ -1218,8 +1218,8 @@ void KuickShow::slotOpenURL()
     if ( dlg.exec() == QDialog::Accepted )
     {
         KUrl::List urls = dlg.selectedUrls();
-        KUrl::List::ConstIterator it = urls.begin();
-        for ( ; it != urls.end(); ++it )
+        KUrl::List::ConstIterator it = urls.constBegin();
+        for ( ; it != urls.constEnd(); ++it )
         {
             KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
             if ( FileWidget::isImage( item ) )
