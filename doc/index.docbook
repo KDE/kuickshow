@@ -281,7 +281,7 @@ on.</para>
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Shrink image to screen size, if smaler, up to factor:</guilabel></term>
+<term><guilabel>Shrink image to screen size, if smaller, up to factor:</guilabel></term>
 <listitem>
 <para>If this is selected, &kuickshow; increases the magnification of small images up to 
 the selected factor.</para>
@@ -374,7 +374,7 @@ default is 3 seconds.</para>
 <varlistentry>
 <term><guilabel>Iterations (0 = infinite):</guilabel></term>
 <listitem>
-<para>The amount of iterations. If set to 0 it will loop untill you 
+<para>The amount of iterations. If set to 0 it will loop until you 
 abort the slideshow. You can use the slider, type a new value into the 
 field, or use the small arrows to increase or decrease the value.  The 
 default is 1.</para>
@@ -422,7 +422,7 @@ window.</para></listitem>
 <varlistentry>
 <term><menuchoice>
 <guimenu>File</guimenu>
-<guimenuitem>Show Image in Aktive Window</guimenuitem>
+<guimenuitem>Show Image in Active Window</guimenuitem>
 </menuchoice></term>
 <listitem><para><action>Displays </action>the selected image in the active image 
 window.</para></listitem>
