@@ -168,7 +168,7 @@ void KuickData::save()
   generalGroup.writeEntry( "GammaStepSize", gammaSteps );
 
   generalGroup.writeEntry( "ScrollingStepSize", scrollSteps );
-  generalGroup.writeEntry( "ZoomStepSize", int(zoomSteps) );
+  generalGroup.writeEntry( "ZoomStepSize", zoomSteps );
 
   generalGroup.writeEntry( "MaximumImageWidth", maxWidth );
   generalGroup.writeEntry( "MaximumImageHeight", maxHeight );

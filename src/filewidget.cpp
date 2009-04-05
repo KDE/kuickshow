@@ -193,7 +193,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
     if ( e->type() == QEvent::KeyPress ) {
 	QKeyEvent *k = static_cast<QKeyEvent*>( e );
 
-	if ( (k->state() & (Qt::ControlModifier | Qt::AltModifier)) == 0 ) {
+	if ( (k->modifiers() & (Qt::ControlModifier | Qt::AltModifier)) == 0 ) {
 	    int key = k->key();
  	    if ( actionCollection()->action("delete")->shortcuts().contains( key ) )
             {
@@ -202,7 +202,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 		if ( !item.isNull() ) {
                     KFileItemList list;
                     list.append( item );
-		    del( list, this, (k->state() & Qt::ShiftModifier) == 0 );
+		    del( list, this, (k->modifiers() & Qt::ShiftModifier) == 0 );
                 }
 		return true;
 	    }

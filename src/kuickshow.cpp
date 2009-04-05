@@ -106,7 +106,6 @@ KuickShow::KuickShow( const char *name )
       id( 0L ),
       m_viewer( 0L ),
       oneWindowAction( 0L ),
-      m_accel( 0L ),
       m_delayedRepeatItem( 0L ),
       m_slideShowStopped(false)
 {
@@ -198,8 +197,7 @@ KuickShow::~KuickShow()
 {
     saveSettings();
 
-    if ( m_viewer )
-        m_viewer->close( true );
+    delete m_viewer;
 
     free( id );
     kapp->quit();
@@ -230,27 +228,27 @@ void KuickShow::initGUI( const KUrl& startDir )
              this, SLOT( slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &)) );
 
     // setup actions
-    QAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
+    KAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
                                       coll );
     coll->addAction( "openURL", open );
 
-    QAction *print = KStandardAction::print( this, SLOT( slotPrint() ),
+    KAction *print = KStandardAction::print( this, SLOT( slotPrint() ),
                                         coll );
     coll->addAction( "kuick_print", print );
     print->setText( i18n("Print Image...") );
 
-    QAction *configure = coll->addAction( "kuick_configure" );
+    KAction *configure = coll->addAction( "kuick_configure" );
     configure->setText( i18n("Configure %1...",KGlobal::mainComponent().aboutData()->programName() ) );
     configure->setIcon( KIcon( "configure" ) );
     connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
 
-    QAction *slide = coll->addAction( "kuick_slideshow" );
+    KAction *slide = coll->addAction( "kuick_slideshow" );
     slide->setText( i18n("Start Slideshow" ) );
     slide->setIcon( KIcon("ksslide" ));
     slide->setShortcut( Qt::Key_F2 );
     connect( slide, SIGNAL( triggered() ), this, SLOT( startSlideShow() ));
 
-    QAction *about = coll->addAction( "about" );
+    KAction *about = coll->addAction( "about" );
     about->setText( i18n( "About KuickShow" ) );
     about->setIcon( KIcon("about") );
     connect( about, SIGNAL( triggered() ), this, SLOT( about() ) );
@@ -267,24 +265,23 @@ void KuickShow::initGUI( const KUrl& startDir )
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
 
-    QAction *showInOther = coll->addAction( "kuick_showInOtherWindow" );
+    KAction *showInOther = coll->addAction( "kuick_showInOtherWindow" );
     showInOther->setText( i18n("Show Image") );
     connect( showInOther, SIGNAL( triggered() ), SLOT( slotShowInOtherWindow() ));
 
-    QAction *showInSame = coll->addAction( "kuick_showInSameWindow" );
+    KAction *showInSame = coll->addAction( "kuick_showInSameWindow" );
     showInSame->setText( i18n("Show Image in Active Window") );
     connect( showInSame, SIGNAL( triggered() ), this, SLOT( slotShowInSameWindow() ) );
 
-    QAction *showFullscreen = coll->addAction( "kuick_showFullscreen" );
+    KAction *showFullscreen = coll->addAction( "kuick_showFullscreen" );
     showFullscreen->setText( i18n("Show Image in Fullscreen Mode") );
     connect( showFullscreen, SIGNAL( triggered() ), this, SLOT( slotShowFullscreen() ) );
 
-    QAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll);
+    KAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll);
     coll->addAction( "quit", quit );
 
     // remove QString::null parameter -- ellis
 //    coll->readShortcutSettings( QString::null );
-//    m_accel = coll->accel();
 
     // menubar
     KMenuBar *mBar = menuBar();
@@ -546,7 +543,7 @@ void KuickShow::showImage( const KFileItem& fi,
 
         if ( !safeViewer->showNextImage( filename ) ) {
             m_viewer = safeViewer;
-            safeViewer->close( true ); // couldn't load image, close window
+            delete safeViewer; // couldn't load image, close window
         }
         else {
             safeViewer->setFullscreen( fullscreen );
@@ -584,7 +581,7 @@ void KuickShow::slotDeleteImage()
     if (!next.isNull())
         showImage(next, false);
     else
-        m_viewer->close(true);
+        delete m_viewer;
     fileWidget->del(list, false,false);
 }
 
@@ -637,7 +634,7 @@ void KuickShow::nextSlide()
             }
         }
 
-        m_viewer->close( true );
+        delete m_viewer;
         fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( true );
         return;
     }
@@ -672,7 +669,7 @@ void KuickShow::slotPrint()
             iw->printImage();
     }
 
-    iw->close( true );
+    delete iw;
 }
 
 void KuickShow::slotShowInOtherWindow()
@@ -890,7 +887,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 KFileItemList list;
                 list.append( it );
                 if ( fileWidget->del(list, window,
-                                     (k->state() & Qt::ShiftModifier) == 0) == 0L )
+                                     (k->modifiers() & Qt::ShiftModifier) == 0) == 0L )
                     return true; // aborted deletion
 
                 // ### check failure asynchronously and restore old item?
@@ -943,7 +940,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     raise();
                 }
 
-                window->close( true );
+                delete window;
 
                 ev->accept();
                 ret = true;
@@ -962,7 +959,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
 void KuickShow::configuration()
 {
-    if ( !m_accel ) {
+    if ( !fileWidget ) {
         KUrl start;
         start.setPath( QDir::homePath() );
         initGUI( KUrl::fromPathOrUrl( QDir::homePath() ) );
@@ -1070,8 +1067,8 @@ void KuickShow::saveSettings()
         sessGroup.writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
+        sessGroup.writePathEntry( "CurrentDirectory", fileWidget->url().url() );
         KConfigGroup group( kc, "Filebrowser" );
-        group.writePathEntry( "CurrentDirectory", fileWidget->url().url() );
         fileWidget->writeConfig( group);
     }
 
@@ -1094,7 +1091,7 @@ void KuickShow::initImlib()
     ImlibInitParams par;
     initImlibParams( idata, &par );
 
-    id = Imlib_init_with_params( x11Display(), &par );
+    id = Imlib_init_with_params( getX11Display(), &par );
     if ( !id ) {
         initImlibParams( idata, &par );
 
@@ -1107,7 +1104,7 @@ void KuickShow::initImlib()
 
         qWarning("Palettefile: %s", par.palettefile );
 
-        id = Imlib_init_with_params( x11Display(), &par );
+        id = Imlib_init_with_params( getX11Display(), &par );
 
         if ( !id ) {
             QString tmp = i18n("Unable to initialize \"Imlib\".\n"
@@ -1128,7 +1125,7 @@ void KuickShow::initImlibParams( ImData *idata, ImlibInitParams *par )
                    PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
                    PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
-    Visual* defaultvis = DefaultVisual(x11Display(), x11Screen());
+    Visual* defaultvis = DefaultVisual(getX11Display(), x11Info().screen());
 
     par->paletteoverride = idata->ownPalette  ? 1 : 0;
     par->remap           = idata->fastRemap   ? 1 : 0;
@@ -1235,7 +1232,7 @@ void KuickShow::deleteAllViewers()
     QList<ImageWindow*>::Iterator it = s_viewers.begin();
     for ( ; it != s_viewers.end(); ++it ) {
         (*it)->disconnect( SIGNAL( destroyed() ), this, SLOT( viewerDeleted() ));
-        (*it)->close( true );
+        delete (*it);
     }
 
     s_viewers.clear();

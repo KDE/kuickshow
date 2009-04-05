@@ -48,6 +48,7 @@ public:
   ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent=0,
 	       const char *name=0 );
   ImageWindow( ImData *_idata=0, QWidget *parent=0, const char *name=0 );
+  ~ImageWindow();
 
   bool 		showNextImage( const QString& filename );
   void 		scrollImage( int, int, bool restrict=true );
@@ -99,7 +100,6 @@ signals:
   void		prevSlideRequested();
 
 protected:
-  ~ImageWindow(); // deletes itself, just call close( true );
 
   void 		init();
   void 		centerImage();

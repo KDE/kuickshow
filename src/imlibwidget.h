@@ -21,6 +21,7 @@
 #include <qwidget.h>
 //Added by qt3to4:
 #include <QCloseEvent>
+#include <QX11Info>
 
 #include <kurl.h>
 
@@ -188,6 +189,7 @@ public slots:
 
 
 protected:
+  Display *	getX11Display() const { return x11Info().display(); }
   KuickImage *	loadImageInternal( const QString&  );
   void 		showImage();
   void          setImageModifier();

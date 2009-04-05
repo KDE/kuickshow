@@ -25,6 +25,7 @@
 //Added by qt3to4:
 #include <QKeyEvent>
 #include <QDropEvent>
+#include <QX11Info>
 
 #include <kfileitem.h>
 #include <kxmlguiwindow.h>
@@ -126,6 +127,7 @@ private slots:
     void		slotDeleteImage();
 
 private:
+    Display *		getX11Display() const { return x11Info().display(); }
     void 		initGUI( const KUrl& startDir );
     bool	       	eventFilter( QObject *, QEvent * );
     void 		initImlib();
@@ -144,7 +146,6 @@ private:
     ImlibData           *id;
     ImageWindow 	*m_viewer;
     KToggleAction 	*oneWindowAction;
-    KAccel 		*m_accel;
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;
     bool                m_slideShowStopped;

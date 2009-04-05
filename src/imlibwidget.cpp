@@ -42,7 +42,7 @@
 const int ImlibWidget::ImlibOffset = 256;
 
 ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
-  QWidget( parent, name, Qt::WDestructiveClose )
+  QWidget( parent, name )
 {
     idata 		= _idata;
     deleteImData 	= false;
@@ -60,7 +60,7 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
 		  PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
 		  PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
-    Visual* defaultvis = DefaultVisual(x11Display(), x11Screen());
+    Visual* defaultvis = DefaultVisual(getX11Display(), x11Info().screen());
 
     par.paletteoverride = idata->ownPalette ? 1 : 0;
     par.remap           = idata->fastRemap ? 1 : 0;
@@ -74,7 +74,7 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
     par.imagecachesize  = maxcache * 1024;
     par.pixmapcachesize = maxcache * 1024;
 
-    id = Imlib_init_with_params( x11Display(), &par );
+    id = Imlib_init_with_params( getX11Display(), &par );
 
     init();
 }
@@ -82,7 +82,7 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
 
 ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent,
 			  const char *name )
-    : QWidget( parent, name, Qt::WDestructiveClose )
+    : QWidget( parent, name )
 {
     id              = _id;
     idata           = _idata;
@@ -108,6 +108,7 @@ void ImlibWidget::init()
     if ( !id )
 	qFatal("ImlibWidget: Imlib not initialized, aborting.");
 
+    setAttribute( Qt::WA_DeleteOnClose );
     setAutoRender( true );
 
     setPalette( QPalette( myBackgroundColor ));
@@ -117,14 +118,14 @@ void ImlibWidget::init()
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
     connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
 
-    win = XCreateSimpleWindow(x11Display(), winId(), 0,0,w,h,0,0,0);
+    win = XCreateSimpleWindow(getX11Display(), winId(), 0,0,w,h,0,0,0);
 }
 
 ImlibWidget::~ImlibWidget()
 {
     delete imageCache;
     if ( deleteImlibData && id ) free ( id );
-    if ( win ) XDestroyWindow( x11Display(), win );
+    if ( win ) XDestroyWindow( getX11Display(), win );
     if ( deleteImData ) delete idata;
 }
 
@@ -193,8 +194,8 @@ bool ImlibWidget::cacheImage( const QString& filename )
 
 void ImlibWidget::showImage()
 {
-    XMapWindow( x11Display(), win );
-    XSync( x11Display(), False );
+    XMapWindow( getX11Display(), win );
+    XSync( getX11Display(), False );
 }
 
 
@@ -391,14 +392,14 @@ void ImlibWidget::updateWidget( bool geometryUpdate )
 	return;
 
 //     if ( geometryUpdate )
-//         XUnmapWindow( x11Display(), win );// remove the old image -> no flicker
+//         XUnmapWindow( getX11Display(), win );// remove the old image -> no flicker
 
-    XSetWindowBackgroundPixmap( x11Display(), win, m_kuim->pixmap() );
+    XSetWindowBackgroundPixmap( getX11Display(), win, m_kuim->pixmap() );
 
     if ( geometryUpdate )
 	updateGeometry( m_kuim->width(), m_kuim->height() );
 
-    XClearWindow( x11Display(), win );
+    XClearWindow( getX11Display(), win );
 
     showImage();
 }
@@ -407,8 +408,8 @@ void ImlibWidget::updateWidget( bool geometryUpdate )
 // here we just use the size of m_kuim, may be overridden in subclass
 void ImlibWidget::updateGeometry( int w, int h )
 {
-    XMoveWindow( x11Display(), win, 0, 0 ); // center?
-    XResizeWindow( x11Display(), win, w, h );
+    XMoveWindow( getX11Display(), win, 0, 0 ); // center?
+    XResizeWindow( getX11Display(), win, w, h );
     resize( w, h );
 }
 
@@ -476,13 +477,13 @@ void ImlibWidget::restoreCursor()
 void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt )
 {
     XWindowAttributes attr;
-    XGetWindowAttributes( x11Display(), win, &attr );
-    XUnmapWindow( x11Display(), win );
-    XReparentWindow( x11Display(), win, attr.root, 0, 0 );
+    XGetWindowAttributes( getX11Display(), win, &attr );
+    XUnmapWindow( getX11Display(), win );
+    XReparentWindow( getX11Display(), win, attr.root, 0, 0 );
     QWidget::reparent( parent, f, p, showIt );
-    XReparentWindow( x11Display(), win, winId(), attr.x, attr.y );
+    XReparentWindow( getX11Display(), win, winId(), attr.x, attr.y );
     if( attr.map_state != IsUnmapped )
-        XMapWindow( x11Display(), win );
+        XMapWindow( getX11Display(), win );
 }
 
 //----------

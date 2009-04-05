@@ -103,7 +103,7 @@ void ImageWindow::init()
     XClassHint hint;
     hint.res_name = const_cast<char*>( kapp->name() );
     hint.res_class = const_cast<char*>( "ImageWindow" );
-    XSetClassHint( x11Display(), winId(), &hint );
+    XSetClassHint( getX11Display(), winId(), &hint );
 
     viewerMenu = 0L;
     gammaMenu = 0L;
@@ -129,7 +129,7 @@ void ImageWindow::init()
     myIsFullscreen = false;
 
     xpos = 0, ypos = 0;
-    m_numHeads = ScreenCount( x11Display() );
+    m_numHeads = ScreenCount( getX11Display() );
 
     setAcceptDrops( true );
     setBackgroundColor( kdata->backgroundColor );
@@ -146,151 +146,145 @@ void ImageWindow::updateActions()
 
 void ImageWindow::setupActions()
 {
-    QAction *nextImage = m_actions->addAction( "next_image" );
+    KAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
-    qobject_cast<KAction*>( nextImage )->setShortcut( KStandardShortcut::next() );
+    nextImage->setShortcut( KStandardShortcut::next() );
     connect( nextImage, SIGNAL( triggered() ), this, SLOT( slotRequestNext() ) );
 
-    QAction* showPreviousImage = m_actions->addAction( "previous_image" );
+    KAction* showPreviousImage = m_actions->addAction( "previous_image" );
     showPreviousImage->setText( i18n("Show Previous Image") );
-    qobject_cast<KAction*>( showPreviousImage )->setShortcut(KStandardShortcut::prior());
+    showPreviousImage->setShortcut(KStandardShortcut::prior());
     connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( slotRequestPrevious() ) );
 
-    QAction* deleteImage = m_actions->addAction( "delete_image" );
+    KAction* deleteImage = m_actions->addAction( "delete_image" );
     deleteImage->setText( i18n("Delete Image") );
     deleteImage->setShortcut(Qt::Key_Delete);
     connect( deleteImage, SIGNAL( triggered() ), this, SLOT( imageDelete() ) );
 
-    QAction* zoomIn = m_actions->addAction( "zoom_in" );
-    zoomIn->setText( i18n("Zoom In") );
+    KAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions ); 
     zoomIn->setShortcut(Qt::Key_Plus),
-    connect( zoomIn, SIGNAL( triggered(bool) ), this, SLOT( zoomIn() ));
+    m_actions->addAction( "zoom_in" );
 
-    QAction *zoomOut = m_actions->addAction( "zoom_out");
-    zoomOut->setText( i18n("Zoom Out") );
-
+    KAction *zoomOut = KStandardAction::zoomOut( this, SLOT( zoomOut() ), m_actions );
     zoomOut->setShortcut(Qt::Key_Minus);
-    connect( zoomOut, SIGNAL( triggered() ), this, SLOT( zoomOut() ) );
 
-    QAction *restoreSize = m_actions->addAction( "original_size" );
+    KAction *restoreSize = m_actions->addAction( "original_size" );
     restoreSize->setText( i18n("Restore Original Size") );
     restoreSize->setShortcut(Qt::Key_O);
     connect( restoreSize, SIGNAL( triggered() ), this, SLOT( showImageOriginalSize() ) );
 
-    QAction *maximize = m_actions->addAction( "maximize" );
+    KAction *maximize = m_actions->addAction( "maximize" );
     maximize->setText( i18n("Maximize") );
     maximize->setShortcut(Qt::Key_M);
     connect( maximize, SIGNAL( triggered() ), this, SLOT( maximize() ) );
 
-    QAction *rotate90 = m_actions->addAction( "rotate90" );
+    KAction *rotate90 = m_actions->addAction( "rotate90" );
     rotate90->setText( i18n("Rotate 90 Degrees") );
     rotate90->setShortcut(Qt::Key_9);
     connect( rotate90, SIGNAL( triggered() ), this, SLOT( rotate90() ) );
 
-    QAction *rotate180 = m_actions->addAction( "rotate180" );
+    KAction *rotate180 = m_actions->addAction( "rotate180" );
     rotate180->setText( i18n("Rotate 180 Degrees") );
     rotate180->setShortcut(Qt::Key_8);
     connect( rotate180, SIGNAL( triggered() ), this, SLOT( rotate180() ) );
 
-    QAction *rotate270 = m_actions->addAction( "rotate270" );
+    KAction *rotate270 = m_actions->addAction( "rotate270" );
     rotate270->setText( i18n("Rotate 270 Degrees") );
     rotate270->setShortcut(Qt::Key_7);
     connect( rotate270, SIGNAL( triggered() ), this, SLOT( rotate270() ) );
 
-    QAction *flipHori = m_actions->addAction( "flip_horicontally" );
+    KAction *flipHori = m_actions->addAction( "flip_horicontally" );
     flipHori->setText( i18n("Flip Horizontally") );
 
     flipHori->setShortcut(Qt::Key_Asterisk);
     connect( flipHori, SIGNAL( triggered() ), this, SLOT( flipHoriz() ) );
 
-    QAction *flipVeri = m_actions->addAction( "flip_vertically" );
+    KAction *flipVeri = m_actions->addAction( "flip_vertically" );
     flipVeri->setText( i18n("Flip Vertically") );
     flipVeri->setShortcut(Qt::Key_Slash);
     connect( flipVeri, SIGNAL( triggered() ), this, SLOT( flipVert() ) );
 
-    QAction *printImage = m_actions->addAction( "print_image" );
+    KAction *printImage = m_actions->addAction( "print_image" );
     printImage->setText( i18n("Print Image...") );
-    qobject_cast<KAction*>( printImage )->setShortcut(KStandardShortcut::print());
+    printImage->setShortcut(KStandardShortcut::print());
     connect( printImage, SIGNAL( triggered() ), this, SLOT( printImage() ) );
 
-    QAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
+    KAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
     m_actions->addAction( "save_image_as",  a );
 
     a = KStandardAction::close( this, SLOT( close() ),
                  m_actions);
     m_actions->addAction( "close_image", a );
     // --------
-    QAction *moreBrighteness = m_actions->addAction( "more_brightness" );
+    KAction *moreBrighteness = m_actions->addAction( "more_brightness" );
     moreBrighteness->setText( i18n("More Brightness") );
     moreBrighteness->setShortcut(Qt::Key_B);
     connect( moreBrighteness, SIGNAL( triggered() ), this, SLOT( moreBrightness() ) );
 
-    QAction *lessBrightness = m_actions->addAction( "less_brightness" );
+    KAction *lessBrightness = m_actions->addAction( "less_brightness" );
     lessBrightness->setText(  i18n("Less Brightness") );
     lessBrightness->setShortcut(Qt::SHIFT + Qt::Key_B);
     connect( lessBrightness, SIGNAL( triggered() ), this, SLOT( lessBrightness() ) );
 
-    QAction *moreContrast = m_actions->addAction( "more_contrast" );
+    KAction *moreContrast = m_actions->addAction( "more_contrast" );
     moreContrast->setText( i18n("More Contrast") );
     moreContrast->setShortcut(Qt::Key_C);
     connect( moreContrast, SIGNAL( triggered() ), this, SLOT( moreContrast() ) );
 
-    QAction *lessContrast = m_actions->addAction( "less_contrast" );
+    KAction *lessContrast = m_actions->addAction( "less_contrast" );
     lessContrast->setText( i18n("Less Contrast") );
     lessContrast->setShortcut(Qt::SHIFT + Qt::Key_C);
     connect( lessContrast, SIGNAL( triggered() ), this, SLOT( lessContrast() ) );
 
-    QAction *moreGamma = m_actions->addAction( "more_gamma" );
+    KAction *moreGamma = m_actions->addAction( "more_gamma" );
     moreGamma->setText( i18n("More Gamma") );
 
     moreGamma->setShortcut(Qt::Key_G);
     connect( moreGamma, SIGNAL( triggered() ), this, SLOT( moreGamma() ) );
 
-    QAction *lessGamma = m_actions->addAction( "less_gamma" );
+    KAction *lessGamma = m_actions->addAction( "less_gamma" );
     lessGamma->setText( i18n("Less Gamma") );
     lessGamma->setShortcut(Qt::SHIFT + Qt::Key_G);
     connect( lessGamma, SIGNAL( triggered() ), this, SLOT( lessGamma() ) );
 
     // --------
-    QAction *scrollUp = m_actions->addAction( "scroll_up" );
+    KAction *scrollUp = m_actions->addAction( "scroll_up" );
     scrollUp->setText( i18n("Scroll Up") );
 
     scrollUp->setShortcut(Qt::Key_Up);
     connect( scrollUp, SIGNAL( triggered() ), this, SLOT( scrollUp() ) );
 
-    QAction *scrollDown = m_actions->addAction( "scroll_down" );
+    KAction *scrollDown = m_actions->addAction( "scroll_down" );
     scrollDown->setText( i18n("Scroll Down") );
     scrollDown->setShortcut(Qt::Key_Down);
     connect( scrollDown, SIGNAL( triggered() ), this, SLOT( scrollDown() ) );
 
-    QAction *scrollLeft = m_actions->addAction( "scroll_left" );
+    KAction *scrollLeft = m_actions->addAction( "scroll_left" );
     scrollLeft->setText( i18n("Scroll Left") );
     scrollLeft->setShortcut(Qt::Key_Left);
     connect( scrollLeft, SIGNAL( triggered() ), this, SLOT( scrollLeft() ) );
 
-    QAction *scrollRight = m_actions->addAction( "scroll_right" );
+    KAction *scrollRight = m_actions->addAction( "scroll_right" );
     scrollRight->setText( i18n("Scroll Right") );
     scrollRight->setShortcut(Qt::Key_Right);
     connect( scrollRight, SIGNAL( triggered() ), this, SLOT( scrollRight() ) );
     // --------
-    QAction *pause = m_actions->addAction( "kuick_slideshow_pause" );
+    KAction *pause = m_actions->addAction( "kuick_slideshow_pause" );
     pause->setText( i18n("Pause Slideshow") );
     pause->setShortcut(Qt::Key_P);
     connect( pause, SIGNAL( triggered() ), this, SLOT( pauseSlideShow() ) );
-#ifdef __GNUC__
-#warning "kde4 port it"
-#endif
-#if 0
-    QAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
-    m_actions->addAction( "", fullscreenAction );
-    qobject_cast<KAction*>( fullscreenAction )->setShortcut(KShortcut(Qt::Key_Return), KAction::DefaultShortcut);
-#endif
-    QAction *reloadImage = m_actions->addAction( "reload_image" );
+
+    KAction *fullscreenAction = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, SLOT( toggleFullscreen() ));
+//    KAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
+//    m_actions->addAction( "", fullscreenAction );
+    fullscreenAction->setShortcut(KShortcut(Qt::Key_Return), KAction::DefaultShortcut);
+
+    KAction *reloadImage = m_actions->addAction( "reload_image" );
     reloadImage->setText( i18n("Reload Image") );
     reloadImage->setShortcut(Qt::Key_Enter);
     connect( reloadImage, SIGNAL( triggered() ), this, SLOT( reload() ) );
 
-    QAction *properties = m_actions->addAction("properties" );
+    KAction *properties = m_actions->addAction("properties" );
     properties->setText( i18n("Properties") );
     properties->setShortcut(Qt::ALT + Qt::Key_Return);
     connect( reloadImage, SIGNAL( triggered() ), this, SLOT( slotProperties() ) );
@@ -318,21 +312,21 @@ void ImageWindow::setFullscreen( bool enable )
 void ImageWindow::updateGeometry( int imWidth, int imHeight )
 {
 //     qDebug("::updateGeometry: %i, %i", imWidth, imHeight);
-    //  XMoveWindow( x11Display(), win, 0, 0 );
-    XResizeWindow( x11Display(), win, imWidth, imHeight );
+    //  XMoveWindow( getX11Display(), win, 0, 0 );
+    XResizeWindow( getX11Display(), win, imWidth, imHeight );
 
     if ( imWidth != width() || imHeight != height() ) {
 	if ( myIsFullscreen ) {
 	    centerImage();
 	}
 	else { // window mode
-	    // XMoveWindow( x11Display(), win, 0, 0 );
+	    // XMoveWindow( getX11Display(), win, 0, 0 );
 	    resizeOptimal( imWidth, imHeight ); // also centers the image
 	}
     }
     else { // image size == widget size
 	xpos = 0; ypos = 0;
-	XMoveWindow( x11Display(), win, 0, 0 );
+	XMoveWindow( getX11Display(), win, 0, 0 );
     }
 
     updateCursor();
@@ -363,7 +357,7 @@ void ImageWindow::centerImage()
     xpos = w/2 - imageWidth()/2;
     ypos = h/2 - imageHeight()/2;
 
-    XMoveWindow( x11Display(), win, xpos, ypos );
+    XMoveWindow( getX11Display(), win, xpos, ypos );
 
     // Modified by Evan for his Multi-Head (2 screens)
     // This should center on the first head
@@ -373,7 +367,7 @@ void ImageWindow::centerImage()
 //         xpos = width()/2 - imageWidth()/2;
 
 //     ypos = height()/2 - imageHeight()/2;
-//     XMoveWindow( x11Display(), win, xpos, ypos );
+//     XMoveWindow( getX11Display(), win, xpos, ypos );
 }
 
 
@@ -414,8 +408,8 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 	}
     }
 
-    XMoveWindow( x11Display(), win, xpos, ypos );
-    XClearArea( x11Display(), win, xpos, ypos, iw, ih, false );
+    XMoveWindow( getX11Display(), win, xpos, ypos );
+    XClearArea( getX11Display(), win, xpos, ypos, iw, ih, false );
     showImage();
 }
 
@@ -611,7 +605,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
 
 void ImageWindow::keyReleaseEvent( QKeyEvent *e )
 {
-    if ( e->state() & Qt::ShiftModifier ) { // Shift-key released
+    if ( e->modifiers() & Qt::ShiftModifier ) { // Shift-key released
         updateCursor();
         if ( transWidget ) {
             delete transWidget;
@@ -634,7 +628,7 @@ void ImageWindow::mousePressEvent( QMouseEvent *e )
     yposPress = ymove;
 
     if ( e->button() == Qt::LeftButton ) {
-        if ( e->state() & Qt::ShiftModifier )
+        if ( e->modifiers() & Qt::ShiftModifier )
             updateCursor( ZoomCursor );
         else
             updateCursor( MoveCursor );
@@ -675,11 +669,11 @@ void ImageWindow::updateCursor( KuickCursor cursor )
 
 void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 {
-    if ( !(e->state() & Qt::LeftButton) ) { // only handle Qt::LeftButton actions
+    if ( !(e->modifiers() & Qt::LeftButton) ) { // only handle Qt::LeftButton actions
 	return;
     }
 
-    if ( e->state() & Qt::ShiftModifier ) {
+    if ( e->modifiers() & Qt::ShiftModifier ) {
 
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
@@ -740,7 +734,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     }
 
     // only proceed if shift-Key is still pressed
-    if ( !(e->button() == Qt::LeftButton && e->state() & Qt::ShiftModifier) )
+    if ( !(e->button() == Qt::LeftButton && e->modifiers() & Qt::ShiftModifier) )
 	return;
 
     int neww, newh, topX, topY, botX, botY;
@@ -802,12 +796,12 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     ytmp += ycenter;
 
     m_kuim->resize( w, h );
-    XResizeWindow( x11Display(), win, w, h );
+    XResizeWindow( getX11Display(), win, w, h );
     updateWidget( false );
 
     xpos = xtmp; ypos = ytmp;
 
-    XMoveWindow( x11Display(), win, xpos, ypos );
+    XMoveWindow( getX11Display(), win, xpos, ypos );
     scrollImage( 1, 1, true ); // unrestricted scrolling
 }
 
