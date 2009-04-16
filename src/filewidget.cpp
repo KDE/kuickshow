@@ -332,8 +332,6 @@ KFileItem FileWidget::getPrevious( bool go )
 // this sucks! Use KFileView::currentFileItem() when implemented
 KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
 {
-kdDebug() << "getItem..." << endl;
-
     QModelIndex currentIndex = view()->currentIndex();
     if ( !currentIndex.isValid() ) {
     	kDebug() << "no current index" << endl;
@@ -358,7 +356,6 @@ kdDebug() << "getItem..." << endl;
             index = index.sibling( index.row() - 1, column );
 	}
 
-kDebug() << "no previous" << endl;
         return KFileItem(); // no previous item / image
     }
 
@@ -372,7 +369,6 @@ kDebug() << "no previous" << endl;
             index = index.sibling( index.row() + 1, column );
 	}
 
-kDebug() << "no next" << endl;
 	    return KFileItem(); // no further item / image
      }
 

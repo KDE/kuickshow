@@ -35,8 +35,7 @@ class KuickConfigDialog : public KPageDialog
     Q_OBJECT
 
 public:
-    KuickConfigDialog( KActionCollection *coll, QWidget *parent=0,
-		       const char *name=0, bool modal=true);
+    KuickConfigDialog( KActionCollection *coll, QWidget *parent=0, bool modal=true);
     ~KuickConfigDialog();
 
     void 		applyConfig();

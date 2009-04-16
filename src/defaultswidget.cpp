@@ -71,10 +71,10 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
   comboRotate = new KComboBox( gbGeometry );
   comboRotate->setObjectName( "rotate combobox" );
-  comboRotate->insertItem( i18n("0 Degrees") );
-  comboRotate->insertItem( i18n("90 Degrees") );
-  comboRotate->insertItem( i18n("180 Degrees") );
-  comboRotate->insertItem( i18n("270 Degrees") );
+  comboRotate->addItem( i18n("0 Degrees") );
+  comboRotate->addItem( i18n("90 Degrees") );
+  comboRotate->addItem( i18n("180 Degrees") );
+  comboRotate->addItem( i18n("270 Degrees") );
 
   // --
 
@@ -99,10 +99,12 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   gbPreview->setAlignment( Qt::AlignCenter );
 
   lbImOrig = new QLabel( i18n("Original"), gbPreview );
-  imOrig = new ImlibWidget( 0L, gbPreview, "original image" );
+  imOrig = new ImlibWidget( 0L, gbPreview );
+  imOrig->setObjectName( QString::fromLatin1("original image") );
 
   lbImFiltered = new QLabel( i18n("Modified"), gbPreview );
-  imFiltered = new ImlibWidget( 0L, imOrig->getImlibData(), gbPreview, "" );
+  imFiltered = new ImlibWidget( 0L, imOrig->getImlibData(), gbPreview );
+  imFiltered->setObjectName( QString::fromLatin1("modified image") );
   connect( imFiltered, SIGNAL( destroyed() ), SLOT( slotNoImage() ));
 
   ////
@@ -280,7 +282,7 @@ void DefaultsWidget::enableWidgets( bool enable )
 
 Rotation DefaultsWidget::currentRotation() const
 {
-    return (Rotation) comboRotate->currentItem();
+    return (Rotation) comboRotate->currentIndex();
 }
 
 #include "defaultswidget.moc"

@@ -60,6 +60,7 @@ KuickData::KuickData()
   backgroundColor = Qt::black;
 
   startInLastDir = true;
+  modificationCacheSize = 500;
 
   idata = new ImData;
 }
@@ -114,6 +115,7 @@ void KuickData::load()
   backgroundColor = generalGroup.readEntry( "BackgroundColor", _col );
 
   startInLastDir = generalGroup.readEntry( "StartInLastDir", true);
+  modificationCacheSize = qMax(0, generalGroup.readEntry("ModificationCacheSize", def.modificationCacheSize));
 
   idata->load( kc );
 

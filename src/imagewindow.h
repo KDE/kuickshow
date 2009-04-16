@@ -45,9 +45,8 @@ class ImageWindow : public ImlibWidget
   Q_OBJECT
 
 public:
-  ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent=0,
-	       const char *name=0 );
-  ImageWindow( ImData *_idata=0, QWidget *parent=0, const char *name=0 );
+  ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent=0 );
+  ImageWindow( ImData *_idata=0, QWidget *parent=0 );
   ~ImageWindow();
 
   bool 		showNextImage( const QString& filename );
@@ -104,7 +103,7 @@ protected:
   void 		init();
   void 		centerImage();
   virtual void	updateGeometry( int imWidth, int imHeight );
-  virtual void  loaded( KuickImage * );
+  virtual void  loaded( KuickImage *, bool wasCached );
 
   virtual void  wheelEvent( QWheelEvent * );
   virtual void	keyPressEvent( QKeyEvent * );

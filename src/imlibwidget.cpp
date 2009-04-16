@@ -38,11 +38,12 @@
 #include <kimageio.h>
 
 #include "imlibwidget.h"
+#include "imagemods.h"
 
 const int ImlibWidget::ImlibOffset = 256;
 
-ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
-  QWidget( parent, name )
+ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent ) :
+  QWidget( parent )
 {
     idata 		= _idata;
     deleteImData 	= false;
@@ -80,9 +81,8 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent, const char *name ) :
 }
 
 
-ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent,
-			  const char *name )
-    : QWidget( parent, name )
+ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent )
+    : QWidget( parent )
 {
     id              = _id;
     idata           = _idata;
@@ -149,19 +149,25 @@ KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
     mod.contrast = idata->contrast + ImlibOffset;
     mod.gamma = idata->gamma + ImlibOffset;
 
-    KuickImage *kuim = imageCache->getKuimage( filename, mod );
+    KuickImage *kuim = imageCache->getKuimage( filename );
+    bool wasCached = true;
+    if ( !kuim ) {
+    	wasCached = false;
+    	kuim = imageCache->loadImage( filename, mod );
+    }
+
     if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
 	kWarning() << "ImlibWidget: can't load image " << filename;
 	return 0L;
     }
 
-    loaded( kuim ); // maybe upscale/downscale/rotate in subclasses
+    loaded( kuim, wasCached ); // maybe upscale/downscale/rotate in subclasses
 
     return kuim;
 }
 
 // overridden in subclass
-void ImlibWidget::loaded( KuickImage * )
+void ImlibWidget::loaded( KuickImage *, bool wasCached )
 {
 }
 
@@ -425,7 +431,7 @@ void ImlibWidget::setBackgroundColor( const QColor& color )
 {
     myBackgroundColor = color;
     setPalette( QPalette( myBackgroundColor ));
-    repaint( false); // FIXME - false? necessary at all?
+    repaint(); // FIXME - necessary at all?
 }
 
 const QColor& ImlibWidget::backgroundColor() const
@@ -491,7 +497,7 @@ void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool
 
 
 KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
-    : QObject( 0L, 0L )
+    : QObject( 0L )
 {
     myFilename = filename;
     myIm       = im;
@@ -499,7 +505,7 @@ KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
     myPixmap   = 0L;
     myWidth    = im->rgb_width;
     myHeight   = im->rgb_height;
-    myIsDirty  = true;
+    setDirty(true);
 
     myOrigWidth  = myWidth;
     myOrigHeight = myHeight;
@@ -509,6 +515,10 @@ KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
 
 KuickImage::~KuickImage()
 {
+	if (isModified())
+	{
+		ImageMods::rememberFor( this );
+	}
     if ( myPixmap )
         Imlib_free_pixmap( myId, myPixmap );
     Imlib_destroy_image( myId, myIm );
@@ -522,18 +532,25 @@ void KuickImage::resize( int width, int height )
 
     myWidth   = width;
     myHeight  = height;
-    myIsDirty = true;
+    setDirty(true);
 }
 
+bool KuickImage::isModified() const
+{
+	bool modified = myWidth != myOrigWidth || myHeight != myOrigHeight;
+	modified |= (myFlipMode != FlipNone);
+	modified |= (myRotation != ROT_0);
+	return modified;
+}
 
 void KuickImage::restoreOriginalSize()
 {
-    if (myWidth == myOrigWidth && myHeight == myOrigHeight)
+	if (myWidth == myOrigWidth && myHeight == myOrigHeight)
 	return;
 
     myWidth   = myOrigWidth;
     myHeight  = myOrigHeight;
-    myIsDirty = true;
+    setDirty(true);
 
     if ( myRotation == ROT_90 || myRotation == ROT_270 )
         qSwap( myWidth, myHeight );
@@ -553,8 +570,6 @@ void KuickImage::renderPixmap()
 {
     if ( !myIsDirty )
 	return;
-
-//     qDebug("### rendering: %s", myFilename.toLatin1());
 
     if ( myPixmap )
 	Imlib_free_pixmap( myId, myPixmap );
@@ -578,7 +593,7 @@ void KuickImage::renderPixmap()
 
     emit stoppedRendering();
 
-    myIsDirty = false;
+    setDirty(false);
 }
 
 
@@ -595,12 +610,12 @@ void KuickImage::rotate( Rotation rot )
 
 	if ( rot == ROT_90 ) 		// rotate 90 degrees
 	    Imlib_flip_image_horizontal( myId, myIm );
-	else if ( rot == ROT_270 ) 		// rotate 270 degrees
+	else if ( rot == ROT_270 )		// rotate 270 degrees
 	    Imlib_flip_image_vertical( myId, myIm );
     }
 
     myRotation = (Rotation) ((myRotation + rot) % 4);
-    myIsDirty = true;
+    setDirty(true);
 }
 
 
@@ -635,7 +650,7 @@ void KuickImage::flip( FlipMode flipMode )
 	Imlib_flip_image_vertical( myId, myIm );
 
     myFlipMode = (FlipMode) (myFlipMode ^ flipMode);
-    myIsDirty = true;
+    setDirty(true);
 }
 
 bool KuickImage::flipAbs( int mode )
@@ -659,7 +674,7 @@ bool KuickImage::flipAbs( int mode )
 
     if ( changed ) {
         myFlipMode = (FlipMode) mode;
-        myIsDirty = true;
+        setDirty(true);
         return true;
     }
 
@@ -718,15 +733,15 @@ void ImageCache::slotIdle()
 }
 
 
-KuickImage * ImageCache::getKuimage( const QString& file,
-				     ImlibColorModifier mod )
+KuickImage * ImageCache::getKuimage( const QString& file )
 {
     KuickImage *kuim = 0L;
     if ( file.isEmpty() )
 	return 0L;
 
     int index = fileList.findIndex( file );
-    if ( index != -1 ) {
+    if ( index != -1 )
+    {
         if ( index == 0 )
             kuim = kuickList.at( 0 );
 
@@ -742,28 +757,35 @@ KuickImage * ImageCache::getKuimage( const QString& file,
         return kuim;
     }
 
-    if ( !kuim ) {
+    return 0L;
+}
+
+KuickImage * ImageCache::loadImage(const QString& file, ImlibColorModifier mod)
+{
+	KuickImage *kuim = 0L;
+	if ( file.isEmpty() )
+		return 0L;
+
 	slotBusy();
 
-// #ifndef NDEBUG
-//         struct timeval tms1, tms2;
-//         gettimeofday( &tms1, NULL );
-// #endif
+	// #ifndef NDEBUG
+	//         struct timeval tms1, tms2;
+	//         gettimeofday( &tms1, NULL );
+	// #endif
 
-        ImlibImage *im = Imlib_load_image( myId,
-                                           QFile::encodeName( file ).data() );
+	ImlibImage *im = Imlib_load_image( myId, QFile::encodeName( file ).data() );
 
-// #ifndef NDEBUG
-//         gettimeofday( &tms2, NULL );
-//         qDebug("*** LOADING image: %s, took %ld ms", file.toLatin1(),
-//                (tms2.tv_usec - tms1.tv_usec)/1000);
-// #endif	
+	// #ifndef NDEBUG
+	//         gettimeofday( &tms2, NULL );
+	//         qDebug("*** LOADING image: %s, took %ld ms", file.toLatin1(),
+	//                (tms2.tv_usec - tms1.tv_usec)/1000);
+	// #endif
 
-        slotIdle();
+	slotIdle();
 	if ( !im ) {
-	    im = loadImageWithQt( file );
-	    if ( !im )
-		return 0L;
+		im = loadImageWithQt( file );
+		if ( !im )
+			return 0L;
 	}
 
 	Imlib_set_image_modifier( myId, im, &mod );
@@ -773,15 +795,14 @@ KuickImage * ImageCache::getKuimage( const QString& file,
 
 	kuickList.insert( 0, kuim );
 	fileList.prepend( file );
-    }
 
-    if ( kuickList.count() > (uint) myMaxImages ) {
-//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).toLatin1());
-	kuickList.removeLast();
-	fileList.remove( fileList.fromLast() );
-    }
+	if ( kuickList.count() > (uint) myMaxImages ) {
+		//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).toLatin1());
+		kuickList.removeLast();
+		fileList.remove( fileList.fromLast() );
+	}
 
-    return kuim;
+	return kuim;
 }
 
 
@@ -791,7 +812,7 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 {
     kDebug() << "Trying to load " << fileName << " with KImageIO...";
 
-    
+
 
     QImage image( fileName );
     if ( image.isNull() )
@@ -808,10 +829,10 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
     const int NUM_BYTES_NEW  = 3; // 24 bpp
     uchar *newImageData = new uchar[numPixels * NUM_BYTES_NEW];
     uchar *newData = newImageData;
-    
+
     int w = image.width();
     int h = image.height();
-    
+
     for (int y = 0; y < h; y++) {
 	QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
 	for (int x = 0; x < w; x++) {
@@ -821,10 +842,10 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 	    *(newData++) = qBlue(pixel);
 	}
     }
-    
+
     ImlibImage *im = Imlib_create_image_from_data( myId, newImageData, NULL,
                                                    image.width(), image.height() );
-		    
+
     delete[] newImageData;
 
     return im;

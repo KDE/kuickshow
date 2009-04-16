@@ -52,7 +52,8 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
     printer.setDocName( imageWin.filename() );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
-    KuickPrintDialogPage* dialogPage = new KuickPrintDialogPage( parent, "kuick page");
+    KuickPrintDialogPage* dialogPage = new KuickPrintDialogPage( parent );
+    dialogPage->setObjectName(QString::fromLatin1("kuick page"));
     QPrintDialog *printDialog = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << dialogPage, parent);
     printDialog->setWindowTitle(i18n("Print %1", printer.docName().section('/', -1)));
 
@@ -200,7 +201,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 ///////////////////////////////////////////////////////////////////
 
 
-KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
+KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent )
     : QWidget( parent )
 {
     setWindowTitle( i18n("Image Settings") );
@@ -240,9 +241,9 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent, const char *name )
     m_units = new KComboBox( false, widget );
     m_units->setObjectName( "unit combobox" );
     grid->addWidget( m_units, 0, 2, Qt::AlignLeft );
-    m_units->insertItem( i18n("Millimeters") );
-    m_units->insertItem( i18n("Centimeters") );
-    m_units->insertItem( i18n("Inches") );
+    m_units->addItem( i18n("Millimeters") );
+    m_units->addItem( i18n("Centimeters") );
+    m_units->addItem( i18n("Inches") );
 
     m_width = new KIntNumInput( widget/*, "exact width"*/ );
     grid->addWidget( m_width, 1, 1 );

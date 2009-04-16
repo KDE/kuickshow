@@ -68,6 +68,7 @@
 #include <kio/netaccess.h>
 
 #include "imagewindow.h"
+#include "imagemods.h"
 #include "kuick.h"
 #include "kuickdata.h"
 #include "printing.h"
@@ -76,15 +77,14 @@
 
 QCursor *ImageWindow::s_handCursor = 0L;
 
-ImageWindow::ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent,
-			  const char *name )
-    : ImlibWidget( _idata, id, parent, name )
+ImageWindow::ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent )
+    : ImlibWidget( _idata, id, parent )
 {
     init();
 }
 
-ImageWindow::ImageWindow( ImData *_idata, QWidget *parent, const char *name )
-    : ImlibWidget( _idata, parent, name )
+ImageWindow::ImageWindow( ImData *_idata, QWidget *parent )
+    : ImlibWidget( _idata, parent )
 {
     init();
 }
@@ -101,7 +101,7 @@ void ImageWindow::init()
 
     // give the image window a different WM_CLASS
     XClassHint hint;
-    hint.res_name = const_cast<char*>( kapp->name() );
+    hint.res_name = kapp->objectName().toLocal8Bit().data();
     hint.res_class = const_cast<char*>( "ImageWindow" );
     XSetClassHint( getX11Display(), winId(), &hint );
 
@@ -161,7 +161,7 @@ void ImageWindow::setupActions()
     deleteImage->setShortcut(Qt::Key_Delete);
     connect( deleteImage, SIGNAL( triggered() ), this, SLOT( imageDelete() ) );
 
-    KAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions ); 
+    KAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions );
     zoomIn->setShortcut(Qt::Key_Plus),
     m_actions->addAction( "zoom_in" );
 
@@ -587,7 +587,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
         updateCursor( ZoomCursor );
 
     if ( key == Qt::Key_Escape || KStandardShortcut::close().contains( key ) )
-        close( true );
+        close();
     else if ( KStandardShortcut::save().contains( key ) )
         saveImage();
     else if ( key == Qt::Key_Right || key == Qt::Key_Down )
@@ -927,7 +927,7 @@ void ImageWindow::saveImage()
 
     QString selection = m_saveDirectory.isEmpty() ?
                             m_kuim->filename() :
-                            KUrl::fromPathOrUrl( m_kuim->filename() ).fileName();
+                            KUrl( m_kuim->filename() ).fileName();
     dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setCaption( i18n("Save As") );
@@ -982,15 +982,24 @@ void ImageWindow::toggleFullscreen()
     setFullscreen( !myIsFullscreen );
 }
 
-void ImageWindow::loaded( KuickImage *kuim )
+void ImageWindow::loaded( KuickImage *kuim, bool wasCached )
 {
-    if ( !kdata->isModsEnabled ) {
-	kuim->restoreOriginalSize();
-    }
-    else
+	if (wasCached)
+	{
+		return; // keep it as it is
+	}
+
+    if ( !ImageMods::restoreFor( kuim ) )
     {
-        autoRotate( kuim );
-        autoScale( kuim );
+    	// if no cached image modifications are available, apply the default modifications
+        if ( !kdata->isModsEnabled ) {
+        	kuim->restoreOriginalSize();
+        }
+        else
+        {
+        	autoRotate( kuim );
+        	autoScale( kuim );
+        }
     }
 }
 

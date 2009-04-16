@@ -22,6 +22,7 @@ set(kuickshow_KDEINIT_SRCS
    kuick.cpp 
    imlibwidget.cpp 
    slideshowwidget.cpp 
+   imagemods.cpp
    printing.cpp )
 
 kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})

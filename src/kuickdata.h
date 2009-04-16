@@ -52,6 +52,7 @@ public:
 
     int 	scrollSteps;
     float	zoomSteps;
+    int     modificationCacheSize;
 
     bool startInLastDir      :1;
 

@@ -51,6 +51,11 @@ public:
   int 		originalWidth() const { return myOrigWidth; }
   int 		originalHeight() const { return myOrigHeight; }
 
+  /**
+   * Returns true if this image is modified against the original loaded
+   * version from disk. I.e. resized, rotated, flipped.
+   */
+  bool		isModified() const;
   void 		resize( int width, int height );
   void 		restoreOriginalSize();
   void 		rotate( Rotation rot );
@@ -63,6 +68,10 @@ public:
   const QString& filename() 	const { return myFilename;}
 
   void 		setDirty( bool d )    { myIsDirty = d;    }
+  /**
+   * Returns true if this image is "dirty", i.e some operation was done,
+   * and it needs re-rendering.
+   */
   bool 		isDirty() 	const { return myIsDirty; }
   Rotation      absRotation()   const { return myRotation; }
   FlipMode      flipMode()      const { return myFlipMode; }
@@ -101,12 +110,13 @@ public:
   void 			setMaxImages( int maxImages );
   int 			maxImages() 		const { return myMaxImages; }
 
-  KuickImage *		getKuimage( const QString& file, ImlibColorModifier  );
+  KuickImage *		getKuimage( const QString& file );
+  KuickImage *		loadImage( const QString& file, ImlibColorModifier  );
   //  KuickImage *		find( const QString& filename );
 
 private:
   ImlibImage *		loadImageWithQt( const QString& filename ) const;
-  
+
   int 			myMaxImages;
   QStringList		fileList;
   Q3PtrList<KuickImage>	kuickList;
@@ -136,9 +146,8 @@ class ImlibWidget : public QWidget
 
 public:
 
-  ImlibWidget( ImData *_idata=0, QWidget *parent=0, const char *name=0 );
-  ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0,
-	       const char *name=0 );
+  ImlibWidget( ImData *_idata=0, QWidget *parent=0 );
+  ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0 );
   virtual ~ImlibWidget();
 
   const QString& filename() 		const { return m_filename; }
@@ -196,7 +205,7 @@ protected:
   void 		rotate( int );
   void 		updateWidget( bool geometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
-  virtual void  loaded( KuickImage * );
+  virtual void  loaded( KuickImage *, bool wasCached );
 
   void 		closeEvent( QCloseEvent * );
 

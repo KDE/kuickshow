@@ -68,7 +68,8 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
     QLabel *copy = new QLabel("(C) 1998-2004", gBox);
     copy->setAlignment( Qt::AlignCenter );
 
-    ImlibWidget *im = new ImlibWidget( 0L, gBox, "KuickShow Logo" );
+    ImlibWidget *im = new ImlibWidget( 0L, gBox );
+    im->setObjectName( QString::fromLatin1("KuickShow Logo") );
     if ( im->loadImage( file ) )
 	im->setFixedSize( im->width(), im->height() );
     else {

@@ -39,8 +39,7 @@
 #include "kuickdata.h"
 
 
-KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
-				      const char *name, bool modal )
+KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent, bool modal )
     : KPageDialog( parent )
 {
     setButtons( Help | Default | Ok | Apply | Cancel );
@@ -78,7 +77,7 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 
 KuickConfigDialog::~KuickConfigDialog()
 {
-    imageWindow->close( true );
+    delete imageWindow;
 }
 
 void KuickConfigDialog::applyConfig()

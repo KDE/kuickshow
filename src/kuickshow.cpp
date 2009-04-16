@@ -415,7 +415,7 @@ void KuickShow::slotSetURL( const KUrl& url )
 
 void KuickShow::slotURLComboReturnPressed()
 {
-    KUrl where = KUrl::fromPathOrUrl( cmbPath->currentText() );
+    KUrl where( cmbPath->currentText() );
     slotSetURL( where );
 }
 
@@ -449,7 +449,6 @@ void KuickShow::viewerDeleted()
 
 void KuickShow::slotHighlighted( const KFileItem& item )
 {
-kdDebug() << "highlighted: " << endl;
     QString statusBarInfo = item.isNull() ? QString() : item.getStatusBarInfo();
 
     statusBar()->changeItem( statusBarInfo, URL_ITEM );
@@ -506,7 +505,8 @@ void KuickShow::showImage( const KFileItem& fi,
     if ( FileWidget::isImage( fi ) ) {
 
         if ( newWindow ) {
-            m_viewer = new ImageWindow( kdata->idata, id, 0L, "image window" );
+            m_viewer = new ImageWindow( kdata->idata, id, 0L );
+            m_viewer->setObjectName( QString::fromLatin1("image window") );
             s_viewers.append( m_viewer );
 
 	    connect( m_viewer, SIGNAL( nextSlideRequested() ), this, SLOT( nextSlide() ));
@@ -661,7 +661,8 @@ void KuickShow::slotPrint()
 	const KFileItemList::const_iterator end = items.constEnd();
 
     // don't show the image, just print
-    ImageWindow *iw = new ImageWindow( 0, id, this, "printing image" );
+    ImageWindow *iw = new ImageWindow( 0, id, this );
+    iw->setObjectName( QString::fromLatin1("printing image"));
     KFileItem item;
 	for ( ; it != end; ++it ) {
 		item = (*it);
@@ -962,12 +963,11 @@ void KuickShow::configuration()
     if ( !fileWidget ) {
         KUrl start;
         start.setPath( QDir::homePath() );
-        initGUI( KUrl::fromPathOrUrl( QDir::homePath() ) );
+        initGUI( start );
     }
 
-    dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L,
-                                    "dialog", false );
-    dialog->resize( 540, 510 );
+    dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L, false );
+    dialog->setObjectName(QString::fromLatin1("dialog"));
     dialog->setIcon( qApp->windowIcon().pixmap(IconSize(KIconLoader::Small),IconSize(KIconLoader::Small)) );
 
     connect( dialog, SIGNAL( okClicked() ),
@@ -1025,14 +1025,14 @@ void KuickShow::readProperties( const KConfigGroup& kc )
     assert( fileWidget ); // from SM, we should always have initGUI on startup
     QString dir = kc.readPathEntry( "CurrentDirectory", QString() );
     if ( !dir.isEmpty() ) {
-        fileWidget->setUrl( KUrl::fromPathOrUrl( dir ), true );
+        fileWidget->setUrl( KUrl( dir ), true );
         fileWidget->clearHistory();
     }
 
     const QStringList images = kc.readPathEntry( "Images shown", QStringList() );
     QStringList::const_iterator it;
     for ( it = images.constBegin(); it != images.constEnd(); ++it ) {
-        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KUrl::fromPathOrUrl( *it ), false );
+        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KUrl( *it ), false );
         if ( item.isReadable() )
             showImage( item, true );
     }

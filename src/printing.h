@@ -50,7 +50,7 @@ class KuickPrintDialogPage : public QWidget
     Q_OBJECT
 
 public:
-    KuickPrintDialogPage( QWidget *parent = 0L, const char *name = 0 );
+    KuickPrintDialogPage( QWidget *parent = 0L );
     ~KuickPrintDialogPage();
 
     bool printFilename();
