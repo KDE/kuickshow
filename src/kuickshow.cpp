@@ -308,7 +308,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     // from the main contextmenu
     KActionMenu *sortingMenu = static_cast<KActionMenu*>( coll->action("sorting menu"));
     KActionMenu *mainActionMenu = static_cast<KActionMenu*>( coll->action("popupMenu"));
-    QMenu *mainPopup = mainActionMenu->popupMenu();
+    QMenu *mainPopup = mainActionMenu->menu();
 /*
     int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
     int separatorId = mainPopup->idAt( sortingIndex + 1 );
@@ -320,8 +320,8 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     // add the sorting menu and a separator into the View menu
     KActionMenu *viewActionMenu = static_cast<KActionMenu*>( coll->action("view menu"));
-    viewActionMenu->popupMenu()->addSeparator();
-    viewActionMenu->popupMenu()->addAction(sortingMenu); //, 0 ); // on top of the menu
+    viewActionMenu->menu()->addSeparator();
+    viewActionMenu->menu()->addAction(sortingMenu); //, 0 ); // on top of the menu
 
 
     Q3PopupMenu *settingsMenu = new Q3PopupMenu( mBar, "settings" );
