@@ -47,10 +47,11 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
   gbScale = new Q3GroupBox( i18n("Scaling"), this );
   gbScale->setColumnLayout( 0, Qt::Horizontal );
 
-  cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"),
-			       gbScale, "shrinktoscreen" );
+  cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"), gbScale );
+  cbDownScale->setObjectName( QString::fromLatin1( "shrinktoscreen" ) );
 
-  cbUpScale = new QCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale, "upscale checkbox" );
+  cbUpScale = new QCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale );
+  cbUpScale->setObjectName( QString::fromLatin1( "upscale checkbox" ) );
 
   sbMaxUpScaleFactor = new KIntNumInput( gbScale/*, "upscale factor"*/ );
   sbMaxUpScaleFactor->setRange( 1, 100, 1, false );
@@ -112,8 +113,9 @@ DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
 
 
   // layout management
-  QVBoxLayout *mainLayout = new QVBoxLayout( this, 0,
-            KDialog::spacingHint(), "main layout" );
+  QVBoxLayout *mainLayout = new QVBoxLayout( this );
+  mainLayout->setMargin( 0 );
+  mainLayout->setObjectName( QString::fromLatin1( "main layout" ) );
 
   QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale->layout(),
             KDialog::spacingHint());

@@ -861,7 +861,7 @@ void ImageWindow::setPopupMenu()
 
     viewerMenu->addAction(m_actions->action("next_image"));
     viewerMenu->addAction(m_actions->action("previous_image"));
-    viewerMenu->insertSeparator();
+    viewerMenu->addSeparator();
 
     brightnessMenu = new QMenu( viewerMenu );
     brightnessMenu->addAction(m_actions->action("more_brightness"));
@@ -880,26 +880,26 @@ void ImageWindow::setPopupMenu()
     viewerMenu->addAction(m_actions->action("original_size"));
     viewerMenu->addAction(m_actions->action("maximize"));
 
-    viewerMenu->insertSeparator();
+    viewerMenu->addSeparator();
     viewerMenu->addAction(m_actions->action("rotate90"));
     viewerMenu->addAction(m_actions->action("rotate180"));
     viewerMenu->addAction(m_actions->action("rotate270"));
 
-    viewerMenu->insertSeparator();
+    viewerMenu->addSeparator();
     viewerMenu->addAction(m_actions->action("flip_vertically"));
     viewerMenu->addAction(m_actions->action("flip_horicontally"));
-    viewerMenu->insertSeparator();
+    viewerMenu->addSeparator();
     viewerMenu->insertItem( i18n("Brightness"), brightnessMenu );
     viewerMenu->insertItem( i18n("Contrast"), contrastMenu );
     viewerMenu->insertItem( i18n("Gamma"), gammaMenu );
-    viewerMenu->insertSeparator();
+    viewerMenu->addSeparator();
 
     viewerMenu->addAction(m_actions->action("delete_image"));
     viewerMenu->addAction(m_actions->action("print_image"));
     viewerMenu->addAction(m_actions->action("save_image_as"));
     viewerMenu->addAction(m_actions->action("properties"));
 
-    viewerMenu->insertSeparator();
+    viewerMenu->addSeparator();
     viewerMenu->addAction(m_actions->action("close_image"));
 }
 

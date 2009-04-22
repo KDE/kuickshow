@@ -711,7 +711,7 @@ void ImageCache::setMaxImages( int maxImages )
     int count   = kuickList.count();
     while ( count > myMaxImages ) {
 	kuickList.removeLast();
-	fileList.remove( fileList.fromLast() );
+	fileList.removeLast();
 	count--;
     }
 }
@@ -739,7 +739,7 @@ KuickImage * ImageCache::getKuimage( const QString& file )
     if ( file.isEmpty() )
 	return 0L;
 
-    int index = fileList.findIndex( file );
+    int index = fileList.indexOf( file );
     if ( index != -1 )
     {
         if ( index == 0 )
@@ -799,7 +799,7 @@ KuickImage * ImageCache::loadImage(const QString& file, ImlibColorModifier mod)
 	if ( kuickList.count() > (uint) myMaxImages ) {
 		//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).toLatin1());
 		kuickList.removeLast();
-		fileList.remove( fileList.fromLast() );
+		fileList.removeLast();
 	}
 
 	return kuim;

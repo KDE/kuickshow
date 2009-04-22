@@ -422,7 +422,7 @@ void KuickShow::slotURLComboReturnPressed()
 void KuickShow::viewerDeleted()
 {
     ImageWindow *viewer = (ImageWindow*) sender();
-    s_viewers.remove( viewer );
+    s_viewers.removeAll( viewer );
     if ( viewer == m_viewer )
         m_viewer = 0L;
 
@@ -968,7 +968,7 @@ void KuickShow::configuration()
 
     dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L, false );
     dialog->setObjectName(QString::fromLatin1("dialog"));
-    dialog->setIcon( qApp->windowIcon().pixmap(IconSize(KIconLoader::Small),IconSize(KIconLoader::Small)) );
+    dialog->setWindowIcon( qApp->windowIcon() );
 
     connect( dialog, SIGNAL( okClicked() ),
              this, SLOT( slotConfigApplied() ) );

@@ -56,17 +56,21 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   layout->addWidget( logo, 0, Qt::AlignRight );
 
-  cbFullscreen = new QCheckBox( i18n("Fullscreen mode"), this, "boscreen" );
+  cbFullscreen = new QCheckBox( i18n("Fullscreen mode"), this );
+  cbFullscreen->setObjectName( QString::fromLatin1( "boscreen" ) );
 
-  cbPreload = new QCheckBox( i18n("Preload next image"), this, "preload");
-  cbLastdir = new QCheckBox( i18n("Remember last folder"), this, "restart_lastdir");
+  cbPreload = new QCheckBox( i18n("Preload next image"), this );
+  cbPreload->setObjectName( QString::fromLatin1( "preload" ) );
+  cbLastdir = new QCheckBox( i18n("Remember last folder"), this );
+  cbLastdir->setObjectName( QString::fromLatin1( "restart_lastdir" ) );
 
   QGridLayout *gridLayout = new QGridLayout();
   gridLayout->setSpacing( KDialog::spacingHint() );
   QLabel *l0 = new QLabel( i18n("Background color:"), this );
   colorButton = new KColorButton( this );
 
-  QLabel *l1 = new QLabel( i18n("Show only files with extension: "), this, "label" );
+  QLabel *l1 = new QLabel( i18n("Show only files with extension: "), this );
+  l1->setObjectName( QString::fromLatin1( "label" ) );
   editFilter = new KLineEdit( this );
   editFilter->setObjectName( "filteredit" );
 
@@ -87,18 +91,20 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   layout->addWidget( gbox2 );
   layout->addStretch();
 
-  cbFastRender = new QCheckBox( i18n("Fast rendering"), gbox2, "fastrender" );
-  cbDither16bit = new QCheckBox( i18n("Dither in HiColor (15/16bit) modes"),
-				 gbox2, "dither16bit" );
+  cbFastRender = new QCheckBox( i18n("Fast rendering"), gbox2 );
+  cbFastRender->setObjectName( QString::fromLatin1( "fastrender" ) );
+  cbDither16bit = new QCheckBox( i18n("Dither in HiColor (15/16bit) modes"), gbox2 );
+  cbDither16bit->setObjectName( QString::fromLatin1( "dither16bit" ) );
 
-  cbDither8bit = new QCheckBox( i18n("Dither in LowColor (<=8bit) modes"),
-				gbox2, "dither8bit" );
+  cbDither8bit = new QCheckBox( i18n("Dither in LowColor (<=8bit) modes"), gbox2 );
+  cbDither8bit->setObjectName( QString::fromLatin1( "dither8bit" ) );
 
-  cbOwnPalette = new QCheckBox( i18n("Use own color palette"),
-                                gbox2, "pal");
+  cbOwnPalette = new QCheckBox( i18n("Use own color palette"), gbox2 );
+  cbOwnPalette->setObjectName( QString::fromLatin1( "pal" ) );
   connect( cbOwnPalette, SIGNAL( clicked() ), this, SLOT( useOwnPalette() ) );
 
-  cbFastRemap = new QCheckBox( i18n("Fast palette remapping"), gbox2, "remap");
+  cbFastRemap = new QCheckBox( i18n("Fast palette remapping"), gbox2 );
+  cbFastRemap->setObjectName( QString::fromLatin1( "remap" ) );
 
   maxCacheSpinBox = new KIntNumInput( gbox2/*, "editmaxcache"*/ );
   maxCacheSpinBox->setLabel( i18n("Maximum cache size: "), Qt::AlignVCenter );

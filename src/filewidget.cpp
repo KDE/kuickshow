@@ -164,7 +164,7 @@ void FileWidget::activatedMenu( const KFileItem& item, const QPoint& pos )
 void FileWidget::findCompletion( const QString& text )
 {
     if ( text.at(0) == '/' || text.at(0) == '~' ||
-	 text.find('/') != -1 ) {
+	 text.indexOf('/') != -1 ) {
 	QString t = m_fileFinder->completion()->makeCompletion( text );
 
 	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
@@ -430,7 +430,7 @@ void FileWidget::slotReturnPressed( const QString& t )
 	setUrl( url, true );
     }
 
-    else if ( text.find('/') != (int) text.length() -1 ) { // relative path
+    else if ( text.indexOf('/') != (int) text.length() -1 ) { // relative path
 	QString dir = m_fileFinder->completion()->replacedPath( text );
 	KUrl u( url(), dir );
 	setUrl( u, true );
