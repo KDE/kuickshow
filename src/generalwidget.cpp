@@ -24,7 +24,7 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QGridLayout>
-#include <Q3GroupBox>
+#include <QGroupBox>
 #include <kapplication.h>
 #include <kcolorbutton.h>
 #include <kdialog.h>
@@ -86,10 +86,11 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
 
   ////////////////////////////////////////////////////////////////////////
 
-  Q3GroupBox *gbox2 = new Q3GroupBox (1, Qt::Horizontal, i18n("Quality/Speed"),
-				     this, "qualitybox" );
+  QGroupBox *gbox2 = new QGroupBox( i18n("Quality/Speed"), this );
+  gbox2->setObjectName( QString::fromLatin1( "qualitybox" ) );
   layout->addWidget( gbox2 );
   layout->addStretch();
+  QVBoxLayout *gbox2Layout = new QVBoxLayout( gbox2 );
 
   cbFastRender = new QCheckBox( i18n("Fast rendering"), gbox2 );
   cbFastRender->setObjectName( QString::fromLatin1( "fastrender" ) );
@@ -111,6 +112,13 @@ GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
   maxCacheSpinBox->setSuffix( i18n( " MB" ) );
   maxCacheSpinBox->setSpecialValueText( i18n( "Unlimited" ) );
   maxCacheSpinBox->setRange( 0, 400, 1 );
+
+  gbox2Layout->addWidget( cbFastRender );
+  gbox2Layout->addWidget( cbDither16bit );
+  gbox2Layout->addWidget( cbDither8bit );
+  gbox2Layout->addWidget( cbOwnPalette );
+  gbox2Layout->addWidget( cbFastRemap );
+  gbox2Layout->addWidget( maxCacheSpinBox );
 
   loadSettings( *kdata );
   cbFullscreen->setFocus();
