@@ -163,10 +163,11 @@ void ImageWindow::setupActions()
 
     KAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions );
     zoomIn->setShortcut(Qt::Key_Plus),
-    m_actions->addAction( "zoom_in" );
+    m_actions->addAction( "zoom_in", zoomIn );
 
     KAction *zoomOut = KStandardAction::zoomOut( this, SLOT( zoomOut() ), m_actions );
     zoomOut->setShortcut(Qt::Key_Minus);
+    m_actions->addAction( "zoom_out", zoomOut );
 
     KAction *restoreSize = m_actions->addAction( "original_size" );
     restoreSize->setText( i18n("Restore Original Size") );
