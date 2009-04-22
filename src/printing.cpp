@@ -19,7 +19,6 @@
 #include <qcheckbox.h>
 #include <qfont.h>
 #include <qfontmetrics.h>
-#include <q3grid.h>
 #include <qlayout.h>
 #include <qimage.h>
 //Added by qt3to4:

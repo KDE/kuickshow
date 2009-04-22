@@ -21,7 +21,6 @@
 #include <QKeyEvent>
 #include <QResizeEvent>
 #include <QEvent>
-#include <Q3PopupMenu>
 #include <QMenuItem>
 #include <QAbstractItemView>
 #include <QAbstractItemModel>
