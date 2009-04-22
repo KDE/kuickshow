@@ -32,7 +32,6 @@
 #include <QEvent>
 #include <QDropEvent>
 #include <QLabel>
-#include <Q3PopupMenu>
 #include <QMouseEvent>
 #include <QMenuItem>
 #include <QAbstractItemView>
@@ -286,7 +285,8 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     // menubar
     KMenuBar *mBar = menuBar();
-    Q3PopupMenu *fileMenu = new Q3PopupMenu( mBar, "file" );
+    QMenu *fileMenu = new QMenu( mBar );
+    fileMenu->setObjectName( QString::fromLatin1( "file" ) );
     fileMenu->addAction(open);
     fileMenu->addAction(showInOther);
     fileMenu->addAction(showInSame);
@@ -297,7 +297,8 @@ void KuickShow::initGUI( const KUrl& startDir )
     fileMenu->addSeparator();
     fileMenu->addAction(quit);
 
-    Q3PopupMenu *editMenu = new Q3PopupMenu( mBar, "edit" );
+    QMenu *editMenu = new QMenu( mBar );
+    editMenu->setObjectName( QString::fromLatin1( "edit" ) );
     editMenu->addAction(coll->action("mkdir"));
     editMenu->addAction(coll->action("delete"));
     editMenu->addSeparator();
@@ -324,7 +325,8 @@ void KuickShow::initGUI( const KUrl& startDir )
     viewActionMenu->menu()->addAction(sortingMenu); //, 0 ); // on top of the menu
 
 
-    Q3PopupMenu *settingsMenu = new Q3PopupMenu( mBar, "settings" );
+    QMenu *settingsMenu = new QMenu( mBar );
+    settingsMenu->setObjectName( QString::fromLatin1( "settings" ) );
     settingsMenu->addAction(configure);
 
     mBar->insertItem( i18n("&File"), fileMenu );
