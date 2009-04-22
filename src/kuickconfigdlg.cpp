@@ -50,15 +50,18 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     coll = _coll;
     KVBox *box = new KVBox();
     addPage( box, i18n("&General") );
-    generalWidget = new GeneralWidget( box, "general widget" );
+    generalWidget = new GeneralWidget( box );
+    generalWidget->setObjectName( QString::fromLatin1( "general widget" ) );
 
     box = new KVBox();
     addPage( box, i18n("&Modifications") );
-    defaultsWidget = new DefaultsWidget( box, "defaults widget" );
+    defaultsWidget = new DefaultsWidget( box );
+    defaultsWidget->setObjectName( QString::fromLatin1( "defaults widget" ) );
 
     box = new KVBox();
     addPage( box, i18n("&Slideshow")  );
-    slideshowWidget = new SlideShowWidget( box, "slideshow widget" );
+    slideshowWidget = new SlideShowWidget( box );
+    slideshowWidget->setObjectName( QString::fromLatin1( "slideshow widget" ) );
 
     box = new KVBox();
     addPage( box, i18n("&Viewer Shortcuts") );

@@ -208,7 +208,8 @@ KuickShow::~KuickShow()
 // TODO convert to use xmlui file
 void KuickShow::initGUI( const KUrl& startDir )
 {
-    fileWidget = new FileWidget( startDir, this, "MainWidget" );
+    fileWidget = new FileWidget( startDir, this );
+    fileWidget->setObjectName( QString::fromLatin1( "MainWidget" ) );
     setFocusProxy( fileWidget );
 
     KActionCollection *coll = fileWidget->actionCollection();
@@ -1009,8 +1010,10 @@ void KuickShow::slotConfigClosed()
 
 void KuickShow::about()
 {
-    if ( !aboutWidget )
-        aboutWidget = new AboutWidget( 0L, "about" );
+    if ( !aboutWidget ) {
+        aboutWidget = new AboutWidget( 0L );
+        aboutWidget->setObjectName( QString::fromLatin1( "about" ) );
+    }
 
     aboutWidget->adjustSize();
 

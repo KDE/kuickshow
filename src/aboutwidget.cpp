@@ -34,8 +34,8 @@
 
 #include "aboutwidget.h"
 
-AboutWidget::AboutWidget( QWidget *parent, const char *name )
-    : QFrame( parent, name )
+AboutWidget::AboutWidget( QWidget *parent )
+    : QFrame( parent )
 {
     KWindowSystem::setType( winId(), NET::Override );
     KWindowSystem::setState( winId(), NET::StaysOnTop | NET::SkipTaskbar );

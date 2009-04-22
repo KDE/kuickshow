@@ -37,8 +37,8 @@
 
 #include "generalwidget.h"
 
-GeneralWidget::GeneralWidget( QWidget *parent, const char *name )
-  : QWidget( parent, name )
+GeneralWidget::GeneralWidget( QWidget *parent )
+  : QWidget( parent )
 {
   QVBoxLayout *layout = new QVBoxLayout( this );
   layout->setSpacing( KDialog::spacingHint() );

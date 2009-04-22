@@ -36,7 +36,7 @@ class DefaultsWidget : public QWidget
   Q_OBJECT
 
 public:
-  DefaultsWidget( QWidget *parent, const char *name );
+  DefaultsWidget( QWidget *parent );
   ~DefaultsWidget();
 
   void 		loadSettings( const KuickData& data );

@@ -32,7 +32,7 @@ class MainWidget : public QWidget
   Q_OBJECT
 
 public:
-  MainWidget( QString, QWidget *parent, const char *name=0L);
+  MainWidget( QString, QWidget *parent );
   ~MainWidget();
 
   FileView* 	getFileBox() { return box; }

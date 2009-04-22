@@ -34,8 +34,8 @@
 #include "imlibwidget.h"
 #include "defaultswidget.h"
 
-DefaultsWidget::DefaultsWidget( QWidget *parent, const char *name)
-  : QWidget( parent, name )
+DefaultsWidget::DefaultsWidget( QWidget *parent )
+  : QWidget( parent )
 {
   imFiltered = 0L;
 

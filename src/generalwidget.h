@@ -34,7 +34,7 @@ class GeneralWidget : public QWidget
     Q_OBJECT
 
 public:
-    GeneralWidget( QWidget *parent, const char *name );
+    GeneralWidget( QWidget *parent );
     ~GeneralWidget();
 
     void 	loadSettings( const KuickData& data );

@@ -28,7 +28,7 @@ class SlideShowWidget : public QWidget
 {
     Q_OBJECT
 public:
-    SlideShowWidget( QWidget *parent, const char *name );
+    SlideShowWidget( QWidget *parent );
     ~SlideShowWidget();
 
     virtual void loadSettings( const KuickData& data );

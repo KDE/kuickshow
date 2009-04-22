@@ -23,8 +23,8 @@
 #include <QResizeEvent>
 
 
-MainWidget::MainWidget( QString startDir, QWidget *parent,
-			const char *name ) : QWidget ( parent, name )
+MainWidget::MainWidget( QString startDir, QWidget *parent )
+    : QWidget( parent )
 {	
   box = new FileView( startDir, true, (QDir::Dirs | QDir::Files),
 		      this, "fileview" );

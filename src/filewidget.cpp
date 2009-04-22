@@ -49,7 +49,7 @@
 #undef KeyPress
 #endif
 
-FileWidget::FileWidget( const KUrl& url, QWidget *parent, const char *)
+FileWidget::FileWidget( const KUrl& url, QWidget *parent )
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
       m_fileFinder( 0L )

@@ -28,8 +28,8 @@
 #include "slideshowwidget.h"
 
 
-SlideShowWidget::SlideShowWidget( QWidget *parent, const char *name )
-    : QWidget( parent, name )
+SlideShowWidget::SlideShowWidget( QWidget *parent )
+    : QWidget( parent )
 {
 //     setTitle( i18n("Slideshow") );
 
