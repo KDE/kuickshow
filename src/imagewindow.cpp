@@ -117,7 +117,7 @@ void ImageWindow::init()
     if ( !s_handCursor ) {
         QString file = KStandardDirs::locate( "appdata", "pics/handcursor.png" );
         if ( !file.isEmpty() )
-            s_handCursor = new QCursor( QBitmap(file) );
+            s_handCursor = new QCursor( QPixmap(file) );
         else
             s_handCursor = new QCursor( Qt::ArrowCursor );
     }
