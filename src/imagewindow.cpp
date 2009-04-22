@@ -288,7 +288,7 @@ void ImageWindow::setupActions()
     KAction *properties = m_actions->addAction("properties" );
     properties->setText( i18n("Properties") );
     properties->setShortcut(Qt::ALT + Qt::Key_Return);
-    connect( reloadImage, SIGNAL( triggered() ), this, SLOT( slotProperties() ) );
+    connect( properties, SIGNAL( triggered() ), this, SLOT( slotProperties() ) );
 
     m_actions->readSettings();
 }
