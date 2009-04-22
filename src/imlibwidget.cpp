@@ -461,7 +461,7 @@ int ImlibWidget::imageHeight() const
 
 void ImlibWidget::setBusyCursor()
 {
-    if ( ownCursor() )
+    if ( testAttribute( Qt::WA_SetCursor ) )
         m_oldCursor = cursor();
     else
         m_oldCursor = QCursor();
@@ -750,7 +750,7 @@ KuickImage * ImageCache::getKuimage( const QString& file )
         else {
             kuim = kuickList.take( index );
             kuickList.insert( 0, kuim );
-            fileList.remove( file );
+            fileList.removeAll( file );
             fileList.prepend( file );
         }
 

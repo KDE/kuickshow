@@ -864,15 +864,15 @@ void ImageWindow::setPopupMenu()
     viewerMenu->addAction(m_actions->action("previous_image"));
     viewerMenu->addSeparator();
 
-    brightnessMenu = new QMenu( viewerMenu );
+    brightnessMenu = new QMenu( i18n("Brightness"), viewerMenu );
     brightnessMenu->addAction(m_actions->action("more_brightness"));
     brightnessMenu->addAction(m_actions->action("less_brightness"));
 
-    contrastMenu = new QMenu( viewerMenu );
+    contrastMenu = new QMenu( i18n("Contrast"), viewerMenu );
     contrastMenu->addAction(m_actions->action("more_contrast"));
     contrastMenu->addAction(m_actions->action("less_contrast"));
 
-    gammaMenu = new QMenu( viewerMenu );
+    gammaMenu = new QMenu( i18n("Gamma"), viewerMenu );
     gammaMenu->addAction(m_actions->action("more_gamma"));
     gammaMenu->addAction(m_actions->action("less_gamma"));
 
@@ -890,9 +890,9 @@ void ImageWindow::setPopupMenu()
     viewerMenu->addAction(m_actions->action("flip_vertically"));
     viewerMenu->addAction(m_actions->action("flip_horicontally"));
     viewerMenu->addSeparator();
-    viewerMenu->insertItem( i18n("Brightness"), brightnessMenu );
-    viewerMenu->insertItem( i18n("Contrast"), contrastMenu );
-    viewerMenu->insertItem( i18n("Gamma"), gammaMenu );
+    viewerMenu->addMenu( brightnessMenu );
+    viewerMenu->addMenu( contrastMenu );
+    viewerMenu->addMenu( gammaMenu );
     viewerMenu->addSeparator();
 
     viewerMenu->addAction(m_actions->action("delete_image"));

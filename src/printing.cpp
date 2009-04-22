@@ -233,7 +233,7 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent )
 
     m_scale = new QRadioButton( i18n("Print e&xact size: "), widget );
     m_scale->setEnabled( false ); // ###
-    grid->addMultiCellWidget( m_scale, 0, 0, 0, 1 );
+    grid->addWidget( m_scale, 0, 0, 1, 2 );
     group->insert( m_scale );
     connect( m_scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
 

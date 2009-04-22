@@ -53,7 +53,8 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   cbUpScale->setObjectName( QString::fromLatin1( "upscale checkbox" ) );
 
   sbMaxUpScaleFactor = new KIntNumInput( gbScale/*, "upscale factor"*/ );
-  sbMaxUpScaleFactor->setRange( 1, 100, 1, false );
+  sbMaxUpScaleFactor->setRange( 1, 100, 1 );
+  sbMaxUpScaleFactor->setSliderEnabled( false );
 
   connect(cbUpScale, SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
             SLOT( setEnabled(bool) ));
@@ -80,16 +81,19 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   gbAdjust = new QGroupBox( i18n("Adjustments"), this );
 
   sbBrightness = new KIntNumInput( gbAdjust/*, "brightness spinbox"*/ );
-  sbBrightness->setRange( -256, 256, 1, true );
+  sbBrightness->setRange( -256, 256, 1 );
+  sbBrightness->setSliderEnabled( true );
   sbBrightness->setLabel( i18n("Brightness:"), Qt::AlignVCenter );
 
   sbContrast = new KIntNumInput( sbBrightness, 0,gbAdjust, 10/*,
 				 "contrast spinbox"*/);
-  sbContrast->setRange( -256, 256, 1, true );
+  sbContrast->setRange( -256, 256, 1 );
+  sbContrast->setSliderEnabled( true );
   sbContrast->setLabel( i18n("Contrast:"), Qt::AlignVCenter );
 
   sbGamma = new KIntNumInput( sbContrast, 0, gbAdjust, 10/*, "gamma spinbox"*/ );
-  sbGamma->setRange( -256, 256, 1, true );
+  sbGamma->setRange( -256, 256, 1 );
+  sbGamma->setSliderEnabled( true );
   sbGamma->setLabel( i18n("Gamma:"), Qt::AlignVCenter );
 
   // --

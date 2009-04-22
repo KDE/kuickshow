@@ -107,7 +107,7 @@ void FileWidget::initActions()
     // so we move it to the real bottom
     menu->menu()->removeAction( coll->action( "properties" ) );
 
-    KMenu *pMenu = menu->popupMenu();
+    KMenu *pMenu = menu->menu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
     QMenuItem *mItem = pMenu->findItem( lastItemId );
     if ( mItem && !mItem->isSeparator() )

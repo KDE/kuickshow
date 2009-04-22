@@ -285,7 +285,7 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     // menubar
     KMenuBar *mBar = menuBar();
-    QMenu *fileMenu = new QMenu( mBar );
+    QMenu *fileMenu = new QMenu( i18n("&File"), mBar );
     fileMenu->setObjectName( QString::fromLatin1( "file" ) );
     fileMenu->addAction(open);
     fileMenu->addAction(showInOther);
@@ -297,7 +297,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     fileMenu->addSeparator();
     fileMenu->addAction(quit);
 
-    QMenu *editMenu = new QMenu( mBar );
+    QMenu *editMenu = new QMenu( i18n("&Edit"), mBar );
     editMenu->setObjectName( QString::fromLatin1( "edit" ) );
     editMenu->addAction(coll->action("mkdir"));
     editMenu->addAction(coll->action("delete"));
@@ -325,14 +325,14 @@ void KuickShow::initGUI( const KUrl& startDir )
     viewActionMenu->menu()->addAction(sortingMenu); //, 0 ); // on top of the menu
 
 
-    QMenu *settingsMenu = new QMenu( mBar );
+    QMenu *settingsMenu = new QMenu( i18n("&Settings"), mBar );
     settingsMenu->setObjectName( QString::fromLatin1( "settings" ) );
     settingsMenu->addAction(configure);
 
-    mBar->insertItem( i18n("&File"), fileMenu );
-    mBar->insertItem( i18n("&Edit"), editMenu );
+    mBar->addMenu( fileMenu );
+    mBar->addMenu( editMenu );
     mBar->addAction(viewActionMenu);
-    mBar->insertItem( i18n("&Settings"), settingsMenu );
+    mBar->addMenu( settingsMenu );
 
     // toolbar
     KToolBar *tBar = toolBar(i18n("Main Toolbar"));
@@ -359,7 +359,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     tBar->addAction(about);
 
     KMenu *help = helpMenu( QString::null, false );
-    mBar->insertItem( KStandardGuiItem::help().text() , help );
+    mBar->addMenu( help );
 
 
     KStatusBar* sBar = statusBar();
