@@ -17,7 +17,7 @@
 */
 
 #include <qcheckbox.h>
-#include <q3groupbox.h>
+#include <qgroupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 //Added by qt3to4:
@@ -44,8 +44,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   // create all the widgets
 
-  gbScale = new Q3GroupBox( i18n("Scaling"), this );
-  gbScale->setColumnLayout( 0, Qt::Horizontal );
+  gbScale = new QGroupBox( i18n("Scaling"), this );
 
   cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"), gbScale );
   cbDownScale->setObjectName( QString::fromLatin1( "shrinktoscreen" ) );
@@ -61,8 +60,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   // --
 
-  gbGeometry = new Q3GroupBox( i18n("Geometry"), this );
-  gbGeometry->setColumnLayout( 0, Qt::Horizontal );
+  gbGeometry = new QGroupBox( i18n("Geometry"), this );
 
   cbFlipVertically = new QCheckBox( i18n("Flip vertically"), gbGeometry );
 
@@ -79,7 +77,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   // --
 
-  gbAdjust = new Q3GroupBox (1, Qt::Horizontal, i18n("Adjustments"), this );
+  gbAdjust = new QGroupBox( i18n("Adjustments"), this );
 
   sbBrightness = new KIntNumInput( gbAdjust/*, "brightness spinbox"*/ );
   sbBrightness->setRange( -256, 256, 1, true );
@@ -96,8 +94,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   // --
 
-  gbPreview = new Q3GroupBox( i18n("Preview"), this );
-  gbPreview->setAlignment( Qt::AlignCenter );
+  gbPreview = new QGroupBox( i18n("Preview"), this );
 
   lbImOrig = new QLabel( i18n("Original"), gbPreview );
   imOrig = new ImlibWidget( 0L, gbPreview );
@@ -117,10 +114,9 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   mainLayout->setMargin( 0 );
   mainLayout->setObjectName( QString::fromLatin1( "main layout" ) );
 
-  QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale->layout(),
-            KDialog::spacingHint());
-  QVBoxLayout *gbGeometryLayout = new QVBoxLayout(gbGeometry->layout(),
-            KDialog::spacingHint());
+  QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale );
+  QVBoxLayout *gbAdjustLayout = new QVBoxLayout( gbAdjust );
+  QVBoxLayout *gbGeometryLayout = new QVBoxLayout( gbGeometry );
   QGridLayout *gbPreviewLayout = new QGridLayout(gbPreview, 2, 3, 0,
             KDialog::spacingHint());
 
@@ -152,6 +148,12 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   rotateLayout->addWidget( lbRotate, 0, Qt::AlignLeft );
   rotateLayout->addWidget( comboRotate, 0, Qt::AlignLeft );
+
+  // --
+
+  gbAdjustLayout->addWidget( sbBrightness );
+  gbAdjustLayout->addWidget( sbContrast );
+  gbAdjustLayout->addWidget( sbGamma );
 
   // --
 

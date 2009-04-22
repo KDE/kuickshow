@@ -22,10 +22,10 @@
 #include "kuickdata.h"
 //Added by qt3to4:
 #include <QLabel>
-#include <Q3GroupBox>
 class ImlibWidget;
 
 class QCheckBox;
+class QGroupBox;
 class QLabel;
 
 class KComboBox;
@@ -47,19 +47,19 @@ private:
 
   QCheckBox 	*cbEnableMods;
 
-  Q3GroupBox 	*gbScale;
+  QGroupBox 	*gbScale;
   QCheckBox 	*cbUpScale, *cbDownScale;
   KIntNumInput 	*sbMaxUpScaleFactor;
 
-  Q3GroupBox 	*gbAdjust;
+  QGroupBox 	*gbAdjust;
   KIntNumInput 	*sbBrightness, *sbContrast, *sbGamma;
 
-  Q3GroupBox 	*gbGeometry;
+  QGroupBox 	*gbGeometry;
   QLabel 	*lbRotate;
   KComboBox 	*comboRotate;
   QCheckBox 	*cbFlipVertically, *cbFlipHorizontally;
 
-  Q3GroupBox 	*gbPreview;
+  QGroupBox 	*gbPreview;
   QLabel 	*lbImOrig, *lbImFiltered;
   ImlibWidget 	*imOrig, *imFiltered;
 
