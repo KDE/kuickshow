@@ -20,11 +20,11 @@
 #define ABOUTWIDGET_H
 
 #include <qevent.h>
-#include <q3vbox.h>
+#include <qframe.h>
 
 class KUrlLabel;
 
-class AboutWidget : public Q3VBox
+class AboutWidget : public QFrame
 {
     Q_OBJECT
 

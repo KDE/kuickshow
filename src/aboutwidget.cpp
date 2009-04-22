@@ -19,8 +19,9 @@
 #include <qdatetime.h>
 #include <qevent.h>
 #include <qglobal.h>
-#include <q3groupbox.h>
+#include <qgroupbox.h>
 #include <qlabel.h>
+#include <qlayout.h>
 //Added by qt3to4:
 #include <QMouseEvent>
 
@@ -34,20 +35,18 @@
 #include "aboutwidget.h"
 
 AboutWidget::AboutWidget( QWidget *parent, const char *name )
-    : Q3VBox( parent, name )
+    : QFrame( parent, name )
 {
     KWindowSystem::setType( winId(), NET::Override );
     KWindowSystem::setState( winId(), NET::StaysOnTop | NET::SkipTaskbar );
 
     setFrameStyle( WinPanel | Raised );
 
-    Q3GroupBox *gBox = new Q3GroupBox( 1, Qt::Horizontal, this);
-    gBox->setGeometry( 10, 10, width()-20, height()-20 );
+    setPalette( QPalette( QColor( Qt::white ) ) );
+
+    QGroupBox *gBox = new QGroupBox( this );
     gBox->setAlignment( Qt::AlignHCenter );
     gBox->installEventFilter( this );
-
-    gBox->setPalette( QPalette( QColor( Qt::white ) ) );
-    gBox->setBackgroundMode( Qt::PaletteBackground );
 
     int hour = QTime::currentTime().hour();
     QString file;
@@ -77,6 +76,19 @@ AboutWidget::AboutWidget( QWidget *parent, const char *name )
 	im = 0L;
 	qWarning( "KuickShow: about-image not found/unreadable." );
     }
+
+    QVBoxLayout *mainLayout = new QVBoxLayout( this );
+    mainLayout->setMargin( 1 );
+
+    QVBoxLayout *gBoxLayout = new QVBoxLayout( gBox );
+
+    mainLayout->addWidget( gBox );
+
+    gBoxLayout->addWidget( authors );
+    gBoxLayout->addWidget( m_homepage );
+    gBoxLayout->addWidget( copy );
+    if ( im )
+        gBoxLayout->addWidget( im );
 }
 
 AboutWidget::~AboutWidget()
@@ -93,6 +105,6 @@ bool AboutWidget::eventFilter( QObject *o, QEvent *e )
         }
     }
 
-    return Q3VBox::eventFilter( o, e );
+    return QFrame::eventFilter( o, e );
 }
 #include "aboutwidget.moc"
