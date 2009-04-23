@@ -31,6 +31,7 @@ ImData::ImData()
   fastRender  	 = true;
   dither16bit    = false;
   dither8bit     = true;
+  smoothScale    = false;
   maxCache       = 10240;
 
   gamma          = 0;
@@ -54,6 +55,7 @@ void ImData::load( KSharedConfig::Ptr kc )
   fastRender  = group.readEntry( "FastRendering", def.fastRender );
   dither16bit = group.readEntry( "Dither16Bit", def.dither16bit );
   dither8bit  = group.readEntry( "Dither8Bit", def.dither8bit );
+  smoothScale = group.readEntry( "SmoothScaling", def.smoothScale );
 
   maxCache    = group.readEntry( "MaxCacheSize", 10240 );
 
@@ -77,6 +79,7 @@ void ImData::save( KSharedConfig::Ptr kc )
   group.writeEntry( "Dither16Bit", dither16bit );
   group.writeEntry( "Dither8Bit", dither8bit );
   group.writeEntry( "MaxCacheSize", maxCache );
+  group.writeEntry( "SmoothScaling", smoothScale );
 
   group.writeEntry( "GammaDefault", gamma );
   group.writeEntry( "BrightnessDefault", brightness );

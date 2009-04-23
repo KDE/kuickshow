@@ -34,7 +34,7 @@ class KuickPrintDialogPage;
 class Printing
 {
 public:
-    static bool printImage( const ImageWindow& imageWin, QWidget *parent = 0L);
+    static bool printImage( ImageWindow& imageWin, QWidget *parent = 0L);
     static bool printImageWithQt( const QString& filename, QPrinter& printer, KuickPrintDialogPage& dialogPage,
                                   const QString& originalFileName );
 

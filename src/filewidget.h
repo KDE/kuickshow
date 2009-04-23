@@ -42,7 +42,7 @@ public:
     bool hasFiles() const;
     void reloadConfiguration();
 
-    void setInitialItem( const QString& filename );
+    void setInitialItem( const KUrl& url );
 
     KFileItem getCurrentItem( bool onlyImage ) const {
 	return getItem( Current, onlyImage );
@@ -93,7 +93,7 @@ private:
     bool m_validCompletion;
     FileFinder *m_fileFinder;
     QString m_currentURL;
-    QString m_initialName;
+    KUrl m_initialName;
 
 };
 

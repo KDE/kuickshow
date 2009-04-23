@@ -10,15 +10,17 @@ set(kuickshow_KDEINIT_SRCS
    aboutwidget.cpp 
    generalwidget.cpp 
    kuickconfigdlg.cpp 
+   kuickfile.cpp
+   filecache.cpp
    main.cpp 
    defaultswidget.cpp 
    imagewindow.cpp 
    kuickdata.cpp 
+   kuickimage.cpp
    imdata.cpp 
    filefinder.cpp 
    kurlwidget.cpp 
    filewidget.cpp 
-   kuickio.cpp 
    kuick.cpp 
    imlibwidget.cpp 
    slideshowwidget.cpp 

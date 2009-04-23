@@ -22,6 +22,7 @@
 #include <unistd.h>
 
 #include <stdlib.h>
+#include <assert.h>
 
 #include <qcolor.h>
 #include <qfile.h>
@@ -37,6 +38,9 @@
 #include <kfilemetainfo.h>
 #include <kimageio.h>
 
+#include "filecache.h"
+#include "kuickfile.h"
+#include "kuickimage.h"
 #include "imlibwidget.h"
 #include "imagemods.h"
 
@@ -104,6 +108,7 @@ void ImlibWidget::init()
     int h = 1;
     myBackgroundColor = Qt::black;
     m_kuim              = 0L;
+    m_kuickFile = 0L;
 
     if ( !id )
 	qFatal("ImlibWidget: Imlib not initialized, aborting.");
@@ -131,33 +136,37 @@ ImlibWidget::~ImlibWidget()
 
 KUrl ImlibWidget::url() const
 {
-    KUrl url;
-    if ( m_filename.at(0) == '/' )
-        url.setPath( m_filename );
-    else
-        url = m_filename;
+    if ( m_kuickFile )
+        return m_kuickFile->url();
 
-    return url;
+    return KUrl();
+}
+
+KuickFile * ImlibWidget::currentFile() const
+{
+    return m_kuickFile;
 }
 
 // tries to load "filename" and returns the according KuickImage *
 // or 0L if unsuccessful
-KuickImage * ImlibWidget::loadImageInternal( const QString& filename )
+KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
 {
+    assert( file->isAvailable() );
+
     // apply default image modifications
     mod.brightness = idata->brightness + ImlibOffset;
     mod.contrast = idata->contrast + ImlibOffset;
     mod.gamma = idata->gamma + ImlibOffset;
 
-    KuickImage *kuim = imageCache->getKuimage( filename );
+    KuickImage *kuim = imageCache->getKuimage( file );
     bool wasCached = true;
     if ( !kuim ) {
     	wasCached = false;
-    	kuim = imageCache->loadImage( filename, mod );
+    	kuim = imageCache->loadImage( file, mod );
     }
 
     if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
-	kWarning() << "ImlibWidget: can't load image " << filename;
+	kWarning() << "ImlibWidget: can't load image " << file->url().prettyUrl();
 	return 0L;
     }
 
@@ -171,15 +180,23 @@ void ImlibWidget::loaded( KuickImage *, bool wasCached )
 {
 }
 
-bool ImlibWidget::loadImage( const QString& filename )
+bool ImlibWidget::loadImage( const KUrl& url )
 {
-    KuickImage *kuim = loadImageInternal( filename );
+    return loadImage( FileCache::self()->getFile( url ));
+}
+
+bool ImlibWidget::loadImage( KuickFile * file )
+{
+    if ( file->waitForDownload( this ) != KuickFile::OK)
+    	return false;
+
+    KuickImage *kuim = loadImageInternal( file );
     // FIXME - check everywhere if we have a kuim or not!
 
     if ( kuim ) {
 	m_kuim = kuim;
 	autoUpdate( true ); // -> updateWidget() -> updateGeometry()
-	m_filename = filename;
+	m_kuickFile = file;
         return true;
     }
 
@@ -187,9 +204,25 @@ bool ImlibWidget::loadImage( const QString& filename )
 }
 
 
-bool ImlibWidget::cacheImage( const QString& filename )
+bool ImlibWidget::cacheImage( const KUrl& url )
 {
-    KuickImage *kuim = loadImageInternal( filename );
+//    qDebug("cache image: %s", url.url().latin1());
+    KuickFile *file = FileCache::self()->getFile( url );
+    if ( file->isAvailable() )
+        return cacheImage( file );
+    else {
+        if ( !file->download() ) {
+            return false;
+        }
+        connect( file, SIGNAL( downloaded( KuickFile * )), SLOT( cacheImage( KuickFile * )) );
+        return true; // optimistic
+    }
+}
+
+bool ImlibWidget::cacheImage( KuickFile * file )
+{
+//    qDebug("cache image: %s", file->url().url().latin1());
+    KuickImage *kuim = loadImageInternal( file );
     if ( kuim ) {
         kuim->renderPixmap();
         return true;
@@ -235,21 +268,37 @@ void ImlibWidget::setGamma( int factor )
 }
 
 
+Rotation ImlibWidget::rotation() const
+{
+    return m_kuim ? m_kuim->absRotation() : ROT_0;
+}
+
+FlipMode ImlibWidget::flipMode()  const
+{
+    return m_kuim ? m_kuim->flipMode() : FlipNone;
+}
+
 void ImlibWidget::zoomImage( float factor )
 {
     if ( factor == 1 || factor == 0 || !m_kuim )
 	return;
 
-    float wf, hf;
+    int newWidth  = (int) (factor * (float) m_kuim->width());
+    int newHeight = (int) (factor * (float) m_kuim->height());
 
-    wf = (float) m_kuim->width() * factor;
-    hf = (float) m_kuim->height() * factor;
+    if ( canZoomTo( newWidth, newHeight ) )
+    {
+        m_kuim->resize( newWidth, newHeight, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
+        autoUpdate( true );
+    }
+}
 
-    if ( wf <= 2.0 || hf <= 2.0 ) // minimum size for an image is 2x2 pixels
-	return;
+bool ImlibWidget::canZoomTo( int newWidth, int newHeight )
+{
+    if ( newWidth <= 2 || newHeight <= 2 ) // minimum size for an image is 2x2 pixels
+	return false;
 
-    m_kuim->resize( (int) wf, (int) hf );
-    autoUpdate( true );
+    return true;
 }
 
 
@@ -266,14 +315,12 @@ void ImlibWidget::showImageOriginalSize()
 
 bool ImlibWidget::autoRotate( KuickImage *kuim )
 {
-    KFileMetaInfo metadatas( kuim->filename() );
+    KFileMetaInfo metadatas( kuim->file().localFile() );
     if ( !metadatas.isValid() )
         return false;
 
     KFileMetaInfoItem metaitem = metadatas.item("Orientation");
-    if ( !metaitem.isValid()
-        || metaitem.value().isNull()
-        )
+    if ( !metaitem.isValid() || metaitem.value().isNull() )
         return false;
 
 
@@ -339,6 +386,7 @@ void ImlibWidget::rotate90()
 	return;
 
     m_kuim->rotate( ROT_90 );
+    rotated( m_kuim, ROT_90 );
     autoUpdate( true );
 }
 
@@ -348,6 +396,7 @@ void ImlibWidget::rotate180()
 	return;
 
     m_kuim->rotate( ROT_180 );
+    rotated( m_kuim, ROT_180 );
     autoUpdate();
 }
 
@@ -357,6 +406,7 @@ void ImlibWidget::rotate270()
 	return;
 
     m_kuim->rotate( ROT_270 );
+    rotated( m_kuim, ROT_270 );
     autoUpdate( true );
 }
 
@@ -466,11 +516,12 @@ void ImlibWidget::setBusyCursor()
     else
         m_oldCursor = QCursor();
 
-    setCursor( Qt::WaitCursor );
+    setCursor( QCursor( Qt::WaitCursor ) );
 }
 
 void ImlibWidget::restoreCursor()
 {
+    if ( cursor().shape() == QCursor(Qt::waitCursor).shape() ) // only if nobody changed the cursor in the meantime!
     setCursor( m_oldCursor );
 }
 
@@ -492,198 +543,11 @@ void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool
         XMapWindow( getX11Display(), win );
 }
 
-//----------
-
-
-
-KuickImage::KuickImage( const QString& filename, ImlibImage *im, ImlibData *id)
-    : QObject( 0L )
+void ImlibWidget::rotated( KuickImage *, int )
 {
-    myFilename = filename;
-    myIm       = im;
-    myId       = id;
-    myPixmap   = 0L;
-    myWidth    = im->rgb_width;
-    myHeight   = im->rgb_height;
-    setDirty(true);
-
-    myOrigWidth  = myWidth;
-    myOrigHeight = myHeight;
-    myRotation   = ROT_0;
-    myFlipMode   = FlipNone;
 }
-
-KuickImage::~KuickImage()
-{
-	if (isModified())
-	{
-		ImageMods::rememberFor( this );
-	}
-    if ( myPixmap )
-        Imlib_free_pixmap( myId, myPixmap );
-    Imlib_destroy_image( myId, myIm );
-}
-
-
-void KuickImage::resize( int width, int height )
-{
-    if ( myWidth == width && myHeight == height )
-	return;
-
-    myWidth   = width;
-    myHeight  = height;
-    setDirty(true);
-}
-
-bool KuickImage::isModified() const
-{
-	bool modified = myWidth != myOrigWidth || myHeight != myOrigHeight;
-	modified |= (myFlipMode != FlipNone);
-	modified |= (myRotation != ROT_0);
-	return modified;
-}
-
-void KuickImage::restoreOriginalSize()
-{
-	if (myWidth == myOrigWidth && myHeight == myOrigHeight)
-	return;
-
-    myWidth   = myOrigWidth;
-    myHeight  = myOrigHeight;
-    setDirty(true);
-
-    if ( myRotation == ROT_90 || myRotation == ROT_270 )
-        qSwap( myWidth, myHeight );
-}
-
-
-Pixmap& KuickImage::pixmap()
-{
-    if ( myIsDirty )
-	renderPixmap();
-
-    return myPixmap;
-}
-
-
-void KuickImage::renderPixmap()
-{
-    if ( !myIsDirty )
-	return;
-
-    if ( myPixmap )
-	Imlib_free_pixmap( myId, myPixmap );
-
-    emit startRendering();
-
-// #ifndef NDEBUG
-//     struct timeval tms1, tms2;
-//     gettimeofday( &tms1, NULL );
-// #endif
-
-    Imlib_render( myId, myIm, myWidth, myHeight );
-    myPixmap = Imlib_move_image( myId, myIm );
-
-// #ifndef NDEBUG
-//     gettimeofday( &tms2, NULL );
-//     qDebug("*** rendering image: %s, took %ld ms", myFilename.toLatin1(),
-//            (tms2.tv_usec - tms1.tv_usec)/1000);
-// #endif
-
-
-    emit stoppedRendering();
-
-    setDirty(false);
-}
-
-
-void KuickImage::rotate( Rotation rot )
-{
-    if ( rot == ROT_180 ) { 		// rotate 180 degrees
-	Imlib_flip_image_horizontal( myId, myIm );
-	Imlib_flip_image_vertical( myId, myIm );
-    }
-
-    else if ( rot == ROT_90 || rot == ROT_270 ) {
-	qSwap( myWidth, myHeight );
-	Imlib_rotate_image( myId, myIm, -1 );
-
-	if ( rot == ROT_90 ) 		// rotate 90 degrees
-	    Imlib_flip_image_horizontal( myId, myIm );
-	else if ( rot == ROT_270 )		// rotate 270 degrees
-	    Imlib_flip_image_vertical( myId, myIm );
-    }
-
-    myRotation = (Rotation) ((myRotation + rot) % 4);
-    setDirty(true);
-}
-
-
-bool KuickImage::rotateAbs( Rotation rot )
-{
-    if ( myRotation == rot )
-	return false;
-
-    int diff = rot - myRotation;
-    bool clockWise = (diff > 0);
-
-    switch( abs(diff) ) {
-    case ROT_90:
-        rotate( clockWise ? ROT_90 : ROT_270 );
-	break;
-    case ROT_180:
-	rotate( ROT_180 );
-	break;
-    case ROT_270:
-        rotate( clockWise ? ROT_270 : ROT_90 );
-	break;
-    }
-
-    return true;
-}
-
-void KuickImage::flip( FlipMode flipMode )
-{
-    if ( flipMode & FlipHorizontal )
-	Imlib_flip_image_horizontal( myId, myIm );
-    if ( flipMode & FlipVertical )
-	Imlib_flip_image_vertical( myId, myIm );
-
-    myFlipMode = (FlipMode) (myFlipMode ^ flipMode);
-    setDirty(true);
-}
-
-bool KuickImage::flipAbs( int mode )
-{
-    if ( myFlipMode == mode )
-	return false;
-
-    bool changed = false;
-
-    if ( ((myFlipMode & FlipHorizontal) && !(mode & FlipHorizontal)) ||
-	 (!(myFlipMode & FlipHorizontal) && (mode & FlipHorizontal)) ) {
-	Imlib_flip_image_horizontal( myId, myIm );
-	changed = true;
-    }
-
-    if ( ((myFlipMode & FlipVertical) && !(mode & FlipVertical)) ||
-	 (!(myFlipMode & FlipVertical) && (mode & FlipVertical)) ) {
-	Imlib_flip_image_vertical( myId, myIm );
-	changed = true;
-    }
-
-    if ( changed ) {
-        myFlipMode = (FlipMode) mode;
-        setDirty(true);
-        return true;
-    }
-
-    return false;
-}
-
 
 //----------
-
 
 
 // uhh ugly, we have two lists to map from filename to KuickImage :-/
@@ -733,13 +597,17 @@ void ImageCache::slotIdle()
 }
 
 
-KuickImage * ImageCache::getKuimage( const QString& file )
+KuickImage * ImageCache::getKuimage( KuickFile * file )
 {
-    KuickImage *kuim = 0L;
-    if ( file.isEmpty() )
+    if ( !file )
 	return 0L;
 
-    int index = fileList.indexOf( file );
+    assert( file->isAvailable() ); // debug build
+    if ( file->waitForDownload( 0L ) != KuickFile::OK ) // and for users
+    	return 0L;
+
+    KuickImage *kuim = 0L;
+    int index = fileList.findIndex( file );
     if ( index != -1 )
     {
         if ( index == 0 )
@@ -760,10 +628,10 @@ KuickImage * ImageCache::getKuimage( const QString& file )
     return 0L;
 }
 
-KuickImage * ImageCache::loadImage(const QString& file, ImlibColorModifier mod)
+KuickImage * ImageCache::loadImage( KuickFile * file, ImlibColorModifier mod)
 {
 	KuickImage *kuim = 0L;
-	if ( file.isEmpty() )
+	if ( !file || !file->isAvailable() )
 		return 0L;
 
 	slotBusy();
@@ -773,7 +641,7 @@ KuickImage * ImageCache::loadImage(const QString& file, ImlibColorModifier mod)
 	//         gettimeofday( &tms1, NULL );
 	// #endif
 
-	ImlibImage *im = Imlib_load_image( myId, QFile::encodeName( file ).data() );
+	ImlibImage *im = Imlib_load_image( myId, QFile::encodeName( file->localFile() ).data() );
 
 	// #ifndef NDEBUG
 	//         gettimeofday( &tms2, NULL );
@@ -783,7 +651,9 @@ KuickImage * ImageCache::loadImage(const QString& file, ImlibColorModifier mod)
 
 	slotIdle();
 	if ( !im ) {
-		im = loadImageWithQt( file );
+        slotBusy();
+		im = loadImageWithQt( file->localFile() );
+		slotIdle();
 		if ( !im )
 			return 0L;
 	}
@@ -812,17 +682,16 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 {
     kDebug() << "Trying to load " << fileName << " with KImageIO...";
 
-
-
     QImage image( fileName );
     if ( image.isNull() )
 	return 0L;
     if ( image.depth() != 32 ) {
 	image.setAlphaBuffer(false);
 	image = image.convertDepth(32);
-    }
+
     if ( image.isNull() )
 	return 0L;
+    }
 
     // convert to 24 bpp (discard alpha)
     int numPixels = image.width() * image.height();
@@ -851,16 +720,4 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
     return im;
 }
 
-/*
-KuickImage * ImageCache::find( const QString& file )
-{
-  KuickImage *kuim = 0L;
-  int index = fileList.findIndex( file );
-  if ( index >= 0 )
-    kuim = kuickList.at( index );
-
-  qDebug("found cached KuickImage? : %p", kuim );
-  return kuim;
-}
-*/
 #include "imlibwidget.moc"

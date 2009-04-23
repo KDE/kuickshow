@@ -48,6 +48,9 @@ AboutWidget::AboutWidget( QWidget *parent )
     gBox->setAlignment( Qt::AlignHCenter );
     gBox->installEventFilter( this );
 
+    gBox->setPalette( QPalette( QColor( Qt::white ) ) );
+    gBox->setBackgroundRole( QPalette::Window );
+
     int hour = QTime::currentTime().hour();
     QString file;
 
@@ -64,7 +67,7 @@ AboutWidget::AboutWidget( QWidget *parent )
     m_homepage->setUrl( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
     m_homepage->setAlignment( Qt::AlignCenter );
 
-    QLabel *copy = new QLabel("(C) 1998-2004", gBox);
+    QLabel *copy = new QLabel("(C) 1998-2009", gBox);
     copy->setAlignment( Qt::AlignCenter );
 
     ImlibWidget *im = new ImlibWidget( 0L, gBox );
@@ -100,7 +103,7 @@ bool AboutWidget::eventFilter( QObject *o, QEvent *e )
     if ( e->type() == QEvent::MouseButtonPress ) {
         QMouseEvent *ev = static_cast<QMouseEvent*>( e );
         if ( !m_homepage->geometry().contains( ev->pos() ) ) {
-            delete this;
+            deleteLater();
             return true;
         }
     }

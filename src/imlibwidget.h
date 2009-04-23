@@ -17,6 +17,7 @@
 #include <qcursor.h>
 #include <qevent.h>
 #include <q3ptrlist.h>
+#include <q3valuelist.h>
 #include <qtimer.h>
 #include <qwidget.h>
 //Added by qt3to4:
@@ -34,70 +35,8 @@
 #include "imdata.h"
 #include "kuickdata.h"
 
-
-// hmm, global declaration for now
-enum FlipMode { FlipNone = 0, FlipHorizontal = 1, FlipVertical = 2 };
-
-class KuickImage : public QObject
-{
-  Q_OBJECT
-
-public:
-  KuickImage( const QString& filename, ImlibImage *im, ImlibData *id );
-  ~KuickImage();
-
-  int 		width() 	const { return myWidth;   }
-  int 		height()	const { return myHeight;  }
-  int 		originalWidth() const { return myOrigWidth; }
-  int 		originalHeight() const { return myOrigHeight; }
-
-  /**
-   * Returns true if this image is modified against the original loaded
-   * version from disk. I.e. resized, rotated, flipped.
-   */
-  bool		isModified() const;
-  void 		resize( int width, int height );
-  void 		restoreOriginalSize();
-  void 		rotate( Rotation rot );
-  bool          rotateAbs( Rotation rot );
-  void 		flip( FlipMode flipMode );
-  bool 		flipAbs( int mode );
-  ImlibImage *	imlibImage()	const { return myIm;      }
-  Pixmap& 	pixmap();
-  void 		renderPixmap();
-  const QString& filename() 	const { return myFilename;}
-
-  void 		setDirty( bool d )    { myIsDirty = d;    }
-  /**
-   * Returns true if this image is "dirty", i.e some operation was done,
-   * and it needs re-rendering.
-   */
-  bool 		isDirty() 	const { return myIsDirty; }
-  Rotation      absRotation()   const { return myRotation; }
-  FlipMode      flipMode()      const { return myFlipMode; }
-
-private:
-  int 		myWidth;
-  int 		myHeight;
-  QString 	myFilename;
-  ImlibImage * 	myIm;
-  ImlibData  * 	myId;
-  Pixmap 	myPixmap;
-  bool 		myIsDirty;
-
-  int 		myOrigWidth;
-  int 		myOrigHeight;
-  Rotation 	myRotation;
-  FlipMode 	myFlipMode;
-
-signals:
-  void 		startRendering();
-  void 		stoppedRendering();
-};
-
-
-// ------------------------------------------
-
+class KuickFile;
+class KuickImage;
 
 class ImageCache : public QObject
 {
@@ -110,15 +49,15 @@ public:
   void 			setMaxImages( int maxImages );
   int 			maxImages() 		const { return myMaxImages; }
 
-  KuickImage *		getKuimage( const QString& file );
-  KuickImage *		loadImage( const QString& file, ImlibColorModifier  );
+  KuickImage *		getKuimage( KuickFile * file );
+  KuickImage *		loadImage( KuickFile *file, ImlibColorModifier );
   //  KuickImage *		find( const QString& filename );
 
 private:
   ImlibImage *		loadImageWithQt( const QString& filename ) const;
 
   int 			myMaxImages;
-  QStringList		fileList;
+  Q3ValueList<KuickFile*>fileList;
   Q3PtrList<KuickImage>	kuickList;
   //  QPtrList<ImlibImage>	imList;
   ImlibData * 		myId;
@@ -150,10 +89,11 @@ public:
   ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0 );
   virtual ~ImlibWidget();
 
-  const QString& filename() 		const { return m_filename; }
   KUrl          url()                   const;
-  bool		loadImage( const QString& filename );
-  bool 		cacheImage( const QString& filename );
+  KuickFile *   currentFile()           const;
+  bool		loadImage( KuickFile * file);
+  bool		loadImage( const KUrl& url );
+  bool 		cacheImage( const KUrl& url );
   void 		zoomImage( float );
   void 		setBrightness( int );
   void 		setContrast( int );
@@ -161,11 +101,11 @@ public:
   void 		setRotation( Rotation );
   void 		setFlipMode( int mode );
 
-  int 		brightness() 		 const;
+  int 		brightness()     const;
   int 		contrast()		 const;
   int 		gamma() 		 const;
-  Rotation 	rotation() 		 const { return m_kuim ? m_kuim->absRotation() : ROT_0; }
-  FlipMode	flipMode() 		 const { return m_kuim ? m_kuim->flipMode() : FlipNone; }
+  Rotation 	rotation() 		 const;
+  FlipMode	flipMode() 		 const;
 
   int 		imageWidth() 		 const;
   int 		imageHeight() 		 const;
@@ -198,14 +138,16 @@ public slots:
 
 
 protected:
-  Display *	getX11Display() const { return x11Info().display(); }
-  KuickImage *	loadImageInternal( const QString&  );
-  void 		showImage();
+  Display *	    getX11Display() const { return x11Info().display(); }
+  KuickImage *	loadImageInternal( KuickFile * file );
+  void 			showImage();
   void          setImageModifier();
-  void 		rotate( int );
-  void 		updateWidget( bool geometryUpdate=true );
+  void 		    rotate( int );
+  void 		    updateWidget( bool geometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
   virtual void  loaded( KuickImage *, bool wasCached );
+  virtual bool  canZoomTo( int newWidth, int newHeight );
+  virtual void  rotated( KuickImage *kuim, int rotation );
 
   void 		closeEvent( QCloseEvent * );
 
@@ -224,7 +166,7 @@ protected:
   Window        win;
   ImlibColorModifier mod;
 
-  QString m_filename;
+  KuickFile *m_kuickFile;
   QCursor m_oldCursor;
 
   static const int ImlibOffset;
@@ -238,12 +180,13 @@ private:
 
 
 protected slots:
+  bool 		cacheImage( KuickFile *file );
   void 		setBusyCursor();
   void 		restoreCursor();
 
 
 signals:
-  void 		sigBadImage( const QString& );
+  void 		sigImageError( const KuickFile * file, const QString& );
 
 };
 

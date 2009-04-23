@@ -53,8 +53,7 @@ KuickData::KuickData()
   scrollSteps     = 1;
   zoomSteps       = 1.5;
 
-  maxWidth 	  = 8192;
-  maxHeight 	  = 8192;
+  maxZoomFactor	  = 4.0;
 
   maxCachedImages = 4;
   backgroundColor = Qt::black;
@@ -105,6 +104,7 @@ void KuickData::load()
   scrollSteps     = generalGroup.readEntry("ScrollingStepSize", def.scrollSteps);
   zoomSteps       = generalGroup.readEntry("ZoomStepSize", (double)def.zoomSteps);
 
+  maxZoomFactor   = generalGroup.readEntry( "MaximumZoomFactorByDesktop", def.maxZoomFactor );
 
   maxWidth 	= abs( generalGroup.readEntry( "MaximumImageWidth", def.maxWidth ) );
   maxHeight 	= abs( generalGroup.readEntry( "MaximumImageHeight", def.maxHeight));
@@ -171,6 +171,8 @@ void KuickData::save()
 
   generalGroup.writeEntry( "ScrollingStepSize", scrollSteps );
   generalGroup.writeEntry( "ZoomStepSize", zoomSteps );
+
+  generalGroup.writeEntry( "MaximumZoomFactorByDesktop", maxZoomFactor );
 
   generalGroup.writeEntry( "MaximumImageWidth", maxWidth );
   generalGroup.writeEntry( "MaximumImageHeight", maxHeight );

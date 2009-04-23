@@ -45,10 +45,11 @@
 #include "printing.h"
 #include "version.h"
 
-bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
+bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
 {
+    QString imageURL = imageWin.url().prettyUrl();
     QPrinter printer;
-    printer.setDocName( imageWin.filename() );
+    printer.setDocName( imageURL );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
 
     KuickPrintDialogPage* dialogPage = new KuickPrintDialogPage( parent );
@@ -60,13 +61,14 @@ bool Printing::printImage( const ImageWindow& imageWin, QWidget *parent )
     {
         KTemporaryFile tmpFile;
         tmpFile.setSuffix(".png");
+        tmpFile.setAutoRemove( true );
         if ( tmpFile.open() )
         {
             if ( imageWin.saveImage( tmpFile.fileName(), true ) )
             {
 
                 bool success = printImageWithQt( tmpFile.fileName(), printer, *dialogPage,
-                                         imageWin.filename() );
+                                         imageURL);
                 delete printDialog;
                 return success;
             }

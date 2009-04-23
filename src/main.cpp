@@ -56,7 +56,6 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 	RESTORE( KuickShow )
     else {
 	KuickShow *k = new KuickShow( "kuickshow" );
-	app.setMainWidget( k );
     }
 
     return app.exec();

@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2004 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998-2006 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -60,6 +60,7 @@
 #include <kmessagebox.h>
 #include <kpropertiesdialog.h>
 #include <kstandardshortcut.h>
+#include <kstandardguiitem.h>
 #include <kstandarddirs.h>
 #include <kglobalsettings.h>
 #include <ktemporaryfile.h>
@@ -70,6 +71,8 @@
 #include "imagewindow.h"
 #include "imagemods.h"
 #include "kuick.h"
+#include "kuickimage.h"
+#include "filecache.h"
 #include "kuickdata.h"
 #include "printing.h"
 
@@ -96,6 +99,8 @@ ImageWindow::~ImageWindow()
 
 void ImageWindow::init()
 {
+    setFocusPolicy( Qt::StrongFocus );
+
     KCursor::setAutoHideCursor( this, true, true );
     KCursor::setHideCursorDelay( 1500 );
 
@@ -158,16 +163,22 @@ void ImageWindow::setupActions()
 
     KAction* deleteImage = m_actions->addAction( "delete_image" );
     deleteImage->setText( i18n("Delete Image") );
-    deleteImage->setShortcut(Qt::Key_Delete);
+    deleteImage->setShortcut(KShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_Delete)));
     connect( deleteImage, SIGNAL( triggered() ), this, SLOT( imageDelete() ) );
 
+    KAction *trashImage = m_actions->addAction( "trash_image" );
+    trashImage->setText( i18n("Move Image to Trash") );
+    trashImage->setShortcut( Qt::Key_Delete );
+    connect( trashImage, SIGNAL( triggered() ), this, SLOT( imageTrash() ) );
+
+
     KAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions );
-    zoomIn->setShortcut(Qt::Key_Plus),
-    m_actions->addAction( "zoom_in", zoomIn );
+    zoomIn->setShortcut(Qt::Key_Plus);
+    m_actions->addAction( "zoom_in",  zoomIn );
 
     KAction *zoomOut = KStandardAction::zoomOut( this, SLOT( zoomOut() ), m_actions );
     zoomOut->setShortcut(Qt::Key_Minus);
-    m_actions->addAction( "zoom_out", zoomOut );
+    m_actions->addAction( "zoom_out",  zoomOut );
 
     KAction *restoreSize = m_actions->addAction( "original_size" );
     restoreSize->setText( i18n("Restore Original Size") );
@@ -213,8 +224,7 @@ void ImageWindow::setupActions()
     KAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
     m_actions->addAction( "save_image_as",  a );
 
-    a = KStandardAction::close( this, SLOT( close() ),
-                 m_actions);
+    a = KStandardAction::close( this, SLOT( close() ), m_actions);
     m_actions->addAction( "close_image", a );
     // --------
     KAction *moreBrighteness = m_actions->addAction( "more_brightness" );
@@ -278,12 +288,11 @@ void ImageWindow::setupActions()
     KAction *fullscreenAction = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, SLOT( toggleFullscreen() ));
 //    KAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
 //    m_actions->addAction( "", fullscreenAction );
-    fullscreenAction->setShortcut(KShortcut(Qt::Key_Return), KAction::DefaultShortcut);
 
-    KAction *reloadImage = m_actions->addAction( "reload_image" );
-    reloadImage->setText( i18n("Reload Image") );
-    reloadImage->setShortcut(Qt::Key_Enter);
-    connect( reloadImage, SIGNAL( triggered() ), this, SLOT( reload() ) );
+    KAction *reloadAction = m_actions->addAction( "reload_image" );
+    reloadAction->setText( i18n("Reload Image") );
+    reloadAction->setShortcut(KStandardShortcut::reload());
+    connect( reloadAction, SIGNAL( triggered() ), this, SLOT( reload() ) );
 
     KAction *properties = m_actions->addAction("properties" );
     properties->setText( i18n("Properties") );
@@ -291,22 +300,43 @@ void ImageWindow::setupActions()
     connect( properties, SIGNAL( triggered() ), this, SLOT( slotProperties() ) );
 
     m_actions->readSettings();
+
+    // Unfortunately there is no KAction::setShortcutDefault() :-/
+    // so add Key_Return as fullscreen shortcut _after_ readShortcutSettings()
+    addAlternativeShortcut(fullscreenAction, Qt::Key_Return);
+    addAlternativeShortcut(reloadAction, Qt::Key_Enter);
 }
 
+void ImageWindow::addAlternativeShortcut(KAction *action, int key)
+{
+    KShortcut cut( action->shortcut() );
+    if (cut == action->shortcut(KAction::DefaultShortcut)) {
+        cut.setAlternate(key);
+        action->setShortcut(cut);
+    }
+}
+
+void ImageWindow::showWindow()
+{
+	if ( myIsFullscreen )
+		showFullScreen();
+	else
+		showNormal();
+}
 
 void ImageWindow::setFullscreen( bool enable )
 {
     xpos = 0; ypos = 0;
 
-    if ( enable && !myIsFullscreen ) { // set Fullscreen
-        setWindowState( windowState() | Qt::WindowFullScreen ); // set
-    }
-    else if ( !enable && myIsFullscreen ) { // go into window mode
-        setWindowState( windowState() & ~Qt::WindowFullScreen ); // reset
-    }
+//    if ( enable && !myIsFullscreen ) { // set Fullscreen
+//        showFullScreen();
+//    }
+//    else if ( !enable && myIsFullscreen ) { // go into window mode
+//        showNormal();
+//    }
 
     myIsFullscreen = enable;
-    centerImage(); // ### really necessary (multihead!)
+//    centerImage(); // ### really necessary (multihead!)
 }
 
 
@@ -335,7 +365,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     QString caption = i18nc( "Filename (Imagewidth x Imageheight)",
                              "%3 (%1 x %2)",
                              m_kuim->originalWidth(), m_kuim->originalHeight(),
-                             m_kuim->filename() );
+                             m_kuim->url().prettyUrl() );
     setWindowTitle( KDialog::makeStandardCaption( caption, this ) );
 }
 
@@ -430,23 +460,48 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 //     XClearWindow(); // repaint
 //     XMapWindow(), XSync();
 //
-bool ImageWindow::showNextImage( const QString& filename )
+bool ImageWindow::showNextImage( const KUrl& url )
 {
-    if ( !loadImage( filename ) ) {
-	emit sigBadImage( filename );
+    KuickFile *file = FileCache::self()->getFile( url );
+    switch ( file->waitForDownload( this ) ) {
+    	case KuickFile::ERROR:
+    	{
+    	    QString tmp = i18n("Unable to download the image from %1.").arg(url.prettyUrl());
+	        emit sigImageError( file, tmp );
+	        return false;
+    	}
+	    case KuickFile::CANCELED:
+	    	return false; // just abort, no error message
+	    default:
+	    	break; // go on...
+    }
+
+    return showNextImage( file );
+}
+
+bool ImageWindow::showNextImage( KuickFile *file )
+{
+    if ( !loadImage( file ) ) {
+   	    QString tmp = i18n("Unable to load the image %1.\n"
+                       "Perhaps the file format is unsupported or "
+                       "your Imlib is not installed properly.").arg(file->url().prettyUrl());
+        emit sigImageError( file, tmp );
 	return false;
     }
 
     else {
 	// updateWidget( true ); // already called from loadImage()
-	showImage();
+	if ( !isVisible() )
+		showWindow();
+
+//	showImage();
 	return true;
     }
 }
 
 void ImageWindow::reload()
 {
-    showNextImage( filename() );
+    showNextImage( currentFile() );
 }
 
 void ImageWindow::pauseSlideShow()
@@ -555,7 +610,12 @@ void ImageWindow::lessGamma()
 
 void ImageWindow::imageDelete()
 {
-    emit deleteImage();
+    emit deleteImage(this);
+}
+
+void ImageWindow::imageTrash()
+{
+    emit trashImage(this);
 }
 
 ///
@@ -660,6 +720,9 @@ void ImageWindow::updateCursor( KuickCursor cursor )
             break;
         case DefaultCursor:
         default:
+            if ( isCursorHidden() )
+                return;
+
             if ( imageWidth() > width() || imageHeight() > height() )
                 setCursor( *s_handCursor );
             else
@@ -781,10 +844,8 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     w = (uint) ( factor * (float) imageWidth() );
     h = (uint) ( factor * (float) imageHeight() );
 
-    if ( w > kdata->maxWidth || h > kdata->maxHeight ) {
-	qDebug("KuickShow: scaling larger than configured maximum -> aborting" );
+    if ( !canZoomTo( w, h ) )
 	return;
-    }
 
     int xtmp = - (int) (factor * abs(xpos - topX) );
     int ytmp = - (int) (factor * abs(ypos - topY) );
@@ -796,7 +857,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     xtmp += xcenter;
     ytmp += ycenter;
 
-    m_kuim->resize( w, h );
+    m_kuim->resize( w, h, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
     XResizeWindow( getX11Display(), win, w, h );
     updateWidget( false );
 
@@ -807,8 +868,9 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 }
 
 
-void ImageWindow::focusInEvent( QFocusEvent * )
+void ImageWindow::focusInEvent( QFocusEvent *ev )
 {
+    ImlibWidget::focusInEvent( ev );
     emit sigFocusWindow( this );
 }
 
@@ -927,26 +989,28 @@ void ImageWindow::saveImage()
     KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this,keepSize);
 
     QString selection = m_saveDirectory.isEmpty() ?
-                            m_kuim->filename() :
-                            KUrl( m_kuim->filename() ).fileName();
+                            m_kuim->url().url() :
+                            m_kuim->url().fileName();
     dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setCaption( i18n("Save As") );
     if ( dlg.exec() == QDialog::Accepted )
     {
-        QString file = dlg.selectedFile();
-        if ( !file.isEmpty() )
+        KUrl url = dlg.selectedUrl();
+        if ( url.isValid() )
         {
-            if ( !saveImage( file, keepSize->isChecked() ) )
+            if ( !saveImage( url, keepSize->isChecked() ) )
             {
                 QString tmp = i18n("Could not save the file.\n"
                                    "Perhaps the disk is full, or you do not "
                                    "have write permission to the file.");
                 KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
             }
-
-            if ( file == m_kuim->filename() ) {
-                Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+            else
+            {
+				if ( url.equals( m_kuim->url() )) {
+					Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+				}
             }
         }
     }
@@ -956,7 +1020,7 @@ void ImageWindow::saveImage()
         m_saveDirectory = lastDir;
 }
 
-bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) const
+bool ImageWindow::saveImage( const KUrl& dest, bool keepOriginalSize )
 {
     int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
@@ -967,11 +1031,37 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
                                                    w, h );
     bool success = false;
 
-    if ( saveIm ) {
+	QString saveFile;
+	if ( dest.isLocalFile() )
+		saveFile = dest.path();
+	else
+	{
+
+		KTemporaryFile tmpFile;
+		tmpFile.setAutoRemove( false );
+		QString extension = QFileInfo( dest.fileName() ).completeSuffix();
+		if ( !extension.isEmpty() )
+//			extension.prepend( '.' );
+			tmpFile.setSuffix( extension );
+		if ( !tmpFile.open() )
+			return false;
+		tmpFile.close();
+		saveFile = tmpFile.fileName();
+	}
+
+    if ( saveIm )
+    {
         Imlib_apply_modifiers_to_rgb( id, saveIm );
         success = Imlib_save_image( id, saveIm,
-                                    QFile::encodeName( filename ).data(),
+                                    QFile::encodeName( saveFile ).data(),
                                     NULL );
+        if ( success && !dest.isLocalFile() )
+        {
+        	if ( isFullscreen() )
+        		toggleFullscreen(); // otherwise upload window would block us invisibly
+        	success = KIO::NetAccess::upload( saveFile, dest, const_cast<ImageWindow*>( this ) );
+        }
+
         Imlib_kill_image( id, saveIm );
     }
 
@@ -981,6 +1071,7 @@ bool ImageWindow::saveImage( const QString& filename, bool keepOriginalSize ) co
 void ImageWindow::toggleFullscreen()
 {
     setFullscreen( !myIsFullscreen );
+    showWindow();
 }
 
 void ImageWindow::loaded( KuickImage *kuim, bool wasCached )
@@ -990,10 +1081,11 @@ void ImageWindow::loaded( KuickImage *kuim, bool wasCached )
 		return; // keep it as it is
 	}
 
-    if ( !ImageMods::restoreFor( kuim ) )
+    if ( !ImageMods::restoreFor( kuim, idata ) )
     {
     	// if no cached image modifications are available, apply the default modifications
         if ( !kdata->isModsEnabled ) {
+    		// ### BUG: should be "restorePreviousSize"
         	kuim->restoreOriginalSize();
         }
         else
@@ -1062,7 +1154,7 @@ void ImageWindow::autoScale( KuickImage *kuim )
     }
 
     if ( doIt )
-        kuim->resize( newW, newH );
+        kuim->resize( newW, newH, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
 }
 
 // only called when kdata->isModsEnabled is true
@@ -1158,10 +1250,66 @@ void ImageWindow::maximize()
     kdata->downScale = oldDownscale;
 }
 
+bool ImageWindow::canZoomTo( int newWidth, int newHeight )
+{
+    if ( !ImlibWidget::canZoomTo( newWidth, newHeight ) )
+        return false;
+
+    QSize desktopSize = KGlobalSettings::desktopGeometry(topLevelWidget()).size();
+
+    int desktopArea = desktopSize.width() * desktopSize.height();
+    int imageArea = newWidth * newHeight;
+
+    if ( imageArea > desktopArea * kdata->maxZoomFactor )
+    {
+        return KMessageBox::warningContinueCancel(
+            this,
+            i18n("You are about to view a very large image (%1 x %2 pixels), which can be very resource-consuming and even make your computer hang.\nDo you want to continue?")
+            .arg( newWidth ).arg( newHeight ),
+            QString::null,
+            KStandardGuiItem::cont(),
+            KStandardGuiItem::cancel(),
+            "ImageWindow_confirm_very_large_window"
+            ) == KMessageBox::Continue;
+    }
+
+    return true;
+}
+
+void ImageWindow::rotated( KuickImage *kuim, int rotation )
+{
+    if ( !m_kuim )
+        return;
+
+    ImlibWidget::rotated( kuim, rotation );
+
+    if ( rotation == ROT_90 || rotation == ROT_270 )
+        autoScale( kuim ); // ### BUG: only autoScale when configured!
+}
+
 void ImageWindow::slotProperties()
 {
-    KPropertiesDialog dlg( KUrl(filename()), this );
+    KPropertiesDialog dlg( currentFile()->url(), this );
     dlg.exec();
+}
+
+void ImageWindow::setBusyCursor()
+{
+    // avoid busy cursor in fullscreen mode
+    if ( !isFullscreen() )
+        ImlibWidget::setBusyCursor();
+}
+
+void ImageWindow::restoreCursor()
+{
+    // avoid busy cursor in fullscreen mode
+    if ( !isFullscreen() )
+        ImlibWidget::restoreCursor();
+}
+
+bool ImageWindow::isCursorHidden() const
+{
+    return cursor().shape() == Qt::BlankCursor;
 }
 
 #include "imagewindow.moc"

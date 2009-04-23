@@ -28,6 +28,9 @@
 // values are also used as combobox index defaultswidget.*
 enum Rotation { ROT_0=0, ROT_90=1, ROT_180=2, ROT_270=3 };
 
+// hmm, global declaration for now
+enum FlipMode { FlipNone = 0, FlipHorizontal = 1, FlipVertical = 2 };
+
 class KuickData
 {
 public:
@@ -68,7 +71,9 @@ public:
     bool 	downScale        :1;
     bool 	upScale          :1;
     int 	maxUpScale;
-    uint 	maxWidth, maxHeight;
+    int 	maxWidth;
+    int 	maxHeight;
+    float 	maxZoomFactor;
     uint        maxCachedImages;
     Rotation 	rotation;
 

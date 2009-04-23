@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998-2003 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998-2006 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -48,6 +48,8 @@ class AboutWidget;
 class KUrl;
 class KUrlComboBox;
 
+class KuickFile;
+
 class DelayedRepeatEvent
 {
 public:
@@ -55,18 +57,28 @@ public:
         viewer = view;
         event  = ev;
     }
-    DelayedRepeatEvent( ImageWindow *view, int step ) {
-        viewer = view;
-        steps  = step;
-        event  = 0L;
+    DelayedRepeatEvent( ImageWindow *view, int action, void *data ) {
+        this->viewer = view;
+        this->action = action;
+        this->data   = data;
+        this->event  = 0L;
     }
+
     ~DelayedRepeatEvent() {
         delete event;
     }
 
+    enum Action
+    {
+        DeleteCurrentFile,
+        TrashCurrentFile,
+        AdvanceViewer
+    };
+
     ImageWindow *viewer;
     QKeyEvent *event;
-    int steps;
+    int action;
+    void *data;
 };
 
 
@@ -89,6 +101,7 @@ public:
 protected:
     virtual void	readProperties( const KConfigGroup& kc );
     void 		initImlibParams( ImData *, ImlibInitParams * );
+    void                tryShowNextImage();
 
 private slots:
     void                toggleBrowser();
@@ -96,9 +109,9 @@ private slots:
     void 		slotPrint();
     void 		slotConfigApplied();
     void 		slotConfigClosed();
-    void 		messageCantLoadImage( const QString& );
-    void         	showImage(const KFileItem&, bool newWindow = false,
-                                  bool fullscreen = false, bool moveToTopLeft = true );
+    void 		messageCantLoadImage( const KuickFile *file, const QString& message );
+    bool     	showImage(const KFileItem&, bool newWindow = false,
+                          bool fullscreen = false, bool moveToTopLeft = true );
     void 		showFileItem( ImageWindow *, const KFileItem * );
     void		slotHighlighted( const KFileItem& );
     void 		slotSelected( const KFileItem& );
@@ -119,12 +132,16 @@ private slots:
     void                slotShowFullscreen();
 
     void		slotReplayEvent();
-    void                slotReplayAdvance();
     void                slotOpenURL();
     void		slotSetURL( const KUrl& );
     void		slotURLComboReturnPressed();
 //     void                invalidateImages( const KFileItemList& items );
-    void		slotDeleteImage();
+    void		slotDeleteCurrentImage(ImageWindow *viewer);
+    void		slotTrashCurrentImage(ImageWindow *viewer);
+    void                slotDeleteCurrentImage();
+    void                slotTrashCurrentImage();
+
+    void                doReplay();
 
 private:
     Display *		getX11Display() const { return x11Info().display(); }
@@ -135,7 +152,15 @@ private:
     void 		saveSettings();
     bool 		haveBrowser() const;
     void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );
+    void		abortDelayedEvent();
     void                deleteAllViewers();
+    void                redirectDeleteAndTrashActions(KActionCollection *coll);
+
+    void                delayAction(DelayedRepeatEvent *event);
+    void                replayAdvance(DelayedRepeatEvent *event);
+
+    void                performDeleteCurrentImage(QWidget *parent);
+    void                performTrashCurrentImage(QWidget *parent);
 
     uint 		viewItem, renameItem, deleteItem, printItem;
     uint                m_slideshowCycle;

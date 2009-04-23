@@ -32,6 +32,7 @@
 #include <QDropEvent>
 
 #include <kaction.h>
+#include <kurl.h>
 
 #include "imlibwidget.h"
 
@@ -39,6 +40,8 @@ class QCursor;
 class QString;
 class QWidget;
 class KActionCollection;
+
+class KuickFile;
 
 class ImageWindow : public ImlibWidget
 {
@@ -49,7 +52,8 @@ public:
   ImageWindow( ImData *_idata=0, QWidget *parent=0 );
   ~ImageWindow();
 
-  bool 		showNextImage( const QString& filename );
+  bool 		showNextImage( KuickFile * file );
+  bool 		showNextImage( const KUrl& url );
   void 		scrollImage( int, int, bool restrict=true );
   void		setFullscreen( bool );
   bool 		isFullscreen() 	const { return myIsFullscreen; }
@@ -70,7 +74,7 @@ public:
   void autoScale( KuickImage *kuim );
   virtual bool autoRotate( KuickImage *kuim );
 
-  bool          saveImage( const QString& filename, bool keepOriginalSize ) const;
+  bool          saveImage( const KUrl& dest, bool keepOriginalSize );
 
 public slots:
   void 		zoomIn();
@@ -89,12 +93,14 @@ public slots:
   void 		toggleFullscreen();
   void 		maximize();
   void 		imageDelete();
+  void 		imageTrash();
 
 signals:
   void 		sigFocusWindow( ImageWindow * );
   // go advance images back/forth
   void          requestImage( ImageWindow *, int advance );
-  void          deleteImage();
+  void          deleteImage(ImageWindow *viewer);
+  void          trashImage(ImageWindow *viewer);
   void		nextSlideRequested();
   void		prevSlideRequested();
 
@@ -102,8 +108,11 @@ protected:
 
   void 		init();
   void 		centerImage();
+  void          addAlternativeShortcut( KAction *action, int key );
   virtual void	updateGeometry( int imWidth, int imHeight );
   virtual void  loaded( KuickImage *, bool wasCached );
+  virtual bool  canZoomTo( int newWidth, int newHeight );
+  virtual void  rotated( KuickImage *kuim, int rotation );
 
   virtual void  wheelEvent( QWheelEvent * );
   virtual void	keyPressEvent( QKeyEvent * );
@@ -117,6 +126,7 @@ protected:
   virtual void 	dropEvent( QDropEvent * );
   virtual void  contextMenuEvent( QContextMenuEvent * );
 
+  void 			showWindow();
   enum KuickCursor { DefaultCursor = 0, ZoomCursor, MoveCursor };
   void 	updateCursor( KuickCursor cursor = DefaultCursor );
 
@@ -148,6 +158,8 @@ protected slots:
   void          reload();
   void          slotProperties();
   void          pauseSlideShow();
+  virtual void  setBusyCursor();
+  virtual void  restoreCursor();
 
 signals:
   void          pauseSlideShowSignal();
@@ -158,6 +170,7 @@ private:
   QSize		maxImageSize() const;
   void          setupActions();
   void 		setPopupMenu();
+  bool          isCursorHidden() const;
 
   bool 		myIsFullscreen;
   int           m_numHeads;

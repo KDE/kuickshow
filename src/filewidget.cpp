@@ -180,11 +180,13 @@ void FileWidget::findCompletion( const QString& text )
     QString file = makeDirCompletion( text );
     if ( file.isNull() )
 	file = makeCompletion( text );
-
     m_validCompletion = !file.isNull();
 
-    if ( m_validCompletion )
-	KDirOperator::setCurrentItem( file );
+    if ( m_validCompletion ) {
+    	KUrl completeUrl = url();
+    	completeUrl.setFileName( file );
+    	KDirOperator::setCurrentItem( completeUrl.url() );
+    }
 }
 
 bool FileWidget::eventFilter( QObject *o, QEvent *e )
@@ -447,9 +449,9 @@ void FileWidget::slotReturnPressed( const QString& t )
     }
 }
 
-void FileWidget::setInitialItem( const QString& filename )
+void FileWidget::setInitialItem( const KUrl& url )
 {
-    m_initialName = filename;
+    m_initialName = url;
 }
 
 void FileWidget::slotURLEntered( const KUrl& url )
@@ -460,19 +462,21 @@ void FileWidget::slotURLEntered( const KUrl& url )
 
 void FileWidget::slotFinishedLoading()
 {
-#ifdef __GNUC__
-#warning "kde4: port it"
-#endif
-#if 0
-    KFileItem *current = getCurrentItem( false );
-    if ( !m_initialName.isEmpty() )
-	setCurrentItem( m_initialName );
-    else if ( !current )
-	setCurrentItem( view()->items()->getFirst() );
+	const KFileItem& current = getCurrentItem( false );
+	if ( !m_initialName.isEmpty() )
+		setCurrentItem( m_initialName.url() );
+	else if ( current.isNull() ) {
+		QModelIndex first = view()->model()->index(0, 0);
+		if (first.isValid()) {
+			KFileItem item = first.data(Qt::UserRole).value<KFileItem>();
+			if (!item.isNull()) {
+				setCurrentItem( item );
+			}
+		}
+	}
 
-    m_initialName = QString::null;
-    emit finished();
-#endif
+	m_initialName = KUrl();
+	emit finished();
 }
 
 QSize FileWidget::sizeHint() const

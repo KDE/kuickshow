@@ -92,6 +92,8 @@ GeneralWidget::GeneralWidget( QWidget *parent )
   layout->addStretch();
   QVBoxLayout *gbox2Layout = new QVBoxLayout( gbox2 );
 
+  cbSmoothScale = new QCheckBox( i18n("Smooth scaling"), gbox2 );
+  cbSmoothScale->setObjectName( QString::fromLatin1( "smoothscale" ) );
   cbFastRender = new QCheckBox( i18n("Fast rendering"), gbox2 );
   cbFastRender->setObjectName( QString::fromLatin1( "fastrender" ) );
   cbDither16bit = new QCheckBox( i18n("Dither in HiColor (15/16bit) modes"), gbox2 );
@@ -144,6 +146,7 @@ void GeneralWidget::loadSettings( const KuickData& data )
     cbLastdir->setChecked( data.startInLastDir );
     cbFastRemap->setChecked( idata->fastRemap );
     cbOwnPalette->setChecked( idata->ownPalette );
+    cbSmoothScale->setChecked( idata->smoothScale );
     cbFastRender->setChecked( idata->fastRender );
     cbDither16bit->setChecked( idata->dither16bit );
     cbDither8bit->setChecked( idata->dither8bit );
@@ -162,6 +165,7 @@ void GeneralWidget::applySettings( KuickData& data)
     data.preloadImage	  = cbPreload->isChecked();
     data.startInLastDir   = cbLastdir->isChecked();
 
+    idata->smoothScale    = cbSmoothScale->isChecked();
     idata->fastRemap 	  = cbFastRemap->isChecked();
     idata->ownPalette 	  = cbOwnPalette->isChecked();
     idata->fastRender 	  = cbFastRender->isChecked();

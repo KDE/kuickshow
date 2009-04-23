@@ -20,11 +20,11 @@
 #include "kuickdata.h"
 #include "imagemods.h"
 
-QCache<QString,ImageMods> * ImageMods::s_modifications = 0L;
+QCache<KUrl,ImageMods> * ImageMods::s_modifications = 0L;
 
-QCache<QString,ImageMods> * ImageMods::getInstance() {
+QCache<KUrl,ImageMods> * ImageMods::getInstance() {
 	if ( !s_modifications) {
-		s_modifications = new QCache<QString,ImageMods>(kdata->modificationCacheSize);
+		s_modifications = new QCache<KUrl,ImageMods>(kdata->modificationCacheSize);
 	}
 	return s_modifications;
 }
@@ -32,13 +32,13 @@ QCache<QString,ImageMods> * ImageMods::getInstance() {
 
 void ImageMods::rememberFor(KuickImage *kuim)
 {
-	QCache<QString,ImageMods> * instance = getInstance();
+	QCache<KUrl,ImageMods> * instance = getInstance();
 
-	ImageMods *mods = instance->object(kuim->filename());
+	ImageMods *mods = instance->object(kuim->url());
 	if ( !mods )
 	{
 		mods = new ImageMods();
-		instance->insert(kuim->filename(), mods);
+		instance->insert(kuim->url(), mods);
 	}
 
 	mods->width = kuim->width();
@@ -47,14 +47,14 @@ void ImageMods::rememberFor(KuickImage *kuim)
 	mods->flipMode = kuim->flipMode();
 }
 
-bool ImageMods::restoreFor(KuickImage *kuim)
+bool ImageMods::restoreFor(KuickImage *kuim, ImData *idata)
 {
-	ImageMods *mods = getInstance()->object(kuim->filename());
+	ImageMods *mods = getInstance()->object(kuim->url());
 	if ( mods )
 	{
 		kuim->rotateAbs( mods->rotation );
 		kuim->flipAbs( mods->flipMode );
-		kuim->resize( mods->width, mods->height );
+		kuim->resize( mods->width, mods->height, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
 		return true;
 	}
 
