@@ -115,6 +115,7 @@ GeneralWidget::GeneralWidget( QWidget *parent )
   maxCacheSpinBox->setSpecialValueText( i18n( "Unlimited" ) );
   maxCacheSpinBox->setRange( 0, 400, 1 );
 
+  gbox2Layout->addWidget( cbSmoothScale );
   gbox2Layout->addWidget( cbFastRender );
   gbox2Layout->addWidget( cbDither16bit );
   gbox2Layout->addWidget( cbDither8bit );
