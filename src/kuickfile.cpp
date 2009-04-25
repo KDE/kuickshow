@@ -83,28 +83,28 @@ bool KuickFile::download()
 
     QString ext;
     QString fileName = m_url.fileName();
-    int extIndex = fileName.findRev('.');
+    int extIndex = fileName.lastIndexOf('.');
     if ( extIndex > 0 )
         ext = fileName.mid( extIndex );
-#warning "need '.jpg' or 'jpg'?"
 
     QString tempDir = FileCache::self()->tempDir();
     KTemporaryFile tempFile;
-    // FIXME: avoid KTemporaryFile's locateLocal() all the time again and again by setting a prefix
+    if ( !tempDir.isEmpty() ) {
+        tempFile.setPrefix( tempDir );
+    }
     tempFile.setSuffix( ext );
     tempFile.setAutoRemove( tempDir.isNull() ); // in case there is no proper tempdir, make sure to delete those files!
     if ( !tempFile.open() )
         return false;
 
+    KUrl destURL( tempFile.fileName() );
+
     tempFile.close();
 
-    KUrl destURL;
-    destURL.setPath( tempFile.fileName() );
-
-    m_job = KIO::file_copy( m_url, destURL, -1, KIO::HideProgressInfo ); // handling progress ourselves
+    m_job = KIO::file_copy( m_url, destURL, -1, KIO::HideProgressInfo | KIO::Overwrite ); // handling progress ourselves
 //    m_job->setAutoErrorHandlingEnabled( true );
-    connect( m_job, SIGNAL( result( KIO::Job * )), SLOT( slotResult( KIO::Job * ) ));
-    connect( m_job, SIGNAL( percent( KIO::Job *, unsigned long )), SLOT( slotProgress( KIO::Job *, unsigned long ) ));
+    connect( m_job, SIGNAL( result( KJob * )), SLOT( slotResult( KJob * ) ));
+    connect( m_job, SIGNAL( percent( KJob *, unsigned long )), SLOT( slotProgress( KJob *, unsigned long ) ));
 
     // TODO: generify background/foreground downloading?
 
@@ -123,8 +123,8 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
 
     KProgressDialog *dialog = new KProgressDialog( parent );
     dialog->setModal( true );
-    dialog->setCaption( i18n("Downloading %1...").arg( m_url.fileName() ) );
-    dialog->setLabelText( i18n("Please wait while downloading\n%1").arg( m_url.prettyUrl() ));
+    dialog->setCaption( i18n("Downloading %1...", m_url.fileName() ) );
+    dialog->setLabelText( i18n("Please wait while downloading\n%1", m_url.prettyUrl() ));
     dialog->setAllowCancel( true );
     dialog->setAutoClose( true );
 
@@ -153,7 +153,7 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
      return OK;
 }
 
-void KuickFile::slotResult( KIO::Job *job )
+void KuickFile::slotResult( KJob *job )
 {
     if (job != m_job) { // huh?
         return;
@@ -185,7 +185,7 @@ void KuickFile::slotResult( KIO::Job *job )
     }
 }
 
-void KuickFile::slotProgress( KIO::Job *job, unsigned long percent )
+void KuickFile::slotProgress( KJob *job, unsigned long percent )
 {
     if (job != m_job) { // huh?
         return;

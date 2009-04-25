@@ -26,8 +26,9 @@
 
 class QProgressBar;
 
+class KJob;
+
 namespace KIO {
-    class Job;
     class FileCopyJob;
 }
 
@@ -92,8 +93,8 @@ signals:
     void downloaded( KuickFile * );
 
 private slots:
-    void slotResult( KIO::Job *job );
-    void slotProgress( KIO::Job *job, unsigned long percent );
+    void slotResult( KJob *job );
+    void slotProgress( KJob *job, unsigned long percent );
 
 private:
     KUrl m_url;
