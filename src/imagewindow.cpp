@@ -105,8 +105,9 @@ void ImageWindow::init()
     KCursor::setHideCursorDelay( 1500 );
 
     // give the image window a different WM_CLASS
+    QByteArray appName = QCoreApplication::applicationName().toLocal8Bit();
     XClassHint hint;
-    hint.res_name = kapp->objectName().toLocal8Bit().data();
+    hint.res_name = appName.data();
     hint.res_class = const_cast<char*>( "ImageWindow" );
     XSetClassHint( getX11Display(), winId(), &hint );
 
