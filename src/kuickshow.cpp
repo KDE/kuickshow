@@ -659,7 +659,7 @@ void KuickShow::performDeleteCurrentImage(QWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>").arg(item.url().pathOrUrl()),
+            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>", item.url().pathOrUrl()),
             i18n("Delete File"),
             KStandardGuiItem::del(),
             KStandardGuiItem::cancel(),
@@ -685,7 +685,7 @@ void KuickShow::performTrashCurrentImage(QWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>").arg(item.url().pathOrUrl()),
+            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>", item.url().pathOrUrl()),
             i18n("Trash File"),
             KGuiItem(i18nc("to trash", "&Trash"),"edittrash"),
             KStandardGuiItem::cancel(),

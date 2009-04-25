@@ -467,7 +467,7 @@ bool ImageWindow::showNextImage( const KUrl& url )
     switch ( file->waitForDownload( this ) ) {
     	case KuickFile::ERROR:
     	{
-    	    QString tmp = i18n("Unable to download the image from %1.").arg(url.prettyUrl());
+    	    QString tmp = i18n("Unable to download the image from %1.", url.prettyUrl());
 	        emit sigImageError( file, tmp );
 	        return false;
     	}
@@ -485,7 +485,7 @@ bool ImageWindow::showNextImage( KuickFile *file )
     if ( !loadImage( file ) ) {
    	    QString tmp = i18n("Unable to load the image %1.\n"
                        "Perhaps the file format is unsupported or "
-                       "your Imlib is not installed properly.").arg(file->url().prettyUrl());
+                       "your Imlib is not installed properly.", file->url().prettyUrl());
         emit sigImageError( file, tmp );
 	return false;
     }
@@ -1265,8 +1265,8 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
     {
         return KMessageBox::warningContinueCancel(
             this,
-            i18n("You are about to view a very large image (%1 x %2 pixels), which can be very resource-consuming and even make your computer hang.\nDo you want to continue?")
-            .arg( newWidth ).arg( newHeight ),
+            i18n("You are about to view a very large image (%1 x %2 pixels), which can be very resource-consuming and even make your computer hang.\nDo you want to continue?",
+            newWidth, newHeight ),
             QString::null,
             KStandardGuiItem::cont(),
             KStandardGuiItem::cancel(),
