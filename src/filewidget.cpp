@@ -100,8 +100,8 @@ void FileWidget::initActions()
     menu->addSeparator();
 
     // support for older kdelibs, remove somewhen...
-    if ( coll->action("kuick_delete") )
-        menu->addAction( coll->action("kuick_delete") );
+//    if ( coll->action("kuick_delete") )
+//        menu->addAction( coll->action("kuick_delete") );
 
     // properties dialog is now in kfile, but not at the right position,
     // so we move it to the real bottom

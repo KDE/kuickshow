@@ -104,7 +104,8 @@ protected:
     void                tryShowNextImage();
 
 private slots:
-    void                toggleBrowser();
+    void		toggleBrowser();
+    void 		slotToggleInlinePreview( bool on );
     void 		slotQuit() { delete this; }
     void 		slotPrint();
     void 		slotConfigApplied();

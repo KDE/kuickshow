@@ -302,6 +302,12 @@ void KuickShow::initGUI( const KUrl& startDir )
     showFullscreen->setText( i18n("Show Image in Fullscreen Mode") );
     connect( showFullscreen, SIGNAL( triggered() ), this, SLOT( slotShowFullscreen() ) );
 
+    QAction *defaultInlinePreview = coll->action( "inline preview" );
+    KToggleAction *inlinePreviewAction = coll->add<KToggleAction>( "kuick_inlinePreview" );
+    inlinePreviewAction->setText( defaultInlinePreview->text() );
+    inlinePreviewAction->setIcon( defaultInlinePreview->icon() );
+    connect( inlinePreviewAction, SIGNAL( toggled(bool) ), this, SLOT( slotToggleInlinePreview(bool) ) );
+
     KAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll);
     coll->addAction( "quit", quit );
 
@@ -325,30 +331,9 @@ void KuickShow::initGUI( const KUrl& startDir )
     QMenu *editMenu = new QMenu( i18n("&Edit"), mBar );
     editMenu->setObjectName( QString::fromLatin1( "edit" ) );
     editMenu->addAction(coll->action("mkdir"));
-    editMenu->addAction(coll->action("delete"));
+    editMenu->addAction(coll->action("trash"));
     editMenu->addSeparator();
     editMenu->addAction(coll->action("properties"));
-
-
-    // remove the Sorting submenu (and the separator below)
-    // from the main contextmenu
-    KActionMenu *sortingMenu = static_cast<KActionMenu*>( coll->action("sorting menu"));
-    KActionMenu *mainActionMenu = static_cast<KActionMenu*>( coll->action("popupMenu"));
-
-/*
-    QMenu *mainPopup = mainActionMenu->menu();
-    int sortingIndex = mainPopup->indexOf( sortingMenu->itemId( 0 ) );
-    int separatorId = mainPopup->idAt( sortingIndex + 1 );
-    QMenuItem *separatorItem = mainPopup->findItem( separatorId );
-    if ( separatorItem && separatorItem->isSeparator() )
-        mainPopup->removeItem( separatorId );
-    mainActionMenu->remove( sortingMenu );
-*/
-
-    // add the sorting menu and a separator into the View menu
-    KActionMenu *viewActionMenu = static_cast<KActionMenu*>( coll->action("view menu"));
-    viewActionMenu->menu()->addSeparator();
-    viewActionMenu->menu()->addAction(sortingMenu); //, 0 ); // on top of the menu
 
 
     QMenu *settingsMenu = new QMenu( i18n("&Settings"), mBar );
@@ -373,7 +358,6 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     // Address box in address tool bar
     KToolBar *addressToolBar = toolBar( "address_bar" );
-    const int ID_ADDRESSBAR = 1;
 
     cmbPath = new KUrlComboBox( KUrlComboBox::Directories,
                                 true, addressToolBar );
@@ -381,8 +365,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     cmbPath->setCompletionObject( cmpl );
     cmbPath->setAutoDeleteCompletionObject( true );
 
-    addressToolBar->addWidget( cmbPath);
-//    addressToolBar->setItemAutoSized( ID_ADDRESSBAR );
+    addressToolBar->addWidget( cmbPath );
 
     connect( cmbPath, SIGNAL( urlActivated( const KUrl& )),
              this, SLOT( slotSetURL( const KUrl& )));
@@ -393,6 +376,9 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     tBar->addAction(coll->action( "short view" ));
     tBar->addAction(coll->action( "detailed view" ));
+
+
+    tBar->addAction(inlinePreviewAction);
     tBar->addAction(coll->action( "preview"));
 
     tBar->addSeparator();
@@ -1411,6 +1397,21 @@ void KuickShow::slotOpenURL()
                 fileWidget->setUrl( *it, true );
         }
     }
+}
+
+void KuickShow::slotToggleInlinePreview(bool on)
+{
+	int iconSize;
+	if (on) {
+		iconSize = KIconLoader::SizeEnormous;
+	} else {
+		iconSize = KIconLoader::SizeSmall;
+	}
+	fileWidget->setIconsZoom( iconSize );
+	fileWidget->setInlinePreviewShown(on);
+    QAction *defaultInlinePreview = fileWidget->actionCollection()->action( "inline preview" );
+    defaultInlinePreview->setChecked(on);
+//	fileWidget->actionCollection("short view")
 }
 
 void KuickShow::deleteAllViewers()
