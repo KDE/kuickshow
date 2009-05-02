@@ -1,8 +1,6 @@
 project(kuickshow)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules
-)
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 find_package(KDE4 REQUIRED)
 find_package(IMLIB REQUIRED)
