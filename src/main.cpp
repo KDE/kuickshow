@@ -55,7 +55,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     if ( app.isSessionRestored() )
 	RESTORE( KuickShow )
     else {
-	KuickShow *k = new KuickShow( "kuickshow" );
+	(void) new KuickShow( "kuickshow" );
     }
 
     return app.exec();

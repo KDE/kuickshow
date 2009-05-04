@@ -471,7 +471,7 @@ void KuickShow::viewerDeleted()
     }
 
     else if ( haveBrowser() ) {
-        setActiveWindow();
+        activateWindow();
         // This setFocus() call causes problems in the combiview (always the
         // directory view on the left gets the focus, which is not desired)
         // fileWidget->setFocus();
