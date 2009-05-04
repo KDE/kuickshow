@@ -388,7 +388,6 @@ void KuickShow::initGUI( const KUrl& startDir )
     tBar->addAction(coll->action( "preview"));
 
     tBar->addSeparator();
-    tBar->addAction(configure);
     tBar->addAction(slide);
     tBar->addSeparator();
     tBar->addAction(oneWindowAction);
