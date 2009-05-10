@@ -117,7 +117,7 @@ void ImlibWidget::init()
     setAutoRender( true );
 
     setPalette( QPalette( myBackgroundColor ));
-    setBackgroundMode( Qt::PaletteBackground );
+    setBackgroundRole( QPalette::Window );
 
     imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
@@ -176,7 +176,7 @@ KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
 }
 
 // overridden in subclass
-void ImlibWidget::loaded( KuickImage *, bool wasCached )
+void ImlibWidget::loaded( KuickImage *, bool /*wasCached*/ )
 {
 }
 
@@ -521,10 +521,10 @@ void ImlibWidget::setBusyCursor()
 
 void ImlibWidget::restoreCursor()
 {
-    if ( cursor().shape() == QCursor(Qt::waitCursor).shape() ) // only if nobody changed the cursor in the meantime!
+    if ( cursor().shape() == QCursor(Qt::WaitCursor).shape() ) // only if nobody changed the cursor in the meantime!
     setCursor( m_oldCursor );
 }
-
+/*
 // Reparenting a widget in Qt in fact means destroying the old X window of the widget
 // and creating a new one. And since the X window used for the Imlib image is a child
 // of this widget's X window, destroying this widget's X window would mean also
@@ -542,7 +542,7 @@ void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool
     if( attr.map_state != IsUnmapped )
         XMapWindow( getX11Display(), win );
 }
-
+*/
 void ImlibWidget::rotated( KuickImage *, int )
 {
 }
@@ -556,15 +556,14 @@ ImageCache::ImageCache( ImlibData *id, int maxImages )
     myId        = id;
     idleCount   = 0;
     myMaxImages = maxImages;
-    kuickList.setAutoDelete( true );
-    fileList.clear();
-    kuickList.clear();
 }
 
 
 ImageCache::~ImageCache()
 {
-    kuickList.clear();
+    while ( !kuickList.isEmpty() ) {
+        delete kuickList.takeFirst();
+    }
     fileList.clear();
 }
 
@@ -574,7 +573,7 @@ void ImageCache::setMaxImages( int maxImages )
     myMaxImages = maxImages;
     int count   = kuickList.count();
     while ( count > myMaxImages ) {
-	kuickList.removeLast();
+	delete kuickList.takeLast();
 	fileList.removeLast();
 	count--;
     }
@@ -607,7 +606,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file )
     	return 0L;
 
     KuickImage *kuim = 0L;
-    int index = fileList.findIndex( file );
+    int index = fileList.indexOf( file );
     if ( index != -1 )
     {
         if ( index == 0 )
@@ -616,7 +615,7 @@ KuickImage * ImageCache::getKuimage( KuickFile * file )
         // need to reorder the lists, otherwise we might delete the current
         // image when a new one is cached and the current one is the last!
         else {
-            kuim = kuickList.take( index );
+            kuim = kuickList.takeAt( index );
             kuickList.insert( 0, kuim );
             fileList.removeAll( file );
             fileList.prepend( file );
@@ -666,9 +665,9 @@ KuickImage * ImageCache::loadImage( KuickFile * file, ImlibColorModifier mod)
 	kuickList.insert( 0, kuim );
 	fileList.prepend( file );
 
-	if ( kuickList.count() > (uint) myMaxImages ) {
+	if ( kuickList.count() > myMaxImages ) {
 		//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).toLatin1());
-		kuickList.removeLast();
+		delete kuickList.takeLast();
 		fileList.removeLast();
 	}
 
@@ -686,8 +685,7 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
     if ( image.isNull() )
 	return 0L;
     if ( image.depth() != 32 ) {
-	image.setAlphaBuffer(false);
-	image = image.convertDepth(32);
+	image = image.convertToFormat(QImage::Format_RGB32);
 
     if ( image.isNull() )
 	return 0L;

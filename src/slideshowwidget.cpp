@@ -45,7 +45,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent )
     m_delayTime->setRange( 0, 60 * 60 ); // 1 hour
     m_delayTime->setSpecialValueText( i18n("Wait for key") );
 
-    m_cycles = new KIntNumInput( m_delayTime, 1, this );
+    m_cycles = new KIntNumInput( 1, this );
     m_cycles->setLabel( i18n("&Iterations (0 = infinite):") );
     m_cycles->setSpecialValueText( i18n("infinite") );
     m_cycles->setRange( 0, 500 );

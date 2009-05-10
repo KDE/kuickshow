@@ -322,8 +322,7 @@ ImlibImage * KuickImage::toImage( ImlibData *id, QImage& image )
 
     if ( image.depth() != 32 )
     {
-		image.setAlphaBuffer(false);
-		image = image.convertDepth(32);
+	image = image.convertToFormat(QImage::Format_RGB32);
 
     	if ( image.isNull() )
 			return 0L;

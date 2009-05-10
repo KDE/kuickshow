@@ -85,13 +85,13 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   sbBrightness->setSliderEnabled( true );
   sbBrightness->setLabel( i18n("Brightness:"), Qt::AlignVCenter );
 
-  sbContrast = new KIntNumInput( sbBrightness, 0,gbAdjust, 10/*,
+  sbContrast = new KIntNumInput( 0,gbAdjust, 10/*,
 				 "contrast spinbox"*/);
   sbContrast->setRange( -256, 256, 1 );
   sbContrast->setSliderEnabled( true );
   sbContrast->setLabel( i18n("Contrast:"), Qt::AlignVCenter );
 
-  sbGamma = new KIntNumInput( sbContrast, 0, gbAdjust, 10/*, "gamma spinbox"*/ );
+  sbGamma = new KIntNumInput( 0, gbAdjust, 10/*, "gamma spinbox"*/ );
   sbGamma->setRange( -256, 256, 1 );
   sbGamma->setSliderEnabled( true );
   sbGamma->setLabel( i18n("Gamma:"), Qt::AlignVCenter );
@@ -121,8 +121,8 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale );
   QVBoxLayout *gbAdjustLayout = new QVBoxLayout( gbAdjust );
   QVBoxLayout *gbGeometryLayout = new QVBoxLayout( gbGeometry );
-  QGridLayout *gbPreviewLayout = new QGridLayout(gbPreview, 2, 3, 0,
-            KDialog::spacingHint());
+  QGridLayout *gbPreviewLayout = new QGridLayout( gbPreview );
+
 
   QHBoxLayout *scaleLayout = new QHBoxLayout();
   QHBoxLayout *rotateLayout = new QHBoxLayout();

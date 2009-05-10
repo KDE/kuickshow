@@ -82,6 +82,9 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent )
 
     // should actually be KDirOperator's job!
     connect( this, SIGNAL( finishedLoading() ), SLOT( slotFinishedLoading() ));
+
+    connect( this, SIGNAL( contextMenuAboutToShow( const KFileItem&, QMenu *) ),
+             SLOT( slotContextMenu( const KFileItem&, QMenu *)));
 }
 
 FileWidget::~FileWidget()
@@ -99,20 +102,16 @@ void FileWidget::initActions()
     menu->addAction(coll->action("kuick_showFullscreen"));
     menu->addSeparator();
 
-    // support for older kdelibs, remove somewhen...
-//    if ( coll->action("kuick_delete") )
-//        menu->addAction( coll->action("kuick_delete") );
-
     // properties dialog is now in kfile, but not at the right position,
     // so we move it to the real bottom
     menu->menu()->removeAction( coll->action( "properties" ) );
-
+/*
     KMenu *pMenu = menu->menu();
     int lastItemId = pMenu->idAt( pMenu->count() - 1 );
     QMenuItem *mItem = pMenu->findItem( lastItemId );
     if ( mItem && !mItem->isSeparator() )
         menu->addSeparator();
-
+*/
     // those at the bottom
     menu->addAction(coll->action("kuick_print") );
     menu->addSeparator();
@@ -143,7 +142,7 @@ bool FileWidget::hasFiles() const
     return (numFiles() > 0);
 }
 
-void FileWidget::activatedMenu( const KFileItem& item, const QPoint& pos )
+void FileWidget::slotContextMenu( const KFileItem& item, QMenu */*popupMenu*/ )
 {
     bool image = isImage( item );
     actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
@@ -151,13 +150,22 @@ void FileWidget::activatedMenu( const KFileItem& item, const QPoint& pos )
     actionCollection()->action("kuick_showFullscreen")->setEnabled( image );
     actionCollection()->action("kuick_print")->setEnabled( image );
 
-    bool hasSelection = true; //(item != 0L);
-    actionCollection()->action("properties")->setEnabled( hasSelection );
+    KActionCollection *coll = actionCollection();
+    KActionMenu *menu = static_cast<KActionMenu*>( coll->action("popupMenu") );
 
-    if ( actionCollection()->action("kuick_delete") )
-        actionCollection()->action("kuick_delete")->setEnabled( hasSelection );
+    menu->addAction(coll->action("kuick_showInOtherWindow"));
+    menu->addAction(coll->action("kuick_showInSameWindow"));
+    menu->addAction(coll->action("kuick_showFullscreen"));
+    menu->addSeparator();
 
-    KDirOperator::activatedMenu( item, pos );
+    // properties dialog is now in kfile, but not at the right position,
+    // so we move it to the real bottom
+    menu->menu()->removeAction( coll->action( "properties" ) );
+
+    // those at the bottom
+    menu->addAction(coll->action("kuick_print") );
+    menu->addSeparator();
+    menu->addAction(coll->action("properties") );
 }
 
 void FileWidget::findCompletion( const QString& text )

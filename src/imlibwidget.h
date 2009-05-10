@@ -57,8 +57,8 @@ private:
   ImlibImage *		loadImageWithQt( const QString& filename ) const;
 
   int 			myMaxImages;
-  Q3ValueList<KuickFile*>fileList;
-  Q3PtrList<KuickImage>	kuickList;
+  QList<KuickFile*>	fileList;
+  QList<KuickImage*>	kuickList;
   //  QPtrList<ImlibImage>	imList;
   ImlibData * 		myId;
   int 			idleCount;
@@ -125,7 +125,7 @@ public:
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
-  virtual void  reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt = false );
+//  virtual void  reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt = false );
 
 public slots:
   void 		rotate90();

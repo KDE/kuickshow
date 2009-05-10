@@ -734,16 +734,18 @@ void ImageWindow::updateCursor( KuickCursor cursor )
 
 void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 {
-    if ( !(e->modifiers() & Qt::LeftButton) ) { // only handle Qt::LeftButton actions
+    if ( (e->buttons() != Qt::LeftButton) ) { // only handle Qt::LeftButton actions
 	return;
     }
 
-    if ( e->modifiers() & Qt::ShiftModifier ) {
+    // FIXME: the zoom-box doesn't work at all
+    if ( false && (e->modifiers() & Qt::ShiftModifier) != 0 ) {
 
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
 	    transWidget->setGeometry( 0, 0, width(), height() );
 	    transWidget->setBackgroundMode( Qt::NoBackground );
+       //     transWidget->setAttribute( Qt::WA_NoSystemBackground );
 	}
 
   	transWidget->hide();
@@ -751,7 +753,8 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
  	// really required?
  	p.eraseRect( transWidget->rect() );
 	transWidget->show();
-	qApp->processOneEvent();
+	//qApp->processOneEvent();
+	qApp->processEvents( QEventLoop::ExcludeUserInputEvents );
 
 	int width  = e->x() - xposPress;
 	int height = e->y() - yposPress;
@@ -771,11 +774,6 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	p.drawRect( xzoom, yzoom, width, height );
 	p.setPen( Qt::DotLine ); // defaults to black dotted line pen
 	p.drawRect( xzoom, yzoom, width, height );
-
-#ifdef __GNUC__
-#warning "qt4 what will replace p.flush() ????? "
-#endif
-	//p.flush();
     }
 
     else { // move the image

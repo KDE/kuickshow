@@ -67,7 +67,6 @@ signals:
 protected:
     virtual bool eventFilter( QObject *o, QEvent * );
     virtual void resizeEvent( QResizeEvent * );
-    virtual void activatedMenu( const KFileItem &, const QPoint& );
     virtual QSize sizeHint() const;
 
 private slots:
@@ -78,6 +77,7 @@ private slots:
     void slotItemsCleared();
     void slotItemDeleted( const KFileItem& );
     void slotHighlighted( const KFileItem& );
+    void slotContextMenu( const KFileItem &, QMenu *);
 
     void slotURLEntered( const KUrl& url );
     void slotFinishedLoading();

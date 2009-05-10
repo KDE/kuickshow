@@ -24,11 +24,11 @@
 //Added by qt3to4:
 #include <QVBoxLayout>
 #include <QGridLayout>
-#include <Q3VButtonGroup>
 #include <qpainter.h>
 #include <qradiobutton.h>
 //
 #include <qcolor.h>
+#include <QtGui/QGroupBox>
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
 
@@ -100,7 +100,7 @@ bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, Kui
 
     // Black & white print?
     if ( dialogPage.printBlackWhite() ) {
-        image = image.convertDepth( 1, Qt::MonoOnly | Qt::ThresholdDither | Qt::AvoidDither );
+        image = image.convertToFormat( QImage::Format_Mono, Qt::MonoOnly | Qt::ThresholdDither | Qt::AvoidDither );
     }
 
     int filenameOffset = 0;
@@ -116,7 +116,7 @@ bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, Kui
     bool shrinkToFit = dialogPage.printShrinkToFit();
     QSize imagesize = image.size();
     if ( shrinkToFit && (image.width() > w || image.height() > h) ) {
-        imagesize.scale( w, h, Qt::ScaleMin );
+        imagesize.scale( w, h, Qt::KeepAspectRatio );
     }
 
 
@@ -219,14 +219,18 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent )
     m_blackwhite->setChecked( false );
     layout->addWidget (m_blackwhite );
 
-    Q3VButtonGroup *group = new Q3VButtonGroup( i18n("Scaling"), this );
-    group->setRadioButtonExclusive( true );
+    QGroupBox *group = new QGroupBox( i18n("Scaling"), this );
     layout->addWidget( group );
+
+    QVBoxLayout *buttonLayout = new QVBoxLayout( group );
+
     // m_shrinkToFit = new QRadioButton( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit = new QCheckBox( i18n("Shrink image to &fit, if necessary"), group );
     m_shrinkToFit->setChecked( true );
+    buttonLayout->addWidget( m_shrinkToFit );
 
     QWidget *widget = new QWidget( group );
+    buttonLayout->addWidget( widget );
     QGridLayout *grid = new QGridLayout( widget );
     grid->addItem( new QSpacerItem( 30, 0 ), 0, 0 );
     grid->setColumnStretch( 0, 0 );
@@ -236,7 +240,6 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent )
     m_scale = new QRadioButton( i18n("Print e&xact size: "), widget );
     m_scale->setEnabled( false ); // ###
     grid->addWidget( m_scale, 0, 0, 1, 2 );
-    group->insert( m_scale );
     connect( m_scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
 
     m_units = new KComboBox( false, widget );
