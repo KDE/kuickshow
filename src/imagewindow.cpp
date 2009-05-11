@@ -744,8 +744,7 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	if ( !transWidget ) {
 	    transWidget = new QWidget( this );
 	    transWidget->setGeometry( 0, 0, width(), height() );
-	    transWidget->setBackgroundMode( Qt::NoBackground );
-       //     transWidget->setAttribute( Qt::WA_NoSystemBackground );
+	    transWidget->setAttribute( Qt::WA_NoSystemBackground, true );
 	}
 
   	transWidget->hide();
