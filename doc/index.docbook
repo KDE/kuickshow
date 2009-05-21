@@ -498,7 +498,7 @@ action.</para></listitem>
 <varlistentry>
 <term><menuchoice>
 <shortcut><keycombo action="simul">
-<keycap>&Alt;</keycap><keycap>Return</keycap></keycombo></shortcut>
+&Alt;<keycap>Return</keycap></keycombo></shortcut>
 <guimenu>Edit</guimenu>
 <guimenuitem>Properties</guimenuitem>
 </menuchoice></term>
