@@ -769,7 +769,7 @@ if you don't have a browser window open.</entry>
 have enabled automatic scaling.</entry>
 </row>
 <row>
-<entry><keycap>Enter</keycap></entry>
+<entry>&Enter;</entry>
 <entry>Redisplays the image with the default settings and
 size.</entry>
 </row>
