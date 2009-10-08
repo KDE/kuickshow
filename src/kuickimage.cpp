@@ -308,7 +308,7 @@ QImage * KuickImage::newQImage() const
 
 		QRgb rgbPixel = qRgb( r, g, b );
 		QRgb *destImageData = reinterpret_cast<QRgb*>( image->scanLine( destLineIndex ));
-		*destImageData = rgbPixel;
+		destImageData[destByteIndex++] = rgbPixel;
 //		destImageData[destLineIndex][destByteIndex++] = rgbPixel;
 	}
 
