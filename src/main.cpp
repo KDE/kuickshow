@@ -32,7 +32,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
     KAboutData about(
 	  "kuickshow", 0, ki18n( "KuickShow" ), KUICKSHOWVERSION,
 	  ki18n("A fast and versatile image viewer" ),
-	  KAboutData::License_GPL, ki18n("(c) 1998-2002, Carsten Pfeiffer"),
+	  KAboutData::License_GPL, ki18n("(c) 1998-2009, Carsten Pfeiffer"),
 	  ki18n(0 /*text*/), "http://devel-home.kde.org/~pfeiffer/" );
 
     about.addAuthor( ki18n("Carsten Pfeiffer"), KLocalizedString(), "pfeiffer@kde.org",
