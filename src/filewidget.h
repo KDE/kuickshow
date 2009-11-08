@@ -28,6 +28,7 @@
 
 class FileFinder;
 class KFileItem;
+class KFileItemActions;
 
 class FileWidget : public KDirOperator
 {
@@ -94,6 +95,7 @@ private:
     FileFinder *m_fileFinder;
     QString m_currentURL;
     KUrl m_initialName;
+    KFileItemActions *m_fileItemActions;
 
 };
 

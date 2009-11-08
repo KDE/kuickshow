@@ -39,6 +39,8 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 #include <kconfiggroup.h>
+#include <kfileitemactions.h>
+#include <kfileitemlistproperties.h>
 #include "filefinder.h"
 #include "filewidget.h"
 #include "kuickdata.h"
@@ -51,7 +53,8 @@
 FileWidget::FileWidget( const KUrl& url, QWidget *parent )
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
-      m_fileFinder( 0L )
+      m_fileFinder( 0L ),
+      m_fileItemActions( 0L )
 {
     setEnableDirHighlighting( true );
 
@@ -142,7 +145,7 @@ bool FileWidget::hasFiles() const
     return (numFiles() > 0);
 }
 
-void FileWidget::slotContextMenu( const KFileItem& item, QMenu */*popupMenu*/ )
+void FileWidget::slotContextMenu( const KFileItem& item, QMenu *popupMenu )
 {
     bool image = isImage( item );
     actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
@@ -158,7 +161,19 @@ void FileWidget::slotContextMenu( const KFileItem& item, QMenu */*popupMenu*/ )
     menu->addAction(coll->action("kuick_showFullscreen"));
     menu->addSeparator();
 
-    // properties dialog is now in kfile, but not at the right position,
+    if (!item.isNull()) {
+	KFileItemList items;
+	items.append(item);
+	KFileItemListProperties properties( items );
+	if ( !m_fileItemActions ) {
+	    m_fileItemActions = new KFileItemActions( this );
+	    m_fileItemActions->setParentWidget( this );
+	}
+	m_fileItemActions->setItemListProperties( properties );
+	m_fileItemActions->addOpenWithActionsTo( menu->menu(), QString() );
+    }
+
+   // properties dialog is now in kfile, but not at the right position,
     // so we move it to the real bottom
     menu->menu()->removeAction( coll->action( "properties" ) );
 
