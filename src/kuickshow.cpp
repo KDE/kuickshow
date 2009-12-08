@@ -784,7 +784,7 @@ void KuickShow::nextSlide( const KFileItem& item )
 void KuickShow::slotPrint()
 {
     const KFileItemList items = fileWidget->selectedItems();
-    if ( !items.isEmpty() )
+    if ( items.isEmpty() )
         return;
 
 	KFileItemList::const_iterator it = items.constBegin();
