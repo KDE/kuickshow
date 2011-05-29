@@ -661,7 +661,7 @@ void KuickShow::performDeleteCurrentImage(QWidget *parent)
     }
 
     tryShowNextImage();
-    fileWidget->del(list, false, false);
+    fileWidget->del(list, 0, false);
 }
 
 void KuickShow::performTrashCurrentImage(QWidget *parent)
