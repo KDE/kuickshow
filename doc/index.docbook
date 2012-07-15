@@ -30,8 +30,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2005-12-29</date>
-<releaseinfo>0.8.7</releaseinfo>
+<date>2012-07-15</date>
+<releaseinfo>0.9.2 (&kde; 4.8)</releaseinfo>
 
 <!-- Abstract about this handbook -->
 
@@ -109,9 +109,6 @@ key.</para>
 	  <imageobject>
 	    <imagedata fileref="screenshot.png" format="PNG"/>
 	  </imageobject>
-	  <imageobject>
-	    <imagedata fileref="screenshot.eps" format="EPS"/>
-	  </imageobject>
 	  <textobject>
 	    <phrase>Screenshot</phrase>
 	  </textobject>
@@ -149,8 +146,7 @@ is highlighted. You can leave the edit window by pressing
 </chapter>
 
 <chapter id="configuration-dialog">
-<title>The <guilabel>&kuickshow; Configuration</guilabel>
-Dialog</title>
+<title>The &kuickshow; Configuration Dialog</title>
 
 <para>The <guilabel>&kuickshow; Configuration</guilabel> dialog
 contains 5 tabs.  Three of them, <link
@@ -164,7 +160,7 @@ allow you to personalize the shortcuts for the
 respective windows.</para>
 
 <sect1 id="general-options">
-<title><guilabel>General</guilabel> Options</title>
+<title>General Options</title>
 
 <para>The <guilabel>General</guilabel> contains the options to
 configure and tune &kuickshow;.</para>
@@ -265,7 +261,7 @@ types it is capable of.</para>
 </sect1>
 
 <sect1 id="modifications-options">
-<title>The <guilabel>Modifications</guilabel> Tab</title>
+<title>The Modifications Tab</title>
 
 <para>Check <guilabel>Apply default image modifications</guilabel> to open an image 
 with these modifications in &kuickshow;.</para>
@@ -341,7 +337,7 @@ and <guilabel>Modified</guilabel> image is displayed below this options.</para>
 </sect1>
 
 <sect1 id="slideshow-options">
-<title>The <guilabel>Slideshow</guilabel> Tab</title>
+<title>The Slideshow Tab</title>
 
 <variablelist>
 
@@ -385,9 +381,12 @@ default is 1.</para>
 </sect1>
 
 <sect1 id="shortcuts-options">
-<title>The <guimenu>Shortcuts</guimenu> Tabs</title> 
+<title>The Shortcuts Tabs</title> 
 <para>Change the shortcuts for the different modes of &kuickshow;
 in the <guilabel>Viewer Shortcuts</guilabel> and the <guilabel>Browser Shortcuts</guilabel> tabs.</para>
+
+<para>For more information read the section about <ulink url="help:/fundamentals/config.html#shortcuts"
+>Shortcuts</ulink> of the &kde; Fundamentals.</para>
 </sect1>
 
 </chapter>
@@ -396,7 +395,7 @@ in the <guilabel>Viewer Shortcuts</guilabel> and the <guilabel>Browser Shortcuts
 <title>Menu Reference</title>
 
 <sect1 id="file-menu">
-<title>The <guimenu>File</guimenu> Menu</title>
+<title>The File Menu</title>
 
 <variablelist>
 <varlistentry>
@@ -471,7 +470,7 @@ images windows open, all of them are closed.</para></listitem>
 </sect1>
 
 <sect1 id="edit-menu">
-<title>The <guimenu>Edit</guimenu> Menu</title>
+<title>The Edit Menu</title>
 
 <variablelist>
 <varlistentry>
@@ -486,12 +485,11 @@ images windows open, all of them are closed.</para></listitem>
 </varlistentry>
 
 <varlistentry>
-<term><menuchoice><shortcut><keycombo action="simul">
-<keycap>&Shift;</keycap><keycap>Delete</keycap></keycombo></shortcut>
+<term><menuchoice><shortcut><keycap>Del</keycap></shortcut>
 <guimenu>Edit</guimenu>
-<guimenuitem>Delete</guimenuitem>
+<guimenuitem>Move to Trash</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Deletes</action> the current file.  You will be asked to confirm the
+<listitem><para><action>Moves</action> the current file to the trash.  You will be asked to confirm the
 action.</para></listitem>
 </varlistentry>
 
@@ -509,7 +507,7 @@ action.</para></listitem>
 </sect1>
 
 <sect1 id="view-menu">
-<title>The <guimenu>View</guimenu> Menu</title>
+<title>The View Menu</title>
 
 <variablelist>
 <varlistentry>
@@ -534,76 +532,28 @@ action.</para></listitem>
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycap>F8</keycap></shortcut>
+<shortcut><keycap>F6</keycap></shortcut>
 <guimenu>View</guimenu>
-<guimenuitem>Show Hidden Files</guimenuitem>
+<guimenuitem>Tree View</guimenuitem>
 </menuchoice></term>
-<listitem><para>This will toggle between revealing and hiding normally hidden files.</para></listitem>
+<listitem><para></para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycap>F12</keycap></shortcut>
+<shortcut><keycap>F7</keycap></shortcut>
 <guimenu>View</guimenu>
-<guimenuitem>Separate Folders</guimenuitem>
+<guimenuitem>Detailed Tree View</guimenuitem>
 </menuchoice></term>
-<listitem><para>Use this option to toggle between a 2 pane view of the file system (one pane for the folders
-and one pane for the files) and a one pane view of the file system with folders and files.</para></listitem>
+<listitem><para></para></listitem>
 </varlistentry>
 
-<varlistentry>
-<term><menuchoice>
-<guimenu>View</guimenu>
-<guimenuitem>Large Icons</guimenuitem>
-</menuchoice></term>
-<listitem><para>Display the image files in the folder with large icons. 
-This item is only available in <guimenuitem>Short View</guimenuitem> mode.</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>View</guimenu>
-<guimenuitem>Small Icons</guimenuitem>
-</menuchoice></term>
-<listitem><para>Display the image files in the folder with small icons. 
-This item is only available in <guimenuitem>Short View</guimenuitem> mode.</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>View</guimenu>
-<guimenuitem>Thumbnail Previews</guimenuitem>
-</menuchoice></term>
-<listitem><para>Display a preview of the images in the folder. This item is only available in <guimenuitem>Short View</guimenuitem> mode.</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice><shortcut><keycombo action="simul">
-&Ctrl;<keycap>-</keycap></keycombo></shortcut>
-<guimenu>View</guimenu>
-<guimenuitem>Zoom Out</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Reduces the image size by ten percent</action>. Again
-this refers to the <emphasis>current</emphasis> size of the
-image.</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice><shortcut><keycombo action="simul">
-&Ctrl;<keycap>+</keycap></keycombo></shortcut>
-<guimenu>View</guimenu>
-<guimenuitem>Zoom In</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Enlarges the image by ten percent</action>. Notice that
-this refers to the <emphasis>current</emphasis> size of the
-picture.</para></listitem>
-</varlistentry>
 </variablelist>
 
 </sect1>
 
-<sect1 id="settings-menu">
-<title>The <guimenu>Settings</guimenu> Menu</title>
+<sect1 id="settings-help-menu">
+<title>The Settings and Help Menu</title>
 
 <variablelist>
 <varlistentry>
@@ -616,55 +566,12 @@ described in the section <xref linkend="configuration-dialog"/></para>
 </listitem>
 </varlistentry>
 </variablelist>
-</sect1>
 
-
-<sect1 id="help-menu">
-<title>The <guimenu>Help</guimenu> Menu</title>
-
-<variablelist>
-<varlistentry>
-<term>
-<menuchoice>
-<shortcut>
-<keycombo action="simul"><keycap>F1</keycap></keycombo>
-</shortcut>
-<guimenu>Help</guimenu>
-<guimenuitem>&kappname; Handbook</guimenuitem>
-</menuchoice>
-</term>
-<listitem><para><action>Invokes the &kde; Help system</action> starting at the
-&kappname; help pages. (this document).</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Help</guimenu>
-<guimenuitem>Report Bug...</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Opens the Bug report dialog</action> where you can
-report a bug or request a <quote>wishlist</quote> feature.</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Help</guimenu>
-<guimenuitem>About &kappname;</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>This will display version and author
-information.</action></para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<guimenu>Help</guimenu>
-<guimenuitem>About KDE</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>This displays the &kde; version and other basic
-information.</action></para></listitem>
-</varlistentry>
-</variablelist>
-
+<para>
+&kuickshow; has the common &kde; <guimenu>Help</guimenu>
+menu items, for more information read the section <ulink url="help:/fundamentals/ui.html#menus-help">Help Menu</ulink>
+of the &kde; Fundamentals.
+</para>
 </sect1>
 
 </chapter>
@@ -880,12 +787,14 @@ item selected.</entry>
 the first characters of a filename to search for, and if found, the
 file will be selected.</entry>
 </row>
+<!-- not in 0.9.2 kde 4.8
 <row>
 <entry><keycombo
 action="simul">&Ctrl;<keycap>G</keycap></keycombo></entry>
 <entry><quote>Go to</quote> &mdash; lets you enter a folder to go
 to.</entry>
 </row>
+-->
 <row>
 <entry><keycap>Delete</keycap></entry>
 <entry>Deletes the current file.  You will be asked to confirm the
@@ -943,18 +852,13 @@ folder</entry>
 
 <chapter id="credits">
 
-<!-- Include credits for the programmers, documentation writers, and
-contributors here. The license for your software should then be included below
-the credits with a reference to the appropriate license file included in the KDE
-distribution. -->
-
 <title>Credits and License</title>
 
 <para>
 &kuickshow;
 </para>
 <para>
-Program copyright 1998-2002 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail;
+Program copyright 1998-2009 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail;
 </para>
 
 <para>
@@ -984,37 +888,7 @@ Documentation copyright 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail;
 <sect1 id="requirements">
 <title>Requirements</title>
 
-<para>To be written</para>
-<!--
-List any special requirements for your application here. This should include:
-.Libraries or other software that is not included in kdesupport,
-kdelibs, or kdebase.
-.Hardware requirements like amount of RAM, disk space, graphics card
-capabilities, screen resolution, special expansion cards, etc.
-.Operating systems the app will run on. If your app is designed only for a
-specific OS, (you wrote a graphical LILO configurator for example) put this
-information here.
-
-
-<para>
-In order to successfully use &kuickshow;, you need &kde; 1.1. Foobar.lib is
-required in order to support the advanced &kuickshow; features. &kuickshow; uses
-about 5 megs of memory to run, but this may vary depending on your
-platform and configuration.
-</para>
-
-<para>
-All required libraries as well as &kuickshow; itself can be found
-on <ulink url="ftp://ftp.kapp.org">The &kuickshow; home page</ulink>.
-</para>
--->
-
-<!-- For a list of updates, you may refer to the application web site
-or the ChangeLog file, or ... 
-<para>
-You can find a list of changes at <ulink
-url="http://apps.kde.org/kapp">http://apps.kde.org/kapp</ulink>.
-</para>-->
+<para>In order to build and use &kuickshow; you need Imlib library version 1.x.</para>
 </sect1>
 
 <sect1 id="compilation">
