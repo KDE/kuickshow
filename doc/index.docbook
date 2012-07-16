@@ -532,7 +532,6 @@ action.</para></listitem>
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycap>F6</keycap></shortcut>
 <guimenu>View</guimenu>
 <guimenuitem>Tree View</guimenuitem>
 </menuchoice></term>
@@ -541,7 +540,6 @@ action.</para></listitem>
 
 <varlistentry>
 <term><menuchoice>
-<shortcut><keycap>F7</keycap></shortcut>
 <guimenu>View</guimenu>
 <guimenuitem>Detailed Tree View</guimenuitem>
 </menuchoice></term>
