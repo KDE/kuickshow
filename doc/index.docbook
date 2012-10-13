@@ -7,7 +7,7 @@
 ]>
 
 <!-- The language must NOT be changed here. -->
-<book lang="&language;">
+<book id="kuickshow" lang="&language;">
 
 <bookinfo>
 <title>The &kuickshow; Handbook</title>
