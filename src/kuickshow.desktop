@@ -2,6 +2,7 @@
 Name=Kuickshow
 Name[be]=Kuickshow
 Name[bg]=Kuickshow
+Name[bs]=Kuickshow
 Name[ca]=Kuickshow
 Name[ca@valencia]=Kuickshow
 Name[cs]=Kuickshow
@@ -62,6 +63,7 @@ InitialPreference=6
 GenericName=Image Viewer
 GenericName[be]=Праглядчык відарысаў
 GenericName[bg]=Преглед на изображения
+GenericName[bs]=Pregled slika
 GenericName[ca]=Visualitzador d'imatges
 GenericName[ca@valencia]=Visualitzador d'imatges
 GenericName[cs]=Prohlížeč obrázků
