@@ -388,9 +388,9 @@ void KuickShow::initGUI( const QUrl& startDir )
     tBar->addSeparator();
     tBar->addAction(about);
 
+    mBar->addSeparator();
     KHelpMenu* help = new KHelpMenu(this, QString(), false);
     mBar->addMenu(help->menu());
-
 
     sblblUrlInfo = createStatusBarLabel(10);
     sblblMetaInfo = createStatusBarLabel(2);
