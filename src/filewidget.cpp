@@ -291,10 +291,6 @@ void FileWidget::setImage( KFileItem& item, bool enable )
         item.removeExtraData( (void*) MY_TYPE );
 }
 
-#ifdef index
-#undef index
-#endif
-
 KFileItem FileWidget::gotoFirstImage()
 {
     QModelIndex modelIndex = view()->model()->index( 0, 0 );

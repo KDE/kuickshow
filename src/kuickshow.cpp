@@ -78,10 +78,6 @@
 #include "imlibwidget.h"
 #include "kuick.h"
 
-#ifdef index
-#undef index
-#endif
-
 #include "kuickconfigdlg.h"
 #include "kuickdata.h"
 #include "kuickshow.h"

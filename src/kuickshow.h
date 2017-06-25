@@ -31,7 +31,7 @@
 #include <kxmlguiwindow.h>
 #include <kurl.h>
 
-#include <Imlib.h>
+#include "imlib-wrapper.h"
 
 #include "aboutwidget.h"
 

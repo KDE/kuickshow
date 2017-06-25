@@ -17,9 +17,6 @@
 */
 
 
-#ifdef index
-#undef index
-#endif
 #include "kuickconfigdlg.h"
 
 #include <qnamespace.h>
