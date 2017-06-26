@@ -93,7 +93,7 @@ void KuickData::load()
   flipHorizontally = generalGroup.readEntry( "FlipHorizontally",
 					def.flipHorizontally );
   maxUpScale       = generalGroup.readEntry( "MaxUpscale Factor", def.maxUpScale );
-  rotation         = (Rotation) generalGroup.readEntry( "Rotation", int(def.rotation) );
+  int rawRotation  = generalGroup.readEntry( "Rotation", int(def.rotation) );
 
   isModsEnabled    = generalGroup.readEntry( "ApplyDefaultModifications",
 					def.isModsEnabled );
@@ -120,8 +120,15 @@ void KuickData::load()
   idata->load( kc );
 
   // compatibility with KuickShow <= 0.8.3
-  switch ( rotation )
+  switch ( rawRotation )
   {
+      case ROT_0:
+      case ROT_90:
+      case ROT_180:
+      case ROT_270:
+          rotation = (Rotation) rawRotation;
+          break;
+
       case 90:
           rotation = ROT_90;
           break;
@@ -131,9 +138,10 @@ void KuickData::load()
       case 270:
           rotation = ROT_270;
           break;
+
       default:
-          if ( (rotation < ROT_0) || (rotation > ROT_270) )
-              rotation = ROT_0;
+          // everything else is invalid and the default rotation is used
+          rotation = def.rotation;
           break;
   }
 }
