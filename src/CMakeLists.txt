@@ -1,5 +1,5 @@
 
-include_directories(${IMLIB_INCLUDE_DIR} ${KDE4_INCLUDES})
+include_directories(${IMLIB_INCLUDE_DIRS} ${KDE4_INCLUDES})
 
 ########### next target ###############
 
