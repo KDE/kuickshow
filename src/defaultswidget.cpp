@@ -16,23 +16,24 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
+#include "defaultswidget.h"
 
-#include <kcombobox.h>
-#include <kdialog.h>
-#include <klocale.h>
-#include <knuminput.h>
-#include <kstandarddirs.h>
+#include <KComboBox>
+#include <KDialog>
+#include <KLocale>
+#include <KNumInput>
+#include <KStandardDirs>
+
+#include <QCheckBox>
+#include <QGridLayout>
+#include <QGroupBox>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLayout>
+#include <QVBoxLayout>
 
 #include "imlibwidget.h"
-#include "defaultswidget.h"
+
 
 DefaultsWidget::DefaultsWidget( QWidget *parent )
   : QWidget( parent )
@@ -292,5 +293,3 @@ Rotation DefaultsWidget::currentRotation() const
 {
     return (Rotation) comboRotate->currentIndex();
 }
-
-#include "defaultswidget.moc"

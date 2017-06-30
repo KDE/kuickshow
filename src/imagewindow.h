@@ -19,29 +19,29 @@
 #ifndef IMAGEWINDOW_H
 #define IMAGEWINDOW_H
 
-#include <qevent.h>
-//Added by qt3to4:
+#include <KAction>
+#include <KUrl>
+
 #include <QContextMenuEvent>
-#include <QMouseEvent>
 #include <QDragEnterEvent>
-#include <QWheelEvent>
+#include <QDropEvent>
+#include <QEvent>
 #include <QFocusEvent>
 #include <QKeyEvent>
-#include <QResizeEvent>
 #include <QMenu>
-#include <QDropEvent>
-
-#include <kaction.h>
-#include <kurl.h>
+#include <QMouseEvent>
+#include <QResizeEvent>
+#include <QWheelEvent>
 
 #include "imlibwidget.h"
 
+class KActionCollection;
 class QCursor;
 class QString;
 class QWidget;
-class KActionCollection;
 
 class KuickFile;
+
 
 class ImageWindow : public ImlibWidget
 {

@@ -16,24 +16,21 @@
    Boston, MA 02110-1301, USA.
 */
 
-
 #include "kuickconfigdlg.h"
 
+#include <KConfig>
+#include <KGlobal>
+#include <KLocale>
+#include <KShortcutsDialog>
+#include <KVBox>
+
 #include <qnamespace.h>
-#include <kvbox.h>
 
-
-#include <kconfig.h>
-#include <kglobal.h>
-#include <kshortcutsdialog.h>
-#include <klocale.h>
-
-#include "imagewindow.h"
 #include "defaultswidget.h"
 #include "generalwidget.h"
-#include "slideshowwidget.h"
-
+#include "imagewindow.h"
 #include "kuickdata.h"
+#include "slideshowwidget.h"
 
 
 KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent, bool modal )
@@ -103,5 +100,3 @@ void KuickConfigDialog::resetDefaults()
     //imageKeyChooser->allDefault();
     //browserKeyChooser->allDefault();
 }
-
-#include "kuickconfigdlg.moc"

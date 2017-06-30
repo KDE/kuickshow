@@ -16,12 +16,12 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <stdlib.h>
-
-#include <kconfig.h>
-
 #include "imdata.h"
-#include <kconfiggroup.h>
+
+#include <KConfig>
+#include <KConfigGroup>
+
+#include <stdlib.h>
 
 
 ImData::ImData()

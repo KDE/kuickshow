@@ -19,36 +19,33 @@
 #ifndef KUICKSHOW_H
 #define KUICKSHOW_H
 
-#include <qevent.h>
-#include <qpointer.h>
-#include <qstring.h>
-//Added by qt3to4:
-#include <QKeyEvent>
+#include <KFileItem>
+#include <KUrl>
+#include <KXmlGuiWindow>
+
 #include <QDropEvent>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QPointer>
+#include <QString>
 #include <QX11Info>
 
-#include <kfileitem.h>
-#include <kxmlguiwindow.h>
-#include <kurl.h>
-
 #include "imlib-wrapper.h"
-
 #include "aboutwidget.h"
-
-class FileWidget;
-class ImageWindow;
-class ImData;
-class KuickConfigDialog;
 
 class KAccel;
 class KConfig;
 class KToggleAction;
-class AboutWidget;
-
 class KUrl;
 class KUrlComboBox;
 
+class AboutWidget;
+class FileWidget;
+class ImageWindow;
+class ImData;
+class KuickConfigDialog;
 class KuickFile;
+
 
 class DelayedRepeatEvent
 {

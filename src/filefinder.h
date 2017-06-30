@@ -19,14 +19,14 @@
 #ifndef FILEFINDER_H
 #define FILEFINDER_H
 
-#include <qevent.h>
-//Added by qt3to4:
+#include <KLineEdit>
+#include <KUrlCompletion>
+
 #include <QFocusEvent>
 #include <QKeyEvent>
 
-#include <klineedit.h>
+class QWidget;
 
-class KUrlCompletion;
 
 class FileFinder : public KLineEdit
 {

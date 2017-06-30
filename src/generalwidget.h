@@ -19,14 +19,14 @@
 #ifndef GENERALWIDGET_H
 #define GENERALWIDGET_H
 
-#include <qwidget.h>
+#include <QWidget>
 
 #include "kuickdata.h"
 
-class QCheckBox;
 class KColorButton;
-class KLineEdit;
 class KIntNumInput;
+class KLineEdit;
+class QCheckBox;
 
 
 class GeneralWidget : public QWidget

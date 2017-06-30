@@ -19,10 +19,11 @@
 #ifndef ABOUTWIDGET_H
 #define ABOUTWIDGET_H
 
-#include <qevent.h>
-#include <qframe.h>
+#include <QFrame>
 
 class KUrlLabel;
+class QEvent;
+
 
 class AboutWidget : public QFrame
 {

@@ -19,18 +19,18 @@
 #ifndef KUICKFILE_H
 #define KUICKFILE_H
 
-#include <qobject.h>
-#include <qstring.h>
+#include <KUrl>
 
-#include <kurl.h>
-
-class QProgressBar;
+#include <QObject>
+#include <QString>
 
 class KJob;
+class QProgressBar;
 
 namespace KIO {
     class FileCopyJob;
 }
+
 
 class KuickFile : public QObject
 {

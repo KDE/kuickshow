@@ -19,17 +19,20 @@
 #ifndef PRINTING_H
 #define PRINTING_H
 
-#include <qfontmetrics.h>
-#include <qstring.h>
+#include <QFontMetrics>
+#include <QString>
+#include <QWidget>
 
-class QCheckBox;
-class QRadioButton;
-class QPrinter;
 class KComboBox;
 class KIntNumInput;
+class QCheckBox;
+class QPrinter;
+class QRadioButton;
+class QWidget;
 
 class ImageWindow;
 class KuickPrintDialogPage;
+
 
 class Printing
 {

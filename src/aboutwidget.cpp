@@ -16,23 +16,22 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qdatetime.h>
-#include <qevent.h>
-#include <qglobal.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-//Added by qt3to4:
-#include <QMouseEvent>
+#include "aboutwidget.h"
 
-#include <kwindowsystem.h>
-#include <kstandarddirs.h>
+#include <KStandardDirs>
+#include <KWindowSystem>
+
+#include <QDateTime>
+#include <QEvent>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLayout>
+#include <QMouseEvent>
 
 #include "imlibwidget.h"
 #include "kurlwidget.h"
 #include "version.h"
 
-#include "aboutwidget.h"
 
 AboutWidget::AboutWidget( QWidget *parent )
     : QFrame( parent )
@@ -110,4 +109,3 @@ bool AboutWidget::eventFilter( QObject *o, QEvent *e )
 
     return QFrame::eventFilter( o, e );
 }
-#include "aboutwidget.moc"

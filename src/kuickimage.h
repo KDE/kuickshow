@@ -19,10 +19,10 @@
 #ifndef KUICKIMAGE_H
 #define KUICKIMAGE_H
 
-#include <qimage.h>
-#include <qobject.h>
+#include <KUrl>
 
-#include <kurl.h>
+#include <QImage>
+#include <QObject>
 
 #include "kuickdata.h"
 #include "kuickfile.h"

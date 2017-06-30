@@ -19,7 +19,10 @@
 #ifndef KURLWIDGET_H
 #define KURLWIDGET_H
 
-#include <kurllabel.h>
+#include <KUrlLabel>
+
+class QWidget;
+
 
 class KURLWidget : public KUrlLabel
 {

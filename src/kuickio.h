@@ -19,11 +19,10 @@
 #ifndef KUICKIO_H
 #define KUICKIO_H
 
+#include <QObject>
+
 class QWidget;
 
-#include <qobject.h>
-
-#include <kurl.h>
 
 class KuickIO : public QObject
 {

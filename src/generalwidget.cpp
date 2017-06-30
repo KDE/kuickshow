@@ -16,26 +16,26 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
+#include "generalwidget.h"
 
-//Added by qt3to4:
-#include <QPixmap>
-#include <QVBoxLayout>
+#include <KApplication>
+#include <KColorButton>
+#include <KDialog>
+#include <KIconLoader>
+#include <KLineEdit>
+#include <KLocale>
+#include <KNumInput>
+#include <KToolInvocation>
+#include <KUrlLabel>
+
+#include <QCheckBox>
 #include <QGridLayout>
 #include <QGroupBox>
-#include <kapplication.h>
-#include <kcolorbutton.h>
-#include <kdialog.h>
-#include <kiconloader.h>
-#include <klineedit.h>
-#include <klocale.h>
-#include <knuminput.h>
-#include <kurllabel.h>
-#include <ktoolinvocation.h>
+#include <QLabel>
+#include <QLayout>
+#include <QPixmap>
+#include <QVBoxLayout>
 
-#include "generalwidget.h"
 
 GeneralWidget::GeneralWidget( QWidget *parent )
   : QWidget( parent )
@@ -180,5 +180,3 @@ void GeneralWidget::useOwnPalette()
 {
     cbFastRemap->setEnabled( cbOwnPalette->isChecked() );
 }
-
-#include "generalwidget.moc"

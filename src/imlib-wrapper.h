@@ -14,6 +14,17 @@
 
 #undef index
 #undef rindex
+
+#undef Color
+#undef CursorShape
+#undef FocusIn
+#undef FocusOut
+#undef FontChange
+#undef GrayScale
+#undef KeyPress
+#undef KeyRelease
 #undef None
+#undef Status
+#undef Unsorted
 
 #endif

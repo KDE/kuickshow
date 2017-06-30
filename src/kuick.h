@@ -19,11 +19,11 @@
 #ifndef KUICKGLOBALS_H
 #define KUICKGLOBALS_H
 
-#include <qrect.h>
-#include <qsize.h>
+#include <KWindowSystem>
 
-#include <kwindowsystem.h>
-#include <kwindowsystem.h>
+#include <QRect>
+#include <QSize>
+
 
 class Kuick
 {

@@ -16,16 +16,15 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qstring.h>
-
-#include <kaboutdata.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-#include <klocale.h>
-#include <kdebug.h>
+#include <KAboutData>
+#include <KApplication>
+#include <KCmdLineArgs>
+#include <KDebug>
+#include <KLocale>
 
 #include "kuickshow.h"
 #include "version.h"
+
 
 extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
 {

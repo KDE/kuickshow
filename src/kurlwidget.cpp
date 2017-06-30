@@ -16,10 +16,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "kurlwidget.moc"
+#include "kurlwidget.h"
 
-#include <kurl.h>
-#include <krun.h>
+#include <KRun>
+#include <KUrl>
+
 
 KURLWidget::KURLWidget(const QString& text, QWidget *parent)
     : KUrlLabel( parent )

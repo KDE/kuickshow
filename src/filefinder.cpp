@@ -16,19 +16,19 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qnamespace.h>
-//Added by qt3to4:
+#include "filefinder.h"
+
+#include <KApplication>
+#include <KCompletionBox>
+#include <KConfig>
+#include <KConfigGroup>
+#include <KGlobal>
+#include <KUrlCompletion>
+
 #include <QFocusEvent>
 #include <QKeyEvent>
+#include <qnamespace.h>
 
-#include <kapplication.h>
-#include <kconfig.h>
-#include <kglobal.h>
-#include <kcompletionbox.h>
-#include <kurlcompletion.h>
-#include <kconfiggroup.h>
-
-#include "filefinder.h"
 
 FileFinder::FileFinder( QWidget *parent )
     : KLineEdit( parent )
@@ -99,5 +99,3 @@ void FileFinder::slotAccept( const QString& dir )
     hide();
     emit enterDir( dir );
 }
-
-#include "filefinder.moc"

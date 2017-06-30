@@ -19,17 +19,18 @@
 #ifndef DEFAULTSWIDGET_H
 #define DEFAULTSWIDGET_H
 
-#include "kuickdata.h"
-//Added by qt3to4:
-#include <QLabel>
-class ImlibWidget;
+#include <QWidget>
 
+#include "kuickdata.h"
+
+class KComboBox;
+class KIntNumInput;
 class QCheckBox;
 class QGroupBox;
 class QLabel;
 
-class KComboBox;
-class KIntNumInput;
+class ImlibWidget;
+
 
 class DefaultsWidget : public QWidget
 {

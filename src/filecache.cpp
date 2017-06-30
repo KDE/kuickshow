@@ -15,16 +15,16 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#include <unistd.h>
-
-#include <qstring.h>
-
-#include <kcomponentdata.h>
-#include <kdebug.h>
-#include <kstandarddirs.h>
-#include <ktempdir.h>
 
 #include "filecache.h"
+
+#include <KComponentData>
+#include <KDebug>
+#include <KStandardDirs>
+#include <KTempDir>
+
+#include <unistd.h>
+
 
 FileCache * FileCache::s_self;
 

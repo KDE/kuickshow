@@ -16,16 +16,15 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qlayout.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-
-#include <kdialog.h>
-#include <klocale.h>
-#include <knuminput.h>
-
 #include "slideshowwidget.h"
+
+#include <KDialog>
+#include <KLocale>
+#include <KNumInput>
+
+#include <QCheckBox>
+#include <QLayout>
+#include <QVBoxLayout>
 
 
 SlideShowWidget::SlideShowWidget( QWidget *parent )
@@ -78,5 +77,3 @@ void SlideShowWidget::applySettings( KuickData& data )
     data.slideshowFullscreen = m_fullScreen->isChecked();
     data.slideshowStartAtFirst = !m_startWithCurrent->isChecked();
 }
-
-#include "slideshowwidget.moc"

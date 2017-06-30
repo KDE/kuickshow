@@ -16,67 +16,61 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <stdlib.h>
-#include <kactioncollection.h>
-#include <kstandardaction.h>
-#include <ktogglefullscreenaction.h>
-#include <qcheckbox.h>
-#include <qcursor.h>
-#include <qdrawutil.h>
-#include <qnamespace.h>
-#include <qpainter.h>
-#include <qpen.h>
+#include "imagewindow.h"
+
+#include <KActionCollection>
+#include <KApplication>
+#include <KConfig>
+#include <KCursor>
+#include <KDebug>
+#include <KFileDialog>
+#include <KGlobalSettings>
+#include <KIconLoader>
+#include <KLocale>
+#include <KMessageBox>
+#include <KPropertiesDialog>
+#include <KStandardAction>
+#include <KStandardDirs>
+#include <KStandardGuiItem>
+#include <KStandardShortcut>
+#include <KTemporaryFile>
+#include <KToggleFullScreenAction>
+#include <KWindowSystem>
+#include <kdeversion.h>
+
 #include <QBitmap>
-#ifdef KDE_USE_FINAL
-#undef GrayScale
-#undef Color
-#endif
-#include <qrect.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qtimer.h>
-//Added by qt3to4:
-#include <QWheelEvent>
-#include <QPixmap>
+#include <QCheckBox>
+#include <QContextMenuEvent>
+#include <QCursor>
+#include <QDragEnterEvent>
+#include <QDropEvent>
 #include <QFocusEvent>
 #include <QKeyEvent>
-#include <QDropEvent>
-#include <QContextMenuEvent>
-#include <QResizeEvent>
-#include <QDragEnterEvent>
 #include <QMouseEvent>
+#include <QPainter>
+#include <QPen>
+#include <QPixmap>
+#include <QRect>
+#include <QResizeEvent>
+#include <QString>
+#include <QStringList>
+#include <QTimer>
+#include <QWheelEvent>
+#include <qdrawutil.h>
+#include <qnamespace.h>
 
-#include <kapplication.h>
-#include <kconfig.h>
-#include <kcursor.h>
-#include <kdebug.h>
-#include <kdeversion.h>
-#ifdef KDE_USE_FINAL
-#undef Unsorted
-#endif
-#include <kfiledialog.h>
-#include <kiconloader.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kpropertiesdialog.h>
-#include <kstandardshortcut.h>
-#include <kstandardguiitem.h>
-#include <kstandarddirs.h>
-#include <kglobalsettings.h>
-#include <ktemporaryfile.h>
-#include <kwindowsystem.h>
+#include <KIO/NetAccess>
+
 #include <netwm.h>
-#include <kio/netaccess.h>
+#include <stdlib.h>
 
-#include "imagewindow.h"
+#include "filecache.h"
 #include "imagemods.h"
 #include "kuick.h"
-#include "kuickimage.h"
-#include "filecache.h"
 #include "kuickdata.h"
+#include "kuickimage.h"
 #include "printing.h"
 
-#undef GrayScale
 
 QCursor *ImageWindow::s_handCursor = 0L;
 
@@ -1309,5 +1303,3 @@ bool ImageWindow::isCursorHidden() const
 {
     return cursor().shape() == Qt::BlankCursor;
 }
-
-#include "imagewindow.moc"

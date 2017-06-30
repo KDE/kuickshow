@@ -16,39 +16,35 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qnamespace.h>
-//Added by qt3to4:
-#include <QKeyEvent>
-#include <QResizeEvent>
-#include <QEvent>
-#include <QMenuItem>
-#include <QAbstractItemView>
-#include <QAbstractItemModel>
-#include <QModelIndex>
-
-#include <kactioncollection.h>
-#include <kactionmenu.h>
-#include <kdebug.h>
-#include <kdeversion.h>
-#include <kglobal.h>
-#include <kglobalsettings.h>
-#include <klocale.h>
-#include <kmenu.h>
-#include <kpropertiesdialog.h>
-#include <kurlcompletion.h>
-#include <kactioncollection.h>
-#include <kactionmenu.h>
-#include <kconfiggroup.h>
-#include <kfileitemactions.h>
-#include <kfileitemlistproperties.h>
-#include "filefinder.h"
 #include "filewidget.h"
+
+#include <KActionCollection>
+#include <KActionMenu>
+#include <KConfigGroup>
+#include <KDebug>
+#include <KFileItemActions>
+#include <KFileItemListProperties>
+#include <KGlobal>
+#include <KGlobalSettings>
+#include <KLocale>
+#include <KMenu>
+#include <KPropertiesDialog>
+#include <KUrlCompletion>
+#include <kdeversion.h>
+
+#include <QAbstractItemModel>
+#include <QAbstractItemView>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QMenuItem>
+#include <QModelIndex>
+#include <QResizeEvent>
+#include <qnamespace.h>
+
+#include "filefinder.h"
 #include "kuickdata.h"
 #include "kuickshow.h"
 
-#ifdef KeyPress
-#undef KeyPress
-#endif
 
 FileWidget::FileWidget( const KUrl& url, QWidget *parent )
     : KDirOperator( url, parent ),
@@ -510,5 +506,3 @@ void FileWidget::resizeEvent( QResizeEvent *e )
 	m_fileFinder->move( width()  - m_fileFinder->width(),
 			    height() - m_fileFinder->height() );
 }
-
-#include "filewidget.moc"

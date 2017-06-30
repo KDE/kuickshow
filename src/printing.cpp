@@ -16,34 +16,34 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qfont.h>
-#include <qfontmetrics.h>
-#include <qlayout.h>
-#include <qimage.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QGridLayout>
-#include <qpainter.h>
-#include <qradiobutton.h>
-//
-#include <qcolor.h>
-#include <QtGui/QGroupBox>
-#include <QtGui/QPrinter>
-#include <QtGui/QPrintDialog>
+#include "printing.h"
 
-#include <kcombobox.h>
-#include <kdialog.h>
-#include <klocale.h>
-#include <kdebug.h>
-#include <kglobalsettings.h>
-#include <knuminput.h>
-#include <ktemporaryfile.h>
-#include <kdeprintdialog.h>
+#include <KComboBox>
+#include <KDebug>
+#include <KDEPrintDialog>
+#include <KDialog>
+#include <KGlobalSettings>
+#include <KLocale>
+#include <KNumInput>
+#include <KTemporaryFile>
+
+#include <QCheckBox>
+#include <QColor>
+#include <QFont>
+#include <QFontMetrics>
+#include <QGridLayout>
+#include <QGroupBox>
+#include <QImage>
+#include <QLayout>
+#include <QPainter>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QRadioButton>
+#include <QVBoxLayout>
 
 #include "imagewindow.h"
-#include "printing.h"
 #include "version.h"
+
 
 bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
 {
@@ -374,5 +374,3 @@ float KuickPrintDialogPage::pixelsToUnit( int /*pixels*/ ) const
 {
     return 1.0; // ###
 }
-
-#include "printing.moc"

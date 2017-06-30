@@ -16,14 +16,15 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <stdlib.h>
-
-#include <qcolor.h>
-#include <ksharedconfig.h>
-#include <kglobal.h>
-#include <kconfiggroup.h>
-
 #include "kuickdata.h"
+
+#include <KConfigGroup>
+#include <KGlobal>
+#include <KSharedConfig>
+
+#include <QColor>
+
+#include <stdlib.h>
 
 
 KuickData::KuickData()

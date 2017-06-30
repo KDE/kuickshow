@@ -19,13 +19,14 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
-#include <qevent.h>
-#include <qstring.h>
-#include <qwidget.h>
-//Added by qt3to4:
-#include <QResizeEvent>
+#include <QEvent>
+#include <QString>
+#include <QWidget>
+
+class QResizeEvent;
 
 class FileView;
+
 
 class MainWidget : public QWidget
 {

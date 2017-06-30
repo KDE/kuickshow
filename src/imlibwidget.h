@@ -12,15 +12,14 @@
 #ifndef IMLIBWIDGET_H
 #define IMLIBWIDGET_H
 
-#include <qvariant.h>
+#include <KUrl>
 
-#include <qcursor.h>
-#include <qevent.h>
-#include <qtimer.h>
-#include <qwidget.h>
+#include <QCursor>
+#include <QEvent>
+#include <QTimer>
+#include <QVariant>
+#include <QWidget>
 #include <QX11Info>
-
-#include <kurl.h>
 
 // #include those AFTER Qt-includes!
 #include "imlib-wrapper.h"
@@ -33,6 +32,7 @@
 
 class KuickFile;
 class KuickImage;
+
 
 class ImageCache : public QObject
 {

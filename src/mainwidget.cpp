@@ -16,11 +16,10 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include "mainwidget.h"
+
 #include "fileview.h"
 #include "kuickdata.h"
-#include "mainwidget.h"
-//Added by qt3to4:
-#include <QResizeEvent>
 
 
 MainWidget::MainWidget( QString startDir, QWidget *parent )
@@ -42,4 +41,3 @@ void MainWidget::resizeEvent( QResizeEvent * )
 {
   box->resize( width(), height() );
 }
-#include "mainwidget.moc"

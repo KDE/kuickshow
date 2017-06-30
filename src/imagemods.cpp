@@ -16,9 +16,12 @@
    Boston, MA 02110-1301, USA.
  */
 
-#include <kdebug.h>
-#include "kuickdata.h"
 #include "imagemods.h"
+
+#include <KDebug>
+
+#include "kuickdata.h"
+
 
 QCache<KUrl,ImageMods> * ImageMods::s_modifications = 0L;
 

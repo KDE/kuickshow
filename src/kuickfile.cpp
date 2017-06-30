@@ -15,18 +15,21 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#include <qfile.h>
 
-#include <kdebug.h>
-#include <kdeversion.h>
-#include <klocale.h>
-#include <kprogressdialog.h>
-#include <kio/job.h>
-#include <kio/netaccess.h>
+#include "kuickfile.h"
+
+#include <KDebug>
+#include <KLocale>
+#include <KProgressDialog>
 #include <KTemporaryFile>
+#include <KIO/Job>
+#include <KIO/NetAccess>
+#include <kdeversion.h>
+
+#include <QFile>
 
 #include "filecache.h"
-#include "kuickfile.h"
+
 
 KuickFile::KuickFile(const KUrl& url)
     : QObject(),
@@ -207,5 +210,3 @@ void KuickFile::slotProgress( KJob *job, unsigned long percent )
 bool operator==( const KuickFile& first, const KuickFile& second ) {
     return first.url().equals( second.url() );
 }
-
-#include "kuickfile.moc"

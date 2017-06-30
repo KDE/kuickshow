@@ -19,16 +19,16 @@
 #ifndef FILEWIDGET_H
 #define FILEWIDGET_H
 
-#include <qevent.h>
-//Added by qt3to4:
-#include <QResizeEvent>
+#include <KDirModel>
+#include <KDirOperator>
 
-#include <kdiroperator.h>
-#include <kdirmodel.h>
-
-class FileFinder;
 class KFileItem;
 class KFileItemActions;
+class QEvent;
+class QResizeEvent;
+
+class FileFinder;
+
 
 class FileWidget : public KDirOperator
 {

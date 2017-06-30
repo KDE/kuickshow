@@ -16,33 +16,32 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "kuickdata.h"
+#include "imlibwidget.h"
 
-#include <sys/time.h>
-#include <unistd.h>
+#include <KCursor>
+#include <KDebug>
+#include <KFileMetaInfo>
+#include <KImageIO>
 
-#include <stdlib.h>
-#include <assert.h>
-
-#include <qcolor.h>
-#include <qfile.h>
-#include <qglobal.h>
-#include <qimage.h>
-#include <qobject.h>
-#include <qpalette.h>
-//Added by qt3to4:
 #include <QCloseEvent>
+#include <QColor>
+#include <QFile>
+#include <QImage>
+#include <QObject>
+#include <QPalette>
+#include <QtGlobal>
 
-#include <kcursor.h>
-#include <kdebug.h>
-#include <kfilemetainfo.h>
-#include <kimageio.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/time.h>
 
 #include "filecache.h"
+#include "kuickdata.h"
 #include "kuickfile.h"
 #include "kuickimage.h"
-#include "imlibwidget.h"
 #include "imagemods.h"
+
 
 const int ImlibWidget::ImlibOffset = 256;
 
@@ -717,5 +716,3 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 
     return im;
 }
-
-#include "imlibwidget.moc"

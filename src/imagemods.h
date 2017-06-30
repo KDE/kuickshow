@@ -19,12 +19,13 @@
 #ifndef IMAGE_MODS_H
 #define IMAGE_MODS_H
 
+#include <QCache>
+
 #include "imlibwidget.h"
 #include "kuickimage.h"
 
-#include <QCache>
-
 class ImData;
+
 
 class ImageMods
 {

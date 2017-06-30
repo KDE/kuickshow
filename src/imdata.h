@@ -1,4 +1,3 @@
-#include <ksharedconfig.h>
 /* This file is part of the KDE project
    Copyright (C) 1998,1999,2000,2001 Carsten Pfeiffer <pfeiffer@kde.org>
 
@@ -20,7 +19,9 @@
 #ifndef IMBLIBCONFIG_H
 #define IMBLIBCONFIG_H
 
-class KConfigBase;
+#include <KSharedConfig>
+
+
 class ImData
 {
 public:

@@ -16,76 +16,74 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <stdio.h>
-#include <assert.h>
-#include <qtextstream.h>
-#include <qdir.h>
-#include <qdesktopwidget.h>
-#include <qdialog.h>
-#include <qglobal.h>
-#include <qnamespace.h>
-#include <qlayout.h>
-#include <qsize.h>
-#include <qstring.h>
-//Added by qt3to4:
-#include <QKeyEvent>
-#include <QEvent>
-#include <QDropEvent>
-#include <QLabel>
-#include <QMenu>
-#include <QMouseEvent>
-#include <QMenuItem>
-#include <QAbstractItemView>
-#include <kaboutdata.h>
-#include <kactioncollection.h>
-#include <kaction.h>
-#include <kactionmenu.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-#include <kconfig.h>
-#include <kcursor.h>
-#include <kdebug.h>
-#include <kdeversion.h>
-#include <kactionmenu.h>
-#include <kfiledialog.h>
-#include <kfilemetainfo.h>
-#include <kglobal.h>
-#include <khelpmenu.h>
-#include <kiconloader.h>
-#include <kio/netaccess.h>
-#include <klocale.h>
-#include <kmenubar.h>
-#include <kmessagebox.h>
-#include <kmenu.h>
-#include <kpropertiesdialog.h>
-#include <kprotocolmanager.h>
-#include <kstatusbar.h>
-#include <kstandardaction.h>
-#include <kstandarddirs.h>
+#include "kuickshow.h"
+
+#include <KAboutData>
+#include <KAction>
+#include <KActionCollection>
+#include <KActionMenu>
+#include <KApplication>
+#include <KCmdLineArgs>
+#include <KConfig>
+#include <KConfigGroup>
+#include <KCursor>
+#include <KDebug>
+#include <KFileDialog>
+#include <KFileMetaInfo>
+#include <KGlobal>
+#include <KHelpMenu>
+#include <KIconLoader>
+#include <KLocale>
+#include <KMenu>
+#include <KMenuBar>
+#include <KMessageBox>
+#include <KPropertiesDialog>
+#include <KProtocolManager>
+#include <KStatusBar>
+#include <KStandardAction>
+#include <KStandardDirs>
 #include <KStandardGuiItem>
-#include <kstartupinfo.h>
-#include <ktoolbar.h>
-#include <kurlcombobox.h>
-#include <kurlcompletion.h>
-#include <kwindowsystem.h>
-#include <kstandardshortcut.h>
-#include <kconfiggroup.h>
+#include <KStandardShortcut>
+#include <KStartupInfo>
+#include <KToolBar>
+#include <KUrlComboBox>
+#include <KUrlCompletion>
+#include <KWindowSystem>
+#include <KIO/NetAccess>
+#include <kdeversion.h>
+
+#include <QAbstractItemView>
+#include <QDesktopWidget>
+#include <QDialog>
+#include <QDir>
+#include <QDropEvent>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QLabel>
+#include <QLayout>
+#include <QMenu>
+#include <QMenuItem>
+#include <QMouseEvent>
+#include <QSize>
+#include <QString>
+#include <QTextStream>
+#include <QtGlobal>
+#include <qnamespace.h>
+
+#include <assert.h>
+#include <stdio.h>
+
 #include "aboutwidget.h"
 #include "filecache.h"
 #include "filewidget.h"
-#include "imdata.h"
 #include "imagewindow.h"
+#include "imdata.h"
 #include "imlibwidget.h"
 #include "kuick.h"
-
 #include "kuickconfigdlg.h"
 #include "kuickdata.h"
-#include "kuickshow.h"
 #include "version.h"
 
-#ifdef KeyPress
-#undef KeyPress
-#endif
 
 KuickData* kdata;
 
@@ -1434,5 +1432,3 @@ KActionCollection * KuickShow::actionCollection() const
 
     return KXmlGuiWindow::actionCollection();
 }
-
-#include "kuickshow.moc"

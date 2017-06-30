@@ -16,8 +16,10 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "imagemods.h"
 #include "kuickimage.h"
+
+#include "imagemods.h"
+
 
 KuickImage::KuickImage( const KuickFile * file, ImlibImage *im, ImlibData *id)
     : QObject( 0L )
@@ -555,5 +557,3 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 //	return dst.copy();
 }
 #endif
-
-#include "kuickimage.moc"

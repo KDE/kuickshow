@@ -19,10 +19,13 @@
 #ifndef SLIDESHOWWIDGET_H
 #define SLIDESHOWWIDGET_H
 
+#include <QWidget>
+
 #include "kuickdata.h"
 
-class QCheckBox;
 class KIntNumInput;
+class QCheckBox;
+
 
 class SlideShowWidget : public QWidget
 {
