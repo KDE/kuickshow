@@ -1,9 +1,8 @@
 
-include_directories(${IMLIB_INCLUDE_DIRS} ${KDE4_INCLUDES})
+# KuickShow main application
 
-########### next target ###############
-
-set(kuickshow_KDEINIT_SRCS 
+set(CMAKE_AUTOMOC ON)
+set(kuickshow_KDEINIT_SRCS
    kuickshow.cpp 
    aboutwidget.cpp 
    generalwidget.cpp 
@@ -25,15 +24,20 @@ set(kuickshow_KDEINIT_SRCS
    imagemods.cpp
    printing.cpp )
 
-set(CMAKE_AUTOMOC ON)
-kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
 
+# target kdeinit_kuickshow
+kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
+target_compile_definitions(kdeinit_kuickshow PRIVATE ${IMLIB_DEFINITIONS})
+target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS} ${KDE4_INCLUDES})
 target_link_libraries(kdeinit_kuickshow ${X11_LIBRARIES} ${IMLIB_LIBRARIES} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS})
 
 install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
+
+# target kuickshow
 target_link_libraries( kuickshow kdeinit_kuickshow )
 install(TARGETS kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
 
 ########### install files ###############
 
