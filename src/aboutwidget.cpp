@@ -29,7 +29,7 @@
 #include <QMouseEvent>
 
 #include "imlibwidget.h"
-#include "kurlwidget.h"
+#include "kuickurlwidget.h"
 #include "version.h"
 
 
@@ -62,7 +62,7 @@ AboutWidget::AboutWidget( QWidget *parent )
 				 " was brought to you by", gBox);
     authors->setAlignment( Qt::AlignCenter );
 
-    m_homepage = new KURLWidget("Carsten Pfeiffer", gBox);
+    m_homepage = new KuickUrlWidget("Carsten Pfeiffer", gBox);
     m_homepage->setUrl( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
     m_homepage->setAlignment( Qt::AlignCenter );
 

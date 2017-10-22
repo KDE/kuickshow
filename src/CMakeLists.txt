@@ -17,7 +17,7 @@ set(kuickshow_KDEINIT_SRCS
    kuickimage.cpp
    imdata.cpp 
    filefinder.cpp 
-   kurlwidget.cpp 
+   kuickurlwidget.cpp
    filewidget.cpp 
    kuick.cpp 
    imlibwidget.cpp 

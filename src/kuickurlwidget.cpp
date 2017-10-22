@@ -16,13 +16,13 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "kurlwidget.h"
+#include "kuickurlwidget.h"
 
 #include <KRun>
 #include <KUrl>
 
 
-KURLWidget::KURLWidget(const QString& text, QWidget *parent)
+KuickUrlWidget::KuickUrlWidget(const QString& text, QWidget *parent)
     : KUrlLabel( parent )
 {
     setText( text );
@@ -30,7 +30,7 @@ KURLWidget::KURLWidget(const QString& text, QWidget *parent)
     setUseTips( true );
 }
 
-void KURLWidget::run()
+void KuickUrlWidget::run()
 {
     KUrl ku( url() );
     if ( ku.isValid() ) {

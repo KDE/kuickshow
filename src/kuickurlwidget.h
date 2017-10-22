@@ -24,12 +24,12 @@
 class QWidget;
 
 
-class KURLWidget : public KUrlLabel
+class KuickUrlWidget : public KUrlLabel
 {
     Q_OBJECT
 
 public:
-    KURLWidget( const QString& text, QWidget *parent );
+    KuickUrlWidget( const QString& text, QWidget *parent );
 
 protected slots:
     virtual void run();
