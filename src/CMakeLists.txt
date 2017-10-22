@@ -27,6 +27,7 @@ set(kuickshow_KDEINIT_SRCS
 
 # target kdeinit_kuickshow
 kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
+target_compile_options(kdeinit_kuickshow PRIVATE -std=c++11 -Wall --pedantic)
 target_compile_definitions(kdeinit_kuickshow PRIVATE ${IMLIB_DEFINITIONS})
 target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS} ${KDE4_INCLUDES})
 target_link_libraries(kdeinit_kuickshow ${X11_LIBRARIES} ${IMLIB_LIBRARIES} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS})
