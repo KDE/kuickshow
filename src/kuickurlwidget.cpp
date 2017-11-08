@@ -22,6 +22,12 @@
 #include <KUrl>
 
 
+KuickUrlWidget::KuickUrlWidget(QWidget* parent) : KUrlLabel(parent)
+{
+    connect(this, SIGNAL(leftClickedUrl()), SLOT(run()));
+    setUseTips(true);
+}
+
 KuickUrlWidget::KuickUrlWidget(const QString& text, QWidget *parent)
     : KUrlLabel( parent )
 {

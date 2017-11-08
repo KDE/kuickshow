@@ -29,6 +29,7 @@ class KuickUrlWidget : public KUrlLabel
     Q_OBJECT
 
 public:
+    explicit KuickUrlWidget(QWidget *parent = 0);
     KuickUrlWidget( const QString& text, QWidget *parent );
 
 protected slots:

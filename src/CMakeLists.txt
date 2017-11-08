@@ -25,6 +25,11 @@ set(kuickshow_KDEINIT_SRCS
    imagemods.cpp
    printing.cpp )
 
+kde4_add_ui_files(kuickshow_KDEINIT_SRCS
+   aboutwidget.ui
+)
+
+
 kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
 
 target_link_libraries(kdeinit_kuickshow ${X11_LIBRARIES} ${IMLIB_LIBRARIES} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS})
