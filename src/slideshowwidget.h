@@ -25,6 +25,7 @@
 
 class KIntNumInput;
 class QCheckBox;
+namespace Ui { class SlideShowWidget; }
 
 
 class SlideShowWidget : public QWidget
@@ -38,10 +39,7 @@ public:
     virtual void applySettings( KuickData& data );
 
 private:
-    KIntNumInput *m_delayTime;
-    KIntNumInput *m_cycles;
-    QCheckBox    *m_fullScreen;
-    QCheckBox    *m_startWithCurrent;
+    Ui::SlideShowWidget* ui;
 };
 
 #endif // SLIDESHOWWIDGET_H
