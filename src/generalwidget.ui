@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GeneralWidget</class>
+ <widget class="QWidget" name="GeneralWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>364</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>General</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="0" colspan="2">
+    <widget class="QCheckBox" name="cbLastdir">
+     <property name="text">
+      <string>Remember last folder</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="KLineEdit" name="editFilter"/>
+   </item>
+   <item row="6" column="0" colspan="2">
+    <widget class="QGroupBox" name="gbox2">
+     <property name="title">
+      <string>Quality/Speed</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QCheckBox" name="cbSmoothScale">
+        <property name="text">
+         <string>Smooth scaling</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="cbFastRender">
+        <property name="text">
+         <string>Fast rendering</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="cbDither16bit">
+        <property name="text">
+         <string>Dither in HiColor (15/16bit) modes</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="cbDither8bit">
+        <property name="text">
+         <string>Dither in LowColor (&lt;=8bit) modes</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="cbOwnPalette">
+        <property name="text">
+         <string>Use own color palette</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="cbFastRemap">
+        <property name="text">
+         <string>Fast palette remapping</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="KIntNumInput" name="maxCacheSpinBox">
+        <property name="label">
+         <string>Maximum cache size: </string>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>400</number>
+        </property>
+        <property name="suffix">
+         <string> MB</string>
+        </property>
+        <property name="specialValueText">
+         <string>Unlimited</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QCheckBox" name="cbFullscreen">
+     <property name="text">
+      <string>Fullscreen mode</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="KColorButton" name="colorButton"/>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="l0">
+     <property name="text">
+      <string>Background color:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="l1">
+     <property name="text">
+      <string>Show only files with extension: </string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2" alignment="Qt::AlignRight">
+    <widget class="KUrlLabel" name="logo">
+     <property name="tipText">
+      <string>Open KuickShow Website</string>
+     </property>
+     <property name="useTips">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QCheckBox" name="cbPreload">
+     <property name="text">
+      <string>Preload next image</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KColorButton</class>
+   <extends>QPushButton</extends>
+   <header>kcolorbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>klineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KUrlLabel</class>
+   <extends>QLabel</extends>
+   <header>kurllabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KIntNumInput</class>
+   <extends>QWidget</extends>
+   <header>knuminput.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
