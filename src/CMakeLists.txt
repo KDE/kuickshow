@@ -28,6 +28,7 @@ set(kuickshow_KDEINIT_SRCS
 kde4_add_ui_files(kuickshow_KDEINIT_SRCS
    aboutwidget.ui
    generalwidget.ui
+   defaultswidget.ui
 )
 
 
