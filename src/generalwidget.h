@@ -48,9 +48,6 @@ private:
     KLineEdit   	*editFilter;
     KIntNumInput 	*maxCacheSpinBox;
 
-    KIntNumInput 	*sbMaxWidth, *sbMaxHeight;
-    KIntNumInput 	*sbZoomFactor;
-
     KColorButton        *colorButton;
 
 private slots:
