@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998,1999 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998,1999,2000 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -16,28 +16,25 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "mainwidget.h"
+#ifndef KURLWIDGET_H
+#define KURLWIDGET_H
 
-#include "fileview.h"
-#include "kuickdata.h"
+#include <KUrlLabel>
 
-
-MainWidget::MainWidget( QString startDir, QWidget *parent )
-    : QWidget( parent )
-{	
-  box = new FileView( startDir, true, (QDir::Dirs | QDir::Files),
-		      this, "fileview" );
-}
+class QWidget;
 
 
-MainWidget::~MainWidget()
+class KuickUrlWidget : public KUrlLabel
 {
+    Q_OBJECT
 
-}
+public:
+    explicit KuickUrlWidget(QWidget *parent = 0);
+    KuickUrlWidget( const QString& text, QWidget *parent );
 
+protected slots:
+    virtual void run();
 
-// for now, no layout managers
-void MainWidget::resizeEvent( QResizeEvent * )
-{
-  box->resize( width(), height() );
-}
+};
+
+#endif

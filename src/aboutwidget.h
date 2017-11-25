@@ -22,7 +22,8 @@
 #include <QFrame>
 
 class KUrlLabel;
-class QEvent;
+class QMouseEvent;
+namespace Ui { class AboutWidget; }
 
 
 class AboutWidget : public QFrame
@@ -34,10 +35,10 @@ public:
 
 protected:
     ~AboutWidget();
-    bool eventFilter( QObject*, QEvent * );
+    void mouseReleaseEvent(QMouseEvent* event) /* override */;
 
 private:
-    KUrlLabel *m_homepage;
+    Ui::AboutWidget* ui;
 
 };
 

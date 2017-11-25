@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2000,2001 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998,1999,2000 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -16,24 +16,30 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KUICKIO_H
-#define KUICKIO_H
+#include "kuickurlwidget.h"
 
-#include <QObject>
-
-class QWidget;
+#include <KRun>
+#include <KUrl>
 
 
-class KuickIO : public QObject
+KuickUrlWidget::KuickUrlWidget(QWidget* parent) : KUrlLabel(parent)
 {
-    Q_OBJECT
+    connect(this, SIGNAL(leftClickedUrl()), SLOT(run()));
+    setUseTips(true);
+}
 
-public:
-    static KuickIO * self( QWidget *parent );
+KuickUrlWidget::KuickUrlWidget(const QString& text, QWidget *parent)
+    : KUrlLabel( parent )
+{
+    setText( text );
+    connect( this, SIGNAL( leftClickedUrl() ), SLOT( run() ));
+    setUseTips( true );
+}
 
-private:
-    static QWidget * s_parent;
-    static KuickIO * s_self;
-};
-
-#endif // KUICKIO_H
+void KuickUrlWidget::run()
+{
+    KUrl ku( url() );
+    if ( ku.isValid() ) {
+	(void) new KRun( ku, this );
+    }
+}

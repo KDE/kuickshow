@@ -32,6 +32,7 @@ class QWidget;
 
 class ImageWindow;
 class KuickPrintDialogPage;
+namespace Ui { class KuickPrintDialogPage; }
 
 
 class Printing
@@ -81,6 +82,8 @@ private slots:
     void toggleScaling( bool enable );
 
 private:
+    Ui::KuickPrintDialogPage* ui;
+
     // return values in pixels!
     int scaleWidth() const;
     int scaleHeight() const;
@@ -90,14 +93,6 @@ private:
 
     int fromUnitToPixels( float val ) const;
     float pixelsToUnit( int pixels ) const;
-
-    QCheckBox *m_shrinkToFit;
-    QRadioButton *m_scale;
-    KIntNumInput *m_width;
-    KIntNumInput *m_height;
-    KComboBox *m_units;
-    QCheckBox *m_addFileName;
-    QCheckBox *m_blackwhite;
 
 };
 

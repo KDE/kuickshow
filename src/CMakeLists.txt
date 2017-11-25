@@ -16,13 +16,21 @@ set(kuickshow_KDEINIT_SRCS
    kuickimage.cpp
    imdata.cpp 
    filefinder.cpp 
-   kurlwidget.cpp 
+   kuickurlwidget.cpp
    filewidget.cpp 
    kuick.cpp 
    imlibwidget.cpp 
    slideshowwidget.cpp 
    imagemods.cpp
    printing.cpp )
+
+kde4_add_ui_files(kuickshow_KDEINIT_SRCS
+   aboutwidget.ui
+   printing_page.ui
+   generalwidget.ui
+   defaultswidget.ui
+   slideshowwidget.ui
+)
 
 
 # target kdeinit_kuickshow

@@ -17,6 +17,7 @@
 */
 
 #include "printing.h"
+#include <ui_printing_page.h>
 
 #include <KComboBox>
 #include <KDebug>
@@ -205,90 +206,45 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent )
     : QWidget( parent )
 {
-    setWindowTitle( i18n("Image Settings") );
+    ui = new Ui::KuickPrintDialogPage;
+    ui->setupUi(this);
 
-    QVBoxLayout *layout = new QVBoxLayout( this );
-    layout->setMargin( KDialog::marginHint() );
-    layout->setSpacing( KDialog::spacingHint() );
+    layout()->setMargin( KDialog::marginHint() );
+    layout()->setSpacing( KDialog::spacingHint() );
 
-    m_addFileName = new QCheckBox( i18n("Print fi&lename below image"), this);
-    m_addFileName->setChecked( true );
-    layout->addWidget( m_addFileName );
-
-    m_blackwhite = new QCheckBox ( i18n("Print image in &black and white"), this);
-    m_blackwhite->setChecked( false );
-    layout->addWidget (m_blackwhite );
-
-    QGroupBox *group = new QGroupBox( i18n("Scaling"), this );
-    layout->addWidget( group );
-
-    QVBoxLayout *buttonLayout = new QVBoxLayout( group );
-
-    // m_shrinkToFit = new QRadioButton( i18n("Shrink image to &fit, if necessary"), group );
-    m_shrinkToFit = new QCheckBox( i18n("Shrink image to &fit, if necessary"), group );
-    m_shrinkToFit->setChecked( true );
-    buttonLayout->addWidget( m_shrinkToFit );
-
-    QWidget *widget = new QWidget( group );
-    buttonLayout->addWidget( widget );
-    QGridLayout *grid = new QGridLayout( widget );
-    grid->addItem( new QSpacerItem( 30, 0 ), 0, 0 );
-    grid->setColumnStretch( 0, 0 );
-    grid->setColumnStretch( 1, 1 );
-    grid->setColumnStretch( 2, 10 );
-
-    m_scale = new QRadioButton( i18n("Print e&xact size: "), widget );
-    m_scale->setEnabled( false ); // ###
-    grid->addWidget( m_scale, 0, 0, 1, 2 );
-    connect( m_scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
-
-    m_units = new KComboBox( false, widget );
-    m_units->setObjectName( "unit combobox" );
-    grid->addWidget( m_units, 0, 2, Qt::AlignLeft );
-    m_units->addItem( i18n("Millimeters") );
-    m_units->addItem( i18n("Centimeters") );
-    m_units->addItem( i18n("Inches") );
-
-    m_width = new KIntNumInput( widget/*, "exact width"*/ );
-    grid->addWidget( m_width, 1, 1 );
-    m_width->setLabel( i18n("&Width:" ) );
-    m_width->setMinimum( 1 );
-
-    m_height = new KIntNumInput( widget/*, "exact height"*/ );
-    grid->addWidget( m_height, 2, 1 );
-    m_height->setLabel( i18n("&Height:" ) );
-    m_height->setMinimum( 1 );
+    connect( ui->scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
 }
 
 KuickPrintDialogPage::~KuickPrintDialogPage()
 {
+    delete ui;
 }
 
 //    ### opts["app-kuickshow-alignment"] = ;
 
 bool KuickPrintDialogPage::printFilename()
 {
-    return m_addFileName->isChecked();
+    return ui->addFileName->isChecked();
 }
 
 void KuickPrintDialogPage::setPrintFilename( bool addFilename )
 {
-    m_addFileName->setChecked( addFilename );
+    ui->addFileName->setChecked( addFilename );
 }
 
 bool KuickPrintDialogPage::printBlackWhite()
 {
-    return m_blackwhite->isChecked();
+    return ui->blackwhite->isChecked();
 }
 
 void KuickPrintDialogPage::setPrintBlackWhite( bool blackWhite )
 {
-    m_blackwhite->setChecked( blackWhite );
+    ui->blackwhite->setChecked( blackWhite );
 }
 
 bool KuickPrintDialogPage::printShrinkToFit()
 {
-    return m_shrinkToFit->isChecked();
+    return ui->shrinkToFit->isChecked();
 }
 
 void KuickPrintDialogPage::setPrintShrinkToFit( bool shrinkToFit )
@@ -298,7 +254,7 @@ void KuickPrintDialogPage::setPrintShrinkToFit( bool shrinkToFit )
 
 bool KuickPrintDialogPage::printScale()
 {
-    return m_scale->isChecked();
+    return ui->scale->isChecked();
 }
 
 void KuickPrintDialogPage::setPrintScale( bool scale )
@@ -308,12 +264,19 @@ void KuickPrintDialogPage::setPrintScale( bool scale )
 
 QString KuickPrintDialogPage::printScaleUnit()
 {
-    return m_units->currentText();
+    return ui->units->currentText();
 }
 
 void KuickPrintDialogPage::setPrintScaleUnit( QString scaleUnit )
 {
-    m_units->setCurrentItem( scaleUnit );
+    for(int i = 0, count = ui->units->count(); i < count; i++) {
+        if(ui->units->itemText(i) == scaleUnit) {
+            ui->units->setCurrentIndex(i);
+            return;
+        }
+    }
+
+    ui->units->setCurrentIndex(-1);
 }
 
 int KuickPrintDialogPage::printScaleWidthPixels()
@@ -338,31 +301,31 @@ void KuickPrintDialogPage::setPrintScaleHeightPixels( int scaleHeight )
 
 void KuickPrintDialogPage::toggleScaling( bool enable )
 {
-    m_shrinkToFit->setChecked( !enable );
-    m_scale->setChecked( enable );
-    m_width->setEnabled( enable );
-    m_height->setEnabled( enable );
-    m_units->setEnabled( enable );
+    ui->shrinkToFit->setChecked( !enable );
+    ui->scale->setChecked( enable );
+    ui->width->setEnabled( enable );
+    ui->height->setEnabled( enable );
+    ui->units->setEnabled( enable );
 }
 
 int KuickPrintDialogPage::scaleWidth() const
 {
-    return fromUnitToPixels( m_width->value() );
+    return fromUnitToPixels( ui->width->value() );
 }
 
 int KuickPrintDialogPage::scaleHeight() const
 {
-    return fromUnitToPixels( m_height->value() );
+    return fromUnitToPixels( ui->height->value() );
 }
 
 void KuickPrintDialogPage::setScaleWidth( int pixels )
 {
-    m_width->setValue( (int) pixelsToUnit( pixels ) );
+    ui->width->setValue( (int) pixelsToUnit( pixels ) );
 }
 
 void KuickPrintDialogPage::setScaleHeight( int pixels )
 {
-    m_width->setValue( (int) pixelsToUnit( pixels ) );
+    ui->width->setValue( (int) pixelsToUnit( pixels ) );
 }
 
 int KuickPrintDialogPage::fromUnitToPixels( float /*value*/ ) const

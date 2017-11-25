@@ -27,6 +27,7 @@ class KColorButton;
 class KIntNumInput;
 class KLineEdit;
 class QCheckBox;
+namespace Ui { class GeneralWidget; }
 
 
 class GeneralWidget : public QWidget
@@ -41,17 +42,7 @@ public:
     void 	applySettings( KuickData& data );
 
 private:
-    QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload, *cbLastdir;
-    QCheckBox   *cbSmoothScale, *cbFastRemap, *cbFastRender;
-    QCheckBox 	*cbDither16bit, *cbDither8bit, *cbOwnPalette;
-
-    KLineEdit   	*editFilter;
-    KIntNumInput 	*maxCacheSpinBox;
-
-    KIntNumInput 	*sbMaxWidth, *sbMaxHeight;
-    KIntNumInput 	*sbZoomFactor;
-
-    KColorButton        *colorButton;
+    Ui::GeneralWidget* ui;
 
 private slots:
     void 	useOwnPalette();
