@@ -11,6 +11,7 @@ include(KDE4Defaults)
 add_subdirectory( src ) 
 add_subdirectory( misc ) 
 add_subdirectory( pics ) 
+add_subdirectory( icons )
 
 
 ########### install files ###############
