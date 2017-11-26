@@ -142,7 +142,8 @@ private slots:
     void                doReplay();
 
 private:
-    Display *		getX11Display() const { return x11Info().display(); }
+    Display *		getX11Display() const { return QX11Info::display(); }
+    int getX11Screen() const;
     void 		initGUI( const KUrl& startDir );
     bool	       	eventFilter( QObject *, QEvent * );
     void 		initImlib();

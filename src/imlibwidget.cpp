@@ -23,8 +23,10 @@
 #include <KFileMetaInfo>
 #include <KImageIO>
 
+#include <QApplication>
 #include <QCloseEvent>
 #include <QColor>
+#include <QDesktopWidget>
 #include <QFile>
 #include <QImage>
 #include <QObject>
@@ -64,7 +66,7 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent ) :
 		  PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
 		  PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
-    Visual* defaultvis = DefaultVisual(getX11Display(), x11Info().screen());
+    Visual* defaultvis = DefaultVisual(getX11Display(), getX11Screen());
 
     par.paletteoverride = idata->ownPalette ? 1 : 0;
     par.remap           = idata->fastRemap ? 1 : 0;
@@ -545,6 +547,13 @@ void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool
 void ImlibWidget::rotated( KuickImage *, int )
 {
 }
+
+
+int ImlibWidget::getX11Screen() const
+{
+    return QApplication::desktop()->screenNumber(this);
+}
+
 
 //----------
 

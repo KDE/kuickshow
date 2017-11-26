@@ -134,7 +134,8 @@ public slots:
 
 
 protected:
-  Display *	    getX11Display() const { return x11Info().display(); }
+  Display *	    getX11Display() const { return QX11Info::display(); }
+  int getX11Screen() const;
   KuickImage *	loadImageInternal( KuickFile * file );
   void 			showImage();
   void          setImageModifier();

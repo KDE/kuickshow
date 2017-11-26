@@ -1244,7 +1244,7 @@ void KuickShow::initImlibParams( ImData *idata, ImlibInitParams *par )
                    PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
                    PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
-    Visual* defaultvis = DefaultVisual(getX11Display(), x11Info().screen());
+    Visual* defaultvis = DefaultVisual(getX11Display(), getX11Screen());
 
     par->paletteoverride = idata->ownPalette  ? 1 : 0;
     par->remap           = idata->fastRemap   ? 1 : 0;
@@ -1431,4 +1431,10 @@ KActionCollection * KuickShow::actionCollection() const
         return fileWidget->actionCollection();
 
     return KXmlGuiWindow::actionCollection();
+}
+
+
+int KuickShow::getX11Screen() const
+{
+    return QApplication::desktop()->screenNumber(this);
 }
