@@ -87,9 +87,6 @@
 
 KuickData* kdata;
 
-static const int URL_ITEM  = 0;
-static const int META_ITEM = 1;
-
 QList<ImageWindow*> KuickShow::s_viewers;
 
 KuickShow::KuickShow( const char *name )
@@ -393,10 +390,8 @@ void KuickShow::initGUI( const KUrl& startDir )
     mBar->addMenu( help );
 
 
-    KStatusBar* sBar = statusBar();
-    sBar->insertItem( "           ", URL_ITEM, 10 );
-    sBar->insertItem( "                          ", META_ITEM, 2 );
-    sBar->setItemAlignment(URL_ITEM, Qt::AlignVCenter | Qt::AlignLeft);
+    sblblUrlInfo = createStatusBarLabel(10);
+    sblblMetaInfo = createStatusBarLabel(2);
 
     fileWidget->setFocus();
 
@@ -421,6 +416,14 @@ void KuickShow::initGUI( const KUrl& startDir )
     qobject_cast<KAction *>(coll->action( "mkdir" ))->setShortcut(Qt::Key_F10);
     qobject_cast<KAction *>(coll->action( "preview" ))->setShortcut(Qt::Key_F11);
     //qobject_cast<KAction *>(coll->action( "separate dirs" ))->setShortcut(Qt::Key_F12);
+}
+
+QLabel* KuickShow::createStatusBarLabel(int stretch)
+{
+    QLabel* label = new QLabel(this);
+    label->setFixedHeight(fontMetrics().height() + 2);  // copied from KStatusBar::insertItem
+    statusBar()->addWidget(label, stretch);
+    return label;
 }
 
 void KuickShow::redirectDeleteAndTrashActions(KActionCollection *coll)
@@ -483,7 +486,7 @@ void KuickShow::slotHighlighted( const KFileItem& item )
 {
     QString statusBarInfo = item.isNull() ? QString() : item.getStatusBarInfo();
 
-    statusBar()->changeItem( statusBarInfo, URL_ITEM );
+    sblblUrlInfo->setText(statusBarInfo);
     bool image = FileWidget::isImage( item );
 
     QString meta;
@@ -498,7 +501,7 @@ void KuickShow::slotHighlighted( const KFileItem& item )
                 meta.append( ", " ).append( bpp );
         }
     }
-    statusBar()->changeItem( meta, META_ITEM );
+    sblblMetaInfo->setText(meta);
 
     fileWidget->actionCollection()->action("kuick_print")->setEnabled( image );
     fileWidget->actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
@@ -514,7 +517,7 @@ void KuickShow::dirSelected( const KUrl& url )
         setCaption( url.prettyUrl() );
 
     cmbPath->setUrl( url );
-    statusBar()->changeItem( url.prettyUrl(), URL_ITEM );
+    sblblUrlInfo->setText(url.prettyUrl());
 }
 
 void KuickShow::slotSelected( const KFileItem& item )

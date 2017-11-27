@@ -39,6 +39,8 @@ class KToggleAction;
 class KUrl;
 class KUrlComboBox;
 
+class QLabel;
+
 class AboutWidget;
 class FileWidget;
 class ImageWindow;
@@ -175,6 +177,10 @@ private:
     bool                m_slideShowStopped;
     KToggleAction       *m_toggleBrowserAction;
     QPointer<AboutWidget> aboutWidget;
+
+    QLabel* sblblUrlInfo;
+    QLabel* sblblMetaInfo;
+    QLabel* createStatusBarLabel(int stretch);
 };
 
 #endif
