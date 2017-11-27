@@ -76,7 +76,7 @@ private slots:
     void slotViewChanged();
 
     void slotItemsCleared();
-    void slotItemDeleted( const KFileItem& );
+    void slotItemsDeleted( const KFileItemList& );
     void slotHighlighted( const KFileItem& );
     void slotContextMenu( const KFileItem &, QMenu *);
 

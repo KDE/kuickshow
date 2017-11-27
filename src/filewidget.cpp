@@ -70,8 +70,8 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent )
 	     SLOT( slotViewChanged() ));
 
     connect( dirLister(), SIGNAL( clear() ), SLOT( slotItemsCleared() ));
-    connect( dirLister(), SIGNAL( deleteItem( const KFileItem&  ) ),
-	     SLOT( slotItemDeleted( const KFileItem& ) ));
+    connect( dirLister(), SIGNAL( itemsDeleted( const KFileItemList&  ) ),
+	     SLOT( slotItemsDeleted( const KFileItemList& ) ));
 
     connect( this, SIGNAL( fileHighlighted( const KFileItem& )),
 	     SLOT( slotHighlighted( const KFileItem& )));
@@ -405,10 +405,10 @@ void FileWidget::slotItemsCleared()
     m_currentURL = QString::null;
 }
 
-void FileWidget::slotItemDeleted( const KFileItem& item )
+void FileWidget::slotItemsDeleted( const KFileItemList& items )
 {
     KFileItem current = getCurrentItem( false );
-    if ( item != current ) {
+    if ( !items.contains(current) ) {
 	return; // all ok, we already have a new current item
     }
 
