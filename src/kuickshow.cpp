@@ -429,14 +429,14 @@ void KuickShow::redirectDeleteAndTrashActions(KActionCollection *coll)
     if (action)
     {
         action->disconnect(fileWidget);
-        connect(action, SIGNAL(activated()), this, SLOT(slotDeleteCurrentImage()));
+        connect(action, SIGNAL(triggered()), this, SLOT(slotDeleteCurrentImage()));
     }
 
     action = coll->action("trash");
     if (action)
     {
         action->disconnect(fileWidget);
-        connect(action, SIGNAL(activated()), this, SLOT(slotTrashCurrentImage()));
+        connect(action, SIGNAL(triggered()), this, SLOT(slotTrashCurrentImage()));
     }
 }
 
