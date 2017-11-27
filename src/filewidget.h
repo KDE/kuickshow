@@ -58,7 +58,6 @@ public:
     KFileItem getItem( WhichItem which, bool onlyImage ) const;
 
     static bool isImage( const KFileItem& );
-    static void setImage( KFileItem& item, bool enable );
 
     void initActions();
 

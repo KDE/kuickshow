@@ -174,8 +174,7 @@ KuickShow::KuickShow( const char *name )
 	    // always return the right mimetype. The rest of KDE start a get() instead....
             if ( name.startsWith( "image/" ) || name.startsWith( "text/" ) )
             {
-                FileWidget::setImage( item, true );
-                showImage( item, true, false, true );
+                showImage( item, true, false, true, true );
             }
             else // assume directory, KDirLister will tell us if we can't list
             {
@@ -530,11 +529,11 @@ void KuickShow::showFileItem( ImageWindow * /*view*/,
 }
 
 bool KuickShow::showImage( const KFileItem& fi,
-                           bool newWindow, bool fullscreen, bool moveToTopLeft )
+                           bool newWindow, bool fullscreen, bool moveToTopLeft, bool ignoreFileType )
 {
     newWindow  |= !m_viewer;
     fullscreen |= (newWindow && kdata->fullScreen);
-    if ( FileWidget::isImage( fi ) ) {
+    if ( ignoreFileType || FileWidget::isImage( fi ) ) {
 
         if ( newWindow ) {
             m_viewer = new ImageWindow( kdata->idata, id, 0L );
