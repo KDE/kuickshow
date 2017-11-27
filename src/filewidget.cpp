@@ -70,8 +70,8 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent )
 	     SLOT( slotViewChanged() ));
 
     connect( dirLister(), SIGNAL( clear() ), SLOT( slotItemsCleared() ));
-    connect( dirLister(), SIGNAL( deleteItem( const KFileItem&  ) ),
-	     SLOT( slotItemDeleted( const KFileItem& ) ));
+    connect( dirLister(), SIGNAL( itemsDeleted( const KFileItemList&  ) ),
+	     SLOT( slotItemsDeleted( const KFileItemList& ) ));
 
     connect( this, SIGNAL( fileHighlighted( const KFileItem& )),
 	     SLOT( slotHighlighted( const KFileItem& )));
@@ -262,29 +262,14 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 }
 
 
-// KIO::NetAccess::stat() does NOT give us the right mimetype, while
-// KIO::NetAccess::mimetype() does. So we have this hacklet to tell
-// showImage that the KFileItem is really an image.
-#define IS_IMAGE 5
-#define MY_TYPE 55
-
 bool FileWidget::isImage( const KFileItem& item )
 {
 //     return item && !item.isDir();
     if ( !item.isNull() )
     {
-        return item.isReadable() && (item.mimetype().startsWith( "image/") ||
-            item.extraData( (void*) MY_TYPE ) == (void*) IS_IMAGE);
+        return item.isReadable() && item.mimetype().startsWith( "image/");
     }
     return false;
-}
-
-void FileWidget::setImage( KFileItem& item, bool enable )
-{
-    if ( enable )
-        item.setExtraData( (void*) MY_TYPE, (void*) IS_IMAGE );
-    else
-        item.removeExtraData( (void*) MY_TYPE );
 }
 
 KFileItem FileWidget::gotoFirstImage()
@@ -405,10 +390,10 @@ void FileWidget::slotItemsCleared()
     m_currentURL = QString::null;
 }
 
-void FileWidget::slotItemDeleted( const KFileItem& item )
+void FileWidget::slotItemsDeleted( const KFileItemList& items )
 {
     KFileItem current = getCurrentItem( false );
-    if ( item != current ) {
+    if ( !items.contains(current) ) {
 	return; // all ok, we already have a new current item
     }
 

@@ -58,7 +58,6 @@ public:
     KFileItem getItem( WhichItem which, bool onlyImage ) const;
 
     static bool isImage( const KFileItem& );
-    static void setImage( KFileItem& item, bool enable );
 
     void initActions();
 
@@ -76,7 +75,7 @@ private slots:
     void slotViewChanged();
 
     void slotItemsCleared();
-    void slotItemDeleted( const KFileItem& );
+    void slotItemsDeleted( const KFileItemList& );
     void slotHighlighted( const KFileItem& );
     void slotContextMenu( const KFileItem &, QMenu *);
 
