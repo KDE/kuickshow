@@ -115,7 +115,7 @@ private slots:
     void 		showFileItem( ImageWindow *, const KFileItem * );
     void		slotHighlighted( const KFileItem& );
     void 		slotSelected( const KFileItem& );
-    void		dirSelected( const KUrl& );
+    void		dirSelected( const QUrl& );
     void		configuration();
     void	      	about();
     void 		startSlideShow();
@@ -123,7 +123,7 @@ private slots:
     void 		nextSlide();
     void                nextSlide( const KFileItem& item );
     void		viewerDeleted();
-    void 		slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &);
+    void 		slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
 
@@ -133,7 +133,7 @@ private slots:
 
     void		slotReplayEvent();
     void                slotOpenURL();
-    void		slotSetURL( const KUrl& );
+    void		slotSetURL( const QUrl& );
     void		slotURLComboReturnPressed();
 //     void                invalidateImages( const KFileItemList& items );
     void		slotDeleteCurrentImage(ImageWindow *viewer);

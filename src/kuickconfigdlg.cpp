@@ -24,6 +24,7 @@
 #include <KShortcutsDialog>
 #include <KVBox>
 
+#include <QPushButton>
 #include <qnamespace.h>
 
 #include "defaultswidget.h"
@@ -36,10 +37,9 @@
 KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent, bool modal )
     : KPageDialog( parent )
 {
-    setButtons( Help | Default | Ok | Apply | Cancel );
-    setDefaultButton( Ok );
+    setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Help);
     setModal( modal );
-    setCaption( i18n("Configure") );
+    setWindowTitle( i18n("Configure") );
     setFaceType( Tabbed );
     coll = _coll;
     KVBox *box = new KVBox();
@@ -69,7 +69,9 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     addPage( box, i18n("Bro&wser Shortcuts") );
     browserKeyChooser = new KShortcutsEditor( coll, box );
 
-    connect( this, SIGNAL( defaultClicked() ), SLOT( resetDefaults() ));
+    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(resetDefaults()));
+    connect(buttonBox()->button(QDialogButtonBox::Ok), SIGNAL(clicked()), SIGNAL(okClicked()));
+    connect(buttonBox()->button(QDialogButtonBox::Apply), SIGNAL(clicked()), SIGNAL(applyClicked()));
 }
 
 KuickConfigDialog::~KuickConfigDialog()

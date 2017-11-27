@@ -20,6 +20,7 @@
 
 #include <KComponentData>
 #include <KDebug>
+#include <KGlobal>
 #include <KStandardDirs>
 #include <KTempDir>
 

@@ -23,6 +23,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KGlobal>
+#include <KGlobalSettings>
 #include <KUrlCompletion>
 
 #include <QFocusEvent>
@@ -57,7 +58,7 @@ FileFinder::FileFinder( QWidget *parent )
 
     KSharedConfig::Ptr config = KGlobal::config();
     KConfigGroup cs( config, "GeneralConfiguration" );
-    setCompletionMode( (KGlobalSettings::Completion)
+    setCompletionMode( (KCompletion::CompletionMode)
                cs.readEntry( "FileFinderCompletionMode",
                                      int(KGlobalSettings::completionMode())));
 }

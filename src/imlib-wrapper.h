@@ -15,8 +15,10 @@
 #undef index
 #undef rindex
 
+#undef Bool
 #undef Color
 #undef CursorShape
+#undef Expose
 #undef FocusIn
 #undef FocusOut
 #undef FontChange

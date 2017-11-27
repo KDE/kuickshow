@@ -45,6 +45,10 @@ public:
 private slots:
     void 		resetDefaults();
 
+signals:
+	void okClicked();
+	void applyClicked();
+
 private:
     DefaultsWidget   *defaultsWidget;
     GeneralWidget    *generalWidget;

@@ -24,7 +24,7 @@ set(kuickshow_KDEINIT_SRCS
    imagemods.cpp
    printing.cpp )
 
-kde4_add_ui_files(kuickshow_KDEINIT_SRCS
+ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
    aboutwidget.ui
    printing_page.ui
    generalwidget.ui
@@ -34,11 +34,22 @@ kde4_add_ui_files(kuickshow_KDEINIT_SRCS
 
 
 # target kdeinit_kuickshow
-kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
+kf5_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
 target_compile_options(kdeinit_kuickshow PRIVATE -std=c++11 -Wall --pedantic)
-target_compile_definitions(kdeinit_kuickshow PRIVATE ${IMLIB_DEFINITIONS})
-target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS} ${KDE4_INCLUDES})
-target_link_libraries(kdeinit_kuickshow ${X11_LIBRARIES} ${IMLIB_LIBRARIES} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS})
+target_compile_definitions(kdeinit_kuickshow PRIVATE ${IMLIB_DEFINITIONS} -DQT_NO_URL_CAST_FROM_STRING)
+target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS})
+
+target_link_libraries(kdeinit_kuickshow
+	Qt5::Core
+	Qt5::Gui
+	Qt5::X11Extras
+	KF5::I18n
+	KF5::KIOCore
+	KF5::XmlGui
+	KF5::KDELibs4Support
+	${X11_LIBRARIES}
+	${IMLIB_LIBRARIES}
+)
 
 install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

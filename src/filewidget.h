@@ -21,6 +21,7 @@
 
 #include <KDirModel>
 #include <KDirOperator>
+#include <KUrl>
 
 class KFileItem;
 class KFileItemActions;
@@ -79,7 +80,7 @@ private slots:
     void slotHighlighted( const KFileItem& );
     void slotContextMenu( const KFileItem &, QMenu *);
 
-    void slotURLEntered( const KUrl& url );
+    void slotURLEntered( const QUrl& url );
     void slotFinishedLoading();
 
 private:

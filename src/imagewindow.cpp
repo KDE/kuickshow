@@ -146,169 +146,156 @@ void ImageWindow::updateActions()
 
 void ImageWindow::setupActions()
 {
-    KAction *nextImage = m_actions->addAction( "next_image" );
+    QAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
-    nextImage->setShortcut( KStandardShortcut::next() );
+    m_actions->setDefaultShortcuts(nextImage, KStandardShortcut::next());
     connect( nextImage, SIGNAL( triggered() ), this, SLOT( slotRequestNext() ) );
 
-    KAction* showPreviousImage = m_actions->addAction( "previous_image" );
+    QAction* showPreviousImage = m_actions->addAction( "previous_image" );
     showPreviousImage->setText( i18n("Show Previous Image") );
-    showPreviousImage->setShortcut(KStandardShortcut::prior());
+    m_actions->setDefaultShortcuts(showPreviousImage, KStandardShortcut::prior());
     connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( slotRequestPrevious() ) );
 
-    KAction* deleteImage = m_actions->addAction( "delete_image" );
+    QAction* deleteImage = m_actions->addAction( "delete_image" );
     deleteImage->setText( i18n("Delete Image") );
-    deleteImage->setShortcut(KShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_Delete)));
+    m_actions->setDefaultShortcut(deleteImage, QKeySequence(Qt::ShiftModifier | Qt::Key_Delete));
     connect( deleteImage, SIGNAL( triggered() ), this, SLOT( imageDelete() ) );
 
-    KAction *trashImage = m_actions->addAction( "trash_image" );
+    QAction *trashImage = m_actions->addAction( "trash_image" );
     trashImage->setText( i18n("Move Image to Trash") );
-    trashImage->setShortcut( Qt::Key_Delete );
+    m_actions->setDefaultShortcut(trashImage, Qt::Key_Delete);
     connect( trashImage, SIGNAL( triggered() ), this, SLOT( imageTrash() ) );
 
 
-    KAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions );
-    zoomIn->setShortcut(Qt::Key_Plus);
+    QAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions );
+    m_actions->setDefaultShortcut(zoomIn, Qt::Key_Plus);
     m_actions->addAction( "zoom_in",  zoomIn );
 
-    KAction *zoomOut = KStandardAction::zoomOut( this, SLOT( zoomOut() ), m_actions );
-    zoomOut->setShortcut(Qt::Key_Minus);
+    QAction *zoomOut = KStandardAction::zoomOut( this, SLOT( zoomOut() ), m_actions );
+    m_actions->setDefaultShortcut(zoomOut, Qt::Key_Minus);
     m_actions->addAction( "zoom_out",  zoomOut );
 
-    KAction *restoreSize = m_actions->addAction( "original_size" );
+    QAction *restoreSize = m_actions->addAction( "original_size" );
     restoreSize->setText( i18n("Restore Original Size") );
-    restoreSize->setShortcut(Qt::Key_O);
+    m_actions->setDefaultShortcut(restoreSize, Qt::Key_O);
     connect( restoreSize, SIGNAL( triggered() ), this, SLOT( showImageOriginalSize() ) );
 
-    KAction *maximize = m_actions->addAction( "maximize" );
+    QAction *maximize = m_actions->addAction( "maximize" );
     maximize->setText( i18n("Maximize") );
-    maximize->setShortcut(Qt::Key_M);
+    m_actions->setDefaultShortcut(maximize, Qt::Key_M);
     connect( maximize, SIGNAL( triggered() ), this, SLOT( maximize() ) );
 
-    KAction *rotate90 = m_actions->addAction( "rotate90" );
+    QAction *rotate90 = m_actions->addAction( "rotate90" );
     rotate90->setText( i18n("Rotate 90 Degrees") );
-    rotate90->setShortcut(Qt::Key_9);
+    m_actions->setDefaultShortcut(rotate90, Qt::Key_9);
     connect( rotate90, SIGNAL( triggered() ), this, SLOT( rotate90() ) );
 
-    KAction *rotate180 = m_actions->addAction( "rotate180" );
+    QAction *rotate180 = m_actions->addAction( "rotate180" );
     rotate180->setText( i18n("Rotate 180 Degrees") );
-    rotate180->setShortcut(Qt::Key_8);
+    m_actions->setDefaultShortcut(rotate180, Qt::Key_8);
     connect( rotate180, SIGNAL( triggered() ), this, SLOT( rotate180() ) );
 
-    KAction *rotate270 = m_actions->addAction( "rotate270" );
+    QAction *rotate270 = m_actions->addAction( "rotate270" );
     rotate270->setText( i18n("Rotate 270 Degrees") );
-    rotate270->setShortcut(Qt::Key_7);
+    m_actions->setDefaultShortcut(rotate270, Qt::Key_7);
     connect( rotate270, SIGNAL( triggered() ), this, SLOT( rotate270() ) );
 
-    KAction *flipHori = m_actions->addAction( "flip_horicontally" );
+    QAction *flipHori = m_actions->addAction( "flip_horicontally" );
     flipHori->setText( i18n("Flip Horizontally") );
-
-    flipHori->setShortcut(Qt::Key_Asterisk);
+    m_actions->setDefaultShortcut(flipHori, Qt::Key_Asterisk);
     connect( flipHori, SIGNAL( triggered() ), this, SLOT( flipHoriz() ) );
 
-    KAction *flipVeri = m_actions->addAction( "flip_vertically" );
+    QAction *flipVeri = m_actions->addAction( "flip_vertically" );
     flipVeri->setText( i18n("Flip Vertically") );
-    flipVeri->setShortcut(Qt::Key_Slash);
+    m_actions->setDefaultShortcut(flipVeri, Qt::Key_Slash);
     connect( flipVeri, SIGNAL( triggered() ), this, SLOT( flipVert() ) );
 
-    KAction *printImage = m_actions->addAction( "print_image" );
+    QAction *printImage = m_actions->addAction( "print_image" );
     printImage->setText( i18n("Print Image...") );
-    printImage->setShortcut(KStandardShortcut::print());
+    m_actions->setDefaultShortcuts(printImage, KStandardShortcut::print());
     connect( printImage, SIGNAL( triggered() ), this, SLOT( printImage() ) );
 
-    KAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
+    QAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
     m_actions->addAction( "save_image_as",  a );
 
     a = KStandardAction::close( this, SLOT( close() ), m_actions);
     m_actions->addAction( "close_image", a );
     // --------
-    KAction *moreBrighteness = m_actions->addAction( "more_brightness" );
+    QAction *moreBrighteness = m_actions->addAction( "more_brightness" );
     moreBrighteness->setText( i18n("More Brightness") );
-    moreBrighteness->setShortcut(Qt::Key_B);
+    m_actions->setDefaultShortcut(moreBrighteness, Qt::Key_B);
     connect( moreBrighteness, SIGNAL( triggered() ), this, SLOT( moreBrightness() ) );
 
-    KAction *lessBrightness = m_actions->addAction( "less_brightness" );
+    QAction *lessBrightness = m_actions->addAction( "less_brightness" );
     lessBrightness->setText(  i18n("Less Brightness") );
-    lessBrightness->setShortcut(Qt::SHIFT + Qt::Key_B);
+    m_actions->setDefaultShortcut(lessBrightness, Qt::SHIFT + Qt::Key_B);
     connect( lessBrightness, SIGNAL( triggered() ), this, SLOT( lessBrightness() ) );
 
-    KAction *moreContrast = m_actions->addAction( "more_contrast" );
+    QAction *moreContrast = m_actions->addAction( "more_contrast" );
     moreContrast->setText( i18n("More Contrast") );
-    moreContrast->setShortcut(Qt::Key_C);
+    m_actions->setDefaultShortcut(moreContrast, Qt::Key_C);
     connect( moreContrast, SIGNAL( triggered() ), this, SLOT( moreContrast() ) );
 
-    KAction *lessContrast = m_actions->addAction( "less_contrast" );
+    QAction *lessContrast = m_actions->addAction( "less_contrast" );
     lessContrast->setText( i18n("Less Contrast") );
-    lessContrast->setShortcut(Qt::SHIFT + Qt::Key_C);
+    m_actions->setDefaultShortcut(lessContrast, Qt::SHIFT + Qt::Key_C);
     connect( lessContrast, SIGNAL( triggered() ), this, SLOT( lessContrast() ) );
 
-    KAction *moreGamma = m_actions->addAction( "more_gamma" );
+    QAction *moreGamma = m_actions->addAction( "more_gamma" );
     moreGamma->setText( i18n("More Gamma") );
-
-    moreGamma->setShortcut(Qt::Key_G);
+    m_actions->setDefaultShortcut(moreGamma, Qt::Key_G);
     connect( moreGamma, SIGNAL( triggered() ), this, SLOT( moreGamma() ) );
 
-    KAction *lessGamma = m_actions->addAction( "less_gamma" );
+    QAction *lessGamma = m_actions->addAction( "less_gamma" );
     lessGamma->setText( i18n("Less Gamma") );
-    lessGamma->setShortcut(Qt::SHIFT + Qt::Key_G);
+    m_actions->setDefaultShortcut(lessGamma, Qt::SHIFT + Qt::Key_G);
     connect( lessGamma, SIGNAL( triggered() ), this, SLOT( lessGamma() ) );
 
     // --------
-    KAction *scrollUp = m_actions->addAction( "scroll_up" );
+    QAction *scrollUp = m_actions->addAction( "scroll_up" );
     scrollUp->setText( i18n("Scroll Up") );
-
-    scrollUp->setShortcut(Qt::Key_Up);
+    m_actions->setDefaultShortcut(scrollUp, Qt::Key_Up);
     connect( scrollUp, SIGNAL( triggered() ), this, SLOT( scrollUp() ) );
 
-    KAction *scrollDown = m_actions->addAction( "scroll_down" );
+    QAction *scrollDown = m_actions->addAction( "scroll_down" );
     scrollDown->setText( i18n("Scroll Down") );
-    scrollDown->setShortcut(Qt::Key_Down);
+    m_actions->setDefaultShortcut(scrollDown, Qt::Key_Down);
     connect( scrollDown, SIGNAL( triggered() ), this, SLOT( scrollDown() ) );
 
-    KAction *scrollLeft = m_actions->addAction( "scroll_left" );
+    QAction *scrollLeft = m_actions->addAction( "scroll_left" );
     scrollLeft->setText( i18n("Scroll Left") );
-    scrollLeft->setShortcut(Qt::Key_Left);
+    m_actions->setDefaultShortcut(scrollLeft, Qt::Key_Left);
     connect( scrollLeft, SIGNAL( triggered() ), this, SLOT( scrollLeft() ) );
 
-    KAction *scrollRight = m_actions->addAction( "scroll_right" );
+    QAction *scrollRight = m_actions->addAction( "scroll_right" );
     scrollRight->setText( i18n("Scroll Right") );
-    scrollRight->setShortcut(Qt::Key_Right);
+    m_actions->setDefaultShortcut(scrollRight, Qt::Key_Right);
     connect( scrollRight, SIGNAL( triggered() ), this, SLOT( scrollRight() ) );
     // --------
-    KAction *pause = m_actions->addAction( "kuick_slideshow_pause" );
+    QAction *pause = m_actions->addAction( "kuick_slideshow_pause" );
     pause->setText( i18n("Pause Slideshow") );
-    pause->setShortcut(Qt::Key_P);
+    m_actions->setDefaultShortcut(pause, Qt::Key_P);
     connect( pause, SIGNAL( triggered() ), this, SLOT( pauseSlideShow() ) );
 
-    KAction *fullscreenAction = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, SLOT( toggleFullscreen() ));
+    QAction *fullscreenAction = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, SLOT( toggleFullscreen() ));
+    QList<QKeySequence> shortcuts = fullscreenAction->shortcuts();
+    if(!shortcuts.contains(Qt::Key_Return)) shortcuts << Qt::Key_Return;
+    m_actions->setDefaultShortcuts(fullscreenAction, shortcuts);
 //    KAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
 //    m_actions->addAction( "", fullscreenAction );
 
-    KAction *reloadAction = m_actions->addAction( "reload_image" );
+    QAction *reloadAction = m_actions->addAction( "reload_image" );
     reloadAction->setText( i18n("Reload Image") );
-    reloadAction->setShortcut(KStandardShortcut::reload());
+    if(!(shortcuts = KStandardShortcut::reload()).contains(Qt::Key_Enter)) shortcuts << Qt::Key_Enter;
+    m_actions->setDefaultShortcuts(reloadAction, shortcuts);
     connect( reloadAction, SIGNAL( triggered() ), this, SLOT( reload() ) );
 
-    KAction *properties = m_actions->addAction("properties" );
+    QAction *properties = m_actions->addAction("properties" );
     properties->setText( i18n("Properties") );
-    properties->setShortcut(Qt::ALT + Qt::Key_Return);
+    m_actions->setDefaultShortcut(properties, Qt::ALT + Qt::Key_Return);
     connect( properties, SIGNAL( triggered() ), this, SLOT( slotProperties() ) );
 
     m_actions->readSettings();
-
-    // Unfortunately there is no KAction::setShortcutDefault() :-/
-    // so add Key_Return as fullscreen shortcut _after_ readShortcutSettings()
-    addAlternativeShortcut(fullscreenAction, Qt::Key_Return);
-    addAlternativeShortcut(reloadAction, Qt::Key_Enter);
-}
-
-void ImageWindow::addAlternativeShortcut(KAction *action, int key)
-{
-    KShortcut cut( action->shortcut() );
-    if (cut == action->shortcut(KAction::DefaultShortcut)) {
-        cut.setAlternate(key);
-        action->setShortcut(cut);
-    }
 }
 
 void ImageWindow::showWindow()
@@ -361,7 +348,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
                              "%3 (%1 x %2)",
                              m_kuim->originalWidth(), m_kuim->originalHeight(),
                              m_kuim->url().prettyUrl() );
-    setWindowTitle( KDialog::makeStandardCaption( caption, this ) );
+    setWindowTitle( caption );
 }
 
 
@@ -879,7 +866,7 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 {
     //  if ( e->provides( "image/*" ) ) // can't do this right now with Imlib
-    if ( e->provides( "text/uri-list" ) )
+    if ( e->mimeData()->hasFormat( "text/uri-list" ) )
 	e->accept();
     else
 	e->ignore();
@@ -978,14 +965,14 @@ void ImageWindow::saveImage()
     KuickData tmp;
     QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), 0L);
     keepSize->setChecked( true );
-    KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this,keepSize);
+    KFileDialog dlg( QUrl::fromUserInput(m_saveDirectory, QDir::currentPath(), QUrl::AssumeLocalFile), tmp.fileFilter, this,keepSize);
 
     QString selection = m_saveDirectory.isEmpty() ?
                             m_kuim->url().url() :
                             m_kuim->url().fileName();
     dlg.setSelection( selection );
     dlg.setOperationMode( KFileDialog::Saving );
-    dlg.setCaption( i18n("Save As") );
+    dlg.setWindowTitle( i18n("Save As") );
     if ( dlg.exec() == QDialog::Accepted )
     {
         KUrl url = dlg.selectedUrl();
@@ -1007,7 +994,7 @@ void ImageWindow::saveImage()
         }
     }
 
-    QString lastDir = dlg.baseUrl().path(KUrl::AddTrailingSlash);
+    QString lastDir = dlg.baseUrl().path();
     if ( lastDir != m_saveDirectory )
         m_saveDirectory = lastDir;
 }

@@ -108,7 +108,6 @@ protected:
 
   void 		init();
   void 		centerImage();
-  void          addAlternativeShortcut( KAction *action, int key );
   virtual void	updateGeometry( int imWidth, int imHeight );
   virtual void  loaded( KuickImage *, bool wasCached );
   virtual bool  canZoomTo( int newWidth, int newHeight );

@@ -18,7 +18,7 @@
 
 #include "kuickshow.h"
 
-#include <KAboutData>
+#include <K4AboutData>
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
@@ -28,6 +28,7 @@
 #include <KConfigGroup>
 #include <KCursor>
 #include <KDebug>
+#include <KDialog>
 #include <KFileDialog>
 #include <KFileMetaInfo>
 #include <KGlobal>
@@ -62,7 +63,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QMenu>
-#include <QMenuItem>
+#include <QMimeDatabase>
 #include <QMouseEvent>
 #include <QSize>
 #include <QString>
@@ -139,6 +140,7 @@ KuickShow::KuickShow( const char *name )
         }
     }
 
+    QMimeDatabase mimedb;
     for ( int i = 0; i < numArgs; i++ ) {
         KUrl url = args->url( i );
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url, false );
@@ -161,8 +163,8 @@ KuickShow::KuickShow( const char *name )
         // need to check remote files
         else if ( !url.isLocalFile() )
         {
-            KMimeType::Ptr mime = KMimeType::findByUrl( url );
-            QString name = mime->name();
+            QMimeType mime = mimedb.mimeTypeForUrl( url );
+            QString name = mime.name();
             if ( name == "application/octet-stream" ) // unknown -> stat()
                 name = KIO::NetAccess::mimetype( url, this );
 
@@ -234,61 +236,61 @@ void KuickShow::initGUI( const KUrl& startDir )
     connect( fileWidget, SIGNAL( fileHighlighted( const KFileItem& )),
              this, SLOT( slotHighlighted( const KFileItem& ) ));
 
-    connect( fileWidget, SIGNAL( urlEntered( const KUrl&  )),
-             this, SLOT( dirSelected( const KUrl& )) );
+    connect( fileWidget, SIGNAL( urlEntered( const QUrl&  )),
+             this, SLOT( dirSelected( const QUrl& )) );
 
 
     fileWidget->setAcceptDrops(true);
-    connect( fileWidget, SIGNAL( dropped( const KFileItem&, QDropEvent *, const KUrl::List & )),
-             this, SLOT( slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &)) );
+    connect( fileWidget, SIGNAL( dropped( const KFileItem&, QDropEvent *, const QList<QUrl> & )),
+             this, SLOT( slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &)) );
 
     // setup actions
-    KAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
+    QAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
                                       coll );
     coll->addAction( "openURL", open );
 
-    KAction *print = KStandardAction::print( this, SLOT( slotPrint() ),
+    QAction *print = KStandardAction::print( this, SLOT( slotPrint() ),
                                         coll );
     coll->addAction( "kuick_print", print );
     print->setText( i18n("Print Image...") );
 
-    KAction *configure = coll->addAction( "kuick_configure" );
+    QAction *configure = coll->addAction( "kuick_configure" );
     configure->setText( i18n("Configure %1...",KGlobal::mainComponent().aboutData()->programName() ) );
-    configure->setIcon( KIcon( "configure" ) );
+    configure->setIcon( QIcon::fromTheme( "configure" ) );
     connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
 
-    KAction *slide = coll->addAction( "kuick_slideshow" );
+    QAction *slide = coll->addAction( "kuick_slideshow" );
     slide->setText( i18n("Start Slideshow" ) );
-    slide->setIcon( KIcon("ksslide" ));
-    slide->setShortcut( Qt::Key_F2 );
+    slide->setIcon( QIcon::fromTheme("ksslide" ));
+    coll->setDefaultShortcut(slide, Qt::Key_F2);
     connect( slide, SIGNAL( triggered() ), this, SLOT( startSlideShow() ));
 
-    KAction *about = coll->addAction( "about" );
+    QAction *about = coll->addAction( "about" );
     about->setText( i18n( "About KuickShow" ) );
-    about->setIcon( KIcon("about") );
+    about->setIcon( QIcon::fromTheme("about") );
     connect( about, SIGNAL( triggered() ), this, SLOT( about() ) );
 
     oneWindowAction = coll->add<KToggleAction>( "kuick_one window" );
     oneWindowAction->setText( i18n("Open Only One Image Window") );
-    oneWindowAction->setIcon( KIcon( "window-new" ) );
-    oneWindowAction->setShortcut( Qt::CTRL+Qt::Key_N );
+    oneWindowAction->setIcon( QIcon::fromTheme( "window-new" ) );
+    coll->setDefaultShortcut(oneWindowAction, Qt::CTRL+Qt::Key_N);
 
     m_toggleBrowserAction = coll->add<KToggleAction>( "toggleBrowser" );
     m_toggleBrowserAction->setText( i18n("Show File Browser") );
-    m_toggleBrowserAction->setShortcut( Qt::Key_Space );
+    coll->setDefaultShortcut(m_toggleBrowserAction, Qt::Key_Space);
     m_toggleBrowserAction->setCheckedState(KGuiItem(i18n("Hide File Browser")));
     connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
              SLOT( toggleBrowser() ));
 
-    KAction *showInOther = coll->addAction( "kuick_showInOtherWindow" );
+    QAction *showInOther = coll->addAction( "kuick_showInOtherWindow" );
     showInOther->setText( i18n("Show Image") );
     connect( showInOther, SIGNAL( triggered() ), SLOT( slotShowInOtherWindow() ));
 
-    KAction *showInSame = coll->addAction( "kuick_showInSameWindow" );
+    QAction *showInSame = coll->addAction( "kuick_showInSameWindow" );
     showInSame->setText( i18n("Show Image in Active Window") );
     connect( showInSame, SIGNAL( triggered() ), this, SLOT( slotShowInSameWindow() ) );
 
-    KAction *showFullscreen = coll->addAction( "kuick_showFullscreen" );
+    QAction *showFullscreen = coll->addAction( "kuick_showFullscreen" );
     showFullscreen->setText( i18n("Show Image in Fullscreen Mode") );
     connect( showFullscreen, SIGNAL( triggered() ), this, SLOT( slotShowFullscreen() ) );
 
@@ -298,14 +300,14 @@ void KuickShow::initGUI( const KUrl& startDir )
     inlinePreviewAction->setIcon( defaultInlinePreview->icon() );
     connect( inlinePreviewAction, SIGNAL( toggled(bool) ), this, SLOT( slotToggleInlinePreview(bool) ) );
 
-    KAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll);
+    QAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll);
     coll->addAction( "quit", quit );
 
     // remove QString::null parameter -- ellis
 //    coll->readShortcutSettings( QString::null );
 
     // menubar
-    KMenuBar *mBar = menuBar();
+    QMenuBar *mBar = menuBar();
     QMenu *fileMenu = new QMenu( i18n("&File"), mBar );
     fileMenu->setObjectName( QString::fromLatin1( "file" ) );
     fileMenu->addAction(open);
@@ -363,8 +365,8 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     addressToolBar->addWidget( cmbPath );
 
-    connect( cmbPath, SIGNAL( urlActivated( const KUrl& )),
-             this, SLOT( slotSetURL( const KUrl& )));
+    connect( cmbPath, SIGNAL( urlActivated( const QUrl& )),
+             this, SLOT( slotSetURL( const QUrl& )));
     connect( cmbPath, SIGNAL( returnPressed()),
              this, SLOT( slotURLComboReturnPressed()));
 
@@ -385,7 +387,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     tBar->addSeparator();
     tBar->addAction(about);
 
-    KMenu *help = helpMenu( QString::null, false );
+    QMenu *help = helpMenu( QString::null, false );
     mBar->addMenu( help );
 
 
@@ -408,13 +410,13 @@ void KuickShow::initGUI( const KUrl& startDir )
 
     setupGUI( KXmlGuiWindow::Save );
 
-    qobject_cast<KAction *>(coll->action( "reload" ))->setShortcut( KStandardShortcut::reload() );
-    qobject_cast<KAction *>(coll->action( "short view" ))->setShortcut(Qt::Key_F6);
-    qobject_cast<KAction *>(coll->action( "detailed view" ))->setShortcut(Qt::Key_F7);
-    //qobject_cast<KAction *>(coll->action( "show hidden" ))->setShortcut(Qt::Key_F8);
-    qobject_cast<KAction *>(coll->action( "mkdir" ))->setShortcut(Qt::Key_F10);
-    qobject_cast<KAction *>(coll->action( "preview" ))->setShortcut(Qt::Key_F11);
-    //qobject_cast<KAction *>(coll->action( "separate dirs" ))->setShortcut(Qt::Key_F12);
+    coll->setDefaultShortcuts(coll->action( "reload" ), KStandardShortcut::reload());
+    coll->setDefaultShortcut(coll->action( "short view" ), Qt::Key_F6);
+    coll->setDefaultShortcut(coll->action( "detailed view" ), Qt::Key_F7);
+    //coll->setDefaultShortcut(coll->action( "show hidden" ), Qt::Key_F8);
+    coll->setDefaultShortcut(coll->action( "mkdir" ), Qt::Key_F10);
+    coll->setDefaultShortcut(coll->action( "preview" ), Qt::Key_F11);
+    //coll->setDefaultShortcut(coll->action( "separate dirs" ), Qt::Key_F12);
 }
 
 QLabel* KuickShow::createStatusBarLabel(int stretch)
@@ -442,7 +444,7 @@ void KuickShow::redirectDeleteAndTrashActions(KActionCollection *coll)
     }
 }
 
-void KuickShow::slotSetURL( const KUrl& url )
+void KuickShow::slotSetURL( const QUrl& url )
 {
     fileWidget->setUrl( url, true );
 }
@@ -491,7 +493,13 @@ void KuickShow::slotHighlighted( const KFileItem& item )
     QString meta;
     if ( image )
     {
-        KFileMetaInfo info = item.metaInfo();
+        KFileMetaInfo info;
+        // code snippet copied from KFileItem::metaInfo (KDE4)
+        if(item.isRegularFile() || item.isDir()) {
+            bool isLocalUrl;
+            KUrl url(item.mostLocalUrl(&isLocalUrl));
+            info = KFileMetaInfo(url.toLocalFile(), item.mimetype(), KFileMetaInfo::ContentInfo | KFileMetaInfo::TechnicalInfo);
+        }
         if ( info.isValid() )
         {
             meta = info.item("sizeurl").value().toString();
@@ -508,15 +516,15 @@ void KuickShow::slotHighlighted( const KFileItem& item )
     fileWidget->actionCollection()->action("kuick_showFullscreen")->setEnabled( image );
 }
 
-void KuickShow::dirSelected( const KUrl& url )
+void KuickShow::dirSelected( const QUrl& url )
 {
     if ( url.isLocalFile() )
         setCaption( url.path() );
     else
-        setCaption( url.prettyUrl() );
+        setCaption( url.toDisplayString() );
 
     cmbPath->setUrl( url );
-    sblblUrlInfo->setText(url.prettyUrl());
+    sblblUrlInfo->setText(url.toDisplayString());
 }
 
 void KuickShow::slotSelected( const KFileItem& item )
@@ -646,7 +654,7 @@ void KuickShow::performDeleteCurrentImage(QWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>", item.url().pathOrUrl()),
+            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>", KUrl(item.url()).pathOrUrl()),
             i18n("Delete File"),
             KStandardGuiItem::del(),
             KStandardGuiItem::cancel(),
@@ -672,7 +680,7 @@ void KuickShow::performTrashCurrentImage(QWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>", item.url().pathOrUrl()),
+            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>", KUrl(item.url()).pathOrUrl()),
             i18n("Trash File"),
             KGuiItem(i18nc("to trash", "&Trash"),"edittrash"),
             KStandardGuiItem::cancel(),
@@ -814,9 +822,9 @@ void KuickShow::slotShowFullscreen()
     showImage( fileWidget->getCurrentItem( false ), false, true );
 }
 
-void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &urls)
+void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &urls)
 {
-    KUrl::List::ConstIterator it = urls.constBegin();
+    QList<QUrl>::ConstIterator it = urls.constBegin();
     for ( ; it != urls.constEnd(); ++it )
     {
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
@@ -953,7 +961,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                     {
                         if ( !fileWidget->dirLister()->rootItem().isNull() )
                         {
-                        	fileWidget->setCurrentItem( file->url().fileName() );
+                        	fileWidget->setCurrentItem( file->url() );
                         	QTimer::singleShot( 0, this, SLOT( slotReplayEvent()));
                         }
                         else // finished, but no root-item -- probably an error, kill repeat-item!
@@ -1079,7 +1087,7 @@ void KuickShow::configuration()
              this, SLOT( slotConfigApplied() ) );
     connect( dialog, SIGNAL( applyClicked() ),
              this, SLOT( slotConfigApplied() ) );
-    connect( dialog, SIGNAL( finished() ),
+    connect( dialog, SIGNAL( finished(int) ),
              this, SLOT( slotConfigClosed() ) );
 
     fileWidget->actionCollection()->action( "kuick_configure" )->setEnabled( false );
@@ -1108,7 +1116,7 @@ void KuickShow::slotConfigApplied()
 
 void KuickShow::slotConfigClosed()
 {
-    dialog->delayedDestruct();
+    dialog->deleteLater();
     fileWidget->actionCollection()->action( "kuick_configure" )->setEnabled( true );
 }
 
@@ -1190,7 +1198,7 @@ void KuickShow::saveSettings()
         sessGroup.writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
-        sessGroup.writePathEntry( "CurrentDirectory", fileWidget->url().prettyUrl() );
+        sessGroup.writePathEntry( "CurrentDirectory", fileWidget->url().toDisplayString() );
         KConfigGroup group( kc, "Filebrowser" );
         fileWidget->writeConfig( group);
     }
@@ -1325,7 +1333,7 @@ void KuickShow::delayAction(DelayedRepeatEvent *event)
     if ( fileWidget->dirLister()->isFinished() &&
          !fileWidget->dirLister()->rootItem().isNull() )
     {
-        fileWidget->setCurrentItem( url.fileName() );
+        fileWidget->setCurrentItem( url );
         QTimer::singleShot( 0, this, SLOT( doReplay()));
     }
     else
@@ -1383,7 +1391,7 @@ void KuickShow::slotOpenURL()
 {
     KFileDialog dlg(KUrl(), kdata->fileFilter, this);
     dlg.setMode( KFile::Files | KFile::Directory );
-    dlg.setCaption( i18n("Select Files or Folder to Open") );
+    dlg.setWindowTitle( i18n("Select Files or Folder to Open") );
 
     if ( dlg.exec() == QDialog::Accepted )
     {

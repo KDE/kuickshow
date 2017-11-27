@@ -36,7 +36,7 @@
 #include <QAbstractItemView>
 #include <QEvent>
 #include <QKeyEvent>
-#include <QMenuItem>
+#include <QMimeDatabase>
 #include <QModelIndex>
 #include <QResizeEvent>
 #include <qnamespace.h>
@@ -62,8 +62,8 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent )
     // setOnlyDoubleClickSelectsFiles( true );
     reloadConfiguration();
 
-    completionObject()->setCompletionMode( KGlobalSettings::CompletionAuto );
-    dirCompletionObject()->setCompletionMode( KGlobalSettings::CompletionAuto);
+    completionObject()->setCompletionMode( KCompletion::CompletionAuto );
+    dirCompletionObject()->setCompletionMode( KCompletion::CompletionAuto);
 
     slotViewChanged();
     connect( this, SIGNAL( viewChanged( QAbstractItemView * )),
@@ -76,8 +76,8 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent )
     connect( this, SIGNAL( fileHighlighted( const KFileItem& )),
 	     SLOT( slotHighlighted( const KFileItem& )));
 
-    connect( this, SIGNAL(urlEntered(const KUrl&)),
-             SLOT( slotURLEntered( const KUrl& )));
+    connect( this, SIGNAL(urlEntered(const QUrl&)),
+             SLOT( slotURLEntered( const QUrl& )));
 
     // should actually be KDirOperator's job!
     connect( this, SIGNAL( finishedLoading() ), SLOT( slotFinishedLoading() ));
@@ -125,10 +125,11 @@ void FileWidget::reloadConfiguration()
 	mimes.append("inode/directory");
 
 	// Then, all the images!
-	KMimeType::List l = KMimeType::allMimeTypes();
-	for (KMimeType::List::iterator it = l.begin(); it != l.end(); ++it)
-	    if ((*it)->name().startsWith( "image/" ))
-		mimes.append( (*it)->name() );
+	QMimeDatabase mimedb;
+	QList<QMimeType> l = mimedb.allMimeTypes();
+	for (QList<QMimeType>::const_iterator it = l.begin(); it != l.end(); ++it)
+	    if (it->name().startsWith( "image/" ))
+		mimes.append( it->name() );
 
 	// Ok, show what we've done
 	setMimeFilter (mimes);
@@ -204,7 +205,7 @@ void FileWidget::findCompletion( const QString& text )
     if ( m_validCompletion ) {
     	KUrl completeUrl = url();
     	completeUrl.setFileName( file );
-    	KDirOperator::setCurrentItem( completeUrl.url() );
+    	KDirOperator::setCurrentItem( completeUrl );
     }
 }
 
@@ -454,17 +455,17 @@ void FileWidget::setInitialItem( const KUrl& url )
     m_initialName = url;
 }
 
-void FileWidget::slotURLEntered( const KUrl& url )
+void FileWidget::slotURLEntered( const QUrl& url )
 {
     if ( m_fileFinder )
-        m_fileFinder->completion()->setDir( url.path() );
+        m_fileFinder->completion()->setDir( url );
 }
 
 void FileWidget::slotFinishedLoading()
 {
 	const KFileItem& current = getCurrentItem( false );
 	if ( !m_initialName.isEmpty() )
-		setCurrentItem( m_initialName.url() );
+		setCurrentItem( m_initialName );
 	else if ( current.isNull() ) {
 		QModelIndex first = view()->model()->index(0, 0);
 		if (first.isValid()) {
