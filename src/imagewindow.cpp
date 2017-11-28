@@ -31,7 +31,6 @@
 #include <KStandardDirs>
 #include <KStandardGuiItem>
 #include <KStandardShortcut>
-#include <KTemporaryFile>
 #include <KToggleFullScreenAction>
 #include <KUrlMimeData>
 #include <KWindowSystem>
@@ -46,14 +45,17 @@
 #include <QDropEvent>
 #include <QFocusEvent>
 #include <QKeyEvent>
+#include <QMimeData>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPen>
 #include <QPixmap>
 #include <QRect>
 #include <QResizeEvent>
+#include <QScopedPointer>
 #include <QString>
 #include <QStringList>
+#include <QTemporaryFile>
 #include <QTimer>
 #include <QWheelEvent>
 #include <qdrawutil.h>
@@ -1016,16 +1018,16 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
 	else
 	{
 
-		KTemporaryFile tmpFile;
-		tmpFile.setAutoRemove( false );
 		QString extension = QFileInfo( dest.fileName() ).completeSuffix();
-		if ( !extension.isEmpty() )
-//			extension.prepend( '.' );
-			tmpFile.setSuffix( extension );
-		if ( !tmpFile.open() )
+        if(!extension.isEmpty()) extension.prepend('.');
+        QScopedPointer<QTemporaryFile> tmpFilePtr(FileCache::self()->createTempFile(extension));
+        if(tmpFilePtr.isNull()) return false;
+
+        tmpFilePtr->setAutoRemove(false);
+        if ( !tmpFilePtr->open() )
 			return false;
-		tmpFile.close();
-		saveFile = tmpFile.fileName();
+        saveFile = tmpFilePtr->fileName();
+        tmpFilePtr->close();
 	}
 
     if ( saveIm )

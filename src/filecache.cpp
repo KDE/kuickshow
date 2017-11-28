@@ -22,6 +22,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QTemporaryDir>
+#include <QTemporaryFile>
 #include <QUrl>
 
 
@@ -79,6 +80,15 @@ QString FileCache::tempDir()
     }
 
     return m_tempDir->path() + QLatin1Char('/');
+}
+
+QTemporaryFile* FileCache::createTempFile(const QString& suffix, const QString& prefix)
+{
+    QString nameTemplate = tempDir();
+    if(nameTemplate.isEmpty()) return nullptr;
+
+    nameTemplate += prefix + QStringLiteral("XXXXXX") + suffix;
+    return new QTemporaryFile(nameTemplate);
 }
 
 

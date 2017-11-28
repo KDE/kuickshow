@@ -25,11 +25,11 @@
 #include <KGlobalSettings>
 #include <KLocale>
 #include <KNumInput>
-#include <KTemporaryFile>
 
 #include <QCheckBox>
 #include <QColor>
 #include <QDebug>
+#include <QDir>
 #include <QFont>
 #include <QFontMetrics>
 #include <QGridLayout>
@@ -40,8 +40,11 @@
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QRadioButton>
+#include <QScopedPointer>
+#include <QTemporaryFile>
 #include <QVBoxLayout>
 
+#include "filecache.h"
 #include "imagewindow.h"
 #include "version.h"
 
@@ -60,15 +63,13 @@ bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
 
     if (printDialog->exec())
     {
-        KTemporaryFile tmpFile;
-        tmpFile.setSuffix(".png");
-        tmpFile.setAutoRemove( true );
-        if ( tmpFile.open() )
+        QScopedPointer<QTemporaryFile> tmpFilePtr(FileCache::self()->createTempFile(QStringLiteral(".png")));
+        if ( tmpFilePtr->open() )
         {
-            if ( imageWin.saveImage( QUrl::fromLocalFile(tmpFile.fileName()), true ) )
+            if ( imageWin.saveImage( QUrl::fromLocalFile(tmpFilePtr->fileName()), true ) )
             {
 
-                bool success = printImageWithQt( tmpFile.fileName(), printer, *dialogPage,
+                bool success = printImageWithQt( tmpFilePtr->fileName(), printer, *dialogPage,
                                          imageURL);
                 delete printDialog;
                 return success;

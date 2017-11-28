@@ -24,6 +24,7 @@
 #include "kuickfile.h"
 
 class QTemporaryDir;
+class QTemporaryFile;
 class QUrl;
 
 
@@ -41,6 +42,13 @@ public:
      * @return the temporary directory or QString::null if none available
      */
     QString tempDir();
+
+    /**
+     * Creates a new QTemporaryFile in this cache's temp dir and returns it unopened.
+     * It is the responsibility of the caller to delete the object when it is no longer needed.
+     * @return the QTemporaryFile object, or nullptr on error
+     */
+    QTemporaryFile* createTempFile(const QString& suffix, const QString& prefix = QString());
 
 private:
     static FileCache *s_self;

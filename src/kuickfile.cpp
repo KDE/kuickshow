@@ -20,13 +20,14 @@
 
 #include <KLocale>
 #include <KProgressDialog>
-#include <KTemporaryFile>
 #include <KIO/Job>
 #include <KIO/NetAccess>
 #include <kdeversion.h>
 
 #include <QDebug>
 #include <QFile>
+#include <QScopedPointer>
+#include <QTemporaryFile>
 
 #include "filecache.h"
 
@@ -90,19 +91,13 @@ bool KuickFile::download()
     if ( extIndex > 0 )
         ext = fileName.mid( extIndex );
 
-    QString tempDir = FileCache::self()->tempDir();
-    KTemporaryFile tempFile;
-    if ( !tempDir.isEmpty() ) {
-        tempFile.setPrefix( tempDir );
-    }
-    tempFile.setSuffix( ext );
-    tempFile.setAutoRemove( tempDir.isNull() ); // in case there is no proper tempdir, make sure to delete those files!
-    if ( !tempFile.open() )
-        return false;
+    QScopedPointer<QTemporaryFile> tempFilePtr(FileCache::self()->createTempFile(ext));
+    if(tempFilePtr.isNull() || !tempFilePtr->open()) return false;
 
-    QUrl destURL = QUrl::fromLocalFile( tempFile.fileName() );
+    QUrl destURL = QUrl::fromLocalFile(tempFilePtr->fileName());
 
-    tempFile.close();
+    // we don't need the actual temp file, just its unique name
+    tempFilePtr.reset();
 
     m_job = KIO::file_copy( m_url, destURL, -1, KIO::HideProgressInfo | KIO::Overwrite ); // handling progress ourselves
 //    m_job->setAutoErrorHandlingEnabled( true );
