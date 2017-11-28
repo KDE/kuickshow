@@ -21,7 +21,6 @@
 #include <KActionCollection>
 #include <KConfig>
 #include <KCursor>
-#include <KDebug>
 #include <KFileDialog>
 #include <KGlobalSettings>
 #include <KIconLoader>

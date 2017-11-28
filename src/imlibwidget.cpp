@@ -19,13 +19,13 @@
 #include "imlibwidget.h"
 
 #include <KCursor>
-#include <KDebug>
 #include <KFileMetaInfo>
 #include <KImageIO>
 
 #include <QApplication>
 #include <QCloseEvent>
 #include <QColor>
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QFile>
 #include <QImage>
@@ -167,7 +167,7 @@ KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
     }
 
     if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
-	kWarning() << "ImlibWidget: can't load image " << file->url().prettyUrl();
+        qWarning("ImlibWidget: can't load image %s", qUtf8Printable(file->url().prettyUrl()));
 	return 0L;
     }
 
@@ -687,7 +687,7 @@ KuickImage * ImageCache::loadImage( KuickFile * file, ImlibColorModifier mod)
 // isn't anyway, according to Imlib's sources).
 ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 {
-    kDebug() << "Trying to load " << fileName << " with KImageIO...";
+    qDebug("Trying to load %s with KImageIO...", qUtf8Printable(fileName));
 
     QImage image( fileName );
     if ( image.isNull() )

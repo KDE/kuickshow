@@ -19,10 +19,11 @@
 #include "filecache.h"
 
 #include <KComponentData>
-#include <KDebug>
 #include <KGlobal>
 #include <KStandardDirs>
 #include <KTempDir>
+
+#include <QDebug>
 
 #include <unistd.h>
 
@@ -75,7 +76,7 @@ QString FileCache::tempDir()
         m_tempDir = createTempDir();
 
         if ( !m_tempDir ) {
-            kWarning() << "Unable to create temporary directory for KuickShow" << endl;
+            qWarning("Unable to create temporary directory for KuickShow");
             return QString::null;
         }
     }

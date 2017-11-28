@@ -20,7 +20,6 @@
 #include <ui_printing_page.h>
 
 #include <KComboBox>
-#include <KDebug>
 #include <KDEPrintDialog>
 #include <KDialog>
 #include <KGlobalSettings>
@@ -30,6 +29,7 @@
 
 #include <QCheckBox>
 #include <QColor>
+#include <QDebug>
 #include <QFont>
 #include <QFontMetrics>
 #include <QGridLayout>
@@ -86,7 +86,7 @@ bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, Kui
 {
     QImage image( filename );
     if ( image.isNull() ) {
-        kWarning() << "Can't load image: " << filename << " for printing.\n";
+        qWarning("Can't load image: %s for printing.", qUtf8Printable(filename));
         return false;
     }
 

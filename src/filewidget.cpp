@@ -21,7 +21,6 @@
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KConfigGroup>
-#include <KDebug>
 #include <KFileItemActions>
 #include <KFileItemListProperties>
 #include <KGlobal>
@@ -34,6 +33,7 @@
 
 #include <QAbstractItemModel>
 #include <QAbstractItemView>
+#include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
 #include <QMimeDatabase>
@@ -336,7 +336,7 @@ KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
 {
     QModelIndex currentIndex = view()->currentIndex();
     if ( !currentIndex.isValid() ) {
-    	kDebug() << "no current index" << endl;
+        qDebug("no current index");
         return KFileItem();
     }
 
@@ -345,7 +345,7 @@ KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
     const int column = index.column();
     item = fileItemFor( currentIndex );
     if ( item.isNull() )
-        kDebug() << "### current item is null: " << index.data().typeName() << ", " << currentIndex.data().value<QString>() << endl;
+        qDebug("### current item is null: %s, %s", index.data().typeName(), qUtf8Printable(currentIndex.data().value<QString>()));
 
     switch( which ) {
     case Previous: {

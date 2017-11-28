@@ -18,7 +18,6 @@
 
 #include "kuickfile.h"
 
-#include <KDebug>
 #include <KLocale>
 #include <KProgressDialog>
 #include <KTemporaryFile>
@@ -26,6 +25,7 @@
 #include <KIO/NetAccess>
 #include <kdeversion.h>
 
+#include <QDebug>
 #include <QFile>
 
 #include "filecache.h"
@@ -168,7 +168,7 @@ void KuickFile::slotResult( KJob *job )
     	m_currentProgress = 0;
 
         if ( job->error() != KIO::ERR_USER_CANCELED )
-            kWarning() << "ERROR: KuickFile::slotResult: " << job->errorString() << endl;
+            qWarning("ERROR: KuickFile::slotResult: %s", qUtf8Printable(job->errorString()));
 
         QString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destUrl().path();
         QFile::remove( canceledFile );

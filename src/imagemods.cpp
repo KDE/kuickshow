@@ -18,8 +18,6 @@
 
 #include "imagemods.h"
 
-#include <KDebug>
-
 #include "kuickdata.h"
 
 

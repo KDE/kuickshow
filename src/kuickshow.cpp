@@ -25,7 +25,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KCursor>
-#include <KDebug>
 #include <KDialog>
 #include <KFileDialog>
 #include <KFileMetaInfo>
@@ -54,6 +53,7 @@
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QDialog>
 #include <QDir>
@@ -1364,7 +1364,7 @@ void KuickShow::doReplay()
             replayAdvance(m_delayedRepeatItem);
             break;
         default:
-            kWarning() << "doReplay: unknown action -- ignoring: " << m_delayedRepeatItem->action << endl;
+            qWarning("doReplay: unknown action -- ignoring: %d", m_delayedRepeatItem->action);
             break;
     }
 
