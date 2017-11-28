@@ -19,7 +19,6 @@
 #ifndef IMAGEWINDOW_H
 #define IMAGEWINDOW_H
 
-#include <KAction>
 #include <KUrl>
 
 #include <QContextMenuEvent>

@@ -19,7 +19,6 @@
 #include "kuickshow.h"
 
 #include <KAboutData>
-#include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KConfig>
