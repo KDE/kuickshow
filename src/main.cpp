@@ -16,11 +16,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <K4AboutData>
-#include <KApplication>
-#include <KCmdLineArgs>
-#include <KDebug>
+#include <KAboutData>
 #include <KLocale>
+
+#include <QApplication>
+#include <QCommandLineParser>
 
 #include "kuickshow.h"
 #include "version.h"
@@ -28,28 +28,43 @@
 
 extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 {
-    K4AboutData about(
-	  "kuickshow", 0, ki18n( "KuickShow" ), KUICKSHOWVERSION,
-	  ki18n("A fast and versatile image viewer" ),
-	  K4AboutData::License_GPL, ki18n("(c) 1998-2009, Carsten Pfeiffer"),
-	  ki18n(0 /*text*/), "http://devel-home.kde.org/~pfeiffer/" );
+    QApplication app(argc, argv);
+    KLocalizedString::setApplicationDomain("kuickshow");
 
-    about.addAuthor( ki18n("Carsten Pfeiffer"), KLocalizedString(), "pfeiffer@kde.org",
-		     "http://devel-home.kde.org/~pfeiffer/" );
-    about.addCredit( ki18n("Rober Hamberger"), KLocalizedString(), "rh474@bingo-ev.de" );
-    about.addCredit( ki18n("Thorsten Scheuermann"), KLocalizedString(), "uddn@rz.uni-karlsruhe.de" );
+    KAboutData about(
+        QStringLiteral("kuickshow"),
+        i18n("KuickShow"),
+        KUICKSHOWVERSION,
+        i18n("A fast and versatile image viewer"),
+        KAboutLicense::GPL,
+        i18n("(c) 1998-2009, Carsten Pfeiffer"),
+        QString(),
+        QStringLiteral("http://devel-home.kde.org/~pfeiffer/")
+    );
 
-    KCmdLineArgs::init( argc, argv, &about );
+    about.addAuthor(i18n("Carsten Pfeiffer"), QString(), QStringLiteral("pfeiffer@kde.org"),
+        QStringLiteral("http://devel-home.kde.org/~pfeiffer/"));
+    about.addCredit(i18n("Rober Hamberger"), QString(), QStringLiteral("rh474@bingo-ev.de"));
+    about.addCredit(i18n("Thorsten Scheuermann"), QString(), QStringLiteral("uddn@rz.uni-karlsruhe.de"));
 
-    KCmdLineOptions options;
-    options.add("lastfolder", ki18n("Start in the last visited folder, not the "
-			      "current working folder."));
-    options.add("d");
-    // short option for --lastdir
-    options.add("+[files]", ki18n("Optional image filenames/urls to show"));
-    KCmdLineArgs::addCmdLineOptions( options );
+    KAboutData::setApplicationData(about);
+    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("kuickshow")));
 
-    KApplication app;
+
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+    about.setupCommandLine(&parser);
+
+    parser.addOption({ {"d", "lastfolder"}, i18n("Start in the last visited folder, not the current working folder.") });
+    parser.addPositionalArgument("files", i18n("Optional image filenames/urls to show"), QStringLiteral("[files...]"));
+
+    parser.process(app);
+    about.processCommandLine(&parser);
+
+    // the parser is needed in KuickShow::KuickShow()
+    app.setProperty("cmdlineParser", qVariantFromValue<void*>(&parser));
+
 
     if ( app.isSessionRestored() )
 	RESTORE( KuickShow )

@@ -18,7 +18,6 @@
 
 #include "filefinder.h"
 
-#include <KApplication>
 #include <KCompletionBox>
 #include <KConfig>
 #include <KConfigGroup>

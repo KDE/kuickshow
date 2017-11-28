@@ -19,7 +19,6 @@
 #include "generalwidget.h"
 #include <ui_generalwidget.h>
 
-#include <KApplication>
 #include <KColorButton>
 #include <KDialog>
 #include <KIconLoader>

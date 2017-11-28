@@ -19,7 +19,6 @@
 #include "imagewindow.h"
 
 #include <KActionCollection>
-#include <KApplication>
 #include <KConfig>
 #include <KCursor>
 #include <KDebug>
@@ -38,6 +37,7 @@
 #include <KWindowSystem>
 #include <kdeversion.h>
 
+#include <QApplication>
 #include <QBitmap>
 #include <QCheckBox>
 #include <QContextMenuEvent>

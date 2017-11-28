@@ -18,12 +18,10 @@
 
 #include "kuickshow.h"
 
-#include <K4AboutData>
+#include <KAboutData>
 #include <KAction>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KApplication>
-#include <KCmdLineArgs>
 #include <KConfig>
 #include <KConfigGroup>
 #include <KCursor>
@@ -54,6 +52,8 @@
 #include <kdeversion.h>
 
 #include <QAbstractItemView>
+#include <QApplication>
+#include <QCommandLineParser>
 #include <QDesktopWidget>
 #include <QDialog>
 #include <QDir>
@@ -118,14 +118,14 @@ KuickShow::KuickShow( const char *name )
     bool isDir = false; // true if we get a directory on the commandline
 
     // parse commandline options
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    QCommandLineParser* parser = reinterpret_cast<QCommandLineParser*>(qApp->property("cmdlineParser").value<void*>());
 
     // files to display
     // either a directory to display, an absolute path, a relative path, or a URL
-    KUrl startDir;
-    startDir.setPath( QDir::currentPath() + '/' );
+    QUrl startDir = QUrl::fromLocalFile(QDir::currentPath() + '/');
 
-    int numArgs = args->count();
+    QStringList args = parser->positionalArguments();
+    int numArgs = args.count();
     if ( numArgs >= 10 )
     {
         // Even though the 1st i18n string will never be used, it needs to exist for plural handling - mhunter
@@ -142,7 +142,7 @@ KuickShow::KuickShow( const char *name )
 
     QMimeDatabase mimedb;
     for ( int i = 0; i < numArgs; i++ ) {
-        KUrl url = args->url( i );
+        QUrl url = QUrl::fromUserInput(args.value(i), QDir::currentPath(), QUrl::AssumeLocalFile);
         KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url, false );
 
         // for remote URLs, we don't know if it's a file or directory, but
@@ -184,14 +184,14 @@ KuickShow::KuickShow( const char *name )
         // else // we don't handle local non-images
     }
 
-    if ( (kdata->startInLastDir && args->count() == 0) || args->isSet( "lastfolder" )) {
+    if ( (kdata->startInLastDir && args.count() == 0) || parser->isSet( "lastfolder" )) {
         KConfigGroup sessGroup(kc, "SessionSettings");
-        startDir = sessGroup.readPathEntry( "CurrentDirectory", startDir.url() );
+        startDir = QUrl(sessGroup.readPathEntry( "CurrentDirectory", startDir.url() ));
     }
 
     if ( s_viewers.isEmpty() || isDir ) {
         initGUI( startDir );
-	if (!kapp->isSessionRestored()) // during session management, readProperties() will show()
+	if (!qApp->isSessionRestored()) // during session management, readProperties() will show()
         show();
     }
 
@@ -210,7 +210,7 @@ KuickShow::~KuickShow()
 
     FileCache::shutdown();
     free( id );
-    kapp->quit();
+    qApp->quit();
 
     delete kdata;
 }
@@ -255,7 +255,7 @@ void KuickShow::initGUI( const KUrl& startDir )
     print->setText( i18n("Print Image...") );
 
     QAction *configure = coll->addAction( "kuick_configure" );
-    configure->setText( i18n("Configure %1...",KGlobal::mainComponent().aboutData()->programName() ) );
+    configure->setText( i18n("Configure %1...", QApplication::applicationDisplayName() ) );
     configure->setIcon( QIcon::fromTheme( "configure" ) );
     connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
 
