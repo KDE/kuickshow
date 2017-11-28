@@ -24,6 +24,7 @@
 #include <KTempDir>
 
 #include <QDebug>
+#include <QUrl>
 
 #include <unistd.h>
 
@@ -58,9 +59,9 @@ FileCache * FileCache::self()
     return s_self;
 }
 
-KuickFile * FileCache::getFile( const KUrl& url )
+KuickFile * FileCache::getFile( const QUrl& url )
 {
-    QString urlString = url.prettyUrl();
+    QString urlString = url.toDisplayString();
     KuickFile *file = m_files.object( urlString );
     if ( !file ) {
         file = new KuickFile( url );

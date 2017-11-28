@@ -20,6 +20,7 @@
 #define IMAGE_MODS_H
 
 #include <QCache>
+#include <QUrl>
 
 #include "imlibwidget.h"
 #include "kuickimage.h"
@@ -34,8 +35,8 @@ public:
     static bool restoreFor(KuickImage *kuim, ImData *idata);
 
 private:
-    static QCache<KUrl,ImageMods> *s_modifications;
-    static QCache<KUrl,ImageMods> * getInstance();
+    static QCache<QUrl, ImageMods>* s_modifications;
+    static QCache<QUrl, ImageMods>* getInstance();
 
     int           width;
     int           height;

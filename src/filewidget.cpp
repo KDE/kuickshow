@@ -46,7 +46,7 @@
 #include "kuickshow.h"
 
 
-FileWidget::FileWidget( const KUrl& url, QWidget *parent )
+FileWidget::FileWidget( const QUrl& url, QWidget *parent )
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
       m_fileFinder( 0L ),
@@ -203,8 +203,8 @@ void FileWidget::findCompletion( const QString& text )
     m_validCompletion = !file.isNull();
 
     if ( m_validCompletion ) {
-    	KUrl completeUrl = url();
-    	completeUrl.setFileName( file );
+        QUrl completeUrl = url();
+        completeUrl.setPath(completeUrl.adjusted(QUrl::RemoveFilename).path() + file);
     	KDirOperator::setCurrentItem( completeUrl );
     }
 }
@@ -426,15 +426,12 @@ void FileWidget::slotReturnPressed( const QString& t )
 
     if ( text.at(0) == '/' || text.at(0) == '~' ) {
 	QString dir = m_fileFinder->completion()->replacedPath( text );
-
-	KUrl url;
-	url.setPath( dir );
-	setUrl( url, true );
+        setUrl( QUrl::fromLocalFile(dir), true );
     }
 
     else if ( text.indexOf('/') != (int) text.length() -1 ) { // relative path
 	QString dir = m_fileFinder->completion()->replacedPath( text );
-	KUrl u( url(), dir );
+        QUrl u = url().resolved(QUrl(dir));
 	setUrl( u, true );
     }
 
@@ -450,7 +447,7 @@ void FileWidget::slotReturnPressed( const QString& t )
     }
 }
 
-void FileWidget::setInitialItem( const KUrl& url )
+void FileWidget::setInitialItem( const QUrl& url )
 {
     m_initialName = url;
 }
@@ -476,7 +473,7 @@ void FileWidget::slotFinishedLoading()
 		}
 	}
 
-	m_initialName = KUrl();
+	m_initialName = QUrl();
 	emit finished();
 }
 

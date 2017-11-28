@@ -135,12 +135,12 @@ ImlibWidget::~ImlibWidget()
     if ( deleteImData ) delete idata;
 }
 
-KUrl ImlibWidget::url() const
+QUrl ImlibWidget::url() const
 {
     if ( m_kuickFile )
         return m_kuickFile->url();
 
-    return KUrl();
+    return QUrl();
 }
 
 KuickFile * ImlibWidget::currentFile() const
@@ -167,7 +167,7 @@ KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
     }
 
     if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
-        qWarning("ImlibWidget: can't load image %s", qUtf8Printable(file->url().prettyUrl()));
+        qWarning("ImlibWidget: can't load image %s", qUtf8Printable(file->url().toDisplayString()));
 	return 0L;
     }
 
@@ -181,7 +181,7 @@ void ImlibWidget::loaded( KuickImage *, bool /*wasCached*/ )
 {
 }
 
-bool ImlibWidget::loadImage( const KUrl& url )
+bool ImlibWidget::loadImage( const QUrl& url )
 {
     return loadImage( FileCache::self()->getFile( url ));
 }
@@ -205,7 +205,7 @@ bool ImlibWidget::loadImage( KuickFile * file )
 }
 
 
-bool ImlibWidget::cacheImage( const KUrl& url )
+bool ImlibWidget::cacheImage( const QUrl& url )
 {
 //    qDebug("cache image: %s", url.url().latin1());
     KuickFile *file = FileCache::self()->getFile( url );

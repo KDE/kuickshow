@@ -21,7 +21,8 @@
 
 #include <KDirModel>
 #include <KDirOperator>
-#include <KUrl>
+
+#include <QUrl>
 
 class KFileItem;
 class KFileItemActions;
@@ -38,13 +39,13 @@ class FileWidget : public KDirOperator
 public:
     enum WhichItem { Previous, Next, Current };
 
-    FileWidget( const KUrl& url, QWidget *parent = 0L );
+    FileWidget( const QUrl& url, QWidget *parent = 0L );
     ~FileWidget();
 
     bool hasFiles() const;
     void reloadConfiguration();
 
-    void setInitialItem( const KUrl& url );
+    void setInitialItem( const QUrl& url );
 
     KFileItem getCurrentItem( bool onlyImage ) const {
 	return getItem( Current, onlyImage );
@@ -94,7 +95,7 @@ private:
     bool m_validCompletion;
     FileFinder *m_fileFinder;
     QString m_currentURL;
-    KUrl m_initialName;
+    QUrl m_initialName;
     KFileItemActions *m_fileItemActions;
 
 };

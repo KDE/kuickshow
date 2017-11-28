@@ -31,7 +31,7 @@
 #include "filecache.h"
 
 
-KuickFile::KuickFile(const KUrl& url)
+KuickFile::KuickFile(const QUrl& url)
     : QObject(),
       m_url( url ),
       m_job( 0L ),
@@ -41,7 +41,7 @@ KuickFile::KuickFile(const KUrl& url)
     if ( m_url.isLocalFile())
         m_localFile = m_url.path();
     else {
-    	const KUrl& mostLocal = KIO::NetAccess::mostLocalUrl( m_url, 0L );
+        QUrl mostLocal = KIO::NetAccess::mostLocalUrl( m_url, 0L );
     	if ( mostLocal.isValid() && mostLocal.isLocalFile() )
     		m_localFile = mostLocal.path();
     }
@@ -100,7 +100,7 @@ bool KuickFile::download()
     if ( !tempFile.open() )
         return false;
 
-    KUrl destURL( tempFile.fileName() );
+    QUrl destURL = QUrl::fromLocalFile( tempFile.fileName() );
 
     tempFile.close();
 
@@ -127,7 +127,7 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
     KProgressDialog *dialog = new KProgressDialog( parent );
     dialog->setModal( true );
     dialog->setCaption( i18n("Downloading %1...", m_url.fileName() ) );
-    dialog->setLabelText( i18n("Please wait while downloading\n%1", m_url.prettyUrl() ));
+    dialog->setLabelText( i18n("Please wait while downloading\n%1", m_url.toDisplayString() ));
     dialog->setAllowCancel( true );
     dialog->setAutoClose( true );
 
@@ -208,5 +208,5 @@ void KuickFile::slotProgress( KJob *job, unsigned long percent )
 }
 
 bool operator==( const KuickFile& first, const KuickFile& second ) {
-    return first.url().equals( second.url() );
+    return first.url() == second.url();
 }

@@ -19,7 +19,8 @@
 #include "kuickurlwidget.h"
 
 #include <KRun>
-#include <KUrl>
+
+#include <QUrl>
 
 
 KuickUrlWidget::KuickUrlWidget(QWidget* parent) : KUrlLabel(parent)
@@ -38,7 +39,7 @@ KuickUrlWidget::KuickUrlWidget(const QString& text, QWidget *parent)
 
 void KuickUrlWidget::run()
 {
-    KUrl ku( url() );
+    QUrl ku( url() );
     if ( ku.isValid() ) {
 	(void) new KRun( ku, this );
     }

@@ -24,6 +24,7 @@
 #include "kuickfile.h"
 
 class KTempDir;
+class QUrl;
 
 
 class FileCache
@@ -32,7 +33,7 @@ public:
     static FileCache * self();
     static void shutdown();
 
-    KuickFile * getFile( const KUrl& url );
+    KuickFile * getFile( const QUrl& url );
     void setLimit( int numFiles );
     int getLimit() const { return m_limit; }
 

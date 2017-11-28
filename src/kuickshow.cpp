@@ -67,6 +67,7 @@
 #include <QSize>
 #include <QString>
 #include <QTextStream>
+#include <QUrl>
 #include <QtGlobal>
 #include <qnamespace.h>
 
@@ -215,11 +216,11 @@ KuickShow::~KuickShow()
 }
 
 // TODO convert to use xmlui file
-void KuickShow::initGUI( const KUrl& startDir )
+void KuickShow::initGUI( const QUrl& startDir )
 {
-	KUrl startURL( startDir );
+    QUrl startURL( startDir );
 	if ( !KProtocolManager::supportsListing( startURL ) )
-		startURL = KUrl();
+		startURL = QUrl();
 
     fileWidget = new FileWidget( startDir, this );
     fileWidget->setObjectName( QString::fromLatin1( "MainWidget" ) );
@@ -450,7 +451,7 @@ void KuickShow::slotSetURL( const QUrl& url )
 
 void KuickShow::slotURLComboReturnPressed()
 {
-    KUrl where( cmbPath->currentText() );
+    QUrl where = QUrl::fromUserInput( cmbPath->currentText(), QString(), QUrl::AssumeLocalFile );
     slotSetURL( where );
 }
 
@@ -496,7 +497,7 @@ void KuickShow::slotHighlighted( const KFileItem& item )
         // code snippet copied from KFileItem::metaInfo (KDE4)
         if(item.isRegularFile() || item.isDir()) {
             bool isLocalUrl;
-            KUrl url(item.mostLocalUrl(&isLocalUrl));
+            QUrl url(item.mostLocalUrl(&isLocalUrl));
             info = KFileMetaInfo(url.toLocalFile(), item.mimetype(), KFileMetaInfo::ContentInfo | KFileMetaInfo::TechnicalInfo);
         }
         if ( info.isValid() )
@@ -653,7 +654,7 @@ void KuickShow::performDeleteCurrentImage(QWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>", KUrl(item.url()).pathOrUrl()),
+            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>", item.url().toDisplayString(QUrl::PreferLocalFile)),
             i18n("Delete File"),
             KStandardGuiItem::del(),
             KStandardGuiItem::cancel(),
@@ -679,7 +680,7 @@ void KuickShow::performTrashCurrentImage(QWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>", KUrl(item.url()).pathOrUrl()),
+            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>", item.url().toDisplayString(QUrl::PreferLocalFile)),
             i18n("Trash File"),
             KGuiItem(i18nc("to trash", "&Trash"),"edittrash"),
             KStandardGuiItem::cancel(),
@@ -936,7 +937,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 if ( key != Qt::Key_Escape && key != Qt::Key_Shift && key != Qt::Key_Alt )
                 {
                     KuickFile *file = m_viewer->currentFile();
-                    initGUI( file->url().upUrl() );
+                    initGUI( KIO::upUrl(file->url()) );
 
                     // the fileBrowser will list the start-directory
                     // asynchronously so we can't immediately continue. There
@@ -1048,7 +1049,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 {
                     if ( !fileWidget )
                     {
-                        initGUI( window->currentFile()->url().fileName() );
+                        initGUI( window->currentFile()->url() );
                     }
                     show();
                     raise();
@@ -1073,9 +1074,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 void KuickShow::configuration()
 {
     if ( !fileWidget ) {
-        KUrl start;
-        start.setPath( QDir::homePath() );
-        initGUI( start );
+        initGUI( QUrl::fromLocalFile(QDir::homePath()) );
     }
 
     dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L, false );
@@ -1139,17 +1138,17 @@ void KuickShow::readProperties( const KConfigGroup& kc )
     assert( fileWidget ); // from SM, we should always have initGUI on startup
     QString dir = kc.readPathEntry( "CurrentDirectory", QString() );
     if ( !dir.isEmpty() ) {
-        fileWidget->setUrl( KUrl( dir ), true );
+        fileWidget->setUrl( QUrl( dir ), true );
         fileWidget->clearHistory();
     }
 
-    const KUrl& listedURL = fileWidget->url();
+    QUrl listedURL = fileWidget->url();
     const QStringList images = kc.readPathEntry( "Images shown", QStringList() );
     QStringList::const_iterator it;
     bool hasCurrentURL = false;
 
     for ( it = images.constBegin(); it != images.constEnd(); ++it ) {
-        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, KUrl( *it ), false );
+        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, QUrl( *it ), false );
         if ( item.isReadable() ) {
             if (showImage( item, true )) {
 				// Set the current URL in the file widget, if possible
@@ -1177,11 +1176,11 @@ void KuickShow::saveProperties( KConfigGroup& kc )
     QStringList urls;
     QList<ImageWindow*>::ConstIterator it;
     for ( it = s_viewers.constBegin(); it != s_viewers.constEnd(); ++it ) {
-        const KUrl& url = (*it)->currentFile()->url();
+        const QUrl url = (*it)->currentFile()->url();
         if ( url.isLocalFile() )
             urls.append( url.path() );
         else
-            urls.append( url.prettyUrl() ); // ### check if writePathEntry( prettyUrl ) works!
+            urls.append( url.toDisplayString() ); // ### check if writePathEntry( prettyUrl ) works!
     }
 
     kc.writePathEntry( "Images shown", urls );
@@ -1323,10 +1322,10 @@ void KuickShow::delayAction(DelayedRepeatEvent *event)
 
     m_delayedRepeatItem = event;
 
-    KUrl url = event->viewer->currentFile()->url();
+    QUrl url = event->viewer->currentFile()->url();
 //    QFileInfo fi( event->viewer->filename() );
 //    start.setPath( fi.dirPath( true ) );
-    initGUI( url.upUrl() );
+    initGUI( KIO::upUrl(url) );
 
     // see eventFilter() for explanation and similar code
     if ( fileWidget->dirLister()->isFinished() &&
@@ -1388,15 +1387,14 @@ void KuickShow::toggleBrowser()
 
 void KuickShow::slotOpenURL()
 {
-    KFileDialog dlg(KUrl(), kdata->fileFilter, this);
+    KFileDialog dlg(QUrl(), kdata->fileFilter, this);
     dlg.setMode( KFile::Files | KFile::Directory );
     dlg.setWindowTitle( i18n("Select Files or Folder to Open") );
 
     if ( dlg.exec() == QDialog::Accepted )
     {
-        KUrl::List urls = dlg.selectedUrls();
-        KUrl::List::ConstIterator it = urls.constBegin();
-        for ( ; it != urls.constEnd(); ++it )
+        QList<QUrl> urls = dlg.selectedUrls();
+        for ( auto it = urls.constBegin(); it != urls.constEnd(); ++it )
         {
             KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
             if ( FileWidget::isImage( item ) )

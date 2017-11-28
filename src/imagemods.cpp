@@ -21,11 +21,11 @@
 #include "kuickdata.h"
 
 
-QCache<KUrl,ImageMods> * ImageMods::s_modifications = 0L;
+QCache<QUrl, ImageMods>* ImageMods::s_modifications = 0L;
 
-QCache<KUrl,ImageMods> * ImageMods::getInstance() {
+QCache<QUrl, ImageMods>* ImageMods::getInstance() {
 	if ( !s_modifications) {
-		s_modifications = new QCache<KUrl,ImageMods>(kdata->modificationCacheSize);
+        s_modifications = new QCache<QUrl, ImageMods>(kdata->modificationCacheSize);
 	}
 	return s_modifications;
 }
@@ -33,7 +33,7 @@ QCache<KUrl,ImageMods> * ImageMods::getInstance() {
 
 void ImageMods::rememberFor(KuickImage *kuim)
 {
-	QCache<KUrl,ImageMods> * instance = getInstance();
+    QCache<QUrl, ImageMods>* instance = getInstance();
 
 	ImageMods *mods = instance->object(kuim->url());
 	if ( !mods )

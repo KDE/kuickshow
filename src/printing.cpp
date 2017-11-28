@@ -48,7 +48,7 @@
 
 bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
 {
-    QString imageURL = imageWin.url().prettyUrl();
+    QString imageURL = imageWin.url().toDisplayString();
     QPrinter printer;
     printer.setDocName( imageURL );
     printer.setCreator( "KuickShow-" KUICKSHOWVERSION );
@@ -65,7 +65,7 @@ bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
         tmpFile.setAutoRemove( true );
         if ( tmpFile.open() )
         {
-            if ( imageWin.saveImage( tmpFile.fileName(), true ) )
+            if ( imageWin.saveImage( QUrl::fromLocalFile(tmpFile.fileName()), true ) )
             {
 
                 bool success = printImageWithQt( tmpFile.fileName(), printer, *dialogPage,

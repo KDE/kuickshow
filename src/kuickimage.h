@@ -19,10 +19,9 @@
 #ifndef KUICKIMAGE_H
 #define KUICKIMAGE_H
 
-#include <KUrl>
-
 #include <QImage>
 #include <QObject>
+#include <QUrl>
 
 #include "kuickdata.h"
 #include "kuickfile.h"
@@ -65,7 +64,7 @@ public:
   void 		renderPixmap();
 //  const QString& filename() 	const { return myFilename;}
   const KuickFile& file()       const { return *myFile; }
-  const KUrl& url()             const { return myFile->url(); }
+  QUrl url()             const { return myFile->url(); }
 
   void 		setDirty( bool d )    { myIsDirty = d;    }
   /**

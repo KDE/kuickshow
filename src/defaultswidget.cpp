@@ -31,6 +31,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLayout>
+#include <QUrl>
 #include <QVBoxLayout>
 
 #include "imlibwidget.h"
@@ -79,9 +80,9 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   // load and display the test image
   QString filename = KStandardDirs::locate( "data", "kuickshow/pics/calibrate.png" );
-  if ( !imOrig->loadImage( filename ) )
+  if ( !imOrig->loadImage( QUrl::fromLocalFile(filename) ) )
     imOrig = 0L; // FIXME - display some errormessage!
-  if ( !imFiltered->loadImage( filename ) )
+  if ( !imFiltered->loadImage( QUrl::fromLocalFile(filename) ) )
     imFiltered = 0L; // FIXME - display some errormessage!
 
   loadSettings( *kdata );

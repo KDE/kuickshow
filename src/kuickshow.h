@@ -20,7 +20,6 @@
 #define KUICKSHOW_H
 
 #include <KFileItem>
-#include <KUrl>
 #include <KXmlGuiWindow>
 
 #include <QDropEvent>
@@ -36,10 +35,10 @@
 class KAccel;
 class KConfig;
 class KToggleAction;
-class KUrl;
 class KUrlComboBox;
 
 class QLabel;
+class QUrl;
 
 class AboutWidget;
 class FileWidget;
@@ -146,7 +145,7 @@ private slots:
 private:
     Display *		getX11Display() const { return QX11Info::display(); }
     int getX11Screen() const;
-    void 		initGUI( const KUrl& startDir );
+    void 		initGUI( const QUrl& startDir );
     bool	       	eventFilter( QObject *, QEvent * );
     void 		initImlib();
     void 		saveProperties( KConfigGroup& kc );

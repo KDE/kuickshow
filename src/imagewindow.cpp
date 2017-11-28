@@ -33,6 +33,7 @@
 #include <KStandardShortcut>
 #include <KTemporaryFile>
 #include <KToggleFullScreenAction>
+#include <KUrlMimeData>
 #include <KWindowSystem>
 #include <kdeversion.h>
 
@@ -346,7 +347,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     QString caption = i18nc( "Filename (Imagewidth x Imageheight)",
                              "%3 (%1 x %2)",
                              m_kuim->originalWidth(), m_kuim->originalHeight(),
-                             m_kuim->url().prettyUrl() );
+                             m_kuim->url().toDisplayString() );
     setWindowTitle( caption );
 }
 
@@ -441,13 +442,13 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 //     XClearWindow(); // repaint
 //     XMapWindow(), XSync();
 //
-bool ImageWindow::showNextImage( const KUrl& url )
+bool ImageWindow::showNextImage( const QUrl& url )
 {
     KuickFile *file = FileCache::self()->getFile( url );
     switch ( file->waitForDownload( this ) ) {
     	case KuickFile::ERROR:
     	{
-    	    QString tmp = i18n("Unable to download the image from %1.", url.prettyUrl());
+            QString tmp = i18n("Unable to download the image from %1.", url.toDisplayString());
 	        emit sigImageError( file, tmp );
 	        return false;
     	}
@@ -465,7 +466,7 @@ bool ImageWindow::showNextImage( KuickFile *file )
     if ( !loadImage( file ) ) {
    	    QString tmp = i18n("Unable to load the image %1.\n"
                        "Perhaps the file format is unsupported or "
-                       "your Imlib is not installed properly.", file->url().prettyUrl());
+                       "your Imlib is not installed properly.", file->url().toDisplayString());
         emit sigImageError( file, tmp );
 	return false;
     }
@@ -875,13 +876,13 @@ void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 void ImageWindow::dropEvent( QDropEvent *e )
 {
     // FIXME - only preliminary drop-support for now
-	KUrl::List list = KUrl::List::fromMimeData( e->mimeData() );
+    QList<QUrl> list = KUrlMimeData::urlsFromMimeData(e->mimeData());
     if ( !list.isEmpty()) {
         QString tmpFile;
-        const KUrl &url = list.first();
+        QUrl url = list.first();
         if (KIO::NetAccess::download( url, tmpFile, this ) )
         {
-	    loadImage( tmpFile );
+	    loadImage( QUrl::fromLocalFile(tmpFile) );
 	    KIO::NetAccess::removeTempFile( tmpFile );
 	}
 	updateWidget();
@@ -974,7 +975,7 @@ void ImageWindow::saveImage()
     dlg.setWindowTitle( i18n("Save As") );
     if ( dlg.exec() == QDialog::Accepted )
     {
-        KUrl url = dlg.selectedUrl();
+        QUrl url = dlg.selectedUrl();
         if ( url.isValid() )
         {
             if ( !saveImage( url, keepSize->isChecked() ) )
@@ -986,7 +987,7 @@ void ImageWindow::saveImage()
             }
             else
             {
-				if ( url.equals( m_kuim->url() )) {
+                if ( url == m_kuim->url() ) {
 					Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
 				}
             }
@@ -998,7 +999,7 @@ void ImageWindow::saveImage()
         m_saveDirectory = lastDir;
 }
 
-bool ImageWindow::saveImage( const KUrl& dest, bool keepOriginalSize )
+bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
 {
     int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();

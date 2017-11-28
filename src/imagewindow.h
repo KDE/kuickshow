@@ -19,8 +19,6 @@
 #ifndef IMAGEWINDOW_H
 #define IMAGEWINDOW_H
 
-#include <KUrl>
-
 #include <QContextMenuEvent>
 #include <QDragEnterEvent>
 #include <QDropEvent>
@@ -30,6 +28,7 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QResizeEvent>
+#include <QUrl>
 #include <QWheelEvent>
 
 #include "imlibwidget.h"
@@ -52,7 +51,7 @@ public:
   ~ImageWindow();
 
   bool 		showNextImage( KuickFile * file );
-  bool 		showNextImage( const KUrl& url );
+  bool 		showNextImage( const QUrl& url );
   void 		scrollImage( int, int, bool restrict=true );
   void		setFullscreen( bool );
   bool 		isFullscreen() 	const { return myIsFullscreen; }
@@ -73,7 +72,7 @@ public:
   void autoScale( KuickImage *kuim );
   virtual bool autoRotate( KuickImage *kuim );
 
-  bool          saveImage( const KUrl& dest, bool keepOriginalSize );
+  bool          saveImage( const QUrl& dest, bool keepOriginalSize );
 
 public slots:
   void 		zoomIn();

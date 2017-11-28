@@ -12,11 +12,10 @@
 #ifndef IMLIBWIDGET_H
 #define IMLIBWIDGET_H
 
-#include <KUrl>
-
 #include <QCursor>
 #include <QEvent>
 #include <QTimer>
+#include <QUrl>
 #include <QVariant>
 #include <QWidget>
 #include <QX11Info>
@@ -85,11 +84,11 @@ public:
   ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0 );
   virtual ~ImlibWidget();
 
-  KUrl          url()                   const;
+  QUrl          url()                   const;
   KuickFile *   currentFile()           const;
   bool		loadImage( KuickFile * file);
-  bool		loadImage( const KUrl& url );
-  bool 		cacheImage( const KUrl& url );
+  bool		loadImage( const QUrl& url );
+  bool 		cacheImage( const QUrl& url );
   void 		zoomImage( float );
   void 		setBrightness( int );
   void 		setContrast( int );
