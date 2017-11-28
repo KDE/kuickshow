@@ -23,7 +23,7 @@
 
 #include "kuickfile.h"
 
-class KTempDir;
+class QTemporaryDir;
 class QUrl;
 
 
@@ -47,11 +47,11 @@ private:
     FileCache();
     ~FileCache();
 
-    KTempDir * createTempDir();
+    QTemporaryDir* createTempDir();
     QCache<QString,KuickFile> m_files;
 
     int m_limit;
-    KTempDir *m_tempDir;
+    QTemporaryDir* m_tempDir;
 
 };
 

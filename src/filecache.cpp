@@ -18,18 +18,14 @@
 
 #include "filecache.h"
 
-#include <KComponentData>
-#include <KGlobal>
-#include <KStandardDirs>
-#include <KTempDir>
-
+#include <QCoreApplication>
 #include <QDebug>
+#include <QDir>
+#include <QTemporaryDir>
 #include <QUrl>
 
-#include <unistd.h>
 
-
-FileCache * FileCache::s_self;
+FileCache* FileCache::s_self = nullptr;
 
 FileCache::FileCache()
     : m_limit( 0 ),
@@ -82,19 +78,19 @@ QString FileCache::tempDir()
         }
     }
 
-    return m_tempDir->name();
+    return m_tempDir->path() + QLatin1Char('/');
 }
 
 
-KTempDir * FileCache::createTempDir()
+QTemporaryDir* FileCache::createTempDir()
 {
-    QString tmpName = KGlobal::mainComponent().componentName();
-    tmpName.append( QString::number( getpid() ) );
-    QString dirName = KStandardDirs::locateLocal( "tmp", tmpName );
-    KTempDir *dir = new KTempDir( dirName );
-    dir->setAutoRemove( true );
-    if ( dir->status() != 0L )
-    {
+    QString nameTemplate = QStringLiteral("%1/%2_%3_XXXXXX")
+            .arg(QDir::tempPath())
+            .arg(QCoreApplication::applicationName())
+            .arg(QCoreApplication::applicationPid());
+    QTemporaryDir* dir = new QTemporaryDir(nameTemplate);
+
+    if(!dir->isValid()) {
         delete dir;
         return 0L;
     }
