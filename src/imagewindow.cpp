@@ -22,7 +22,6 @@
 #include <KConfig>
 #include <KCursor>
 #include <KFileDialog>
-#include <KGlobalSettings>
 #include <KIconLoader>
 #include <KLocale>
 #include <KMessageBox>
@@ -40,6 +39,7 @@
 #include <QCheckBox>
 #include <QContextMenuEvent>
 #include <QCursor>
+#include <QDesktopWidget>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QFocusEvent>
@@ -359,7 +359,7 @@ void ImageWindow::centerImage()
     int w, h;
     if ( myIsFullscreen )
     {
-        QRect desktopRect = KGlobalSettings::desktopGeometry( this );
+        QRect desktopRect = QApplication::desktop()->screenGeometry(this);
         w = desktopRect.width();
         h = desktopRect.height();
     }
@@ -1171,7 +1171,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen )
     {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).width();
+        return QApplication::desktop()->screenGeometry(topLevelWidget()).width();
     } else
 	return Kuick::workArea().width();
 }
@@ -1180,7 +1180,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 int ImageWindow::desktopHeight( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen ) {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).height();
+        return QApplication::desktop()->screenGeometry(topLevelWidget()).height();
     } else {
 	return Kuick::workArea().height();
     }
@@ -1189,7 +1189,7 @@ int ImageWindow::desktopHeight( bool totalScreen ) const
 QSize ImageWindow::maxImageSize() const
 {
     if ( myIsFullscreen ) {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).size();
+        return QApplication::desktop()->screenGeometry(topLevelWidget()).size();
     }
     else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
@@ -1236,7 +1236,7 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
     if ( !ImlibWidget::canZoomTo( newWidth, newHeight ) )
         return false;
 
-    QSize desktopSize = KGlobalSettings::desktopGeometry(topLevelWidget()).size();
+    QSize desktopSize = QApplication::desktop()->screenGeometry(topLevelWidget()).size();
 
     int desktopArea = desktopSize.width() * desktopSize.height();
     int imageArea = newWidth * newHeight;
