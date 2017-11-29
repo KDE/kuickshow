@@ -30,8 +30,6 @@
 #include <KHelpMenu>
 #include <KIconLoader>
 #include <KLocale>
-#include <KMenu>
-#include <KMenuBar>
 #include <KMessageBox>
 #include <KPropertiesDialog>
 #include <KProtocolManager>
@@ -60,6 +58,7 @@
 #include <QLabel>
 #include <QLayout>
 #include <QMenu>
+#include <QMenuBar>
 #include <QMimeDatabase>
 #include <QMouseEvent>
 #include <QSize>
@@ -386,8 +385,8 @@ void KuickShow::initGUI( const QUrl& startDir )
     tBar->addSeparator();
     tBar->addAction(about);
 
-    QMenu *help = helpMenu( QString::null, false );
-    mBar->addMenu( help );
+    KHelpMenu* help = new KHelpMenu(this, QString(), false);
+    mBar->addMenu(help->menu());
 
 
     sblblUrlInfo = createStatusBarLabel(10);
