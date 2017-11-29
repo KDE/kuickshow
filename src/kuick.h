@@ -19,6 +19,7 @@
 #ifndef KUICKGLOBALS_H
 #define KUICKGLOBALS_H
 
+#include <KWindowInfo>
 #include <KWindowSystem>
 
 #include <QRect>
@@ -34,7 +35,7 @@ public:
 
     static QSize frameSize( WId win = 0L ) {
 	if ( win ) {
-	    KWindowInfo info = KWindowSystem::windowInfo(win, NET::WMFrameExtents | NET::WMGeometry | NET::WMDesktop);
+	    KWindowInfo info(win, NET::WMFrameExtents | NET::WMGeometry | NET::WMDesktop);
 	    int wborder = info.frameGeometry().width() - info.geometry().width();
 	    int hborder = info.frameGeometry().height() - info.geometry().height();
 	
