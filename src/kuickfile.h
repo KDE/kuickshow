@@ -24,7 +24,7 @@
 #include <QUrl>
 
 class KJob;
-class QProgressBar;
+class QProgressDialog;
 
 namespace KIO {
     class FileCopyJob;
@@ -99,7 +99,7 @@ private:
     QUrl m_url;
     QString m_localFile;
     KIO::FileCopyJob *m_job;
-    QProgressBar *m_progress;
+    QProgressDialog *m_progress;
     int m_currentProgress;
 
 };

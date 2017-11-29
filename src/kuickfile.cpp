@@ -19,13 +19,13 @@
 #include "kuickfile.h"
 
 #include <KLocale>
-#include <KProgressDialog>
 #include <KIO/Job>
 #include <KIO/NetAccess>
 #include <kdeversion.h>
 
 #include <QDebug>
 #include <QFile>
+#include <QProgressDialog>
 #include <QScopedPointer>
 #include <QTemporaryFile>
 
@@ -119,20 +119,20 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
             return ERROR;
     }
 
-    KProgressDialog *dialog = new KProgressDialog( parent );
-    dialog->setModal( true );
-    dialog->setCaption( i18n("Downloading %1...", m_url.fileName() ) );
+    QProgressDialog *dialog = new QProgressDialog( parent );
+    dialog->setWindowTitle( i18n("Downloading %1...", m_url.fileName() ) );
     dialog->setLabelText( i18n("Please wait while downloading\n%1", m_url.toDisplayString() ));
-    dialog->setAllowCancel( true );
     dialog->setAutoClose( true );
 
-    m_progress = dialog->progressBar();
-    m_progress->setMaximum( 100 ); // percent
-    m_progress->setValue( m_currentProgress );
+    dialog->setMaximum( 100 ); // percent
+    dialog->setValue( m_currentProgress );
+
+    m_progress = dialog;
     dialog->exec();
-    bool canceled = dialog->wasCancelled();
+    m_progress = nullptr;
+
+    bool canceled = dialog->wasCanceled();
     delete dialog;
-    m_progress = 0L;
 
 	if ( canceled && m_job ) {
 		m_job->kill();
@@ -167,7 +167,7 @@ void KuickFile::slotResult( KJob *job )
 
         QString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destUrl().path();
         QFile::remove( canceledFile );
-        m_progress->topLevelWidget()->hide();
+        m_progress->hide();
     }
     else {
 	    m_localFile = static_cast<KIO::FileCopyJob*>(job)->destUrl().path();
@@ -175,10 +175,6 @@ void KuickFile::slotResult( KJob *job )
 
 	    if ( m_progress ) {
 	        m_progress->setValue( 100 );
-#define BUGGY_VERSION KDE_MAKE_VERSION(3,5,2)
-	        if ( KDE::version() <= BUGGY_VERSION ) {
-	            m_progress->topLevelWidget()->hide(); // ### workaround broken KProgressDialog
-	        }
 	    }
     }
 }
