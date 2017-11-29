@@ -23,7 +23,6 @@
 #include <KDialog>
 #include <KLocale>
 #include <KNumInput>
-#include <KStandardDirs>
 
 #include <QCheckBox>
 #include <QGridLayout>
@@ -31,6 +30,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLayout>
+#include <QStandardPaths>
 #include <QUrl>
 #include <QVBoxLayout>
 
@@ -79,7 +79,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
 
   // load and display the test image
-  QString filename = KStandardDirs::locate( "data", "kuickshow/pics/calibrate.png" );
+  QString filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kuickshow/pics/calibrate.png"));
   if ( !imOrig->loadImage( QUrl::fromLocalFile(filename) ) )
     imOrig = 0L; // FIXME - display some errormessage!
   if ( !imFiltered->loadImage( QUrl::fromLocalFile(filename) ) )

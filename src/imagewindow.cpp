@@ -28,7 +28,6 @@
 #include <KMessageBox>
 #include <KPropertiesDialog>
 #include <KStandardAction>
-#include <KStandardDirs>
 #include <KStandardGuiItem>
 #include <KStandardShortcut>
 #include <KToggleFullScreenAction>
@@ -53,6 +52,7 @@
 #include <QRect>
 #include <QResizeEvent>
 #include <QScopedPointer>
+#include <QStandardPaths>
 #include <QString>
 #include <QStringList>
 #include <QTemporaryFile>
@@ -117,7 +117,7 @@ void ImageWindow::init()
     m_actions->addAssociatedWidget( this );
 
     if ( !s_handCursor ) {
-        QString file = KStandardDirs::locate( "appdata", "pics/handcursor.png" );
+        QString file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/handcursor.png");
         if ( !file.isEmpty() )
             s_handCursor = new QCursor( QPixmap(file) );
         else

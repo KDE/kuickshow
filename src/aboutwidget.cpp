@@ -19,12 +19,12 @@
 #include "aboutwidget.h"
 #include <ui_aboutwidget.h>
 
-#include <KStandardDirs>
 #include <KWindowSystem>
 
 #include <QDateTime>
 #include <QMouseEvent>
 #include <QPixmap>
+#include <QStandardPaths>
 
 #include "kuickurlwidget.h"
 #include "version.h"
@@ -61,9 +61,9 @@ AboutWidget::AboutWidget( QWidget *parent )
     QString file;
 
     if ( hour >= 10 && hour < 16 )
-	file = KStandardDirs::locate("appdata", "pics/kuickshow-day.jpg");
+        file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/kuickshow-day.jpg");
     else
-	file = KStandardDirs::locate("appdata", "pics/kuickshow-night.jpg");
+        file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/kuickshow-night.jpg");
 
     QPixmap image;
     if(image.load(file)) {

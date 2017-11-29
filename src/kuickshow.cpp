@@ -38,7 +38,6 @@
 #include <KProtocolManager>
 #include <KStatusBar>
 #include <KStandardAction>
-#include <KStandardDirs>
 #include <KStandardGuiItem>
 #include <KStandardShortcut>
 #include <KStartupInfo>
@@ -65,6 +64,7 @@
 #include <QMimeDatabase>
 #include <QMouseEvent>
 #include <QSize>
+#include <QStandardPaths>
 #include <QString>
 #include <QTextStream>
 #include <QUrl>
@@ -1222,7 +1222,7 @@ void KuickShow::initImlib()
         initImlibParams( idata, &par );
 
         qWarning("*** KuickShow: Whoops, can't initialize imlib, trying my own palettefile now.");
-        QString paletteFile = KStandardDirs::locate( "data", "kuickshow/im_palette.pal" );
+        QString paletteFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kuickshow/im_palette.pal");
         // FIXME - does the qstrdup() cure the segfault in imlib eventually?
         char *file = qstrdup( paletteFile.toLocal8Bit() );
         par.palettefile = file;
