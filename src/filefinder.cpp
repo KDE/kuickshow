@@ -21,7 +21,6 @@
 #include <KCompletionBox>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KGlobal>
 #include <KGlobalSettings>
 #include <KUrlCompletion>
 
@@ -55,7 +54,7 @@ FileFinder::FileFinder( QWidget *parent )
     setAutoDeleteCompletionObject( true );
     setFocusPolicy( Qt::ClickFocus );
 
-    KSharedConfig::Ptr config = KGlobal::config();
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup cs( config, "GeneralConfiguration" );
     setCompletionMode( (KCompletion::CompletionMode)
                cs.readEntry( "FileFinderCompletionMode",
@@ -64,7 +63,7 @@ FileFinder::FileFinder( QWidget *parent )
 
 FileFinder::~FileFinder()
 {
-    KSharedConfig::Ptr config = KGlobal::config();
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup cs( config, "GeneralConfiguration" );
     cs.writeEntry( "FileFinderCompletionMode", int(completionMode()) );
 }

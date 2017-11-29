@@ -23,7 +23,6 @@
 #include <KConfigGroup>
 #include <KFileItemActions>
 #include <KFileItemListProperties>
-#include <KGlobal>
 #include <KGlobalSettings>
 #include <KLocale>
 #include <KMenu>
@@ -54,7 +53,7 @@ FileWidget::FileWidget( const QUrl& url, QWidget *parent )
 {
     setEnableDirHighlighting( true );
 
-    KConfigGroup group(KGlobal::config(), "Filebrowser");
+    KConfigGroup group(KSharedConfig::openConfig(), "Filebrowser");
     setViewConfig( group );
     readConfig( group );
     setView( KFile::Default );

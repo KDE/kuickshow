@@ -19,7 +19,6 @@
 #include "kuickconfigdlg.h"
 
 #include <KConfig>
-#include <KGlobal>
 #include <KLocale>
 #include <KShortcutsDialog>
 #include <KVBox>
@@ -88,7 +87,7 @@ void KuickConfigDialog::applyConfig()
     imageKeyChooser->save();
     browserKeyChooser->save();
 
-    KGlobal::config()->sync();
+    KSharedConfig::openConfig()->sync();
 }
 
 

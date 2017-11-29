@@ -27,7 +27,6 @@
 #include <KDialog>
 #include <KFileDialog>
 #include <KFileMetaInfo>
-#include <KGlobal>
 #include <KHelpMenu>
 #include <KIconLoader>
 #include <KLocale>
@@ -113,7 +112,7 @@ KuickShow::KuickShow( const char *name )
     connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
 
 
-    KSharedConfig::Ptr kc = KGlobal::config();
+    KSharedConfig::Ptr kc = KSharedConfig::openConfig();
 
     bool isDir = false; // true if we get a directory on the commandline
 
@@ -396,7 +395,7 @@ void KuickShow::initGUI( const QUrl& startDir )
 
     fileWidget->setFocus();
 
-    KConfigGroup kc(KGlobal::config(), "SessionSettings");
+    KConfigGroup kc(KSharedConfig::openConfig(), "SessionSettings");
     bool oneWindow = kc.readEntry("OpenImagesInActiveWindow", true );
     oneWindowAction->setChecked( oneWindow );
 
@@ -1190,7 +1189,7 @@ void KuickShow::saveProperties( KConfigGroup& kc )
 
 void KuickShow::saveSettings()
 {
-    KSharedConfig::Ptr kc = KGlobal::config();
+    KSharedConfig::Ptr kc = KSharedConfig::openConfig();
     KConfigGroup sessGroup(kc, "SessionSettings");
     if ( oneWindowAction )
         sessGroup.writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );

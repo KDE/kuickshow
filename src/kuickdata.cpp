@@ -19,7 +19,6 @@
 #include "kuickdata.h"
 
 #include <KConfigGroup>
-#include <KGlobal>
 #include <KSharedConfig>
 
 #include <QColor>
@@ -73,7 +72,7 @@ KuickData::~KuickData()
 
 void KuickData::load()
 {
-  KSharedConfig::Ptr kc = KGlobal::config();
+  KSharedConfig::Ptr kc = KSharedConfig::openConfig();
 
   KuickData def;
 
@@ -150,7 +149,7 @@ void KuickData::load()
 
 void KuickData::save()
 {
-  KSharedConfig::Ptr kc = KGlobal::config();
+  KSharedConfig::Ptr kc = KSharedConfig::openConfig();
 
   KConfigGroup generalGroup(kc, "GeneralConfiguration");
 
