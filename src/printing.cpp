@@ -20,7 +20,6 @@
 #include <ui_printing_page.h>
 
 #include <KComboBox>
-#include <KDialog>
 #include <KGlobalSettings>
 #include <KLocale>
 
@@ -208,9 +207,6 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent )
 {
     ui = new Ui::KuickPrintDialogPage;
     ui->setupUi(this);
-
-    layout()->setMargin( KDialog::marginHint() );
-    layout()->setSpacing( KDialog::spacingHint() );
 
     connect( ui->scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
 }

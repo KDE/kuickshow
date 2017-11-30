@@ -20,7 +20,6 @@
 #include <ui_generalwidget.h>
 
 #include <KColorButton>
-#include <KDialog>
 #include <KIconLoader>
 #include <KLineEdit>
 #include <KLocale>
@@ -46,7 +45,6 @@ GeneralWidget::GeneralWidget( QWidget *parent )
 
 
   // now the properties that couldn't be set in the .ui file
-  layout()->setSpacing( KDialog::spacingHint() );
 
   // the KuickShow logo
   QPixmap pixmap = UserIcon( "logo" );

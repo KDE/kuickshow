@@ -20,7 +20,6 @@
 #include <ui_defaultswidget.h>
 
 #include <KComboBox>
-#include <KDialog>
 #include <KLocale>
 
 #include <QCheckBox>
@@ -46,7 +45,6 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   // set the properties that couldn't be set in the .ui file
   QGridLayout* gbPreviewLayout = dynamic_cast<QGridLayout*>(ui->gbPreview->layout());
-  gbPreviewLayout->setSpacing( KDialog::spacingHint() );
 
   // The image widgets have to be created here, because the required parameters can only be set on creation.
   // The generated code won't do that.

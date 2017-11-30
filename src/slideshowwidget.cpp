@@ -19,7 +19,6 @@
 #include "slideshowwidget.h"
 #include <ui_slideshowwidget.h>
 
-#include <KDialog>
 #include <KLocale>
 
 #include <QCheckBox>
@@ -33,8 +32,6 @@ SlideShowWidget::SlideShowWidget( QWidget *parent )
     // setup the widget based on its .ui file
     ui = new Ui::SlideShowWidget;
     ui->setupUi(this);
-
-    layout()->setSpacing( KDialog::spacingHint() );
 
     loadSettings( *kdata );
 }

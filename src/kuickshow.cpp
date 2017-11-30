@@ -24,7 +24,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KCursor>
-#include <KDialog>
 #include <KHelpMenu>
 #include <KIconLoader>
 #include <KIO/MimetypeJob>
@@ -1134,7 +1133,10 @@ void KuickShow::about()
 
     aboutWidget->adjustSize();
 
-    KDialog::centerOnScreen( aboutWidget );
+    // code copied from KDialog::centerOnScreen() (KDE4)
+    QDesktopWidget* desktop = QApplication::desktop();
+    QRect screenRect = desktop->screenGeometry(desktop->screenNumber(this));
+    aboutWidget->move(screenRect.center().x() - aboutWidget->width() / 2, screenRect.center().y() - aboutWidget->height() / 2);
 
     aboutWidget->show();
 }
