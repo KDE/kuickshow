@@ -22,7 +22,9 @@ set(kuickshow_KDEINIT_SRCS
    imlibwidget.cpp 
    slideshowwidget.cpp 
    imagemods.cpp
-   printing.cpp )
+   printing.cpp
+   openfilesanddirsdialog.cpp
+)
 
 ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
    aboutwidget.ui

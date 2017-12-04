@@ -25,7 +25,6 @@
 #include <KConfigGroup>
 #include <KCursor>
 #include <KDialog>
-#include <KFileDialog>
 #include <KFileMetaInfo>
 #include <KHelpMenu>
 #include <KIconLoader>
@@ -81,6 +80,7 @@
 #include "kuick.h"
 #include "kuickconfigdlg.h"
 #include "kuickdata.h"
+#include "openfilesanddirsdialog.h"
 #include "version.h"
 
 
@@ -1385,21 +1385,19 @@ void KuickShow::toggleBrowser()
 
 void KuickShow::slotOpenURL()
 {
-    KFileDialog dlg(QUrl(), kdata->fileFilter, this);
-    dlg.setMode( KFile::Files | KFile::Directory );
-    dlg.setWindowTitle( i18n("Select Files or Folder to Open") );
+    OpenFilesAndDirsDialog dlg(this, i18n("Select Files or Folder to Open"));
+    dlg.setNameFilter(i18n("Image Files (%1)").arg(kdata->fileFilter));
+    if(dlg.exec() != QDialog::Accepted) return;
 
-    if ( dlg.exec() == QDialog::Accepted )
-    {
-        QList<QUrl> urls = dlg.selectedUrls();
-        for ( auto it = urls.constBegin(); it != urls.constEnd(); ++it )
-        {
-            KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
-            if ( FileWidget::isImage( item ) )
-                showImage( item, true );
-            else
-                fileWidget->setUrl( *it, true );
-        }
+    QList<QUrl> urls = dlg.selectedUrls();
+    if(urls.isEmpty()) return;
+
+    for( auto url : urls ) {
+        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url );
+        if ( FileWidget::isImage( item ) )
+            showImage( item, true );
+        else
+            fileWidget->setUrl( url, true );
     }
 }
 

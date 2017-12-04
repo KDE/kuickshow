@@ -21,7 +21,6 @@
 #include <KActionCollection>
 #include <KConfig>
 #include <KCursor>
-#include <KFileDialog>
 #include <KIconLoader>
 #include <KLocale>
 #include <KMessageBox>
@@ -42,7 +41,9 @@
 #include <QDesktopWidget>
 #include <QDragEnterEvent>
 #include <QDropEvent>
+#include <QFileDialog>
 #include <QFocusEvent>
+#include <QGridLayout>
 #include <QKeyEvent>
 #include <QMimeData>
 #include <QMouseEvent>
@@ -967,17 +968,27 @@ void ImageWindow::saveImage()
     KuickData tmp;
     QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), 0L);
     keepSize->setChecked( true );
-    KFileDialog dlg( QUrl::fromUserInput(m_saveDirectory, QDir::currentPath(), QUrl::AssumeLocalFile), tmp.fileFilter, this,keepSize);
+
+    QFileDialog dlg(this);
+    dlg.setWindowTitle( i18n("Save As") );
+    dlg.setOption(QFileDialog::DontUseNativeDialog);
+    dlg.setAcceptMode(QFileDialog::AcceptSave);
+    dlg.setNameFilter(i18n("Image Files (%1)").arg(tmp.fileFilter));
+    dlg.setDirectoryUrl(QUrl::fromUserInput(m_saveDirectory, QDir::currentPath(), QUrl::AssumeLocalFile));
+
+    // insert the checkbox below the filter box
+    if(QGridLayout* gl = qobject_cast<QGridLayout*>(dlg.layout())) {
+        gl->addWidget(keepSize, gl->rowCount(), 0, 1, gl->columnCount());
+    }
 
     QString selection = m_saveDirectory.isEmpty() ?
                             m_kuim->url().url() :
                             m_kuim->url().fileName();
-    dlg.setSelection( selection );
-    dlg.setOperationMode( KFileDialog::Saving );
-    dlg.setWindowTitle( i18n("Save As") );
+    dlg.selectFile( selection );
     if ( dlg.exec() == QDialog::Accepted )
     {
-        QUrl url = dlg.selectedUrl();
+        QList<QUrl> urls = dlg.selectedUrls();
+        QUrl url = urls.value(0);
         if ( url.isValid() )
         {
             if ( !saveImage( url, keepSize->isChecked() ) )
@@ -996,7 +1007,7 @@ void ImageWindow::saveImage()
         }
     }
 
-    QString lastDir = dlg.baseUrl().path();
+    QString lastDir = dlg.directoryUrl().toDisplayString();
     if ( lastDir != m_saveDirectory )
         m_saveDirectory = lastDir;
 }
