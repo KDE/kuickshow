@@ -141,7 +141,7 @@ KuickShow::KuickShow( const char *name )
     QMimeDatabase mimedb;
     for ( int i = 0; i < numArgs; i++ ) {
         QUrl url = QUrl::fromUserInput(args.value(i), QDir::currentPath(), QUrl::AssumeLocalFile);
-        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url, false );
+        KFileItem item( url );
 
         // for remote URLs, we don't know if it's a file or directory, but
         // FileWidget::isImage() should correct in most cases.
@@ -825,7 +825,7 @@ void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &
     QList<QUrl>::ConstIterator it = urls.constBegin();
     for ( ; it != urls.constEnd(); ++it )
     {
-        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, *it );
+        KFileItem item( *it );
         if ( FileWidget::isImage( item ) )
             showImage( item, true );
         else
@@ -1001,8 +1001,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 item = fileWidget->getNext( false ); // don't move
                 if ( item.isNull() )
                     item = fileWidget->getPrevious( false );
-                KFileItem it( KFileItem::Unknown, KFileItem::Unknown,
-                              m_viewer->url() );
+                KFileItem it( m_viewer->url() );
                 KFileItemList list;
                 list.append( it );
                 if ( fileWidget->del(list, window,
@@ -1146,7 +1145,7 @@ void KuickShow::readProperties( const KConfigGroup& kc )
     bool hasCurrentURL = false;
 
     for ( it = images.constBegin(); it != images.constEnd(); ++it ) {
-        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, QUrl( *it ), false );
+        KFileItem item( (QUrl( *it )) );
         if ( item.isReadable() ) {
             if (showImage( item, true )) {
 				// Set the current URL in the file widget, if possible
@@ -1393,7 +1392,7 @@ void KuickShow::slotOpenURL()
     if(urls.isEmpty()) return;
 
     for( auto url : urls ) {
-        KFileItem item( KFileItem::Unknown, KFileItem::Unknown, url );
+        KFileItem item( url );
         if ( FileWidget::isImage( item ) )
             showImage( item, true );
         else
