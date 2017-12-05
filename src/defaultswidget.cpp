@@ -22,7 +22,6 @@
 #include <KComboBox>
 #include <KDialog>
 #include <KLocale>
-#include <KNumInput>
 
 #include <QCheckBox>
 #include <QGridLayout>

@@ -24,7 +24,6 @@
 #include <KDialog>
 #include <KGlobalSettings>
 #include <KLocale>
-#include <KNumInput>
 
 #include <QCheckBox>
 #include <QColor>

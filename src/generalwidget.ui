@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>364</width>
-    <height>400</height>
+    <height>402</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,21 +73,25 @@
        </widget>
       </item>
       <item>
-       <widget class="KIntNumInput" name="maxCacheSpinBox">
-        <property name="label">
+       <widget class="QLabel" name="label">
+        <property name="text">
          <string>Maximum cache size: </string>
         </property>
-        <property name="minimum">
-         <number>0</number>
+        <property name="buddy">
+         <cstring>maxCacheSpinBox</cstring>
         </property>
-        <property name="maximum">
-         <number>400</number>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="maxCacheSpinBox">
+        <property name="specialValueText">
+         <string>Unlimited</string>
         </property>
         <property name="suffix">
          <string> MB</string>
         </property>
-        <property name="specialValueText">
-         <string>Unlimited</string>
+        <property name="maximum">
+         <number>400</number>
         </property>
        </widget>
       </item>
@@ -165,11 +169,6 @@
    <class>KUrlLabel</class>
    <extends>QLabel</extends>
    <header>kurllabel.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KIntNumInput</class>
-   <extends>QWidget</extends>
-   <header>knuminput.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -24,7 +24,6 @@
 #include <KIconLoader>
 #include <KLineEdit>
 #include <KLocale>
-#include <KNumInput>
 #include <KToolInvocation>
 #include <KUrlLabel>
 
