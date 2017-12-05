@@ -24,15 +24,16 @@
 #include <KIconLoader>
 #include <KLineEdit>
 #include <KLocale>
-#include <KToolInvocation>
 #include <KUrlLabel>
 
 #include <QCheckBox>
+#include <QDesktopServices>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QLabel>
 #include <QLayout>
 #include <QPixmap>
+#include <QUrl>
 #include <QVBoxLayout>
 
 
@@ -72,7 +73,7 @@ GeneralWidget::~GeneralWidget()
 
 void GeneralWidget::slotURLClicked( const QString & url )
 {
-  KToolInvocation::invokeBrowser( url );
+    QDesktopServices::openUrl(QUrl::fromUserInput(url));
 }
 
 void GeneralWidget::loadSettings( const KuickData& data )
