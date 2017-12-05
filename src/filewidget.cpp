@@ -23,7 +23,6 @@
 #include <KConfigGroup>
 #include <KFileItemActions>
 #include <KFileItemListProperties>
-#include <KGlobalSettings>
 #include <KLocale>
 #include <KMenu>
 #include <KPropertiesDialog>
@@ -185,8 +184,8 @@ void FileWidget::findCompletion( const QString& text )
 	 text.indexOf('/') != -1 ) {
 	QString t = m_fileFinder->completion()->makeCompletion( text );
 
-	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
-            m_fileFinder->completionMode() == KGlobalSettings::CompletionPopupAuto)
+    if (m_fileFinder->completionMode() == KCompletion::CompletionPopup ||
+            m_fileFinder->completionMode() == KCompletion::CompletionPopupAuto)
 	    m_fileFinder->setCompletedItems(
 			      m_fileFinder->completion()->allMatches() );
 	else
