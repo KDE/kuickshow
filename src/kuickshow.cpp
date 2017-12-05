@@ -25,7 +25,6 @@
 #include <KConfigGroup>
 #include <KCursor>
 #include <KDialog>
-#include <KFileMetaInfo>
 #include <KHelpMenu>
 #include <KIconLoader>
 #include <KLocale>
@@ -491,6 +490,9 @@ void KuickShow::slotHighlighted( const KFileItem& item )
     QString meta;
     if ( image )
     {
+        /* KFileMetaInfo disappered in KF5.
+         * TODO: find alternative to KFileMetaInfo
+
         KFileMetaInfo info;
         // code snippet copied from KFileItem::metaInfo (KDE4)
         if(item.isRegularFile() || item.isDir()) {
@@ -505,6 +507,7 @@ void KuickShow::slotHighlighted( const KFileItem& item )
             if ( !bpp.isEmpty() )
                 meta.append( ", " ).append( bpp );
         }
+        */
     }
     sblblMetaInfo->setText(meta);
 

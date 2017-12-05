@@ -19,7 +19,6 @@
 #include "imlibwidget.h"
 
 #include <KCursor>
-#include <KFileMetaInfo>
 #include <KImageIO>
 
 #include <QApplication>
@@ -316,6 +315,9 @@ void ImlibWidget::showImageOriginalSize()
 
 bool ImlibWidget::autoRotate( KuickImage *kuim )
 {
+    /* KFileMetaInfo disappered in KF5.
+     * TODO: find alternative to KFileMetaInfo
+
     KFileMetaInfo metadatas( kuim->file().localFile() );
     if ( !metadatas.isValid() )
         return false;
@@ -365,6 +367,7 @@ bool ImlibWidget::autoRotate( KuickImage *kuim )
             kuim->rotateAbs( ROT_270 );
             break;
     }
+    */
 
     return true;
 }
