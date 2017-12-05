@@ -21,7 +21,6 @@
 #include <KConfig>
 #include <KLocale>
 #include <KShortcutsDialog>
-#include <KVBox>
 
 #include <QPushButton>
 #include <qnamespace.h>
@@ -41,32 +40,26 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     setWindowTitle( i18n("Configure") );
     setFaceType( Tabbed );
     coll = _coll;
-    KVBox *box = new KVBox();
-    addPage( box, i18n("&General") );
-    generalWidget = new GeneralWidget( box );
+
+    generalWidget = new GeneralWidget( this );
     generalWidget->setObjectName( QString::fromLatin1( "general widget" ) );
+    addPage( generalWidget, i18n("&General") );
 
-    box = new KVBox();
-    addPage( box, i18n("&Modifications") );
-    defaultsWidget = new DefaultsWidget( box );
+    defaultsWidget = new DefaultsWidget( this );
     defaultsWidget->setObjectName( QString::fromLatin1( "defaults widget" ) );
+    addPage( defaultsWidget, i18n("&Modifications") );
 
-    box = new KVBox();
-    addPage( box, i18n("&Slideshow")  );
-    slideshowWidget = new SlideShowWidget( box );
+    slideshowWidget = new SlideShowWidget( this );
     slideshowWidget->setObjectName( QString::fromLatin1( "slideshow widget" ) );
-
-    box = new KVBox();
-    addPage( box, i18n("&Viewer Shortcuts") );
+    addPage( slideshowWidget, i18n("&Slideshow")  );
 
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
+    imageKeyChooser = new KShortcutsEditor( imageWindow->actionCollection(), this );
+    addPage( imageKeyChooser, i18n("&Viewer Shortcuts") );
 
-    imageKeyChooser = new KShortcutsEditor( imageWindow->actionCollection(), box );
-
-    box = new KVBox();
-    addPage( box, i18n("Bro&wser Shortcuts") );
-    browserKeyChooser = new KShortcutsEditor( coll, box );
+    browserKeyChooser = new KShortcutsEditor( coll, this );
+    addPage( browserKeyChooser, i18n("Bro&wser Shortcuts") );
 
     connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(resetDefaults()));
     connect(buttonBox()->button(QDialogButtonBox::Ok), SIGNAL(clicked()), SIGNAL(okClicked()));
