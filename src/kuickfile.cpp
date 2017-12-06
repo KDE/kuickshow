@@ -19,8 +19,8 @@
 #include "kuickfile.h"
 
 #include <KLocale>
-#include <KIO/Job>
-#include <KIO/NetAccess>
+#include <KIO/FileCopyJob>
+#include <KIO/StatJob>
 #include <kdeversion.h>
 
 #include <QDebug>
@@ -42,7 +42,13 @@ KuickFile::KuickFile(const QUrl& url)
     if ( m_url.isLocalFile())
         m_localFile = m_url.path();
     else {
-        QUrl mostLocal = KIO::NetAccess::mostLocalUrl( m_url, 0L );
+        QUrl mostLocal;
+        KIO::StatJob* job = KIO::mostLocalUrl(m_url);
+        connect(job, &KIO::StatJob::result, [job, &mostLocal]() {
+            if(!job->error()) mostLocal = job->mostLocalUrl();
+        });
+        job->exec();
+
     	if ( mostLocal.isValid() && mostLocal.isLocalFile() )
     		m_localFile = mostLocal.path();
     }

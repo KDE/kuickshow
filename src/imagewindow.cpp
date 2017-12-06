@@ -22,6 +22,8 @@
 #include <KConfig>
 #include <KCursor>
 #include <KIconLoader>
+#include <KIO/StoredTransferJob>
+#include <KJobWidgets>
 #include <KLocale>
 #include <KMessageBox>
 #include <KPropertiesDialog>
@@ -61,8 +63,6 @@
 #include <QWheelEvent>
 #include <qdrawutil.h>
 #include <qnamespace.h>
-
-#include <KIO/NetAccess>
 
 #include <netwm.h>
 #include <stdlib.h>
@@ -881,13 +881,12 @@ void ImageWindow::dropEvent( QDropEvent *e )
     // FIXME - only preliminary drop-support for now
     QList<QUrl> list = KUrlMimeData::urlsFromMimeData(e->mimeData());
     if ( !list.isEmpty()) {
-        QString tmpFile;
-        QUrl url = list.first();
-        if (KIO::NetAccess::download( url, tmpFile, this ) )
-        {
-	    loadImage( QUrl::fromLocalFile(tmpFile) );
-	    KIO::NetAccess::removeTempFile( tmpFile );
-	}
+        for(const QUrl& url : list) {
+            if(url.isValid()) {
+                loadImage(url);
+                break;
+            }
+        }
 	updateWidget();
 	e->accept();
     }
@@ -1051,7 +1050,19 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
         {
         	if ( isFullscreen() )
         		toggleFullscreen(); // otherwise upload window would block us invisibly
-        	success = KIO::NetAccess::upload( saveFile, dest, const_cast<ImageWindow*>( this ) );
+
+            QFile sourceFile(saveFile);
+            if(!sourceFile.open(QIODevice::ReadOnly)) {
+                // TODO: implement better error handling
+                qWarning("failed to open file \"%s\": %s", qUtf8Printable(saveFile), qUtf8Printable(sourceFile.errorString()));
+                return false;
+            }
+
+            KIO::StoredTransferJob* job = KIO::storedPut(&sourceFile, dest, -1);
+            KJobWidgets::setWindow(job, this);
+            success = job->exec();
+
+            sourceFile.close();
         }
 
         Imlib_kill_image( id, saveIm );

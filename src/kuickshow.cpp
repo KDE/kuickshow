@@ -27,6 +27,8 @@
 #include <KDialog>
 #include <KHelpMenu>
 #include <KIconLoader>
+#include <KIO/MimetypeJob>
+#include <KJobWidgets>
 #include <KLocale>
 #include <KMessageBox>
 #include <KPropertiesDialog>
@@ -40,7 +42,6 @@
 #include <KUrlComboBox>
 #include <KUrlCompletion>
 #include <KWindowSystem>
-#include <KIO/NetAccess>
 #include <kdeversion.h>
 
 #include <QAbstractItemView>
@@ -162,8 +163,14 @@ KuickShow::KuickShow( const char *name )
         {
             QMimeType mime = mimedb.mimeTypeForUrl( url );
             QString name = mime.name();
-            if ( name == "application/octet-stream" ) // unknown -> stat()
-                name = KIO::NetAccess::mimetype( url, this );
+            if ( name == "application/octet-stream" ) { // unknown -> stat()
+                KIO::MimetypeJob* job = KIO::mimetype(url);
+                KJobWidgets::setWindow(job, this);
+                connect(job, &KIO::MimetypeJob::result, [job, &name]() {
+                    if(!job->error()) name = job->mimetype();
+                });
+                job->exec();
+            }
 
 	    // text/* is a hack for bugs.kde.org-attached-images urls.
 	    // The real problem here is that NetAccess::mimetype does a HTTP HEAD, which doesn't
