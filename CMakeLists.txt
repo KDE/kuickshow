@@ -10,8 +10,21 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(FeatureSummary)
 
-find_package(Qt5 REQUIRED Core Gui X11Extras)
-find_package(KF5 REQUIRED COMPONENTS DocTools I18n Init KIO XmlGui KDELibs4Support)
+find_package(Qt5 REQUIRED
+	Core
+	Gui
+	PrintSupport
+	X11Extras
+)
+find_package(KF5 REQUIRED COMPONENTS
+	DocTools
+	I18n
+	IconThemes
+	Init
+	KIO
+	WindowSystem
+	XmlGui
+)
 
 find_package(IMLIB REQUIRED)
 

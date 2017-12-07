@@ -44,11 +44,15 @@ target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS})
 target_link_libraries(kdeinit_kuickshow
 	Qt5::Core
 	Qt5::Gui
+	Qt5::PrintSupport
 	Qt5::X11Extras
 	KF5::I18n
+	KF5::IconThemes
 	KF5::KIOCore
+	KF5::KIOWidgets
+	KF5::KIOFileWidgets
+	KF5::WindowSystem
 	KF5::XmlGui
-	KF5::KDELibs4Support
 	${X11_LIBRARIES}
 	${IMLIB_LIBRARIES}
 )
