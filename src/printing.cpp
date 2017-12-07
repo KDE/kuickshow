@@ -20,7 +20,6 @@
 #include <ui_printing_page.h>
 
 #include <KComboBox>
-#include <KDEPrintDialog>
 #include <KDialog>
 #include <KGlobalSettings>
 #include <KLocale>
@@ -57,7 +56,8 @@ bool Printing::printImage( ImageWindow& imageWin, QWidget *parent )
 
     KuickPrintDialogPage* dialogPage = new KuickPrintDialogPage( parent );
     dialogPage->setObjectName(QString::fromLatin1("kuick page"));
-    QPrintDialog *printDialog = KdePrint::createPrintDialog(&printer, QList<QWidget*>() << dialogPage, parent);
+    QPrintDialog *printDialog = new QPrintDialog(&printer, parent);
+    printDialog->setOptionTabs(QList<QWidget*>() << dialogPage);
     printDialog->setWindowTitle(i18n("Print %1", printer.docName().section('/', -1)));
 
     if (printDialog->exec())
