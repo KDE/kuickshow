@@ -20,7 +20,6 @@
 #include <ui_printing_page.h>
 
 #include <KComboBox>
-#include <KGlobalSettings>
 #include <KLocale>
 
 #include <QCheckBox>
@@ -28,6 +27,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFont>
+#include <QFontDatabase>
 #include <QFontMetrics>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -92,7 +92,7 @@ bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, Kui
     QPainter p;
     p.begin( &printer );
 
-    p.setFont( KGlobalSettings::generalFont() );
+    p.setFont( QFontDatabase::systemFont(QFontDatabase::GeneralFont) );
     QFontMetrics fm = p.fontMetrics();
 
     int w = printer.width();
