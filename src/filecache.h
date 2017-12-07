@@ -19,13 +19,12 @@
 #define FILECACHE_H
 
 #include <QCache>
-#include <QString>
 
-#include "kuickfile.h"
-
+class QString;
 class QTemporaryDir;
 class QTemporaryFile;
 class QUrl;
+class KuickFile;
 
 
 class FileCache

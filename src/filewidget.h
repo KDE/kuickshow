@@ -28,7 +28,6 @@ class KFileItem;
 class KFileItemActions;
 class QEvent;
 class QResizeEvent;
-
 class FileFinder;
 
 

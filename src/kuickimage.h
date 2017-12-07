@@ -19,18 +19,15 @@
 #ifndef KUICKIMAGE_H
 #define KUICKIMAGE_H
 
-#include <QImage>
 #include <QObject>
-#include <QUrl>
+
+#include "imlib-wrapper.h"
 
 #include "kuickdata.h"
 #include "kuickfile.h"
 
-// #include those AFTER Qt-includes!
-#include "imlib-wrapper.h"
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-// #include <X11/extensions/shape.h>
+class QImage;
+class QUrl;
 
 
 class KuickImage : public QObject

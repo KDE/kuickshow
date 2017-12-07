@@ -20,24 +20,21 @@
 
 #include <KActionCollection>
 #include <KActionMenu>
+#include <KCompletion>
 #include <KConfigGroup>
 #include <KFileItemActions>
 #include <KFileItemListProperties>
-#include <KLocale>
-#include <KMenu>
-#include <KPropertiesDialog>
-#include <KUrlCompletion>
-#include <kdeversion.h>
+#include <KLocalizedString>
 
 #include <QAbstractItemModel>
 #include <QAbstractItemView>
 #include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
+#include <QMenu>
 #include <QMimeDatabase>
 #include <QModelIndex>
 #include <QResizeEvent>
-#include <qnamespace.h>
 
 #include "filefinder.h"
 #include "kuickdata.h"

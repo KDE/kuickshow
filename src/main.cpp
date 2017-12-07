@@ -17,7 +17,7 @@
 */
 
 #include <KAboutData>
-#include <KLocale>
+#include <KLocalizedString>
 
 #include <QApplication>
 #include <QCommandLineParser>

@@ -18,10 +18,7 @@
 
 #include "imdata.h"
 
-#include <KConfig>
 #include <KConfigGroup>
-
-#include <stdlib.h>
 
 
 ImData::ImData()

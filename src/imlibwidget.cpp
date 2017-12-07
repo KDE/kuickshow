@@ -19,7 +19,6 @@
 #include "imlibwidget.h"
 
 #include <KCursor>
-#include <KImageIO>
 
 #include <QApplication>
 #include <QCloseEvent>
@@ -28,7 +27,6 @@
 #include <QDesktopWidget>
 #include <QFile>
 #include <QImage>
-#include <QObject>
 #include <QPalette>
 #include <QtGlobal>
 

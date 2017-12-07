@@ -19,14 +19,12 @@
 #include "filefinder.h"
 
 #include <KCompletionBox>
-#include <KConfig>
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KUrlCompletion>
 
 #include <QFocusEvent>
 #include <QKeyEvent>
-#include <qnamespace.h>
 
 
 FileFinder::FileFinder( QWidget *parent )

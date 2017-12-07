@@ -21,10 +21,7 @@
 
 #include <QWidget>
 
-#include "kuickdata.h"
-
-class KIntNumInput;
-class QCheckBox;
+class KuickData;
 namespace Ui { class SlideShowWidget; }
 
 

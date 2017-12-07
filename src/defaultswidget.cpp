@@ -19,18 +19,8 @@
 #include "defaultswidget.h"
 #include <ui_defaultswidget.h>
 
-#include <KComboBox>
-#include <KLocale>
-
-#include <QCheckBox>
-#include <QGridLayout>
-#include <QGroupBox>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QLayout>
 #include <QStandardPaths>
 #include <QUrl>
-#include <QVBoxLayout>
 
 #include "imlibwidget.h"
 

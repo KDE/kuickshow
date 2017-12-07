@@ -19,27 +19,22 @@
 #ifndef KUICKSHOW_H
 #define KUICKSHOW_H
 
-#include <KFileItem>
 #include <KXmlGuiWindow>
 
-#include <QDropEvent>
-#include <QEvent>
 #include <QKeyEvent>
 #include <QPointer>
-#include <QString>
 #include <QX11Info>
 
 #include "imlib-wrapper.h"
-#include "aboutwidget.h"
 
-class KAccel;
-class KConfig;
+class KFileItem;
 class KToggleAction;
 class KUrlComboBox;
-
+class QDropEvent;
+class QEvent;
 class QLabel;
+class QString;
 class QUrl;
-
 class AboutWidget;
 class FileWidget;
 class ImageWindow;

@@ -21,11 +21,8 @@
 
 #include <KPageDialog>
 
-#include <QEvent>
-
 class KActionCollection;
 class KShortcutsEditor;
-
 class DefaultsWidget;
 class GeneralWidget;
 class ImageWindow;

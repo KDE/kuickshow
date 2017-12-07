@@ -19,21 +19,14 @@
 #include "generalwidget.h"
 #include <ui_generalwidget.h>
 
-#include <KColorButton>
 #include <KIconLoader>
-#include <KLineEdit>
-#include <KLocale>
-#include <KUrlLabel>
+#include <KLocalizedString>
 
-#include <QCheckBox>
 #include <QDesktopServices>
-#include <QGridLayout>
-#include <QGroupBox>
-#include <QLabel>
-#include <QLayout>
 #include <QPixmap>
 #include <QUrl>
-#include <QVBoxLayout>
+
+#include "kuickdata.h"
 
 
 GeneralWidget::GeneralWidget( QWidget *parent )

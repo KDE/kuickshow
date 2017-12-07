@@ -20,6 +20,7 @@
 #define OPENFILESANDDIRSDIALOG_H
 
 #include <QFileDialog>
+#include <QString>
 
 class QPushButton;
 

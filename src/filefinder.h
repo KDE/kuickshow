@@ -22,9 +22,8 @@
 #include <KLineEdit>
 #include <KUrlCompletion>
 
-#include <QFocusEvent>
-#include <QKeyEvent>
-
+class QFocusEvent;
+class QKeyEvent;
 class QWidget;
 
 

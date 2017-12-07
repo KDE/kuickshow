@@ -18,6 +18,9 @@
 
 #include "kuickimage.h"
 
+#include <QImage>
+#include <QUrl>
+
 #include "imagemods.h"
 
 

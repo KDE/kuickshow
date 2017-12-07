@@ -19,27 +19,19 @@
 #include "printing.h"
 #include <ui_printing_page.h>
 
-#include <KComboBox>
-#include <KLocale>
+#include <KLocalizedString>
 
-#include <QCheckBox>
-#include <QColor>
 #include <QDebug>
-#include <QDir>
 #include <QFont>
 #include <QFontDatabase>
 #include <QFontMetrics>
-#include <QGridLayout>
-#include <QGroupBox>
 #include <QImage>
-#include <QLayout>
 #include <QPainter>
 #include <QPrintDialog>
 #include <QPrinter>
-#include <QRadioButton>
 #include <QScopedPointer>
 #include <QTemporaryFile>
-#include <QVBoxLayout>
+#include <QUrl>
 
 #include "filecache.h"
 #include "imagewindow.h"

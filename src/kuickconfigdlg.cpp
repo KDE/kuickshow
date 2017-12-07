@@ -18,12 +18,12 @@
 
 #include "kuickconfigdlg.h"
 
-#include <KConfig>
-#include <KLocale>
+#include <QDialogButtonBox>
+#include <KLocalizedString>
+#include <KSharedConfig>
 #include <KShortcutsDialog>
 
 #include <QPushButton>
-#include <qnamespace.h>
 
 #include "defaultswidget.h"
 #include "generalwidget.h"

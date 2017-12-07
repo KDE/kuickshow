@@ -21,12 +21,7 @@
 
 #include <QWidget>
 
-#include "kuickdata.h"
-
-class KColorButton;
-class KIntNumInput;
-class KLineEdit;
-class QCheckBox;
+class KuickData;
 namespace Ui { class GeneralWidget; }
 
 

@@ -23,12 +23,6 @@
 
 #include "kuickdata.h"
 
-class KComboBox;
-class KIntNumInput;
-class QCheckBox;
-class QGroupBox;
-class QLabel;
-
 class ImlibWidget;
 namespace Ui { class DefaultsWidget; }
 

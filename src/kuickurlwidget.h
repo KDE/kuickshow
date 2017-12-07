@@ -21,8 +21,6 @@
 
 #include <KUrlLabel>
 
-class QWidget;
-
 
 class KuickUrlWidget : public KUrlLabel
 {

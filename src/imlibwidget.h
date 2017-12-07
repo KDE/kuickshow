@@ -13,22 +13,18 @@
 #define IMLIBWIDGET_H
 
 #include <QCursor>
-#include <QEvent>
-#include <QTimer>
-#include <QUrl>
-#include <QVariant>
+#include <QObject>
 #include <QWidget>
 #include <QX11Info>
 
-// #include those AFTER Qt-includes!
 #include "imlib-wrapper.h"
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-// #include <X11/extensions/shape.h>
 
 #include "imdata.h"
 #include "kuickdata.h"
 
+class QCloseEvent;
+class QColor;
+class QUrl;
 class KuickFile;
 class KuickImage;
 
@@ -71,8 +67,6 @@ signals:
 
 // ------------------------------------------
 
-
-class QColor;
 
 class ImlibWidget : public QWidget
 {

@@ -18,8 +18,6 @@
 
 #include "imagemods.h"
 
-#include "kuickdata.h"
-
 
 QCache<QUrl, ImageMods>* ImageMods::s_modifications = 0L;
 

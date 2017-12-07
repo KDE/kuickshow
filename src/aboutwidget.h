@@ -21,7 +21,6 @@
 
 #include <QFrame>
 
-class KUrlLabel;
 class QMouseEvent;
 namespace Ui { class AboutWidget; }
 

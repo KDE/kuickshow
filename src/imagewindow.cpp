@@ -19,12 +19,11 @@
 #include "imagewindow.h"
 
 #include <KActionCollection>
-#include <KConfig>
 #include <KCursor>
 #include <KIconLoader>
 #include <KIO/StoredTransferJob>
 #include <KJobWidgets>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <KPropertiesDialog>
 #include <KStandardAction>
@@ -33,7 +32,6 @@
 #include <KToggleFullScreenAction>
 #include <KUrlMimeData>
 #include <KWindowSystem>
-#include <kdeversion.h>
 
 #include <QApplication>
 #include <QBitmap>
@@ -47,6 +45,7 @@
 #include <QFocusEvent>
 #include <QGridLayout>
 #include <QKeyEvent>
+#include <QMenu>
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QPainter>
@@ -60,9 +59,8 @@
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QTimer>
+#include <QUrl>
 #include <QWheelEvent>
-#include <qdrawutil.h>
-#include <qnamespace.h>
 
 #include <netwm.h>
 #include <stdlib.h>

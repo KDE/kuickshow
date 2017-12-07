@@ -26,7 +26,6 @@
 #include <QPixmap>
 #include <QStandardPaths>
 
-#include "kuickurlwidget.h"
 #include "version.h"
 
 

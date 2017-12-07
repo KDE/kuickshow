@@ -19,11 +19,7 @@
 #include "slideshowwidget.h"
 #include <ui_slideshowwidget.h>
 
-#include <KLocale>
-
-#include <QCheckBox>
-#include <QLayout>
-#include <QVBoxLayout>
+#include "kuickdata.h"
 
 
 SlideShowWidget::SlideShowWidget( QWidget *parent )

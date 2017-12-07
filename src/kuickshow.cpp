@@ -21,18 +21,16 @@
 #include <KAboutData>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KConfig>
 #include <KConfigGroup>
 #include <KCursor>
 #include <KHelpMenu>
 #include <KIconLoader>
 #include <KIO/MimetypeJob>
 #include <KJobWidgets>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
-#include <KPropertiesDialog>
 #include <KProtocolManager>
-#include <KStatusBar>
+#include <KSharedConfig>
 #include <KStandardAction>
 #include <KStandardGuiItem>
 #include <KStandardShortcut>
@@ -41,7 +39,6 @@
 #include <KUrlComboBox>
 #include <KUrlCompletion>
 #include <KWindowSystem>
-#include <kdeversion.h>
 
 #include <QAbstractItemView>
 #include <QApplication>
@@ -61,11 +58,12 @@
 #include <QMouseEvent>
 #include <QSize>
 #include <QStandardPaths>
+#include <QStatusBar>
 #include <QString>
 #include <QTextStream>
+#include <QTimer>
 #include <QUrl>
 #include <QtGlobal>
-#include <qnamespace.h>
 
 #include <assert.h>
 #include <stdio.h>
@@ -79,8 +77,8 @@
 #include "kuick.h"
 #include "kuickconfigdlg.h"
 #include "kuickdata.h"
+#include "kuickfile.h"
 #include "openfilesanddirsdialog.h"
-#include "version.h"
 
 
 KuickData* kdata;

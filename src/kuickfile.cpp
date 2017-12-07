@@ -18,10 +18,9 @@
 
 #include "kuickfile.h"
 
-#include <KLocale>
 #include <KIO/FileCopyJob>
 #include <KIO/StatJob>
-#include <kdeversion.h>
+#include <KLocalizedString>
 
 #include <QDebug>
 #include <QFile>

@@ -21,9 +21,12 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
+#include <QString>
 #include <QTemporaryDir>
 #include <QTemporaryFile>
 #include <QUrl>
+
+#include "kuickfile.h"
 
 
 FileCache* FileCache::s_self = nullptr;
