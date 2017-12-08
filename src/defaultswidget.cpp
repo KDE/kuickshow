@@ -16,179 +16,60 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QGridLayout>
+#include "defaultswidget.h"
+#include <ui_defaultswidget.h>
 
-#include <kcombobox.h>
-#include <kdialog.h>
-#include <klocale.h>
-#include <knuminput.h>
-#include <kstandarddirs.h>
+#include <QStandardPaths>
+#include <QUrl>
 
 #include "imlibwidget.h"
-#include "defaultswidget.h"
+
 
 DefaultsWidget::DefaultsWidget( QWidget *parent )
   : QWidget( parent )
 {
-  imFiltered = 0L;
+  // setup the widget based on its .ui file
+  ui = new Ui::DefaultsWidget;
+  ui->setupUi(this);
 
-  cbEnableMods = new QCheckBox( i18n("Apply default image modifications"), this );
-  connect( cbEnableMods, SIGNAL( toggled(bool) ), SLOT( enableWidgets(bool) ));
 
-  // create all the widgets
+  // set the properties that couldn't be set in the .ui file
+  QGridLayout* gbPreviewLayout = dynamic_cast<QGridLayout*>(ui->gbPreview->layout());
 
-  gbScale = new QGroupBox( i18n("Scaling"), this );
+  // The image widgets have to be created here, because the required parameters can only be set on creation.
+  // The generated code won't do that.
+  imOrig = new ImlibWidget(0L, ui->gbPreview);
+  gbPreviewLayout->addWidget(imOrig, 1, 0, Qt::AlignCenter | Qt::AlignTop);
 
-  cbDownScale = new QCheckBox( i18n("Shrink image to screen size, if larger"), gbScale );
-  cbDownScale->setObjectName( QString::fromLatin1( "shrinktoscreen" ) );
+  imFiltered = new ImlibWidget(0L, imOrig->getImlibData(), ui->gbPreview);
+  gbPreviewLayout->addWidget(imFiltered, 1, 1, Qt::AlignCenter | Qt::AlignTop);
 
-  cbUpScale = new QCheckBox( i18n("Scale image to screen size, if smaller, up to factor:"), gbScale );
-  cbUpScale->setObjectName( QString::fromLatin1( "upscale checkbox" ) );
 
-  sbMaxUpScaleFactor = new KIntNumInput( gbScale/*, "upscale factor"*/ );
-  sbMaxUpScaleFactor->setRange( 1, 100, 1 );
-  sbMaxUpScaleFactor->setSliderEnabled( false );
+  // actions
+  connect( ui->cbEnableMods, SIGNAL( toggled(bool) ), SLOT( enableWidgets(bool) ));
 
-  connect(cbUpScale, SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
+  connect(ui->cbUpScale, SIGNAL( toggled(bool)), ui->sbMaxUpScaleFactor,
             SLOT( setEnabled(bool) ));
 
-  // --
-
-  gbGeometry = new QGroupBox( i18n("Geometry"), this );
-
-  cbFlipVertically = new QCheckBox( i18n("Flip vertically"), gbGeometry );
-
-  cbFlipHorizontally = new QCheckBox( i18n("Flip horizontally"), gbGeometry );
-
-  lbRotate = new QLabel( i18n("Rotate image:"), gbGeometry );
-
-  comboRotate = new KComboBox( gbGeometry );
-  comboRotate->setObjectName( "rotate combobox" );
-  comboRotate->addItem( i18n("0 Degrees") );
-  comboRotate->addItem( i18n("90 Degrees") );
-  comboRotate->addItem( i18n("180 Degrees") );
-  comboRotate->addItem( i18n("270 Degrees") );
-
-  // --
-
-  gbAdjust = new QGroupBox( i18n("Adjustments"), this );
-
-  sbBrightness = new KIntNumInput( gbAdjust/*, "brightness spinbox"*/ );
-  sbBrightness->setRange( -256, 256, 1 );
-  sbBrightness->setSliderEnabled( true );
-  sbBrightness->setLabel( i18n("Brightness:"), Qt::AlignVCenter );
-
-  sbContrast = new KIntNumInput( 0,gbAdjust, 10/*,
-				 "contrast spinbox"*/);
-  sbContrast->setRange( -256, 256, 1 );
-  sbContrast->setSliderEnabled( true );
-  sbContrast->setLabel( i18n("Contrast:"), Qt::AlignVCenter );
-
-  sbGamma = new KIntNumInput( 0, gbAdjust, 10/*, "gamma spinbox"*/ );
-  sbGamma->setRange( -256, 256, 1 );
-  sbGamma->setSliderEnabled( true );
-  sbGamma->setLabel( i18n("Gamma:"), Qt::AlignVCenter );
-
-  // --
-
-  gbPreview = new QGroupBox( i18n("Preview"), this );
-
-  lbImOrig = new QLabel( i18n("Original"), gbPreview );
-  imOrig = new ImlibWidget( 0L, gbPreview );
-  imOrig->setObjectName( QString::fromLatin1("original image") );
-
-  lbImFiltered = new QLabel( i18n("Modified"), gbPreview );
-  imFiltered = new ImlibWidget( 0L, imOrig->getImlibData(), gbPreview );
-  imFiltered->setObjectName( QString::fromLatin1("modified image") );
   connect( imFiltered, SIGNAL( destroyed() ), SLOT( slotNoImage() ));
 
-  ////
-  ////////////////
+  connect( ui->cbDownScale,        SIGNAL( clicked() ), SLOT( updatePreview() ));
+  connect( ui->cbUpScale,          SIGNAL( clicked() ), SLOT( updatePreview() ));
+  connect( ui->cbFlipVertically,   SIGNAL( clicked() ), SLOT( updatePreview() ));
+  connect( ui->cbFlipHorizontally, SIGNAL( clicked() ), SLOT( updatePreview() ));
+  connect( ui->sbMaxUpScaleFactor, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
+  connect( ui->sbBrightness, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
+  connect( ui->sbContrast,   SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
+  connect( ui->sbGamma,      SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
+
+  connect( ui->comboRotate,  SIGNAL( activated(int) ), SLOT( updatePreview() ));
 
 
-  // layout management
-  QVBoxLayout *mainLayout = new QVBoxLayout( this );
-  mainLayout->setMargin( 0 );
-  mainLayout->setObjectName( QString::fromLatin1( "main layout" ) );
-
-  QVBoxLayout *gbScaleLayout = new QVBoxLayout( gbScale );
-  QVBoxLayout *gbAdjustLayout = new QVBoxLayout( gbAdjust );
-  QVBoxLayout *gbGeometryLayout = new QVBoxLayout( gbGeometry );
-  QGridLayout *gbPreviewLayout = new QGridLayout( gbPreview );
-
-
-  QHBoxLayout *scaleLayout = new QHBoxLayout();
-  QHBoxLayout *rotateLayout = new QHBoxLayout();
-
-  mainLayout->addWidget( cbEnableMods );
-  mainLayout->addWidget( gbScale );
-  QHBoxLayout *hl = new QHBoxLayout();
-  hl->addWidget( gbGeometry );
-  hl->addWidget( gbAdjust );
-  mainLayout->addLayout( hl );
-  mainLayout->addWidget( gbPreview );
-  mainLayout->addStretch();
-
-  // --
-
-  gbScaleLayout->addWidget( cbDownScale );
-  gbScaleLayout->addLayout( scaleLayout );
-
-  scaleLayout->addWidget( cbUpScale );
-  scaleLayout->addWidget( sbMaxUpScaleFactor );
-
-  // --
-
-  gbGeometryLayout->addWidget( cbFlipVertically, 0, Qt::AlignLeft );
-  gbGeometryLayout->addWidget( cbFlipHorizontally, 0, Qt::AlignLeft );
-  gbGeometryLayout->addLayout( rotateLayout, 0 );
-
-  rotateLayout->addWidget( lbRotate, 0, Qt::AlignLeft );
-  rotateLayout->addWidget( comboRotate, 0, Qt::AlignLeft );
-
-  // --
-
-  gbAdjustLayout->addWidget( sbBrightness );
-  gbAdjustLayout->addWidget( sbContrast );
-  gbAdjustLayout->addWidget( sbGamma );
-
-  // --
-
-  gbPreviewLayout->setMargin( 10 );
-  gbPreviewLayout->setSpacing( KDialog::spacingHint() );
-  gbPreviewLayout->addWidget( lbImOrig, 0, 0, Qt::AlignCenter );
-  gbPreviewLayout->addWidget( imOrig,   1, 0, Qt::AlignCenter | Qt::AlignTop );
-  gbPreviewLayout->addWidget( lbImFiltered, 0, 2, Qt::AlignCenter );
-  gbPreviewLayout->addWidget( imFiltered,   1, 2, Qt::AlignCenter | Qt::AlignTop );
-
-
-  ////
-  ////////////////
-
-  // connect them all to the update slot
-  connect( cbDownScale,        SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( cbUpScale,          SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( cbFlipVertically,   SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( cbFlipHorizontally, SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( sbMaxUpScaleFactor, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( sbBrightness, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( sbContrast,   SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( sbGamma,      SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-
-  connect( comboRotate,  SIGNAL( activated(int) ), SLOT( updatePreview() ));
-
-
-  QString filename = KStandardDirs::locate( "data", "kuickshow/pics/calibrate.png" );
-  if ( !imOrig->loadImage( filename ) )
+  // load and display the test image
+  QString filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kuickshow/pics/calibrate.png"));
+  if ( !imOrig->loadImage( QUrl::fromLocalFile(filename) ) )
     imOrig = 0L; // FIXME - display some errormessage!
-  if ( !imFiltered->loadImage( filename ) )
+  if ( !imFiltered->loadImage( QUrl::fromLocalFile(filename) ) )
     imFiltered = 0L; // FIXME - display some errormessage!
 
   loadSettings( *kdata );
@@ -198,7 +79,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   if ( imFiltered )
     imFiltered->setFixedSize( imFiltered->size() );
 
-  mainLayout->activate();
+  //layout()->activate();
 }
 
 
@@ -208,26 +89,28 @@ DefaultsWidget::~DefaultsWidget()
     // references ImlibData from imOrig
     delete imFiltered;
     delete imOrig;
+
+    delete ui;
 }
 
 void DefaultsWidget::loadSettings( const KuickData& data )
 {
-    cbDownScale->setChecked( data.downScale );
-    cbUpScale->setChecked( data.upScale );
-    sbMaxUpScaleFactor->setValue( data.maxUpScale );
+    ui->cbDownScale->setChecked( data.downScale );
+    ui->cbUpScale->setChecked( data.upScale );
+    ui->sbMaxUpScaleFactor->setValue( data.maxUpScale );
 
-    cbFlipVertically->setChecked( data.flipVertically );
-    cbFlipHorizontally->setChecked( data.flipHorizontally );
+    ui->cbFlipVertically->setChecked( data.flipVertically );
+    ui->cbFlipHorizontally->setChecked( data.flipHorizontally );
 
-    comboRotate->setCurrentIndex( ( int )data.rotation );
+    ui->comboRotate->setCurrentIndex( ( int )data.rotation );
 
     ImData *id = data.idata;
 
-    sbBrightness->setValue( id->brightness );
-    sbContrast->setValue( id->contrast );
-    sbGamma->setValue( id->gamma );
+    ui->sbBrightness->setValue( id->brightness );
+    ui->sbContrast->setValue( id->contrast );
+    ui->sbGamma->setValue( id->gamma );
 
-    cbEnableMods->setChecked( data.isModsEnabled );
+    ui->cbEnableMods->setChecked( data.isModsEnabled );
     enableWidgets( data.isModsEnabled );
 
     updatePreview();
@@ -235,22 +118,22 @@ void DefaultsWidget::loadSettings( const KuickData& data )
 
 void DefaultsWidget::applySettings( KuickData& data )
 {
-    data.isModsEnabled = cbEnableMods->isChecked();
+    data.isModsEnabled = ui->cbEnableMods->isChecked();
 
-    data.downScale  = cbDownScale->isChecked();
-    data.upScale    = cbUpScale->isChecked();
-    data.maxUpScale = sbMaxUpScaleFactor->value();
+    data.downScale  = ui->cbDownScale->isChecked();
+    data.upScale    = ui->cbUpScale->isChecked();
+    data.maxUpScale = ui->sbMaxUpScaleFactor->value();
 
-    data.flipVertically   = cbFlipVertically->isChecked();
-    data.flipHorizontally = cbFlipHorizontally->isChecked();
+    data.flipVertically   = ui->cbFlipVertically->isChecked();
+    data.flipHorizontally = ui->cbFlipHorizontally->isChecked();
 
     data.rotation = currentRotation();
 
     ImData *id = data.idata;
 
-    id->brightness = sbBrightness->value();
-    id->contrast   = sbContrast->value();
-    id->gamma      = sbGamma->value();
+    id->brightness = ui->sbBrightness->value();
+    id->contrast   = ui->sbContrast->value();
+    id->gamma      = ui->sbGamma->value();
 }
 
 void DefaultsWidget::updatePreview()
@@ -260,16 +143,16 @@ void DefaultsWidget::updatePreview()
 
     imFiltered->setAutoRender( false );
 
-    int flipMode = cbFlipHorizontally->isChecked() ? FlipHorizontal : FlipNone;
-    flipMode |= cbFlipVertically->isChecked() ? FlipVertical : FlipNone;
+    int flipMode = ui->cbFlipHorizontally->isChecked() ? FlipHorizontal : FlipNone;
+    flipMode |= ui->cbFlipVertically->isChecked() ? FlipVertical : FlipNone;
     imFiltered->setFlipMode( flipMode );
 
-    Rotation rotation = cbEnableMods->isChecked() ? currentRotation() : ROT_0;
+    Rotation rotation = ui->cbEnableMods->isChecked() ? currentRotation() : ROT_0;
     imFiltered->setRotation( rotation );
 
-    imFiltered->setBrightness( sbBrightness->value() );
-    imFiltered->setContrast( sbContrast->value() );
-    imFiltered->setGamma( sbGamma->value() );
+    imFiltered->setBrightness( ui->sbBrightness->value() );
+    imFiltered->setContrast( ui->sbContrast->value() );
+    imFiltered->setGamma( ui->sbGamma->value() );
 
     imFiltered->updateImage();
     imFiltered->setAutoRender( true );
@@ -278,19 +161,17 @@ void DefaultsWidget::updatePreview()
 
 void DefaultsWidget::enableWidgets( bool enable )
 {
-    gbScale->setEnabled( enable );
-    sbMaxUpScaleFactor->setEnabled( enable & cbUpScale->isChecked() );
+    ui->gbScale->setEnabled( enable );
+    ui->sbMaxUpScaleFactor->setEnabled( enable & ui->cbUpScale->isChecked() );
 
-    gbGeometry->setEnabled( enable );
-    gbAdjust->setEnabled( enable );
-    gbPreview->setEnabled( enable );
+    ui->gbGeometry->setEnabled( enable );
+    ui->gbAdjust->setEnabled( enable );
+    ui->gbPreview->setEnabled( enable );
     updatePreview();
 }
 
 
 Rotation DefaultsWidget::currentRotation() const
 {
-    return (Rotation) comboRotate->currentIndex();
+    return (Rotation) ui->comboRotate->currentIndex();
 }
-
-#include "defaultswidget.moc"

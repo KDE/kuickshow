@@ -19,17 +19,13 @@
 #ifndef DEFAULTSWIDGET_H
 #define DEFAULTSWIDGET_H
 
+#include <QWidget>
+
 #include "kuickdata.h"
-//Added by qt3to4:
-#include <QLabel>
+
 class ImlibWidget;
+namespace Ui { class DefaultsWidget; }
 
-class QCheckBox;
-class QGroupBox;
-class QLabel;
-
-class KComboBox;
-class KIntNumInput;
 
 class DefaultsWidget : public QWidget
 {
@@ -43,26 +39,10 @@ public:
   void 		applySettings( KuickData& data );
 
 private:
-  Rotation      currentRotation() const;
-
-  QCheckBox 	*cbEnableMods;
-
-  QGroupBox 	*gbScale;
-  QCheckBox 	*cbUpScale, *cbDownScale;
-  KIntNumInput 	*sbMaxUpScaleFactor;
-
-  QGroupBox 	*gbAdjust;
-  KIntNumInput 	*sbBrightness, *sbContrast, *sbGamma;
-
-  QGroupBox 	*gbGeometry;
-  QLabel 	*lbRotate;
-  KComboBox 	*comboRotate;
-  QCheckBox 	*cbFlipVertically, *cbFlipHorizontally;
-
-  QGroupBox 	*gbPreview;
-  QLabel 	*lbImOrig, *lbImFiltered;
+  Ui::DefaultsWidget* ui;
   ImlibWidget 	*imOrig, *imFiltered;
 
+  Rotation      currentRotation() const;
 
 private slots:
   void 		updatePreview();

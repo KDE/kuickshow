@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 1998 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998,1999,2000 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -16,34 +16,31 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef MAINWIDGET_H
-#define MAINWIDGET_H
+#include "kuickurlwidget.h"
 
-#include <qevent.h>
-#include <qstring.h>
-#include <qwidget.h>
-//Added by qt3to4:
-#include <QResizeEvent>
+#include <KRun>
 
-class FileView;
+#include <QUrl>
 
-class MainWidget : public QWidget
+
+KuickUrlWidget::KuickUrlWidget(QWidget* parent) : KUrlLabel(parent)
 {
-  Q_OBJECT
+    connect(this, SIGNAL(leftClickedUrl()), SLOT(run()));
+    setUseTips(true);
+}
 
-public:
-  MainWidget( QString, QWidget *parent );
-  ~MainWidget();
+KuickUrlWidget::KuickUrlWidget(const QString& text, QWidget *parent)
+    : KUrlLabel( parent )
+{
+    setText( text );
+    connect( this, SIGNAL( leftClickedUrl() ), SLOT( run() ));
+    setUseTips( true );
+}
 
-  FileView* 	getFileBox() { return box; }
-
-protected:
-  virtual void 	resizeEvent( QResizeEvent * );
-
-private:
-  FileView 	*box;
-
-};
-
-
-#endif
+void KuickUrlWidget::run()
+{
+    QUrl ku( url() );
+    if ( ku.isValid() ) {
+	(void) new KRun( ku, this );
+    }
+}

@@ -19,14 +19,10 @@
 #ifndef GENERALWIDGET_H
 #define GENERALWIDGET_H
 
-#include <qwidget.h>
+#include <QWidget>
 
-#include "kuickdata.h"
-
-class QCheckBox;
-class KColorButton;
-class KLineEdit;
-class KIntNumInput;
+class KuickData;
+namespace Ui { class GeneralWidget; }
 
 
 class GeneralWidget : public QWidget
@@ -41,17 +37,7 @@ public:
     void 	applySettings( KuickData& data );
 
 private:
-    QCheckBox 	*cbFullscreen, *cbActiveWindow, *cbPreload, *cbLastdir;
-    QCheckBox   *cbSmoothScale, *cbFastRemap, *cbFastRender;
-    QCheckBox 	*cbDither16bit, *cbDither8bit, *cbOwnPalette;
-
-    KLineEdit   	*editFilter;
-    KIntNumInput 	*maxCacheSpinBox;
-
-    KIntNumInput 	*sbMaxWidth, *sbMaxHeight;
-    KIntNumInput 	*sbZoomFactor;
-
-    KColorButton        *colorButton;
+    Ui::GeneralWidget* ui;
 
 private slots:
     void 	useOwnPalette();

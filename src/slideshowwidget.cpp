@@ -16,67 +16,39 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qcheckbox.h>
-#include <qlayout.h>
-//Added by qt3to4:
-#include <QVBoxLayout>
-
-#include <kdialog.h>
-#include <klocale.h>
-#include <knuminput.h>
-
 #include "slideshowwidget.h"
+#include <ui_slideshowwidget.h>
+
+#include "kuickdata.h"
 
 
 SlideShowWidget::SlideShowWidget( QWidget *parent )
     : QWidget( parent )
 {
-//     setTitle( i18n("Slideshow") );
-
-    QVBoxLayout *layout = new QVBoxLayout( this );
-    layout->setSpacing( KDialog::spacingHint() );
-
-    m_fullScreen = new QCheckBox( i18n("Switch to &full-screen"), this );
-    m_startWithCurrent = new QCheckBox( i18n("S&tart with current image"), this);
-
-    m_delayTime = new KIntNumInput( this/*, "delay time"*/ );
-    m_delayTime->setLabel( i18n("De&lay between slides:") );
-    m_delayTime->setSuffix( i18n(" sec") );
-    m_delayTime->setRange( 0, 60 * 60 ); // 1 hour
-    m_delayTime->setSpecialValueText( i18n("Wait for key") );
-
-    m_cycles = new KIntNumInput( 1, this );
-    m_cycles->setLabel( i18n("&Iterations (0 = infinite):") );
-    m_cycles->setSpecialValueText( i18n("infinite") );
-    m_cycles->setRange( 0, 500 );
-    
-    layout->addWidget( m_fullScreen );
-    layout->addWidget( m_startWithCurrent );
-    layout->addWidget( m_delayTime );
-    layout->addWidget( m_cycles );
-    layout->addStretch( 1 );
+    // setup the widget based on its .ui file
+    ui = new Ui::SlideShowWidget;
+    ui->setupUi(this);
 
     loadSettings( *kdata );
 }
 
 SlideShowWidget::~SlideShowWidget()
 {
+    delete ui;
 }
 
 void SlideShowWidget::loadSettings( const KuickData& data )
 {
-    m_delayTime->setValue( data.slideDelay / 1000 );
-    m_cycles->setValue( data.slideshowCycles );
-    m_fullScreen->setChecked( data.slideshowFullscreen );
-    m_startWithCurrent->setChecked( !data.slideshowStartAtFirst );
+    ui->delayTime->setValue( data.slideDelay / 1000 );
+    ui->cycles->setValue( data.slideshowCycles );
+    ui->fullScreen->setChecked( data.slideshowFullscreen );
+    ui->startWithCurrent->setChecked( !data.slideshowStartAtFirst );
 }
 
 void SlideShowWidget::applySettings( KuickData& data )
 {
-    data.slideDelay = m_delayTime->value() * 1000;
-    data.slideshowCycles = m_cycles->value();
-    data.slideshowFullscreen = m_fullScreen->isChecked();
-    data.slideshowStartAtFirst = !m_startWithCurrent->isChecked();
+    data.slideDelay = ui->delayTime->value() * 1000;
+    data.slideshowCycles = ui->cycles->value();
+    data.slideshowFullscreen = ui->fullScreen->isChecked();
+    data.slideshowStartAtFirst = !ui->startWithCurrent->isChecked();
 }
-
-#include "slideshowwidget.moc"

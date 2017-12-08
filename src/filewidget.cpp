@@ -16,41 +16,32 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qnamespace.h>
-//Added by qt3to4:
-#include <QKeyEvent>
-#include <QResizeEvent>
-#include <QEvent>
-#include <QMenuItem>
-#include <QAbstractItemView>
-#include <QAbstractItemModel>
-#include <QModelIndex>
-
-#include <kactioncollection.h>
-#include <kactionmenu.h>
-#include <kdebug.h>
-#include <kdeversion.h>
-#include <kglobal.h>
-#include <kglobalsettings.h>
-#include <klocale.h>
-#include <kmenu.h>
-#include <kpropertiesdialog.h>
-#include <kurlcompletion.h>
-#include <kactioncollection.h>
-#include <kactionmenu.h>
-#include <kconfiggroup.h>
-#include <kfileitemactions.h>
-#include <kfileitemlistproperties.h>
-#include "filefinder.h"
 #include "filewidget.h"
+
+#include <KActionCollection>
+#include <KActionMenu>
+#include <KCompletion>
+#include <KConfigGroup>
+#include <KFileItemActions>
+#include <KFileItemListProperties>
+#include <KLocalizedString>
+
+#include <QAbstractItemModel>
+#include <QAbstractItemView>
+#include <QDebug>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QMenu>
+#include <QMimeDatabase>
+#include <QModelIndex>
+#include <QResizeEvent>
+
+#include "filefinder.h"
 #include "kuickdata.h"
 #include "kuickshow.h"
 
-#ifdef KeyPress
-#undef KeyPress
-#endif
 
-FileWidget::FileWidget( const KUrl& url, QWidget *parent )
+FileWidget::FileWidget( const QUrl& url, QWidget *parent )
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
       m_fileFinder( 0L ),
@@ -58,7 +49,7 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent )
 {
     setEnableDirHighlighting( true );
 
-    KConfigGroup group(KGlobal::config(), "Filebrowser");
+    KConfigGroup group(KSharedConfig::openConfig(), "Filebrowser");
     setViewConfig( group );
     readConfig( group );
     setView( KFile::Default );
@@ -66,22 +57,22 @@ FileWidget::FileWidget( const KUrl& url, QWidget *parent )
     // setOnlyDoubleClickSelectsFiles( true );
     reloadConfiguration();
 
-    completionObject()->setCompletionMode( KGlobalSettings::CompletionAuto );
-    dirCompletionObject()->setCompletionMode( KGlobalSettings::CompletionAuto);
+    completionObject()->setCompletionMode( KCompletion::CompletionAuto );
+    dirCompletionObject()->setCompletionMode( KCompletion::CompletionAuto);
 
     slotViewChanged();
     connect( this, SIGNAL( viewChanged( QAbstractItemView * )),
 	     SLOT( slotViewChanged() ));
 
     connect( dirLister(), SIGNAL( clear() ), SLOT( slotItemsCleared() ));
-    connect( dirLister(), SIGNAL( deleteItem( const KFileItem&  ) ),
-	     SLOT( slotItemDeleted( const KFileItem& ) ));
+    connect( dirLister(), SIGNAL( itemsDeleted( const KFileItemList&  ) ),
+	     SLOT( slotItemsDeleted( const KFileItemList& ) ));
 
     connect( this, SIGNAL( fileHighlighted( const KFileItem& )),
 	     SLOT( slotHighlighted( const KFileItem& )));
 
-    connect( this, SIGNAL(urlEntered(const KUrl&)),
-             SLOT( slotURLEntered( const KUrl& )));
+    connect( this, SIGNAL(urlEntered(const QUrl&)),
+             SLOT( slotURLEntered( const QUrl& )));
 
     // should actually be KDirOperator's job!
     connect( this, SIGNAL( finishedLoading() ), SLOT( slotFinishedLoading() ));
@@ -129,10 +120,11 @@ void FileWidget::reloadConfiguration()
 	mimes.append("inode/directory");
 
 	// Then, all the images!
-	KMimeType::List l = KMimeType::allMimeTypes();
-	for (KMimeType::List::iterator it = l.begin(); it != l.end(); ++it)
-	    if ((*it)->name().startsWith( "image/" ))
-		mimes.append( (*it)->name() );
+	QMimeDatabase mimedb;
+	QList<QMimeType> l = mimedb.allMimeTypes();
+	for (QList<QMimeType>::const_iterator it = l.begin(); it != l.end(); ++it)
+	    if (it->name().startsWith( "image/" ))
+		mimes.append( it->name() );
 
 	// Ok, show what we've done
 	setMimeFilter (mimes);
@@ -189,8 +181,8 @@ void FileWidget::findCompletion( const QString& text )
 	 text.indexOf('/') != -1 ) {
 	QString t = m_fileFinder->completion()->makeCompletion( text );
 
-	if (m_fileFinder->completionMode() == KGlobalSettings::CompletionPopup ||
-            m_fileFinder->completionMode() == KGlobalSettings::CompletionPopupAuto)
+    if (m_fileFinder->completionMode() == KCompletion::CompletionPopup ||
+            m_fileFinder->completionMode() == KCompletion::CompletionPopupAuto)
 	    m_fileFinder->setCompletedItems(
 			      m_fileFinder->completion()->allMatches() );
 	else
@@ -206,9 +198,9 @@ void FileWidget::findCompletion( const QString& text )
     m_validCompletion = !file.isNull();
 
     if ( m_validCompletion ) {
-    	KUrl completeUrl = url();
-    	completeUrl.setFileName( file );
-    	KDirOperator::setCurrentItem( completeUrl.url() );
+        QUrl completeUrl = url();
+        completeUrl.setPath(completeUrl.adjusted(QUrl::RemoveFilename).path() + file);
+    	KDirOperator::setCurrentItem( completeUrl );
     }
 }
 
@@ -266,34 +258,15 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 }
 
 
-// KIO::NetAccess::stat() does NOT give us the right mimetype, while
-// KIO::NetAccess::mimetype() does. So we have this hacklet to tell
-// showImage that the KFileItem is really an image.
-#define IS_IMAGE 5
-#define MY_TYPE 55
-
 bool FileWidget::isImage( const KFileItem& item )
 {
 //     return item && !item.isDir();
     if ( !item.isNull() )
     {
-        return item.isReadable() && (item.mimetype().startsWith( "image/") ||
-            item.extraData( (void*) MY_TYPE ) == (void*) IS_IMAGE);
+        return item.isReadable() && item.mimetype().startsWith( "image/");
     }
     return false;
 }
-
-void FileWidget::setImage( KFileItem& item, bool enable )
-{
-    if ( enable )
-        item.setExtraData( (void*) MY_TYPE, (void*) IS_IMAGE );
-    else
-        item.removeExtraData( (void*) MY_TYPE );
-}
-
-#ifdef index
-#undef index
-#endif
 
 KFileItem FileWidget::gotoFirstImage()
 {
@@ -358,7 +331,7 @@ KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
 {
     QModelIndex currentIndex = view()->currentIndex();
     if ( !currentIndex.isValid() ) {
-    	kDebug() << "no current index" << endl;
+        qDebug("no current index");
         return KFileItem();
     }
 
@@ -367,7 +340,7 @@ KFileItem FileWidget::getItem( WhichItem which, bool onlyImage ) const
     const int column = index.column();
     item = fileItemFor( currentIndex );
     if ( item.isNull() )
-        kDebug() << "### current item is null: " << index.data().typeName() << ", " << currentIndex.data().value<QString>() << endl;
+        qDebug("### current item is null: %s, %s", index.data().typeName(), qUtf8Printable(currentIndex.data().value<QString>()));
 
     switch( which ) {
     case Previous: {
@@ -413,10 +386,10 @@ void FileWidget::slotItemsCleared()
     m_currentURL = QString::null;
 }
 
-void FileWidget::slotItemDeleted( const KFileItem& item )
+void FileWidget::slotItemsDeleted( const KFileItemList& items )
 {
     KFileItem current = getCurrentItem( false );
-    if ( item != current ) {
+    if ( !items.contains(current) ) {
 	return; // all ok, we already have a new current item
     }
 
@@ -448,15 +421,12 @@ void FileWidget::slotReturnPressed( const QString& t )
 
     if ( text.at(0) == '/' || text.at(0) == '~' ) {
 	QString dir = m_fileFinder->completion()->replacedPath( text );
-
-	KUrl url;
-	url.setPath( dir );
-	setUrl( url, true );
+        setUrl( QUrl::fromLocalFile(dir), true );
     }
 
     else if ( text.indexOf('/') != (int) text.length() -1 ) { // relative path
 	QString dir = m_fileFinder->completion()->replacedPath( text );
-	KUrl u( url(), dir );
+        QUrl u = url().resolved(QUrl(dir));
 	setUrl( u, true );
     }
 
@@ -472,22 +442,22 @@ void FileWidget::slotReturnPressed( const QString& t )
     }
 }
 
-void FileWidget::setInitialItem( const KUrl& url )
+void FileWidget::setInitialItem( const QUrl& url )
 {
     m_initialName = url;
 }
 
-void FileWidget::slotURLEntered( const KUrl& url )
+void FileWidget::slotURLEntered( const QUrl& url )
 {
     if ( m_fileFinder )
-        m_fileFinder->completion()->setDir( url.path() );
+        m_fileFinder->completion()->setDir( url );
 }
 
 void FileWidget::slotFinishedLoading()
 {
 	const KFileItem& current = getCurrentItem( false );
 	if ( !m_initialName.isEmpty() )
-		setCurrentItem( m_initialName.url() );
+		setCurrentItem( m_initialName );
 	else if ( current.isNull() ) {
 		QModelIndex first = view()->model()->index(0, 0);
 		if (first.isValid()) {
@@ -498,7 +468,7 @@ void FileWidget::slotFinishedLoading()
 		}
 	}
 
-	m_initialName = KUrl();
+	m_initialName = QUrl();
 	emit finished();
 }
 
@@ -514,5 +484,3 @@ void FileWidget::resizeEvent( QResizeEvent *e )
 	m_fileFinder->move( width()  - m_fileFinder->width(),
 			    height() - m_fileFinder->height() );
 }
-
-#include "filewidget.moc"

@@ -16,67 +16,62 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <stdlib.h>
-#include <kactioncollection.h>
-#include <kstandardaction.h>
-#include <ktogglefullscreenaction.h>
-#include <qcheckbox.h>
-#include <qcursor.h>
-#include <qdrawutil.h>
-#include <qnamespace.h>
-#include <qpainter.h>
-#include <qpen.h>
-#include <QBitmap>
-#ifdef KDE_USE_FINAL
-#undef GrayScale
-#undef Color
-#endif
-#include <qrect.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qtimer.h>
-//Added by qt3to4:
-#include <QWheelEvent>
-#include <QPixmap>
-#include <QFocusEvent>
-#include <QKeyEvent>
-#include <QDropEvent>
-#include <QContextMenuEvent>
-#include <QResizeEvent>
-#include <QDragEnterEvent>
-#include <QMouseEvent>
-
-#include <kapplication.h>
-#include <kconfig.h>
-#include <kcursor.h>
-#include <kdebug.h>
-#include <kdeversion.h>
-#ifdef KDE_USE_FINAL
-#undef Unsorted
-#endif
-#include <kfiledialog.h>
-#include <kiconloader.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kpropertiesdialog.h>
-#include <kstandardshortcut.h>
-#include <kstandardguiitem.h>
-#include <kstandarddirs.h>
-#include <kglobalsettings.h>
-#include <ktemporaryfile.h>
-#include <kwindowsystem.h>
-#include <netwm.h>
-#include <kio/netaccess.h>
-
 #include "imagewindow.h"
+
+#include <KActionCollection>
+#include <KCursor>
+#include <KIconLoader>
+#include <KIO/StoredTransferJob>
+#include <KJobWidgets>
+#include <KLocalizedString>
+#include <KMessageBox>
+#include <KPropertiesDialog>
+#include <KStandardAction>
+#include <KStandardGuiItem>
+#include <KStandardShortcut>
+#include <KToggleFullScreenAction>
+#include <KUrlMimeData>
+#include <KWindowSystem>
+
+#include <QApplication>
+#include <QBitmap>
+#include <QCheckBox>
+#include <QContextMenuEvent>
+#include <QCursor>
+#include <QDesktopWidget>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QFileDialog>
+#include <QFocusEvent>
+#include <QGridLayout>
+#include <QKeyEvent>
+#include <QMenu>
+#include <QMimeData>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QPen>
+#include <QPixmap>
+#include <QRect>
+#include <QResizeEvent>
+#include <QScopedPointer>
+#include <QStandardPaths>
+#include <QString>
+#include <QStringList>
+#include <QTemporaryFile>
+#include <QTimer>
+#include <QUrl>
+#include <QWheelEvent>
+
+#include <netwm.h>
+#include <stdlib.h>
+
+#include "filecache.h"
 #include "imagemods.h"
 #include "kuick.h"
-#include "kuickimage.h"
-#include "filecache.h"
 #include "kuickdata.h"
+#include "kuickimage.h"
 #include "printing.h"
 
-#undef GrayScale
 
 QCursor *ImageWindow::s_handCursor = 0L;
 
@@ -121,7 +116,7 @@ void ImageWindow::init()
     m_actions->addAssociatedWidget( this );
 
     if ( !s_handCursor ) {
-        QString file = KStandardDirs::locate( "appdata", "pics/handcursor.png" );
+        QString file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/handcursor.png");
         if ( !file.isEmpty() )
             s_handCursor = new QCursor( QPixmap(file) );
         else
@@ -152,169 +147,156 @@ void ImageWindow::updateActions()
 
 void ImageWindow::setupActions()
 {
-    KAction *nextImage = m_actions->addAction( "next_image" );
+    QAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
-    nextImage->setShortcut( KStandardShortcut::next() );
+    m_actions->setDefaultShortcuts(nextImage, KStandardShortcut::next());
     connect( nextImage, SIGNAL( triggered() ), this, SLOT( slotRequestNext() ) );
 
-    KAction* showPreviousImage = m_actions->addAction( "previous_image" );
+    QAction* showPreviousImage = m_actions->addAction( "previous_image" );
     showPreviousImage->setText( i18n("Show Previous Image") );
-    showPreviousImage->setShortcut(KStandardShortcut::prior());
+    m_actions->setDefaultShortcuts(showPreviousImage, KStandardShortcut::prior());
     connect( showPreviousImage, SIGNAL( triggered() ), this, SLOT( slotRequestPrevious() ) );
 
-    KAction* deleteImage = m_actions->addAction( "delete_image" );
+    QAction* deleteImage = m_actions->addAction( "delete_image" );
     deleteImage->setText( i18n("Delete Image") );
-    deleteImage->setShortcut(KShortcut(QKeySequence(Qt::ShiftModifier | Qt::Key_Delete)));
+    m_actions->setDefaultShortcut(deleteImage, QKeySequence(Qt::ShiftModifier | Qt::Key_Delete));
     connect( deleteImage, SIGNAL( triggered() ), this, SLOT( imageDelete() ) );
 
-    KAction *trashImage = m_actions->addAction( "trash_image" );
+    QAction *trashImage = m_actions->addAction( "trash_image" );
     trashImage->setText( i18n("Move Image to Trash") );
-    trashImage->setShortcut( Qt::Key_Delete );
+    m_actions->setDefaultShortcut(trashImage, Qt::Key_Delete);
     connect( trashImage, SIGNAL( triggered() ), this, SLOT( imageTrash() ) );
 
 
-    KAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions );
-    zoomIn->setShortcut(Qt::Key_Plus);
+    QAction* zoomIn = KStandardAction::zoomIn( this, SLOT( zoomIn() ), m_actions );
+    m_actions->setDefaultShortcut(zoomIn, Qt::Key_Plus);
     m_actions->addAction( "zoom_in",  zoomIn );
 
-    KAction *zoomOut = KStandardAction::zoomOut( this, SLOT( zoomOut() ), m_actions );
-    zoomOut->setShortcut(Qt::Key_Minus);
+    QAction *zoomOut = KStandardAction::zoomOut( this, SLOT( zoomOut() ), m_actions );
+    m_actions->setDefaultShortcut(zoomOut, Qt::Key_Minus);
     m_actions->addAction( "zoom_out",  zoomOut );
 
-    KAction *restoreSize = m_actions->addAction( "original_size" );
+    QAction *restoreSize = m_actions->addAction( "original_size" );
     restoreSize->setText( i18n("Restore Original Size") );
-    restoreSize->setShortcut(Qt::Key_O);
+    m_actions->setDefaultShortcut(restoreSize, Qt::Key_O);
     connect( restoreSize, SIGNAL( triggered() ), this, SLOT( showImageOriginalSize() ) );
 
-    KAction *maximize = m_actions->addAction( "maximize" );
+    QAction *maximize = m_actions->addAction( "maximize" );
     maximize->setText( i18n("Maximize") );
-    maximize->setShortcut(Qt::Key_M);
+    m_actions->setDefaultShortcut(maximize, Qt::Key_M);
     connect( maximize, SIGNAL( triggered() ), this, SLOT( maximize() ) );
 
-    KAction *rotate90 = m_actions->addAction( "rotate90" );
+    QAction *rotate90 = m_actions->addAction( "rotate90" );
     rotate90->setText( i18n("Rotate 90 Degrees") );
-    rotate90->setShortcut(Qt::Key_9);
+    m_actions->setDefaultShortcut(rotate90, Qt::Key_9);
     connect( rotate90, SIGNAL( triggered() ), this, SLOT( rotate90() ) );
 
-    KAction *rotate180 = m_actions->addAction( "rotate180" );
+    QAction *rotate180 = m_actions->addAction( "rotate180" );
     rotate180->setText( i18n("Rotate 180 Degrees") );
-    rotate180->setShortcut(Qt::Key_8);
+    m_actions->setDefaultShortcut(rotate180, Qt::Key_8);
     connect( rotate180, SIGNAL( triggered() ), this, SLOT( rotate180() ) );
 
-    KAction *rotate270 = m_actions->addAction( "rotate270" );
+    QAction *rotate270 = m_actions->addAction( "rotate270" );
     rotate270->setText( i18n("Rotate 270 Degrees") );
-    rotate270->setShortcut(Qt::Key_7);
+    m_actions->setDefaultShortcut(rotate270, Qt::Key_7);
     connect( rotate270, SIGNAL( triggered() ), this, SLOT( rotate270() ) );
 
-    KAction *flipHori = m_actions->addAction( "flip_horicontally" );
+    QAction *flipHori = m_actions->addAction( "flip_horicontally" );
     flipHori->setText( i18n("Flip Horizontally") );
-
-    flipHori->setShortcut(Qt::Key_Asterisk);
+    m_actions->setDefaultShortcut(flipHori, Qt::Key_Asterisk);
     connect( flipHori, SIGNAL( triggered() ), this, SLOT( flipHoriz() ) );
 
-    KAction *flipVeri = m_actions->addAction( "flip_vertically" );
+    QAction *flipVeri = m_actions->addAction( "flip_vertically" );
     flipVeri->setText( i18n("Flip Vertically") );
-    flipVeri->setShortcut(Qt::Key_Slash);
+    m_actions->setDefaultShortcut(flipVeri, Qt::Key_Slash);
     connect( flipVeri, SIGNAL( triggered() ), this, SLOT( flipVert() ) );
 
-    KAction *printImage = m_actions->addAction( "print_image" );
+    QAction *printImage = m_actions->addAction( "print_image" );
     printImage->setText( i18n("Print Image...") );
-    printImage->setShortcut(KStandardShortcut::print());
+    m_actions->setDefaultShortcuts(printImage, KStandardShortcut::print());
     connect( printImage, SIGNAL( triggered() ), this, SLOT( printImage() ) );
 
-    KAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
+    QAction *a =  KStandardAction::saveAs( this, SLOT( saveImage() ), m_actions);
     m_actions->addAction( "save_image_as",  a );
 
     a = KStandardAction::close( this, SLOT( close() ), m_actions);
     m_actions->addAction( "close_image", a );
     // --------
-    KAction *moreBrighteness = m_actions->addAction( "more_brightness" );
+    QAction *moreBrighteness = m_actions->addAction( "more_brightness" );
     moreBrighteness->setText( i18n("More Brightness") );
-    moreBrighteness->setShortcut(Qt::Key_B);
+    m_actions->setDefaultShortcut(moreBrighteness, Qt::Key_B);
     connect( moreBrighteness, SIGNAL( triggered() ), this, SLOT( moreBrightness() ) );
 
-    KAction *lessBrightness = m_actions->addAction( "less_brightness" );
+    QAction *lessBrightness = m_actions->addAction( "less_brightness" );
     lessBrightness->setText(  i18n("Less Brightness") );
-    lessBrightness->setShortcut(Qt::SHIFT + Qt::Key_B);
+    m_actions->setDefaultShortcut(lessBrightness, Qt::SHIFT + Qt::Key_B);
     connect( lessBrightness, SIGNAL( triggered() ), this, SLOT( lessBrightness() ) );
 
-    KAction *moreContrast = m_actions->addAction( "more_contrast" );
+    QAction *moreContrast = m_actions->addAction( "more_contrast" );
     moreContrast->setText( i18n("More Contrast") );
-    moreContrast->setShortcut(Qt::Key_C);
+    m_actions->setDefaultShortcut(moreContrast, Qt::Key_C);
     connect( moreContrast, SIGNAL( triggered() ), this, SLOT( moreContrast() ) );
 
-    KAction *lessContrast = m_actions->addAction( "less_contrast" );
+    QAction *lessContrast = m_actions->addAction( "less_contrast" );
     lessContrast->setText( i18n("Less Contrast") );
-    lessContrast->setShortcut(Qt::SHIFT + Qt::Key_C);
+    m_actions->setDefaultShortcut(lessContrast, Qt::SHIFT + Qt::Key_C);
     connect( lessContrast, SIGNAL( triggered() ), this, SLOT( lessContrast() ) );
 
-    KAction *moreGamma = m_actions->addAction( "more_gamma" );
+    QAction *moreGamma = m_actions->addAction( "more_gamma" );
     moreGamma->setText( i18n("More Gamma") );
-
-    moreGamma->setShortcut(Qt::Key_G);
+    m_actions->setDefaultShortcut(moreGamma, Qt::Key_G);
     connect( moreGamma, SIGNAL( triggered() ), this, SLOT( moreGamma() ) );
 
-    KAction *lessGamma = m_actions->addAction( "less_gamma" );
+    QAction *lessGamma = m_actions->addAction( "less_gamma" );
     lessGamma->setText( i18n("Less Gamma") );
-    lessGamma->setShortcut(Qt::SHIFT + Qt::Key_G);
+    m_actions->setDefaultShortcut(lessGamma, Qt::SHIFT + Qt::Key_G);
     connect( lessGamma, SIGNAL( triggered() ), this, SLOT( lessGamma() ) );
 
     // --------
-    KAction *scrollUp = m_actions->addAction( "scroll_up" );
+    QAction *scrollUp = m_actions->addAction( "scroll_up" );
     scrollUp->setText( i18n("Scroll Up") );
-
-    scrollUp->setShortcut(Qt::Key_Up);
+    m_actions->setDefaultShortcut(scrollUp, Qt::Key_Up);
     connect( scrollUp, SIGNAL( triggered() ), this, SLOT( scrollUp() ) );
 
-    KAction *scrollDown = m_actions->addAction( "scroll_down" );
+    QAction *scrollDown = m_actions->addAction( "scroll_down" );
     scrollDown->setText( i18n("Scroll Down") );
-    scrollDown->setShortcut(Qt::Key_Down);
+    m_actions->setDefaultShortcut(scrollDown, Qt::Key_Down);
     connect( scrollDown, SIGNAL( triggered() ), this, SLOT( scrollDown() ) );
 
-    KAction *scrollLeft = m_actions->addAction( "scroll_left" );
+    QAction *scrollLeft = m_actions->addAction( "scroll_left" );
     scrollLeft->setText( i18n("Scroll Left") );
-    scrollLeft->setShortcut(Qt::Key_Left);
+    m_actions->setDefaultShortcut(scrollLeft, Qt::Key_Left);
     connect( scrollLeft, SIGNAL( triggered() ), this, SLOT( scrollLeft() ) );
 
-    KAction *scrollRight = m_actions->addAction( "scroll_right" );
+    QAction *scrollRight = m_actions->addAction( "scroll_right" );
     scrollRight->setText( i18n("Scroll Right") );
-    scrollRight->setShortcut(Qt::Key_Right);
+    m_actions->setDefaultShortcut(scrollRight, Qt::Key_Right);
     connect( scrollRight, SIGNAL( triggered() ), this, SLOT( scrollRight() ) );
     // --------
-    KAction *pause = m_actions->addAction( "kuick_slideshow_pause" );
+    QAction *pause = m_actions->addAction( "kuick_slideshow_pause" );
     pause->setText( i18n("Pause Slideshow") );
-    pause->setShortcut(Qt::Key_P);
+    m_actions->setDefaultShortcut(pause, Qt::Key_P);
     connect( pause, SIGNAL( triggered() ), this, SLOT( pauseSlideShow() ) );
 
-    KAction *fullscreenAction = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, SLOT( toggleFullscreen() ));
+    QAction *fullscreenAction = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, SLOT( toggleFullscreen() ));
+    QList<QKeySequence> shortcuts = fullscreenAction->shortcuts();
+    if(!shortcuts.contains(Qt::Key_Return)) shortcuts << Qt::Key_Return;
+    m_actions->setDefaultShortcuts(fullscreenAction, shortcuts);
 //    KAction *fullscreenAction = KStandardAction::fullScreen(this, SLOT( toggleFullscreen() ), m_actions);
 //    m_actions->addAction( "", fullscreenAction );
 
-    KAction *reloadAction = m_actions->addAction( "reload_image" );
+    QAction *reloadAction = m_actions->addAction( "reload_image" );
     reloadAction->setText( i18n("Reload Image") );
-    reloadAction->setShortcut(KStandardShortcut::reload());
+    if(!(shortcuts = KStandardShortcut::reload()).contains(Qt::Key_Enter)) shortcuts << Qt::Key_Enter;
+    m_actions->setDefaultShortcuts(reloadAction, shortcuts);
     connect( reloadAction, SIGNAL( triggered() ), this, SLOT( reload() ) );
 
-    KAction *properties = m_actions->addAction("properties" );
+    QAction *properties = m_actions->addAction("properties" );
     properties->setText( i18n("Properties") );
-    properties->setShortcut(Qt::ALT + Qt::Key_Return);
+    m_actions->setDefaultShortcut(properties, Qt::ALT + Qt::Key_Return);
     connect( properties, SIGNAL( triggered() ), this, SLOT( slotProperties() ) );
 
     m_actions->readSettings();
-
-    // Unfortunately there is no KAction::setShortcutDefault() :-/
-    // so add Key_Return as fullscreen shortcut _after_ readShortcutSettings()
-    addAlternativeShortcut(fullscreenAction, Qt::Key_Return);
-    addAlternativeShortcut(reloadAction, Qt::Key_Enter);
-}
-
-void ImageWindow::addAlternativeShortcut(KAction *action, int key)
-{
-    KShortcut cut( action->shortcut() );
-    if (cut == action->shortcut(KAction::DefaultShortcut)) {
-        cut.setAlternate(key);
-        action->setShortcut(cut);
-    }
 }
 
 void ImageWindow::showWindow()
@@ -366,8 +348,8 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     QString caption = i18nc( "Filename (Imagewidth x Imageheight)",
                              "%3 (%1 x %2)",
                              m_kuim->originalWidth(), m_kuim->originalHeight(),
-                             m_kuim->url().prettyUrl() );
-    setWindowTitle( KDialog::makeStandardCaption( caption, this ) );
+                             m_kuim->url().toDisplayString() );
+    setWindowTitle( caption );
 }
 
 
@@ -376,7 +358,7 @@ void ImageWindow::centerImage()
     int w, h;
     if ( myIsFullscreen )
     {
-        QRect desktopRect = KGlobalSettings::desktopGeometry( this );
+        QRect desktopRect = QApplication::desktop()->screenGeometry(this);
         w = desktopRect.width();
         h = desktopRect.height();
     }
@@ -461,13 +443,13 @@ void ImageWindow::scrollImage( int x, int y, bool restrict )
 //     XClearWindow(); // repaint
 //     XMapWindow(), XSync();
 //
-bool ImageWindow::showNextImage( const KUrl& url )
+bool ImageWindow::showNextImage( const QUrl& url )
 {
     KuickFile *file = FileCache::self()->getFile( url );
     switch ( file->waitForDownload( this ) ) {
     	case KuickFile::ERROR:
     	{
-    	    QString tmp = i18n("Unable to download the image from %1.", url.prettyUrl());
+            QString tmp = i18n("Unable to download the image from %1.", url.toDisplayString());
 	        emit sigImageError( file, tmp );
 	        return false;
     	}
@@ -485,7 +467,7 @@ bool ImageWindow::showNextImage( KuickFile *file )
     if ( !loadImage( file ) ) {
    	    QString tmp = i18n("Unable to load the image %1.\n"
                        "Perhaps the file format is unsupported or "
-                       "your Imlib is not installed properly.", file->url().prettyUrl());
+                       "your Imlib is not installed properly.", file->url().toDisplayString());
         emit sigImageError( file, tmp );
 	return false;
     }
@@ -885,7 +867,7 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 {
     //  if ( e->provides( "image/*" ) ) // can't do this right now with Imlib
-    if ( e->provides( "text/uri-list" ) )
+    if ( e->mimeData()->hasFormat( "text/uri-list" ) )
 	e->accept();
     else
 	e->ignore();
@@ -895,15 +877,14 @@ void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 void ImageWindow::dropEvent( QDropEvent *e )
 {
     // FIXME - only preliminary drop-support for now
-	KUrl::List list = KUrl::List::fromMimeData( e->mimeData() );
+    QList<QUrl> list = KUrlMimeData::urlsFromMimeData(e->mimeData());
     if ( !list.isEmpty()) {
-        QString tmpFile;
-        const KUrl &url = list.first();
-        if (KIO::NetAccess::download( url, tmpFile, this ) )
-        {
-	    loadImage( tmpFile );
-	    KIO::NetAccess::removeTempFile( tmpFile );
-	}
+        for(const QUrl& url : list) {
+            if(url.isValid()) {
+                loadImage(url);
+                break;
+            }
+        }
 	updateWidget();
 	e->accept();
     }
@@ -984,17 +965,27 @@ void ImageWindow::saveImage()
     KuickData tmp;
     QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), 0L);
     keepSize->setChecked( true );
-    KFileDialog dlg( m_saveDirectory, tmp.fileFilter, this,keepSize);
+
+    QFileDialog dlg(this);
+    dlg.setWindowTitle( i18n("Save As") );
+    dlg.setOption(QFileDialog::DontUseNativeDialog);
+    dlg.setAcceptMode(QFileDialog::AcceptSave);
+    dlg.setNameFilter(i18n("Image Files (%1)").arg(tmp.fileFilter));
+    dlg.setDirectoryUrl(QUrl::fromUserInput(m_saveDirectory, QDir::currentPath(), QUrl::AssumeLocalFile));
+
+    // insert the checkbox below the filter box
+    if(QGridLayout* gl = qobject_cast<QGridLayout*>(dlg.layout())) {
+        gl->addWidget(keepSize, gl->rowCount(), 0, 1, gl->columnCount());
+    }
 
     QString selection = m_saveDirectory.isEmpty() ?
                             m_kuim->url().url() :
                             m_kuim->url().fileName();
-    dlg.setSelection( selection );
-    dlg.setOperationMode( KFileDialog::Saving );
-    dlg.setCaption( i18n("Save As") );
+    dlg.selectFile( selection );
     if ( dlg.exec() == QDialog::Accepted )
     {
-        KUrl url = dlg.selectedUrl();
+        QList<QUrl> urls = dlg.selectedUrls();
+        QUrl url = urls.value(0);
         if ( url.isValid() )
         {
             if ( !saveImage( url, keepSize->isChecked() ) )
@@ -1006,19 +997,19 @@ void ImageWindow::saveImage()
             }
             else
             {
-				if ( url.equals( m_kuim->url() )) {
+                if ( url == m_kuim->url() ) {
 					Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
 				}
             }
         }
     }
 
-    QString lastDir = dlg.baseUrl().path(KUrl::AddTrailingSlash);
+    QString lastDir = dlg.directoryUrl().toDisplayString();
     if ( lastDir != m_saveDirectory )
         m_saveDirectory = lastDir;
 }
 
-bool ImageWindow::saveImage( const KUrl& dest, bool keepOriginalSize )
+bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
 {
     int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
@@ -1035,16 +1026,16 @@ bool ImageWindow::saveImage( const KUrl& dest, bool keepOriginalSize )
 	else
 	{
 
-		KTemporaryFile tmpFile;
-		tmpFile.setAutoRemove( false );
 		QString extension = QFileInfo( dest.fileName() ).completeSuffix();
-		if ( !extension.isEmpty() )
-//			extension.prepend( '.' );
-			tmpFile.setSuffix( extension );
-		if ( !tmpFile.open() )
+        if(!extension.isEmpty()) extension.prepend('.');
+        QScopedPointer<QTemporaryFile> tmpFilePtr(FileCache::self()->createTempFile(extension));
+        if(tmpFilePtr.isNull()) return false;
+
+        tmpFilePtr->setAutoRemove(false);
+        if ( !tmpFilePtr->open() )
 			return false;
-		tmpFile.close();
-		saveFile = tmpFile.fileName();
+        saveFile = tmpFilePtr->fileName();
+        tmpFilePtr->close();
 	}
 
     if ( saveIm )
@@ -1057,7 +1048,19 @@ bool ImageWindow::saveImage( const KUrl& dest, bool keepOriginalSize )
         {
         	if ( isFullscreen() )
         		toggleFullscreen(); // otherwise upload window would block us invisibly
-        	success = KIO::NetAccess::upload( saveFile, dest, const_cast<ImageWindow*>( this ) );
+
+            QFile sourceFile(saveFile);
+            if(!sourceFile.open(QIODevice::ReadOnly)) {
+                // TODO: implement better error handling
+                qWarning("failed to open file \"%s\": %s", qUtf8Printable(saveFile), qUtf8Printable(sourceFile.errorString()));
+                return false;
+            }
+
+            KIO::StoredTransferJob* job = KIO::storedPut(&sourceFile, dest, -1);
+            KJobWidgets::setWindow(job, this);
+            success = job->exec();
+
+            sourceFile.close();
         }
 
         Imlib_kill_image( id, saveIm );
@@ -1188,7 +1191,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen )
     {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).width();
+        return QApplication::desktop()->screenGeometry(topLevelWidget()).width();
     } else
 	return Kuick::workArea().width();
 }
@@ -1197,7 +1200,7 @@ int ImageWindow::desktopWidth( bool totalScreen ) const
 int ImageWindow::desktopHeight( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen ) {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).height();
+        return QApplication::desktop()->screenGeometry(topLevelWidget()).height();
     } else {
 	return Kuick::workArea().height();
     }
@@ -1206,7 +1209,7 @@ int ImageWindow::desktopHeight( bool totalScreen ) const
 QSize ImageWindow::maxImageSize() const
 {
     if ( myIsFullscreen ) {
-        return KGlobalSettings::desktopGeometry(topLevelWidget()).size();
+        return QApplication::desktop()->screenGeometry(topLevelWidget()).size();
     }
     else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
@@ -1253,7 +1256,7 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
     if ( !ImlibWidget::canZoomTo( newWidth, newHeight ) )
         return false;
 
-    QSize desktopSize = KGlobalSettings::desktopGeometry(topLevelWidget()).size();
+    QSize desktopSize = QApplication::desktop()->screenGeometry(topLevelWidget()).size();
 
     int desktopArea = desktopSize.width() * desktopSize.height();
     int imageArea = newWidth * newHeight;
@@ -1309,5 +1312,3 @@ bool ImageWindow::isCursorHidden() const
 {
     return cursor().shape() == Qt::BlankCursor;
 }
-
-#include "imagewindow.moc"

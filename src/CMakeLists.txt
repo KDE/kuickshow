@@ -1,9 +1,8 @@
 
-include_directories(${IMLIB_INCLUDE_DIR} ${KDE4_INCLUDES})
+# KuickShow main application
 
-########### next target ###############
-
-set(kuickshow_KDEINIT_SRCS 
+set(CMAKE_AUTOMOC ON)
+set(kuickshow_KDEINIT_SRCS
    kuickshow.cpp 
    aboutwidget.cpp 
    generalwidget.cpp 
@@ -17,25 +16,55 @@ set(kuickshow_KDEINIT_SRCS
    kuickimage.cpp
    imdata.cpp 
    filefinder.cpp 
-   kurlwidget.cpp 
+   kuickurlwidget.cpp
    filewidget.cpp 
    kuick.cpp 
    imlibwidget.cpp 
    slideshowwidget.cpp 
    imagemods.cpp
-   printing.cpp )
+   printing.cpp
+   openfilesanddirsdialog.cpp
+)
 
-kde4_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
+ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
+   aboutwidget.ui
+   printing_page.ui
+   generalwidget.ui
+   defaultswidget.ui
+   slideshowwidget.ui
+)
 
-target_link_libraries(kdeinit_kuickshow ${X11_LIBRARIES} ${IMLIB_LIBRARIES} ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS})
+
+# target kdeinit_kuickshow
+kf5_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
+target_compile_options(kdeinit_kuickshow PRIVATE -std=c++11 -Wall --pedantic)
+target_compile_definitions(kdeinit_kuickshow PRIVATE ${IMLIB_DEFINITIONS} -DQT_NO_URL_CAST_FROM_STRING)
+target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS})
+
+target_link_libraries(kdeinit_kuickshow
+	Qt5::Core
+	Qt5::Gui
+	Qt5::PrintSupport
+	Qt5::X11Extras
+	KF5::I18n
+	KF5::IconThemes
+	KF5::KIOCore
+	KF5::KIOWidgets
+	KF5::KIOFileWidgets
+	KF5::WindowSystem
+	KF5::XmlGui
+	${X11_LIBRARIES}
+	${IMLIB_LIBRARIES}
+)
 
 install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
+
+# target kuickshow
 target_link_libraries( kuickshow kdeinit_kuickshow )
 install(TARGETS kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+
 
 ########### install files ###############
 
 install( PROGRAMS kuickshow.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
-
-kde4_install_icons(${ICON_INSTALL_DIR})

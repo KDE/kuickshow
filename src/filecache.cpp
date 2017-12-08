@@ -15,18 +15,21 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#include <unistd.h>
-
-#include <qstring.h>
-
-#include <kcomponentdata.h>
-#include <kdebug.h>
-#include <kstandarddirs.h>
-#include <ktempdir.h>
 
 #include "filecache.h"
 
-FileCache * FileCache::s_self;
+#include <QCoreApplication>
+#include <QDebug>
+#include <QDir>
+#include <QString>
+#include <QTemporaryDir>
+#include <QTemporaryFile>
+#include <QUrl>
+
+#include "kuickfile.h"
+
+
+FileCache* FileCache::s_self = nullptr;
 
 FileCache::FileCache()
     : m_limit( 0 ),
@@ -56,9 +59,9 @@ FileCache * FileCache::self()
     return s_self;
 }
 
-KuickFile * FileCache::getFile( const KUrl& url )
+KuickFile * FileCache::getFile( const QUrl& url )
 {
-    QString urlString = url.prettyUrl();
+    QString urlString = url.toDisplayString();
     KuickFile *file = m_files.object( urlString );
     if ( !file ) {
         file = new KuickFile( url );
@@ -74,24 +77,33 @@ QString FileCache::tempDir()
         m_tempDir = createTempDir();
 
         if ( !m_tempDir ) {
-            kWarning() << "Unable to create temporary directory for KuickShow" << endl;
+            qWarning("Unable to create temporary directory for KuickShow");
             return QString::null;
         }
     }
 
-    return m_tempDir->name();
+    return m_tempDir->path() + QLatin1Char('/');
+}
+
+QTemporaryFile* FileCache::createTempFile(const QString& suffix, const QString& prefix)
+{
+    QString nameTemplate = tempDir();
+    if(nameTemplate.isEmpty()) return nullptr;
+
+    nameTemplate += prefix + QStringLiteral("XXXXXX") + suffix;
+    return new QTemporaryFile(nameTemplate);
 }
 
 
-KTempDir * FileCache::createTempDir()
+QTemporaryDir* FileCache::createTempDir()
 {
-    QString tmpName = KGlobal::mainComponent().componentName();
-    tmpName.append( QString::number( getpid() ) );
-    QString dirName = KStandardDirs::locateLocal( "tmp", tmpName );
-    KTempDir *dir = new KTempDir( dirName );
-    dir->setAutoRemove( true );
-    if ( dir->status() != 0L )
-    {
+    QString nameTemplate = QStringLiteral("%1/%2_%3_XXXXXX")
+            .arg(QDir::tempPath())
+            .arg(QCoreApplication::applicationName())
+            .arg(QCoreApplication::applicationPid());
+    QTemporaryDir* dir = new QTemporaryDir(nameTemplate);
+
+    if(!dir->isValid()) {
         delete dir;
         return 0L;
     }

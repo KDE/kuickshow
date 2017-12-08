@@ -12,27 +12,22 @@
 #ifndef IMLIBWIDGET_H
 #define IMLIBWIDGET_H
 
-#include <qvariant.h>
-
-#include <qcursor.h>
-#include <qevent.h>
-#include <qtimer.h>
-#include <qwidget.h>
+#include <QCursor>
+#include <QObject>
+#include <QWidget>
 #include <QX11Info>
 
-#include <kurl.h>
-
-// #include those AFTER Qt-includes!
-#include <Imlib.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-// #include <X11/extensions/shape.h>
+#include "imlib-wrapper.h"
 
 #include "imdata.h"
 #include "kuickdata.h"
 
+class QCloseEvent;
+class QColor;
+class QUrl;
 class KuickFile;
 class KuickImage;
+
 
 class ImageCache : public QObject
 {
@@ -73,8 +68,6 @@ signals:
 // ------------------------------------------
 
 
-class QColor;
-
 class ImlibWidget : public QWidget
 {
   Q_OBJECT
@@ -85,11 +78,11 @@ public:
   ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0 );
   virtual ~ImlibWidget();
 
-  KUrl          url()                   const;
+  QUrl          url()                   const;
   KuickFile *   currentFile()           const;
   bool		loadImage( KuickFile * file);
-  bool		loadImage( const KUrl& url );
-  bool 		cacheImage( const KUrl& url );
+  bool		loadImage( const QUrl& url );
+  bool 		cacheImage( const QUrl& url );
   void 		zoomImage( float );
   void 		setBrightness( int );
   void 		setContrast( int );
@@ -134,7 +127,8 @@ public slots:
 
 
 protected:
-  Display *	    getX11Display() const { return x11Info().display(); }
+  Display *	    getX11Display() const { return QX11Info::display(); }
+  int getX11Screen() const;
   KuickImage *	loadImageInternal( KuickFile * file );
   void 			showImage();
   void          setImageModifier();

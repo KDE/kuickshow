@@ -19,19 +19,15 @@
 #ifndef KUICKIMAGE_H
 #define KUICKIMAGE_H
 
-#include <qimage.h>
-#include <qobject.h>
+#include <QObject>
 
-#include <kurl.h>
+#include "imlib-wrapper.h"
 
 #include "kuickdata.h"
 #include "kuickfile.h"
 
-// #include those AFTER Qt-includes!
-#include <Imlib.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-// #include <X11/extensions/shape.h>
+class QImage;
+class QUrl;
 
 
 class KuickImage : public QObject
@@ -65,7 +61,7 @@ public:
   void 		renderPixmap();
 //  const QString& filename() 	const { return myFilename;}
   const KuickFile& file()       const { return *myFile; }
-  const KUrl& url()             const { return myFile->url(); }
+  QUrl url()             const { return myFile->url(); }
 
   void 		setDirty( bool d )    { myIsDirty = d;    }
   /**

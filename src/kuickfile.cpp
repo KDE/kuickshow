@@ -15,20 +15,23 @@
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
 */
-#include <qfile.h>
 
-#include <kdebug.h>
-#include <kdeversion.h>
-#include <klocale.h>
-#include <kprogressdialog.h>
-#include <kio/job.h>
-#include <kio/netaccess.h>
-#include <KTemporaryFile>
-
-#include "filecache.h"
 #include "kuickfile.h"
 
-KuickFile::KuickFile(const KUrl& url)
+#include <KIO/FileCopyJob>
+#include <KIO/StatJob>
+#include <KLocalizedString>
+
+#include <QDebug>
+#include <QFile>
+#include <QProgressDialog>
+#include <QScopedPointer>
+#include <QTemporaryFile>
+
+#include "filecache.h"
+
+
+KuickFile::KuickFile(const QUrl& url)
     : QObject(),
       m_url( url ),
       m_job( 0L ),
@@ -38,7 +41,13 @@ KuickFile::KuickFile(const KUrl& url)
     if ( m_url.isLocalFile())
         m_localFile = m_url.path();
     else {
-    	const KUrl& mostLocal = KIO::NetAccess::mostLocalUrl( m_url, 0L );
+        QUrl mostLocal;
+        KIO::StatJob* job = KIO::mostLocalUrl(m_url);
+        connect(job, &KIO::StatJob::result, [job, &mostLocal]() {
+            if(!job->error()) mostLocal = job->mostLocalUrl();
+        });
+        job->exec();
+
     	if ( mostLocal.isValid() && mostLocal.isLocalFile() )
     		m_localFile = mostLocal.path();
     }
@@ -87,19 +96,13 @@ bool KuickFile::download()
     if ( extIndex > 0 )
         ext = fileName.mid( extIndex );
 
-    QString tempDir = FileCache::self()->tempDir();
-    KTemporaryFile tempFile;
-    if ( !tempDir.isEmpty() ) {
-        tempFile.setPrefix( tempDir );
-    }
-    tempFile.setSuffix( ext );
-    tempFile.setAutoRemove( tempDir.isNull() ); // in case there is no proper tempdir, make sure to delete those files!
-    if ( !tempFile.open() )
-        return false;
+    QScopedPointer<QTemporaryFile> tempFilePtr(FileCache::self()->createTempFile(ext));
+    if(tempFilePtr.isNull() || !tempFilePtr->open()) return false;
 
-    KUrl destURL( tempFile.fileName() );
+    QUrl destURL = QUrl::fromLocalFile(tempFilePtr->fileName());
 
-    tempFile.close();
+    // we don't need the actual temp file, just its unique name
+    tempFilePtr.reset();
 
     m_job = KIO::file_copy( m_url, destURL, -1, KIO::HideProgressInfo | KIO::Overwrite ); // handling progress ourselves
 //    m_job->setAutoErrorHandlingEnabled( true );
@@ -121,20 +124,20 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
             return ERROR;
     }
 
-    KProgressDialog *dialog = new KProgressDialog( parent );
-    dialog->setModal( true );
-    dialog->setCaption( i18n("Downloading %1...", m_url.fileName() ) );
-    dialog->setLabelText( i18n("Please wait while downloading\n%1", m_url.prettyUrl() ));
-    dialog->setAllowCancel( true );
+    QProgressDialog *dialog = new QProgressDialog( parent );
+    dialog->setWindowTitle( i18n("Downloading %1...", m_url.fileName() ) );
+    dialog->setLabelText( i18n("Please wait while downloading\n%1", m_url.toDisplayString() ));
     dialog->setAutoClose( true );
 
-    m_progress = dialog->progressBar();
-    m_progress->setMaximum( 100 ); // percent
-    m_progress->setValue( m_currentProgress );
+    dialog->setMaximum( 100 ); // percent
+    dialog->setValue( m_currentProgress );
+
+    m_progress = dialog;
     dialog->exec();
-    bool canceled = dialog->wasCancelled();
+    m_progress = nullptr;
+
+    bool canceled = dialog->wasCanceled();
     delete dialog;
-    m_progress = 0L;
 
 	if ( canceled && m_job ) {
 		m_job->kill();
@@ -165,11 +168,11 @@ void KuickFile::slotResult( KJob *job )
     	m_currentProgress = 0;
 
         if ( job->error() != KIO::ERR_USER_CANCELED )
-            kWarning() << "ERROR: KuickFile::slotResult: " << job->errorString() << endl;
+            qWarning("ERROR: KuickFile::slotResult: %s", qUtf8Printable(job->errorString()));
 
         QString canceledFile = static_cast<KIO::FileCopyJob*>(job)->destUrl().path();
         QFile::remove( canceledFile );
-        m_progress->topLevelWidget()->hide();
+        m_progress->hide();
     }
     else {
 	    m_localFile = static_cast<KIO::FileCopyJob*>(job)->destUrl().path();
@@ -177,10 +180,6 @@ void KuickFile::slotResult( KJob *job )
 
 	    if ( m_progress ) {
 	        m_progress->setValue( 100 );
-#define BUGGY_VERSION KDE_MAKE_VERSION(3,5,2)
-	        if ( KDE::version() <= BUGGY_VERSION ) {
-	            m_progress->topLevelWidget()->hide(); // ### workaround broken KProgressDialog
-	        }
 	    }
     }
 }
@@ -205,7 +204,5 @@ void KuickFile::slotProgress( KJob *job, unsigned long percent )
 }
 
 bool operator==( const KuickFile& first, const KuickFile& second ) {
-    return first.url().equals( second.url() );
+    return first.url() == second.url();
 }
-
-#include "kuickfile.moc"

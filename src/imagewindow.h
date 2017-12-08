@@ -19,29 +19,26 @@
 #ifndef IMAGEWINDOW_H
 #define IMAGEWINDOW_H
 
-#include <qevent.h>
-//Added by qt3to4:
-#include <QContextMenuEvent>
-#include <QMouseEvent>
-#include <QDragEnterEvent>
-#include <QWheelEvent>
-#include <QFocusEvent>
-#include <QKeyEvent>
-#include <QResizeEvent>
-#include <QMenu>
-#include <QDropEvent>
-
-#include <kaction.h>
-#include <kurl.h>
+#include <QString>
 
 #include "imlibwidget.h"
 
-class QCursor;
-class QString;
-class QWidget;
 class KActionCollection;
-
+class QContextMenuEvent;
+class QCursor;
+class QDragEnterEvent;
+class QDropEvent;
+class QFocusEvent;
+class QKeyEvent;
+class QMenu;
+class QMouseEvent;
+class QResizeEvent;
+class QSize;
+class QUrl;
+class QWheelEvent;
+class QWidget;
 class KuickFile;
+
 
 class ImageWindow : public ImlibWidget
 {
@@ -53,7 +50,7 @@ public:
   ~ImageWindow();
 
   bool 		showNextImage( KuickFile * file );
-  bool 		showNextImage( const KUrl& url );
+  bool 		showNextImage( const QUrl& url );
   void 		scrollImage( int, int, bool restrict=true );
   void		setFullscreen( bool );
   bool 		isFullscreen() 	const { return myIsFullscreen; }
@@ -74,7 +71,7 @@ public:
   void autoScale( KuickImage *kuim );
   virtual bool autoRotate( KuickImage *kuim );
 
-  bool          saveImage( const KUrl& dest, bool keepOriginalSize );
+  bool          saveImage( const QUrl& dest, bool keepOriginalSize );
 
 public slots:
   void 		zoomIn();
@@ -108,7 +105,6 @@ protected:
 
   void 		init();
   void 		centerImage();
-  void          addAlternativeShortcut( KAction *action, int key );
   virtual void	updateGeometry( int imWidth, int imHeight );
   virtual void  loaded( KuickImage *, bool wasCached );
   virtual bool  canZoomTo( int newWidth, int newHeight );

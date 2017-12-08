@@ -16,66 +16,54 @@
    Boston, MA 02110-1301, USA.
 */
 
-
-#ifdef index
-#undef index
-#endif
 #include "kuickconfigdlg.h"
 
-#include <qnamespace.h>
-#include <kvbox.h>
+#include <QDialogButtonBox>
+#include <KLocalizedString>
+#include <KSharedConfig>
+#include <KShortcutsDialog>
 
+#include <QPushButton>
 
-#include <kconfig.h>
-#include <kglobal.h>
-#include <kshortcutsdialog.h>
-#include <klocale.h>
-
-#include "imagewindow.h"
 #include "defaultswidget.h"
 #include "generalwidget.h"
-#include "slideshowwidget.h"
-
+#include "imagewindow.h"
 #include "kuickdata.h"
+#include "slideshowwidget.h"
 
 
 KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent, bool modal )
     : KPageDialog( parent )
 {
-    setButtons( Help | Default | Ok | Apply | Cancel );
-    setDefaultButton( Ok );
+    setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Help);
     setModal( modal );
-    setCaption( i18n("Configure") );
+    setWindowTitle( i18n("Configure") );
     setFaceType( Tabbed );
     coll = _coll;
-    KVBox *box = new KVBox();
-    addPage( box, i18n("&General") );
-    generalWidget = new GeneralWidget( box );
+
+    generalWidget = new GeneralWidget( this );
     generalWidget->setObjectName( QString::fromLatin1( "general widget" ) );
+    addPage( generalWidget, i18n("&General") );
 
-    box = new KVBox();
-    addPage( box, i18n("&Modifications") );
-    defaultsWidget = new DefaultsWidget( box );
+    defaultsWidget = new DefaultsWidget( this );
     defaultsWidget->setObjectName( QString::fromLatin1( "defaults widget" ) );
+    addPage( defaultsWidget, i18n("&Modifications") );
 
-    box = new KVBox();
-    addPage( box, i18n("&Slideshow")  );
-    slideshowWidget = new SlideShowWidget( box );
+    slideshowWidget = new SlideShowWidget( this );
     slideshowWidget->setObjectName( QString::fromLatin1( "slideshow widget" ) );
-
-    box = new KVBox();
-    addPage( box, i18n("&Viewer Shortcuts") );
+    addPage( slideshowWidget, i18n("&Slideshow")  );
 
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
+    imageKeyChooser = new KShortcutsEditor( imageWindow->actionCollection(), this );
+    addPage( imageKeyChooser, i18n("&Viewer Shortcuts") );
 
-    imageKeyChooser = new KShortcutsEditor( imageWindow->actionCollection(), box );
+    browserKeyChooser = new KShortcutsEditor( coll, this );
+    addPage( browserKeyChooser, i18n("Bro&wser Shortcuts") );
 
-    box = new KVBox();
-    addPage( box, i18n("Bro&wser Shortcuts") );
-    browserKeyChooser = new KShortcutsEditor( coll, box );
-
-    connect( this, SIGNAL( defaultClicked() ), SLOT( resetDefaults() ));
+    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(resetDefaults()));
+    connect(buttonBox()->button(QDialogButtonBox::Ok), SIGNAL(clicked()), SIGNAL(okClicked()));
+    connect(buttonBox()->button(QDialogButtonBox::Apply), SIGNAL(clicked()), SIGNAL(applyClicked()));
 }
 
 KuickConfigDialog::~KuickConfigDialog()
@@ -92,7 +80,7 @@ void KuickConfigDialog::applyConfig()
     imageKeyChooser->save();
     browserKeyChooser->save();
 
-    KGlobal::config()->sync();
+    KSharedConfig::openConfig()->sync();
 }
 
 
@@ -106,5 +94,3 @@ void KuickConfigDialog::resetDefaults()
     //imageKeyChooser->allDefault();
     //browserKeyChooser->allDefault();
 }
-
-#include "kuickconfigdlg.moc"

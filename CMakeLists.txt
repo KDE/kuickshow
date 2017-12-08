@@ -1,30 +1,36 @@
+cmake_minimum_required(VERSION 3.0)
 project(kuickshow)
 
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+find_package(ECM REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
-find_package(KDE4 REQUIRED)
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(ECMInstallIcons)
+include(FeatureSummary)
+
+find_package(Qt5 REQUIRED
+	Core
+	Gui
+	PrintSupport
+	X11Extras
+)
+find_package(KF5 REQUIRED COMPONENTS
+	DocTools
+	I18n
+	IconThemes
+	Init
+	KIO
+	WindowSystem
+	XmlGui
+)
+
 find_package(IMLIB REQUIRED)
-
-include(KDE4Defaults)
 
 add_subdirectory( src ) 
 add_subdirectory( misc ) 
 add_subdirectory( pics ) 
+add_subdirectory( icons )
 
-
-########### install files ###############
-
-
-
-
-
-#original Makefile.am contents follow:
-
-#SUBDIRS = src misc pics
-#
-#kuickshow-package:
-#	@export CVSROOT=`cat CVS/Root`; \
-#	kuickdir=$$PWD; \
-#	kuickver=`cat src/version.h | grep define | cut -f3 -d' ' | sed -e 's/"//g'`; \
-#	cd /tmp; \
-#	cvs2dist `dirname $$kuickdir` kuickshow --remove-hidden --version $$kuickver $$kuickdir/TODO $$kuickdir/BUGS $$kuickdir/kuickshow.lsm $$kuickdir/kuickshow.spec $$kuickshow/../Makefile.cvs
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

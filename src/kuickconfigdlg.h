@@ -19,16 +19,15 @@
 #ifndef KUICKCONFIGDLG_H
 #define KUICKCONFIGDLG_H
 
-#include <qevent.h>
+#include <KPageDialog>
 
-#include <kpagedialog.h>
-
-class GeneralWidget;
-class DefaultsWidget;
-class SlideShowWidget;
-class ImageWindow;
-class KShortcutsEditor;
 class KActionCollection;
+class KShortcutsEditor;
+class DefaultsWidget;
+class GeneralWidget;
+class ImageWindow;
+class SlideShowWidget;
+
 
 class KuickConfigDialog : public KPageDialog
 {
@@ -42,6 +41,10 @@ public:
 
 private slots:
     void 		resetDefaults();
+
+signals:
+	void okClicked();
+	void applyClicked();
 
 private:
     DefaultsWidget   *defaultsWidget;

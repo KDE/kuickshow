@@ -19,8 +19,8 @@
 #ifndef KUICKDATA_H
 #define KUICKDATA_H
 
-#include <qcolor.h>
-#include <qstring.h>
+#include <QColor>
+#include <QString>
 
 #include "imdata.h"
 

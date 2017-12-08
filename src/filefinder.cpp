@@ -16,19 +16,16 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qnamespace.h>
-//Added by qt3to4:
+#include "filefinder.h"
+
+#include <KCompletionBox>
+#include <KConfigGroup>
+#include <KSharedConfig>
+#include <KUrlCompletion>
+
 #include <QFocusEvent>
 #include <QKeyEvent>
 
-#include <kapplication.h>
-#include <kconfig.h>
-#include <kglobal.h>
-#include <kcompletionbox.h>
-#include <kurlcompletion.h>
-#include <kconfiggroup.h>
-
-#include "filefinder.h"
 
 FileFinder::FileFinder( QWidget *parent )
     : KLineEdit( parent )
@@ -55,16 +52,16 @@ FileFinder::FileFinder( QWidget *parent )
     setAutoDeleteCompletionObject( true );
     setFocusPolicy( Qt::ClickFocus );
 
-    KSharedConfig::Ptr config = KGlobal::config();
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup cs( config, "GeneralConfiguration" );
-    setCompletionMode( (KGlobalSettings::Completion)
+    setCompletionMode( (KCompletion::CompletionMode)
                cs.readEntry( "FileFinderCompletionMode",
-                                     int(KGlobalSettings::completionMode())));
+                                     int(KCompletion().completionMode())));
 }
 
 FileFinder::~FileFinder()
 {
-    KSharedConfig::Ptr config = KGlobal::config();
+    KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup cs( config, "GeneralConfiguration" );
     cs.writeEntry( "FileFinderCompletionMode", int(completionMode()) );
 }
@@ -99,5 +96,3 @@ void FileFinder::slotAccept( const QString& dir )
     hide();
     emit enterDir( dir );
 }
-
-#include "filefinder.moc"

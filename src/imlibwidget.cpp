@@ -16,33 +16,31 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "kuickdata.h"
+#include "imlibwidget.h"
 
-#include <sys/time.h>
-#include <unistd.h>
+#include <KCursor>
 
-#include <stdlib.h>
-#include <assert.h>
-
-#include <qcolor.h>
-#include <qfile.h>
-#include <qglobal.h>
-#include <qimage.h>
-#include <qobject.h>
-#include <qpalette.h>
-//Added by qt3to4:
+#include <QApplication>
 #include <QCloseEvent>
+#include <QColor>
+#include <QDebug>
+#include <QDesktopWidget>
+#include <QFile>
+#include <QImage>
+#include <QPalette>
+#include <QtGlobal>
 
-#include <kcursor.h>
-#include <kdebug.h>
-#include <kfilemetainfo.h>
-#include <kimageio.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/time.h>
 
 #include "filecache.h"
+#include "kuickdata.h"
 #include "kuickfile.h"
 #include "kuickimage.h"
-#include "imlibwidget.h"
 #include "imagemods.h"
+
 
 const int ImlibWidget::ImlibOffset = 256;
 
@@ -65,7 +63,7 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent ) :
 		  PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
 		  PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
-    Visual* defaultvis = DefaultVisual(getX11Display(), x11Info().screen());
+    Visual* defaultvis = DefaultVisual(getX11Display(), getX11Screen());
 
     par.paletteoverride = idata->ownPalette ? 1 : 0;
     par.remap           = idata->fastRemap ? 1 : 0;
@@ -134,12 +132,12 @@ ImlibWidget::~ImlibWidget()
     if ( deleteImData ) delete idata;
 }
 
-KUrl ImlibWidget::url() const
+QUrl ImlibWidget::url() const
 {
     if ( m_kuickFile )
         return m_kuickFile->url();
 
-    return KUrl();
+    return QUrl();
 }
 
 KuickFile * ImlibWidget::currentFile() const
@@ -166,7 +164,7 @@ KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
     }
 
     if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
-	kWarning() << "ImlibWidget: can't load image " << file->url().prettyUrl();
+        qWarning("ImlibWidget: can't load image %s", qUtf8Printable(file->url().toDisplayString()));
 	return 0L;
     }
 
@@ -180,7 +178,7 @@ void ImlibWidget::loaded( KuickImage *, bool /*wasCached*/ )
 {
 }
 
-bool ImlibWidget::loadImage( const KUrl& url )
+bool ImlibWidget::loadImage( const QUrl& url )
 {
     return loadImage( FileCache::self()->getFile( url ));
 }
@@ -204,7 +202,7 @@ bool ImlibWidget::loadImage( KuickFile * file )
 }
 
 
-bool ImlibWidget::cacheImage( const KUrl& url )
+bool ImlibWidget::cacheImage( const QUrl& url )
 {
 //    qDebug("cache image: %s", url.url().latin1());
     KuickFile *file = FileCache::self()->getFile( url );
@@ -315,6 +313,9 @@ void ImlibWidget::showImageOriginalSize()
 
 bool ImlibWidget::autoRotate( KuickImage *kuim )
 {
+    /* KFileMetaInfo disappered in KF5.
+     * TODO: find alternative to KFileMetaInfo
+
     KFileMetaInfo metadatas( kuim->file().localFile() );
     if ( !metadatas.isValid() )
         return false;
@@ -364,6 +365,7 @@ bool ImlibWidget::autoRotate( KuickImage *kuim )
             kuim->rotateAbs( ROT_270 );
             break;
     }
+    */
 
     return true;
 }
@@ -547,6 +549,13 @@ void ImlibWidget::rotated( KuickImage *, int )
 {
 }
 
+
+int ImlibWidget::getX11Screen() const
+{
+    return QApplication::desktop()->screenNumber(this);
+}
+
+
 //----------
 
 
@@ -679,7 +688,7 @@ KuickImage * ImageCache::loadImage( KuickFile * file, ImlibColorModifier mod)
 // isn't anyway, according to Imlib's sources).
 ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 {
-    kDebug() << "Trying to load " << fileName << " with KImageIO...";
+    qDebug("Trying to load %s with KImageIO...", qUtf8Printable(fileName));
 
     QImage image( fileName );
     if ( image.isNull() )
@@ -717,5 +726,3 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 
     return im;
 }
-
-#include "imlibwidget.moc"

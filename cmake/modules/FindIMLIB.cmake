@@ -1,69 +1,98 @@
-# - Try to find the Imlib graphics library
-# Once done this will define
-#
-#  IMLIB_FOUND - system has IMLIB
-#  IMLIB_INCLUDE_DIR - the IMLIB include directory
-#  IMLIB_LIBRARIES - Link these to use IMLIB
-#  IMLIB_DEFINITIONS - Compiler switches required for using IMLIB
-
 # Copyright (c) 2006, Dirk Mueller, <mueller@kde.org>
+# Copyright (c) 2017, Christian Gerloff <chrgerloff@gmx.net>
 #
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
 
-IF (DEFINED CACHED_IMLIB)
+# FindIMLIB
+# ---------
+#
+# Find the Imlib graphics library.
+#
+# Result variables
+# ^^^^^^^^^^^^^^^^
+#
+# This module will set the following variables in your project:
+#
+# IMLIB_FOUND (boolean)
+#     Is true if the library has been found, otherwise false.
+# IMLIB_DEFINITIONS
+#     The compiler flags required to use the library.
+#     Use them with target_compile_definitions(<target> <scope> ${IMLIB_DEFINITIONS})
+# IMLIB_INCLUDE_DIRS
+#     The directories where the include files are located.
+#     Use them with target_include_directories(<target> <scope> ${IMLIB_INCLUDE_DIRS})
+# IMLIB_LIBRARIES
+#     The required libraries to link against.
+#     Use them with target_link_libraries(<target> <scope> ${IMLIB_LIBRARIES})
+#
+# libImlib_*
+#     These variables are INTERNAL to this cmake module.
+#     You should not depend on their values (or even existence) outside this file.
 
-  # in cache already
-  IF ("${CACHED_IMLIB}" STREQUAL "YES")
-    SET(IMLIB_FOUND TRUE)
-  ENDIF ("${CACHED_IMLIB}" STREQUAL "YES")
 
-ELSE (DEFINED CACHED_IMLIB)
+# check if we've already tried to find the library
+if (NOT "${IMLIB_CACHED}" STREQUAL "")
+	if ("${IMLIB_CACHED}" STREQUAL "YES")
+		set(IMLIB_FOUND true)
+	endif()
+else()
+	# first, try to use imlib's pkg-config to get the flags, paths and libs
+	include(FindPkgConfig OPTIONAL RESULT_VARIABLE _fpc)
+	if(NOT "${_fpc}" STREQUAL "NOTFOUND")
+		pkg_check_modules(libImlib imlib>=1.9)
+	endif()
+	unset(_fpc)
 
-IF (NOT WIN32)
-  # use pkg-config to get the directories and then use these values
-  # in the FIND_PATH() and FIND_LIBRARY() calls
-  INCLUDE(UsePkgConfig)
+	# if that failed, try a manual approach (last resort)
+	if (NOT libImlib_FOUND)
+		find_path(libImlib_INCLUDEDIR Imlib.h)
+		find_library(libImlib_LIBRARIES NAMES Imlib libImlib)
 
-  PKGCONFIG(imlib _IMLIBIncDir _IMLIBLinkDir _IMLIBLinkFlags _IMLIBCflags)
-  set(IMLIB_DEFINITIONS ${_IMLIBCflags})
+		# how do we get this with find_library(...) ? (for now, make sure it's empty)
+		set(libImlib_LIBDIR "")
 
-ELSE (NOT WIN32)
+		if (libImlib_INCLUDEDIR AND libImlib_LIBRARIES)
+			set(libImlib_FOUND true)
+		endif()
+	endif()
 
-  FIND_PATH(IMLIB_INCLUDE_DIR Imlib.h
-    ${_IMLIBIncDir}
-  )
-  set(IMLIB_DEFINITIONS "-I${IMLIB_INCLUDE_DIR}")
-ENDIF (NOT WIN32)
 
-  FIND_LIBRARY(IMLIB_LIBRARIES NAMES Imlib libImlib
-    PATHS
-    ${_IMLIBLinkDir}
-  )
+	# next, set the exported variables
+	if (libImlib_FOUND)
+		# the list of libraries must include the library paths
+		set(_libs "")
+		foreach(libdir ${libImlib_LIBDIR})
+			list(APPEND _libs "-L${libdir}")
+		endforeach()
+		list(APPEND _libs ${libImlib_LIBRARIES})
 
-  if (IMLIB_DEFINITIONS AND IMLIB_LIBRARIES)
-     SET(IMLIB_FOUND true)
-  endif (IMLIB_DEFINITIONS AND IMLIB_LIBRARIES)
- 
-  if (IMLIB_FOUND)
-    set(CACHED_IMLIB "YES")
-    if (NOT IMLIB_FIND_QUIETLY)
-      message(STATUS "Found IMLIB Libraries: ${IMLIB_LIBRARIES}")
-      message(STATUS "Found IMLIB Defs     : ${IMLIB_DEFINITIONS}")
-    endif (NOT IMLIB_FIND_QUIETLY)
-  else (IMLIB_FOUND)
-    set(CACHED_IMLIB "NO")
-    if (NOT IMLIB_FIND_QUIETLY)
-      message(STATUS "didn't find IMLIB")
-    endif (NOT IMLIB_FIND_QUIETLY)
-    if (IMLIB_FIND_REQUIRED)
-      message(FATAL_ERROR "Could NOT find IMLIB")
-    endif (IMLIB_FIND_REQUIRED)
-  endif (IMLIB_FOUND)
-  
-  MARK_AS_ADVANCED(IMLIB_DEFINITIONS IMLIB_LIBRARIES)
-  
-  set(CACHED_IMLIB ${CACHED_IMLIB} CACHE INTERNAL "If liImlib was checked")
+		# the exported variables need to be cached
+		set(_CACHED "YES")
+		set(IMLIB_FOUND true)
+		set(IMLIB_INCLUDE_DIRS "${libImlib_INCLUDEDIR}" CACHE PATH "Include path for Imlib.h")
+		set(IMLIB_DEFINITIONS "${libImlib_CFLAGS}" CACHE STRING "Compiler definitions for imlib")
+		set(IMLIB_LIBRARIES "${_libs}" CACHE STRING "Libraries for imlib")
+		unset(_libs)
 
-ENDIF (DEFINED CACHED_IMLIB)
+		if (NOT IMLIB_FIND_QUIETLY)
+			message(STATUS "Found IMLIB Defs     : ${IMLIB_DEFINITIONS}")
+			message(STATUS "Found IMLIB Includes : ${IMLIB_INCLUDE_DIRS}")
+			message(STATUS "Found IMLIB Libraries: ${IMLIB_LIBRARIES}")
+		endif()
+
+		mark_as_advanced(IMLIB_DEFINITIONS IMLIB_INCLUDE_DIRS IMLIB_LIBRARIES)
+	else()
+		# (optionally) display error and (optionally) fail
+		set(_CACHED "NO")
+		if (IMLIB_FIND_REQUIRED)
+			message(FATAL_ERROR "Could NOT find IMLIB")
+		elseif (NOT IMLIB_FIND_QUIETLY)
+			message(STATUS "Didn't find IMLIB")
+		endif()
+	endif()
+
+	set(IMLIB_CACHED ${_CACHED} CACHE INTERNAL "If imlib has been found")
+	unset(_CACHED)
+endif()

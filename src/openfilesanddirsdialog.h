@@ -1,5 +1,5 @@
 /* This file is part of the KDE project
-   Copyright (C) 2000,2001 Carsten Pfeiffer <pfeiffer@kde.org>
+   Copyright (C) 1998,1999,2000 Carsten Pfeiffer <pfeiffer@kde.org>
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public
@@ -16,26 +16,29 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <unistd.h>
+#ifndef OPENFILESANDDIRSDIALOG_H
+#define OPENFILESANDDIRSDIALOG_H
 
-#include <qfile.h>
+#include <QFileDialog>
+#include <QString>
 
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kio/netaccess.h>
+class QPushButton;
 
-#include "kuickio.h"
 
-KuickIO * KuickIO::s_self = 0L;
-QWidget * KuickIO::s_parent = 0L;
-
-KuickIO * KuickIO::self( QWidget *parent )
+class OpenFilesAndDirsDialog : public QFileDialog
 {
-    if ( !s_self )
-	s_self = new KuickIO();
+    Q_OBJECT
 
-    s_self->s_parent = parent;
-    return s_self;
-}
+public:
+    explicit OpenFilesAndDirsDialog(QWidget* parent = nullptr, const QString& caption = QString());
+    ~OpenFilesAndDirsDialog();
 
-#include "kuickio.moc"
+private slots:
+    void onSelectionChange(QWidget* obj);
+    void okClicked();
+
+private:
+    QPushButton* buttonOpen;
+};
+
+#endif

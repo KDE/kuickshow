@@ -16,14 +16,14 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <stdlib.h>
-
-#include <qcolor.h>
-#include <ksharedconfig.h>
-#include <kglobal.h>
-#include <kconfiggroup.h>
-
 #include "kuickdata.h"
+
+#include <KConfigGroup>
+#include <KSharedConfig>
+
+#include <QColor>
+
+#include <stdlib.h>
 
 
 KuickData::KuickData()
@@ -72,7 +72,7 @@ KuickData::~KuickData()
 
 void KuickData::load()
 {
-  KSharedConfig::Ptr kc = KGlobal::config();
+  KSharedConfig::Ptr kc = KSharedConfig::openConfig();
 
   KuickData def;
 
@@ -149,7 +149,7 @@ void KuickData::load()
 
 void KuickData::save()
 {
-  KSharedConfig::Ptr kc = KGlobal::config();
+  KSharedConfig::Ptr kc = KSharedConfig::openConfig();
 
   KConfigGroup generalGroup(kc, "GeneralConfiguration");
 

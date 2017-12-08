@@ -19,11 +19,13 @@
 #define FILECACHE_H
 
 #include <QCache>
-#include <QString>
 
-#include "kuickfile.h"
+class QString;
+class QTemporaryDir;
+class QTemporaryFile;
+class QUrl;
+class KuickFile;
 
-class KTempDir;
 
 class FileCache
 {
@@ -31,7 +33,7 @@ public:
     static FileCache * self();
     static void shutdown();
 
-    KuickFile * getFile( const KUrl& url );
+    KuickFile * getFile( const QUrl& url );
     void setLimit( int numFiles );
     int getLimit() const { return m_limit; }
 
@@ -40,16 +42,23 @@ public:
      */
     QString tempDir();
 
+    /**
+     * Creates a new QTemporaryFile in this cache's temp dir and returns it unopened.
+     * It is the responsibility of the caller to delete the object when it is no longer needed.
+     * @return the QTemporaryFile object, or nullptr on error
+     */
+    QTemporaryFile* createTempFile(const QString& suffix, const QString& prefix = QString());
+
 private:
     static FileCache *s_self;
     FileCache();
     ~FileCache();
 
-    KTempDir * createTempDir();
+    QTemporaryDir* createTempDir();
     QCache<QString,KuickFile> m_files;
 
     int m_limit;
-    KTempDir *m_tempDir;
+    QTemporaryDir* m_tempDir;
 
 };
 

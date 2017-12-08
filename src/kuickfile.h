@@ -19,18 +19,17 @@
 #ifndef KUICKFILE_H
 #define KUICKFILE_H
 
-#include <qobject.h>
-#include <qstring.h>
-
-#include <kurl.h>
-
-class QProgressBar;
+#include <QObject>
+#include <QString>
+#include <QUrl>
 
 class KJob;
+class QProgressDialog;
 
 namespace KIO {
     class FileCopyJob;
 }
+
 
 class KuickFile : public QObject
 {
@@ -44,14 +43,14 @@ public:
 		ERROR
 	};
 
-    KuickFile(const KUrl& url);
+    KuickFile(const QUrl& url);
 
     /**
      * Cleans up resources and removes any temporary file, if available.
      */
     ~KuickFile();
 
-    const KUrl& url() const { return m_url; }
+    const QUrl& url() const { return m_url; }
 
 
     QString localFile() const;
@@ -97,10 +96,10 @@ private slots:
     void slotProgress( KJob *job, unsigned long percent );
 
 private:
-    KUrl m_url;
+    QUrl m_url;
     QString m_localFile;
     KIO::FileCopyJob *m_job;
-    QProgressBar *m_progress;
+    QProgressDialog *m_progress;
     int m_currentProgress;
 
 };

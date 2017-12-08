@@ -16,98 +16,73 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include <qdatetime.h>
-#include <qevent.h>
-#include <qglobal.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-//Added by qt3to4:
+#include "aboutwidget.h"
+#include <ui_aboutwidget.h>
+
+#include <KWindowSystem>
+
+#include <QDateTime>
 #include <QMouseEvent>
+#include <QPixmap>
+#include <QStandardPaths>
 
-#include <kwindowsystem.h>
-#include <kstandarddirs.h>
-
-#include "imlibwidget.h"
-#include "kurlwidget.h"
 #include "version.h"
 
-#include "aboutwidget.h"
 
 AboutWidget::AboutWidget( QWidget *parent )
     : QFrame( parent )
 {
-    KWindowSystem::setType( winId(), NET::Override );
-    KWindowSystem::setState( winId(), NET::StaysOnTop | NET::SkipTaskbar );
+    // setup the widget based on its .ui file
+    ui = new Ui::AboutWidget;
+    ui->setupUi(this);
 
-    setFrameStyle( WinPanel | Raised );
 
-    setPalette( QPalette( QColor( Qt::white ) ) );
+    // now the properties that couldn't be set in the .ui file
 
-    QGroupBox *gBox = new QGroupBox( this );
-    gBox->setAlignment( Qt::AlignHCenter );
-    gBox->installEventFilter( this );
+    // KDE specific settings for "window" display (it's just a frame, not a real window)
+    KWindowSystem::setType(winId(), NET::Override);
+    KWindowSystem::setState(winId(), NET::StaysOnTop | NET::SkipTaskbar);
 
-    gBox->setPalette( QPalette( QColor( Qt::white ) ) );
-    gBox->setBackgroundRole( QPalette::Window );
+    // these settings are difficult to set in designer
+    QPalette whitePalette((QColor(Qt::white)));
+    setPalette(whitePalette);
+    ui->groupBox->setPalette(whitePalette);
+    ui->groupBox->setBackgroundRole(QPalette::Window);
 
+    // fill the labels
+    ui->lblAuthors->setText("Kuickshow " KUICKSHOWVERSION " was brought to you by");
+    ui->urlHomepage->setText("Carsten Pfeiffer");
+    ui->urlHomepage->setUrl("http://devel-home.kde.org/~pfeiffer/kuickshow/");
+    ui->lblCopyright->setText("(C) 1998-2009");
+
+    // load & show the logo
     int hour = QTime::currentTime().hour();
     QString file;
 
     if ( hour >= 10 && hour < 16 )
-	file = KStandardDirs::locate("appdata", "pics/kuickshow-day.jpg");
+        file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/kuickshow-day.jpg");
     else
-	file = KStandardDirs::locate("appdata", "pics/kuickshow-night.jpg");
+        file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/kuickshow-night.jpg");
 
-    QLabel *authors = new QLabel("Kuickshow " KUICKSHOWVERSION
-				 " was brought to you by", gBox);
-    authors->setAlignment( Qt::AlignCenter );
-
-    m_homepage = new KURLWidget("Carsten Pfeiffer", gBox);
-    m_homepage->setUrl( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
-    m_homepage->setAlignment( Qt::AlignCenter );
-
-    QLabel *copy = new QLabel("(C) 1998-2009", gBox);
-    copy->setAlignment( Qt::AlignCenter );
-
-    ImlibWidget *im = new ImlibWidget( 0L, gBox );
-    im->setObjectName( QString::fromLatin1("KuickShow Logo") );
-    if ( im->loadImage( file ) )
-	im->setFixedSize( im->width(), im->height() );
-    else {
-	delete im;
-	im = 0L;
-	qWarning( "KuickShow: about-image not found/unreadable." );
+    QPixmap image;
+    if(image.load(file)) {
+        ui->picLogo->setPixmap(image);
+    } else {
+        qWarning("KuickShow: about-image not found/unreadable.");
     }
-
-    QVBoxLayout *mainLayout = new QVBoxLayout( this );
-    mainLayout->setMargin( 1 );
-
-    QVBoxLayout *gBoxLayout = new QVBoxLayout( gBox );
-
-    mainLayout->addWidget( gBox );
-
-    gBoxLayout->addWidget( authors );
-    gBoxLayout->addWidget( m_homepage );
-    gBoxLayout->addWidget( copy );
-    if ( im )
-        gBoxLayout->addWidget( im );
 }
 
 AboutWidget::~AboutWidget()
 {
+    delete ui;
 }
 
-bool AboutWidget::eventFilter( QObject *o, QEvent *e )
+
+void AboutWidget::mouseReleaseEvent(QMouseEvent* event)
 {
-    if ( e->type() == QEvent::MouseButtonPress ) {
-        QMouseEvent *ev = static_cast<QMouseEvent*>( e );
-        if ( !m_homepage->geometry().contains( ev->pos() ) ) {
-            deleteLater();
-            return true;
-        }
-    }
-
-    return QFrame::eventFilter( o, e );
+    // Clicking anywhere on the frame except for the URL widget removes it.
+    // Note: This only works as intended if the frame is displayed as a window. If it is used in another window's
+    //       layout, it'll just remove itself from that window (and probably mess up the layout in the process).
+    if(!ui->urlHomepage->geometry().contains(event->pos()))
+        deleteLater();
 }
-#include "aboutwidget.moc"

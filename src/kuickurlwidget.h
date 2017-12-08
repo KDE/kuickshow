@@ -19,14 +19,16 @@
 #ifndef KURLWIDGET_H
 #define KURLWIDGET_H
 
-#include <kurllabel.h>
+#include <KUrlLabel>
 
-class KURLWidget : public KUrlLabel
+
+class KuickUrlWidget : public KUrlLabel
 {
     Q_OBJECT
 
 public:
-    KURLWidget( const QString& text, QWidget *parent );
+    explicit KuickUrlWidget(QWidget *parent = 0);
+    KuickUrlWidget( const QString& text, QWidget *parent );
 
 protected slots:
     virtual void run();

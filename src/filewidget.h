@@ -19,16 +19,17 @@
 #ifndef FILEWIDGET_H
 #define FILEWIDGET_H
 
-#include <qevent.h>
-//Added by qt3to4:
-#include <QResizeEvent>
+#include <KDirModel>
+#include <KDirOperator>
 
-#include <kdiroperator.h>
-#include <kdirmodel.h>
+#include <QUrl>
 
-class FileFinder;
 class KFileItem;
 class KFileItemActions;
+class QEvent;
+class QResizeEvent;
+class FileFinder;
+
 
 class FileWidget : public KDirOperator
 {
@@ -37,13 +38,13 @@ class FileWidget : public KDirOperator
 public:
     enum WhichItem { Previous, Next, Current };
 
-    FileWidget( const KUrl& url, QWidget *parent = 0L );
+    FileWidget( const QUrl& url, QWidget *parent = 0L );
     ~FileWidget();
 
     bool hasFiles() const;
     void reloadConfiguration();
 
-    void setInitialItem( const KUrl& url );
+    void setInitialItem( const QUrl& url );
 
     KFileItem getCurrentItem( bool onlyImage ) const {
 	return getItem( Current, onlyImage );
@@ -58,7 +59,6 @@ public:
     KFileItem getItem( WhichItem which, bool onlyImage ) const;
 
     static bool isImage( const KFileItem& );
-    static void setImage( KFileItem& item, bool enable );
 
     void initActions();
 
@@ -76,11 +76,11 @@ private slots:
     void slotViewChanged();
 
     void slotItemsCleared();
-    void slotItemDeleted( const KFileItem& );
+    void slotItemsDeleted( const KFileItemList& );
     void slotHighlighted( const KFileItem& );
     void slotContextMenu( const KFileItem &, QMenu *);
 
-    void slotURLEntered( const KUrl& url );
+    void slotURLEntered( const QUrl& url );
     void slotFinishedLoading();
 
 private:
@@ -94,7 +94,7 @@ private:
     bool m_validCompletion;
     FileFinder *m_fileFinder;
     QString m_currentURL;
-    KUrl m_initialName;
+    QUrl m_initialName;
     KFileItemActions *m_fileItemActions;
 
 };

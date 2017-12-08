@@ -19,36 +19,29 @@
 #ifndef KUICKSHOW_H
 #define KUICKSHOW_H
 
-#include <qevent.h>
-#include <qpointer.h>
-#include <qstring.h>
-//Added by qt3to4:
+#include <KXmlGuiWindow>
+
 #include <QKeyEvent>
-#include <QDropEvent>
+#include <QPointer>
 #include <QX11Info>
 
-#include <kfileitem.h>
-#include <kxmlguiwindow.h>
-#include <kurl.h>
+#include "imlib-wrapper.h"
 
-#include <Imlib.h>
-
-#include "aboutwidget.h"
-
+class KFileItem;
+class KToggleAction;
+class KUrlComboBox;
+class QDropEvent;
+class QEvent;
+class QLabel;
+class QString;
+class QUrl;
+class AboutWidget;
 class FileWidget;
 class ImageWindow;
 class ImData;
 class KuickConfigDialog;
-
-class KAccel;
-class KConfig;
-class KToggleAction;
-class AboutWidget;
-
-class KUrl;
-class KUrlComboBox;
-
 class KuickFile;
+
 
 class DelayedRepeatEvent
 {
@@ -112,11 +105,11 @@ private slots:
     void 		slotConfigClosed();
     void 		messageCantLoadImage( const KuickFile *file, const QString& message );
     bool     	showImage(const KFileItem&, bool newWindow = false,
-                          bool fullscreen = false, bool moveToTopLeft = true );
+                          bool fullscreen = false, bool moveToTopLeft = true, bool ignoreFileType = false );
     void 		showFileItem( ImageWindow *, const KFileItem * );
     void		slotHighlighted( const KFileItem& );
     void 		slotSelected( const KFileItem& );
-    void		dirSelected( const KUrl& );
+    void		dirSelected( const QUrl& );
     void		configuration();
     void	      	about();
     void 		startSlideShow();
@@ -124,7 +117,7 @@ private slots:
     void 		nextSlide();
     void                nextSlide( const KFileItem& item );
     void		viewerDeleted();
-    void 		slotDropped( const KFileItem&, QDropEvent *, const KUrl::List &);
+    void 		slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
 
@@ -134,7 +127,7 @@ private slots:
 
     void		slotReplayEvent();
     void                slotOpenURL();
-    void		slotSetURL( const KUrl& );
+    void		slotSetURL( const QUrl& );
     void		slotURLComboReturnPressed();
 //     void                invalidateImages( const KFileItemList& items );
     void		slotDeleteCurrentImage(ImageWindow *viewer);
@@ -145,8 +138,9 @@ private slots:
     void                doReplay();
 
 private:
-    Display *		getX11Display() const { return x11Info().display(); }
-    void 		initGUI( const KUrl& startDir );
+    Display *		getX11Display() const { return QX11Info::display(); }
+    int getX11Screen() const;
+    void 		initGUI( const QUrl& startDir );
     bool	       	eventFilter( QObject *, QEvent * );
     void 		initImlib();
     void 		saveProperties( KConfigGroup& kc );
@@ -177,6 +171,10 @@ private:
     bool                m_slideShowStopped;
     KToggleAction       *m_toggleBrowserAction;
     QPointer<AboutWidget> aboutWidget;
+
+    QLabel* sblblUrlInfo;
+    QLabel* sblblMetaInfo;
+    QLabel* createStatusBarLabel(int stretch);
 };
 
 #endif
