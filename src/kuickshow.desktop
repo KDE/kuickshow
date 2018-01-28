@@ -54,7 +54,7 @@ Name[vi]=Kuickshow
 Name[x-test]=xxKuickshowxx
 Name[zh_CN]=Kuickshow
 Name[zh_TW]=Kuickshow
-Exec=kuickshow -caption %c %U
+Exec=kuickshow -qwindowtitle %c %U
 Icon=kuickshow
 Type=Application
 # TODO: What is image/x-eim? Register it to freedesktop.org if you need it
