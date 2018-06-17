@@ -21,7 +21,6 @@
 
 #include <KLocalizedString>
 
-#include <QDebug>
 #include <QFont>
 #include <QFontDatabase>
 #include <QFontMetrics>
@@ -35,6 +34,7 @@
 
 #include "filecache.h"
 #include "imagewindow.h"
+#include "kuickshow_debug.h"
 #include "version.h"
 
 

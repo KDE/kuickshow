@@ -19,13 +19,13 @@
 #include "filecache.h"
 
 #include <QCoreApplication>
-#include <QDebug>
 #include <QDir>
 #include <QString>
 #include <QTemporaryDir>
 #include <QTemporaryFile>
 #include <QUrl>
 
+#include "kuickshow_debug.h"
 #include "kuickfile.h"
 
 

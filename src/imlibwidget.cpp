@@ -23,7 +23,6 @@
 #include <QApplication>
 #include <QCloseEvent>
 #include <QColor>
-#include <QDebug>
 #include <QDesktopWidget>
 #include <QFile>
 #include <QImage>
@@ -39,6 +38,7 @@
 #include "kuickdata.h"
 #include "kuickfile.h"
 #include "kuickimage.h"
+#include "kuickshow_debug.h"
 #include "imagemods.h"
 
 

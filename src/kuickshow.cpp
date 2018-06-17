@@ -43,7 +43,6 @@
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QDebug>
 #include <QDesktopWidget>
 #include <QDialog>
 #include <QDir>
@@ -78,6 +77,7 @@
 #include "kuickconfigdlg.h"
 #include "kuickdata.h"
 #include "kuickfile.h"
+#include "kuickshow_debug.h"
 #include "openfilesanddirsdialog.h"
 
 

@@ -28,7 +28,6 @@
 
 #include <QAbstractItemModel>
 #include <QAbstractItemView>
-#include <QDebug>
 #include <QEvent>
 #include <QKeyEvent>
 #include <QMenu>
@@ -38,6 +37,7 @@
 
 #include "filefinder.h"
 #include "kuickdata.h"
+#include "kuickshow_debug.h"
 #include "kuickshow.h"
 
 

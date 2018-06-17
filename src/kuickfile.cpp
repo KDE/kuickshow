@@ -17,12 +17,12 @@
 */
 
 #include "kuickfile.h"
+#include "kuickshow_debug.h"
 
 #include <KIO/FileCopyJob>
 #include <KIO/StatJob>
 #include <KLocalizedString>
 
-#include <QDebug>
 #include <QFile>
 #include <QProgressDialog>
 #include <QScopedPointer>

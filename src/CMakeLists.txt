@@ -34,6 +34,12 @@ ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
    slideshowwidget.ui
 )
 
+ecm_qt_declare_logging_category(kuickshow_KDEINIT_SRCS
+   HEADER kuickshow_debug.h
+   IDENTIFIER KUICKSHOW_LOG
+   CATEGORY_NAME org.kde.kuickshow
+   DEFAULT_SEVERITY Warning
+)
 
 # target kdeinit_kuickshow
 kf5_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
@@ -68,3 +74,4 @@ install(TARGETS kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 ########### install files ###############
 
 install( PROGRAMS org.kde.kuickshow.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
+install( FILES kuickshow.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
