@@ -117,6 +117,7 @@ GenericName[ug]=سۈرەت كۆرگۈ
 GenericName[uk]=Переглядач зображень
 GenericName[vi]=Bộ xem ảnh
 GenericName[x-test]=xxImage Viewerxx
+GenericName[zh_CN]=图像查看器
 GenericName[zh_TW]=影像檢視器
 X-DBUS-StartupType=Multi
 Categories=Qt;KDE;Graphics;
