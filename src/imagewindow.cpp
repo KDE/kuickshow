@@ -1267,7 +1267,7 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
             this,
             i18n("You are about to view a very large image (%1 x %2 pixels), which can be very resource-consuming and even make your computer hang.\nDo you want to continue?",
             newWidth, newHeight ),
-            QString::null,
+            QString(),
             KStandardGuiItem::cont(),
             KStandardGuiItem::cancel(),
             "ImageWindow_confirm_very_large_window"

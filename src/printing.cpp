@@ -167,7 +167,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
                                   metrics, int maxWidth )
 {
     if ( text.length() <= 5 )
-        return QString::null; // no sense to cut that tiny little string
+        return QString(); // no sense to cut that tiny little string
 
     bool changed = false;
     while ( metrics.width( text ) > maxWidth )
@@ -181,7 +181,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
     {
         int mid = text.length() / 2;
         if ( mid <= 5 ) // sanity check
-            return QString::null;
+            return QString();
 
         text.replace( mid - 1, 3, "..." );
     }

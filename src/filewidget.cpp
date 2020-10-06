@@ -383,7 +383,7 @@ void FileWidget::slotViewChanged()
 
 void FileWidget::slotItemsCleared()
 {
-    m_currentURL = QString::null;
+    m_currentURL.clear();
 }
 
 void FileWidget::slotItemsDeleted( const KFileItemList& items )

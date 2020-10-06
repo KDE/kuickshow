@@ -66,7 +66,7 @@ QString KuickFile::localFile() const
     // Note: never call isAvailable() from here, directly or indirectly
 
     if ( isDownloading() )
-        return QString::null;
+        return QString();
 
     return m_localFile;
 }
@@ -86,7 +86,7 @@ bool KuickFile::download()
         return true;
 
     // reinitialize
-    m_localFile = QString::null;
+    m_localFile.clear();
     m_currentProgress = 0;
 
 

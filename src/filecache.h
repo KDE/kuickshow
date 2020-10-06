@@ -38,7 +38,7 @@ public:
     int getLimit() const { return m_limit; }
 
     /**
-     * @return the temporary directory or QString::null if none available
+     * @return the temporary directory or QString() if none available
      */
     QString tempDir();
 

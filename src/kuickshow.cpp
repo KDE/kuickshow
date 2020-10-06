@@ -304,9 +304,6 @@ void KuickShow::initGUI( const QUrl& startDir )
     QAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll);
     coll->addAction( "quit", quit );
 
-    // remove QString::null parameter -- ellis
-//    coll->readShortcutSettings( QString::null );
-
     // menubar
     QMenuBar *mBar = menuBar();
     QMenu *fileMenu = new QMenu( i18n("&File"), mBar );

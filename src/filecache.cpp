@@ -78,7 +78,7 @@ QString FileCache::tempDir()
 
         if ( !m_tempDir ) {
             qWarning("Unable to create temporary directory for KuickShow");
-            return QString::null;
+            return QString();
         }
     }
 
