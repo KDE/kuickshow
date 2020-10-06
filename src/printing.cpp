@@ -151,7 +151,7 @@ bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, Kui
         QString fname = minimizeString( originalFileName, fm, w );
         if ( !fname.isEmpty() )
         {
-            int fw = fm.width( fname );
+            int fw = fm.horizontalAdvance(fname);
             int x = (w - fw)/2;
             int y = printer.height() - filenameOffset/2;
             p.drawText( x, y, fname );
@@ -170,7 +170,7 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
         return QString(); // no sense to cut that tiny little string
 
     bool changed = false;
-    while ( metrics.width( text ) > maxWidth )
+    while (metrics.horizontalAdvance(text) > maxWidth)
     {
         int mid = text.length() / 2;
         text.remove( mid, 2 ); // remove 2 characters in the middle
