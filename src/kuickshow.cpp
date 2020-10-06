@@ -113,7 +113,7 @@ KuickShow::KuickShow( const char *name )
     bool isDir = false; // true if we get a directory on the commandline
 
     // parse commandline options
-    QCommandLineParser* parser = reinterpret_cast<QCommandLineParser*>(qApp->property("cmdlineParser").value<void*>());
+    QCommandLineParser *parser = static_cast<QCommandLineParser *>(qApp->property("cmdlineParser").value<void *>());
 
     // files to display
     // either a directory to display, an absolute path, a relative path, or a URL
