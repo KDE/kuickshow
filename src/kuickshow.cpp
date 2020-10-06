@@ -59,6 +59,7 @@
 #include <QStandardPaths>
 #include <QStatusBar>
 #include <QString>
+#include <QScreen>
 #include <QTextStream>
 #include <QTimer>
 #include <QUrl>
@@ -1128,9 +1129,8 @@ void KuickShow::about()
 
     aboutWidget->adjustSize();
 
-    // code copied from KDialog::centerOnScreen() (KDE4)
-    QDesktopWidget* desktop = QApplication::desktop();
-    QRect screenRect = desktop->screenGeometry(desktop->screenNumber(this));
+    QScreen *screen = windowHandle()->screen();
+    const QRect screenRect = screen->geometry();
     aboutWidget->move(screenRect.center().x() - aboutWidget->width() / 2, screenRect.center().y() - aboutWidget->height() / 2);
 
     aboutWidget->show();
