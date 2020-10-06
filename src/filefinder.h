@@ -45,8 +45,8 @@ signals:
     void enterDir( const QString& );
 
 protected:
-    virtual void focusOutEvent( QFocusEvent * );
-    virtual void keyPressEvent( QKeyEvent * );
+    virtual void focusOutEvent( QFocusEvent * ) override;
+    virtual void keyPressEvent( QKeyEvent * ) override;
 
 private slots:
     void slotAccept( const QString& );

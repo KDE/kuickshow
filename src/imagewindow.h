@@ -69,7 +69,7 @@ public:
    */
   void resizeOptimal( int w, int h );
   void autoScale( KuickImage *kuim );
-  virtual bool autoRotate( KuickImage *kuim );
+  virtual bool autoRotate(KuickImage *kuim) override;
 
   bool          saveImage( const QUrl& dest, bool keepOriginalSize );
 
@@ -105,22 +105,22 @@ protected:
 
   void 		init();
   void 		centerImage();
-  virtual void	updateGeometry( int imWidth, int imHeight );
-  virtual void  loaded( KuickImage *, bool wasCached );
-  virtual bool  canZoomTo( int newWidth, int newHeight );
-  virtual void  rotated( KuickImage *kuim, int rotation );
+  virtual void	updateGeometry( int imWidth, int imHeight ) override;
+  virtual void  loaded( KuickImage *, bool wasCached ) override;
+  virtual bool  canZoomTo( int newWidth, int newHeight ) override;
+  virtual void  rotated( KuickImage *kuim, int rotation ) override;
 
-  virtual void  wheelEvent( QWheelEvent * );
-  virtual void	keyPressEvent( QKeyEvent * );
-  virtual void 	keyReleaseEvent( QKeyEvent * );
-  virtual void 	mousePressEvent( QMouseEvent * );
-  virtual void 	mouseReleaseEvent( QMouseEvent * );
-  virtual void 	mouseMoveEvent( QMouseEvent * );
-  virtual void 	focusInEvent( QFocusEvent * );
-  virtual void 	resizeEvent( QResizeEvent * );
-  virtual void 	dragEnterEvent( QDragEnterEvent * );
-  virtual void 	dropEvent( QDropEvent * );
-  virtual void  contextMenuEvent( QContextMenuEvent * );
+  virtual void  wheelEvent( QWheelEvent * ) override;
+  virtual void	keyPressEvent( QKeyEvent * ) override;
+  virtual void 	keyReleaseEvent( QKeyEvent * ) override;
+  virtual void 	mousePressEvent( QMouseEvent * ) override;
+  virtual void 	mouseReleaseEvent( QMouseEvent * ) override;
+  virtual void 	mouseMoveEvent( QMouseEvent * ) override;
+  virtual void 	focusInEvent( QFocusEvent * ) override;
+  virtual void 	resizeEvent( QResizeEvent * ) override;
+  virtual void 	dragEnterEvent( QDragEnterEvent * ) override;
+  virtual void 	dropEvent( QDropEvent * ) override;
+  virtual void  contextMenuEvent( QContextMenuEvent * ) override;
 
   void 			showWindow();
   enum KuickCursor { DefaultCursor = 0, ZoomCursor, MoveCursor };

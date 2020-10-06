@@ -139,7 +139,7 @@ protected:
   virtual bool  canZoomTo( int newWidth, int newHeight );
   virtual void  rotated( KuickImage *kuim, int rotation );
 
-  void 		closeEvent( QCloseEvent * );
+  void 		closeEvent(QCloseEvent *) override;
 
   inline void	autoUpdate( bool geometryUpdate=false ) {
     if ( isAutoRendering )

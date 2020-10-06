@@ -34,7 +34,7 @@ public:
 
 protected:
     ~AboutWidget();
-    void mouseReleaseEvent(QMouseEvent* event) /* override */;
+    void mouseReleaseEvent(QMouseEvent* event) override;
 
 private:
     Ui::AboutWidget* ui;

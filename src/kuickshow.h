@@ -88,11 +88,11 @@ public:
 
     // overridden to make KDCOPActionProxy work -- all our actions are not
     // in the mainwindow's collection, but in the filewidget's.
-    virtual KActionCollection* actionCollection() const;
+    virtual KActionCollection* actionCollection() const override;
 
 
 protected:
-    virtual void	readProperties( const KConfigGroup& kc );
+    virtual void	readProperties( const KConfigGroup& kc ) override;
     void 		initImlibParams( ImData *, ImlibInitParams * );
     void                tryShowNextImage();
 
@@ -141,9 +141,9 @@ private:
     Display *		getX11Display() const { return QX11Info::display(); }
     int getX11Screen() const;
     void 		initGUI( const QUrl& startDir );
-    bool	       	eventFilter( QObject *, QEvent * );
+    bool	       	eventFilter( QObject *, QEvent * ) override;
     void 		initImlib();
-    void 		saveProperties( KConfigGroup& kc );
+    void 		saveProperties( KConfigGroup& kc ) override;
     void 		saveSettings();
     bool 		haveBrowser() const;
     void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );

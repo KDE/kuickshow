@@ -66,9 +66,9 @@ signals:
     void finished();
 
 protected:
-    virtual bool eventFilter( QObject *o, QEvent * );
-    virtual void resizeEvent( QResizeEvent * );
-    virtual QSize sizeHint() const;
+    virtual bool eventFilter( QObject *o, QEvent * ) override;
+    virtual void resizeEvent( QResizeEvent * ) override;
+    virtual QSize sizeHint() const override;
 
 private slots:
     void slotReturnPressed( const QString& text );
