@@ -40,7 +40,7 @@ GeneralWidget::GeneralWidget( QWidget *parent )
   // now the properties that couldn't be set in the .ui file
 
   // the KuickShow logo
-  QPixmap pixmap = UserIcon( "logo" );
+  QPixmap pixmap = KIconLoader::global()->loadIcon("logo", KIconLoader::User);
   ui->logo->setUrl( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
   ui->logo->setPixmap( pixmap );
   ui->logo->setFixedSize( pixmap.size() );

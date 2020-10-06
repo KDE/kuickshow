@@ -135,8 +135,9 @@ void ImageWindow::init()
     setAcceptDrops( true );
     setBackgroundColor( kdata->backgroundColor );
 
-    static QPixmap imageIcon = UserIcon( "imageviewer-medium" );
-    static QPixmap miniImageIcon = UserIcon( "imageviewer-small" );
+    // TODO: static non-POD data - is this advisable?
+    static QPixmap imageIcon = KIconLoader::global()->loadIcon("imageviewer-medium", KIconLoader::User);
+    static QPixmap miniImageIcon = KIconLoader::global()->loadIcon( "imageviewer-small",KIconLoader::User);
     KWindowSystem::setIcons( winId(), imageIcon, miniImageIcon );
 }
 
