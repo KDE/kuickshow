@@ -24,7 +24,8 @@
 #include <QSignalMapper>
 
 
-OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& caption) : QFileDialog(parent, caption)
+OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& caption)
+    : QFileDialog(parent, caption)
 {
     // native dialogs usually don't support selecting files AND directories, so we can't use them
     setOption(QFileDialog::DontUseNativeDialog);
@@ -36,7 +37,7 @@ OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& c
     // The following code highly depends on the internals of QFileDialog.
 
     // find the button box within this dialog, so we can connect to the "Open" button
-    QDialogButtonBox* bbox = findChild<QDialogButtonBox*>();
+    QDialogButtonBox* bbox = findChild<QDialogButtonBox *>();
     if(bbox && (buttonOpen = bbox->button(QDialogButtonBox::Open))) {
         //buttonOpen->disconnect(SIGNAL(clicked()));
         connect(buttonOpen, SIGNAL(clicked()), SLOT(okClicked()));
@@ -46,7 +47,7 @@ OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& c
 
     // find the selection controls
     QSignalMapper* mapper = new QSignalMapper(this);
-    for(auto view : findChildren<QAbstractItemView*>(QRegExp("^(?:treeView|listView)$"))) {
+    for (auto *view : findChildren<QAbstractItemView *>(QRegularExpression("^(?:treeView|listView)$"))) {
         // allow selection of multiple entries
         view->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
