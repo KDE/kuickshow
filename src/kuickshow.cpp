@@ -709,7 +709,7 @@ void KuickShow::tryShowNextImage()
     if (!m_viewer)
         return;
 
-        if (!next.isNull())
+    if (!next.isNull())
         showImage(next, false);
     else
     {
@@ -794,8 +794,8 @@ void KuickShow::slotPrint()
     if ( items.isEmpty() )
         return;
 
-	KFileItemList::const_iterator it = items.constBegin();
-	const KFileItemList::const_iterator end = items.constEnd();
+    KFileItemList::const_iterator it = items.constBegin();
+    const KFileItemList::const_iterator end = items.constEnd();
 
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow( 0, id, this );
