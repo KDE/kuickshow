@@ -34,6 +34,7 @@
 #include <QMimeDatabase>
 #include <QModelIndex>
 #include <QResizeEvent>
+#include <QTimer>
 
 #include "filefinder.h"
 #include "kuickdata.h"
@@ -306,7 +307,14 @@ KFileItem FileWidget::getNext( bool go )
     KFileItem item = getItem( Next, true );
     if ( !item.isNull() ) {
 	if ( go )
-	    setCurrentItem( item );
+            // This needs to be done on a single shot timer because,
+            // if the setCurrentItem() is done immediately, the current
+            // index of the view() seems to be cleared soon afterwards by
+            // a KCoreDirLister::completed() signal.  It is not clear what
+            // causes the sending of this signal, but the result is that
+            // the current index is left cleared and the next call of
+            // getItem() will fail.
+            QTimer::singleShot(0, this, [item, this]() { setCurrentItem(item); });
 	return item;
     }
 
@@ -318,7 +326,7 @@ KFileItem FileWidget::getPrevious( bool go )
     KFileItem item = getItem( Previous, true );
     if ( !item.isNull() ) {
 	if ( go )
-	    setCurrentItem( item );
+            QTimer::singleShot(0, this, [item, this]() { setCurrentItem(item); });
 	return item;
     }
 
