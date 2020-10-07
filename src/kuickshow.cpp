@@ -326,12 +326,7 @@ void KuickShow::initGUI( const QUrl& startDir )
     editMenu->addSeparator();
     editMenu->addAction(coll->action("properties"));
 
-
-    // add the sorting menu and a separator into the View menu
-    KActionMenu *viewActionMenu = static_cast<KActionMenu*>( coll->action("view menu"));
-    viewActionMenu->menu()->addSeparator();
-    KActionMenu *sortingMenu = static_cast<KActionMenu*>( coll->action("sorting menu"));
-//    viewActionMenu->menu()->addAction(sortingMenu); //, 0 ); // on top of the menu
+    KActionMenu *viewActionMenu = static_cast<KActionMenu *>(coll->action("view menu"));
 
     QMenu *settingsMenu = new QMenu( i18n("&Settings"), mBar );
     settingsMenu->setObjectName( QString::fromLatin1( "settings" ) );
