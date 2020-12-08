@@ -1175,7 +1175,8 @@ void KuickShow::saveProperties( KConfigGroup& kc )
     QStringList urls;
     QList<ImageWindow*>::ConstIterator it;
     for ( it = s_viewers.constBegin(); it != s_viewers.constEnd(); ++it ) {
-        const QUrl url = (*it)->currentFile()->url();
+        const QUrl url = (*it)->url();			// checks currentFile() internally
+        if (!url.isValid()) continue;			// no current file, ignore
         if ( url.isLocalFile() )
             urls.append( url.path() );
         else
