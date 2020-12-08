@@ -39,6 +39,8 @@ ecm_qt_declare_logging_category(kuickshow_KDEINIT_SRCS
    IDENTIFIER KUICKSHOW_LOG
    CATEGORY_NAME org.kde.kuickshow
    DEFAULT_SEVERITY Warning
+   EXPORT kuickshow
+   DESCRIPTION "KuickShow image viewer"
 )
 
 # target kdeinit_kuickshow
@@ -65,13 +67,15 @@ target_link_libraries(kdeinit_kuickshow
 
 install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-
 # target kuickshow
 target_link_libraries( kuickshow kdeinit_kuickshow )
 install(TARGETS kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
-
 ########### install files ###############
 
 install( PROGRAMS org.kde.kuickshow.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
-install( FILES kuickshow.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
+
+ecm_qt_install_logging_categories(
+  EXPORT kuickshow
+  DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
+)
