@@ -580,11 +580,9 @@ bool KuickShow::showImage( const KFileItem& fi,
         // and the second isn't (e.g. because it is a pdf or something else,
         // Imlib can't load).
         ImageWindow *safeViewer = m_viewer;
-
-
         if ( !safeViewer->showNextImage( fi.url() ) ) {
             m_viewer = safeViewer;
-            delete safeViewer; // couldn't load image, close window
+            safeViewer->deleteLater(); // couldn't load image, close window
         }
         else {
             // safeViewer->setFullscreen( fullscreen );
