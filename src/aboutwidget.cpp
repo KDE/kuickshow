@@ -41,7 +41,7 @@ AboutWidget::AboutWidget( QWidget *parent )
 
     // KDE specific settings for "window" display (it's just a frame, not a real window)
     KWindowSystem::setType(winId(), NET::Override);
-    KWindowSystem::setState(winId(), NET::StaysOnTop | NET::SkipTaskbar);
+    KWindowSystem::setState(winId(), NET::KeepAbove | NET::SkipTaskbar);
 
     // these settings are difficult to set in designer
     QPalette whitePalette((QColor(Qt::white)));
