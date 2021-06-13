@@ -615,7 +615,7 @@ void ImageWindow::wheelEvent( QWheelEvent *e )
 {
     e->accept();
     static const int WHEEL_DELTA = 120;
-    int delta = e->delta();
+    int delta = e->angleDelta().y();
 
     if ( delta == 0 )
         return;
