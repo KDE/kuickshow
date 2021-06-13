@@ -469,7 +469,7 @@ void FileWidget::slotFinishedLoading()
 	else if ( current.isNull() ) {
 		QModelIndex first = view()->model()->index(0, 0);
 		if (first.isValid()) {
-			KFileItem item = first.data(Qt::UserRole).value<KFileItem>();
+			KFileItem item = first.data(KDirModel::FileItemRole).value<KFileItem>();
 			if (!item.isNull()) {
 				setCurrentItem( item );
 			}
