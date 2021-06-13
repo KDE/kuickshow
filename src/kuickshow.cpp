@@ -1409,7 +1409,7 @@ void KuickShow::slotToggleInlinePreview(bool on)
 	} else {
 		iconSize = KIconLoader::SizeSmall;
 	}
-	fileWidget->setIconsZoom( iconSize );
+	fileWidget->setIconSize( iconSize );
 	fileWidget->setInlinePreviewShown(on);
     QAction *defaultInlinePreview = fileWidget->actionCollection()->action( "inline preview" );
     defaultInlinePreview->setChecked(on);
