@@ -52,8 +52,6 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
 
 
     QCommandLineParser parser;
-    parser.addHelpOption();
-    parser.addVersionOption();
     about.setupCommandLine(&parser);
 
     parser.addOption({ {"d", "lastfolder"}, i18n("Start in the last visited folder, not the current working folder.") });
