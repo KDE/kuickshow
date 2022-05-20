@@ -60,7 +60,7 @@ Exec=kuickshow -qwindowtitle %c %U
 Icon=kuickshow
 Type=Application
 # TODO: What is image/x-eim? Register it to freedesktop.org if you need it
-MimeType=image/gif;image/x-xpixmap;image/x-xbitmap;image/jpeg;image/png;image/tiff;image/bmp;image/x-psd;image/x-portable-bitmap;image/x-portable-pixmap;image/x-portable-graymap;inode/directory;
+MimeType=image/gif;image/x-xpixmap;image/x-xbitmap;image/jpeg;image/png;image/tiff;image/bmp;image/x-psd;image/x-portable-bitmap;image/x-portable-pixmap;image/x-portable-graymap;inode/directory;image/avif;
 DocPath=kuickshow/index.html
 Terminal=false
 InitialPreference=6
