@@ -1206,7 +1206,7 @@ void KuickShow::saveSettings()
 void KuickShow::messageCantLoadImage( const KuickFile *, const QString& message )
 {
     m_viewer->clearFocus();
-    KMessageBox::sorry( m_viewer, message, i18n("Image Error") );
+    KMessageBox::error( m_viewer, message, i18n("Image Error") );
 }
 
 void KuickShow::initImlib()

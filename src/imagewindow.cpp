@@ -953,7 +953,7 @@ void ImageWindow::printImage()
 
     if ( !Printing::printImage( *this, this ) )
     {
-        KMessageBox::sorry( this, i18n("Unable to print the image."),
+        KMessageBox::error( this, i18n("Unable to print the image."),
                             i18n("Printing Failed") );
     }
 }
@@ -994,7 +994,7 @@ void ImageWindow::saveImage()
                 QString tmp = i18n("Could not save the file.\n"
                                    "Perhaps the disk is full, or you do not "
                                    "have write permission to the file.");
-                KMessageBox::sorry( this, tmp, i18n("File Saving Failed"));
+                KMessageBox::error( this, tmp, i18n("File Saving Failed"));
             }
             else
             {
