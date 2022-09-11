@@ -62,7 +62,6 @@
 #include <QUrl>
 #include <QWheelEvent>
 
-#include <netwm.h>
 #include <stdlib.h>
 
 #include "filecache.h"
