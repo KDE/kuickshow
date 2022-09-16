@@ -65,15 +65,15 @@ target_link_libraries(kdeinit_kuickshow
 	${IMLIB_LIBRARIES}
 )
 
-install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kdeinit_kuickshow  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # target kuickshow
 target_link_libraries( kuickshow kdeinit_kuickshow )
-install(TARGETS kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kuickshow  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
-install( PROGRAMS org.kde.kuickshow.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
+install( PROGRAMS org.kde.kuickshow.desktop  DESTINATION  ${KDE_INSTALL_APPDIR} )
 
 ecm_qt_install_logging_categories(
   EXPORT kuickshow
