@@ -1,0 +1,816 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kuickshow package.
+# Shinjo Park <kde@peremen.name>, 2019, 2020, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kuickshow\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-14 00:15+0000\n"
+"PO-Revision-Date: 2021-06-03 02:44+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 20.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "박신조"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde@peremen.name"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
+#: src/aboutwidget.ui:32
+#, kde-format
+msgid "(authors)"
+msgstr "(작성자)"
+
+#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
+#: src/aboutwidget.ui:45
+#, kde-format
+msgid "(url)"
+msgstr "(url)"
+
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: src/aboutwidget.ui:55
+#, kde-format
+msgid "(copyright)"
+msgstr "(저작권)"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
+#: src/defaultswidget.ui:14
+#, kde-format
+msgid "Modifications"
+msgstr "수정"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
+#: src/defaultswidget.ui:23
+#, kde-format
+msgid "Apply default image modifications"
+msgstr "기본 그림 수정 적용"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbScale)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: src/defaultswidget.ui:30 src/printing_page.ui:37
+#, kde-format
+msgid "Scaling"
+msgstr "크기 조정"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbUpScale)
+#: src/defaultswidget.ui:36
+#, kde-format
+msgid "Scale image to screen size, if smaller, up to factor:"
+msgstr "그림을 화면 크기에 맞춤, 작은 경우 다음 배율까지:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDownScale)
+#: src/defaultswidget.ui:53
+#, kde-format
+msgid "Shrink image to screen size, if larger"
+msgstr "큰 그림을 화면 크기에 맞게 축소"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbGeometry)
+#: src/defaultswidget.ui:63
+#, kde-format
+msgid "Geometry"
+msgstr "크기"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipVertically)
+#: src/defaultswidget.ui:69
+#, kde-format
+msgid "Flip vertically"
+msgstr "좌우 반전"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
+#: src/defaultswidget.ui:76
+#, kde-format
+msgid "Flip horizontally"
+msgstr "상하 반전"
+
+#. i18n: ectx: property (text), widget (QLabel, lbRotate)
+#: src/defaultswidget.ui:85
+#, kde-format
+msgid "Rotate image:"
+msgstr "그림 회전:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:93
+#, kde-format
+msgid "0 Degrees"
+msgstr "0도"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:98
+#, kde-format
+msgid "90 Degrees"
+msgstr "90도"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:103
+#, kde-format
+msgid "180 Degrees"
+msgstr "180도"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:108
+#, kde-format
+msgid "270 Degrees"
+msgstr "270도"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbAdjust)
+#: src/defaultswidget.ui:134
+#, kde-format
+msgid "Adjustments"
+msgstr "조정"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/defaultswidget.ui:140
+#, kde-format
+msgid "Brightness:"
+msgstr "밝기:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/defaultswidget.ui:183
+#, kde-format
+msgid "Contrast:"
+msgstr "명암:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/defaultswidget.ui:226
+#, kde-format
+msgid "Gamma:"
+msgstr "감마:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
+#: src/defaultswidget.ui:272
+#, kde-format
+msgid "Preview"
+msgstr "미리 보기"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImOrig)
+#: src/defaultswidget.ui:281
+#, kde-format
+msgid "Original"
+msgstr "원본"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImFiltered)
+#: src/defaultswidget.ui:288
+#, kde-format
+msgid "Modified"
+msgstr "수정됨"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
+#: src/generalwidget.ui:14
+#, kde-format
+msgid "General"
+msgstr "일반"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
+#: src/generalwidget.ui:20
+#, kde-format
+msgid "Remember last folder"
+msgstr "마지막 폴더 기억"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbox2)
+#: src/generalwidget.ui:30
+#, kde-format
+msgid "Quality/Speed"
+msgstr "품질/속도"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
+#: src/generalwidget.ui:36
+#, kde-format
+msgid "Smooth scaling"
+msgstr "부드러운 크기 조정"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
+#: src/generalwidget.ui:43
+#, kde-format
+msgid "Fast rendering"
+msgstr "빠른 렌더링"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
+#: src/generalwidget.ui:50
+#, kde-format
+msgid "Dither in HiColor (15/16bit) modes"
+msgstr "하이컬러 모드(15/16비트)에서 디더링 사용"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
+#: src/generalwidget.ui:57
+#, kde-format
+msgid "Dither in LowColor (<=8bit) modes"
+msgstr "저 색농도(<=8비트) 모드에서 디더링 사용"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
+#: src/generalwidget.ui:64
+#, kde-format
+msgid "Use own color palette"
+msgstr "고유 팔레트 사용"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRemap)
+#: src/generalwidget.ui:71
+#, kde-format
+msgid "Fast palette remapping"
+msgstr "빠른 팔레트 리매핑"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/generalwidget.ui:78
+#, kde-format
+msgid "Maximum cache size: "
+msgstr "최대 캐시 크기:"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:88
+#, kde-format
+msgid "Unlimited"
+msgstr "무제한"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:91
+#, kde-format
+msgid " MB"
+msgstr " MB"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
+#: src/generalwidget.ui:104
+#, kde-format
+msgid "Fullscreen mode"
+msgstr "전체 화면 모드"
+
+#. i18n: ectx: property (text), widget (QLabel, l0)
+#: src/generalwidget.ui:114
+#, kde-format
+msgid "Background color:"
+msgstr "배경색:"
+
+#. i18n: ectx: property (text), widget (QLabel, l1)
+#: src/generalwidget.ui:121
+#, kde-format
+msgid "Show only files with extension: "
+msgstr "다음 확장자의 파일 이름만 표시:"
+
+#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
+#: src/generalwidget.ui:128
+#, kde-format
+msgid "Open KuickShow Website"
+msgstr "KuickShow 웹사이트 열기"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
+#: src/generalwidget.ui:138
+#, kde-format
+msgid "Preload next image"
+msgstr "다음 그림 미리 불러오기"
+
+#: src/imagewindow.cpp:152
+#, kde-format
+msgid "Show Next Image"
+msgstr "다음 그림 표시"
+
+#: src/imagewindow.cpp:157
+#, kde-format
+msgid "Show Previous Image"
+msgstr "이전 그림 표시"
+
+#: src/imagewindow.cpp:162
+#, kde-format
+msgid "Delete Image"
+msgstr "그림 삭제"
+
+#: src/imagewindow.cpp:167
+#, kde-format
+msgid "Move Image to Trash"
+msgstr "그림을 휴지통으로 이동"
+
+#: src/imagewindow.cpp:181
+#, kde-format
+msgid "Restore Original Size"
+msgstr "원본 크기 복원"
+
+#: src/imagewindow.cpp:186
+#, kde-format
+msgid "Maximize"
+msgstr "최대화"
+
+#: src/imagewindow.cpp:191
+#, kde-format
+msgid "Rotate 90 Degrees"
+msgstr "90도 회전"
+
+#: src/imagewindow.cpp:196
+#, kde-format
+msgid "Rotate 180 Degrees"
+msgstr "180도 회전"
+
+#: src/imagewindow.cpp:201
+#, kde-format
+msgid "Rotate 270 Degrees"
+msgstr "270도 회전"
+
+#: src/imagewindow.cpp:206
+#, kde-format
+msgid "Flip Horizontally"
+msgstr "상하 반전"
+
+#: src/imagewindow.cpp:211
+#, kde-format
+msgid "Flip Vertically"
+msgstr "좌우 반전"
+
+#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#, kde-format
+msgid "Print Image..."
+msgstr "그림 인쇄..."
+
+#: src/imagewindow.cpp:227
+#, kde-format
+msgid "More Brightness"
+msgstr "밝기 증가"
+
+#: src/imagewindow.cpp:232
+#, kde-format
+msgid "Less Brightness"
+msgstr "밝기 감소"
+
+#: src/imagewindow.cpp:237
+#, kde-format
+msgid "More Contrast"
+msgstr "명암 증가"
+
+#: src/imagewindow.cpp:242
+#, kde-format
+msgid "Less Contrast"
+msgstr "명암 감소"
+
+#: src/imagewindow.cpp:247
+#, kde-format
+msgid "More Gamma"
+msgstr "감마 증가"
+
+#: src/imagewindow.cpp:252
+#, kde-format
+msgid "Less Gamma"
+msgstr "감마 감소"
+
+#: src/imagewindow.cpp:258
+#, kde-format
+msgid "Scroll Up"
+msgstr "위로 스크롤"
+
+#: src/imagewindow.cpp:263
+#, kde-format
+msgid "Scroll Down"
+msgstr "아래로 스크롤"
+
+#: src/imagewindow.cpp:268
+#, kde-format
+msgid "Scroll Left"
+msgstr "왼쪽으로 스크롤"
+
+#: src/imagewindow.cpp:273
+#, kde-format
+msgid "Scroll Right"
+msgstr "오른쪽으로 스크롤"
+
+#: src/imagewindow.cpp:278
+#, kde-format
+msgid "Pause Slideshow"
+msgstr "슬라이드 쇼 일시 정지"
+
+#: src/imagewindow.cpp:290
+#, kde-format
+msgid "Reload Image"
+msgstr "그림 새로 고침"
+
+#: src/imagewindow.cpp:296
+#, kde-format
+msgid "Properties"
+msgstr "속성"
+
+#: src/imagewindow.cpp:350
+#, kde-format
+msgctxt "Filename (Imagewidth x Imageheight)"
+msgid "%3 (%1 x %2)"
+msgstr "%3(%1 x %2)"
+
+#: src/imagewindow.cpp:453
+#, kde-format
+msgid "Unable to download the image from %1."
+msgstr "%1에서 그림을 다운로드할 수 없습니다."
+
+#: src/imagewindow.cpp:469
+#, kde-format
+msgid ""
+"Unable to load the image %1.\n"
+"Perhaps the file format is unsupported or your Imlib is not installed "
+"properly."
+msgstr ""
+"그림 파일 %1을(를) 불러올 수 없습니다.\n"
+"파일을 지원하지 않거나 Imlib 설치가 잘못되었을 수도 있습니다."
+
+#: src/imagewindow.cpp:909
+#, kde-format
+msgid "Brightness"
+msgstr "밝기"
+
+#: src/imagewindow.cpp:913
+#, kde-format
+msgid "Contrast"
+msgstr "명암"
+
+#: src/imagewindow.cpp:917
+#, kde-format
+msgid "Gamma"
+msgstr "감마"
+
+#: src/imagewindow.cpp:956
+#, kde-format
+msgid "Unable to print the image."
+msgstr "그림을 인쇄할 수 없습니다."
+
+#: src/imagewindow.cpp:957
+#, kde-format
+msgid "Printing Failed"
+msgstr "인쇄 실패"
+
+#: src/imagewindow.cpp:967
+#, kde-format
+msgid "Keep original image size"
+msgstr "원본 그림 크기 유지"
+
+#: src/imagewindow.cpp:971
+#, kde-format
+msgid "Save As"
+msgstr "다른 이름으로 저장"
+
+#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#, kde-format
+msgid "Image Files (%1)"
+msgstr "그림 파일(%1)"
+
+#: src/imagewindow.cpp:994
+#, kde-format
+msgid ""
+"Could not save the file.\n"
+"Perhaps the disk is full, or you do not have write permission to the file."
+msgstr ""
+"파일을 저장할 수 없습니다.\n"
+"디스크가 가득 찼거나 파일에 쓰기 권한이 없습니다."
+
+#: src/imagewindow.cpp:997
+#, kde-format
+msgid "File Saving Failed"
+msgstr "파일 저장 오류"
+
+#: src/imagewindow.cpp:1269
+#, kde-format
+msgid ""
+"You are about to view a very large image (%1 x %2 pixels), which can be very "
+"resource-consuming and even make your computer hang.\n"
+"Do you want to continue?"
+msgstr ""
+"매우 큰 그림(%1 x %2픽셀)을 보려고 하고 있습니다. 자원을 많이 소모할 수도 있"
+"으며 컴퓨터가 응답하지 않을 수도 있습니다.\n"
+"계속 진행하시겠습니까?"
+
+#: src/kuickconfigdlg.cpp:40
+#, kde-format
+msgid "Configure"
+msgstr "설정"
+
+#: src/kuickconfigdlg.cpp:46
+#, kde-format
+msgid "&General"
+msgstr "일반(&G)"
+
+#: src/kuickconfigdlg.cpp:50
+#, kde-format
+msgid "&Modifications"
+msgstr "수정(&M)"
+
+#: src/kuickconfigdlg.cpp:54
+#, kde-format
+msgid "&Slideshow"
+msgstr "슬라이드 쇼(&S)"
+
+#: src/kuickconfigdlg.cpp:59
+#, kde-format
+msgid "&Viewer Shortcuts"
+msgstr "뷰어 단축키(&V)"
+
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Bro&wser Shortcuts"
+msgstr "탐색기 단축키(&W)"
+
+#: src/kuickfile.cpp:128
+#, kde-format
+msgid "Downloading %1..."
+msgstr "%1 다운로드 중..."
+
+#: src/kuickfile.cpp:129
+#, kde-format
+msgid ""
+"Please wait while downloading\n"
+"%1"
+msgstr ""
+"%1을(를)\n"
+"다운로드하는 동안 기다려 주십시오"
+
+#: src/kuickshow.cpp:130
+#, kde-format
+msgid ""
+"Do you really want to display this 1 image at the same time? This might be "
+"quite resource intensive and could overload your computer.<br>If you choose "
+"%1, only the first image will be shown."
+msgid_plural ""
+"Do you really want to display these %n images at the same time? This might "
+"be quite resource intensive and could overload your computer.<br>If you "
+"choose %1, only the first image will be shown."
+msgstr[0] ""
+"동시에 이 그림 %n개를 표시하시겠습니까? 자원을 많이 소모할 수도 있으며 컴퓨터"
+"가 응답하지 않을 수도 있습니다.<br> %1을(를) 선택하면 첫 번째 그림만 표시합니"
+"다."
+
+#: src/kuickshow.cpp:132
+#, kde-format
+msgid "Display Multiple Images?"
+msgstr "여러 그림을 표시하시겠습니까?"
+
+#: src/kuickshow.cpp:260
+#, kde-format
+msgid "Configure %1..."
+msgstr "%1 설정..."
+
+#: src/kuickshow.cpp:265
+#, kde-format
+msgid "Start Slideshow"
+msgstr "슬라이드 쇼 시작"
+
+#: src/kuickshow.cpp:271
+#, kde-format
+msgid "About KuickShow"
+msgstr "KuickShow 정보"
+
+#: src/kuickshow.cpp:276
+#, kde-format
+msgid "Open Only One Image Window"
+msgstr "그림 창 한 개만 열기"
+
+#: src/kuickshow.cpp:281
+#, kde-format
+msgid "Show File Browser"
+msgstr "파일 탐색기 표시"
+
+#: src/kuickshow.cpp:283
+#, kde-format
+msgid "Hide File Browser"
+msgstr "파일 탐색기 숨기기"
+
+#: src/kuickshow.cpp:288
+#, kde-format
+msgid "Show Image"
+msgstr "그림 표시"
+
+#: src/kuickshow.cpp:292
+#, kde-format
+msgid "Show Image in Active Window"
+msgstr "활성 창에 그림 표시"
+
+#: src/kuickshow.cpp:296
+#, kde-format
+msgid "Show Image in Fullscreen Mode"
+msgstr "전체 화면 모드에서 그림 보기"
+
+#: src/kuickshow.cpp:310
+#, kde-format
+msgid "&File"
+msgstr "파일(&F)"
+
+#: src/kuickshow.cpp:322
+#, kde-format
+msgid "&Edit"
+msgstr "편집(&E)"
+
+#: src/kuickshow.cpp:331
+#, kde-format
+msgid "&Settings"
+msgstr "설정(&S)"
+
+#: src/kuickshow.cpp:341
+#, kde-format
+msgid "Main Toolbar"
+msgstr "주 도구 모음"
+
+#: src/kuickshow.cpp:653
+#, kde-format
+msgid ""
+"<qt>Do you really want to delete\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+"<qt>다음 파일을 정말로 지우시겠습니까?\n"
+"<b>'%1'</b></qt>"
+
+#: src/kuickshow.cpp:654
+#, kde-format
+msgid "Delete File"
+msgstr "파일 삭제"
+
+#: src/kuickshow.cpp:679
+#, kde-format
+msgid ""
+"<qt>Do you really want to trash\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+"<qt>다음 파일을 정말로 휴지통에 버리시겠습니까?\n"
+"<b>'%1'</b></qt>"
+
+#: src/kuickshow.cpp:680
+#, kde-format
+msgid "Trash File"
+msgstr "파일을 휴지통으로 이동"
+
+#: src/kuickshow.cpp:681
+#, kde-format
+msgctxt "to trash"
+msgid "&Trash"
+msgstr "휴지통으로 이동(&T)"
+
+#: src/kuickshow.cpp:1209
+#, kde-format
+msgid "Image Error"
+msgstr "그림 오류"
+
+#: src/kuickshow.cpp:1234
+#, kde-format
+msgid ""
+"Unable to initialize \"Imlib\".\n"
+"Start kuickshow from the command line and look for error messages.\n"
+"The program will now quit."
+msgstr ""
+"\"Imlib\"를 초기화할 수 없습니다.\n"
+"명령행에서 KuickShow를 시작한 다음 오류 메시지를 확인하십시오.\n"
+"프로그램을 종료합니다."
+
+#: src/kuickshow.cpp:1238
+#, kde-format
+msgid "Fatal Imlib Error"
+msgstr "치명적인 Imlib 오류"
+
+#: src/kuickshow.cpp:1388
+#, kde-format
+msgid "Select Files or Folder to Open"
+msgstr "열 파일이나 폴더 선택"
+
+#: src/main.cpp:36
+#, kde-format
+msgid "KuickShow"
+msgstr "KuickShow"
+
+#: src/main.cpp:38
+#, kde-format
+msgid "A fast and versatile image viewer"
+msgstr "빠른 다기능 그림 뷰어"
+
+#: src/main.cpp:40
+#, kde-format
+msgid "(c) 1998-2009, Carsten Pfeiffer"
+msgstr "(c) 1998-2009, Carsten Pfeiffer"
+
+#: src/main.cpp:45
+#, kde-format
+msgid "Carsten Pfeiffer"
+msgstr "Carsten Pfeiffer"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Rober Hamberger"
+msgstr "Rober Hamberger"
+
+#: src/main.cpp:48
+#, kde-format
+msgid "Thorsten Scheuermann"
+msgstr "Thorsten Scheuermann"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Start in the last visited folder, not the current working folder."
+msgstr "현재 작업 폴더가 아닌 마지막으로 방문한 폴더에서 시작합니다."
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Optional image filenames/urls to show"
+msgstr "표시할 추가적 그림 파일 이름이나 URL"
+
+#: src/printing.cpp:52
+#, kde-format
+msgid "Print %1"
+msgstr "%1 인쇄"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
+#: src/printing_page.ui:14
+#, kde-format
+msgid "Image Settings"
+msgstr "그림 설정"
+
+#. i18n: ectx: property (text), widget (QCheckBox, addFileName)
+#: src/printing_page.ui:20
+#, kde-format
+msgid "Print fi&lename below image"
+msgstr "그림 아래에 파일 이름 인쇄(&L)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
+#: src/printing_page.ui:30
+#, kde-format
+msgid "Print image in &black and white"
+msgstr "흑백으로 그림 인쇄(&B)"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/printing_page.ui:53
+#, kde-format
+msgid "&Width:"
+msgstr "너비(&W):"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:64
+#, kde-format
+msgid "Millimeters"
+msgstr "밀리미터"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:69
+#, kde-format
+msgid "Centimeters"
+msgstr "센티미터"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:74
+#, kde-format
+msgid "Inches"
+msgstr "인치"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/printing_page.ui:108
+#, kde-format
+msgid "&Height:"
+msgstr "높이(&H):"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scale)
+#: src/printing_page.ui:121
+#, kde-format
+msgid "Print e&xact size: "
+msgstr "정확한 크기로 인쇄(&X):"
+
+#. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
+#: src/printing_page.ui:141
+#, kde-format
+msgid "Shrink image to &fit, if necessary"
+msgstr "필요한 경우 그림을 축소해서 맞춤(&F)"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
+#: src/slideshowwidget.ui:14
+#, kde-format
+msgid "Slideshow"
+msgstr "슬라이드 쇼"
+
+#. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
+#: src/slideshowwidget.ui:20
+#, kde-format
+msgid "Switch to &full-screen"
+msgstr "전체 화면으로 전환(&F)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
+#: src/slideshowwidget.ui:27
+#, kde-format
+msgid "S&tart with current image"
+msgstr "현재 그림에서 시작(&T)"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/slideshowwidget.ui:34
+#, kde-format
+msgid "De&lay between slides:"
+msgstr "슬라이드 지연 시간(&L):"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:44
+#, kde-format
+msgid "Wait for key"
+msgstr "키 입력 대기"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:47
+#, kde-format
+msgid " sec"
+msgstr " 초"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/slideshowwidget.ui:57
+#, kde-format
+msgid "&Iterations (0 = infinite):"
+msgstr "반복 횟수(0=무한대)(&I):"

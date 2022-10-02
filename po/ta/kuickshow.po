@@ -1,0 +1,818 @@
+# Copyright (C) 2021 Free Software Foundation, Inc.
+#
+# Kishore G <kishore96@gmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: kuickshow\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-14 00:15+0000\n"
+"PO-Revision-Date: 2021-01-18 19:18+0530\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
+"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.12.1\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "உங்கள் பெயர்கள்"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "tamilpc@ambalam.com"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
+#: src/aboutwidget.ui:32
+#, kde-format
+msgid "(authors)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
+#: src/aboutwidget.ui:45
+#, kde-format
+msgid "(url)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: src/aboutwidget.ui:55
+#, kde-format
+msgid "(copyright)"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
+#: src/defaultswidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&Modifications"
+msgid "Modifications"
+msgstr "மாற்றங்கள்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
+#: src/defaultswidget.ui:23
+#, kde-format
+msgid "Apply default image modifications"
+msgstr "முன்னிருப்பு பிம்ப மாற்றங்களை பயன்படுத்து"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbScale)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: src/defaultswidget.ui:30 src/printing_page.ui:37
+#, kde-format
+msgid "Scaling"
+msgstr "அளவு மாற்றுதல் "
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbUpScale)
+#: src/defaultswidget.ui:36
+#, kde-format
+msgid "Scale image to screen size, if smaller, up to factor:"
+msgstr ""
+"சிறிதாக இருந்தால், அதாவது காரணி வரை பிம்பத்தின் அளவை திரை அளவிற்கு ஏற்றவாறு "
+"அளவுகோலுக"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDownScale)
+#: src/defaultswidget.ui:53
+#, kde-format
+msgid "Shrink image to screen size, if larger"
+msgstr "பெரிதாக இருந்தால், திரையளவிற்கு சுருக்கவும்"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbGeometry)
+#: src/defaultswidget.ui:63
+#, kde-format
+msgid "Geometry"
+msgstr "வடிவியல்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipVertically)
+#: src/defaultswidget.ui:69
+#, kde-format
+msgid "Flip vertically"
+msgstr "உயர்வாக திருப்பு"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
+#: src/defaultswidget.ui:76
+#, kde-format
+msgid "Flip horizontally"
+msgstr "இடம்வலமாக திருப்பு"
+
+#. i18n: ectx: property (text), widget (QLabel, lbRotate)
+#: src/defaultswidget.ui:85
+#, kde-format
+msgid "Rotate image:"
+msgstr "பிம்பத்தை சுழற்று"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:93
+#, kde-format
+msgid "0 Degrees"
+msgstr "0 டிகிரி"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:98
+#, kde-format
+msgid "90 Degrees"
+msgstr "90 டிகிரி "
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:103
+#, kde-format
+msgid "180 Degrees"
+msgstr "180 டிகிரி "
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:108
+#, kde-format
+msgid "270 Degrees"
+msgstr "270 டிகிரி "
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbAdjust)
+#: src/defaultswidget.ui:134
+#, kde-format
+msgid "Adjustments"
+msgstr "சீரைமைப்புகள்"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/defaultswidget.ui:140
+#, kde-format
+msgid "Brightness:"
+msgstr "பிரகாசம்"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/defaultswidget.ui:183
+#, kde-format
+msgid "Contrast:"
+msgstr "வித்தியாசம்"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/defaultswidget.ui:226
+#, kde-format
+msgid "Gamma:"
+msgstr "காமா"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
+#: src/defaultswidget.ui:272
+#, kde-format
+msgid "Preview"
+msgstr "முன் ஓட்டம்"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImOrig)
+#: src/defaultswidget.ui:281
+#, kde-format
+msgid "Original"
+msgstr "மூலம்"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImFiltered)
+#: src/defaultswidget.ui:288
+#, kde-format
+msgid "Modified"
+msgstr "மாற்றப்பட்டது "
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
+#: src/generalwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&General"
+msgid "General"
+msgstr "பொதுவான"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
+#: src/generalwidget.ui:20
+#, kde-format
+msgid "Remember last folder"
+msgstr "கடைசி கோப்புறையை நினைவிற் கொள்"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbox2)
+#: src/generalwidget.ui:30
+#, kde-format
+msgid "Quality/Speed"
+msgstr "துண்டு காகித வேகம்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
+#: src/generalwidget.ui:36
+#, fuzzy, kde-format
+msgid "Smooth scaling"
+msgstr "அளவு மாற்றுதல் "
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
+#: src/generalwidget.ui:43
+#, kde-format
+msgid "Fast rendering"
+msgstr "வேகமாக பதிப்பு வரைதல்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
+#: src/generalwidget.ui:50
+#, kde-format
+msgid "Dither in HiColor (15/16bit) modes"
+msgstr "உயர் வண்ண மாற்றங்களை (15/16bit) கலக்கு"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
+#: src/generalwidget.ui:57
+#, kde-format
+msgid "Dither in LowColor (<=8bit) modes"
+msgstr "கீழ் வண்ண மாற்றங்களை(<=8பிட்) கலக்கு"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
+#: src/generalwidget.ui:64
+#, kde-format
+msgid "Use own color palette"
+msgstr "உங்கள் சொந்த வண்ணக் களஞ்சியத்தை பயன்படுத்து"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRemap)
+#: src/generalwidget.ui:71
+#, kde-format
+msgid "Fast palette remapping"
+msgstr "களஞ்சியத்தை வேகமாக படமிடல்"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/generalwidget.ui:78
+#, kde-format
+msgid "Maximum cache size: "
+msgstr "அதிக நினையளவு"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:88
+#, kde-format
+msgid "Unlimited"
+msgstr "அளவில்லா "
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:91
+#, kde-format
+msgid " MB"
+msgstr "MB"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
+#: src/generalwidget.ui:104
+#, kde-format
+msgid "Fullscreen mode"
+msgstr "முழுத்திரை மாற்றங்கள்"
+
+#. i18n: ectx: property (text), widget (QLabel, l0)
+#: src/generalwidget.ui:114
+#, kde-format
+msgid "Background color:"
+msgstr "பின்னணி வண்ணம்"
+
+#. i18n: ectx: property (text), widget (QLabel, l1)
+#: src/generalwidget.ui:121
+#, kde-format
+msgid "Show only files with extension: "
+msgstr "விரிவாக்கத்துடன் இருக்கும் கோப்புகளை மட்டும் காட்டு"
+
+#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
+#: src/generalwidget.ui:128
+#, kde-format
+msgid "Open KuickShow Website"
+msgstr "குயிக்க்ஷோ இணைய தளத்தை திற"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
+#: src/generalwidget.ui:138
+#, kde-format
+msgid "Preload next image"
+msgstr "அடுத்த பிம்பத்தை முன்னேற்றுமதி செய்"
+
+#: src/imagewindow.cpp:152
+#, kde-format
+msgid "Show Next Image"
+msgstr "அடுத்த பிம்பத்தை காட்டு"
+
+#: src/imagewindow.cpp:157
+#, kde-format
+msgid "Show Previous Image"
+msgstr "முந்தைய பிம்பத்தை காட்டு"
+
+#: src/imagewindow.cpp:162
+#, fuzzy, kde-format
+msgid "Delete Image"
+msgstr "பிம்பத்தை மறுஏற்று"
+
+#: src/imagewindow.cpp:167
+#, kde-format
+msgid "Move Image to Trash"
+msgstr ""
+
+#: src/imagewindow.cpp:181
+#, kde-format
+msgid "Restore Original Size"
+msgstr "உண்மையான அளவை மீட்டெடு "
+
+#: src/imagewindow.cpp:186
+#, kde-format
+msgid "Maximize"
+msgstr "பெரிதாக்கு"
+
+#: src/imagewindow.cpp:191
+#, kde-format
+msgid "Rotate 90 Degrees"
+msgstr "90 டிகிரி சுழற்று"
+
+#: src/imagewindow.cpp:196
+#, kde-format
+msgid "Rotate 180 Degrees"
+msgstr "180 டிகிரி சுழற்று"
+
+#: src/imagewindow.cpp:201
+#, kde-format
+msgid "Rotate 270 Degrees"
+msgstr "270 டிகிரி சுழற்று"
+
+#: src/imagewindow.cpp:206
+#, kde-format
+msgid "Flip Horizontally"
+msgstr "கிடைமட்டமாக திருப்பு"
+
+#: src/imagewindow.cpp:211
+#, kde-format
+msgid "Flip Vertically"
+msgstr "உயரவாகில் திருப்பு "
+
+#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#, kde-format
+msgid "Print Image..."
+msgstr "பிம்பத்தை அச்சடி"
+
+#: src/imagewindow.cpp:227
+#, kde-format
+msgid "More Brightness"
+msgstr "அதிக பிரகாசம்"
+
+#: src/imagewindow.cpp:232
+#, kde-format
+msgid "Less Brightness"
+msgstr "குறைந்த பிரகாசம்"
+
+#: src/imagewindow.cpp:237
+#, kde-format
+msgid "More Contrast"
+msgstr "அதிக மாறுபாடு"
+
+#: src/imagewindow.cpp:242
+#, kde-format
+msgid "Less Contrast"
+msgstr "குறைந்த மாறுபாடு"
+
+#: src/imagewindow.cpp:247
+#, kde-format
+msgid "More Gamma"
+msgstr "அதிக காமா"
+
+#: src/imagewindow.cpp:252
+#, kde-format
+msgid "Less Gamma"
+msgstr "குறைந்த காமா"
+
+#: src/imagewindow.cpp:258
+#, kde-format
+msgid "Scroll Up"
+msgstr "மேலே நகர்த்து"
+
+#: src/imagewindow.cpp:263
+#, kde-format
+msgid "Scroll Down"
+msgstr "கீழே நகர்த்து"
+
+#: src/imagewindow.cpp:268
+#, kde-format
+msgid "Scroll Left"
+msgstr "இடது பக்கம் நகர்த்து"
+
+#: src/imagewindow.cpp:273
+#, kde-format
+msgid "Scroll Right"
+msgstr "வலது பக்கம் நகர்த்து"
+
+#: src/imagewindow.cpp:278
+#, kde-format
+msgid "Pause Slideshow"
+msgstr "படவில்லை காட்சியை தற்காலிகமாக நிறுத்து"
+
+#: src/imagewindow.cpp:290
+#, kde-format
+msgid "Reload Image"
+msgstr "பிம்பத்தை மறுஏற்று"
+
+#: src/imagewindow.cpp:296
+#, kde-format
+msgid "Properties"
+msgstr ""
+
+#: src/imagewindow.cpp:350
+#, kde-format
+msgctxt "Filename (Imagewidth x Imageheight)"
+msgid "%3 (%1 x %2)"
+msgstr "%3 (%1 x %2)"
+
+#: src/imagewindow.cpp:453
+#, fuzzy, kde-format
+msgid "Unable to download the image from %1."
+msgstr "பிம்பத்தை அச்சிட முடியவில்லை"
+
+#: src/imagewindow.cpp:469
+#, kde-format
+msgid ""
+"Unable to load the image %1.\n"
+"Perhaps the file format is unsupported or your Imlib is not installed "
+"properly."
+msgstr ""
+"%1 எனும் பிம்பத்தை ஏற்ற முடியவில்லை\n"
+"கோப்பு வடிவம் ஆதரிக்கபடவில்லை அல்லது உங்கள் உறுப்பு சரியாக நிறுவப்படவில்லை"
+
+#: src/imagewindow.cpp:909
+#, kde-format
+msgid "Brightness"
+msgstr "பிரகாசம்"
+
+#: src/imagewindow.cpp:913
+#, kde-format
+msgid "Contrast"
+msgstr "வித்தியாசம்"
+
+#: src/imagewindow.cpp:917
+#, kde-format
+msgid "Gamma"
+msgstr "காமா"
+
+#: src/imagewindow.cpp:956
+#, kde-format
+msgid "Unable to print the image."
+msgstr "பிம்பத்தை அச்சிட முடியவில்லை"
+
+#: src/imagewindow.cpp:957
+#, kde-format
+msgid "Printing Failed"
+msgstr "அச்சிட முடியவில்லை"
+
+#: src/imagewindow.cpp:967
+#, kde-format
+msgid "Keep original image size"
+msgstr "அசலான பிம்ப அளவை வைத்துக்கொள்"
+
+#: src/imagewindow.cpp:971
+#, kde-format
+msgid "Save As"
+msgstr ""
+
+#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#, kde-format
+msgid "Image Files (%1)"
+msgstr ""
+
+#: src/imagewindow.cpp:994
+#, fuzzy, kde-format
+msgid ""
+"Could not save the file.\n"
+"Perhaps the disk is full, or you do not have write permission to the file."
+msgstr ""
+"கோப்பினை சேமிக்க முடியவில்லை\n"
+"தகடு நிரம்பி விட்டது அல்லது கோப்பினை எழுத அனுமதி இல்லை."
+
+#: src/imagewindow.cpp:997
+#, kde-format
+msgid "File Saving Failed"
+msgstr "கோப்பினை சேமிக்க முடியவில்லை"
+
+#: src/imagewindow.cpp:1269
+#, kde-format
+msgid ""
+"You are about to view a very large image (%1 x %2 pixels), which can be very "
+"resource-consuming and even make your computer hang.\n"
+"Do you want to continue?"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:40
+#, fuzzy, kde-format
+msgid "Configure"
+msgstr "%1ஐஉள்ளமை "
+
+#: src/kuickconfigdlg.cpp:46
+#, kde-format
+msgid "&General"
+msgstr "பொதுவான"
+
+#: src/kuickconfigdlg.cpp:50
+#, kde-format
+msgid "&Modifications"
+msgstr "மாற்றங்கள்"
+
+#: src/kuickconfigdlg.cpp:54
+#, kde-format
+msgid "&Slideshow"
+msgstr "படவில்லை காட்சி"
+
+#: src/kuickconfigdlg.cpp:59
+#, kde-format
+msgid "&Viewer Shortcuts"
+msgstr "பார்வையாளர் குறுக்கு வழி"
+
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Bro&wser Shortcuts"
+msgstr "தேடியந்திரம் குறுக்குவழி"
+
+#: src/kuickfile.cpp:128
+#, fuzzy, kde-format
+msgid "Downloading %1..."
+msgstr "%1ஐஉள்ளமை "
+
+#: src/kuickfile.cpp:129
+#, kde-format
+msgid ""
+"Please wait while downloading\n"
+"%1"
+msgstr ""
+
+#: src/kuickshow.cpp:130
+#, kde-format
+msgid ""
+"Do you really want to display this 1 image at the same time? This might be "
+"quite resource intensive and could overload your computer.<br>If you choose "
+"%1, only the first image will be shown."
+msgid_plural ""
+"Do you really want to display these %n images at the same time? This might "
+"be quite resource intensive and could overload your computer.<br>If you "
+"choose %1, only the first image will be shown."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/kuickshow.cpp:132
+#, kde-format
+msgid "Display Multiple Images?"
+msgstr ""
+
+#: src/kuickshow.cpp:260
+#, kde-format
+msgid "Configure %1..."
+msgstr "%1ஐஉள்ளமை "
+
+#: src/kuickshow.cpp:265
+#, kde-format
+msgid "Start Slideshow"
+msgstr "படவில்லை காட்சியை ஆரம்பி"
+
+#: src/kuickshow.cpp:271
+#, kde-format
+msgid "About KuickShow"
+msgstr "kuickகாட்சியை ஆரம்பி"
+
+#: src/kuickshow.cpp:276
+#, kde-format
+msgid "Open Only One Image Window"
+msgstr "ஒரே ஒரு பிம்ப சாளரத்தை மட்டும் திற்"
+
+#: src/kuickshow.cpp:281
+#, kde-format
+msgid "Show File Browser"
+msgstr "கோப்புத் தேடியந்திரத்தை காட்டு/மறை."
+
+#: src/kuickshow.cpp:283
+#, kde-format
+msgid "Hide File Browser"
+msgstr "கோப்புத் தேடியந்திரத்தை காட்டு/மறை."
+
+#: src/kuickshow.cpp:288
+#, kde-format
+msgid "Show Image"
+msgstr "பிம்பத்தை காட்டு"
+
+#: src/kuickshow.cpp:292
+#, kde-format
+msgid "Show Image in Active Window"
+msgstr "பிம்பத்தை இயங்கும் சாளரத்தில் காட்டு"
+
+#: src/kuickshow.cpp:296
+#, kde-format
+msgid "Show Image in Fullscreen Mode"
+msgstr "முழுத்திரை முறையில் பிம்பத்தை காட்டு"
+
+#: src/kuickshow.cpp:310
+#, kde-format
+msgid "&File"
+msgstr ""
+
+#: src/kuickshow.cpp:322
+#, kde-format
+msgid "&Edit"
+msgstr ""
+
+#: src/kuickshow.cpp:331
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "படிமத்தின் அமைப்புகள்"
+
+#: src/kuickshow.cpp:341
+#, kde-format
+msgid "Main Toolbar"
+msgstr "பிரதான கருவிப்பட்டை"
+
+#: src/kuickshow.cpp:653
+#, kde-format
+msgid ""
+"<qt>Do you really want to delete\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+
+#: src/kuickshow.cpp:654
+#, fuzzy, kde-format
+msgid "Delete File"
+msgstr "பிம்பத்தை மறுஏற்று"
+
+#: src/kuickshow.cpp:679
+#, kde-format
+msgid ""
+"<qt>Do you really want to trash\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+
+#: src/kuickshow.cpp:680
+#, kde-format
+msgid "Trash File"
+msgstr ""
+
+#: src/kuickshow.cpp:681
+#, kde-format
+msgctxt "to trash"
+msgid "&Trash"
+msgstr ""
+
+#: src/kuickshow.cpp:1209
+#, kde-format
+msgid "Image Error"
+msgstr ""
+
+#: src/kuickshow.cpp:1234
+#, kde-format
+msgid ""
+"Unable to initialize \"Imlib\".\n"
+"Start kuickshow from the command line and look for error messages.\n"
+"The program will now quit."
+msgstr ""
+"தொடக்கிவிட முடியவில்லை \"lmlib\".\n"
+"கட்டளை வரியிலிருந்து kuick காட்சியை ஆரம்பித்து தவறான தகவலுக்கு \n"
+"காத்திரு இந்நிரலி இப்போது வெளியேரும் "
+
+#: src/kuickshow.cpp:1238
+#, kde-format
+msgid "Fatal Imlib Error"
+msgstr "கடுமையான imlib தவறு"
+
+#: src/kuickshow.cpp:1388
+#, kde-format
+msgid "Select Files or Folder to Open"
+msgstr "திறப்பதற்காக ஆவணத்தையோ அல்லது கோப்பினையோ தேர்வுசெய்"
+
+#: src/main.cpp:36
+#, kde-format
+msgid "KuickShow"
+msgstr "kuick காட்சி"
+
+#: src/main.cpp:38
+#, kde-format
+msgid "A fast and versatile image viewer"
+msgstr "பல்திறனும் வேகமும் உடைய பிம்பப் பார்வையாளர்"
+
+#: src/main.cpp:40
+#, kde-format
+msgid "(c) 1998-2009, Carsten Pfeiffer"
+msgstr ""
+
+#: src/main.cpp:45
+#, kde-format
+msgid "Carsten Pfeiffer"
+msgstr ""
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Rober Hamberger"
+msgstr ""
+
+#: src/main.cpp:48
+#, kde-format
+msgid "Thorsten Scheuermann"
+msgstr ""
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Start in the last visited folder, not the current working folder."
+msgstr "தற்போது வேலை செய்யும் ஆவணத்தை விட்டு கடைசியாக சென்ற ஆவணத்தில் தொடங்கவும்"
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Optional image filenames/urls to show"
+msgstr "விருப்பப் பிம்ப கோப்புப்பெயர்/காட்டவேண்டிய urls"
+
+#: src/printing.cpp:52
+#, kde-format
+msgid "Print %1"
+msgstr "%1ஐ அச்சிடு"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
+#: src/printing_page.ui:14
+#, kde-format
+msgid "Image Settings"
+msgstr "படிமத்தின் அமைப்புகள்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, addFileName)
+#: src/printing_page.ui:20
+#, kde-format
+msgid "Print fi&lename below image"
+msgstr "பிம்பத்தின் கீழ் கோப்புப் பெயரை அச்சிடு"
+
+#. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
+#: src/printing_page.ui:30
+#, kde-format
+msgid "Print image in &black and white"
+msgstr "கருப்புவெள்ளையில் பிம்பத்தை அச்சிடு"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/printing_page.ui:53
+#, kde-format
+msgid "&Width:"
+msgstr "அகலம்"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:64
+#, kde-format
+msgid "Millimeters"
+msgstr "மில்லிமீட்டர்"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:69
+#, kde-format
+msgid "Centimeters"
+msgstr "சென்டிமீட்டர்"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:74
+#, kde-format
+msgid "Inches"
+msgstr "இன்சுகள்"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/printing_page.ui:108
+#, kde-format
+msgid "&Height:"
+msgstr "உயரம்"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scale)
+#: src/printing_page.ui:121
+#, kde-format
+msgid "Print e&xact size: "
+msgstr "மிகச் சரியான அளவை அச்சிடு"
+
+#. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
+#: src/printing_page.ui:141
+#, kde-format
+msgid "Shrink image to &fit, if necessary"
+msgstr "தேவைபட்டால் பிம்பத்தை பொருந்தும் வகையில் சுருக்கு"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
+#: src/slideshowwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&Slideshow"
+msgid "Slideshow"
+msgstr "படவில்லை காட்சி"
+
+#. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
+#: src/slideshowwidget.ui:20
+#, kde-format
+msgid "Switch to &full-screen"
+msgstr "முழுத் திரைக்கு மாறவும்"
+
+#. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
+#: src/slideshowwidget.ui:27
+#, kde-format
+msgid "S&tart with current image"
+msgstr "நடப்பு பிம்பத்தில் இருந்து ஆரம்பி "
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/slideshowwidget.ui:34
+#, kde-format
+msgid "De&lay between slides:"
+msgstr "படவில்லைகளுக்கு இடையில் தாமதிக்கவும்"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:44
+#, kde-format
+msgid "Wait for key"
+msgstr ""
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:47
+#, kde-format
+msgid " sec"
+msgstr "நொடி"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/slideshowwidget.ui:57
+#, kde-format
+msgid "&Iterations (0 = infinite):"
+msgstr "திரும்ப செயல்கள்(0 = எண்ணற்ற)"
+
+#~ msgid "infinite"
+#~ msgstr "எண்ண்ற்ற"
+
+#~ msgid "Zoom In"
+#~ msgstr "நெருங்கிப்பார்"
+
+#~ msgid "Zoom Out"
+#~ msgstr "விலகிப் பார்"

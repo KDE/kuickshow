@@ -1,0 +1,845 @@
+# translation of kuickshow.po to Dutch
+# translation of kuickshow.po to
+# translation of kuickshow.po to
+# Nederlandse vertaling van
+# Copyright (C) 2000, 2001, 2002 KDE e.v..
+# KDE-vertaalgroep Nederlands <www.kde.nl>
+#
+# Rinse de Vries <Rinse@kde.nl>, 2000 2001, 2002.
+# Rinse de Vries <rinse@kde.nl>, 2003, 2004.
+# Wilbert Berendsen <wbsoft@xs4all.nl>, 2003.
+# Rinse de Vries <rinsedevries@kde.nl>, 2004, 2005, 2007, 2008.
+# Tom Albers <tomalbers@kde.nl>, 2004.
+# Bram Schoenmakers <bramschoenmakers@kde.nl>, 2006.
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2009, 2018, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: kuickshow\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-14 00:15+0000\n"
+"PO-Revision-Date: 2020-08-18 11:02+0200\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.04.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+"Otto Bruggeman,Rinse de Vries,Wilbert Berendsen,Antoon Tolboom,Freek de "
+"Kruijf"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ",rinse@kde.nl,wilbert@kde.nl,atolboo@casema.nl,freekdekruijf@kde.nl"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
+#: src/aboutwidget.ui:32
+#, kde-format
+msgid "(authors)"
+msgstr "(auteurs)"
+
+#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
+#: src/aboutwidget.ui:45
+#, kde-format
+msgid "(url)"
+msgstr "(url)"
+
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: src/aboutwidget.ui:55
+#, kde-format
+msgid "(copyright)"
+msgstr "(copyright)"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
+#: src/defaultswidget.ui:14
+#, kde-format
+msgid "Modifications"
+msgstr "Wijzigingen"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
+#: src/defaultswidget.ui:23
+#, kde-format
+msgid "Apply default image modifications"
+msgstr "Standaardafbeeldingmodificaties toepassen"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbScale)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: src/defaultswidget.ui:30 src/printing_page.ui:37
+#, kde-format
+msgid "Scaling"
+msgstr "Schaling"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbUpScale)
+#: src/defaultswidget.ui:36
+#, kde-format
+msgid "Scale image to screen size, if smaller, up to factor:"
+msgstr "Afbeelding schalen tot schermgrootte, indien kleiner, tot een factor:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDownScale)
+#: src/defaultswidget.ui:53
+#, kde-format
+msgid "Shrink image to screen size, if larger"
+msgstr "Afbeelding krimpen tot schermgrootte, indien groter"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbGeometry)
+#: src/defaultswidget.ui:63
+#, kde-format
+msgid "Geometry"
+msgstr "Afmeting"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipVertically)
+#: src/defaultswidget.ui:69
+#, kde-format
+msgid "Flip vertically"
+msgstr "Verticaal spiegelen"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
+#: src/defaultswidget.ui:76
+#, kde-format
+msgid "Flip horizontally"
+msgstr "Horizontaal spiegelen"
+
+#. i18n: ectx: property (text), widget (QLabel, lbRotate)
+#: src/defaultswidget.ui:85
+#, kde-format
+msgid "Rotate image:"
+msgstr "Afbeelding roteren:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:93
+#, kde-format
+msgid "0 Degrees"
+msgstr "0 graden"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:98
+#, kde-format
+msgid "90 Degrees"
+msgstr "90 graden"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:103
+#, kde-format
+msgid "180 Degrees"
+msgstr "180 graden"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:108
+#, kde-format
+msgid "270 Degrees"
+msgstr "270 graden"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbAdjust)
+#: src/defaultswidget.ui:134
+#, kde-format
+msgid "Adjustments"
+msgstr "Aanpassingen"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/defaultswidget.ui:140
+#, kde-format
+msgid "Brightness:"
+msgstr "Helderheid:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/defaultswidget.ui:183
+#, kde-format
+msgid "Contrast:"
+msgstr "Contrast:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/defaultswidget.ui:226
+#, kde-format
+msgid "Gamma:"
+msgstr "Gamma:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
+#: src/defaultswidget.ui:272
+#, kde-format
+msgid "Preview"
+msgstr "Voorbeeld"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImOrig)
+#: src/defaultswidget.ui:281
+#, kde-format
+msgid "Original"
+msgstr "Origineel"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImFiltered)
+#: src/defaultswidget.ui:288
+#, kde-format
+msgid "Modified"
+msgstr "Gewijzigd"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
+#: src/generalwidget.ui:14
+#, kde-format
+msgid "General"
+msgstr "Algemeen"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
+#: src/generalwidget.ui:20
+#, kde-format
+msgid "Remember last folder"
+msgstr "Laatste map onthouden"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbox2)
+#: src/generalwidget.ui:30
+#, kde-format
+msgid "Quality/Speed"
+msgstr "Kwaliteit/snelheid"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
+#: src/generalwidget.ui:36
+#, kde-format
+msgid "Smooth scaling"
+msgstr "Gladde schaling"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
+#: src/generalwidget.ui:43
+#, kde-format
+msgid "Fast rendering"
+msgstr "Snelle weergave-opbouw"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
+#: src/generalwidget.ui:50
+#, kde-format
+msgid "Dither in HiColor (15/16bit) modes"
+msgstr "Weergeven in hoge kleuren (15/16-bit) modus"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
+#: src/generalwidget.ui:57
+#, kde-format
+msgid "Dither in LowColor (<=8bit) modes"
+msgstr "Weergeven in lage kleuren (<=8-bit) modi"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
+#: src/generalwidget.ui:64
+#, kde-format
+msgid "Use own color palette"
+msgstr "Eigen kleurenpalet gebruiken"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRemap)
+#: src/generalwidget.ui:71
+#, kde-format
+msgid "Fast palette remapping"
+msgstr "Snelle paletremapping"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/generalwidget.ui:78
+#, kde-format
+msgid "Maximum cache size: "
+msgstr "Maximale cachegrootte : "
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:88
+#, kde-format
+msgid "Unlimited"
+msgstr "Onbeperkt"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:91
+#, kde-format
+msgid " MB"
+msgstr " MB"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
+#: src/generalwidget.ui:104
+#, kde-format
+msgid "Fullscreen mode"
+msgstr "Volledig scherm"
+
+#. i18n: ectx: property (text), widget (QLabel, l0)
+#: src/generalwidget.ui:114
+#, kde-format
+msgid "Background color:"
+msgstr "Achtergrondkleur:"
+
+#. i18n: ectx: property (text), widget (QLabel, l1)
+#: src/generalwidget.ui:121
+#, kde-format
+msgid "Show only files with extension: "
+msgstr "Toon alleen bestanden met deze extensie: "
+
+#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
+#: src/generalwidget.ui:128
+#, kde-format
+msgid "Open KuickShow Website"
+msgstr "Website van KuickShow openen"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
+#: src/generalwidget.ui:138
+#, kde-format
+msgid "Preload next image"
+msgstr "Volgende afbeelding voorladen"
+
+#: src/imagewindow.cpp:152
+#, kde-format
+msgid "Show Next Image"
+msgstr "Volgende afbeelding tonen"
+
+#: src/imagewindow.cpp:157
+#, kde-format
+msgid "Show Previous Image"
+msgstr "Vorige afbeelding tonen"
+
+#: src/imagewindow.cpp:162
+#, kde-format
+msgid "Delete Image"
+msgstr "Afbeelding verwijderen"
+
+#: src/imagewindow.cpp:167
+#, kde-format
+msgid "Move Image to Trash"
+msgstr "Afbeelding naar de prullenbak verplaatsen"
+
+#: src/imagewindow.cpp:181
+#, kde-format
+msgid "Restore Original Size"
+msgstr "Originele grootte herstellen"
+
+#: src/imagewindow.cpp:186
+#, kde-format
+msgid "Maximize"
+msgstr "Maximaliseren"
+
+#: src/imagewindow.cpp:191
+#, kde-format
+msgid "Rotate 90 Degrees"
+msgstr "90 graden roteren"
+
+#: src/imagewindow.cpp:196
+#, kde-format
+msgid "Rotate 180 Degrees"
+msgstr "180 graden roteren"
+
+#: src/imagewindow.cpp:201
+#, kde-format
+msgid "Rotate 270 Degrees"
+msgstr "270 graden roteren"
+
+#: src/imagewindow.cpp:206
+#, kde-format
+msgid "Flip Horizontally"
+msgstr "Horizontaal spiegelen"
+
+#: src/imagewindow.cpp:211
+#, kde-format
+msgid "Flip Vertically"
+msgstr "Verticaal spiegelen"
+
+#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#, kde-format
+msgid "Print Image..."
+msgstr "Afbeelding afdrukken..."
+
+#: src/imagewindow.cpp:227
+#, kde-format
+msgid "More Brightness"
+msgstr "Helderheid versterken"
+
+#: src/imagewindow.cpp:232
+#, kde-format
+msgid "Less Brightness"
+msgstr "Helderheid verminderen"
+
+#: src/imagewindow.cpp:237
+#, kde-format
+msgid "More Contrast"
+msgstr "Contrast vermeerderen"
+
+#: src/imagewindow.cpp:242
+#, kde-format
+msgid "Less Contrast"
+msgstr "Contrast verminderen"
+
+#: src/imagewindow.cpp:247
+#, kde-format
+msgid "More Gamma"
+msgstr "Gamma vermeerderen"
+
+#: src/imagewindow.cpp:252
+#, kde-format
+msgid "Less Gamma"
+msgstr "Gamma verminderen"
+
+#: src/imagewindow.cpp:258
+#, kde-format
+msgid "Scroll Up"
+msgstr "Omhoog schuiven"
+
+#: src/imagewindow.cpp:263
+#, kde-format
+msgid "Scroll Down"
+msgstr "Omlaag schuiven"
+
+#: src/imagewindow.cpp:268
+#, kde-format
+msgid "Scroll Left"
+msgstr "Naar links schuiven"
+
+#: src/imagewindow.cpp:273
+#, kde-format
+msgid "Scroll Right"
+msgstr "Naar rechts schuiven"
+
+#: src/imagewindow.cpp:278
+#, kde-format
+msgid "Pause Slideshow"
+msgstr "Diavoorstelling pauzeren"
+
+#: src/imagewindow.cpp:290
+#, kde-format
+msgid "Reload Image"
+msgstr "Afbeelding herladen"
+
+#: src/imagewindow.cpp:296
+#, kde-format
+msgid "Properties"
+msgstr "Eigenschappen"
+
+#: src/imagewindow.cpp:350
+#, kde-format
+msgctxt "Filename (Imagewidth x Imageheight)"
+msgid "%3 (%1 x %2)"
+msgstr "%3 (%1 x %2)"
+
+#: src/imagewindow.cpp:453
+#, kde-format
+msgid "Unable to download the image from %1."
+msgstr "De afbeelding kon niet gedownload worden vanaf %1."
+
+#: src/imagewindow.cpp:469
+#, kde-format
+msgid ""
+"Unable to load the image %1.\n"
+"Perhaps the file format is unsupported or your Imlib is not installed "
+"properly."
+msgstr ""
+"Helaas, de afbeelding\n"
+"%1\n"
+"kan niet worden geladen.\n"
+"Mogelijk wordt het afbeeldingformaat niet ondersteund, of is uw imlib-"
+"bibliotheek onjuist geïnstalleerd."
+
+#: src/imagewindow.cpp:909
+#, kde-format
+msgid "Brightness"
+msgstr "Helderheid"
+
+#: src/imagewindow.cpp:913
+#, kde-format
+msgid "Contrast"
+msgstr "Contrast"
+
+#: src/imagewindow.cpp:917
+#, kde-format
+msgid "Gamma"
+msgstr "Gamma"
+
+#: src/imagewindow.cpp:956
+#, kde-format
+msgid "Unable to print the image."
+msgstr "De afbeelding kon niet worden afgedrukt."
+
+#: src/imagewindow.cpp:957
+#, kde-format
+msgid "Printing Failed"
+msgstr "Het afdrukken is mislukt"
+
+#: src/imagewindow.cpp:967
+#, kde-format
+msgid "Keep original image size"
+msgstr "Originele afbeeldinggrootte behouden"
+
+#: src/imagewindow.cpp:971
+#, kde-format
+msgid "Save As"
+msgstr "Opslaan als"
+
+#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#, kde-format
+msgid "Image Files (%1)"
+msgstr "Afbeeldingsbestanden (%1)"
+
+#: src/imagewindow.cpp:994
+#, kde-format
+msgid ""
+"Could not save the file.\n"
+"Perhaps the disk is full, or you do not have write permission to the file."
+msgstr ""
+"Het bestand kon niet worden opgeslagen.\n"
+"Mogelijk is uw schijf vol of u hebt geen schrijftoegang tot het bestand."
+
+#: src/imagewindow.cpp:997
+#, kde-format
+msgid "File Saving Failed"
+msgstr "Het opslaan van het bestand is mislukt"
+
+#: src/imagewindow.cpp:1269
+#, kde-format
+msgid ""
+"You are about to view a very large image (%1 x %2 pixels), which can be very "
+"resource-consuming and even make your computer hang.\n"
+"Do you want to continue?"
+msgstr ""
+"U staat op het punt om een zeer grote afbeelding te bekijken (%1 x %2 "
+"pixels), dat kan erg veel bronnen in beslag nemen en zelfs uw computer laten "
+"hangen.\n"
+"Wilt u doorgaan?"
+
+#: src/kuickconfigdlg.cpp:40
+#, kde-format
+msgid "Configure"
+msgstr "Configureren"
+
+#: src/kuickconfigdlg.cpp:46
+#, kde-format
+msgid "&General"
+msgstr "Al&gemeen"
+
+#: src/kuickconfigdlg.cpp:50
+#, kde-format
+msgid "&Modifications"
+msgstr "&Wijzigingen"
+
+#: src/kuickconfigdlg.cpp:54
+#, kde-format
+msgid "&Slideshow"
+msgstr "Diavoor&stelling"
+
+#: src/kuickconfigdlg.cpp:59
+#, kde-format
+msgid "&Viewer Shortcuts"
+msgstr "&Viewer-sneltoetsen"
+
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Bro&wser Shortcuts"
+msgstr "Bro&wser-sneltoetsen"
+
+#: src/kuickfile.cpp:128
+#, kde-format
+msgid "Downloading %1..."
+msgstr "Downloaden van %1..."
+
+#: src/kuickfile.cpp:129
+#, kde-format
+msgid ""
+"Please wait while downloading\n"
+"%1"
+msgstr ""
+"Even geduld bij het downloaden\n"
+"%1"
+
+#: src/kuickshow.cpp:130
+#, kde-format
+msgid ""
+"Do you really want to display this 1 image at the same time? This might be "
+"quite resource intensive and could overload your computer.<br>If you choose "
+"%1, only the first image will be shown."
+msgid_plural ""
+"Do you really want to display these %n images at the same time? This might "
+"be quite resource intensive and could overload your computer.<br>If you "
+"choose %1, only the first image will be shown."
+msgstr[0] ""
+"Wilt u echt deze ene afbeelding tegelijk weergeven? Dit kan erg veel bronnen "
+"nodig hebben en uw computer overladen.<br>Als u %1 kiest dan wordt alleen de "
+"eerste afbeelding getoond."
+msgstr[1] ""
+"Wilt u echt deze %n afbeeldingen tegelijk weergeven? Dit kan erg veel "
+"bronnen nodig hebben en uw computer overladen.<br>Als u %1 kiest dan wordt "
+"alleen de eerste afbeelding getoond."
+
+#: src/kuickshow.cpp:132
+#, kde-format
+msgid "Display Multiple Images?"
+msgstr "Meer dan één afbeelding weergeven?"
+
+#: src/kuickshow.cpp:260
+#, kde-format
+msgid "Configure %1..."
+msgstr "%1 configureren..."
+
+#: src/kuickshow.cpp:265
+#, kde-format
+msgid "Start Slideshow"
+msgstr "Diavoorstelling starten"
+
+#: src/kuickshow.cpp:271
+#, kde-format
+msgid "About KuickShow"
+msgstr "Info over KuickShow"
+
+#: src/kuickshow.cpp:276
+#, kde-format
+msgid "Open Only One Image Window"
+msgstr "Niet meer dan één afbeeldingvenster openen"
+
+#: src/kuickshow.cpp:281
+#, kde-format
+msgid "Show File Browser"
+msgstr "Bestandsbrowser tonen"
+
+#: src/kuickshow.cpp:283
+#, kde-format
+msgid "Hide File Browser"
+msgstr "Bestandsbrowser verbergen"
+
+#: src/kuickshow.cpp:288
+#, kde-format
+msgid "Show Image"
+msgstr "Afbeelding tonen"
+
+#: src/kuickshow.cpp:292
+#, kde-format
+msgid "Show Image in Active Window"
+msgstr "Afbeelding in actief venster tonen"
+
+#: src/kuickshow.cpp:296
+#, kde-format
+msgid "Show Image in Fullscreen Mode"
+msgstr "Afbeelding in volledig scherm tonen"
+
+#: src/kuickshow.cpp:310
+#, kde-format
+msgid "&File"
+msgstr "&Bestand"
+
+#: src/kuickshow.cpp:322
+#, kde-format
+msgid "&Edit"
+msgstr "Be&werken"
+
+#: src/kuickshow.cpp:331
+#, kde-format
+msgid "&Settings"
+msgstr "&Instellingen"
+
+#: src/kuickshow.cpp:341
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Hoofdwerkbalk"
+
+#: src/kuickshow.cpp:653
+#, kde-format
+msgid ""
+"<qt>Do you really want to delete\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+"<qt>Wilt u echt\n"
+" <b>'%1'</b> verwijderen?</qt>"
+
+#: src/kuickshow.cpp:654
+#, kde-format
+msgid "Delete File"
+msgstr "Bestand verwijderen"
+
+#: src/kuickshow.cpp:679
+#, kde-format
+msgid ""
+"<qt>Do you really want to trash\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+"<qt>Wilt u echt\n"
+" <b>'%1'</b> naar de prullenbak verplaatsen?</qt>"
+
+#: src/kuickshow.cpp:680
+#, kde-format
+msgid "Trash File"
+msgstr "Bestand naar prullenbak verplaatsen"
+
+#: src/kuickshow.cpp:681
+#, kde-format
+msgctxt "to trash"
+msgid "&Trash"
+msgstr "Naar prullen&bak"
+
+#: src/kuickshow.cpp:1209
+#, kde-format
+msgid "Image Error"
+msgstr "Afbeeldingfout"
+
+#: src/kuickshow.cpp:1234
+#, kde-format
+msgid ""
+"Unable to initialize \"Imlib\".\n"
+"Start kuickshow from the command line and look for error messages.\n"
+"The program will now quit."
+msgstr ""
+"\"imlib\" kan niet worden geïnitialiseerd.\n"
+"Start kuickshow vanaf de commandoprompt en bekijk de foutmeldingen.\n"
+"De toepassing wordt nu afgesloten."
+
+#: src/kuickshow.cpp:1238
+#, kde-format
+msgid "Fatal Imlib Error"
+msgstr "Fatale Imlib-fout"
+
+#: src/kuickshow.cpp:1388
+#, kde-format
+msgid "Select Files or Folder to Open"
+msgstr "Bestanden of map selecteren om te openen"
+
+#: src/main.cpp:36
+#, kde-format
+msgid "KuickShow"
+msgstr "KuickShow"
+
+#: src/main.cpp:38
+#, kde-format
+msgid "A fast and versatile image viewer"
+msgstr "Een snelle en veelzijdige afbeeldingviewer"
+
+#: src/main.cpp:40
+#, kde-format
+msgid "(c) 1998-2009, Carsten Pfeiffer"
+msgstr "(c) 1998-2009, Carsten Pfeiffer"
+
+#: src/main.cpp:45
+#, kde-format
+msgid "Carsten Pfeiffer"
+msgstr "Carsten Pfeiffer"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Rober Hamberger"
+msgstr "Rober Hamberger"
+
+#: src/main.cpp:48
+#, kde-format
+msgid "Thorsten Scheuermann"
+msgstr "Thorsten Scheuermann"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Start in the last visited folder, not the current working folder."
+msgstr "Opstarten in de laatstbezochte map, niet in de huidige werkmap."
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Optional image filenames/urls to show"
+msgstr "Optionele afbeeldingnamen/URL-adressen om te tonen"
+
+#: src/printing.cpp:52
+#, kde-format
+msgid "Print %1"
+msgstr "%1 afdrukken"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
+#: src/printing_page.ui:14
+#, kde-format
+msgid "Image Settings"
+msgstr "Afbeeldingsinstellingen"
+
+#. i18n: ectx: property (text), widget (QCheckBox, addFileName)
+#: src/printing_page.ui:20
+#, kde-format
+msgid "Print fi&lename below image"
+msgstr "Bestandsnaam onder afbee&lding afdrukken"
+
+#. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
+#: src/printing_page.ui:30
+#, kde-format
+msgid "Print image in &black and white"
+msgstr "Afbeelding in &zwart-wit afdrukken"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/printing_page.ui:53
+#, kde-format
+msgid "&Width:"
+msgstr "&Breedte:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:64
+#, kde-format
+msgid "Millimeters"
+msgstr "Millimeters"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:69
+#, kde-format
+msgid "Centimeters"
+msgstr "Centimeters"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:74
+#, kde-format
+msgid "Inches"
+msgstr "Inches"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/printing_page.ui:108
+#, kde-format
+msgid "&Height:"
+msgstr "&Hoogte:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scale)
+#: src/printing_page.ui:121
+#, kde-format
+msgid "Print e&xact size: "
+msgstr "&Exacte grootte afdrukken: "
+
+#. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
+#: src/printing_page.ui:141
+#, kde-format
+msgid "Shrink image to &fit, if necessary"
+msgstr "A&fbeelding krimpen tot paginagrootte, indien nodig"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
+#: src/slideshowwidget.ui:14
+#, kde-format
+msgid "Slideshow"
+msgstr "Diavoorstelling"
+
+#. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
+#: src/slideshowwidget.ui:20
+#, kde-format
+msgid "Switch to &full-screen"
+msgstr "Naar &volledig scherm overschakelen"
+
+#. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
+#: src/slideshowwidget.ui:27
+#, kde-format
+msgid "S&tart with current image"
+msgstr "Met &huidige afbeelding beginnen"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/slideshowwidget.ui:34
+#, kde-format
+msgid "De&lay between slides:"
+msgstr "Vertra&ging tussen dia's:"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:44
+#, kde-format
+msgid "Wait for key"
+msgstr "Op toets wachten"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:47
+#, kde-format
+msgid " sec"
+msgstr " sec"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/slideshowwidget.ui:57
+#, kde-format
+msgid "&Iterations (0 = infinite):"
+msgstr "Herhal&ingen (0 is oneindig):"
+
+#~ msgid "infinite"
+#~ msgstr "oneindig"
+
+#~ msgid "Zoom In"
+#~ msgstr "Inzoomen"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Uitzoomen"

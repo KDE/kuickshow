@@ -1,0 +1,834 @@
+# translation of kuickshow.po to
+# translation of kuickshow.po to Tajik
+# translation of kuickshow.po to Тоҷикӣ
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# 2004, infoDev, a World Bank organization
+# 2004, Khujand Computer Technologies, Inc.
+# 2004, Youth Opportunities, NGO
+# Victor Ibragimov <youth_opportunities@tajik.net>, 2004.
+# Marina Kolucheva <youth_opportunities@tajik.net>, 2004.
+# Victor Ibragimov <youth_opportunities@tajikngo.org>, 2005, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: kuickshow\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-14 00:15+0000\n"
+"PO-Revision-Date: 2019-09-29 12:21+0500\n"
+"Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
+"Language-Team: English <kde-i18n-doc@kde.org>\n"
+"Language: tg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 19.04.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+"Роҷер Ковакс, Виктор Ибрагимов, Марина Колючева, Евгения Фатхеева, Акмал "
+"Ватаншоев, Абророва Хиромон, Акмал Саломов, Акбар Ватаншоев, Фарход Ахмедов, "
+"Эркин Пулатов, Гулшод Довуди, Гулноз Курбанова, Зарина Косымова, Шухрат "
+"Лоиқов, Сурайё Ҷурахонова"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"rkovacs@khujand.org,youth_opportunities@tajikngo.org,MarinaKL@tajikngo."
+"org,,,,,,,,,,,,"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
+#: src/aboutwidget.ui:32
+#, kde-format
+msgid "(authors)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
+#: src/aboutwidget.ui:45
+#, kde-format
+msgid "(url)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: src/aboutwidget.ui:55
+#, kde-format
+msgid "(copyright)"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
+#: src/defaultswidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&Modifications"
+msgid "Modifications"
+msgstr "&Тағирот"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
+#: src/defaultswidget.ui:23
+#, kde-format
+msgid "Apply default image modifications"
+msgstr "Истеъмоли ғоиби тасвири тағиребӣ"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbScale)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: src/defaultswidget.ui:30 src/printing_page.ui:37
+#, kde-format
+msgid "Scaling"
+msgstr "Андозгароӣ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbUpScale)
+#: src/defaultswidget.ui:36
+#, kde-format
+msgid "Scale image to screen size, if smaller, up to factor:"
+msgstr "Ҳаҷми тасвир ба андози монитор  агар хурдтар боло ба омил:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDownScale)
+#: src/defaultswidget.ui:53
+#, kde-format
+msgid "Shrink image to screen size, if larger"
+msgstr "Қафо кардани тасвир ба андози монитор агар калонтар"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbGeometry)
+#: src/defaultswidget.ui:63
+#, kde-format
+msgid "Geometry"
+msgstr "Геометрия"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipVertically)
+#: src/defaultswidget.ui:69
+#, kde-format
+msgid "Flip vertically"
+msgstr "Гузоштани амудӣ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
+#: src/defaultswidget.ui:76
+#, kde-format
+msgid "Flip horizontally"
+msgstr "Гузоштани уфуқӣ"
+
+#. i18n: ectx: property (text), widget (QLabel, lbRotate)
+#: src/defaultswidget.ui:85
+#, kde-format
+msgid "Rotate image:"
+msgstr "Гардониши тасвир:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:93
+#, kde-format
+msgid "0 Degrees"
+msgstr "0 Дараҷа"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:98
+#, kde-format
+msgid "90 Degrees"
+msgstr "90 Дараҷа"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:103
+#, kde-format
+msgid "180 Degrees"
+msgstr "180 Дараҷа"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:108
+#, kde-format
+msgid "270 Degrees"
+msgstr "270 Дараҷа"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbAdjust)
+#: src/defaultswidget.ui:134
+#, kde-format
+msgid "Adjustments"
+msgstr "Лавозимот"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/defaultswidget.ui:140
+#, kde-format
+msgid "Brightness:"
+msgstr "Равшанӣ:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/defaultswidget.ui:183
+#, kde-format
+msgid "Contrast:"
+msgstr "Акс:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/defaultswidget.ui:226
+#, kde-format
+msgid "Gamma:"
+msgstr "Гамма:"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
+#: src/defaultswidget.ui:272
+#, kde-format
+msgid "Preview"
+msgstr "Пешнамоиш"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImOrig)
+#: src/defaultswidget.ui:281
+#, kde-format
+msgid "Original"
+msgstr "Асл"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImFiltered)
+#: src/defaultswidget.ui:288
+#, kde-format
+msgid "Modified"
+msgstr "Санаи тағйир"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
+#: src/generalwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&General"
+msgid "General"
+msgstr "&Умумӣ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
+#: src/generalwidget.ui:20
+#, kde-format
+msgid "Remember last folder"
+msgstr "Ед дор файли охигин"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbox2)
+#: src/generalwidget.ui:30
+#, kde-format
+msgid "Quality/Speed"
+msgstr "Сифат/Самт"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
+#: src/generalwidget.ui:36
+#, fuzzy, kde-format
+msgid "Smooth scaling"
+msgstr "Андозгароӣ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
+#: src/generalwidget.ui:43
+#, kde-format
+msgid "Fast rendering"
+msgstr "Тарҷумаи тез"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
+#: src/generalwidget.ui:50
+#, kde-format
+msgid "Dither in HiColor (15/16bit) modes"
+msgstr "Омехта кардан дар тартиботи Hicolor(15/16бит)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
+#: src/generalwidget.ui:57
+#, kde-format
+msgid "Dither in LowColor (<=8bit) modes"
+msgstr "Омехта кардан дар Lowcolor(<=8бит)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
+#: src/generalwidget.ui:64
+#, kde-format
+msgid "Use own color palette"
+msgstr "Истифодаи ранги палитраи худ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRemap)
+#: src/generalwidget.ui:71
+#, kde-format
+msgid "Fast palette remapping"
+msgstr "Тез переиндексация кардани маҷмуи рангҳо"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/generalwidget.ui:78
+#, kde-format
+msgid "Maximum cache size: "
+msgstr "Максимум андозаи махфӣ"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:88
+#, kde-format
+msgid "Unlimited"
+msgstr "Номаҳдуд"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:91
+#, kde-format
+msgid " MB"
+msgstr " МБ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
+#: src/generalwidget.ui:104
+#, kde-format
+msgid "Fullscreen mode"
+msgstr "Ҳолати пурраи экран"
+
+#. i18n: ectx: property (text), widget (QLabel, l0)
+#: src/generalwidget.ui:114
+#, kde-format
+msgid "Background color:"
+msgstr "Ранги замина:"
+
+#. i18n: ectx: property (text), widget (QLabel, l1)
+#: src/generalwidget.ui:121
+#, kde-format
+msgid "Show only files with extension: "
+msgstr "Намоиши файлҳо фақат бо масофат"
+
+#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
+#: src/generalwidget.ui:128
+#, kde-format
+msgid "Open KuickShow Website"
+msgstr "Кушодани Сайти НамоишиТез"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
+#: src/generalwidget.ui:138
+#, kde-format
+msgid "Preload next image"
+msgstr "Пурбори тасвири оянда"
+
+#: src/imagewindow.cpp:152
+#, kde-format
+msgid "Show Next Image"
+msgstr "Намоиши Тасвири Оянда"
+
+#: src/imagewindow.cpp:157
+#, kde-format
+msgid "Show Previous Image"
+msgstr "Намоиши Тасвири Пешина"
+
+#: src/imagewindow.cpp:162
+#, kde-format
+msgid "Delete Image"
+msgstr "Нобуд кардани Тасвир"
+
+#: src/imagewindow.cpp:167
+#, kde-format
+msgid "Move Image to Trash"
+msgstr ""
+
+#: src/imagewindow.cpp:181
+#, kde-format
+msgid "Restore Original Size"
+msgstr "Гузоштани андозаи оригиналӣ"
+
+#: src/imagewindow.cpp:186
+#, kde-format
+msgid "Maximize"
+msgstr "Максималӣ"
+
+#: src/imagewindow.cpp:191
+#, kde-format
+msgid "Rotate 90 Degrees"
+msgstr "Гардиши 90 дараҷа"
+
+#: src/imagewindow.cpp:196
+#, kde-format
+msgid "Rotate 180 Degrees"
+msgstr "Гардиши 180 дараҷа"
+
+#: src/imagewindow.cpp:201
+#, kde-format
+msgid "Rotate 270 Degrees"
+msgstr "Гардиши 270 дараҷа"
+
+#: src/imagewindow.cpp:206
+#, kde-format
+msgid "Flip Horizontally"
+msgstr "Гузоштани Уфуқӣ"
+
+#: src/imagewindow.cpp:211
+#, kde-format
+msgid "Flip Vertically"
+msgstr "Гузоштани Амудӣ"
+
+#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#, kde-format
+msgid "Print Image..."
+msgstr "Чоп кардани тасвир..."
+
+#: src/imagewindow.cpp:227
+#, kde-format
+msgid "More Brightness"
+msgstr "Сер равшанӣ"
+
+#: src/imagewindow.cpp:232
+#, kde-format
+msgid "Less Brightness"
+msgstr "Камравшанӣ"
+
+#: src/imagewindow.cpp:237
+#, kde-format
+msgid "More Contrast"
+msgstr "Сер акс"
+
+#: src/imagewindow.cpp:242
+#, kde-format
+msgid "Less Contrast"
+msgstr "Кам акс"
+
+#: src/imagewindow.cpp:247
+#, kde-format
+msgid "More Gamma"
+msgstr "Сер гамма"
+
+#: src/imagewindow.cpp:252
+#, kde-format
+msgid "Less Gamma"
+msgstr "Кам гамма"
+
+#: src/imagewindow.cpp:258
+#, kde-format
+msgid "Scroll Up"
+msgstr "Ба боло"
+
+#: src/imagewindow.cpp:263
+#, kde-format
+msgid "Scroll Down"
+msgstr "Ба поен"
+
+#: src/imagewindow.cpp:268
+#, kde-format
+msgid "Scroll Left"
+msgstr "Ба чап "
+
+#: src/imagewindow.cpp:273
+#, kde-format
+msgid "Scroll Right"
+msgstr "Ба рост"
+
+#: src/imagewindow.cpp:278
+#, kde-format
+msgid "Pause Slideshow"
+msgstr "Интизоршавии намоиши қабат"
+
+#: src/imagewindow.cpp:290
+#, kde-format
+msgid "Reload Image"
+msgstr "Пурбори Тасвир"
+
+#: src/imagewindow.cpp:296
+#, kde-format
+msgid "Properties"
+msgstr ""
+
+#: src/imagewindow.cpp:350
+#, kde-format
+msgctxt "Filename (Imagewidth x Imageheight)"
+msgid "%3 (%1 x %2)"
+msgstr "%3 (%1 x %2)"
+
+#: src/imagewindow.cpp:453
+#, fuzzy, kde-format
+msgid "Unable to download the image from %1."
+msgstr "Тасвирро чоп карда натавонист."
+
+#: src/imagewindow.cpp:469
+#, kde-format
+msgid ""
+"Unable to load the image %1.\n"
+"Perhaps the file format is unsupported or your Imlib is not installed "
+"properly."
+msgstr ""
+"Пур кардани тасвири %1 номумкин.\n"
+"Мумкин,ки формати файл нигоҳ дошта нашудааст ё Imlib - и шумо таври  бо "
+"даркори барқарор нашудааст."
+
+#: src/imagewindow.cpp:909
+#, kde-format
+msgid "Brightness"
+msgstr "Равшанӣ"
+
+#: src/imagewindow.cpp:913
+#, kde-format
+msgid "Contrast"
+msgstr "Тазод"
+
+#: src/imagewindow.cpp:917
+#, kde-format
+msgid "Gamma"
+msgstr "Гамма"
+
+#: src/imagewindow.cpp:956
+#, kde-format
+msgid "Unable to print the image."
+msgstr "Тасвирро чоп карда натавонист."
+
+#: src/imagewindow.cpp:957
+#, kde-format
+msgid "Printing Failed"
+msgstr "Чоп нашуд"
+
+#: src/imagewindow.cpp:967
+#, kde-format
+msgid "Keep original image size"
+msgstr "Нигоҳ доштани андозаи тасвири аввал"
+
+#: src/imagewindow.cpp:971
+#, kde-format
+msgid "Save As"
+msgstr ""
+
+#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#, kde-format
+msgid "Image Files (%1)"
+msgstr ""
+
+#: src/imagewindow.cpp:994
+#, fuzzy, kde-format
+msgid ""
+"Could not save the file.\n"
+"Perhaps the disk is full, or you do not have write permission to the file."
+msgstr ""
+"Файлро дар хотир нагузоштан.\n"
+"Мумкин,ки диск ҷои холи надорад,ё ин ки шумо  рухсат барои сабт карданро "
+"надоред."
+
+#: src/imagewindow.cpp:997
+#, kde-format
+msgid "File Saving Failed"
+msgstr "Нигоҳ доштани файли нодуруст"
+
+#: src/imagewindow.cpp:1269
+#, kde-format
+msgid ""
+"You are about to view a very large image (%1 x %2 pixels), which can be very "
+"resource-consuming and even make your computer hang.\n"
+"Do you want to continue?"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:40
+#, fuzzy, kde-format
+msgid "Configure"
+msgstr "Танзимоти %1..."
+
+#: src/kuickconfigdlg.cpp:46
+#, kde-format
+msgid "&General"
+msgstr "&Умумӣ"
+
+#: src/kuickconfigdlg.cpp:50
+#, kde-format
+msgid "&Modifications"
+msgstr "&Тағирот"
+
+#: src/kuickconfigdlg.cpp:54
+#, kde-format
+msgid "&Slideshow"
+msgstr "&Намоиши слайд"
+
+#: src/kuickconfigdlg.cpp:59
+#, kde-format
+msgid "&Viewer Shortcuts"
+msgstr " &Тугмачаҳои барои зуд аз назар гузаронидан"
+
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Bro&wser Shortcuts"
+msgstr "Браузери &тугмачаҳои тез"
+
+#: src/kuickfile.cpp:128
+#, fuzzy, kde-format
+msgid "Downloading %1..."
+msgstr "Танзимоти %1..."
+
+#: src/kuickfile.cpp:129
+#, kde-format
+msgid ""
+"Please wait while downloading\n"
+"%1"
+msgstr ""
+
+#: src/kuickshow.cpp:130
+#, kde-format
+msgid ""
+"Do you really want to display this 1 image at the same time? This might be "
+"quite resource intensive and could overload your computer.<br>If you choose "
+"%1, only the first image will be shown."
+msgid_plural ""
+"Do you really want to display these %n images at the same time? This might "
+"be quite resource intensive and could overload your computer.<br>If you "
+"choose %1, only the first image will be shown."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/kuickshow.cpp:132
+#, kde-format
+msgid "Display Multiple Images?"
+msgstr ""
+
+#: src/kuickshow.cpp:260
+#, kde-format
+msgid "Configure %1..."
+msgstr "Танзимоти %1..."
+
+#: src/kuickshow.cpp:265
+#, kde-format
+msgid "Start Slideshow"
+msgstr "Намоиши слайд сар кунед"
+
+#: src/kuickshow.cpp:271
+#, kde-format
+msgid "About KuickShow"
+msgstr "Дар бораи KuickShow"
+
+#: src/kuickshow.cpp:276
+#, kde-format
+msgid "Open Only One Image Window"
+msgstr "Фақат як тирезаи тасвирро кушодан"
+
+#: src/kuickshow.cpp:281
+#, kde-format
+msgid "Show File Browser"
+msgstr "Намоиши браузери файл"
+
+#: src/kuickshow.cpp:283
+#, kde-format
+msgid "Hide File Browser"
+msgstr "Пинҳони браузери файл"
+
+#: src/kuickshow.cpp:288
+#, kde-format
+msgid "Show Image"
+msgstr "Намоиши тасвир"
+
+#: src/kuickshow.cpp:292
+#, kde-format
+msgid "Show Image in Active Window"
+msgstr "Намоиши тасвир дар тирезаи фаъол"
+
+#: src/kuickshow.cpp:296
+#, kde-format
+msgid "Show Image in Fullscreen Mode"
+msgstr "Ҳолати пурраи экранро нишон диҳед"
+
+#: src/kuickshow.cpp:310
+#, kde-format
+msgid "&File"
+msgstr ""
+
+#: src/kuickshow.cpp:322
+#, kde-format
+msgid "&Edit"
+msgstr ""
+
+#: src/kuickshow.cpp:331
+#, fuzzy, kde-format
+msgid "&Settings"
+msgstr "Танзимоти Тасвир"
+
+#: src/kuickshow.cpp:341
+#, kde-format
+msgid "Main Toolbar"
+msgstr ""
+
+#: src/kuickshow.cpp:653
+#, kde-format
+msgid ""
+"<qt>Do you really want to delete\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+
+#: src/kuickshow.cpp:654
+#, fuzzy, kde-format
+msgid "Delete File"
+msgstr "Нобуд кардани Тасвир"
+
+#: src/kuickshow.cpp:679
+#, kde-format
+msgid ""
+"<qt>Do you really want to trash\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+
+#: src/kuickshow.cpp:680
+#, kde-format
+msgid "Trash File"
+msgstr ""
+
+#: src/kuickshow.cpp:681
+#, kde-format
+msgctxt "to trash"
+msgid "&Trash"
+msgstr ""
+
+#: src/kuickshow.cpp:1209
+#, kde-format
+msgid "Image Error"
+msgstr ""
+
+#: src/kuickshow.cpp:1234
+#, kde-format
+msgid ""
+"Unable to initialize \"Imlib\".\n"
+"Start kuickshow from the command line and look for error messages.\n"
+"The program will now quit."
+msgstr ""
+" \"Imlib\"-бозсози но мумкин. \n"
+"Kuickshow -ро аз сатри фармондадиҳи сар диҳед ва \n"
+"-ро барои хабарҳо дар бораи хаттоги мушоҳида кунед .\n"
+"Гузоришро маҳкам мекунем."
+
+#: src/kuickshow.cpp:1238
+#, kde-format
+msgid "Fatal Imlib Error"
+msgstr "Хатогии ногузори Imlib"
+
+#: src/kuickshow.cpp:1388
+#, kde-format
+msgid "Select Files or Folder to Open"
+msgstr "Интихоби Файлҳо  ё Папкаҳо барои кушодан"
+
+#: src/main.cpp:36
+#, kde-format
+msgid "KuickShow"
+msgstr "KuickShow"
+
+#: src/main.cpp:38
+#, kde-format
+msgid "A fast and versatile image viewer"
+msgstr "Тез ва тасвири нозирии ҳаматарафа "
+
+#: src/main.cpp:40
+#, kde-format
+msgid "(c) 1998-2009, Carsten Pfeiffer"
+msgstr ""
+
+#: src/main.cpp:45
+#, kde-format
+msgid "Carsten Pfeiffer"
+msgstr ""
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Rober Hamberger"
+msgstr ""
+
+#: src/main.cpp:48
+#, kde-format
+msgid "Thorsten Scheuermann"
+msgstr ""
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Start in the last visited folder, not the current working folder."
+msgstr ""
+"Корро дар охирон каталогҳои пештара ташриф карда сар кунед на ин ,ки дар "
+"каталоги ҳозира."
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Optional image filenames/urls to show"
+msgstr "Ихтиёри  нишон додани  тасвири номҳои файл /urls"
+
+#: src/printing.cpp:52
+#, kde-format
+msgid "Print %1"
+msgstr "Чопи кардан %1"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
+#: src/printing_page.ui:14
+#, kde-format
+msgid "Image Settings"
+msgstr "Танзимоти Тасвир"
+
+#. i18n: ectx: property (text), widget (QCheckBox, addFileName)
+#: src/printing_page.ui:20
+#, kde-format
+msgid "Print fi&lename below image"
+msgstr "Мӯҳр задани номҳои фай&л дар поёни тасвир"
+
+#. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
+#: src/printing_page.ui:30
+#, kde-format
+msgid "Print image in &black and white"
+msgstr "Мӯҳр задани тасвир бо &сиёҳ ва сафед"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/printing_page.ui:53
+#, kde-format
+msgid "&Width:"
+msgstr "&Васеъ:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:64
+#, kde-format
+msgid "Millimeters"
+msgstr "Миллиметрҳо"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:69
+#, kde-format
+msgid "Centimeters"
+msgstr "Сантиметрҳо"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:74
+#, kde-format
+msgid "Inches"
+msgstr "Дюймҳо"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/printing_page.ui:108
+#, kde-format
+msgid "&Height:"
+msgstr "&Дарозӣ:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scale)
+#: src/printing_page.ui:121
+#, kde-format
+msgid "Print e&xact size: "
+msgstr "Мӯҳр &задани андозаи дақиқ "
+
+#. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
+#: src/printing_page.ui:141
+#, kde-format
+msgid "Shrink image to &fit, if necessary"
+msgstr "Тасвирро зер карда ба &лоиқ агар лозим бошад"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
+#: src/slideshowwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&Slideshow"
+msgid "Slideshow"
+msgstr "&Намоиши слайд"
+
+#. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
+#: src/slideshowwidget.ui:20
+#, kde-format
+msgid "Switch to &full-screen"
+msgstr "Пайвастан ба экрани &пурра"
+
+#. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
+#: src/slideshowwidget.ui:27
+#, kde-format
+msgid "S&tart with current image"
+msgstr "Аз тасвири &равон сар кунед"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/slideshowwidget.ui:34
+#, kde-format
+msgid "De&lay between slides:"
+msgstr "&Андармони мобайни поинтаринҳо:"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:44
+#, kde-format
+msgid "Wait for key"
+msgstr "Интизор бошед барои калид"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:47
+#, kde-format
+msgid " sec"
+msgstr " сон"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/slideshowwidget.ui:57
+#, kde-format
+msgid "&Iterations (0 = infinite):"
+msgstr "&Такроршавиҳо(0= беохир):"
+
+#~ msgid "infinite"
+#~ msgstr "Беохир"
+
+#~ msgid "Zoom In"
+#~ msgstr "Калон кардан"
+
+#~ msgid "Zoom Out"
+#~ msgstr "Майда карда"

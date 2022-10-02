@@ -1,0 +1,1007 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&kuickshow;">
+  <!ENTITY package "kdegraphics">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Russian "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book lang="&language;">
+
+<bookinfo>
+<title
+>Руководство &kuickshow;</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+><email
+>pfeiffer@kde.org</email
+></address>
+</affiliation>
+</author>
+</authorgroup>
+
+<othercredit role="translator"
+><firstname
+>Иван </firstname
+> <surname
+>Кашуков </surname
+><affiliation
+><address
+><email
+>dolphin210@yandex.ru </email
+></address
+></affiliation
+><contrib
+>Перевод на русский</contrib
+></othercredit
+> 
+
+<copyright>
+<year
+>2001</year>
+<holder
+>Carsten Pfeiffer</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2002-01-09</date>
+<releaseinfo
+>1.01.00</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>&kuickshow; -- программа для просмотра изображений. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>image</keyword>
+<keyword
+>viewer</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Введение</title>
+
+<para
+>&kuickshow; -- программа для просмотра изображений. Чтобы открыть файл, укажите его в окне выбора файла. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>Поддерживаются следующие графические форматы:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xmp</para>
+</listitem>
+<listitem
+><para
+>xbm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Изображение может выводиться как в окне, соответствующем его размеру, так и на полный экран.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>Использование &kuickshow;</title>
+
+<para
+>Работать с &kuickshow; очень просто. В окне выбора файла укажите файл, дважды щёлкнув на нем, нажав на клавишу <keycap
+>Ввод</keycap
+>, или выбрав пункт <guimenuitem
+>Показать изображение</guimenuitem
+> в меню <mousebutton
+>правой</mousebutton
+> кнопки мыши.</para>
+
+<screenshot>
+<screeninfo
+>Вот снимок окна &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Снимок окна</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>Дополнительные возможности &kuickshow;</title>
+
+<para
+>Через окно настройки доступны следующие возможности:</para>
+
+<itemizedlist>
+<listitem
+><para
+>Если изображение не умещается на экране, программа может уменьшить его.</para>
+</listitem>
+<listitem
+><para
+>Можно указать, открывать ли каждое изображение в отдельном окне или использовать одно окно.</para>
+</listitem>
+<listitem
+><para
+>Можно установить время задержки для режима показа слайдов.</para>
+</listitem>
+<listitem
+><para
+>Можно указать типы файлов, которые будут отображаться в окне выбора файлов.</para>
+</listitem>
+<listitem
+><para
+>Можно изменить отношение скорость/качество.</para
+></listitem>
+</itemizedlist>
+
+<para
+>Если известно имя файла, который требуется открыть, введите его начало в окне выбора файла. В правом нижнем углу будет открыто текстовое поле ввода. Все соответствующие шаблону файлы будут выделяться. Нажмите <keycap
+>Ввод</keycap
+> или &Esc;, чтобы выйти из окна.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>Диалоговое окно <guilabel
+>Настройка &kuickshow;</guilabel
+></title>
+
+<para
+>Диалоговое окно <guilabel
+>Настройка &kuickshow;</guilabel
+> включает 5 закладок. Три из них, <link linkend="general-options"
+><guilabel
+>Общие</guilabel
+></link
+>, <link linkend= "modifications-options"
+><guilabel
+>Изменения</guilabel
+></link
+> и <link linkend="slideshow-options"
+>Слайд-шоу<guilabel
+></guilabel
+></link
+> относятся собственно к &kuickshow;, другие две, <guilabel
+>Клавиши быстрого просмотра</guilabel
+> и <guilabel
+>Клавиши обозревателя</guilabel
+>, позволяют вам настроить комбинации клавиш для соответствующих окон.</para>
+
+<sect1 id="general-options">
+<title
+><guilabel
+>Общие</guilabel
+> параметры</title>
+
+<para
+>Закладка <guilabel
+>Общие</guilabel
+> содержит основные параметры &kuickshow;.</para>
+
+<variablelist>
+<title
+><guilabel
+>Параметры</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Полноэкранный режим</guilabel
+></term>
+<listitem>
+<para
+>Если флажок установлен, при выводе изображения окно будет развёртываться на полный экран. Если изображение недостаточно большое, пустая часть окна будет заполнена выбранным ниже цветом фона. По умолчанию опция отключена.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Загружать следующее изображение</guilabel
+></term>
+<listitem>
+<para
+>Если флажок установлен, &kuickshow; будет загружать в память следующее изображение из текущей папки. При этом задержка между сменой изображений будет меньше. Это особенно заметно в режиме показа слайдов.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Цвет фона</guilabel
+></term>
+<listitem>
+<para
+>Щёлкните на кнопке, чтобы выбрать цвет фона. Если окно больше, чем изображение, этим цветом будет заполнена пустая часть.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Показывать файлы только с расширением:</guilabel
+></term>
+<listitem>
+<para
+>Можно указать, чтобы в окне выбора файлов отображались только те файлы, которые программа &kuickshow; может обработать.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Качество/скорость</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Быстрое отображение</guilabel
+></term>
+<listitem
+><para
+>Выводить файлы быстрее.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Смешивание в режимах HiColor (15/16 бит)</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Смешивание в режимах LowColor (&lt;=8 бит)</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Использовать собственную цветовую палитру</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Быстрая переиндексация палитры</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Максимальный размер кэша (МБ):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>Закладка <guilabel
+>Изменения</guilabel
+></title>
+
+<para
+>На данный момент документация отсутствует.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>Закладка <guilabel
+>Слайд-шоу</guilabel
+></title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Переключиться на полный экран</guilabel
+></term>
+<listitem>
+<para
+>Определяет, будет ли окно программы распахиваться на полный экран при запуске показа слайдов. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Начать с текущего изображения:</guilabel
+></term>
+<listitem>
+<para
+>Определяет, с какого изображения будет начат показ слайдов -- с первого в каталоге или с выбранного. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Задержка между сменой слайдов:</guilabel
+></term>
+<listitem>
+<para
+>Определяет задержку между сменой слайдов в режиме слайд-шоу. Для изменения значения вы можете использовать переключатель, ползунок, или ввести новое значение с клавиатуры. Значение по умолчанию - 3 секунды.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Повторений:</guilabel
+></term>
+<listitem>
+<para
+>Количество повторений. Если установлено значение 0, показ слайдов будет продолжаться до его завершения пользователем. Для изменения значения вы можете использовать переключатель, ползунок, или ввести новое значение с клавиатуры. Значение умолчанию - 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Справочник команд</title>
+
+<sect1 id="keybindings">
+<title
+>Окно показа изображения</title>
+
+<para
+>Вы можете настроить все комбинации клавиш в <link linkend="configuration-dialog"
+>диалоговом окне настройки</link
+>.</para>
+
+<table>
+<title
+>Комбинации клавиш для окна показа изображений</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Клавиша</entry>
+<entry
+>Действие</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Загрузить следующее изображение</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Загрузить предыдущее изображение</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Загрузить первое изображение</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Увеличить масштаб</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Уменьшить масштаб</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Отразить изображение зеркально по вертикали</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Отразить изображение зеркально по горизонтали</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Повернуть изображение на 270 градусов по часовой стрелке (то же самое, что на 90 градусов против часовой стрелки)</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Повернуть на 90 градусов по часовой стрелке</entry>
+</row>
+<row>
+<entry
+>Клавиши <keycap
+>курсора</keycap
+></entry>
+<entry
+>Сдвинуть изображение, если оно больше, чем окно приложения</entry>
+</row>
+<row>
+<entry
+><keycap
+>Ввод</keycap
+></entry>
+<entry
+>Переключиться между полноэкранным и оконным режимом</entry>
+</row>
+<row>
+<entry
+><keycap
+>Пробел</keycap
+></entry>
+<entry
+>Показать или скрыть окно выбора файлов</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>Закрыть окно показа изображения. Если при этом окно выбора файлов закрыто, то программа закончит работу.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>Увеличить или уменьшить яркость изображения</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Увеличить или уменьшить контрастность изображения</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Увеличить или уменьшить <firstterm
+>гамму</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Вывести изображение в первоначальном размере. Это может потребоваться, только если было включено автоматическое масштабирование.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Ввод</keycap
+></entry>
+<entry
+>Вывести изображение, применив параметры по умолчанию и вернув первоначальный размер.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Открыть диалоговое окно <guilabel
+>Сохранить как...</guilabel
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>Удалить текущее изображение. Перед удалением программа запросит подтверждение.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Удалить текущее изображение без подтверждения.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Открыть руководство (этот файл)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Выйти из &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Использование мыши в окне вывода изображений</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Действие</entry>
+<entry
+>Действие</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>Щелчок <mousebutton
+>правой</mousebutton
+> кнопкой</entry>
+<entry
+>Открыть контекстное меню</entry>
+</row>
+<row>
+<entry
+>Перетаскивание <mousebutton
+>левой</mousebutton
+> кнопкой</entry>
+<entry
+>Передвинуть изображение, если оно не умещается на экране</entry>
+</row>
+<row>
+<entry
+>&Shift; и перетаскивание <mousebutton
+>левой</mousebutton
+> кнопкой</entry>
+<entry
+>Выделить участок изображения, который будет растянут на всё окно.</entry>
+</row>
+<row>
+<entry
+>Двойной щелчок <mousebutton
+>левой</mousebutton
+> кнопкой</entry>
+<entry
+>Закрыть текущее изображение</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>Окно выбора файлов</title>
+
+<table>
+<title
+>Комбинации клавиш, применяемые в окне выбора файлов</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Комбинация клавиш</entry>
+<entry
+>Действие</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Ввод</keycap
+></entry>
+<entry
+>Войти в каталог или открыть изображение, в зависимости от того, что выбрано.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Пролистать список файлов на страницу вперёд</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Пролистать список файлов на страницу назад</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Выбрать первый файл или каталог</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Выбрать последний файл или каталог</entry>
+</row>
+<row>
+<entry
+><keycap
+>Пробел</keycap
+></entry>
+<entry
+>Показать или скрыть окно выбора файлов, если открыто окно выбора изображения.</entry>
+</row>
+<row>
+<entry
+><keycap
+>любая буква или цифра</keycap
+></entry>
+<entry
+>Открыть текстовое поле ввода. Введите в нём первые символы названия требуемого файла, и все файлы, удовлетворяющие условию, будут подсвечиваться.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Перейти к</quote
+> &mdash; позволяет ввести имя каталога, к которому следует перейти.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>Удалить текущий файл. Программа запросит подтверждение.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Удалить текущий файл без подтверждения.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Открыть руководство (этот файл)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Выйти из &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Использование мыши в окне выбора файла</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Использование мыши</entry>
+<entry
+>Действие</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>Щелчок <mousebutton
+>левой</mousebutton
+> кнопкой</entry>
+<entry
+>Войти в каталог или открыть изображение</entry>
+</row>
+<row>
+<entry
+>Щелчок <mousebutton
+>правой</mousebutton
+> кнопкой</entry>
+<entry
+>Открыть контекстное меню.</entry>
+</row>
+<row>
+<entry
+>Двойной щелчок</entry>
+<entry
+>Загрузить выбранное изображение или войти в выбранный каталог</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+
+<title
+>Благодарности и лицензирование</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Авторские права на программу принадлежат 1998-2002 Carsten Pfeiffer <email
+>pfeiffer@kde.org</email
+> </para>
+
+<para
+>Авторские права на документацию принадлежат 2001 Carsten Pfeiffer <email
+>pfeiffer@kde.org</email
+> </para>
+<para
+>Перевод в формат DocBook &XML; и дополнения -- Lauri Watts <email
+>lauri@kde.org</email
+></para>
+
+<para
+>Перевод на русский &mdash; Иван Кашуков <email
+>dolphin210@yandex.ru</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Установка</title>
+
+<sect1 id="getting-kuickshow">
+<title
+>Где взять &kuickshow;</title>
+&install.intro.documentation; </sect1>
+
+<sect1 id="requirements">
+<title
+>Системные требования</title>
+
+<para
+>Раздел ещё не написан</para>
+<!--
+List any special requirements for your application here. This should include:
+.Libraries or other software that is not included in kdesupport,
+kdelibs, or kdebase.
+.Hardware requirements like amount of RAM, disk space, graphics card
+capabilities, screen resolution, special expansion cards, etc.
+.Operating systems the app will run on. If your app is designed only for a
+specific OS, (you wrote a graphical LILO configurator for example) put this
+information here.
+
+
+<para>
+In order to successfully use &kuickshow;, you need &kde; 1.1. Foobar.lib is
+required in order to support the advanced &kuickshow; features. &kuickshow; uses
+about 5 megs of memory to run, but this may vary depending on your
+platform and configuration.
+</para>
+
+<para>
+All required libraries as well as &kuickshow; itself can be found
+on <ulink url="ftp://ftp.kapp.org"
+>The &kuickshow; home page</ulink
+>.
+</para>
+-->
+
+<!-- For a list of updates, you may refer to the application web site
+or the ChangeLog file, or ... 
+<para>
+You can find a list of changes at <ulink
+url="http://apps.kde.org/kapp"
+>http://apps.kde.org/kapp</ulink
+>.
+</para
+>-->
+</sect1>
+
+<sect1 id="compilation">
+<title
+>Сборка и установка</title>
+&install.compile.documentation; </sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+

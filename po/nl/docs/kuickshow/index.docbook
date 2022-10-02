@@ -1,0 +1,1435 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Dutch "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book id="kuickshow" lang="&language;">
+
+<bookinfo>
+<title
+>Het handboek van &kuickshow;</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+&Freek.de.Kruijf;&Ronald.Stroethoff; 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2012-07-15</date>
+<releaseinfo
+>0.9.2 (&kde; 4.8)</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>&kuickshow; is een comfortabele afbeeldingsbrowser/viewer. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>afbeelding</keyword>
+<keyword
+>viewer</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inleiding</title>
+
+<para
+>&kuickshow; is een comfortabele afbeeldingsbrowser/viewer. Het toont een bestandenbrowser waarin u afbeeldingen kunt selecteren en ze dan kan tonen. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>De volgende afbeeldingsformaten worden ondersteund:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Afbeeldingen kunnen worden getoond ofwel in hun eigen venster, met de grootte van de afbeelding of beeldvullend op het volledige scherm.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>&kuickshow; gebruiken</title>
+
+<para
+>&kuickshow; gebruiken is erg eenvoudig. De bestandenbrowser geeft een lijst met bestanden, die u met een &LMB;-klik of met de <keycap
+>Return</keycap
+>-toets kunt selecteren.</para>
+
+<screenshot>
+<screeninfo
+>Hier is een schermafbeelding van &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Schermafdruk</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>Meer mogelijkheden van &kuickshow;</title>
+
+<para
+>De dialoog voor opties geeft nog meer mogelijkheden:</para>
+
+<itemizedlist>
+<listitem
+><para
+>Als ze groter zijn, kunnen afbeeldingen automatisch verkleind worden om op het scherm te passen.</para>
+</listitem>
+<listitem
+><para
+>U kunt instellen of afbeeldingen getoond worden in hun eigen venster of altijd hetzelfde venster gebruiken.</para>
+</listitem>
+<listitem
+><para
+>U kunt de vertragingstijd voor een diashow instellen.</para>
+</listitem>
+<listitem
+><para
+>U kunt de browser vertellen welke bestandstypen te tonen.</para>
+</listitem>
+<listitem
+><para
+>U kunt de snelheid/kwaliteitsverhouding aanpassen</para
+></listitem>
+</itemizedlist>
+
+<para
+>Als u zoekt naar een bepaald bestand, voer gewoon de eerst paar tekens van zijn bestandsnaam in in de browser. Een klein bewerkingsvenster zal verschijnen in de hoek rechtsonder. Wanneer een overeenkomend bestand is gevonden, wordt het gemarkeerd. U kunt het bewerkingsvenster verlaten door op <keycap
+>Return</keycap
+> of &Esc; te drukken.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>Het configuratievenster van &kuickshow;</title>
+
+<para
+>De dialoog <guilabel
+>&kuickshow; configuratie</guilabel
+> bevat 5 tabbladen. Drie ervan, <link linkend="general-options"
+><guilabel
+>Algemeen</guilabel
+></link
+>, <link linkend="modifications-options"
+><guilabel
+>Wijzigingen</guilabel
+></link
+> en <link linkend="slideshow-options"
+><guilabel
+>Diashow</guilabel
+></link
+> configureren de werking van &kuickshow; en de andere twee, <link linkend="shortcuts-options"
+><guilabel
+>Sneltoetsen voor weergave</guilabel
+></link
+> en <link linkend="shortcuts-options"
+><guilabel
+>Sneltoetsen voor browser</guilabel
+></link
+> stellen u in staat om de sneltoetsen voor de respectievelijke vensters te personaliseren.</para>
+
+<sect1 id="general-options">
+<title
+>Algemene opties</title>
+
+<para
+>Het tabblad <guilabel
+>Algemeen</guilabel
+> bevat de opties om &kuickshow; in te stellen en af te regelen.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Modus volledig scherm</guilabel
+></term>
+<listitem>
+<para
+>Als dit is geselecteerd, openen afbeeldingen in modus volledig scherm. Als de afbeelding niet groot genoeg is om het scherm te vullen, zal de rest van het scherm ingevuld worden met de onderstaand geselecteerde achtergrondkleur. De standaard is uit.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Volgende afbeelding vooraf laden</guilabel
+></term>
+<listitem>
+<para
+>Als dit is geselecteerd zal &kuickshow; de volgende afbeelding in de map laden, terwijl u kijkt naar de huidige. Dit vermindert de vertraging wanneer u de volgende afbeelding selecteert en is speciaal nuttig voor diashows.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Laatste map onthouden</guilabel
+></term>
+<listitem>
+<para
+>Als dit is geactiveerd, slaat &kuickshow; de naam van de laatste map op bij afsluiten. Bij de volgende start van &kuickshow; zal deze map in het browservenster geopend worden.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Achtergrondkleur:</guilabel
+></term>
+<listitem>
+<para
+>Klik op de gekleurde balk om een achtergrondkleur te selecteren. Deze wordt gebruikt om he scherm in modus volledig scherm te vullen of het venster, als u het groter heeft gemaakt dan de afbeelding.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Alleen bestanden met deze extensie tonen: </guilabel
+></term>
+<listitem>
+<para
+>U kunt &kuickshow; configureren om u alleen enkele van de bestandstypen die het aankan te tonen.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Kwaliteit/snelheid</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Snelle weergave-opbouw</guilabel
+></term>
+<listitem
+><para
+>Weergave van dingen snel opbouwen.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Weergeven in hoge kleuren (15/16-bit) modus</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Weergeven in lage kleuren (&lt;=8 bits) modus</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Eigen kleurenpalet gebruiken</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Snel remappen van palet</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Maximale grootte cache (MB):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>Het tabblad Wijzigen</title>
+
+<para
+>Activeer <guilabel
+>Standaard wijzigingen op afbeelding toepassen</guilabel
+> om een afbeelding met deze wijzigingen in &kuickshow; te openen.</para>
+
+<variablelist>
+<title
+><guilabel
+>Schaling</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Grotere afbeelding krimpen tot schermgrootte</guilabel
+></term>
+<listitem>
+<para
+>Als dit is geselecteerd worden grote afbeeldingen getoond in een gemaximaliseerd venster. Dit staat standaard ingeschakeld.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Afbeelding verkleinen tot schermgrootte, indien kleiner, tot een factor:</guilabel
+></term>
+<listitem>
+<para
+>Als dit is geselecteerd verhoogt &kuickshow; de vergroting van kleine afbeeldingen tot de geselecteerde factor.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Geometrie</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Verticaal spiegelen</guilabel
+></term>
+<listitem
+><para
+>Spiegelt de afbeelding verticaal.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Horizontaal spiegelen</guilabel
+></term>
+<listitem
+><para
+>Spiegelt de afbeelding horizontaal. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Afbeelding draaien</guilabel
+></term>
+<listitem
+><para
+>Roteert de afbeelding tot 0, 90, 180 of 270 graden. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Aanpassingen</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Helderheid:</guilabel
+></term>
+<listitem
+><para
+>Maakt de afbeelding lichter/donkerder.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Contrast:</guilabel
+></term>
+<listitem
+><para
+>Voegt toe/verwijdert contrast.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gamma:</guilabel
+></term>
+<listitem
+><para
+>Meer/minder gamma. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Een <guilabel
+>Voorbeeld</guilabel
+> van het <guilabel
+>Origineel</guilabel
+> en <guilabel
+>Gewijzigde</guilabel
+> afbeelding wordt getoond onder deze opties.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>Het tabblad Diashow</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Naar volledig scherm overschakelen</guilabel
+></term>
+<listitem>
+<para
+>Geeft aan of &kuickshow; zou moeten omschakelen naar modus volledig scherm wanneer de diashow begint. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Beginnen met huidige afbeelding</guilabel
+></term>
+<listitem>
+<para
+>Geeft aan of de diashow moet beginnen met de eerste afbeelding in de map of met de afbeelding die is geselecteerd. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vertraging tussen dia's:</guilabel
+></term>
+<listitem>
+<para
+>De tijdsduur tussen wijziging van beeld tijdens de diashow. U kunt de schuifregelaar gebruiken, een nieuwe waarde in het veld ingeven of de kleine pijltjes om de waarde te verhogen of te verlagen. De standaard is 3 seconden.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Herhalingen (0 is oneindig):</guilabel
+></term>
+<listitem>
+<para
+>De hoeveelheid iteraties. Als u het op 0 instelt zal het rondlopen totdat u het afbreekt U kunt de schuifregelaar gebruiken, een nieuwe waarde in het veld ingeven of de kleine pijltjes om de waarde te verhogen of te verlagen. De standaard is 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>Het tabblad Sneltoetsen</title
+> 
+<para
+>De sneltoetsen wijzigen voor de verschillende modi van &kuickshow; in de tabbladen <guilabel
+>Sneltoetsen voor de viewer</guilabel
+> en de <guilabel
+>Sneltoetsen voor de browser</guilabel
+>.</para>
+
+<para
+>Voor meer informatie lees de sectie over <ulink url="help:/fundamentals/config.html#shortcuts"
+>Sneltoetsen</ulink
+> van de &kde;-fundamentals.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>Menubeschrijvingen</title>
+
+<sect1 id="file-menu">
+<title
+>Het menu Bestand</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Openen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een nieuwe afbeelding</action
+> in &kuickshow;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afbeelding tonen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Toont </action
+> de geselecteerde afbeelding in een nieuw afbeeldingsvenster.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afbeelding in actieve venster tonen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Toont </action
+>de geselecteerde afbeelding in het actieve afbeeldingsvenster.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afbeelding in volledig scherm tonen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Geeft</action
+> het geselecteerde afbeelding op het volledige scherm weer. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Diavoorstelling starten</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Start</action
+> van de afbeeldingen in de map een diavoorstelling.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+><guimenuitem
+>Afbeelding afdrukken...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Drukt de afbeelding af</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Bestand</guimenu
+> <guimenuitem
+>Afsluiten</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Sluit</action
+> &kuickshow; af. Als u meerdere vensters met afbeeldingen open heeft dan worden ze allemaal afgesloten.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+>Het menu Bewerken</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Nieuwe map...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+>Een nieuwe map <action
+>Aanmaken</action
+>.</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Naar prullenbak</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Verplaatst</action
+> het geselecteerde bestand naar de prullenbak. U wordt gevraagd om de actie te bevestigen.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keysym
+>Return</keysym
+></keycombo
+> </shortcut
+> <guimenu
+>Bewerken</guimenu
+> <guimenuitem
+>Eigenschappen</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Toont</action
+> de eigenschappen va het geselecteerde bestand.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+>Het menu Beeld</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Compacte weergave</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Als u dit inschakelt, dan krijgt u alleen de namen van de bestanden en mappen te zien.</para>
+<para
+>Vergelijk dit met de gedetailleerde weergave.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Gedetailleerde weergave</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Als u dit inschakelt, dan krijgt u de namen, grootte, datums, permissies, bestandseigendom en groepseigendom te zien.</para>
+<para
+>Vergelijk dit met de compacte weergave.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Weergave in boomstructuur</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Beeld</guimenu
+> <guimenuitem
+>Gedetailleerde weergave in boomstructuur</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-help-menu">
+<title
+>De menu's Instellingen en Help</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>&kuickshow; instellen...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Opent een dialoog voor het wijzigen van enige opties</action
+> zoals beschreven in de sectie <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>&kuickshow; heeft een aantal van de algemene &kde; items in het menu <guimenu
+>Help</guimenu
+>, voor meer informatie lees de sectie hierover in het <ulink url="help:/fundamentals/menus.html#menus-help"
+>Menu Help</ulink
+> van de basisinformatie van &kde;. </para>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Overzicht van de opdrachten</title>
+
+<sect1 id="keybindings">
+<title
+>Het venster Afbeelding</title>
+
+<para
+>Alle sneltoetsen zijn instelbaar in het <link linkend="configuration-dialog"
+>Instellingendialoog</link
+>.</para>
+
+<table>
+<title
+>Sneltoetsen voor het weergavevenster</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Sleutel</entry>
+<entry
+>Actie</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Toont volgende afbeelding</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Toont vorige afbeelding</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Toont eerste afbeelding</entry>
+</row>
+<row>
+<entry
+><keycap
+>Einde</keycap
+></entry>
+<entry
+>Toont laatste afbeelding</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Zoomt in op de afbeelding</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Zoomt uit op de afbeelding</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Spiegelt de afbeelding horizontaal</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Spiegelt de afbeelding verticaal</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Roteert 270&deg; met de klok mee (wat ook 90&deg; tegen de klok in is)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>Roteert 90&deg; met de klok mee</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Roteert 180&deg; met de klok mee</entry>
+</row>
+<row>
+<entry
+><keycap
+>Pijltjestoetsen</keycap
+></entry>
+<entry
+>Verplaatst de afbeelding (of eigenlijk, u, de kijker,) als het groter is dan het scherm</entry>
+</row>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>Schakelt tussen volledig scherm en venster-modus</entry>
+</row>
+<row>
+<entry
+><keycap
+>Spatie</keycap
+></entry>
+<entry
+>Schakelt de weergave van het bestandsvenster</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>Sluit het weergavevenster. Dit sluit &kuickshow; compleet af, als u geen bestandsvenster open heeft.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>Maakt de afbeelding Lichter/Donkerder</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Verhoogt/Verlaagt contrast</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Meer/Minder <firstterm
+>gamma</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Toont de afbeelding met de oorspronkelijke afmetingen. Dit is alleen bruikbaar als u automatisch herschalen heeft ingeschakeld.</entry>
+</row>
+<row>
+<entry
+>&Enter;</entry>
+<entry
+>Toont de afbeelding opnieuw met de standaardinstellingen en afmetingen.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Opent het <guilabel
+>Opslaan als</guilabel
+>-dialoog</entry>
+</row>
+<row>
+<entry
+><keycap
+>Verwijderen</keycap
+></entry>
+<entry
+>Verwijdert de geselecteerde afbeelding. U wordt gevraagd om de actie te bevestigen.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Verwijdert de geselecteerde afbeelding zonder om bevestiging te vragen.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;<keycap
+>Return</keycap
+></keycombo
+></entry>
+<entry
+>Toont de eigenschappen van de afbeelding</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Opent de online help (dit bestand)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>Beëindigt &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Gebruik van de muis in het weergavevenster</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Muisknop</entry>
+<entry
+>Actie</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><mousebutton
+>Rechter</mousebutton
+> muisklik</entry>
+<entry
+>Opent het contextmenu, met meerdere keuzemogelijkheden</entry>
+</row>
+<row>
+<entry
+>Sleep met <mousebutton
+>Links</mousebutton
+></entry>
+<entry
+>Verplaatst de afbeelding, als het niet past in het venster.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<mousebutton
+>Links</mousebutton
+> </keycombo
+> slepen</entry>
+<entry
+>Laat een rechthoek zien waarop u kunt inzoomen.</entry>
+</row>
+<row>
+<entry
+>Dubbelklik <mousebutton
+>Links</mousebutton
+></entry>
+<entry
+>Sluit de huidige afbeelding</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>Het browservenster</title>
+
+<table>
+<title
+>Sneltoetsen voor het browservenster</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Sneltoetsen</entry>
+<entry
+>Actie</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>Opent een map, of opent een afbeeldingsvenster, afhankelijk van het geselecteerde item.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Gaat in de lijst met bestanden een pagina verder.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Gaat in de lijst met bestanden een pagina terug.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Selecteert het eerste bestand of map</entry>
+</row>
+<row>
+<entry
+><keycap
+>Einde</keycap
+></entry>
+<entry
+>Selecteert het laatste bestand of map</entry>
+</row>
+<row>
+<entry
+><keycap
+>Spatie</keycap
+></entry>
+<entry
+>Brengt het browservenster naar de voorgrond, als een afbeeldingsvenster is geopend</entry>
+</row>
+<row>
+<entry
+><keycap
+>Elk alfanumeriek karakter</keycap
+></entry>
+<entry
+>Opent het invoervak voor <quote
+>automatisch aanvullen</quote
+>. Voer de eerste karakters in van een bestandsnaam waarnaar u zoekt, en als het aanwezig is, dan zal het bestand worden geselecteerd.</entry>
+</row>
+<!-- not in 0.9.2 kde 4.8
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Go to</quote
+> &mdash; lets you enter a folder to go
+to.</entry>
+</row>
+-->
+<row>
+<entry
+><keycap
+>Verwijderen</keycap
+></entry>
+<entry
+>Verwijdert het geselecteerde bestand. U wordt gevraagd om de actie te bevestigen.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Verwijdert het geselecteerde bestand zonder om bevestiging te vragen..</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Opent de online help (dit bestand)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Beëindigt &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Gebruik van de muis in het browservenster</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Gebruik van de muis</entry>
+<entry
+>Actie</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><mousebutton
+>Linker</mousebutton
+> muisklik</entry>
+<entry
+>Opent een map, of selecteert een afbeeldingsvenster.</entry>
+</row>
+<row>
+<entry
+><mousebutton
+>Rechter</mousebutton
+> muisklik</entry>
+<entry
+>Opent het contextmenu, met meerdere keuzemogelijkheden.</entry>
+</row>
+<row>
+<entry
+>Dubbelklik</entry>
+<entry
+>Laad het geselecteerde afbeelding of opent de geselecteerde map</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Dankbetuigingen en licentie</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Programma copyright 1998-2009 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+
+<para
+>Documentatie copyright 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+<para
+>Geconverteerd naar docbook &XML; en uitgebreid door &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+&meld.fouten;&vertaling.freek; &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+

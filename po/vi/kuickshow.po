@@ -1,0 +1,816 @@
+# Vietnamese translation for Kuickshow.
+# Copyright © 2007 KDE i18n Project for Vietnamese.
+# Clytie Siddall <clytie@riverland.net.au>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kuickshow\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-06-14 00:15+0000\n"
+"PO-Revision-Date: 2007-07-07 22:37+0930\n"
+"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: LocFactoryEditor 1.6.4a6\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Nhóm Việt hoá KDE"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde-l10n-vi@kde.org"
+
+#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
+#: src/aboutwidget.ui:32
+#, kde-format
+msgid "(authors)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
+#: src/aboutwidget.ui:45
+#, kde-format
+msgid "(url)"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
+#: src/aboutwidget.ui:55
+#, kde-format
+msgid "(copyright)"
+msgstr ""
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
+#: src/defaultswidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&Modifications"
+msgid "Modifications"
+msgstr "&Sự sửa đổi"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
+#: src/defaultswidget.ui:23
+#, kde-format
+msgid "Apply default image modifications"
+msgstr "Áp dụng các sự sửa đổi ảnh mặc định"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbScale)
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: src/defaultswidget.ui:30 src/printing_page.ui:37
+#, kde-format
+msgid "Scaling"
+msgstr "Co dãn"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbUpScale)
+#: src/defaultswidget.ui:36
+#, kde-format
+msgid "Scale image to screen size, if smaller, up to factor:"
+msgstr "Ảnh nhỏ hơn thì phóng to nó thành kích cỡ màn hình, đến hệ số :"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDownScale)
+#: src/defaultswidget.ui:53
+#, kde-format
+msgid "Shrink image to screen size, if larger"
+msgstr "Ảnh quá lớn thì thu nhỏ nó thành kích cỡ màn hình"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbGeometry)
+#: src/defaultswidget.ui:63
+#, kde-format
+msgid "Geometry"
+msgstr "Dạng hình, hình học"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipVertically)
+#: src/defaultswidget.ui:69
+#, kde-format
+msgid "Flip vertically"
+msgstr "Lật dọc"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
+#: src/defaultswidget.ui:76
+#, kde-format
+msgid "Flip horizontally"
+msgstr "Lật ngang"
+
+#. i18n: ectx: property (text), widget (QLabel, lbRotate)
+#: src/defaultswidget.ui:85
+#, kde-format
+msgid "Rotate image:"
+msgstr "Xoay ảnh:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:93
+#, kde-format
+msgid "0 Degrees"
+msgstr "0º"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:98
+#, kde-format
+msgid "90 Degrees"
+msgstr "90º"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:103
+#, kde-format
+msgid "180 Degrees"
+msgstr "180º"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
+#: src/defaultswidget.ui:108
+#, kde-format
+msgid "270 Degrees"
+msgstr "270º"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbAdjust)
+#: src/defaultswidget.ui:134
+#, kde-format
+msgid "Adjustments"
+msgstr "Điều chỉnh"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/defaultswidget.ui:140
+#, kde-format
+msgid "Brightness:"
+msgstr "Độ sáng:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/defaultswidget.ui:183
+#, kde-format
+msgid "Contrast:"
+msgstr "Độ tương phản:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: src/defaultswidget.ui:226
+#, kde-format
+msgid "Gamma:"
+msgstr "Gamma (γ):"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
+#: src/defaultswidget.ui:272
+#, kde-format
+msgid "Preview"
+msgstr "Xem thử"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImOrig)
+#: src/defaultswidget.ui:281
+#, kde-format
+msgid "Original"
+msgstr "Gốc"
+
+#. i18n: ectx: property (text), widget (QLabel, lbImFiltered)
+#: src/defaultswidget.ui:288
+#, kde-format
+msgid "Modified"
+msgstr "Đã sửa đổi"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
+#: src/generalwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&General"
+msgid "General"
+msgstr "&Chung"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
+#: src/generalwidget.ui:20
+#, kde-format
+msgid "Remember last folder"
+msgstr "Nhớ thư mục cuối"
+
+#. i18n: ectx: property (title), widget (QGroupBox, gbox2)
+#: src/generalwidget.ui:30
+#, kde-format
+msgid "Quality/Speed"
+msgstr "Chất lượng/Tốc độ"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
+#: src/generalwidget.ui:36
+#, fuzzy, kde-format
+#| msgid "Scaling"
+msgid "Smooth scaling"
+msgstr "Co dãn"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
+#: src/generalwidget.ui:43
+#, kde-format
+msgid "Fast rendering"
+msgstr "Vẽ nhanh"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
+#: src/generalwidget.ui:50
+#, kde-format
+msgid "Dither in HiColor (15/16bit) modes"
+msgstr "Rung động theo chế độ HiColor (15/16-bit)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
+#: src/generalwidget.ui:57
+#, kde-format
+msgid "Dither in LowColor (<=8bit) modes"
+msgstr "Rung động theo chế độ LowColor (≤8-bit)"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
+#: src/generalwidget.ui:64
+#, kde-format
+msgid "Use own color palette"
+msgstr "Dùng bảng chọn màu riêng"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFastRemap)
+#: src/generalwidget.ui:71
+#, kde-format
+msgid "Fast palette remapping"
+msgstr "Ảnh xạ lại nhanh bảng chọn"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/generalwidget.ui:78
+#, kde-format
+msgid "Maximum cache size: "
+msgstr "Cỡ bộ nhớ tạm tối đa: "
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:88
+#, kde-format
+msgid "Unlimited"
+msgstr "Vô hạn"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, maxCacheSpinBox)
+#: src/generalwidget.ui:91
+#, kde-format
+msgid " MB"
+msgstr " MB"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
+#: src/generalwidget.ui:104
+#, kde-format
+msgid "Fullscreen mode"
+msgstr "Chế độ toàn màn hình"
+
+#. i18n: ectx: property (text), widget (QLabel, l0)
+#: src/generalwidget.ui:114
+#, kde-format
+msgid "Background color:"
+msgstr "Màu nền:"
+
+#. i18n: ectx: property (text), widget (QLabel, l1)
+#: src/generalwidget.ui:121
+#, kde-format
+msgid "Show only files with extension: "
+msgstr "HIện chỉ tệp có phần mở rộng: "
+
+#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
+#: src/generalwidget.ui:128
+#, kde-format
+msgid "Open KuickShow Website"
+msgstr "Mở địa chỉ Web Kuickshow"
+
+#. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
+#: src/generalwidget.ui:138
+#, kde-format
+msgid "Preload next image"
+msgstr "Nạp sẵn ảnh kế"
+
+#: src/imagewindow.cpp:152
+#, kde-format
+msgid "Show Next Image"
+msgstr "Hiện ảnh kế"
+
+#: src/imagewindow.cpp:157
+#, kde-format
+msgid "Show Previous Image"
+msgstr "Hiện ảnh trước"
+
+#: src/imagewindow.cpp:162
+#, kde-format
+msgid "Delete Image"
+msgstr "Xoá ảnh"
+
+#: src/imagewindow.cpp:167
+#, kde-format
+msgid "Move Image to Trash"
+msgstr ""
+
+#: src/imagewindow.cpp:181
+#, kde-format
+msgid "Restore Original Size"
+msgstr "Phục hồi kích cỡ gốc"
+
+#: src/imagewindow.cpp:186
+#, kde-format
+msgid "Maximize"
+msgstr "Phóng to"
+
+#: src/imagewindow.cpp:191
+#, kde-format
+msgid "Rotate 90 Degrees"
+msgstr "Xoay 90°"
+
+#: src/imagewindow.cpp:196
+#, kde-format
+msgid "Rotate 180 Degrees"
+msgstr "Xoay 180°"
+
+#: src/imagewindow.cpp:201
+#, kde-format
+msgid "Rotate 270 Degrees"
+msgstr "Xoay 270°"
+
+#: src/imagewindow.cpp:206
+#, kde-format
+msgid "Flip Horizontally"
+msgstr "Lật ngang"
+
+#: src/imagewindow.cpp:211
+#, kde-format
+msgid "Flip Vertically"
+msgstr "Lật dọc"
+
+#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#, kde-format
+msgid "Print Image..."
+msgstr "In ảnh..."
+
+#: src/imagewindow.cpp:227
+#, kde-format
+msgid "More Brightness"
+msgstr "Tăng độ sáng"
+
+#: src/imagewindow.cpp:232
+#, kde-format
+msgid "Less Brightness"
+msgstr "Giảm độ sáng"
+
+#: src/imagewindow.cpp:237
+#, kde-format
+msgid "More Contrast"
+msgstr "Tăng độ tương phản"
+
+#: src/imagewindow.cpp:242
+#, kde-format
+msgid "Less Contrast"
+msgstr "Giảm độ tương phản"
+
+#: src/imagewindow.cpp:247
+#, kde-format
+msgid "More Gamma"
+msgstr "Tăng Gamma (γ)"
+
+#: src/imagewindow.cpp:252
+#, kde-format
+msgid "Less Gamma"
+msgstr "Giảm Gamma (γ)"
+
+#: src/imagewindow.cpp:258
+#, kde-format
+msgid "Scroll Up"
+msgstr "Cuộn lên"
+
+#: src/imagewindow.cpp:263
+#, kde-format
+msgid "Scroll Down"
+msgstr "Cuộn xuống"
+
+#: src/imagewindow.cpp:268
+#, kde-format
+msgid "Scroll Left"
+msgstr "Cuộn bên trái"
+
+#: src/imagewindow.cpp:273
+#, kde-format
+msgid "Scroll Right"
+msgstr "Cuộn bên phải"
+
+#: src/imagewindow.cpp:278
+#, kde-format
+msgid "Pause Slideshow"
+msgstr "Tạm dừng chiếu ảnh"
+
+#: src/imagewindow.cpp:290
+#, kde-format
+msgid "Reload Image"
+msgstr "Nạp lại ảnh"
+
+#: src/imagewindow.cpp:296
+#, kde-format
+msgid "Properties"
+msgstr "Thuộc tính"
+
+#: src/imagewindow.cpp:350
+#, kde-format
+msgctxt "Filename (Imagewidth x Imageheight)"
+msgid "%3 (%1 x %2)"
+msgstr "%3 (%1 × %2)"
+
+#: src/imagewindow.cpp:453
+#, fuzzy, kde-format
+#| msgid "Unable to print the image."
+msgid "Unable to download the image from %1."
+msgstr "Không thể in ảnh."
+
+#: src/imagewindow.cpp:469
+#, kde-format
+msgid ""
+"Unable to load the image %1.\n"
+"Perhaps the file format is unsupported or your Imlib is not installed "
+"properly."
+msgstr ""
+"Không thể nạp ảnh %1.\n"
+"Có lẽ định dạng tệp không được hỗ trợ, hoặc lmlib chưa được cài đặt đúng."
+
+#: src/imagewindow.cpp:909
+#, kde-format
+msgid "Brightness"
+msgstr "Độ sáng"
+
+#: src/imagewindow.cpp:913
+#, kde-format
+msgid "Contrast"
+msgstr "Độ tương phản"
+
+#: src/imagewindow.cpp:917
+#, kde-format
+msgid "Gamma"
+msgstr "Gamma (γ)"
+
+#: src/imagewindow.cpp:956
+#, kde-format
+msgid "Unable to print the image."
+msgstr "Không thể in ảnh."
+
+#: src/imagewindow.cpp:957
+#, kde-format
+msgid "Printing Failed"
+msgstr "Lỗi in"
+
+#: src/imagewindow.cpp:967
+#, kde-format
+msgid "Keep original image size"
+msgstr "Giữ kích cỡ ảnh gốc"
+
+#: src/imagewindow.cpp:971
+#, kde-format
+msgid "Save As"
+msgstr "Lưu dạng"
+
+#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#, kde-format
+msgid "Image Files (%1)"
+msgstr ""
+
+#: src/imagewindow.cpp:994
+#, fuzzy, kde-format
+#| msgid ""
+#| "Could not save the file.\n"
+#| "Perhaps the disk is full, or you don't have write permission to the file."
+msgid ""
+"Could not save the file.\n"
+"Perhaps the disk is full, or you do not have write permission to the file."
+msgstr ""
+"Không thể lưu tệp.\n"
+"Có lẽ đĩa đầy, hoặc bạn không có quyền ghi vào tệp đó."
+
+#: src/imagewindow.cpp:997
+#, kde-format
+msgid "File Saving Failed"
+msgstr "Lỗi lưu tệp"
+
+#: src/imagewindow.cpp:1269
+#, kde-format
+msgid ""
+"You are about to view a very large image (%1 x %2 pixels), which can be very "
+"resource-consuming and even make your computer hang.\n"
+"Do you want to continue?"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:40
+#, kde-format
+msgid "Configure"
+msgstr "Cấu hình"
+
+#: src/kuickconfigdlg.cpp:46
+#, kde-format
+msgid "&General"
+msgstr "&Chung"
+
+#: src/kuickconfigdlg.cpp:50
+#, kde-format
+msgid "&Modifications"
+msgstr "&Sự sửa đổi"
+
+#: src/kuickconfigdlg.cpp:54
+#, kde-format
+msgid "&Slideshow"
+msgstr "C&hiếu ảnh"
+
+#: src/kuickconfigdlg.cpp:59
+#, kde-format
+msgid "&Viewer Shortcuts"
+msgstr "Phím tắt bộ &xem"
+
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Bro&wser Shortcuts"
+msgstr "Phím tắt bộ &duyệt"
+
+#: src/kuickfile.cpp:128
+#, fuzzy, kde-format
+#| msgid "Configure %1..."
+msgid "Downloading %1..."
+msgstr "Cấu hình %1..."
+
+#: src/kuickfile.cpp:129
+#, kde-format
+msgid ""
+"Please wait while downloading\n"
+"%1"
+msgstr ""
+
+#: src/kuickshow.cpp:130
+#, kde-format
+msgid ""
+"Do you really want to display this 1 image at the same time? This might be "
+"quite resource intensive and could overload your computer.<br>If you choose "
+"%1, only the first image will be shown."
+msgid_plural ""
+"Do you really want to display these %n images at the same time? This might "
+"be quite resource intensive and could overload your computer.<br>If you "
+"choose %1, only the first image will be shown."
+msgstr[0] ""
+
+#: src/kuickshow.cpp:132
+#, kde-format
+msgid "Display Multiple Images?"
+msgstr ""
+
+#: src/kuickshow.cpp:260
+#, kde-format
+msgid "Configure %1..."
+msgstr "Cấu hình %1..."
+
+#: src/kuickshow.cpp:265
+#, kde-format
+msgid "Start Slideshow"
+msgstr "Bắt đầu chiếu ảnh"
+
+#: src/kuickshow.cpp:271
+#, kde-format
+msgid "About KuickShow"
+msgstr "Giới thiệu về KuickShow"
+
+#: src/kuickshow.cpp:276
+#, kde-format
+msgid "Open Only One Image Window"
+msgstr "Mở chỉ một cửa sổ ảnh"
+
+#: src/kuickshow.cpp:281
+#, kde-format
+msgid "Show File Browser"
+msgstr "Hiện bộ duyệt tệp"
+
+#: src/kuickshow.cpp:283
+#, kde-format
+msgid "Hide File Browser"
+msgstr "Ẩn bộ duyệt tệp"
+
+#: src/kuickshow.cpp:288
+#, kde-format
+msgid "Show Image"
+msgstr "Hiện ảnh"
+
+#: src/kuickshow.cpp:292
+#, kde-format
+msgid "Show Image in Active Window"
+msgstr "Hiện ảnh trong cửa sổ đang dùng"
+
+#: src/kuickshow.cpp:296
+#, kde-format
+msgid "Show Image in Fullscreen Mode"
+msgstr "Hiện ảnh trong chế độ toàn màn hình"
+
+#: src/kuickshow.cpp:310
+#, kde-format
+msgid "&File"
+msgstr "&Tệp"
+
+#: src/kuickshow.cpp:322
+#, kde-format
+msgid "&Edit"
+msgstr "&Sửa"
+
+#: src/kuickshow.cpp:331
+#, kde-format
+msgid "&Settings"
+msgstr "Thiết &lập"
+
+#: src/kuickshow.cpp:341
+#, kde-format
+msgid "Main Toolbar"
+msgstr "Thanh công cụ chính"
+
+#: src/kuickshow.cpp:653
+#, kde-format
+msgid ""
+"<qt>Do you really want to delete\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+
+#: src/kuickshow.cpp:654
+#, fuzzy, kde-format
+#| msgid "Delete Image"
+msgid "Delete File"
+msgstr "Xoá ảnh"
+
+#: src/kuickshow.cpp:679
+#, kde-format
+msgid ""
+"<qt>Do you really want to trash\n"
+" <b>'%1'</b>?</qt>"
+msgstr ""
+
+#: src/kuickshow.cpp:680
+#, kde-format
+msgid "Trash File"
+msgstr ""
+
+#: src/kuickshow.cpp:681
+#, kde-format
+msgctxt "to trash"
+msgid "&Trash"
+msgstr ""
+
+#: src/kuickshow.cpp:1209
+#, kde-format
+msgid "Image Error"
+msgstr "Lỗi ảnh"
+
+#: src/kuickshow.cpp:1234
+#, kde-format
+msgid ""
+"Unable to initialize \"Imlib\".\n"
+"Start kuickshow from the command line and look for error messages.\n"
+"The program will now quit."
+msgstr ""
+"Không thể khởi chạy « lmlib ».\n"
+"Hãy khởi chạy kuickshow từ dòng lệnh và theo dõi thông điệp lỗi.\n"
+"Chương trình sẽ thoát ngay bây giờ."
+
+#: src/kuickshow.cpp:1238
+#, kde-format
+msgid "Fatal Imlib Error"
+msgstr "Lỗi lmlib nghiêm trọng"
+
+#: src/kuickshow.cpp:1388
+#, kde-format
+msgid "Select Files or Folder to Open"
+msgstr "Chọn các tệp hay thư mục cần mở"
+
+#: src/main.cpp:36
+#, kde-format
+msgid "KuickShow"
+msgstr "KuickShow"
+
+#: src/main.cpp:38
+#, kde-format
+msgid "A fast and versatile image viewer"
+msgstr "Bộ xem ảnh nhanh có nhiều khả năng"
+
+#: src/main.cpp:40
+#, fuzzy, kde-format
+#| msgid "(c) 1998-2002, Carsten Pfeiffer"
+msgid "(c) 1998-2009, Carsten Pfeiffer"
+msgstr "© năm 1998-2002 của Carsten Pfeiffer"
+
+#: src/main.cpp:45
+#, kde-format
+msgid "Carsten Pfeiffer"
+msgstr "Carsten Pfeiffer"
+
+#: src/main.cpp:47
+#, kde-format
+msgid "Rober Hamberger"
+msgstr "Rober Hamberger"
+
+#: src/main.cpp:48
+#, kde-format
+msgid "Thorsten Scheuermann"
+msgstr "Thorsten Scheuermann"
+
+#: src/main.cpp:57
+#, kde-format
+msgid "Start in the last visited folder, not the current working folder."
+msgstr ""
+"Bắt đầu trong thư mục đã thăm cuối, không phải thư mục làm việc hiện thời."
+
+#: src/main.cpp:58
+#, kde-format
+msgid "Optional image filenames/urls to show"
+msgstr "Các tên tệp/URL ảnh tuỳ chọn cần hiển thị"
+
+#: src/printing.cpp:52
+#, kde-format
+msgid "Print %1"
+msgstr "In %1"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
+#: src/printing_page.ui:14
+#, kde-format
+msgid "Image Settings"
+msgstr "Thiết lập ảnh"
+
+#. i18n: ectx: property (text), widget (QCheckBox, addFileName)
+#: src/printing_page.ui:20
+#, kde-format
+msgid "Print fi&lename below image"
+msgstr "In tê&n tệp bên dưới ảnh"
+
+#. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
+#: src/printing_page.ui:30
+#, kde-format
+msgid "Print image in &black and white"
+msgstr "In ảnh đ&en trắng"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/printing_page.ui:53
+#, kde-format
+msgid "&Width:"
+msgstr "Chiều &rộng:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:64
+#, kde-format
+msgid "Millimeters"
+msgstr "Mili-mét"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:69
+#, kde-format
+msgid "Centimeters"
+msgstr "Cen-ti-mét"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, units)
+#: src/printing_page.ui:74
+#, kde-format
+msgid "Inches"
+msgstr "Insơ"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/printing_page.ui:108
+#, kde-format
+msgid "&Height:"
+msgstr "&Cao :"
+
+#. i18n: ectx: property (text), widget (QRadioButton, scale)
+#: src/printing_page.ui:121
+#, kde-format
+msgid "Print e&xact size: "
+msgstr "In kích cỡ chính &xác: "
+
+#. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
+#: src/printing_page.ui:141
+#, kde-format
+msgid "Shrink image to &fit, if necessary"
+msgstr "Ảnh quá lớn thì thu nhỏ nó để vừa khít"
+
+#. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
+#: src/slideshowwidget.ui:14
+#, fuzzy, kde-format
+#| msgid "&Slideshow"
+msgid "Slideshow"
+msgstr "C&hiếu ảnh"
+
+#. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
+#: src/slideshowwidget.ui:20
+#, kde-format
+msgid "Switch to &full-screen"
+msgstr "Chuyển thành t&oàn màn hình"
+
+#. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
+#: src/slideshowwidget.ui:27
+#, kde-format
+msgid "S&tart with current image"
+msgstr "Bắ&t đầu với ảnh hiện có"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: src/slideshowwidget.ui:34
+#, kde-format
+msgid "De&lay between slides:"
+msgstr "&Hoãn giữa hai ảnh:"
+
+#. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:44
+#, kde-format
+msgid "Wait for key"
+msgstr "Đợi phím"
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
+#: src/slideshowwidget.ui:47
+#, kde-format
+msgid " sec"
+msgstr " giây"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: src/slideshowwidget.ui:57
+#, kde-format
+msgid "&Iterations (0 = infinite):"
+msgstr "&Lần lặp lại (0 = vô hạn):"

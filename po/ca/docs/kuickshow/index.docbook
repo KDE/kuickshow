@@ -1,0 +1,1423 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Catalan  "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book id="kuickshow" lang="&language;">
+
+<bookinfo>
+<title
+>El manual del &kuickshow;</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+&traductor.Antoni.Bella; 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>15 de juliol de 2012</date>
+<releaseinfo
+>0.9.2 (&kde; 4.8)</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>El &kuickshow; és un agradable explorador/visualitzador d'imatges. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>imatge</keyword>
+<keyword
+>visualitzador</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introducció</title>
+
+<para
+>El &kuickshow; és un agradable explorador/visualitzador d'imatges. Mostra un explorador de fitxers des del que podreu seleccionar les imatges que es mostraran. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>S'admeten els següents formats d'imatge:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Les imatges es poden mostrar a la seva pròpia finestra tan gran com la imatge o a pantalla completa.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>Usar el &kuickshow;</title>
+
+<para
+>L'ús del &kuickshow; és molt senzill. El navegador de fitxers llista els fitxers, des del qual els podreu seleccionar amb un clic del &BER; o amb la tecla &Intro;.</para>
+
+<screenshot>
+<screeninfo
+>Aquesta és una captura de pantalla del &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Captura de pantalla</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>Més característiques del &kuickshow;</title>
+
+<para
+>El diàleg d'opcions posa a disposició més possibilitats:</para>
+
+<itemizedlist>
+<listitem
+><para
+>Si les imatges són més grans, es poden reduir automàticament per adaptar-se a la pantalla.</para>
+</listitem>
+<listitem
+><para
+>Podeu configurar si les imatges s'han de mostrar a la seva pròpia finestra, o bé fer servir la mateixa.</para>
+</listitem>
+<listitem
+><para
+>Podeu establir el temps de retard per a un passi de diapositives.</para>
+</listitem>
+<listitem
+><para
+>Podeu indicar-li al navegador els tipus de fitxers que es mostraran.</para>
+</listitem>
+<listitem
+><para
+>Podeu ajustar la relació entre velocitat i qualitat</para
+></listitem>
+</itemizedlist>
+
+<para
+>Si cerqueu un determinat fitxer, només haureu d'introduir al navegador els primers caràcters del seu nom de fitxer. Apareixerà una petita finestra d'edició a l'extrem inferior dret. Quan es trobi un fitxer coincident, serà ressaltat. Podeu deixar la finestra d'edició prement &Intro; o &Esc;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>El diàleg de configuració del &kuickshow;</title>
+
+<para
+>El diàleg de <guilabel
+>Configuració del &kuickshow;</guilabel
+> conté 5 pestanyes. Tres d'elles, <link linkend="general-options"
+><guilabel
+>General</guilabel
+></link
+>, <link linkend="modifications-options"
+><guilabel
+>Modificacions</guilabel
+></link
+> i <link linkend="slideshow-options"
+><guilabel
+>Passi de diapositives</guilabel
+></link
+> configuren la manera d'operar del &kuickshow;, i les altres dues, <link linkend="shortcuts-options"
+><guilabel
+>Dreceres del visualitzador</guilabel
+></link
+> i <link linkend="shortcuts-options"
+><guilabel
+>Dreceres del navegador</guilabel
+></link
+> permeten personalitzar les dreceres de les respectives finestres.</para>
+
+<sect1 id="general-options">
+<title
+>Opcions generals</title>
+
+<para
+>La pestanya <guilabel
+>General</guilabel
+> conté les opcions per a configurar i afinar el &kuickshow;.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Mode de pantalla completa</guilabel
+></term>
+<listitem>
+<para
+>Si se selecciona, les imatges s'obriran en el mode de pantalla completa. Si la imatge no és prou gran per omplir la pantalla, la resta de la pantalla s'omplirà amb el color de fons seleccionat a continuació. El valor predeterminat és restar desactivat.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Precarrega la imatge següent</guilabel
+></term>
+<listitem>
+<para
+>Si se selecciona, el &kuickshow; carregarà la imatge següent a la carpeta, mentre esteu veient l'actual. Això reduirà el retard quan seleccioneu la següent imatge i és especialment útil per a passis de diapositives.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Recorda la darrera carpeta</guilabel
+></term>
+<listitem>
+<para
+>Si se selecciona, el &kuickshow; desarà el nom de l'última carpeta en sortir. El proper inici, el &kuickshow; obrirà aquesta carpeta a la finestra del navegador.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Color de fons:</guilabel
+></term>
+<listitem>
+<para
+>Feu clic a la barra de colors per a seleccionar un color de fons. Aquest s'utilitzarà per a omplir la pantalla en el mode de pantalla completa o la finestra, si és més gran que la imatge.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Mostra només els fitxers amb l'extensió:</guilabel
+></term>
+<listitem>
+<para
+>Podeu configurar el &kuickshow; perquè només mostri alguns dels tipus de fitxer dels que és capaç.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Qualitat/Velocitat</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Renderització ràpida</guilabel
+></term>
+<listitem
+><para
+>Ho renderitza tot ràpidament.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Mode de color de tramat alt (15/16 bits)</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Mode de color de tramat baix (&lt;= 8 bits)</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Usa una paleta de colors pròpia</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Remapatge ràpid de la paleta</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Mida màxima de la memòria cau (MB):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>La pestanya Modificacions</title>
+
+<para
+>Marqueu <guilabel
+>Aplica les modificacions per defecte a la imatge</guilabel
+> per a obrir una imatge al &kuickshow; amb aquestes modificacions.</para>
+
+<variablelist>
+<title
+><guilabel
+>Escalat</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Escala la imatge a la mida de la pantalla, si fos més gran</guilabel
+></term>
+<listitem>
+<para
+>Si se selecciona, es mostraran grans les imatges en una finestra maximitzada. El valor predeterminat és estar activat.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Escala la imatge a la mida de la pantalla, si és més petita, fins al factor:</guilabel
+></term>
+<listitem>
+<para
+>Si se selecciona, el &kuickshow; incrementarà l'ampliació de les imatges petites fins al factor seleccionat.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Geometria</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Inverteix verticalment</guilabel
+></term>
+<listitem
+><para
+>Inverteix la imatge verticalment.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Inverteix horitzontalment</guilabel
+></term>
+<listitem
+><para
+>Inverteix la imatge horitzontalment. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gira la imatge</guilabel
+></term>
+<listitem
+><para
+>Gira la imatge a 0, 90, 180 o 270 graus. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Ajustaments</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Lluminositat:</guilabel
+></term>
+<listitem
+><para
+>Aclareix o enfosqueix la imatge.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Contrast:</guilabel
+></term>
+<listitem
+><para
+>Afegeix o elimina el contrast.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gamma:</guilabel
+></term>
+<listitem
+><para
+>Més o menys gamma. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Es mostrarà una <guilabel
+>Vista prèvia</guilabel
+> de la imatge <guilabel
+>Original</guilabel
+> i la <guilabel
+>Modificada</guilabel
+> sota aquestes opcions.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>La pestanya Passi de diapositives</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Canvia a pantalla completa</guilabel
+></term>
+<listitem>
+<para
+>Indica si el &kuickshow; canviarà al mode de pantalla completa quan comenci el passi de diapositives. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Comença amb la imatge actual</guilabel
+></term>
+<listitem>
+<para
+>Indica si el passi de diapositives haurà de començar amb la primera imatge a la carpeta o amb la imatge seleccionada. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Retard entre diapositives:</guilabel
+></term>
+<listitem>
+<para
+>El període de temps entre els canvis d'imatge durant el passi de diapositives. Podeu utilitzar el control lliscant, introduïu un valor nou al camp o utilitzeu les fletxes petites per a fer augmentar o disminuir el valor. El valor predeterminat és 3 segons.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Iteracions (0 = infinit):</guilabel
+></term>
+<listitem>
+<para
+>La quantitat d'iteracions. Si s'estableix a 0, es posarà en bucle fins que interrompeu el passi de diapositives. Podeu utilitzar el control lliscant, introduïu un valor nou al camp o utilitzeu les fletxes petites per a fer augmentar o disminuir el valor. El valor predeterminat és 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>Les pestanyes de Dreceres</title
+> 
+<para
+>Es canvien les dreceres per als diferents modes del &kuickshow; a les pestanyes <guilabel
+>Dreceres del visualitzador</guilabel
+> i <guilabel
+>Dreceres del navegador</guilabel
+>.</para>
+
+<para
+>Per a més informació, llegiu la secció sobre <ulink url="help:/fundamentals/config.html#shortcuts"
+>Dreceres</ulink
+> en els Fonaments del &kde;.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>Referència del menú</title>
+
+<sect1 id="file-menu">
+<title
+>El menú Fitxer</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Obre...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre una imatge nova</action
+> amb el &kuickshow;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Mostra la imatge</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Mostra</action
+> la imatge seleccionada en una finestra d'imatges nova.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Mostra la imatge a la finestra activa</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Mostra</action
+> la imatge seleccionada a la finestra d'imatges activa.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Mostra la imatge en el mode de pantalla completa</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Mostra</action
+> la imatge seleccionada en el mode de pantalla completa. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Inicia el passi de diapositives</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Inicia</action
+> un passi de diapositives amb les imatges que es troben a la carpeta.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>P</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+><guimenuitem
+>Imprimeix la imatge...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Imprimeix la imatge</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fitxer</guimenu
+> <guimenuitem
+>Surt</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Surt</action
+> del &kuickshow;. Si teniu obertes diverses finestres d'imatges, es tancaran totes.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+>El menú Edita</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Carpeta nova...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+><action
+>Crea</action
+> una carpeta nova.</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+>&Del;</shortcut
+> <guimenu
+>Edita</guimenu
+> <guimenuitem
+>Mou a la paperera</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Mou</action
+> el fitxer actual a la paperera. Se us demanarà que confirmeu l'acció.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Alt;&Intro;</keycombo
+></shortcut
+><guimenu
+>Edita</guimenu
+> <guimenuitem
+>Propietats</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Mostra</action
+> les propietats del fitxer d'imatge actual.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+>El menú Visualitza</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Vista breu</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Si se selecciona aquesta opció, només es mostraran els noms dels fitxers i de les carpetes.</para>
+<para
+>Compareu-ho amb la vista detallada.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Vista detallada</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Si se selecciona aquesta opció, es mostraran els noms, les mides, les dates, els permisos, els usuaris i grups propietaris dels fitxers.</para>
+<para
+>Compareu-ho amb la vista breu.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Vista en arbre</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visualitza</guimenu
+> <guimenuitem
+>Vista en arbre detallada</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-help-menu">
+<title
+>Els menús Arranjament i Ajuda</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Configura el &kuickshow;...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Obre un diàleg per a canviar algunes opcions</action
+> tal com es descriu a la secció <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>El &kuickshow; té la configuració comuna al &kde; i els elements del menú <guimenu
+>Ajuda</guimenu
+>. Per a obtenir més informació, llegiu la secció sobre <ulink url="help:/fundamentals/menus.html#menus-help"
+>El menú Ajuda</ulink
+> en els Fonaments del &kde;. </para>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Referència d'ordres</title>
+
+<sect1 id="keybindings">
+<title
+>La finestra d'imatges</title>
+
+<para
+>Totes les dreceres són configurables des del <link linkend="configuration-dialog"
+>diàleg de configuració</link
+>.</para>
+
+<table>
+<title
+>Dreceres de teclat de la finestra d'imatges</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tecla</entry>
+<entry
+>Acció</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Av Pàg</keycap
+></entry>
+<entry
+>Carrega la imatge següent</entry>
+</row>
+<row>
+<entry
+><keycap
+>Re Pàg</keycap
+></entry>
+<entry
+>Carrega la imatge anterior</entry>
+</row>
+<row>
+<entry
+><keycap
+>Inici</keycap
+></entry>
+<entry
+>Carrega la primera imatge</entry>
+</row>
+<row>
+<entry
+><keycap
+>Fi</keycap
+></entry>
+<entry
+>Carrega l'última imatge</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Apropa la imatge</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Allunya la imatge</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Inverteix la imatge horitzontalment</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Inverteix la imatge verticalment</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Gira 270 &deg; en el sentit de les agulles del rellotge (el qual també és a 90 &deg; en el sentit contrari)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>Gira 90 &deg; en el sentit de les agulles del rellotge</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Gira 180 &deg; en el sentit de les agulles del rellotge</entry>
+</row>
+<row>
+<entry
+>Tecles <keycap
+>Fletxes de cursor</keycap
+></entry>
+<entry
+>Mou la imatge (o més aviat, l'espectador) si aquesta és més gran que la pantalla</entry>
+</row>
+<row>
+<entry
+><keycap
+>Retorn</keycap
+></entry>
+<entry
+>Alterna entre els modes de pantalla completa i de finestra</entry>
+</row>
+<row>
+<entry
+><keycap
+>Espai</keycap
+></entry>
+<entry
+>Mostra/oculta la visualització del navegador</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>Tanca la finestra d'imatges. Això tancarà el &kuickshow;, si no teniu oberta una finestra del navegador.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Maj;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>Aclareix o enfosqueix la imatge</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Maj;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Afegeix o elimina el contrast</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Maj;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Més o menys <firstterm
+>gamma</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Mostra la imatge en la mida original. Això només és útil quan heu habilitat l'escalat automàtic.</entry>
+</row>
+<row>
+<entry
+>&Intro;</entry>
+<entry
+>Torna a mostrar la imatge amb les opcions de configuració i la mida predeterminades.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Obre el diàleg <guilabel
+>Desa com a...</guilabel
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>Suprimeix</keycap
+></entry>
+<entry
+>Suprimeix la imatge actual. Se us demanarà que confirmeu l'acció.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Maj;&Del;</keycombo
+></entry>
+<entry
+>Suprimeix la imatge actual sense demanar confirmació</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;&Intro;</keycombo
+></entry>
+<entry
+>Mostra les propietats de la imatge</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Obre l'ajuda en línia (aquest fitxer)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>Surt del &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Usar el ratolí a la finestra d'imatges</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Botó del ratolí</entry>
+<entry
+>Acció</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>Clic <mousebutton
+>dret</mousebutton
+></entry>
+<entry
+>Obre el menú contextual, amb diverses opcions</entry>
+</row>
+<row>
+<entry
+>Arrossega amb el clic <mousebutton
+>esquerre</mousebutton
+></entry>
+<entry
+>Mou la imatge, si no encaixa a la finestra.</entry>
+</row>
+<row>
+<entry
+>Arrossega amb la tecla <keycombo action="simul"
+>&Maj;<mousebutton
+>clic esquerre</mousebutton
+> </keycombo
+></entry>
+<entry
+>Marca un rectangle del qual es farà zoom.</entry>
+</row>
+<row>
+<entry
+>Doble clic <mousebutton
+>esquerre</mousebutton
+></entry>
+<entry
+>Tanca la imatge actual</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>La finestra de l'explorador</title>
+
+<table>
+<title
+>Dreceres de teclat de la finestra del navegador</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Drecera de teclat</entry>
+<entry
+>Acció</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Retorn</keycap
+></entry>
+<entry
+>Entra en una carpeta o obre una finestra d'imatges segons l'element seleccionat.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Av Pàg</keycap
+></entry>
+<entry
+>Avança una pàgina a la llista de fitxers</entry>
+</row>
+<row>
+<entry
+><keycap
+>Re Pàg</keycap
+></entry>
+<entry
+>Mou una pàgina cap amunt a la llista de fitxers</entry>
+</row>
+<row>
+<entry
+><keycap
+>Inici</keycap
+></entry>
+<entry
+>Selecciona el primer fitxer o carpeta</entry>
+</row>
+<row>
+<entry
+><keycap
+>Fi</keycap
+></entry>
+<entry
+>Selecciona l'últim fitxer o carpeta</entry>
+</row>
+<row>
+<entry
+><keycap
+>Espai</keycap
+></entry>
+<entry
+>Mostra/oculta la visualització del navegador, si hi ha oberta una finestra d'imatges</entry>
+</row>
+<row>
+<entry
+><keycap
+>Qualsevol caràcter alfanumèric</keycap
+></entry>
+<entry
+>Obre el camp d'edició utilitzat per a la <quote
+>compleció</quote
+>. Introduïu els primers caràcters d'un nom de fitxer a cercar i, si es troba, aquest serà seleccionat.</entry>
+</row>
+<!-- not in 0.9.2 kde 4.8
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Go to</quote
+> &mdash; lets you enter a folder to go
+to.</entry>
+</row>
+-->
+<row>
+<entry
+><keycap
+>Suprimeix</keycap
+></entry>
+<entry
+>Suprimeix el fitxer actual. Se us demanarà que confirmeu l'acció.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Maj;&Del;</keycombo
+></entry>
+<entry
+>Suprimeix el fitxer actual sense demanar confirmació.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Obre l'ajuda en línia (aquest fitxer)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Surt del &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Usar el ratolí a la finestra del navegador</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Ús del ratolí</entry>
+<entry
+>Acció</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>Clic <mousebutton
+>esquerre</mousebutton
+></entry>
+<entry
+>Entra en una carpeta o selecciona una finestra d'imatges.</entry>
+</row>
+<row>
+<entry
+>Clic <mousebutton
+>dret</mousebutton
+></entry>
+<entry
+>Obre un menú contextual, amb diverses opcions.</entry>
+</row>
+<row>
+<entry
+>Doble clic</entry>
+<entry
+>Carrega la imatge o entra a la carpeta seleccionada.</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Crèdits i llicència</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Copyright del programa 1998-2009 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+
+<para
+>Copyright de la documentació 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+<para
+>Convertit originalment a DocBook amb &XML; i estès per en &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+<para
+>Traductor/Revisor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+

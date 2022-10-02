@@ -1,0 +1,1705 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&kuickshow;">
+  <!ENTITY package "kdegraphics">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Danish "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book lang="&language;">
+
+<bookinfo>
+<title
+>&kuickshow;-håndbogen</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+&erik.kjaer.pedersen.role; 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2005-12-29</date>
+<releaseinfo
+>0.8.7</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>&kuickshow; er en behagelig billed-søger/fremviser. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>billede</keyword>
+<keyword
+>viser</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Indledning</title>
+
+<para
+>&kuickshow; er en behagelig billed-søger/fremviser. Den viser en filsøger hvor du kan vælge billeder som så bliver vist. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>Følgende billedformater er understøttede:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Billeder kan vises enten i deres eget vindue, så stor som billedet er eller fuldskærms.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>Brug af &kuickshow;</title>
+
+<para
+>Brugen af &kuickshow; er meget enkel. Filbrowseren lister filer, som du kan vælge med et venstreklik eller returtasten.</para>
+
+<screenshot>
+<screeninfo
+>Her er et skærmaftryk af &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.eps" format="EPS"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Skærmaftryk</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>Flere &kuickshow; egenskaber</title>
+
+<para
+>Indstillingsdialogen gør flere muligheder tilgængelige:</para>
+
+<itemizedlist>
+<listitem
+><para
+>Billeder kan blive krympet automatisk til at passe på skærmen hvis de er større.</para>
+</listitem>
+<listitem
+><para
+>Du kan indstille om billeder skal vises i deres eget vindue eller om du altid vil bruge det samme vindue.</para>
+</listitem>
+<listitem
+><para
+>Du kan sætte forsinkelsen for et lysbilledshow.</para>
+</listitem>
+<listitem
+><para
+>Du kan fortælle filsøgeren hvilke slags filer den skal vise.</para>
+</listitem>
+<listitem
+><para
+>Du kan ændre på hastighed/kvalitets-forholdet</para
+></listitem>
+</itemizedlist>
+
+<para
+>Hvis du kigger efter en bestemt fil, så indtast blot de første få tegn for dets filnavn i filsøgeren. Et lille redigeringsvindue vil komme frem i det nederste højre hjørne. Når en fil der passer er fundet, bliver den fremhævet. Du kan forlade redigeringsvinduet ved at trykke på <keycap
+>Enter</keycap
+> eller &Esc;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+><guilabel
+>&kuickshow; Indstillings</guilabel
+>-dialog</title>
+
+<para
+>Dialogen <guilabel
+>Indstil &kuickshow;</guilabel
+> indeholder fem faneblade. Tre af dem, <link linkend="general-options"
+><guilabel
+>Generelt</guilabel
+></link
+>, <link linkend="modifications-options"
+><guilabel
+>Ændringer</guilabel
+></link
+> og <link linkend="slideshow-options"
+><guilabel
+>Lysbilledshow</guilabel
+></link
+>, indstiller &kuickshow;s funktion, og de andre to, <guilabel
+>Genveje for billedfremviseren</guilabel
+> og <guilabel
+>Genveje for browseren</guilabel
+> lader dig indstille dine egne genvejstaster for de respektive vinduer.</para>
+
+<sect1 id="general-options">
+<title
+><guilabel
+>Generelt</guilabel
+>-indstillinger</title>
+
+<para
+><guilabel
+>Generelt</guilabel
+> indeholder tilvalg til at indstille &kuickshow; og gøre den hurtigere.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Fuldskærmstilstand</guilabel
+></term>
+<listitem>
+<para
+>Hvis dette er valgt åbnes billeder i fuldskærmstilstand. Hvis billedet ikke er stort nok til at udfylde skærmen, bliver resten af skærmen fyldt ud med den baggrundsfarve der vælges nedenfor. Standard er fra.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Forindlæs næste billede</guilabel
+></term>
+<listitem>
+<para
+>Hvis dette er valgt, vil &kuickshow; indlæse det næste billede i mappen, mens du kigger på det nuværende billede. Dette reducerer forsinkelsen når du vælger det næste billede, og det er særligt nyttigt til lysbilledshow.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Husk seneste mappe</guilabel
+></term>
+<listitem>
+<para
+>Hvis dette er markeret gemmer &kuickshow; navnet på den seneste mappe ved afslutning. Ved næste start åbner &kuickshow; mappen i browser-vinduet.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Baggrundsfarve:</guilabel
+></term>
+<listitem>
+<para
+>Klik på den farvede linje for at vælge en baggrundsfarve. Dette bruges til at udfylde skærmen i fuldskærmstilstand, eller vinduet, hvis du har gjort det større end billedet.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vis kun filer med endelsen:</guilabel
+></term>
+<listitem>
+<para
+>Du kan indstille &kuickshow; til kun at vise dig visse af de filtyper den er i stand til at vise.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Kvalitet/Hastighed</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Hurtig visning</guilabel
+></term>
+<listitem
+><para
+>Vis ting hurtigt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Anvend dither i farverige (15/16bit) tilstande</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Anvend dither i farvefattige (&lt;=8bit) tilstande</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Brug egen farvepalette</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Hurtig palette genafbildning</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Maksimal cache-størrelse (MB):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>Fanebladet <guilabel
+>Ændringer</guilabel
+></title>
+
+<para
+>Markér <guilabel
+>Brug standard billedændringer</guilabel
+> for at åbne et billede med disse ændringer i &kuickshow;.</para>
+
+<variablelist>
+<title
+><guilabel
+>Skalering</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Krymp billedet til skærmstørrelse hvis det er større</guilabel
+></term>
+<listitem>
+<para
+>Hvis dette er markeret, vises store billeder i et maksimeret vindue. Standard er til.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Forstør billedet til skærmstørrelse hvis det er mindre, op til faktoren:</guilabel
+></term>
+<listitem>
+<para
+>Hvis dette er markeret, øger &kuickshow; forstørrelsen af små billeder op til den valgte faktor.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Geometri</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Vender lodret</guilabel
+></term>
+<listitem
+><para
+>Vender billedet lodret.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vender vandret</guilabel
+></term>
+<listitem
+><para
+>Vender billedet vandret. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Rotér billedet</guilabel
+></term>
+<listitem
+><para
+>Roterer billedet 0, 90, 180 eller 270 grader. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Justeringer</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Lysstyrke:</guilabel
+></term>
+<listitem
+><para
+>Gør billedet lysere/mørkere.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kontrast:</guilabel
+></term>
+<listitem
+><para
+>Tilføjer/fjerner kontrast.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gamma:</guilabel
+></term>
+<listitem
+><para
+>Mere/mindre gamma. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>En <guilabel
+>Forhåndsvisning</guilabel
+> af <guilabel
+>Original</guilabel
+> og <guilabel
+>Ændret</guilabel
+> billede vises under disse valgmuligheder.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>Fanebladet <guilabel
+>Lysbilledshow</guilabel
+></title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Skift til fuldskærm</guilabel
+></term>
+<listitem>
+<para
+>Indikerer at &kuickshow; skal skifte til fuldskærmstilstand når et lysbilledshow startes. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Start med nuværende billede</guilabel
+></term>
+<listitem>
+<para
+>Indikerer at lysbilledshowet skal starte med det første billede i mappen eller det billede der er markeret. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ventetid mellem lysbilleder:</guilabel
+></term>
+<listitem>
+<para
+>Tidslængden mellem billedskift i et lysbilledshow. Du kan bruge skyderen, skrive en ny værdi ind i feltet, eller bruge de små pile til at gøre værdien større eller mindre. Standard er 3 sekunder.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Iterationer (0 = uendelig):</guilabel
+></term>
+<listitem>
+<para
+>Antallet af iterationer. Hvis dette er sat til 0 vil det gå i løkke indtil du afbryder lysbilledshowet.  Du kan bruge skyderen, skrive en ny værdi ind i feltet, eller bruge de små pile til at gøre værdien større eller mindre. Standard er 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>Fanebladene <guilabel
+>Genveje</guilabel
+></title
+> 
+<para
+>Ændr genveje for &kuickshow;s forskellige tilstande i fanebladene <guilabel
+>Genveje for billedviseren</guilabel
+> og <guilabel
+>Genveje for browseren</guilabel
+>.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>Menureference</title>
+
+<sect1 id="file-menu">
+<title
+><guimenu
+>Fil</guimenu
+>-menuen</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fil</guimenu
+> <guimenuitem
+>Åbn</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Åbner et nyt billede</action
+> i &kuickshow;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fil</guimenu
+> <guimenuitem
+>Vis billede</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Viser</action
+> det markerede billede i et nyt billedvindue.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fil</guimenu
+> <guimenuitem
+>Vis billede i aktivt vindue</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Viser </action
+>det markerede billede i det aktive billedvindue.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fil</guimenu
+> <guimenuitem
+>Vis billede i fuldskærmstilstand</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Viser</action
+> markeret billede i fuldskærmstilstand. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>Fil</guimenu
+> <guimenuitem
+>Start lysbilledshow</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Starter</action
+> et lysbilledshow med billederne i mappen.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fil</guimenu
+> <guimenuitem
+>Udskriv billede...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Udskriver billedet</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fil</guimenu
+> <guimenuitem
+>Afslut</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Afslutter</action
+> &kuickshow;. Hvis du har flere billedvinduer åbne, lukkes de alle.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+><guimenu
+>Redigér</guimenu
+>-menuen</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>Redigér</guimenu
+> <guimenuitem
+>Ny mappe...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+><action
+>Opretter</action
+> en ny mappe.</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> <keycap
+>&Shift;</keycap
+><keycap
+>Delete</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigér</guimenu
+> <guimenuitem
+>Slet</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Sletter</action
+> den aktuelle fil. Du vil blive bedt om at bekræfte handlingen.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> <keycap
+>&Alt;</keycap
+><keycap
+>Returtast</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigér</guimenu
+> <guimenuitem
+>Egenskaber</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Viser</action
+> egenskaberne for den nuværende billedfil.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+><guimenu
+>Vis</guimenu
+>-menuen</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>Vis</guimenu
+> <guimenuitem
+>Kort format</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Hvis dette tilvalg markeres, vises kun navne på filer og mapper.</para>
+<para
+>Sammenlign dette med detaljeret format.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>Vis</guimenu
+> <guimenuitem
+>Detaljeret format</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Hvis dette markeres, vises navn, størrelse, dato, rettigheder, filejere og gruppeejere.</para>
+<para
+>Sammenlign det med kort format.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F8</keycap
+></shortcut
+> <guimenu
+>Vis</guimenu
+> <guimenuitem
+>Vis skjulte filer</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Dette skifter mellem at vise og skjule filer som normalt er skjulte.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F12</keycap
+></shortcut
+> <guimenu
+>Vis</guimenu
+> <guimenuitem
+>Adskilte mapper</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Brug dette til at skifte mellem en visning af filsystemet med to felter (et felt for mapper og et for filerne) og en visning af filsystemet med et felt med mapper og filer.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vis</guimenu
+> <guimenuitem
+>Store ikoner</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Viser billedfilerne i mappen med store ikoner. Dette tilvalg er kun tilgængeligt i tilstanden <guimenuitem
+>Kort format</guimenuitem
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vis</guimenu
+> <guimenuitem
+>Små ikoner</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Viser billedfilerne i mappen med små ikoner. Dette tilvalg er kun tilgængeligt i tilstanden <guimenuitem
+>Kort format</guimenuitem
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vis</guimenu
+> <guimenuitem
+>Forhåndsvisning af miniaturebilleder</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Viser en forhåndsvisning af billederne i mappen. Dette tilvalg er kun tilgængeligt i tilstanden <guimenuitem
+>Kort format</guimenuitem
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;<keycap
+>-</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Vis</guimenu
+> <guimenuitem
+>Zoom ud</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Reducerer billedstørrelsen med ti procent</action
+>. Dette refererer igen til <emphasis
+>aktuel</emphasis
+> billedstørrelse.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;<keycap
+>+</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Vis</guimenu
+> <guimenuitem
+>Zoom ind</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Gør billedet ti procent større</action
+>. Bemærk at dette  refererer til den  <emphasis
+>aktuelle</emphasis
+> størrelse af billedet.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-menu">
+<title
+><guimenu
+>Opsætnings</guimenu
+>menuen</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Opsætning</guimenu
+> <guimenuitem
+>Indstil &kuickshow;...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Åbner en dialog til at ændre visse tilvalg</action
+> som beskrevet i dette afsnit <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+
+<sect1 id="help-menu">
+<title
+><guimenu
+>Hjælpe</guimenu
+>menuen</title>
+
+<variablelist>
+<varlistentry>
+<term>
+<menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>F1</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Hjælp</guimenu
+> <guimenuitem
+>&kappname;-håndbogen</guimenuitem
+> </menuchoice>
+</term>
+<listitem
+><para
+><action
+>Starter &kde;'s hjælpesystem</action
+> med startende på hjælpesiderne for &kappname; (dette dokument).</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hjælp</guimenu
+> <guimenuitem
+>Rapportér fejl...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Åbner dialogen for fejlrapportering</action
+> hvor du kan rapportere en fejl eller bede om en ny funktion på <quote
+>ønskelisten</quote
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hjælp</guimenu
+> <guimenuitem
+>Om &kappname;</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Dette viser information om version og forfattere.</action
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Hjælp</guimenu
+> <guimenuitem
+>Om KDE</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Dette viser &kde;'s version og anden grundlæggende information.</action
+></para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Kommandoreference</title>
+
+<sect1 id="keybindings">
+<title
+>Billedvinduet</title>
+
+<para
+>Alle genveje er indstillelige fra <link linkend="configuration-dialog"
+>Indstillingsdialogen</link
+>.</para>
+
+<table>
+<title
+>Billedvinduets tastaturgenveje</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tast</entry>
+<entry
+>Handling</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Indlæs næste billede</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Indlæs forrige billede</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Indlæser det første billede</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Indlæser det sidste billede</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Forstørrer billedet</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Formindsker billedet</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Vender billedet vandret</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Vender billedet lodret</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Roterer 270&deg; med uret (som også er 90&deg; mod uret)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>Roterer 90&deg; med uret</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Roterer 180&deg; med uret</entry>
+</row>
+<row>
+<entry
+><keycap
+>Pile</keycap
+>tasterne</entry>
+<entry
+>Flyt billedet (eller snarere dig der kigger på det) hvis det er større end skærmen</entry>
+</row>
+<row>
+<entry
+><keycap
+>Enter</keycap
+></entry>
+<entry
+>Skifter mellem fuldskærms- og vinduestilstand</entry>
+</row>
+<row>
+<entry
+><keycap
+>Mellemrum</keycap
+></entry>
+<entry
+>Skifter visningen af gennemsøgeren frem og tilbage</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>Lukker billedvinduet. Dette vil lukke &kuickshow; fuldstændigt, hvis du ikke sørger for at have et søgevindue åbent.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>Gør billedet lysere/mørkere</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Tilføjer/fjerner kontrast</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Mere/mindre <firstterm
+>gamma</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Viser billedet i den oprindelige størrelse. Dette er kun nyttigt når du har aktiveret automatisk skalering.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Enter</keycap
+></entry>
+<entry
+>Viser billedet igen med standardindstilling og størrelse</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Åbner <guilabel
+>Gem som</guilabel
+>-dialogen</entry>
+</row>
+<row>
+<entry
+><keycap
+>Slet</keycap
+></entry>
+<entry
+>Sletter det aktuelle billede. Du vil blive bedt om at bekræfte forespørgslen.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Sletter det aktuelle billede uden at bede om bekræftelse</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;<keycap
+>Return</keycap
+></keycombo
+></entry>
+<entry
+>Viser billedets egenskaber</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Åbner online-hjælp (denne fil)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>Afslutter &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Billedvinduets brug af mus</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Museknap</entry>
+<entry
+>Handling</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><mousebutton
+>Højre</mousebutton
+>-klik</entry>
+<entry
+>Åbner sammenhængsmenuen med adskillige valgmuligheder</entry>
+</row>
+<row>
+<entry
+>Træk til <mousebutton
+>venstre</mousebutton
+></entry>
+<entry
+>Flytter billedet hvis det ikke passer ind i vinduet.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<mousebutton
+>Venstre</mousebutton
+> </keycombo
+>-træk</entry>
+<entry
+>Markerer et rektangel du kan zoome ind til.</entry>
+</row>
+<row>
+<entry
+><mousebutton
+>Venstre</mousebutton
+> dobbeltklik</entry>
+<entry
+>Lukker det aktuelle billede</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>Gennemsøg-vinduet</title>
+
+<table>
+<title
+>Gennemsøg-vinduets tastebindinger</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tastebinding</entry>
+<entry
+>Handling</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Enter</keycap
+></entry>
+<entry
+>Går ind i en mappe, eller åbner et billedvindue, afhængigt af det valgte punkt.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Går en side frem i listen af filer</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Går en side tilbage i listen af filer</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Vælger første fil eller mappe</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Vælger sidste fil eller mappe</entry>
+</row>
+<row>
+<entry
+><keycap
+>Mellemrum</keycap
+></entry>
+<entry
+>Skifter frem og tilbage mellem at vise søgeren og vinduet, hvis der er et åbent vindue</entry>
+</row>
+<row>
+<entry
+><keycap
+>vilkårligt alfa-numerisk tegn</keycap
+></entry>
+<entry
+>Åbner redigeringsfeltet der bruges til <quote
+>komplettering</quote
+>. Indtast de første tegn for et filenavn der søges efter, så vil filen blive markeret så snart den er fundet.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Gå til</quote
+> &mdash; lader dig indtaste en mappe du vil gå ind i.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Slet</keycap
+></entry>
+<entry
+>Sletter den aktuelle fil. Du vil blive bedt om at bekræfte handlingen.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Sletter den aktuelle fil uden at bede dig om at bekræfte handlingen.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Åbner online-hjælp (denne fil)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Afslutter &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Søgevinduets brug af musen</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Brug af musen</entry>
+<entry
+>Handling</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><mousebutton
+>Venstre</mousebutton
+>-klik</entry>
+<entry
+>Gå ind i en mappe, eller vælg et billedvindue.</entry>
+</row>
+<row>
+<entry
+><mousebutton
+>Højre</mousebutton
+>-klik</entry>
+<entry
+>Åbner en sammenhængsmenu med adskillige valgmuligheder.</entry>
+</row>
+<row>
+<entry
+>Dobbeltklik</entry>
+<entry
+>Indlæser det valgte billede eller går ind i den valgte mappe</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<!-- Include credits for the programmers, documentation writers, and
+contributors here. The license for your software should then be included below
+the credits with a reference to the appropriate license file included in the KDE
+distribution. -->
+
+<title
+>Medvirkende og licens</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Program ophavsret 1998-2002 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+
+<para
+>Dokumentation ophavsret 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+<para
+>Konverteret til DocBook &XML; og udvidet af &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+&erik.kjaer.pedersen.credit; 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Installation</title>
+
+<sect1 id="getting-kuickshow">
+<title
+>Hvordan får man fat på &kuickshow;</title>
+&install.intro.documentation; </sect1>
+
+<sect1 id="requirements">
+<title
+>Krav</title>
+
+<para
+>Endnu ikke skrevet</para>
+<!--
+List any special requirements for your application here. This should include:
+.Libraries or other software that is not included in kdesupport,
+kdelibs, or kdebase.
+.Hardware requirements like amount of RAM, disk space, graphics card
+capabilities, screen resolution, special expansion cards, etc.
+.Operating systems the app will run on. If your app is designed only for a
+specific OS, (you wrote a graphical LILO configurator for example) put this
+information here.
+
+
+<para>
+In order to successfully use &kuickshow;, you need &kde; 1.1. Foobar.lib is
+required in order to support the advanced &kuickshow; features. &kuickshow; uses
+about 5 megs of memory to run, but this may vary depending on your
+platform and configuration.
+</para>
+
+<para>
+All required libraries as well as &kuickshow; itself can be found
+on <ulink url="ftp://ftp.kapp.org"
+>The &kuickshow; home page</ulink
+>.
+</para>
+-->
+
+<!-- For a list of updates, you may refer to the application web site
+or the ChangeLog file, or ... 
+<para>
+You can find a list of changes at <ulink
+url="http://apps.kde.org/kapp"
+>http://apps.kde.org/kapp</ulink
+>.
+</para
+>-->
+</sect1>
+
+<sect1 id="compilation">
+<title
+>Kompilering og installation</title>
+&install.compile.documentation; </sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+

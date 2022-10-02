@@ -1,0 +1,1445 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Swedish "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book id="kuickshow" lang="&language;">
+
+<bookinfo>
+<title
+>Handbok &kuickshow;</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@comhem.se</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2012-07-15</date>
+<releaseinfo
+>0.9.2 (&kde; 4.8)</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>&kuickshow; är en bekväm bildbläddrare/visare. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>bild</keyword>
+<keyword
+>visare</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Inledning</title>
+
+<para
+>&kuickshow; är en bekväm bildbläddrare/visare. Den visar en filbläddrare där du kan välja bilder som därefter visas. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>Följande bildformat stöds:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Bilder kan visas antingen i egna fönster, lika stora som bilden, eller på hela skärmen.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>Att använda &kuickshow;</title>
+
+<para
+>Att använda &kuickshow; är mycket enkelt. Filbläddraren listar filer, som du kan välja med ett vänsterklick eller returtangenten.</para>
+
+<screenshot>
+<screeninfo
+>Här är en skärmbild av &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Skärmdump</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>Mer funktioner i &kuickshow;</title>
+
+<para
+>Inställningsdialogrutan tillhandahåller fler möjligheter:</para>
+
+<itemizedlist>
+<listitem
+><para
+>Bilder kan automatiskt krympas för att passa på skärmen, om de är större.</para>
+</listitem>
+<listitem
+><para
+>Du kan anpassa om bilder ska visas i ett eget fönster, eller alltid använda samma fönster.</para>
+</listitem>
+<listitem
+><para
+>Du kan ställa in fördröjningstiden för ett bildspel.</para>
+</listitem>
+<listitem
+><para
+>Du kan tala om för bläddraren vilka filtyper som ska visas.</para>
+</listitem>
+<listitem
+><para
+>Du kan justera förhållandet mellan hastighet och kvalitet</para
+></listitem>
+</itemizedlist>
+
+<para
+>Om du letar efter en viss fil, skriv bara in några av de första tecknen från filnamnet i bläddraren. Ett litet redigeringsfönster dyker upp i nedre högra hörnet. När en fil som passar in hittas, markeras den. Du kan stänga redigeringsfönstret genom att trycka på returtangenten eller &Esc;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>&kuickshow;s inställningsdialogruta</title>
+
+<para
+>Dialogrutan <guilabel
+>Anpassa &kuickshow;</guilabel
+> innehåller fem flikar. Tre av dem, <link linkend="general-options"
+><guilabel
+>Allmänt</guilabel
+></link
+>, <link linkend="modifications-options"
+><guilabel
+>Ändringar</guilabel
+></link
+> och <link linkend="slideshow-options"
+><guilabel
+>Bildspel</guilabel
+></link
+>, anpassar &kuickshow;s funktion, och de andra två, <guilabel
+>Genvägar för bildvisaren</guilabel
+> och <guilabel
+>Genvägar för bläddraren</guilabel
+> låter dig ställa in dina egna snabbtangeter för respektive fönster.</para>
+
+<sect1 id="general-options">
+<title
+>Allmänna alternativ</title>
+
+<para
+><guilabel
+>Allmänna</guilabel
+> alternativ innehåller alternativ för att anpassa och justera &kuickshow;.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Fullskärmsläge</guilabel
+></term>
+<listitem>
+<para
+>Om det här är markerat, öppnas bilder i fullskärmsläge. Om bilden inte är stor nog att fylla skärmen, fylls resten av skärmen med bakgrundsfärgen som väljs nedanför. Normalvärdet är av.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Förladda nästa bild</guilabel
+></term>
+<listitem>
+<para
+>Om det här är markerat, laddar &kuickshow; nästa bild i katalogen medan du tittar på den nuvarande. Det här minskar fördröjningen när du väljer nästa bild, och är särskilt användbart för bildspel.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kom ihåg senaste katalog</guilabel
+></term>
+<listitem>
+<para
+>Om det här är markerat sparar &kuickshow; namnet på den senaste katalogen vid avslutning. Vid nästa start öppnar &kuickshow; katalogen i bläddrarfönstret.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Bakgrundsfärg:</guilabel
+></term>
+<listitem>
+<para
+>Klicka på den färgade raden för att välja en bakgrundsfärg. Det här används för att fylla ut skärmen i fullskärmsläge, eller fönstret om du har ändra storleken så att det är större än bilden.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Visa endast filer med filändelse:</guilabel
+></term>
+<listitem>
+<para
+>Du kan anpassa &kuickshow; att bara visa en del av filtyperna som den kan hantera.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Kvalitet/hastighet</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Snabb uppritning</guilabel
+></term>
+<listitem
+><para
+>Rita upp bilder snabbt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Använd gitter i färgrika lägen (15/16 bitar)</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Använd gitter i färgfattiga lägen (&lt;= 8 bitar)</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Använd egen färgpalett</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Snabb palettilldelning</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Maximal cachestorlek (Mibyte):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>Fliken Ändringar</title>
+
+<para
+>Markera <guilabel
+>Verkställ förvalda bildändringar</guilabel
+> för att öppna en bild med dessa ändringar i &kuickshow;.</para>
+
+<variablelist>
+<title
+><guilabel
+>Skalning</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Krymp bilden till skärmstorlek ifall den är större</guilabel
+></term>
+<listitem>
+<para
+>Om det här är markerad, visas stora bilder i maximerade fönster. Förval är på.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Förminska bilden till skärmstorlek ifall den är mindre, upp till faktorn:</guilabel
+></term>
+<listitem>
+<para
+>Om det här är markerat, ökar &kuickshow; förstoringen av små bilder upp till den valda faktorn.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Geometri</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Vänd vertikalt</guilabel
+></term>
+<listitem
+><para
+>Vänder bilden vertikalt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vänd horisontellt</guilabel
+></term>
+<listitem
+><para
+>Vänder bilden horisontellt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Rotera bilden</guilabel
+></term>
+<listitem
+><para
+>Roterar bilden 0, 90, 180 eller 270 grader. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Justeringar</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Ljusstyrka:</guilabel
+></term>
+<listitem
+><para
+>Gör bilden ljusare/mörkare.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kontrast:</guilabel
+></term>
+<listitem
+><para
+>Lägger till/tar bort kontrast.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gamma:</guilabel
+></term>
+<listitem
+><para
+>Mer/mindra gamma. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>En <guilabel
+>Förhandsgranskning</guilabel
+> av <guilabel
+>Original</guilabel
+> och <guilabel
+>Ändrad</guilabel
+> bild visas under alternativen.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>Fliken Bildspel</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Byt till fullskärm</guilabel
+></term>
+<listitem>
+<para
+>Anger om &kuickshow; ska byta till fullskärmsläge när bildspelet startas. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Starta med aktuell bild</guilabel
+></term>
+<listitem>
+<para
+>Anger om bildspelet ska starta med den första bilden i katalogen, eller med bilden som är markerad. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Fördröjning mellan bilder:</guilabel
+></term>
+<listitem>
+<para
+>Tiden mellan bildändringar under bildspelet. Du kan använda skjutreglaget, skriva in ett nytt värde i fältet eller använda de små pilarna för att öka eller minska värdet. Normalvärde är 3 sekunder.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Iterationer (0 = oändlig):</guilabel
+></term>
+<listitem>
+<para
+>Antalet omgångar. Om det ställs in till 0 upprepar det till du avbryter bildspelet. Du kan använda skjutreglaget, skriva in ett nytt värde i fältet eller använda de små pilarna för att öka eller minska värdet. Normalvärde är 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>Flikarna Genvägar</title
+> 
+<para
+>Ändra genvägar för &kuickshow;s olika lägen under flikarna <guilabel
+>Genvägar för bildvisaren</guilabel
+> och <guilabel
+>Genvägar för bläddraren</guilabel
+>.</para>
+
+<para
+>För mer information läs avsnittet <ulink url="help:/fundamentals/config.html#shortcuts"
+>Genvägar</ulink
+> i &kde;:s grunder.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>Menyreferens</title>
+
+<sect1 id="file-menu">
+<title
+>Menyn Arkiv</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Öppna</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar en ny bild</action
+> i &kuickshow;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Visa bild</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Visar</action
+> den markerade bilden i ett nytt bildfönster.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Visa bild i aktivt fönster</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Visar </action
+>den markerade bilden i det aktiva bildfönstret.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Visa bild i fullskärmsläge</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Visar</action
+> markerad bild i fullskärmsläge. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Starta bildspel</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Startar</action
+> ett bildspel med bilderna i katalogen.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Skriv ut bild...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Skriver ut bilden</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Arkiv</guimenu
+> <guimenuitem
+>Avsluta</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Avslutar</action
+> &kuickshow;. Om du har flera bildfönster öppna, stängs de alla.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+>Menyn Redigera</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Ny katalog...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+><action
+>Skapar</action
+> en ny katalog.</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Flytta till papperskorg</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Flyttar</action
+> den nuvarande filen till papperskorgen. Du blir tillfrågad om att bekräfta åtgärden.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Alt;<keycap
+>Retur</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigera</guimenu
+> <guimenuitem
+>Egenskaper</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Visar</action
+> egenskaperna för den nuvarande bildfilen.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+>Menyn Visa</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Kort format</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Om alternativet markeras, visas bara namn på filer och kataloger.</para>
+<para
+>Jämför det med detaljerat format.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>Visa</guimenu
+> <guimenuitem
+>Detaljerat format</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Om alternativet markeras, visas namn, storlek, datum, rättigheter, filägare och gruppägare.</para>
+<para
+>Jämför det med kort format.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Trädvy</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Visa</guimenu
+> <guimenuitem
+>Detaljerad trädvy</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-help-menu">
+<title
+>Menyerna Inställningar och Hjälp</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Anpassa &kuickshow;...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Öppnar en dialogruta för att ändra vissa alternativ</action
+> som beskrivs i avsnittet <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>&kuickshow; har &kde;:s vanliga menyalternativ i menyn <guimenu
+>Hjälp</guimenu
+>. För mer information läs avsnittet om <ulink url="help:/fundamentals/menus.html#menus-help"
+>hjälpmenyn</ulink
+> i &kde;:s grunder. </para>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Kommandoreferens</title>
+
+<sect1 id="keybindings">
+<title
+>Bildfönstret</title>
+
+<para
+>Alla snabbtangenter kan anpassas i <link linkend="configuration-dialog"
+>Inställningsdialogrutan</link
+>.</para>
+
+<table>
+<title
+>Snabbtangenter i bildfönstret</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tangent</entry>
+<entry
+>Åtgärd</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Ladda nästa bild</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Ladda föregående bild</entry>
+</row>
+<row>
+<entry
+><keycap
+>Hem</keycap
+></entry>
+<entry
+>Laddar första bilden</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Laddar sista bilden</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Zoomar in i bilden</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Zoomar ut i bilden</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Vänder bilden horisontellt</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Vänder bilden vertikalt</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Roterar 270&deg; medurs (som är samma sak som 90&deg; moturs)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>Roterar 90&deg; medurs</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Roterar 180&deg; medurs</entry>
+</row>
+<row>
+<entry
+><keycap
+>Piltangenter</keycap
+></entry>
+<entry
+>Flyttar bilden (eller i själva verket betraktaren), om den är större än skärmen</entry>
+</row>
+<row>
+<entry
+><keycap
+>Returtangenten</keycap
+></entry>
+<entry
+>Växlar mellan fullskärmsläge och fönsterläge</entry>
+</row>
+<row>
+<entry
+><keycap
+>Mellanslag</keycap
+></entry>
+<entry
+>Växlar visning av bläddraren</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>Stänger bildfönstret. Det här avslutar hela &kuickshow;, om du inte har ett bläddrarfönster öppet.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>Ljusare/mörkare bild</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Lägger till/tar bort kontrast</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Mer/mindre <firstterm
+>gamma</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Visar bilden med originalstorlek. Det här är bara användbart när du har aktiverat automatisk skalning.</entry>
+</row>
+<row>
+<entry
+>Retur</entry>
+<entry
+>Visar bilden igen med förvalda inställningar och storlek.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Öppnar dialogrutan <guilabel
+>Spara som</guilabel
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>Ta bort</keycap
+></entry>
+<entry
+>Tar bort den nuvarande bilden. Du blir tillfrågad om att bekräfta begäran</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Tar bort den nuvarande bilden utan att fråga efter bekräftelse</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;<keycap
+>Returtangent</keycap
+></keycombo
+></entry>
+<entry
+>Visar bildens egenskaper</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Öppnar hjälpdokumentationen (den här filen)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>Avslutar &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Musanvändning i bildfönster</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Musknapp</entry>
+<entry
+>Åtgärd</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><mousebutton
+>Höger</mousebutton
+>klick</entry>
+<entry
+>Öppnar en sammanhangsberoende meny, med flera alternativ</entry>
+</row>
+<row>
+<entry
+><mousebutton
+>Vänster</mousebutton
+>knapp och drag</entry>
+<entry
+>Flyttar bilden om den inte passar i fönstret.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<mousebutton
+>vänster</mousebutton
+></keycombo
+>knapp och drag</entry>
+<entry
+>Markerar en rektangel som kan zoomas till.</entry>
+</row>
+<row>
+<entry
+>Dubbelklick med <mousebutton
+>vänster</mousebutton
+>knappen</entry>
+<entry
+>Stänger den nuvarande bilden</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>Bläddrarfönstret</title>
+
+<table>
+<title
+>Snabbtangenter i bläddrarfönstret</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tangentbindning</entry>
+<entry
+>Åtgärd</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Returtangenten</keycap
+></entry>
+<entry
+>Går in i en katalog, eller öppnar ett bildfönster, beroende på ikonen som är vald.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Går framåt en sida i listan med filer</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Går tillbaka en sida i listan med filer</entry>
+</row>
+<row>
+<entry
+><keycap
+>Hem</keycap
+></entry>
+<entry
+>Markerar den första filen eller katalogen</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Markerar den sista filen eller katalogen</entry>
+</row>
+<row>
+<entry
+><keycap
+>Mellanslag</keycap
+></entry>
+<entry
+>Växlar visning av bläddraren om ett bildfönster är öppet</entry>
+</row>
+<row>
+<entry
+><keycap
+>alla bokstäver och siffror</keycap
+></entry>
+<entry
+>Öppnar ett redigeringsfält som används för <quote
+>komplettering</quote
+>. Skriv in det första tecknet i ett filnamn att söka efter, och om det hittas, så markeras filen.</entry>
+</row>
+<!-- not in 0.9.2 kde 4.8
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Go to</quote
+> &mdash; lets you enter a folder to go
+to.</entry>
+</row>
+-->
+<row>
+<entry
+><keycap
+>Ta bort</keycap
+></entry>
+<entry
+>Tar bort den nuvarande filen. Du blir tillfrågad om att bekräfta begäran.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Tar bort den nuvarande filen utan att fråga efter bekräftelse.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Öppnar hjälpdokumentationen (den här filen)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Avslutar &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Musanvändning i bläddrarfönstret</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Musanvändning</entry>
+<entry
+>Åtgärd</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><mousebutton
+>Vänster</mousebutton
+>klick</entry>
+<entry
+>Gå in i en katalog, eller välj ett bildfönster</entry>
+</row>
+<row>
+<entry
+><mousebutton
+>Höger</mousebutton
+>klick</entry>
+<entry
+>Öppnar en sammanhangsberoende meny, med flera alternativ.</entry>
+</row>
+<row>
+<entry
+>Dubbelklicka</entry>
+<entry
+>Laddar den markerade bilden eller går in i den markerade katalogen</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Tack till och licens</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Program copyright 1998-2009 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+
+<para
+>Dokumentation copyright 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+<para
+>Överförd till DocBook &XML; och utökad av &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+<para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+
