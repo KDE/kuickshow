@@ -27,6 +27,7 @@
 #include "kuickfile.h"
 
 class QImage;
+class QPixmap;
 class QUrl;
 
 
@@ -57,8 +58,6 @@ public:
   void 		flip( FlipMode flipMode );
   bool 		flipAbs( int mode );
   ImlibImage *	imlibImage()	const { return myIm;      }
-  Pixmap& 	pixmap();
-  void 		renderPixmap();
 //  const QString& filename() 	const { return myFilename;}
   const KuickFile& file()       const { return *myFile; }
   QUrl url()             const { return myFile->url(); }
@@ -66,13 +65,17 @@ public:
   void 		setDirty( bool d )    { myIsDirty = d;    }
   /**
    * Returns true if this image is "dirty", i.e some operation was done,
-   * and it needs re-rendering.
+   * and it needs re-rendering.  TODO: this is not actually used now,
+   * but it may be useful for caching the results of toQImage() and
+   * toImlibImage().
    */
   bool 		isDirty() 	const { return myIsDirty; }
   Rotation      absRotation()   const { return myRotation; }
   FlipMode      flipMode()      const { return myFlipMode; }
 
-  static ImlibImage * toImage( ImlibData *id, QImage& image );
+  static ImlibImage *toImlibImage(ImlibData *id, QImage &image);
+
+  QImage toQImage() const;
 
 private:
   void      fastResize( int newWidth, int newHeight );
@@ -80,8 +83,6 @@ private:
   /**
    * Note: caller must delete it!
    */
-  QImage * 	newQImage() const;
-
   const KuickFile * myFile;
 
   int 		myWidth;
@@ -89,7 +90,6 @@ private:
   ImlibImage * 	myOrigIm;
   ImlibImage * 	myIm;
   ImlibData  * 	myId;
-  Pixmap 	myPixmap;
   bool 		myIsDirty;
 
   int 		myOrigWidth;
@@ -98,8 +98,8 @@ private:
   FlipMode 	myFlipMode;
 
 signals:
-  void 		startRendering();
-  void 		stoppedRendering();
+  void 		startRendering() const;
+  void 		stoppedRendering() const;
 };
 
 

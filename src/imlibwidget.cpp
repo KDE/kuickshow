@@ -18,14 +18,13 @@
 
 #include "imlibwidget.h"
 
-#include <KCursor>
-
 #include <QApplication>
 #include <QCloseEvent>
 #include <QColor>
 #include <QDesktopWidget>
 #include <QFile>
 #include <QImage>
+#include <QLabel>
 #include <QPalette>
 #include <QtGlobal>
 
@@ -44,8 +43,8 @@
 
 const int ImlibWidget::ImlibOffset = 256;
 
-ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent ) :
-  QWidget( parent )
+ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent )
+    : QScrollArea( parent )
 {
     idata 		= _idata;
     deleteImData 	= false;
@@ -59,32 +58,29 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent ) :
     ImlibInitParams par;
 
     // PARAMS_PALETTEOVERRIDE taken out because of segfault in imlib :o(
-    par.flags = ( PARAMS_REMAP | PARAMS_VISUALID |
+    par.flags = ( PARAMS_REMAP |
 		  PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
 		  PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
-
-    Visual* defaultvis = DefaultVisual(getX11Display(), getX11Screen());
 
     par.paletteoverride = idata->ownPalette ? 1 : 0;
     par.remap           = idata->fastRemap ? 1 : 0;
     par.fastrender      = idata->fastRender ? 1 : 0;
     par.hiquality       = idata->dither16bit ? 1 : 0;
     par.dither          = idata->dither8bit ? 1 : 0;
-    par.visualid        = defaultvis->visualid;
     uint maxcache       = idata->maxCache;
 
     // 0 == no cache
     par.imagecachesize  = maxcache * 1024;
     par.pixmapcachesize = maxcache * 1024;
 
-    id = Imlib_init_with_params( getX11Display(), &par );
+    id = Imlib_init_with_params(QX11Info::display(), &par);
 
     init();
 }
 
 
 ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent )
-    : QWidget( parent )
+    : QScrollArea( parent )
 {
     id              = _id;
     idata           = _idata;
@@ -102,6 +98,17 @@ ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent )
 
 void ImlibWidget::init()
 {
+    myLabel = new QLabel(this);
+    setWidget(myLabel);
+    setWidgetResizable(true);
+    // This is required so that the pixmap label fits the window exactly.
+    setFrameStyle(QFrame::NoFrame);
+
+    // The image window never showed scroll bars, the image
+    // could be scrolled by mouse dragging only.
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     int w = 1; // > 0 for XCreateWindow
     int h = 1;
     myBackgroundColor = Qt::black;
@@ -114,21 +121,20 @@ void ImlibWidget::init()
     setAttribute( Qt::WA_DeleteOnClose );
     setAutoRender( true );
 
-    setPalette( QPalette( myBackgroundColor ));
-    setBackgroundRole( QPalette::Window );
+    myLabel->setContentsMargins(0, 0, 0, 0);
+    myLabel->setPalette( QPalette( myBackgroundColor ));
+    myLabel->setBackgroundRole( QPalette::Window );
+    myLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
 
     imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
     connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
-
-    win = XCreateSimpleWindow(getX11Display(), winId(), 0,0,w,h,0,0,0);
 }
 
 ImlibWidget::~ImlibWidget()
 {
     delete imageCache;
     if ( deleteImlibData && id ) free ( id );
-    if ( win ) XDestroyWindow( getX11Display(), win );
     if ( deleteImData ) delete idata;
 }
 
@@ -221,18 +227,13 @@ bool ImlibWidget::cacheImage( KuickFile * file )
 {
 //    qDebug("cache image: %s", file->url().url().latin1());
     KuickImage *kuim = loadImageInternal( file );
-    if ( kuim ) {
-        kuim->renderPixmap();
-        return true;
-    }
-    return false;
+    return (kuim!=nullptr);
 }
 
 
 void ImlibWidget::showImage()
 {
-    XMapWindow( getX11Display(), win );
-    XSync( getX11Display(), False );
+    show();
 }
 
 
@@ -449,15 +450,9 @@ void ImlibWidget::updateWidget( bool geometryUpdate )
     if ( !m_kuim )
 	return;
 
-//     if ( geometryUpdate )
-//         XUnmapWindow( getX11Display(), win );// remove the old image -> no flicker
-
-    XSetWindowBackgroundPixmap( getX11Display(), win, m_kuim->pixmap() );
-
+    myLabel->setPixmap(QPixmap::fromImage(m_kuim->toQImage()));
     if ( geometryUpdate )
 	updateGeometry( m_kuim->width(), m_kuim->height() );
-
-    XClearWindow( getX11Display(), win );
 
     showImage();
 }
@@ -466,9 +461,7 @@ void ImlibWidget::updateWidget( bool geometryUpdate )
 // here we just use the size of m_kuim, may be overridden in subclass
 void ImlibWidget::updateGeometry( int w, int h )
 {
-    XMoveWindow( getX11Display(), win, 0, 0 ); // center?
-    XResizeWindow( getX11Display(), win, w, h );
-    resize( w, h );
+    myLabel->resize( w, h );
 }
 
 
@@ -482,7 +475,7 @@ void ImlibWidget::closeEvent( QCloseEvent *e )
 void ImlibWidget::setBackgroundColor( const QColor& color )
 {
     myBackgroundColor = color;
-    setPalette( QPalette( myBackgroundColor ));
+    myLabel->setPalette( QPalette( myBackgroundColor ));
     repaint(); // FIXME - necessary at all?
 }
 
@@ -550,14 +543,11 @@ void ImlibWidget::rotated( KuickImage *, int )
 }
 
 
-int ImlibWidget::getX11Screen() const
-{
-    return QApplication::desktop()->screenNumber(this);
-}
-
-
 //----------
 
+
+// TODO: move ImageCache into its own source file,
+// maybe use QCache
 
 // uhh ugly, we have two lists to map from filename to KuickImage :-/
 ImageCache::ImageCache( ImlibData *id, int maxImages )

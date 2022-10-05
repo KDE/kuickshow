@@ -54,6 +54,7 @@
 #include <QRect>
 #include <QResizeEvent>
 #include <QScopedPointer>
+#include <QScrollBar>
 #include <QStandardPaths>
 #include <QString>
 #include <QStringList>
@@ -99,12 +100,8 @@ void ImageWindow::init()
     KCursor::setAutoHideCursor( this, true, true );
     KCursor::setHideCursorDelay( 1500 );
 
-    // give the image window a different WM_CLASS
-    QByteArray appName = QCoreApplication::applicationName().toLocal8Bit();
-    XClassHint hint;
-    hint.res_name = appName.data();
-    hint.res_class = const_cast<char*>( "ImageWindow" );
-    XSetClassHint( getX11Display(), winId(), &hint );
+    // This image window will automatically be given
+    // a distinctive WM_CLASS by Qt.
 
     viewerMenu = 0L;
     gammaMenu = 0L;
@@ -130,7 +127,6 @@ void ImageWindow::init()
     myIsFullscreen = false;
 
     xpos = 0, ypos = 0;
-    m_numHeads = ScreenCount( getX11Display() );
 
     setAcceptDrops( true );
     setBackgroundColor( kdata->backgroundColor );
@@ -327,21 +323,19 @@ void ImageWindow::setFullscreen( bool enable )
 void ImageWindow::updateGeometry( int imWidth, int imHeight )
 {
 //     qDebug("::updateGeometry: %i, %i", imWidth, imHeight);
-    //  XMoveWindow( getX11Display(), win, 0, 0 );
-    XResizeWindow( getX11Display(), win, imWidth, imHeight );
+    resize(imWidth, imHeight);
 
     if ( imWidth != width() || imHeight != height() ) {
 	if ( myIsFullscreen ) {
 	    centerImage();
 	}
 	else { // window mode
-	    // XMoveWindow( getX11Display(), win, 0, 0 );
 	    resizeOptimal( imWidth, imHeight ); // also centers the image
 	}
     }
     else { // image size == widget size
 	xpos = 0; ypos = 0;
-	XMoveWindow( getX11Display(), win, 0, 0 );
+	move(0, 0);
     }
 
     updateCursor();
@@ -372,8 +366,6 @@ void ImageWindow::centerImage()
     xpos = w/2 - imageWidth()/2;
     ypos = h/2 - imageHeight()/2;
 
-    XMoveWindow( getX11Display(), win, xpos, ypos );
-
     // Modified by Evan for his Multi-Head (2 screens)
     // This should center on the first head
 //     if ( myIsFullscreen && m_numHeads > 1 && ((m_numHeads % 2) == 0) )
@@ -382,50 +374,14 @@ void ImageWindow::centerImage()
 //         xpos = width()/2 - imageWidth()/2;
 
 //     ypos = height()/2 - imageHeight()/2;
-//     XMoveWindow( getX11Display(), win, xpos, ypos );
+    move(xpos, ypos);
 }
 
 
 void ImageWindow::scrollImage( int x, int y, bool restrict )
 {
-    xpos += x;
-    ypos += y;
-
-    int cwlocal = width();
-    int chlocal = height();
-
-    int iw = imageWidth();
-    int ih = imageHeight();
-
-    if ( myIsFullscreen || width() > desktopWidth() )
-	cwlocal = desktopWidth();
-
-    if ( myIsFullscreen || height() > desktopHeight() )
-	chlocal = desktopHeight();
-
-    if ( restrict ) { // don't allow scrolling in certain cases
-	if ( x != 0 ) { // restrict x-movement
-	    if ( iw <= cwlocal )
-		xpos -= x; // restore previous position
-	    else if ( (xpos <= 0) && (xpos + iw <= cwlocal) )
-		xpos = cwlocal - iw;
-	    else if ( (xpos + iw >= cwlocal) && xpos >= 0 )
-		xpos = 0;
-	}
-
-	if ( y != 0 ) { // restrict y-movement
-	    if ( ih <= chlocal )
-		ypos -= y;
-	    else if ( (ypos <= 0) && (ypos + ih <= chlocal) )
-		ypos = chlocal - ih;
-	    else if ( (ypos + ih >= chlocal) && ypos >= 0 )
-		ypos = 0;
-	}
-    }
-
-    XMoveWindow( getX11Display(), win, xpos, ypos );
-    XClearArea( getX11Display(), win, xpos, ypos, iw, ih, false );
-    showImage();
+    horizontalScrollBar()->setValue(horizontalScrollBar()->value()-x);
+    verticalScrollBar()->setValue(verticalScrollBar()->value()-y);
 }
 
 
@@ -839,12 +795,11 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     ytmp += ycenter;
 
     m_kuim->resize( w, h, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
-    XResizeWindow( getX11Display(), win, w, h );
+    resize( w, h );
     updateWidget( false );
 
     xpos = xtmp; ypos = ytmp;
-
-    XMoveWindow( getX11Display(), win, xpos, ypos );
+    move(xpos, ypos);
     scrollImage( 1, 1, true ); // unrestricted scrolling
 }
 

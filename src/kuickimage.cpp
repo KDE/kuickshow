@@ -19,7 +19,6 @@
 #include "kuickimage.h"
 
 #include <QImage>
-#include <QUrl>
 
 #include "imagemods.h"
 
@@ -31,7 +30,6 @@ KuickImage::KuickImage( const KuickFile * file, ImlibImage *im, ImlibData *id)
     myOrigIm   = 0L;
     myIm       = im;
     myId       = id;
-    myPixmap   = 0L;
     myWidth    = im->rgb_width;
     myHeight   = im->rgb_height;
     setDirty(true);
@@ -48,8 +46,6 @@ KuickImage::~KuickImage()
 	{
 		ImageMods::rememberFor( this );
 	}
-    if ( myPixmap )
-        Imlib_free_pixmap( myId, myPixmap );
 
     if ( myOrigIm )
     {
@@ -66,47 +62,6 @@ bool KuickImage::isModified() const
 	modified |= (myFlipMode != FlipNone);
 	modified |= (myRotation != ROT_0);
 	return modified;
-}
-
-
-Pixmap& KuickImage::pixmap()
-{
-    if ( myIsDirty )
-	renderPixmap();
-
-    return myPixmap;
-}
-
-
-void KuickImage::renderPixmap()
-{
-    if ( !myIsDirty )
-	return;
-
-//     qDebug("### rendering: %s", myFilename.latin1());
-
-    if ( myPixmap )
-	Imlib_free_pixmap( myId, myPixmap );
-
-    emit startRendering();
-
-// #ifndef NDEBUG
-//     struct timeval tms1, tms2;
-//     gettimeofday( &tms1, NULL );
-// #endif
-
-    Imlib_render( myId, myIm, myWidth, myHeight );
-	myPixmap = Imlib_move_image( myId, myIm );
-
-// #ifndef NDEBUG
-//     gettimeofday( &tms2, NULL );
-//     qDebug("*** rendering image: %s, took %ld ms", myFilename.latin1(),
-//            (tms2.tv_usec - tms1.tv_usec)/1000);
-// #endif
-
-    emit stoppedRendering();
-
-    myIsDirty = false;
 }
 
 
@@ -236,26 +191,23 @@ void KuickImage::resize( int width, int height, KuickImage::ResizeMode mode )
 
 void KuickImage::fastResize( int width, int height )
 {
-//	qDebug("-- fastResize: %i x %i", width, height );
-
-	// lazy resizing (only done when rendering pixmap)
-    myWidth   = width;
-    myHeight  = height;
-    setDirty(true);
+//      qDebug("-- fastResize: %i x %i", width, height);
+	smoothResize(width, height);
 }
 
 bool KuickImage::smoothResize( int newWidth, int newHeight )
 {
 //	qDebug("-- smoothResize: %i x %i", newWidth, newHeight);
 
-	QImage *image = newQImage();
-	// Note: QImage::ScaleMin seems to have a bug (off-by-one, sometimes results in width being 1 pixel too small)
-	QImage scaledImage = image->scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	// TODO: why does this use Qt for scaling instead of Imlib?
 
-	delete image;
+	// Note: QImage::ScaleMin seems to have a bug (off-by-one,
+	// sometimes results in width being 1 pixel too small)
+	QImage scaledImage = toQImage().scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
-
-	ImlibImage *newIm = toImage( myId, scaledImage );
+	emit startRendering();
+	ImlibImage *newIm = toImlibImage( myId, scaledImage );
+	emit stoppedRendering();
 	if ( newIm )
 	{
 		if ( myOrigIm == 0 )
@@ -271,13 +223,16 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	return false;
 }
 
-QImage * KuickImage::newQImage() const
+
+
+
+QImage KuickImage::toQImage() const
 {
+	emit startRendering();
+
 	ImlibImage *im;
-
-//	qDebug("-- newQImage");
-
-	if ( myOrigIm != 0L && myRotation == ROT_0 && myFlipMode == FlipNone )
+	if (myOrigIm != 0L && myRotation == ROT_0 && myFlipMode == FlipNone
+	    && myWidth == myOrigWidth && myHeight == myOrigHeight)
 	{
 		// use original image if no other modifications have been applied
 		// ### use orig image always and reapply mods?
@@ -291,10 +246,17 @@ QImage * KuickImage::newQImage() const
 	int w = im->rgb_width;
 	int h = im->rgb_height;
 
-	QImage *image = new QImage( w, h, QImage::Format_RGB32 );
-	uchar *rgb = im->rgb_data;
-//	QRgb **destImageData = reinterpret_cast<QRgb**>( image->jumpTable() );
+	// TODO: apply image modifications as set by ImlibWidget::setImageModifier()
+	// (do an Imlib render into a temporary pixmap and use that as the
+	// source for the QImage data).  Used by the brightness/contrast/gamma
+	// controls.  See the eliminated KuickImage::renderPixmap(), the
+	// essential part is:
+	//
+	// Imlib_render( myId, myIm, myWidth, myHeight );
+	// myPixmap = Imlib_move_image( myId, myIm );
 
+	QImage image(w, h, QImage::Format_RGB32);
+	uchar *rgb = im->rgb_data;
 
 	int byteIndex = 0;
 	int destLineIndex = 0;
@@ -312,15 +274,17 @@ QImage * KuickImage::newQImage() const
 		uchar b = rgb[byteIndex++];
 
 		QRgb rgbPixel = qRgb( r, g, b );
-		QRgb *destImageData = reinterpret_cast<QRgb*>( image->scanLine( destLineIndex ));
+		// TODO: use QImage::setPixel()
+		QRgb *destImageData = reinterpret_cast<QRgb*>(image.scanLine(destLineIndex));
 		destImageData[destByteIndex++] = rgbPixel;
-//		destImageData[destLineIndex][destByteIndex++] = rgbPixel;
 	}
 
+	emit stoppedRendering();
 	return image;
 }
 
-ImlibImage * KuickImage::toImage( ImlibData *id, QImage& image )
+// TODO: this can be file static, second parameter should be const
+/* static */ ImlibImage * KuickImage::toImlibImage(ImlibData *id, QImage& image)
 {
 	if ( image.isNull() )
 		return 0L;
@@ -336,6 +300,7 @@ ImlibImage * KuickImage::toImage( ImlibData *id, QImage& image )
     // convert to 24 bpp (discard alpha)
     int numPixels = image.width() * image.height();
     const int NUM_BYTES_NEW  = 3; // 24 bpp
+    // TODO: use a QByteArray
     uchar *newImageData = new uchar[numPixels * NUM_BYTES_NEW];
     uchar *newData = newImageData;
 
@@ -356,7 +321,6 @@ ImlibImage * KuickImage::toImage( ImlibData *id, QImage& image )
                                                    image.width(), image.height() );
 
     delete [] newImageData;
-
     return im;
 }
 

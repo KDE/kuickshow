@@ -13,8 +13,7 @@
 #define IMLIBWIDGET_H
 
 #include <QCursor>
-#include <QObject>
-#include <QWidget>
+#include <QScrollArea>
 #include <QX11Info>
 
 #include "imlib-wrapper.h"
@@ -27,6 +26,7 @@ class QColor;
 class QUrl;
 class KuickFile;
 class KuickImage;
+class QLabel;
 
 
 class ImageCache : public QObject
@@ -68,7 +68,7 @@ signals:
 // ------------------------------------------
 
 
-class ImlibWidget : public QWidget
+class ImlibWidget : public QScrollArea
 {
   Q_OBJECT
 
@@ -127,8 +127,6 @@ public slots:
 
 
 protected:
-  Display *	    getX11Display() const { return QX11Info::display(); }
-  int getX11Screen() const;
   KuickImage *	loadImageInternal( KuickFile * file );
   void 			showImage();
   void          setImageModifier();
@@ -153,7 +151,6 @@ protected:
   ImageCache 	*imageCache;
   ImlibData     *id;
   ImData    	*idata;
-  Window        win;
   ImlibColorModifier mod;
 
   KuickFile *m_kuickFile;
@@ -167,7 +164,7 @@ private:
   bool 		isAutoRendering;
   int 		myMaxImageCache;
   QColor 	myBackgroundColor;
-
+  QLabel *myLabel;
 
 protected slots:
   bool 		cacheImage( KuickFile *file );
