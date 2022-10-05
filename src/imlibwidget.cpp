@@ -41,6 +41,7 @@
 #include "imagemods.h"
 
 
+// TODO: can be file-static?
 const int ImlibWidget::ImlibOffset = 256;
 
 ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent )

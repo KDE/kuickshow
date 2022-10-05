@@ -246,14 +246,16 @@ QImage KuickImage::toQImage() const
 	int w = im->rgb_width;
 	int h = im->rgb_height;
 
-	// TODO: apply image modifications as set by ImlibWidget::setImageModifier()
-	// (do an Imlib render into a temporary pixmap and use that as the
-	// source for the QImage data).  Used by the brightness/contrast/gamma
-	// controls.  See the eliminated KuickImage::renderPixmap(), the
-	// essential part is:
-	//
-	// Imlib_render( myId, myIm, myWidth, myHeight );
-	// myPixmap = Imlib_move_image( myId, myIm );
+	// TODO: be able to detect whether the modifier is actually needed,
+	// see comment in imlibwidget.h
+
+	// Apply image modifications as set by ImlibWidget::setImageModifier()
+	// by taking a temporary clone of the image and applying the colour
+	// modifications to its RGB data before extracting it.  Originally
+	// done implicitly by Imlib_render() in KuickImage::renderPixmap().
+	ImlibImage *tempImage = Imlib_clone_image(myId, im);
+	Imlib_apply_modifiers_to_rgb(myId, tempImage);
+	im = tempImage;
 
 	QImage image(w, h, QImage::Format_RGB32);
 	uchar *rgb = im->rgb_data;
@@ -279,6 +281,7 @@ QImage KuickImage::toQImage() const
 		destImageData[destByteIndex++] = rgbPixel;
 	}
 
+	if (tempImage!=nullptr) Imlib_kill_image(myId, tempImage);
 	emit stoppedRendering();
 	return image;
 }

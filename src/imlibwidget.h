@@ -151,6 +151,11 @@ protected:
   ImageCache 	*imageCache;
   ImlibData     *id;
   ImData    	*idata;
+
+  // TODO: combine this (in a new custom class) with the rotete/flip/scale
+  // modifications in KuickImage.  Be able to detect whether it is null
+  // (i.e. whether it actually does anything).  Apply all of the requested
+  // modifications in one place in KuickImage::toQImage().
   ImlibColorModifier mod;
 
   KuickFile *m_kuickFile;
