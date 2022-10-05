@@ -72,6 +72,7 @@
 #include "kuickdata.h"
 #include "kuickimage.h"
 #include "printing.h"
+#include "imagecache.h"
 
 
 QCursor *ImageWindow::s_handCursor = 0L;

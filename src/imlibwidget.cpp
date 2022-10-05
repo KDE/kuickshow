@@ -20,18 +20,12 @@
 
 #include <QApplication>
 #include <QCloseEvent>
-#include <QColor>
 #include <QDesktopWidget>
 #include <QFile>
 #include <QImage>
 #include <QLabel>
 #include <QPalette>
-#include <QtGlobal>
-
-#include <assert.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
+#include <QX11Info>
 
 #include "filecache.h"
 #include "kuickdata.h"
@@ -39,6 +33,7 @@
 #include "kuickimage.h"
 #include "kuickshow_debug.h"
 #include "imagemods.h"
+#include "imagecache.h"
 
 
 // TODO: can be file-static?
@@ -522,6 +517,8 @@ void ImlibWidget::restoreCursor()
     if ( cursor().shape() == QCursor(Qt::WaitCursor).shape() ) // only if nobody changed the cursor in the meantime!
     setCursor( m_oldCursor );
 }
+
+
 /*
 // Reparenting a widget in Qt in fact means destroying the old X window of the widget
 // and creating a new one. And since the X window used for the Imlib image is a child
@@ -543,179 +540,4 @@ void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool
 */
 void ImlibWidget::rotated( KuickImage *, int )
 {
-}
-
-
-//----------
-
-
-// TODO: move ImageCache into its own source file,
-// maybe use QCache
-
-// uhh ugly, we have two lists to map from filename to KuickImage :-/
-ImageCache::ImageCache( ImlibData *id, int maxImages )
-{
-    myId        = id;
-    idleCount   = 0;
-    myMaxImages = maxImages;
-}
-
-
-ImageCache::~ImageCache()
-{
-    while ( !kuickList.isEmpty() ) {
-        delete kuickList.takeFirst();
-    }
-    fileList.clear();
-}
-
-
-void ImageCache::setMaxImages( int maxImages )
-{
-    myMaxImages = maxImages;
-    int count   = kuickList.count();
-    while ( count > myMaxImages ) {
-	delete kuickList.takeLast();
-	fileList.removeLast();
-	count--;
-    }
-}
-
-void ImageCache::slotBusy()
-{
-    if ( idleCount == 0 )
-	emit sigBusy();
-
-    idleCount++;
-}
-
-void ImageCache::slotIdle()
-{
-    idleCount--;
-
-    if ( idleCount == 0 )
-	emit sigIdle();
-}
-
-
-KuickImage * ImageCache::getKuimage( KuickFile * file )
-{
-    if ( !file )
-	return 0L;
-
-    assert( file->isAvailable() ); // debug build
-    if ( file->waitForDownload( 0L ) != KuickFile::OK ) // and for users
-    	return 0L;
-
-    KuickImage *kuim = 0L;
-    int index = fileList.indexOf( file );
-    if ( index != -1 )
-    {
-        if ( index == 0 )
-            kuim = kuickList.at( 0 );
-
-        // need to reorder the lists, otherwise we might delete the current
-        // image when a new one is cached and the current one is the last!
-        else {
-            kuim = kuickList.takeAt( index );
-            kuickList.insert( 0, kuim );
-            fileList.removeAll( file );
-            fileList.prepend( file );
-        }
-
-        return kuim;
-    }
-
-    return 0L;
-}
-
-KuickImage * ImageCache::loadImage( KuickFile * file, ImlibColorModifier mod)
-{
-	KuickImage *kuim = 0L;
-	if ( !file || !file->isAvailable() )
-		return 0L;
-
-	slotBusy();
-
-	// #ifndef NDEBUG
-	//         struct timeval tms1, tms2;
-	//         gettimeofday( &tms1, NULL );
-	// #endif
-
-	ImlibImage *im = Imlib_load_image( myId, QFile::encodeName( file->localFile() ).data() );
-
-	// #ifndef NDEBUG
-	//         gettimeofday( &tms2, NULL );
-	//         qDebug("*** LOADING image: %s, took %ld ms", file.toLatin1(),
-	//                (tms2.tv_usec - tms1.tv_usec)/1000);
-	// #endif
-
-	slotIdle();
-	if ( !im ) {
-        slotBusy();
-		im = loadImageWithQt( file->localFile() );
-		slotIdle();
-		if ( !im )
-			return 0L;
-	}
-
-	Imlib_set_image_modifier( myId, im, &mod );
-	kuim = new KuickImage( file, im, myId );
-	connect( kuim, SIGNAL( startRendering() ),   SLOT( slotBusy() ));
-	connect( kuim, SIGNAL( stoppedRendering() ), SLOT( slotIdle() ));
-
-	kuickList.insert( 0, kuim );
-	fileList.prepend( file );
-
-	if ( kuickList.count() > myMaxImages ) {
-		//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).toLatin1());
-		delete kuickList.takeLast();
-		fileList.removeLast();
-	}
-
-	return kuim;
-}
-
-
-// Note: the returned image's filename will not be the real filename (which it usually
-// isn't anyway, according to Imlib's sources).
-ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
-{
-    qDebug("Trying to load %s with KImageIO...", qUtf8Printable(fileName));
-
-    QImage image( fileName );
-    if ( image.isNull() )
-	return 0L;
-    if ( image.depth() != 32 ) {
-	image = image.convertToFormat(QImage::Format_RGB32);
-
-    if ( image.isNull() )
-	return 0L;
-    }
-
-    // convert to 24 bpp (discard alpha)
-    int numPixels = image.width() * image.height();
-    const int NUM_BYTES_NEW  = 3; // 24 bpp
-    uchar *newImageData = new uchar[numPixels * NUM_BYTES_NEW];
-    uchar *newData = newImageData;
-
-    int w = image.width();
-    int h = image.height();
-
-    for (int y = 0; y < h; y++) {
-	QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
-	for (int x = 0; x < w; x++) {
-	    const QRgb& pixel = scanLine[x];
-	    *(newData++) = qRed(pixel);
-	    *(newData++) = qGreen(pixel);
-	    *(newData++) = qBlue(pixel);
-	}
-    }
-
-    ImlibImage *im = Imlib_create_image_from_data( myId, newImageData, NULL,
-                                                   image.width(), image.height() );
-
-    delete[] newImageData;
-
-    return im;
 }

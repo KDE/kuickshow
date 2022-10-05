@@ -12,9 +12,7 @@
 #ifndef IMLIBWIDGET_H
 #define IMLIBWIDGET_H
 
-#include <QCursor>
 #include <QScrollArea>
-#include <QX11Info>
 
 #include "imlib-wrapper.h"
 
@@ -27,45 +25,7 @@ class QUrl;
 class KuickFile;
 class KuickImage;
 class QLabel;
-
-
-class ImageCache : public QObject
-{
-  Q_OBJECT
-
-public:
-  ImageCache( ImlibData *id, int maxImages=1 );
-  ~ImageCache();
-
-  void 			setMaxImages( int maxImages );
-  int 			maxImages() 		const { return myMaxImages; }
-
-  KuickImage *		getKuimage( KuickFile * file );
-  KuickImage *		loadImage( KuickFile *file, ImlibColorModifier );
-  //  KuickImage *		find( const QString& filename );
-
-private:
-  ImlibImage *		loadImageWithQt( const QString& filename ) const;
-
-  int 			myMaxImages;
-  QList<KuickFile*>	fileList;
-  QList<KuickImage*>	kuickList;
-  //  QPtrList<ImlibImage>	imList;
-  ImlibData * 		myId;
-  int 			idleCount;
-
-private slots:
-  void 			slotBusy();
-  void 			slotIdle();
-
-signals:
-  void			sigBusy();
-  void 			sigIdle();
-
-};
-
-
-// ------------------------------------------
+class ImageCache;
 
 
 class ImlibWidget : public QScrollArea

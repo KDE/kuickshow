@@ -24,6 +24,7 @@ set(kuickshow_KDEINIT_SRCS
    imagemods.cpp
    printing.cpp
    openfilesanddirsdialog.cpp
+   imagecache.cpp
 )
 
 ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
