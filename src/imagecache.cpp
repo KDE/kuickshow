@@ -17,14 +17,15 @@
 */
 
 #define DEBUG_TIMING
+#define DEBUG_CACHE
 
 #include "imagecache.h"
 
 #include <qfile.h>
 #include <qimage.h>
+#include <qdebug.h>
 #ifdef DEBUG_TIMING
 #include <qelapsedtimer.h>
-#include <qdebug.h>
 #endif
 
 #include <assert.h>
@@ -33,91 +34,77 @@
 #include "kuickimage.h"
 
 
-// TODO: maybe use QCache to simplify and avoid the below
-
-// uhh ugly, we have two lists to map from filename to KuickImage :-/
-ImageCache::ImageCache( ImlibData *id, int maxImages )
+ImageCache::ImageCache(ImlibData *id, int maxImages)
 {
     myId        = id;
     idleCount   = 0;
-    myMaxImages = maxImages;
+
+    setMaxImages(maxImages);
 }
 
 
-ImageCache::~ImageCache()
+#ifdef DEBUG_CACHE
+void ImageCache::dumpCache() const
 {
-    while ( !kuickList.isEmpty() ) {
-        delete kuickList.takeFirst();
-    }
-    fileList.clear();
-}
-
-
-void ImageCache::setMaxImages( int maxImages )
-{
-    myMaxImages = maxImages;
-    int count   = kuickList.count();
-    while ( count > myMaxImages ) {
-	delete kuickList.takeLast();
-	fileList.removeLast();
-	count--;
+    qDebug() << "cache total" << myCache.totalCost();
+    for (const QUrl &u : myCache.keys())
+    {
+        qDebug() << "  " << u.toDisplayString();
     }
 }
+#endif
+
+
+void ImageCache::setMaxImages(int maxImages)
+{
+    // The 'cost' of an item to be inserted in the cache is always
+    // set to be 1.  This means that the maximum cost of the cache
+    // is the number of images set here, as before.
+    myCache.setMaxCost(maxImages);
+#ifdef DEBUG_CACHE
+    qDebug() << "cache size set to" << myCache.maxCost() << "images";
+#endif
+}
+
+int ImageCache::maxImages() const
+{
+    return (myCache.maxCost());
+}
+
 
 void ImageCache::slotBusy()
 {
-    if ( idleCount == 0 )
-	emit sigBusy();
-
-    idleCount++;
+    if (idleCount==0) emit sigBusy();
+    ++idleCount;
 }
 
 void ImageCache::slotIdle()
 {
-    idleCount--;
-
-    if ( idleCount == 0 )
-	emit sigIdle();
+    --idleCount;
+    if (idleCount==0) emit sigIdle();
 }
 
 
-KuickImage * ImageCache::getKuimage( KuickFile * file )
+KuickImage *ImageCache::getKuimage(KuickFile *file)
 {
-    if ( !file )
-	return 0L;
+    if (file==nullptr) return (nullptr);
 
-    assert( file->isAvailable() ); // debug build
-    if ( file->waitForDownload( 0L ) != KuickFile::OK ) // and for users
-        return 0L;
+    assert(file->isAvailable());			// debug build only
+    if (file->waitForDownload(nullptr)!=KuickFile::OK) return (nullptr);
 
-    KuickImage *kuim = 0L;
-    int index = fileList.indexOf( file );
-    if ( index != -1 )
-    {
-        if ( index == 0 )
-            kuim = kuickList.at( 0 );
-
-        // need to reorder the lists, otherwise we might delete the current
-        // image when a new one is cached and the current one is the last!
-        else {
-            kuim = kuickList.takeAt( index );
-            kuickList.insert( 0, kuim );
-            fileList.removeAll( file );
-            fileList.prepend( file );
-        }
-
-        return kuim;
-    }
-
-    return 0L;
+#ifdef DEBUG_CACHE
+    dumpCache();
+    qDebug() << "requesting" << file->url();
+#endif
+    return (myCache.object(file->url()));
 }
 
-// TODO: 'mod' by const ref
-KuickImage * ImageCache::loadImage( KuickFile * file, ImlibColorModifier mod)
+
+KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod)
 {
-	KuickImage *kuim = 0L;
-	if ( !file || !file->isAvailable() )
-		return 0L;
+	if (file==nullptr || !file->isAvailable()) return (nullptr);
+        const QString fileName = file->localFile();
+        qDebug() << "loading" << fileName;
 
 	slotBusy();
 #ifdef DEBUG_TIMING
@@ -125,35 +112,31 @@ KuickImage * ImageCache::loadImage( KuickFile * file, ImlibColorModifier mod)
 	QElapsedTimer timer;
 	timer.start();
 #endif
-	ImlibImage *im = Imlib_load_image( myId, QFile::encodeName( file->localFile() ).data() );
+	ImlibImage *im = Imlib_load_image(myId, QFile::encodeName(fileName).data());
 #ifdef DEBUG_TIMING
 	qDebug() << "load took" << timer.elapsed() << "ms, ok" << (im!=nullptr);
 #endif
 	slotIdle();
 
-	if ( !im ) {
-        slotBusy();
-		im = loadImageWithQt( file->localFile() );
+	if (im==nullptr)				// failed to load via imlib,
+	{						// fall back to loading via Qt
+		slotBusy();
+		im = loadImageWithQt(fileName);
 		slotIdle();
-		if ( !im )
-			return 0L;
+		if (im==nullptr) return (nullptr);
 	}
 
-	Imlib_set_image_modifier( myId, im, &mod );
-	kuim = new KuickImage( file, im, myId );
+	Imlib_set_image_modifier(myId, im, const_cast<ImlibColorModifier *>(&mod));
+	KuickImage *kuim = new KuickImage(file, im, myId);
 	connect( kuim, SIGNAL( startRendering() ),   SLOT( slotBusy() ));
 	connect( kuim, SIGNAL( stoppedRendering() ), SLOT( slotIdle() ));
 
-	kuickList.insert( 0, kuim );
-	fileList.prepend( file );
-
-	if ( kuickList.count() > myMaxImages ) {
-		//         qDebug(":::: now removing from cache: %s", (*fileList.fromLast()).toLatin1());
-		delete kuickList.takeLast();
-		fileList.removeLast();
-	}
-
-	return kuim;
+	myCache.insert(file->url(), kuim, 1);
+#ifdef DEBUG_CACHE
+	qDebug() << "inserted" << file->url();
+	dumpCache();
+#endif
+	return (kuim);
 }
 
 
@@ -162,7 +145,7 @@ KuickImage * ImageCache::loadImage( KuickFile * file, ImlibColorModifier mod)
 // TODO: can be made file-static once myId is a singleton
 ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 {
-    qDebug() << "Trying to load" << fileName;
+    qDebug() << "loading" << fileName;
 
 #ifdef DEBUG_TIMING
     QElapsedTimer timer;
@@ -176,7 +159,7 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
     if (image.isNull())
     {
         qDebug() << "loading failed";
-	return 0L;
+	return (nullptr);
     }
 
     if (image.depth()!=32)
@@ -192,7 +175,7 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
         if (image.isNull())
         {
             qDebug() << "converting to Format_RGB32 failed";
-            return 0L;
+            return (nullptr);
         }
     }
 
@@ -222,10 +205,9 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 
     ImlibImage *im = Imlib_create_image_from_data( myId, newImageData, NULL,
                                                    image.width(), image.height() );
-
     delete[] newImageData;
 #ifdef DEBUG_TIMING
     qDebug() << "create took" << timer.elapsed() << "ms";
 #endif
-    return im;
+    return (im);
 }

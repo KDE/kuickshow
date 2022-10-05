@@ -11,35 +11,39 @@
 #define IMLIBCACHE_H
 
 #include <qobject.h>
+#include <qcache.h>
 
 #include "imlib-wrapper.h"
 
-class QUrl;
 class KuickFile;
 class KuickImage;
+
 
 class ImageCache : public QObject
 {
   Q_OBJECT
 
 public:
-  explicit ImageCache( ImlibData *id, int maxImages=1 );
-  virtual ~ImageCache();
+  explicit ImageCache(ImlibData *id, int maxImages = 1);
+  // No need for a destructor, ~QCache() deletes all cached objects
+  virtual ~ImageCache() = default;
 
-  void 			setMaxImages( int maxImages );
-  int 			maxImages() 		const { return myMaxImages; }
+  void 			setMaxImages(int maxImages);
+  int 			maxImages() const;
 
-  KuickImage *		getKuimage( KuickFile * file );
-  KuickImage *		loadImage( KuickFile *file, ImlibColorModifier );
+  KuickImage *		getKuimage(KuickFile *file);
+  KuickImage *		loadImage(KuickFile *file, const ImlibColorModifier &mod);
 
 private:
-  ImlibImage *		loadImageWithQt( const QString& filename ) const;
+  ImlibImage *		loadImageWithQt(const QString &filename) const;
 
-  int 			myMaxImages;
-  QList<KuickFile*>	fileList;
-  QList<KuickImage*>	kuickList;
+  QCache<QUrl,KuickImage> myCache;
   ImlibData * 		myId;
   int 			idleCount;
+
+#ifdef DEBUG_CACHE
+  void dumpCache() const;
+#endif
 
 private slots:
   void 			slotBusy();
