@@ -56,6 +56,8 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent )
 	deleteImData = true;
     }
 
+    // TODO: this initialisation and 'id'/'myId' can be managed
+    // in a singleton class
     ImlibInitParams par;
 
     // PARAMS_PALETTEOVERRIDE taken out because of segfault in imlib :o(

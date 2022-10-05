@@ -16,9 +16,16 @@
    Boston, MA 02110-1301, USA.
 */
 
+#define DEBUG_TIMING
+
 #include "kuickimage.h"
 
-#include <QImage>
+#include <qimage.h>
+
+#ifdef DEBUG_TIMING
+#include <qelapsedtimer.h>
+#include <qdebug.h>
+#endif
 
 #include "imagemods.h"
 
@@ -201,6 +208,12 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 
 	// TODO: why does this use Qt for scaling instead of Imlib?
 
+
+#ifdef DEBUG_TIMING
+	qDebug() << "starting to resize image size" << QSize(myWidth, myHeight);
+	QElapsedTimer timer;
+	timer.start();
+#endif
 	// Note: QImage::ScaleMin seems to have a bug (off-by-one,
 	// sometimes results in width being 1 pixel too small)
 	QImage scaledImage = toQImage().scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
@@ -208,6 +221,9 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	emit startRendering();
 	ImlibImage *newIm = toImlibImage( myId, scaledImage );
 	emit stoppedRendering();
+#ifdef DEBUG_TIMING
+	qDebug() << "resize took" << timer.elapsed() << "ms";
+#endif
 	if ( newIm )
 	{
 		if ( myOrigIm == 0 )
@@ -246,6 +262,11 @@ QImage KuickImage::toQImage() const
 	int w = im->rgb_width;
 	int h = im->rgb_height;
 
+#ifdef DEBUG_TIMING
+	qDebug() << "starting to render image size" << QSize(w, h);
+	QElapsedTimer timer;
+	timer.start();
+#endif
 	// TODO: be able to detect whether the modifier is actually needed,
 	// see comment in imlibwidget.h
 
@@ -282,6 +303,9 @@ QImage KuickImage::toQImage() const
 	}
 
 	if (tempImage!=nullptr) Imlib_kill_image(myId, tempImage);
+#ifdef DEBUG_TIMING
+	qDebug() << "render took" << timer.elapsed() << "ms";
+#endif
 	emit stoppedRendering();
 	return image;
 }
@@ -300,6 +324,11 @@ QImage KuickImage::toQImage() const
 			return 0L;
     }
 
+#ifdef DEBUG_TIMING
+    qDebug() << "starting to convert image size" << image.size();
+    QElapsedTimer timer;
+    timer.start();
+#endif
     // convert to 24 bpp (discard alpha)
     int numPixels = image.width() * image.height();
     const int NUM_BYTES_NEW  = 3; // 24 bpp
@@ -324,6 +353,9 @@ QImage KuickImage::toQImage() const
                                                    image.width(), image.height() );
 
     delete [] newImageData;
+#ifdef DEBUG_TIMING
+    qDebug() << "convert took" << timer.elapsed() << "ms";
+#endif
     return im;
 }
 
