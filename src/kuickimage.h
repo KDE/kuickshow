@@ -73,8 +73,6 @@ public:
   Rotation      absRotation()   const { return myRotation; }
   FlipMode      flipMode()      const { return myFlipMode; }
 
-  static ImlibImage *toImlibImage(ImlibData *id, QImage &image);
-
   QImage toQImage() const;
 
 private:

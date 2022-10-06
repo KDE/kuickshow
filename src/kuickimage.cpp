@@ -17,6 +17,7 @@
 */
 
 #define DEBUG_TIMING
+#undef USE_IMLIB_SCALING
 
 #include "kuickimage.h"
 
@@ -196,50 +197,99 @@ void KuickImage::resize( int width, int height, KuickImage::ResizeMode mode )
 }
 
 
+static ImlibImage *toImlibImage(ImlibData *id, const QImage &image)
+{
+	if (image.isNull()) return (nullptr);
+	// The image depth should always be 32, because toImlibImage()
+	// is only called from smoothResize() on the scaled result of
+	// a toQImage() which always returns a 32bpp image.
+	if (image.depth()!=32) return (nullptr);
+
+#ifdef DEBUG_TIMING
+	qDebug() << "starting to convert image size" << image.size();
+	QElapsedTimer timer;
+	timer.start();
+#endif
+	// Convert the QImage pixels to 24bpp (discard the alpha)
+	const int NUM_BYTES_NEW = 3;
+
+	const int w = image.width();
+	const int h = image.height();
+	const int numPixels = w*h;
+
+	uchar *newImageData = new uchar[numPixels*NUM_BYTES_NEW];
+	uchar *newData = newImageData;
+
+	for (int y = 0; y<h; ++y)
+	{
+		const QRgb *scanLine = reinterpret_cast<const QRgb *>(image.scanLine(y));
+		for (int x = 0; x<w; ++x)
+		{
+			// It would be possible to use QImage::pixel() here, instead
+			// of setting scanLine above and then indexing through it.
+			// However, that is slower (typically 15ms for a 1200x900
+			// image, as opposed to 7ms this way).
+			const QRgb &pixel = scanLine[x];
+			*(newData++) = qRed(pixel);
+			*(newData++) = qGreen(pixel);
+			*(newData++) = qBlue(pixel);
+		}
+	}
+
+	ImlibImage *im = Imlib_create_image_from_data(id, newImageData, nullptr, w, h);
+	delete [] newImageData;
+#ifdef DEBUG_TIMING
+	qDebug() << "convert took" << timer.elapsed() << "ms";
+#endif
+	return (im);
+}
+
+
 void KuickImage::fastResize( int width, int height )
 {
 //      qDebug("-- fastResize: %i x %i", width, height);
 	smoothResize(width, height);
 }
 
+
 bool KuickImage::smoothResize( int newWidth, int newHeight )
 {
 //	qDebug("-- smoothResize: %i x %i", newWidth, newHeight);
-
-	// TODO: why does this use Qt for scaling instead of Imlib?
-
-
 #ifdef DEBUG_TIMING
 	qDebug() << "starting to resize image size" << QSize(myWidth, myHeight);
 	QElapsedTimer timer;
 	timer.start();
 #endif
-	// Note: QImage::ScaleMin seems to have a bug (off-by-one,
-	// sometimes results in width being 1 pixel too small)
-	QImage scaledImage = toQImage().scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-
 	emit startRendering();
-	ImlibImage *newIm = toImlibImage( myId, scaledImage );
+#ifdef USE_IMLIB_SCALING
+	ImlibImage *newIm = Imlib_clone_scaled_image(myId, myIm, newWidth, newHeight);
+#else
+	// This uses Qt for scaling instead of Imlib, because Imlib1's
+	// scaling does not appear to have such good smoothing even
+	// if the "Smooth scaling" option is turned on.  It is slower,
+	// though (typically 33ms to scale a 800x600 image up one step,
+	// as opposed to 5ms by Imlib1).
+	//
+	// Note from original: QImage::ScaleMin seems to have a bug
+	// (off-by-one, sometimes results in width being 1 pixel too small)
+	QImage scaledImage = toQImage().scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	ImlibImage *newIm = toImlibImage(myId, scaledImage);
+#endif
 	emit stoppedRendering();
 #ifdef DEBUG_TIMING
 	qDebug() << "resize took" << timer.elapsed() << "ms";
 #endif
-	if ( newIm )
-	{
-		if ( myOrigIm == 0 )
-			myOrigIm = myIm;
+	if (newIm==nullptr) return (false);
 
-		myIm = newIm;
-		myWidth = newWidth;
-		myHeight = newHeight;
-        setDirty(true);
-		return true;
-	}
+	if (myOrigIm==nullptr) myOrigIm = myIm;
+	else Imlib_destroy_image(myId, myIm);
 
-	return false;
+	myIm = newIm;
+	myWidth = newWidth;
+	myHeight = newHeight;
+	setDirty(true);
+	return (true);
 }
-
-
 
 
 QImage KuickImage::toQImage() const
@@ -286,6 +336,8 @@ QImage KuickImage::toQImage() const
 	int destByteIndex = 0;
 	for ( int pixel = 0; pixel < (w * h); pixel++ )
 	{
+		// TODO: similify this block using 2 nested loops,
+		// see toImlibImage()
 		if ( pixel != 0 && (pixel % w) == 0 )
 		{
 			destLineIndex++;
@@ -298,6 +350,8 @@ QImage KuickImage::toQImage() const
 
 		QRgb rgbPixel = qRgb( r, g, b );
 		// TODO: use QImage::setPixel()
+		// TODO: or even if that is slower, move the line below
+		// up to the "destLineIndex++" block
 		QRgb *destImageData = reinterpret_cast<QRgb*>(image.scanLine(destLineIndex));
 		destImageData[destByteIndex++] = rgbPixel;
 	}
@@ -308,55 +362,6 @@ QImage KuickImage::toQImage() const
 #endif
 	emit stoppedRendering();
 	return image;
-}
-
-// TODO: this can be file static, second parameter should be const
-/* static */ ImlibImage * KuickImage::toImlibImage(ImlibData *id, QImage& image)
-{
-	if ( image.isNull() )
-		return 0L;
-
-    if ( image.depth() != 32 )
-    {
-	image = image.convertToFormat(QImage::Format_RGB32);
-
-    	if ( image.isNull() )
-			return 0L;
-    }
-
-#ifdef DEBUG_TIMING
-    qDebug() << "starting to convert image size" << image.size();
-    QElapsedTimer timer;
-    timer.start();
-#endif
-    // convert to 24 bpp (discard alpha)
-    int numPixels = image.width() * image.height();
-    const int NUM_BYTES_NEW  = 3; // 24 bpp
-    // TODO: use a QByteArray
-    uchar *newImageData = new uchar[numPixels * NUM_BYTES_NEW];
-    uchar *newData = newImageData;
-
-    int w = image.width();
-    int h = image.height();
-
-	for (int y = 0; y < h; y++) {
-		QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
-		for (int x = 0; x < w; x++) {
-		    const QRgb& pixel = scanLine[x];
-		    *(newData++) = qRed(pixel);
-		    *(newData++) = qGreen(pixel);
-		    *(newData++) = qBlue(pixel);
-		}
-	}
-
-	ImlibImage *im = Imlib_create_image_from_data( id, newImageData, NULL,
-                                                   image.width(), image.height() );
-
-    delete [] newImageData;
-#ifdef DEBUG_TIMING
-    qDebug() << "convert took" << timer.elapsed() << "ms";
-#endif
-    return im;
 }
 
 
