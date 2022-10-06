@@ -603,7 +603,7 @@ msgstr "Mostra la imatge en el mode de pantalla completa"
 #: src/kuickshow.cpp:310
 #, kde-format
 msgid "&File"
-msgstr "&Fitxer"
+msgstr "Fi&txer"
 
 #: src/kuickshow.cpp:322
 #, kde-format
@@ -749,7 +749,7 @@ msgstr "Imprimix la imatge en &blanc i negre"
 #: src/printing_page.ui:53
 #, kde-format
 msgid "&Width:"
-msgstr "&Amplària:"
+msgstr "A&mplària:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, units)
 #: src/printing_page.ui:64
