@@ -35,7 +35,7 @@ public:
   KuickImage *		loadImage(KuickFile *file, const ImlibColorModifier &mod);
 
 private:
-  ImlibImage *		loadImageWithQt(const QString &filename) const;
+  IMLIBIMAGE loadImageWithQt(const QString &filename) const;
 
   QCache<QUrl,KuickImage> myCache;
   ImlibData * 		myId;

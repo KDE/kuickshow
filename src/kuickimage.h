@@ -38,7 +38,7 @@ class KuickImage : public QObject
 public:
   enum ResizeMode { FAST, SMOOTH };
 
-  KuickImage( const KuickFile * file, ImlibImage *im, ImlibData *id );
+  KuickImage( const KuickFile * file, IMLIBIMAGE im, ImlibData *id );
   ~KuickImage();
 
   int 		width() 	const { return myWidth;   }
@@ -57,7 +57,7 @@ public:
   bool		rotateAbs( Rotation rot );
   void 		flip( FlipMode flipMode );
   bool 		flipAbs( int mode );
-  ImlibImage *	imlibImage()	const { return myIm;      }
+  IMLIBIMAGE	imlibImage()	const { return myIm;      }
 //  const QString& filename() 	const { return myFilename;}
   const KuickFile& file()       const { return *myFile; }
   QUrl url()             const { return myFile->url(); }
@@ -77,7 +77,7 @@ public:
 
 private:
   void      fastResize( int newWidth, int newHeight );
-  bool 		smoothResize( int width, int height );
+  bool 	    smoothResize( int width, int height );
   /**
    * Note: caller must delete it!
    */
@@ -85,8 +85,8 @@ private:
 
   int 		myWidth;
   int 		myHeight;
-  ImlibImage * 	myOrigIm;
-  ImlibImage * 	myIm;
+  IMLIBIMAGE 	myOrigIm;
+  IMLIBIMAGE 	myIm;
   ImlibData  * 	myId;
   bool 		myIsDirty;
 

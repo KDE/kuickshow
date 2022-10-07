@@ -51,27 +51,39 @@ ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent )
 	deleteImData = true;
     }
 
-    // TODO: this initialisation and 'id'/'myId' can be managed
-    // in a singleton class
+    // TODO: maybe this initialisation and 'id'/'myId' can be managed
+    // in a singleton class, or at least merged into an utility
+    // function. Very similar to KuickShow::initImlib().
+
+    uint maxcache       = idata->maxCache;
+#ifdef HAVE_IMLIB1
     ImlibInitParams par;
 
-    // PARAMS_PALETTEOVERRIDE taken out because of segfault in imlib :o(
-    par.flags = ( PARAMS_REMAP |
-		  PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
-		  PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
-
-    par.paletteoverride = idata->ownPalette ? 1 : 0;
-    par.remap           = idata->fastRemap ? 1 : 0;
-    par.fastrender      = idata->fastRender ? 1 : 0;
+    par.paletteoverride = idata->ownPalette  ? 1 : 0;
+    par.remap           = idata->fastRemap   ? 1 : 0;
+    par.fastrender      = idata->fastRender  ? 1 : 0;
     par.hiquality       = idata->dither16bit ? 1 : 0;
-    par.dither          = idata->dither8bit ? 1 : 0;
-    uint maxcache       = idata->maxCache;
+    par.dither          = idata->dither8bit  ? 1 : 0;
+
+    par.flags = ( PARAMS_REMAP |
+                  PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
+                  PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
     // 0 == no cache
     par.imagecachesize  = maxcache * 1024;
     par.pixmapcachesize = maxcache * 1024;
 
     id = Imlib_init_with_params(QX11Info::display(), &par);
+#endif // HAVE_IMLIB1
+#ifdef HAVE_IMLIB2
+    imlib_set_cache_size(maxcache*1024);
+    // Set the maximum number of colours to allocate for 8bpp or less
+    imlib_set_color_usage(128);
+    // Dither for depths<24bpp
+    imlib_context_set_dither(idata->dither8bit  ? 1 : 0);
+    // Set the display , visual and colormap we are using
+    imlib_context_set_display(QX11Info::display());
+#endif // HAVE_IMLIB2
 
     init();
 }
@@ -113,8 +125,9 @@ void ImlibWidget::init()
     m_kuim              = 0L;
     m_kuickFile = 0L;
 
-    if ( !id )
-	qFatal("ImlibWidget: Imlib not initialized, aborting.");
+#ifdef HAVE_IMLIB1
+    if (id==nullptr) qFatal("ImlibWidget: Imlib not initialized");
+#endif // HAVE_IMLIB1
 
     setAttribute( Qt::WA_DeleteOnClose );
     setAutoRender( true );
@@ -127,6 +140,10 @@ void ImlibWidget::init()
     imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
     connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
+
+#ifdef HAVE_IMLIB2
+    mod = imlib_create_color_modifier();
+#endif // HAVE_IMLIB2
 }
 
 ImlibWidget::~ImlibWidget()
@@ -134,6 +151,10 @@ ImlibWidget::~ImlibWidget()
     delete imageCache;
     if ( deleteImlibData && id ) free ( id );
     if ( deleteImData ) delete idata;
+#ifdef HAVE_IMLIB2
+    imlib_context_set_color_modifier(mod);
+    imlib_free_color_modifier();
+#endif // HAVE_IMLIB2
 }
 
 QUrl ImlibWidget::url() const
@@ -156,9 +177,11 @@ KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
     assert( file->isAvailable() );
 
     // apply default image modifications
-    mod.brightness = idata->brightness + ImlibOffset;
-    mod.contrast = idata->contrast + ImlibOffset;
-    mod.gamma = idata->gamma + ImlibOffset;
+/////////////////////////////////////////////////////////////////////////////
+//     mod.brightness = idata->brightness + ImlibOffset;
+//     mod.contrast = idata->contrast + ImlibOffset;
+//     mod.gamma = idata->gamma + ImlibOffset;
+/////////////////////////////////////////////////////////////////////////////
 
     KuickImage *kuim = imageCache->getKuimage( file );
     bool wasCached = true;
@@ -238,8 +261,10 @@ void ImlibWidget::showImage()
 // -256..256
 void ImlibWidget::setBrightness( int factor )
 {
-    mod.brightness = factor + ImlibOffset;
-    setImageModifier();
+/////////////////////////////////////////////////////////////////////////////
+//     mod.brightness = factor + ImlibOffset;
+//     setImageModifier();
+/////////////////////////////////////////////////////////////////////////////
 
     autoUpdate();
 }
@@ -248,8 +273,10 @@ void ImlibWidget::setBrightness( int factor )
 // -256..256
 void ImlibWidget::setContrast( int factor )
 {
-    mod.contrast = factor + ImlibOffset;
-    setImageModifier();
+/////////////////////////////////////////////////////////////////////////////
+//     mod.contrast = factor + ImlibOffset;
+//     setImageModifier();
+/////////////////////////////////////////////////////////////////////////////
 
     autoUpdate();
 }
@@ -258,8 +285,10 @@ void ImlibWidget::setContrast( int factor )
 // -256..256
 void ImlibWidget::setGamma( int factor )
 {
-    mod.gamma = factor + ImlibOffset;
-    setImageModifier();
+/////////////////////////////////////////////////////////////////////////////
+//     mod.gamma = factor + ImlibOffset;
+//     setImageModifier();
+/////////////////////////////////////////////////////////////////////////////
 
     autoUpdate();
 }
@@ -485,10 +514,15 @@ const QColor& ImlibWidget::backgroundColor() const
 
 void ImlibWidget::setImageModifier()
 {
-    if ( !m_kuim )
-	return;
+    if (m_kuim==nullptr) return;
 
-    Imlib_set_image_modifier( id, m_kuim->imlibImage(), &mod );
+#ifdef HAVE_IMLIB1
+    Imlib_set_image_modifier(id, m_kuim->imlibImage(), &mod);
+#endif // HAVE_IMLIB1
+#ifdef HAVE_IMLIB2
+    imlib_context_set_color_modifier(mod);
+#endif // HAVE_IMLIB2
+
     m_kuim->setDirty( true );
 }
 

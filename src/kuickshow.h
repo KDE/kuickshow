@@ -93,7 +93,7 @@ public:
 
 protected:
     virtual void	readProperties( const KConfigGroup& kc ) override;
-    void 		initImlibParams( ImData *, ImlibInitParams * );
+    void 		initImlibParams(const ImData *idata, ImlibInitParams *par);
     void                tryShowNextImage();
 
 private slots:

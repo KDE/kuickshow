@@ -455,8 +455,10 @@ void ImageWindow::addBrightness( int factor )
     if ( factor == 0 )
 	return;
 
-    int oldValue = mod.brightness - ImlibOffset;
-    setBrightness( oldValue + (idata->brightnessFactor * (int) factor) );
+///////////////////////////////////////////////////////////////////////////
+//     int oldValue = mod.brightness - ImlibOffset;
+//     setBrightness( oldValue + (idata->brightnessFactor * (int) factor) );
+///////////////////////////////////////////////////////////////////////////
 }
 
 void ImageWindow::addContrast( int factor )
@@ -464,8 +466,10 @@ void ImageWindow::addContrast( int factor )
     if ( factor == 0 )
 	return;
 
-    int oldValue = mod.contrast - ImlibOffset;
-    setContrast( oldValue + (idata->contrastFactor * (int) factor) );
+///////////////////////////////////////////////////////////////////////////
+//     int oldValue = mod.contrast - ImlibOffset;
+//     setContrast( oldValue + (idata->contrastFactor * (int) factor) );
+///////////////////////////////////////////////////////////////////////////
 }
 
 void ImageWindow::addGamma( int factor )
@@ -473,8 +477,10 @@ void ImageWindow::addGamma( int factor )
     if ( factor == 0 )
 	return;
 
-    int oldValue = mod.gamma - ImlibOffset;
-    setGamma( oldValue + (idata->gammaFactor * (int) factor) );
+///////////////////////////////////////////////////////////////////////////
+//     int oldValue = mod.gamma - ImlibOffset;
+//     setGamma( oldValue + (idata->gammaFactor * (int) factor) );
+///////////////////////////////////////////////////////////////////////////
 }
 
 
@@ -954,9 +960,11 @@ void ImageWindow::saveImage()
             }
             else
             {
-                if ( url == m_kuim->url() ) {
-					Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
-				}
+///////////////////////////////////////////////////////////////////////////
+//                 if ( url == m_kuim->url() ) {
+// 					Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+// 				}
+///////////////////////////////////////////////////////////////////////////
             }
         }
     }
@@ -973,9 +981,11 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
     if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == ROT_270 )
         qSwap( w, h );
 
+    bool success = false;
+#if 0
+///////////////////////////////////////////////////////////////////////////
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
                                                    w, h );
-    bool success = false;
 
 	QString saveFile;
 	if ( dest.isLocalFile() )
@@ -1022,6 +1032,8 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
 
         Imlib_kill_image( id, saveIm );
     }
+#endif
+///////////////////////////////////////////////////////////////////////////
 
     return success;
 }

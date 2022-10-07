@@ -108,6 +108,14 @@ KuickShow::KuickShow( const char *name )
     m_slideTimer = new QTimer( this );
     connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
 
+    // This will report the build time version, there appears to
+    // be no way to obtain the runtime Imlib version.
+#ifdef HAVE_IMLIB1
+    qDebug() << "Configured for Imlib 1 version" << IMLIB1_VERSION;
+#endif // HAVE_IMLIB1
+#ifdef HAVE_IMLIB2
+    qDebug() << "Configured for Imlib 2 version" << IMLIB2_VERSION;
+#endif // HAVE_IMLIB2
 
     KSharedConfig::Ptr kc = KSharedConfig::openConfig();
 
@@ -1213,8 +1221,9 @@ void KuickShow::initImlib()
 {
     ImData *idata = kdata->idata;
     ImlibInitParams par;
-    initImlibParams( idata, &par );
+    initImlibParams(idata, &par);
 
+#ifdef HAVE_IMLIB1
     id = Imlib_init_with_params( getX11Display(), &par );
     if ( !id ) {
         initImlibParams( idata, &par );
@@ -1241,17 +1250,18 @@ void KuickShow::initImlib()
             ::exit(1);
         }
     }
+#endif // HAVE_IMLIB1
 }
 
 
-void KuickShow::initImlibParams( ImData *idata, ImlibInitParams *par )
+void KuickShow::initImlibParams(const ImData *idata, ImlibInitParams *par)
 {
-    par->flags = ( PARAMS_REMAP | PARAMS_VISUALID | PARAMS_SHAREDMEM | PARAMS_SHAREDPIXMAPS |
-                   PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
-                   PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
+    Display *disp = getX11Display();
+    Visual *defaultvis = DefaultVisual(disp, getX11Screen());
+    Colormap cm = DefaultColormap(disp, DefaultScreen(disp));
+    const uint maxcache = idata->maxCache;
 
-    Visual* defaultvis = DefaultVisual(getX11Display(), getX11Screen());
-
+#ifdef HAVE_IMLIB1
     par->paletteoverride = idata->ownPalette  ? 1 : 0;
     par->remap           = idata->fastRemap   ? 1 : 0;
     par->fastrender      = idata->fastRender  ? 1 : 0;
@@ -1260,11 +1270,28 @@ void KuickShow::initImlibParams( ImData *idata, ImlibInitParams *par )
     par->sharedmem       = 1;
     par->sharedpixmaps   = 1;
     par->visualid	 = defaultvis->visualid;
-    uint maxcache        = idata->maxCache;
+
+    par->flags = ( PARAMS_REMAP | PARAMS_VISUALID | PARAMS_SHAREDMEM | PARAMS_SHAREDPIXMAPS |
+                   PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
+                   PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
     // 0 == no cache
     par->imagecachesize  = maxcache * 1024;
     par->pixmapcachesize = maxcache * 1024;
+#endif // HAVE_IMLIB1
+
+#ifdef HAVE_IMLIB2
+    imlib_set_cache_size(maxcache*1024);
+    // Set the maximum number of colours to allocate for 8bpp or less
+    imlib_set_color_usage(128);
+    // Dither for depths<24bpp
+    imlib_context_set_dither(idata->dither8bit  ? 1 : 0);
+    // Set the display , visual and colormap we are using
+    imlib_context_set_display(disp);
+    imlib_context_set_visual(defaultvis);
+    imlib_context_set_colormap(cm);
+//    imlib_context_set_drawable(win);
+#endif // HAVE_IMLIB2
 }
 
 bool KuickShow::haveBrowser() const

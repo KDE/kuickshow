@@ -112,7 +112,7 @@ KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod
 	QElapsedTimer timer;
 	timer.start();
 #endif
-	ImlibImage *im = Imlib_load_image(myId, QFile::encodeName(fileName).data());
+	IMLIBIMAGE im = Imlib_load_image(myId, QFile::encodeName(fileName).data());
 #ifdef DEBUG_TIMING
 	qDebug() << "load took" << timer.elapsed() << "ms, ok" << (im!=nullptr);
 #endif
@@ -143,7 +143,7 @@ KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod
 // Note: the returned image's filename will not be the real filename (which it usually
 // isn't anyway, according to Imlib's sources).
 // TODO: can be made file-static once myId is a singleton
-ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
+IMLIBIMAGE ImageCache::loadImageWithQt(const QString &fileName) const
 {
     qDebug() << "loading" << fileName;
 
@@ -203,8 +203,7 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 	}
     }
 
-    ImlibImage *im = Imlib_create_image_from_data( myId, newImageData, NULL,
-                                                   image.width(), image.height() );
+    IMLIBIMAGE im = Imlib_create_image_from_data(myId, newImageData, nullptr, w, h);
     delete[] newImageData;
 #ifdef DEBUG_TIMING
     qDebug() << "create took" << timer.elapsed() << "ms";
