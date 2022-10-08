@@ -414,19 +414,23 @@ QImage KuickImage::toQImage() const
 	// modifications to its RGB data before extracting it.  Originally
 	// done implicitly by Imlib_render() in KuickImage::renderPixmap().
 
-#if 0 // modifiers not supported yet
 #ifdef HAVE_IMLIB1
+	ImlibColorModifier mod;
+	Imlib_get_image_modifier(myId, im, &mod);
+
 	IMLIBIMAGE tempImage = Imlib_clone_image(myId, im);
+	Imlib_set_image_modifier(myId, tempImage, &mod);
 	Imlib_apply_modifiers_to_rgb(myId, tempImage);
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
+	// The colour modifier context will already have been set
+	// by ImlibWidget::setImageModifier().
 	imlib_context_set_image(im);
 	IMLIBIMAGE tempImage = imlib_clone_image();
 	imlib_context_set_image(tempImage);
 	imlib_apply_color_modifier();
 #endif // HAVE_IMLIB2
 	im = tempImage;
-#endif
 
 	QImage image(w, h, QImage::Format_RGB32);	// destination image
 
@@ -461,7 +465,6 @@ QImage KuickImage::toQImage() const
 		}
 	}
 
-#if 0 // modifiers not supported yet
 	if (tempImage!=nullptr)
 	{
 #ifdef HAVE_IMLIB1
@@ -472,7 +475,6 @@ QImage KuickImage::toQImage() const
 		imlib_free_image();
 #endif // HAVE_IMLIB2
 	}
-#endif
 #ifdef DEBUG_TIMING
 	qDebug() << "render took" << timer.elapsed() << "ms";
 #endif

@@ -55,10 +55,6 @@ public:
   void		setFullscreen( bool );
   bool 		isFullscreen() 	const { return myIsFullscreen; }
 
-  void          addBrightness( int );
-  void 		addContrast( int );
-  void 		addGamma( int );
-
   void 		updateActions();
 
   KActionCollection * actionCollection() const { return m_actions; }

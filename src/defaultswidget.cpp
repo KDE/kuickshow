@@ -150,9 +150,11 @@ void DefaultsWidget::updatePreview()
     Rotation rotation = ui->cbEnableMods->isChecked() ? currentRotation() : ROT_0;
     imFiltered->setRotation( rotation );
 
-    imFiltered->setBrightness( ui->sbBrightness->value() );
-    imFiltered->setContrast( ui->sbContrast->value() );
-    imFiltered->setGamma( ui->sbGamma->value() );
+// TODO: implement imFiltered->resetModifier() then use step....
+// 
+//     imFiltered->setBrightness( ui->sbBrightness->value() );
+//     imFiltered->setContrast( ui->sbContrast->value() );
+//     imFiltered->setGamma( ui->sbGamma->value() );
 
     imFiltered->updateImage();
     imFiltered->setAutoRender( true );

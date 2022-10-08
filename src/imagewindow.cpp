@@ -450,44 +450,7 @@ void ImageWindow::pauseSlideShow()
     emit pauseSlideShowSignal();
 }
 
-void ImageWindow::addBrightness( int factor )
-{
-    if ( factor == 0 )
-	return;
-
-///////////////////////////////////////////////////////////////////////////
-//     int oldValue = mod.brightness - ImlibOffset;
-//     setBrightness( oldValue + (idata->brightnessFactor * (int) factor) );
-///////////////////////////////////////////////////////////////////////////
-}
-
-void ImageWindow::addContrast( int factor )
-{
-    if ( factor == 0 )
-	return;
-
-///////////////////////////////////////////////////////////////////////////
-//     int oldValue = mod.contrast - ImlibOffset;
-//     setContrast( oldValue + (idata->contrastFactor * (int) factor) );
-///////////////////////////////////////////////////////////////////////////
-}
-
-void ImageWindow::addGamma( int factor )
-{
-    if ( factor == 0 )
-	return;
-
-///////////////////////////////////////////////////////////////////////////
-//     int oldValue = mod.gamma - ImlibOffset;
-//     setGamma( oldValue + (idata->gammaFactor * (int) factor) );
-///////////////////////////////////////////////////////////////////////////
-}
-
-
-////////////
-////
-// slots for keyboard/popupmenu actions
-
+// Slots for keyboard/popupmenu actions
 
 void ImageWindow::scrollUp()
 {
@@ -522,37 +485,39 @@ void ImageWindow::zoomOut()
     zoomImage( 1.0 / kdata->zoomSteps );
 }
 
-///
+// The 'brightnessSteps', 'contrastSteps' and 'gammaSteps' are
+// all set to 1 by KuickData::KuickData().  There is no GUI for
+// them, but they could possibly be changed in the application's
+// config file.
 
 void ImageWindow::moreBrightness()
 {
-    addBrightness( kdata->brightnessSteps );
+    stepBrightness(kdata->brightnessSteps);
 }
 
 void ImageWindow::moreContrast()
 {
-    addContrast( kdata->contrastSteps );
+    stepContrast(kdata->contrastSteps);
 }
 
 void ImageWindow::moreGamma()
 {
-    addGamma( kdata->gammaSteps );
+    stepGamma(kdata->gammaSteps);
 }
-
 
 void ImageWindow::lessBrightness()
 {
-    addBrightness( - kdata->brightnessSteps );
+    stepBrightness(-kdata->brightnessSteps);
 }
 
 void ImageWindow::lessContrast()
 {
-    addContrast( - kdata->contrastSteps );
+    stepContrast(-kdata->contrastSteps);
 }
 
 void ImageWindow::lessGamma()
 {
-    addGamma( - kdata->gammaSteps );
+    stepGamma(-kdata->gammaSteps);
 }
 
 void ImageWindow::imageDelete()
