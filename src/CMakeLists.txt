@@ -43,8 +43,10 @@ ecm_qt_declare_logging_category(kuickshow_KDEINIT_SRCS
    DESCRIPTION "KuickShow image viewer"
 )
 
+add_definitions("-DHOMEPAGE_URL=\"https://userbase.kde.org/KuickShow\"")
+
 # target kdeinit_kuickshow
-kf5_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
+kf5_add_kdeinit_executable(kuickshow ${kuickshow_KDEINIT_SRCS})
 target_compile_options(kdeinit_kuickshow PRIVATE -std=c++11 -Wall --pedantic)
 target_compile_definitions(kdeinit_kuickshow PRIVATE ${IMLIB_DEFINITIONS} -DQT_NO_URL_CAST_FROM_STRING)
 target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS})

@@ -39,7 +39,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
         KAboutLicense::GPL,
         i18n("(c) 1998-2009, Carsten Pfeiffer"),
         QString(),
-        QStringLiteral("http://devel-home.kde.org/~pfeiffer/")
+        QStringLiteral(HOMEPAGE_URL)
     );
 
     about.addAuthor(i18n("Carsten Pfeiffer"), QString(), QStringLiteral("pfeiffer@kde.org"),

@@ -52,7 +52,7 @@ AboutWidget::AboutWidget( QWidget *parent )
     // fill the labels
     ui->lblAuthors->setText("Kuickshow " KUICKSHOWVERSION " was brought to you by");
     ui->urlHomepage->setText("Carsten Pfeiffer");
-    ui->urlHomepage->setUrl("http://devel-home.kde.org/~pfeiffer/kuickshow/");
+    ui->urlHomepage->setUrl(HOMEPAGE_URL);
     ui->lblCopyright->setText("(C) 1998-2009");
 
     // load & show the logo
