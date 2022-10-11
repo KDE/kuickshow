@@ -24,11 +24,11 @@ public:
     // This is defined both for Imlib1 and Imlib2, although it
     // is not meaningful for the latter.  The compatibility macros
     // in 'imlib-wrapper.h' throw away the 'id' parameter.
-    static ImlibData *imlibData()		{ return (self()->mId); }
+    static const ImlibData *imlibData()		{ return (self()->mId); }
 
     // Access to the application configuration.
-    static const ImData *imlibConfig()		{ return (self()->mImlibConfig); }
-    static const KuickData *kuickConfig()	{ return (self()->mKuickConfig); }
+    static ImData *imlibConfig()		{ return (self()->mImlibConfig); }
+    static KuickData *kuickConfig()		{ return (self()->mKuickConfig); }
 
     bool init();
 

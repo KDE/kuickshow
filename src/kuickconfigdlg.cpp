@@ -74,9 +74,9 @@ KuickConfigDialog::~KuickConfigDialog()
 
 void KuickConfigDialog::applyConfig()
 {
-    generalWidget->applySettings( *kdata );
-    defaultsWidget->applySettings( *kdata );
-    slideshowWidget->applySettings( *kdata );
+    generalWidget->applySettings();
+    defaultsWidget->applySettings();
+    slideshowWidget->applySettings();
 
     imageKeyChooser->save();
     browserKeyChooser->save();
@@ -87,10 +87,12 @@ void KuickConfigDialog::applyConfig()
 
 void KuickConfigDialog::resetDefaults()
 {
-    KuickData data;
-    generalWidget->loadSettings( data );
-    defaultsWidget->loadSettings( data );
-    slideshowWidget->loadSettings( data );
+    KuickData kdata;					// default settings, not from config
+    ImData idata;
+
+    generalWidget->loadSettings(&kdata, &idata);
+    defaultsWidget->loadSettings(&kdata, &idata);
+    slideshowWidget->loadSettings(&kdata, &idata);
 	//TODO port it
     //imageKeyChooser->allDefault();
     //browserKeyChooser->allDefault();

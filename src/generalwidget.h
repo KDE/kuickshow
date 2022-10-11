@@ -22,6 +22,7 @@
 #include <QWidget>
 
 class KuickData;
+class ImData;
 namespace Ui { class GeneralWidget; }
 
 
@@ -30,11 +31,11 @@ class GeneralWidget : public QWidget
     Q_OBJECT
 
 public:
-    GeneralWidget( QWidget *parent );
-    ~GeneralWidget();
+    explicit GeneralWidget(QWidget *parent);
+    virtual ~GeneralWidget();
 
-    void 	loadSettings( const KuickData& data );
-    void 	applySettings( KuickData& data );
+    void 		loadSettings(const KuickData *kdata = nullptr, const ImData *idata = nullptr);
+    void 		applySettings();
 
 private:
     Ui::GeneralWidget* ui;

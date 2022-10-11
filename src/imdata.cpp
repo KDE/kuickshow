@@ -18,7 +18,8 @@
 
 #include "imdata.h"
 
-#include <KConfigGroup>
+#include <ksharedconfig.h>
+#include <kconfiggroup.h>
 
 
 ImData::ImData()
@@ -41,11 +42,11 @@ ImData::ImData()
 }
 
 
-void ImData::load( KSharedConfig::Ptr kc )
+void ImData::load()
 {
-  ImData def;
-
+  KSharedConfig::Ptr kc = KSharedConfig::openConfig();
   KConfigGroup group( kc, "ImlibConfiguration" );
+  ImData def;
 
   ownPalette  = group.readEntry( "UseOwnPalette", def.ownPalette );
   fastRemap   = group.readEntry( "FastRemapping", def.fastRemap );
@@ -54,20 +55,21 @@ void ImData::load( KSharedConfig::Ptr kc )
   dither8bit  = group.readEntry( "Dither8Bit", def.dither8bit );
   smoothScale = group.readEntry( "SmoothScaling", def.smoothScale );
 
-  maxCache    = group.readEntry( "MaxCacheSize", 10240 );
+  maxCache    = group.readEntry( "MaxCacheSize", def.maxCache);
 
-  gamma       = group.readEntry( "GammaDefault", 0 );
-  brightness  = group.readEntry( "BrightnessDefault", 0 );
-  contrast    = group.readEntry( "ContrastDefault", 0 );
+  gamma       = group.readEntry( "GammaDefault", def.gamma);
+  brightness  = group.readEntry( "BrightnessDefault", def.brightness);
+  contrast    = group.readEntry( "ContrastDefault", def.contrast);
 
-  gammaFactor      = abs( group.readEntry( "GammaFactor", 10 ) );
-  brightnessFactor = abs( group.readEntry( "BrightnessFactor", 10 ) );
-  contrastFactor   = abs( group.readEntry( "ContrastFactor", 10 ) );
+  gammaFactor      = group.readEntry( "GammaFactor", def.gammaFactor);
+  brightnessFactor = group.readEntry( "BrightnessFactor", def.brightnessFactor);
+  contrastFactor   = group.readEntry( "ContrastFactor", def.contrastFactor);
 }
 
 
-void ImData::save( KSharedConfig::Ptr kc )
+void ImData::save()
 {
+  KSharedConfig::Ptr kc = KSharedConfig::openConfig();
   KConfigGroup group( kc, "ImlibConfiguration" );
 
   group.writeEntry( "UseOwnPalette", ownPalette );

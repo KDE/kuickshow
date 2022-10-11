@@ -32,7 +32,7 @@
     qDebug();
 
     mKuickConfig = new KuickData;			// default global application configuration
-    mImlibConfig = mKuickConfig->idata;			// also created by above
+    mImlibConfig = new ImData;				// default global Imlib configuration
 
     init();						// initialise the Imlib library
 }
@@ -40,8 +40,8 @@
 
 bool ImlibParams::init()
 {
-    mKuickConfig->load();				// read settings from config,
-							// also loads mImlibConfig
+    mKuickConfig->load();				// read settings from config
+    mImlibConfig->load();
     const uint maxcache = mImlibConfig->maxCache*1024;	// cache size from settings
 
     Display *disp = QX11Info::display();

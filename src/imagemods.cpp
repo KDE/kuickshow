@@ -18,6 +18,8 @@
 
 #include "imagemods.h"
 
+#include "kuickdata.h"
+#include "imdata.h"
 #include "imlibparams.h"
 
 
@@ -25,7 +27,7 @@ QCache<QUrl, ImageMods>* ImageMods::s_modifications = 0L;
 
 QCache<QUrl, ImageMods>* ImageMods::getInstance() {
 	if ( !s_modifications) {
-        s_modifications = new QCache<QUrl, ImageMods>(kdata->modificationCacheSize);
+		s_modifications = new QCache<QUrl, ImageMods>(ImlibParams::kuickConfig()->modificationCacheSize);
 	}
 	return s_modifications;
 }

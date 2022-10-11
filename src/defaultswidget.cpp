@@ -76,7 +76,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   if ( !imFiltered->loadImage( QUrl::fromLocalFile(filename) ) )
     imFiltered = 0L; // FIXME - display some errormessage!
 
-  loadSettings( *kdata );
+  loadSettings();
 
   if ( imOrig )
     imOrig->setFixedSize( imOrig->size() );
@@ -97,47 +97,48 @@ DefaultsWidget::~DefaultsWidget()
     delete ui;
 }
 
-void DefaultsWidget::loadSettings( const KuickData& data )
+void DefaultsWidget::loadSettings(const KuickData *kdata, const ImData *idata)
 {
-    ui->cbDownScale->setChecked( data.downScale );
-    ui->cbUpScale->setChecked( data.upScale );
-    ui->sbMaxUpScaleFactor->setValue( data.maxUpScale );
+    if (kdata==nullptr) kdata = ImlibParams::kuickConfig();	// normal, unless resetting to defaults
+    if (idata==nullptr) idata = ImlibParams::imlibConfig();
 
-    ui->cbFlipVertically->setChecked( data.flipVertically );
-    ui->cbFlipHorizontally->setChecked( data.flipHorizontally );
+    ui->cbDownScale->setChecked( kdata->downScale );
+    ui->cbUpScale->setChecked( kdata->upScale );
+    ui->sbMaxUpScaleFactor->setValue( kdata->maxUpScale );
 
-    ui->comboRotate->setCurrentIndex( ( int )data.rotation );
+    ui->cbFlipVertically->setChecked( kdata->flipVertically );
+    ui->cbFlipHorizontally->setChecked( kdata->flipHorizontally );
 
-    ImData *id = data.idata;
+    ui->comboRotate->setCurrentIndex( ( int )kdata->rotation );
 
-    ui->sbBrightness->setValue( id->brightness );
-    ui->sbContrast->setValue( id->contrast );
-    ui->sbGamma->setValue( id->gamma );
+    ui->sbBrightness->setValue( idata->brightness );
+    ui->sbContrast->setValue( idata->contrast );
+    ui->sbGamma->setValue( idata->gamma );
 
-    ui->cbEnableMods->setChecked( data.isModsEnabled );
-    enableWidgets( data.isModsEnabled );
+    ui->cbEnableMods->setChecked( kdata->isModsEnabled );
+    enableWidgets( kdata->isModsEnabled );
 
     updatePreview();
 }
 
-void DefaultsWidget::applySettings( KuickData& data )
+void DefaultsWidget::applySettings()
 {
-    data.isModsEnabled = ui->cbEnableMods->isChecked();
+    KuickData *kdata = ImlibParams::kuickConfig();
+    ImData *idata = ImlibParams::imlibConfig();
 
-    data.downScale  = ui->cbDownScale->isChecked();
-    data.upScale    = ui->cbUpScale->isChecked();
-    data.maxUpScale = ui->sbMaxUpScaleFactor->value();
+    kdata->isModsEnabled = ui->cbEnableMods->isChecked();
 
-    data.flipVertically   = ui->cbFlipVertically->isChecked();
-    data.flipHorizontally = ui->cbFlipHorizontally->isChecked();
+    kdata->downScale  = ui->cbDownScale->isChecked();
+    kdata->upScale    = ui->cbUpScale->isChecked();
+    kdata->maxUpScale = ui->sbMaxUpScaleFactor->value();
 
-    data.rotation = currentRotation();
+    kdata->flipVertically   = ui->cbFlipVertically->isChecked();
+    kdata->flipHorizontally = ui->cbFlipHorizontally->isChecked();
+    kdata->rotation = currentRotation();
 
-    ImData *id = data.idata;
-
-    id->brightness = ui->sbBrightness->value();
-    id->contrast   = ui->sbContrast->value();
-    id->gamma      = ui->sbGamma->value();
+    idata->brightness = ui->sbBrightness->value();
+    idata->contrast   = ui->sbContrast->value();
+    idata->gamma      = ui->sbGamma->value();
 }
 
 void DefaultsWidget::updatePreview()

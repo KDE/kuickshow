@@ -20,6 +20,8 @@
 #include <ui_slideshowwidget.h>
 
 #include "kuickdata.h"
+#include "imdata.h"
+#include "imlibparams.h"
 
 
 SlideShowWidget::SlideShowWidget( QWidget *parent )
@@ -29,7 +31,7 @@ SlideShowWidget::SlideShowWidget( QWidget *parent )
     ui = new Ui::SlideShowWidget;
     ui->setupUi(this);
 
-    loadSettings( *kdata );
+    loadSettings();
 }
 
 SlideShowWidget::~SlideShowWidget()
@@ -37,18 +39,24 @@ SlideShowWidget::~SlideShowWidget()
     delete ui;
 }
 
-void SlideShowWidget::loadSettings( const KuickData& data )
+void SlideShowWidget::loadSettings(const KuickData *kdata, const ImData *idata)
 {
-    ui->delayTime->setValue( data.slideDelay / 1000 );
-    ui->cycles->setValue( data.slideshowCycles );
-    ui->fullScreen->setChecked( data.slideshowFullscreen );
-    ui->startWithCurrent->setChecked( !data.slideshowStartAtFirst );
+    if (kdata==nullptr) kdata = ImlibParams::kuickConfig();	// normal, unless resetting to defaults
+    if (idata==nullptr) idata = ImlibParams::imlibConfig();
+
+    ui->delayTime->setValue( kdata->slideDelay / 1000 );
+    ui->cycles->setValue( kdata->slideshowCycles );
+    ui->fullScreen->setChecked( kdata->slideshowFullscreen );
+    ui->startWithCurrent->setChecked( !kdata->slideshowStartAtFirst );
 }
 
-void SlideShowWidget::applySettings( KuickData& data )
+void SlideShowWidget::applySettings()
 {
-    data.slideDelay = ui->delayTime->value() * 1000;
-    data.slideshowCycles = ui->cycles->value();
-    data.slideshowFullscreen = ui->fullScreen->isChecked();
-    data.slideshowStartAtFirst = !ui->startWithCurrent->isChecked();
+    KuickData *kdata = ImlibParams::kuickConfig();
+    ImData *idata = ImlibParams::imlibConfig();
+
+    kdata->slideDelay = ui->delayTime->value() * 1000;
+    kdata->slideshowCycles = ui->cycles->value();
+    kdata->slideshowFullscreen = ui->fullScreen->isChecked();
+    kdata->slideshowStartAtFirst = !ui->startWithCurrent->isChecked();
 }
