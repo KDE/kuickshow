@@ -41,7 +41,7 @@
 #include <KWindowSystem>
 
 #include <QAbstractItemView>
-#include <QApplication>
+#include <QGuiApplication>
 #include <QCommandLineParser>
 #include <QDesktopWidget>
 #include <QDialog>
@@ -80,6 +80,7 @@
 #include "kuickfile.h"
 #include "kuickshow_debug.h"
 #include "openfilesanddirsdialog.h"
+#include "imlibparams.h"
 
 
 KuickData* kdata;
@@ -91,7 +92,6 @@ KuickShow::KuickShow( const char *name )
       m_slideshowCycle( 1 ),
       fileWidget( 0L ),
       dialog( 0L ),
-      id( 0L ),
       m_viewer( 0L ),
       oneWindowAction( 0L ),
       m_delayedRepeatItem( 0L ),
@@ -102,20 +102,35 @@ KuickShow::KuickShow( const char *name )
     kdata = new KuickData;
     kdata->load();
 
-    initImlib();
+    // This will report the build time version, there appears to
+    // be no way to obtain the run time Imlib version.
+#ifdef HAVE_IMLIB1
+    int imlibVersion = 1;
+    qDebug() << "Configured for Imlib 1 version" << IMLIB1_VERSION;
+#endif // HAVE_IMLIB1
+#ifdef HAVE_IMLIB2
+    int imlibVersion = 2;
+    qDebug() << "Configured for Imlib 2 version" << IMLIB2_VERSION;
+#endif // HAVE_IMLIB2
+
+    if (!initImlib())
+    {
+        KMessageBox::error(nullptr,
+                           i18n("Unable to initialize the Imlib %2 library.\n\n"
+                                "More information may be available in the session log file,\n"
+                                "or can be obtained by starting %1 from a terminal.",
+                                QGuiApplication::applicationDisplayName(), imlibVersion),
+                           i18n("Fatal Imlib Error"));
+
+        FileCache::shutdown();
+        QCoreApplication::exit(1);
+        deleteLater();					// to actually exit event loop
+    }
+
     resize( 400, 500 );
 
     m_slideTimer = new QTimer( this );
     connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
-
-    // This will report the build time version, there appears to
-    // be no way to obtain the runtime Imlib version.
-#ifdef HAVE_IMLIB1
-    qDebug() << "Configured for Imlib 1 version" << IMLIB1_VERSION;
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    qDebug() << "Configured for Imlib 2 version" << IMLIB2_VERSION;
-#endif // HAVE_IMLIB2
 
     KSharedConfig::Ptr kc = KSharedConfig::openConfig();
 
@@ -219,7 +234,6 @@ KuickShow::~KuickShow()
     delete m_viewer;
 
     FileCache::shutdown();
-    free( id );
     qApp->quit();
 
     delete kdata;
@@ -265,7 +279,7 @@ void KuickShow::initGUI( const QUrl& startDir )
     print->setText( i18n("Print Image...") );
 
     QAction *configure = coll->addAction( "kuick_configure" );
-    configure->setText( i18n("Configure %1...", QApplication::applicationDisplayName() ) );
+    configure->setText( i18n("Configure %1...", QGuiApplication::applicationDisplayName() ) );
     configure->setIcon( QIcon::fromTheme( "configure" ) );
     connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
 
@@ -553,7 +567,7 @@ bool KuickShow::showImage( const KFileItem& fi,
     if ( ignoreFileType || FileWidget::isImage( fi ) ) {
 
         if ( newWindow ) {
-            m_viewer = new ImageWindow( kdata->idata, id, 0L );
+            m_viewer = new ImageWindow(nullptr);
             m_viewer->setObjectName( QString::fromLatin1("image window") );
             m_viewer->setFullscreen( fullscreen );
             s_viewers.append( m_viewer );
@@ -799,7 +813,7 @@ void KuickShow::slotPrint()
     const KFileItemList::const_iterator end = items.constEnd();
 
     // don't show the image, just print
-    ImageWindow *iw = new ImageWindow( 0, id, this );
+    ImageWindow *iw = new ImageWindow(this);
     iw->setObjectName( QString::fromLatin1("printing image"));
     KFileItem item;
 	for ( ; it != end; ++it ) {
@@ -1100,7 +1114,7 @@ void KuickShow::slotConfigApplied()
 {
     dialog->applyConfig();
 
-    initImlib();
+    initImlib();					// already initialised, so ignore failure
     kdata->save();
 
     ImageWindow *viewer;
@@ -1217,82 +1231,12 @@ void KuickShow::messageCantLoadImage( const KuickFile *, const QString& message 
     KMessageBox::error( m_viewer, message, i18n("Image Error") );
 }
 
-void KuickShow::initImlib()
+
+bool KuickShow::initImlib()
 {
-    ImData *idata = kdata->idata;
-    ImlibInitParams par;
-    initImlibParams(idata, &par);
-
-#ifdef HAVE_IMLIB1
-    id = Imlib_init_with_params( getX11Display(), &par );
-    if ( !id ) {
-        initImlibParams( idata, &par );
-
-        qWarning("*** KuickShow: Whoops, can't initialize imlib, trying my own palettefile now.");
-        QString paletteFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "kuickshow/im_palette.pal");
-        // FIXME - does the qstrdup() cure the segfault in imlib eventually?
-        char *file = qstrdup( paletteFile.toLocal8Bit() );
-        par.palettefile = file;
-        par.flags |= PARAMS_PALETTEFILE;
-
-        qWarning("Palettefile: %s", par.palettefile );
-
-        id = Imlib_init_with_params( getX11Display(), &par );
-
-        if ( !id ) {
-            QString tmp = i18n("Unable to initialize \"Imlib\".\n"
-                               "Start kuickshow from the command line "
-                               "and look for error messages.\n"
-                               "The program will now quit.");
-            KMessageBox::error( this, tmp, i18n("Fatal Imlib Error") );
-
-            FileCache::shutdown();
-            ::exit(1);
-        }
-    }
-#endif // HAVE_IMLIB1
+    return (ImlibParams::self()->init());		// set up library, check success
 }
 
-
-void KuickShow::initImlibParams(const ImData *idata, ImlibInitParams *par)
-{
-    Display *disp = getX11Display();
-    Visual *defaultvis = DefaultVisual(disp, getX11Screen());
-    Colormap cm = DefaultColormap(disp, DefaultScreen(disp));
-    const uint maxcache = idata->maxCache;
-
-#ifdef HAVE_IMLIB1
-    par->paletteoverride = idata->ownPalette  ? 1 : 0;
-    par->remap           = idata->fastRemap   ? 1 : 0;
-    par->fastrender      = idata->fastRender  ? 1 : 0;
-    par->hiquality       = idata->dither16bit ? 1 : 0;
-    par->dither          = idata->dither8bit  ? 1 : 0;
-    par->sharedmem       = 1;
-    par->sharedpixmaps   = 1;
-    par->visualid	 = defaultvis->visualid;
-
-    par->flags = ( PARAMS_REMAP | PARAMS_VISUALID | PARAMS_SHAREDMEM | PARAMS_SHAREDPIXMAPS |
-                   PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
-                   PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
-
-    // 0 == no cache
-    par->imagecachesize  = maxcache * 1024;
-    par->pixmapcachesize = maxcache * 1024;
-#endif // HAVE_IMLIB1
-
-#ifdef HAVE_IMLIB2
-    imlib_set_cache_size(maxcache*1024);
-    // Set the maximum number of colours to allocate for 8bpp or less
-    imlib_set_color_usage(128);
-    // Dither for depths<24bpp
-    imlib_context_set_dither(idata->dither8bit  ? 1 : 0);
-    // Set the display , visual and colormap we are using
-    imlib_context_set_display(disp);
-    imlib_context_set_visual(defaultvis);
-    imlib_context_set_colormap(cm);
-//    imlib_context_set_drawable(win);
-#endif // HAVE_IMLIB2
-}
 
 bool KuickShow::haveBrowser() const
 {
@@ -1461,10 +1405,4 @@ KActionCollection * KuickShow::actionCollection() const
         return fileWidget->actionCollection();
 
     return KXmlGuiWindow::actionCollection();
-}
-
-
-int KuickShow::getX11Screen() const
-{
-    return QApplication::desktop()->screenNumber(this);
 }

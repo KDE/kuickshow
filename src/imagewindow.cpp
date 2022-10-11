@@ -73,24 +73,15 @@
 #include "kuickimage.h"
 #include "printing.h"
 #include "imagecache.h"
+#include "imlibparams.h"
 
 
 QCursor *ImageWindow::s_handCursor = 0L;
 
-ImageWindow::ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent )
-    : ImlibWidget( _idata, id, parent )
+ImageWindow::ImageWindow(QWidget *parent)
+    : ImlibWidget(parent)
 {
     init();
-}
-
-ImageWindow::ImageWindow( ImData *_idata, QWidget *parent )
-    : ImlibWidget( _idata, parent )
-{
-    init();
-}
-
-ImageWindow::~ImageWindow()
-{
 }
 
 
@@ -766,7 +757,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     xtmp += xcenter;
     ytmp += ycenter;
 
-    m_kuim->resize( w, h, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
+    m_kuim->resize( w, h, ImlibParams::imlibConfig()->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
     resize( w, h );
     updateWidget( false );
 
@@ -925,11 +916,10 @@ void ImageWindow::saveImage()
             }
             else
             {
-///////////////////////////////////////////////////////////////////////////
-//                 if ( url == m_kuim->url() ) {
-// 					Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
-// 				}
-///////////////////////////////////////////////////////////////////////////
+                // TODO: what does this do?
+                // if ( url == m_kuim->url() ) {
+                //   Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+                // }
             }
         }
     }
@@ -948,6 +938,7 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
 
     bool success = false;
 #if 0
+// TODO: Imlib 2
 ///////////////////////////////////////////////////////////////////////////
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
                                                    w, h );
@@ -972,8 +963,8 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
 
     if ( saveIm )
     {
-        Imlib_apply_modifiers_to_rgb( id, saveIm );
-        success = Imlib_save_image( id, saveIm,
+        Imlib_apply_modifiers_to_rgb( ImlibParams::data(), saveIm );
+        success = Imlib_save_image( ImlibParams::data(), saveIm,
                                     QFile::encodeName( saveFile ).data(),
                                     NULL );
         if ( success && !dest.isLocalFile() )
@@ -995,7 +986,7 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
             sourceFile.close();
         }
 
-        Imlib_kill_image( id, saveIm );
+        Imlib_kill_image( ImlibParams::data(), saveIm );
     }
 #endif
 ///////////////////////////////////////////////////////////////////////////
@@ -1016,7 +1007,7 @@ void ImageWindow::loaded( KuickImage *kuim, bool wasCached )
 		return; // keep it as it is
 	}
 
-    if ( !ImageMods::restoreFor( kuim, idata ) )
+    if ( !ImageMods::restoreFor(kuim))
     {
     	// if no cached image modifications are available, apply the default modifications
         if ( !kdata->isModsEnabled ) {
@@ -1089,7 +1080,7 @@ void ImageWindow::autoScale( KuickImage *kuim )
     }
 
     if ( doIt )
-        kuim->resize( newW, newH, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
+        kuim->resize( newW, newH, ImlibParams::imlibConfig()->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
 }
 
 // only called when kdata->isModsEnabled is true
@@ -1121,6 +1112,7 @@ bool ImageWindow::autoRotate( KuickImage *kuim )
     return true;
 }
 
+// TODO: this function and next never used
 int ImageWindow::desktopWidth( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen )

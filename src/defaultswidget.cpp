@@ -23,6 +23,7 @@
 #include <QUrl>
 
 #include "imlibwidget.h"
+#include "imlibparams.h"
 
 
 DefaultsWidget::DefaultsWidget( QWidget *parent )
@@ -34,14 +35,16 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
 
   // set the properties that couldn't be set in the .ui file
+  // TODO: will qobject_cast work?
   QGridLayout* gbPreviewLayout = dynamic_cast<QGridLayout*>(ui->gbPreview->layout());
 
   // The image widgets have to be created here, because the required parameters can only be set on creation.
   // The generated code won't do that.
-  imOrig = new ImlibWidget(0L, ui->gbPreview);
+  imOrig = new ImlibWidget(ui->gbPreview);
+  // TODO: set ImlibWidget "do not use config" flag
   gbPreviewLayout->addWidget(imOrig, 1, 0, Qt::AlignCenter | Qt::AlignTop);
 
-  imFiltered = new ImlibWidget(0L, imOrig->getImlibData(), ui->gbPreview);
+  imFiltered = new ImlibWidget(ui->gbPreview);
   gbPreviewLayout->addWidget(imFiltered, 1, 1, Qt::AlignCenter | Qt::AlignTop);
 
 
@@ -51,6 +54,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   connect(ui->cbUpScale, SIGNAL( toggled(bool)), ui->sbMaxUpScaleFactor,
             SLOT( setEnabled(bool) ));
 
+  // TODO: why is this necessary?  Widget cannot delete itself.
   connect( imFiltered, SIGNAL( destroyed() ), SLOT( slotNoImage() ));
 
   connect( ui->cbDownScale,        SIGNAL( clicked() ), SLOT( updatePreview() ));

@@ -34,8 +34,7 @@ class ImlibWidget : public QScrollArea
 
 public:
 
-  ImlibWidget( ImData *_idata=0, QWidget *parent=0 );
-  ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0 );
+  explicit ImlibWidget(QWidget *parent = nullptr);
   virtual ~ImlibWidget();
 
   QUrl          url()                   const;
@@ -70,8 +69,6 @@ public:
    */
   virtual bool  autoRotate( KuickImage *kuim );
 
-  ImlibData*	getImlibData() const 	       { return id; 		  }
-
 //  virtual void  reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt = false );
 
 public slots:
@@ -103,13 +100,10 @@ protected:
   }
 
 //  bool		stillResizing;
-  bool		deleteImData, deleteImlibData;
 //  bool          imlibModifierChanged;
 
   KuickImage 	*m_kuim;
   ImageCache 	*imageCache;
-  ImlibData     *id;
-  ImData    	*idata;
 
 private:
   // TODO: combine this (in a new custom class) with the rotete/flip/scale

@@ -40,7 +40,7 @@ public:
     void 	load();
     void 	save();
 
-
+    // TODO: accessor function
     ImData 	*idata;
 
     QString 	fileFilter;
@@ -83,6 +83,7 @@ public:
 };
 
 
+// TODO: is this necessary?
 extern KuickData* kdata;
 
 #endif

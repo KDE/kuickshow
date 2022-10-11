@@ -34,6 +34,7 @@
 #include "kuickshow_debug.h"
 #include "imagemods.h"
 #include "imagecache.h"
+#include "imlibparams.h"
 
 #ifdef HAVE_IMLIB2
 #include <math.h>
@@ -44,71 +45,10 @@ static const int ImlibOffset = 256;
 static const int ImlibLimit = 256;
 
 
-ImlibWidget::ImlibWidget( ImData *_idata, QWidget *parent )
-    : QScrollArea( parent )
+
+ImlibWidget::ImlibWidget(QWidget *parent)
+    : QScrollArea(parent)
 {
-    idata 		= _idata;
-    deleteImData 	= false;
-    deleteImlibData 	= true;
-
-    if ( !idata ) { // if no imlib configuration was given, create one ourself
-	idata = new ImData;
-	deleteImData = true;
-    }
-
-    // TODO: maybe this initialisation and 'id'/'myId' can be managed
-    // in a singleton class, or at least merged into an utility
-    // function. Very similar to KuickShow::initImlib().
-
-    uint maxcache       = idata->maxCache;
-#ifdef HAVE_IMLIB1
-    ImlibInitParams par;
-
-    par.paletteoverride = idata->ownPalette  ? 1 : 0;
-    par.remap           = idata->fastRemap   ? 1 : 0;
-    par.fastrender      = idata->fastRender  ? 1 : 0;
-    par.hiquality       = idata->dither16bit ? 1 : 0;
-    par.dither          = idata->dither8bit  ? 1 : 0;
-
-    par.flags = ( PARAMS_REMAP |
-                  PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
-                  PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
-
-    // 0 == no cache
-    par.imagecachesize  = maxcache * 1024;
-    par.pixmapcachesize = maxcache * 1024;
-
-    id = Imlib_init_with_params(QX11Info::display(), &par);
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    imlib_set_cache_size(maxcache*1024);
-    // Set the maximum number of colours to allocate for 8bpp or less
-    imlib_set_color_usage(128);
-    // Dither for depths<24bpp
-    imlib_context_set_dither(idata->dither8bit  ? 1 : 0);
-    // Set the display , visual and colormap we are using
-    imlib_context_set_display(QX11Info::display());
-
-    id = nullptr;					// don't try to deallocate
-#endif // HAVE_IMLIB2
-
-    init();
-}
-
-
-ImlibWidget::ImlibWidget( ImData *_idata, ImlibData *_id, QWidget *parent )
-    : QScrollArea( parent )
-{
-    id              = _id;
-    idata           = _idata;
-    deleteImData    = false;
-    deleteImlibData = false;
-
-    if ( !idata ) {
-	idata = new ImData;
-	deleteImData = true;
-    }
-
     init();
 }
 
@@ -133,7 +73,7 @@ void ImlibWidget::init()
     m_kuickFile = 0L;
 
 #ifdef HAVE_IMLIB1
-    if (id==nullptr) qFatal("ImlibWidget: Imlib not initialized");
+    if (ImlibParams::imlibData()==nullptr) qFatal("Imlib not initialised");
 #endif // HAVE_IMLIB1
 
     setAttribute( Qt::WA_DeleteOnClose );
@@ -144,7 +84,8 @@ void ImlibWidget::init()
     myLabel->setBackgroundRole( QPalette::Window );
     myLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
 
-    imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
+    // TODO: ImageCache can also be a global singleton
+    imageCache = new ImageCache(4); // cache 4 images (FIXME?)
     connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
     connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
 
@@ -156,8 +97,6 @@ void ImlibWidget::init()
 ImlibWidget::~ImlibWidget()
 {
     delete imageCache;
-    if ( deleteImlibData && id ) free ( id );
-    if ( deleteImData ) delete idata;
 #ifdef HAVE_IMLIB2
     imlib_context_set_color_modifier(myModifier);
     imlib_free_color_modifier();
@@ -198,9 +137,11 @@ KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
     imlib_modify_color_modifier_gamma(1.0);
 #endif // HAVE_IMLIB2
 
-    stepBrightnessInternal(idata->brightness);		// set configured values
-    stepContrastInternal(idata->contrast);
-    stepGammaInternal(idata->gamma);
+    // Set the configured image modification values.
+    // TODO: not if 'unmodified' flag set
+    stepBrightnessInternal(ImlibParams::imlibConfig()->brightness);
+    stepContrastInternal(ImlibParams::imlibConfig()->contrast);
+    stepGammaInternal(ImlibParams::imlibConfig()->gamma);
 
     KuickImage *kuim = imageCache->getKuimage( file );
     bool wasCached = true;
@@ -393,21 +334,21 @@ void ImlibWidget::stepGammaInternal(int g)
 
 void ImlibWidget::stepBrightness(int b)
 {
-    stepBrightnessInternal(b*idata->brightnessFactor);
+    stepBrightnessInternal(b*ImlibParams::imlibConfig()->brightnessFactor);
     setImageModifier();
     autoUpdate();
 }
 
 void ImlibWidget::stepContrast(int c)
 {
-    stepContrastInternal(c*idata->contrastFactor);
+    stepContrastInternal(c*ImlibParams::imlibConfig()->contrastFactor);
     setImageModifier();
     autoUpdate();
 }
 
 void ImlibWidget::stepGamma(int g)
 {
-    stepGammaInternal(g*idata->gammaFactor);
+    stepGammaInternal(g*ImlibParams::imlibConfig()->gammaFactor);
     setImageModifier();
     autoUpdate();
 }
@@ -433,7 +374,7 @@ void ImlibWidget::zoomImage( float factor )
 
     if ( canZoomTo( newWidth, newHeight ) )
     {
-        m_kuim->resize( newWidth, newHeight, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
+        m_kuim->resize( newWidth, newHeight, ImlibParams::imlibConfig()->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
         autoUpdate( true );
     }
 }

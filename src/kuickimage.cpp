@@ -32,15 +32,15 @@
 #endif
 
 #include "imagemods.h"
+#include "imlibparams.h"
 
 
-KuickImage::KuickImage(const KuickFile *file, IMLIBIMAGE im, ImlibData *id)
+KuickImage::KuickImage(const KuickFile *file, IMLIBIMAGE im)
     : QObject( 0L )
 {
     myFile     = file;
     myOrigIm   = 0L;
     myIm       = im;
-    myId       = id;
 
 #ifdef HAVE_IMLIB1
     myWidth    = im->rgb_width;
@@ -70,8 +70,8 @@ KuickImage::~KuickImage()
     if ( myOrigIm )
     {
 #ifdef HAVE_IMLIB1
-	Imlib_destroy_image( myId, myOrigIm );
-	Imlib_kill_image( myId, myIm );			// kill scaled image (### really? analyze!)
+	Imlib_destroy_image( ImlibParams::imlibData(), myOrigIm );
+	Imlib_kill_image( ImlibParams::imlibData(), myIm );			// kill scaled image (### really? analyze!)
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
 	imlib_context_set_image(myOrigIm);
@@ -83,7 +83,7 @@ KuickImage::~KuickImage()
     else
     {
 #ifdef HAVE_IMLIB1
-	Imlib_destroy_image( myId, myIm );
+	Imlib_destroy_image(ImlibParams::imlibData(), myIm);
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
 	imlib_context_set_image(myIm);
@@ -108,18 +108,18 @@ void KuickImage::rotate( Rotation rot )
 #endif // HAVE_IMLIB2
 
     if ( rot == ROT_180 ) { 		// rotate 180 degrees
-	Imlib_flip_image_horizontal( myId, myIm );
-	Imlib_flip_image_vertical( myId, myIm );
+	Imlib_flip_image_horizontal( ImlibParams::imlibData(), myIm );
+	Imlib_flip_image_vertical( ImlibParams::imlibData(), myIm );
     }
 
     else if ( rot == ROT_90 || rot == ROT_270 ) {
 	qSwap( myWidth, myHeight );
-	Imlib_rotate_image( myId, myIm, -1 );
+	Imlib_rotate_image( ImlibParams::imlibData(), myIm, -1 );
 
 	if ( rot == ROT_90 ) 		// rotate 90 degrees
-	    Imlib_flip_image_horizontal( myId, myIm );
+	    Imlib_flip_image_horizontal( ImlibParams::imlibData(), myIm );
 	else if ( rot == ROT_270 ) 		// rotate 270 degrees
-	    Imlib_flip_image_vertical( myId, myIm );
+	    Imlib_flip_image_vertical( ImlibParams::imlibData(), myIm );
     }
 
     myRotation = (Rotation) ((myRotation + rot) % 4);
@@ -157,9 +157,9 @@ void KuickImage::flip( FlipMode flipMode )
 #endif // HAVE_IMLIB2
 
     if ( flipMode & FlipHorizontal )
-	Imlib_flip_image_horizontal( myId, myIm );
+	Imlib_flip_image_horizontal( ImlibParams::imlibData(), myIm );
     if ( flipMode & FlipVertical )
-	Imlib_flip_image_vertical( myId, myIm );
+	Imlib_flip_image_vertical( ImlibParams::imlibData(), myIm );
 
     myFlipMode = (FlipMode) (myFlipMode ^ flipMode);
     setDirty(true);
@@ -178,13 +178,13 @@ bool KuickImage::flipAbs( int mode )
 
     if ( ((myFlipMode & FlipHorizontal) && !(mode & FlipHorizontal)) ||
 	 (!(myFlipMode & FlipHorizontal) && (mode & FlipHorizontal)) ) {
-	Imlib_flip_image_horizontal( myId, myIm );
+	Imlib_flip_image_horizontal( ImlibParams::imlibData(), myIm );
 	changed = true;
     }
 
     if ( ((myFlipMode & FlipVertical) && !(mode & FlipVertical)) ||
 	 (!(myFlipMode & FlipVertical) && (mode & FlipVertical)) ) {
-	Imlib_flip_image_vertical( myId, myIm );
+	Imlib_flip_image_vertical( ImlibParams::imlibData(), myIm );
 	changed = true;
     }
 
@@ -208,7 +208,7 @@ void KuickImage::restoreOriginalSize()
 	if (myOrigIm!=nullptr)
 	{
 #ifdef HAVE_IMLIB1
-		Imlib_destroy_image(myId, myIm);
+		Imlib_destroy_image(ImlibParams::imlibData(), myIm);
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
 		imlib_context_set_image(myIm);
@@ -328,7 +328,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	emit startRendering();
 #ifdef USE_IMLIB_SCALING
 #ifdef HAVE_IMLIB1
-	IMLIBIMAGE newIm = Imlib_clone_scaled_image(myId, myIm, newWidth, newHeight);
+	IMLIBIMAGE newIm = Imlib_clone_scaled_image(ImlibParams::imlibData(), myIm, newWidth, newHeight);
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
 	imlib_context_set_image(myIm);
@@ -346,7 +346,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	// Note from original: QImage::ScaleMin seems to have a bug
 	// (off-by-one, sometimes results in width being 1 pixel too small)
 	QImage scaledImage = toQImage().scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-	IMLIBIMAGE newIm = toImlibImage(myId, scaledImage);
+	IMLIBIMAGE newIm = toImlibImage(ImlibParams::imlibData(), scaledImage);
 #endif
 	emit stoppedRendering();
 #ifdef DEBUG_TIMING
@@ -358,7 +358,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	else
 	{
 #ifdef HAVE_IMLIB1
-		Imlib_destroy_image(myId, myIm);
+		Imlib_destroy_image(ImlibParams::imlibData(), myIm);
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
 		imlib_context_set_image(myIm);
@@ -416,11 +416,11 @@ QImage KuickImage::toQImage() const
 
 #ifdef HAVE_IMLIB1
 	ImlibColorModifier mod;
-	Imlib_get_image_modifier(myId, im, &mod);
+	Imlib_get_image_modifier(ImlibParams::imlibData(), im, &mod);
 
-	IMLIBIMAGE tempImage = Imlib_clone_image(myId, im);
-	Imlib_set_image_modifier(myId, tempImage, &mod);
-	Imlib_apply_modifiers_to_rgb(myId, tempImage);
+	IMLIBIMAGE tempImage = Imlib_clone_image(ImlibParams::imlibData(), im);
+	Imlib_set_image_modifier(ImlibParams::imlibData(), tempImage, &mod);
+	Imlib_apply_modifiers_to_rgb(ImlibParams::imlibData(), tempImage);
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
 	// The colour modifier context will already have been set
@@ -468,7 +468,7 @@ QImage KuickImage::toQImage() const
 	if (tempImage!=nullptr)
 	{
 #ifdef HAVE_IMLIB1
-		Imlib_destroy_image(myId, tempImage);
+		Imlib_destroy_image(ImlibParams::imlibData(), tempImage);
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
 		imlib_context_set_image(tempImage);
@@ -666,7 +666,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 //	}
 
 	// ### keep orig image somewhere but delete all scaled images!
-	IMLIBIMAGE newIm = Imlib_create_image_from_data( myId, newImageData, NULL,
+	IMLIBIMAGE newIm = Imlib_create_image_from_data( ImlibParams::imlibData(), newImageData, NULL,
                                                       newWidth, newHeight );
     delete[] newImageData;
 

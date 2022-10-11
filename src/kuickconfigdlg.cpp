@@ -53,6 +53,7 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     slideshowWidget->setObjectName( QString::fromLatin1( "slideshow widget" ) );
     addPage( slideshowWidget, i18n("&Slideshow")  );
 
+    // TODO: this can be a child of us, then no need to delete in destructor
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
     imageKeyChooser = new KShortcutsEditor( imageWindow->actionCollection(), this );

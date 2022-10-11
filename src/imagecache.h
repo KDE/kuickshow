@@ -7,8 +7,8 @@
 **
 ****************************************************************************/
 
-#ifndef IMLIBCACHE_H
-#define IMLIBCACHE_H
+#ifndef IMAGECACHE_H
+#define IMAGECACHE_H
 
 #include <qobject.h>
 #include <qcache.h>
@@ -24,7 +24,7 @@ class ImageCache : public QObject
   Q_OBJECT
 
 public:
-  explicit ImageCache(ImlibData *id, int maxImages = 1);
+  explicit ImageCache(int maxImages = 1);
   // No need for a destructor, ~QCache() deletes all cached objects
   virtual ~ImageCache() = default;
 
@@ -35,10 +35,7 @@ public:
   KuickImage *		loadImage(KuickFile *file, const ImlibColorModifier &mod);
 
 private:
-  IMLIBIMAGE loadImageWithQt(const QString &filename) const;
-
   QCache<QUrl,KuickImage> myCache;
-  ImlibData * 		myId;
   int 			idleCount;
 
 #ifdef DEBUG_CACHE

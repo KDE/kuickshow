@@ -25,6 +25,7 @@ set(kuickshow_KDEINIT_SRCS
    printing.cpp
    openfilesanddirsdialog.cpp
    imagecache.cpp
+   imlibparams.cpp
 )
 
 ki18n_wrap_ui(kuickshow_KDEINIT_SRCS

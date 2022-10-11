@@ -16,23 +16,20 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef IMAGE_MODS_H
-#define IMAGE_MODS_H
+#ifndef IMAGEMODS_H
+#define IMAGEMODS_H
 
 #include <QCache>
 #include <QUrl>
 
-#include "imlibwidget.h"
 #include "kuickimage.h"
-
-class ImData;
 
 
 class ImageMods
 {
 public:
     static void rememberFor(KuickImage *kuim);
-    static bool restoreFor(KuickImage *kuim, ImData *idata);
+    static bool restoreFor(KuickImage *kuim);
 
 private:
     static QCache<QUrl, ImageMods>* s_modifications;
@@ -45,6 +42,4 @@ private:
     FlipMode      flipMode;
 };
 
-
-
-#endif // IMAGE_MODS_H
+#endif // IMAGEMODS_H

@@ -38,8 +38,8 @@ class KuickImage : public QObject
 public:
   enum ResizeMode { FAST, SMOOTH };
 
-  KuickImage( const KuickFile * file, IMLIBIMAGE im, ImlibData *id );
-  ~KuickImage();
+  KuickImage(const KuickFile *file, IMLIBIMAGE im);
+  virtual ~KuickImage();
 
   int 		width() 	const { return myWidth;   }
   int 		height()	const { return myHeight;  }
@@ -87,7 +87,6 @@ private:
   int 		myHeight;
   IMLIBIMAGE 	myOrigIm;
   IMLIBIMAGE 	myIm;
-  ImlibData  * 	myId;
   bool 		myIsDirty;
 
   int 		myOrigWidth;
