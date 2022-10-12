@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 project(kuickshow)
 
 set(QT_MIN_VERSION "5.4.0")
-set(KF5_MIN_VERSION "5.10.0")
-set(ECM_MIN_VERSION "5.68.0")
+set(KF5_MIN_VERSION "5.82.0")
+set(ECM_MIN_VERSION ${KF5_MIN_VERSION})
 
 find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)

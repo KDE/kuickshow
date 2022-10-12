@@ -165,7 +165,7 @@ void FileWidget::slotContextMenu( const KFileItem& item, QMenu *popupMenu )
 	    m_fileItemActions->setParentWidget( this );
 	}
 	m_fileItemActions->setItemListProperties( properties );
-	m_fileItemActions->addOpenWithActionsTo( menu->menu(), QString() );
+	m_fileItemActions->insertOpenWithActionsTo(nullptr, menu->menu(), QStringList());
     }
 
    // properties dialog is now in kfile, but not at the right position,
