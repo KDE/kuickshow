@@ -883,7 +883,6 @@ void ImageWindow::saveImage()
     if ( !m_kuim )
         return;
 
-    KuickData tmp;
     QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), 0L);
     keepSize->setChecked( true );
 
@@ -891,7 +890,7 @@ void ImageWindow::saveImage()
     dlg.setWindowTitle( i18n("Save As") );
     dlg.setOption(QFileDialog::DontUseNativeDialog);
     dlg.setAcceptMode(QFileDialog::AcceptSave);
-    dlg.setNameFilter(i18n("Image Files (%1)").arg(tmp.fileFilter));
+    dlg.setNameFilter(i18n("Image Files (%1)").arg(ImlibParams::kuickConfig()->fileFilter));
     dlg.setDirectoryUrl(QUrl::fromUserInput(m_saveDirectory, QDir::currentPath(), QUrl::AssumeLocalFile));
 
     // insert the checkbox below the filter box
@@ -911,10 +910,12 @@ void ImageWindow::saveImage()
         {
             if ( !saveImage( url, keepSize->isChecked() ) )
             {
-                QString tmp = i18n("Could not save the file.\n"
-                                   "Perhaps the disk is full, or you do not "
-                                   "have write permission to the file.");
-                KMessageBox::error( this, tmp, i18n("File Saving Failed"));
+                // TODO: report error if available, don't speculate
+                KMessageBox::error(this,
+                                   i18n("Could not save the file.\n"
+                                        "Perhaps the disk is full, or you do not "
+                                        "have write permission to the file."),
+                                   i18n("File Saving Failed"));
             }
             else
             {

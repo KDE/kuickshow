@@ -101,7 +101,7 @@ void DefaultsWidget::loadSettings(const KuickData *kdata, const ImData *idata)
 
     ui->cbFlipVertically->setChecked( kdata->flipVertically );
     ui->cbFlipHorizontally->setChecked( kdata->flipHorizontally );
-    ui->comboRotate->setCurrentIndex(static_cast<int>(data.rotation));
+    ui->comboRotate->setCurrentIndex(static_cast<int>(kdata->rotation));
 
     ui->sbBrightness->setValue( idata->brightness );
     ui->sbContrast->setValue( idata->contrast );

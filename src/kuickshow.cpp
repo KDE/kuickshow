@@ -84,7 +84,7 @@ KuickData* kdata;
 
 QList<ImageWindow*> KuickShow::s_viewers;
 
-KuickShow::KuickShow( const char *name )
+KuickShow::KuickShow( const char *objName )
     : KXmlGuiWindow( 0L ),
       m_slideshowCycle( 1 ),
       fileWidget( 0L ),
@@ -94,7 +94,7 @@ KuickShow::KuickShow( const char *name )
       m_delayedRepeatItem( 0L ),
       m_slideShowStopped(false)
 {
-    setObjectName(name);
+    setObjectName(objName);
     aboutWidget = 0L;
     kdata = new KuickData;
     kdata->load();

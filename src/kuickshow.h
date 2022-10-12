@@ -50,10 +50,10 @@ public:
         viewer = view;
         event  = ev;
     }
-    DelayedRepeatEvent( ImageWindow *view, int action, void *data ) {
+    DelayedRepeatEvent( ImageWindow *view, int act, void *d ) {
         this->viewer = view;
-        this->action = action;
-        this->data   = data;
+        this->action = act;
+        this->data   = d;
         this->event  = 0L;
     }
 

@@ -152,9 +152,9 @@ bool Printing::printImageWithQt( const QString& filename, QPrinter& printer, Kui
         if ( !fname.isEmpty() )
         {
             int fw = fm.horizontalAdvance(fname);
-            int x = (w - fw)/2;
-            int y = printer.height() - filenameOffset/2;
-            p.drawText( x, y, fname );
+            int tx = (w - fw)/2;
+            int ty = printer.height() - filenameOffset/2;
+            p.drawText( tx, ty, fname );
         }
     }
 
