@@ -60,26 +60,18 @@ KuickData::KuickData()
 
   startInLastDir = true;
   modificationCacheSize = 500;
-
-  idata = new ImData;
-}
-
-KuickData::~KuickData()
-{
-  delete idata;
 }
 
 
 void KuickData::load()
 {
   KSharedConfig::Ptr kc = KSharedConfig::openConfig();
-
+  KConfigGroup generalGroup( kc, "GeneralConfiguration" );
   KuickData def;
 
-  KConfigGroup generalGroup( kc, "GeneralConfiguration" );
   fileFilter   = generalGroup.readEntry( "FileFilter", def.fileFilter );
   slideDelay   = generalGroup.readEntry( "SlideShowDelay", def.slideDelay );
-  slideshowCycles = generalGroup.readEntry( "SlideshowCycles", 1 );
+  slideshowCycles = generalGroup.readEntry( "SlideshowCycles", def.slideshowCycles );
   slideshowFullscreen = generalGroup.readEntry( "SlideshowFullscreen", true );
   slideshowStartAtFirst = generalGroup.readEntry("SlideshowStartAtFirst", true );
 
@@ -117,8 +109,6 @@ void KuickData::load()
   startInLastDir = generalGroup.readEntry( "StartInLastDir", true);
   modificationCacheSize = qMax(0, generalGroup.readEntry("ModificationCacheSize", def.modificationCacheSize));
 
-  idata->load( kc );
-
   // compatibility with KuickShow <= 0.8.3
   switch ( rawRotation )
   {
@@ -150,7 +140,6 @@ void KuickData::load()
 void KuickData::save()
 {
   KSharedConfig::Ptr kc = KSharedConfig::openConfig();
-
   KConfigGroup generalGroup(kc, "GeneralConfiguration");
 
   generalGroup.writeEntry( "FileFilter", fileFilter );
@@ -189,8 +178,6 @@ void KuickData::save()
   generalGroup.writeEntry( "BackgroundColor", backgroundColor );
 
   generalGroup.writeEntry( "StartInLastDir", startInLastDir );
-
-  idata->save( kc );
 
   kc->sync();
 }

@@ -73,24 +73,15 @@
 #include "kuickimage.h"
 #include "printing.h"
 #include "imagecache.h"
+#include "imlibparams.h"
 
 
 QCursor *ImageWindow::s_handCursor = 0L;
 
-ImageWindow::ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent )
-    : ImlibWidget( _idata, id, parent )
+ImageWindow::ImageWindow(QWidget *parent)
+    : ImlibWidget(parent)
 {
     init();
-}
-
-ImageWindow::ImageWindow( ImData *_idata, QWidget *parent )
-    : ImlibWidget( _idata, parent )
-{
-    init();
-}
-
-ImageWindow::~ImageWindow()
-{
 }
 
 
@@ -122,7 +113,7 @@ void ImageWindow::init()
     }
 
     setupActions();
-    imageCache->setMaxImages( kdata->maxCachedImages );
+    imageCache->setMaxImages( ImlibParams::kuickConfig()->maxCachedImages );
 
     transWidget    = 0L;
     myIsFullscreen = false;
@@ -130,7 +121,7 @@ void ImageWindow::init()
     xpos = 0, ypos = 0;
 
     setAcceptDrops( true );
-    setBackgroundColor( kdata->backgroundColor );
+    setBackgroundColor( ImlibParams::kuickConfig()->backgroundColor );
 
     // TODO: static non-POD data - is this advisable?
     static QPixmap imageIcon = KIconLoader::global()->loadIcon("imageviewer-medium", KIconLoader::User);
@@ -450,103 +441,76 @@ void ImageWindow::pauseSlideShow()
     emit pauseSlideShowSignal();
 }
 
-void ImageWindow::addBrightness( int factor )
-{
-    if ( factor == 0 )
-	return;
-
-    int oldValue = mod.brightness - ImlibOffset;
-    setBrightness(oldValue+(idata->brightnessFactor*factor));
-}
-
-void ImageWindow::addContrast( int factor )
-{
-    if ( factor == 0 )
-	return;
-
-    int oldValue = mod.contrast - ImlibOffset;
-    setContrast(oldValue+(idata->contrastFactor*factor));
-}
-
-void ImageWindow::addGamma( int factor )
-{
-    if ( factor == 0 )
-	return;
-
-    int oldValue = mod.gamma - ImlibOffset;
-    setGamma(oldValue+(idata->gammaFactor*factor));
-}
-
-
-////////////
-////
-// slots for keyboard/popupmenu actions
-
+// Slots for keyboard/popupmenu actions
 
 void ImageWindow::scrollUp()
 {
-    scrollImage( 0, 20 * kdata->scrollSteps );
+    scrollImage( 0, 20 * ImlibParams::kuickConfig()->scrollSteps );
 }
 
 void ImageWindow::scrollDown()
 {
-    scrollImage( 0, - 20 * kdata->scrollSteps );
+    scrollImage( 0, - 20 * ImlibParams::kuickConfig()->scrollSteps );
 }
 
 void ImageWindow::scrollLeft()
 {
-    scrollImage( 20 * kdata->scrollSteps, 0 );
+    scrollImage( 20 * ImlibParams::kuickConfig()->scrollSteps, 0 );
 }
 
 void ImageWindow::scrollRight()
 {
-    scrollImage( - 20 * kdata->scrollSteps, 0 );
+    scrollImage( - 20 * ImlibParams::kuickConfig()->scrollSteps, 0 );
 }
 
 ///
 
 void ImageWindow::zoomIn()
 {
-    zoomImage( kdata->zoomSteps );
+    zoomImage( ImlibParams::kuickConfig()->zoomSteps );
 }
 
 void ImageWindow::zoomOut()
 {
-    Q_ASSERT( kdata->zoomSteps != 0 );
-    zoomImage( 1.0 / kdata->zoomSteps );
+    Q_ASSERT( ImlibParams::kuickConfig()->zoomSteps != 0 );
+    zoomImage( 1.0 / ImlibParams::kuickConfig()->zoomSteps );
 }
 
-///
+// The 'brightnessSteps', 'contrastSteps' and 'gammaSteps' are
+// all set to 1 by KuickData::KuickData().  The corresponding
+// 'brightnessFactor', 'contrastFactor' and 'gammaFactor' are
+// all set to 10 by ImData::ImData().  There is no GUI for those
+// settings, so it is reasonable to assume that the calculated
+// step will be either +10 or -10.
 
 void ImageWindow::moreBrightness()
 {
-    addBrightness( kdata->brightnessSteps );
+    stepBrightness(ImlibParams::kuickConfig()->brightnessSteps*ImlibParams::imlibConfig()->brightnessFactor);
 }
 
 void ImageWindow::moreContrast()
 {
-    addContrast( kdata->contrastSteps );
+    stepContrast(ImlibParams::kuickConfig()->contrastSteps*ImlibParams::imlibConfig()->contrastFactor);
 }
 
 void ImageWindow::moreGamma()
 {
-    addGamma( kdata->gammaSteps );
+    stepGamma(ImlibParams::kuickConfig()->gammaSteps*ImlibParams::imlibConfig()->gammaFactor);
 }
-
 
 void ImageWindow::lessBrightness()
 {
-    addBrightness( - kdata->brightnessSteps );
+    stepBrightness(-ImlibParams::kuickConfig()->brightnessSteps*ImlibParams::imlibConfig()->brightnessFactor);
 }
 
 void ImageWindow::lessContrast()
 {
-    addContrast( - kdata->contrastSteps );
+    stepContrast(-ImlibParams::kuickConfig()->contrastSteps*ImlibParams::imlibConfig()->contrastFactor);
 }
 
 void ImageWindow::lessGamma()
 {
-    addGamma( - kdata->gammaSteps );
+    stepGamma(-ImlibParams::kuickConfig()->gammaSteps*ImlibParams::imlibConfig()->gammaFactor);
 }
 
 void ImageWindow::imageDelete()
@@ -795,7 +759,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     xtmp += xcenter;
     ytmp += ycenter;
 
-    m_kuim->resize( w, h, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
+    m_kuim->resize( w, h, ImlibParams::imlibConfig()->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
     resize( w, h );
     updateWidget( false );
 
@@ -954,9 +918,10 @@ void ImageWindow::saveImage()
             }
             else
             {
-                if ( url == m_kuim->url() ) {
-					Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
-				}
+                // TODO: what does this do?
+                // if ( url == m_kuim->url() ) {
+                //   Imlib_apply_modifiers_to_rgb( id, m_kuim->imlibImage() );
+                // }
             }
         }
     }
@@ -973,9 +938,12 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
     if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == ROT_270 )
         qSwap( w, h );
 
+    bool success = false;
+#if 0
+// TODO: Imlib 2
+///////////////////////////////////////////////////////////////////////////
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
                                                    w, h );
-    bool success = false;
 
 	QString saveFile;
 	if ( dest.isLocalFile() )
@@ -997,8 +965,8 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
 
     if ( saveIm )
     {
-        Imlib_apply_modifiers_to_rgb( id, saveIm );
-        success = Imlib_save_image( id, saveIm,
+        Imlib_apply_modifiers_to_rgb( ImlibParams::data(), saveIm );
+        success = Imlib_save_image( ImlibParams::data(), saveIm,
                                     QFile::encodeName( saveFile ).data(),
                                     NULL );
         if ( success && !dest.isLocalFile() )
@@ -1020,8 +988,10 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
             sourceFile.close();
         }
 
-        Imlib_kill_image( id, saveIm );
+        Imlib_kill_image( ImlibParams::data(), saveIm );
     }
+#endif
+///////////////////////////////////////////////////////////////////////////
 
     return success;
 }
@@ -1039,10 +1009,10 @@ void ImageWindow::loaded( KuickImage *kuim, bool wasCached )
 		return; // keep it as it is
 	}
 
-    if ( !ImageMods::restoreFor( kuim, idata ) )
+    if ( !ImageMods::restoreFor(kuim))
     {
     	// if no cached image modifications are available, apply the default modifications
-        if ( !kdata->isModsEnabled ) {
+        if ( !ImlibParams::kuickConfig()->isModsEnabled ) {
     		// ### BUG: should be "restorePreviousSize"
         	kuim->restoreOriginalSize();
         }
@@ -1069,14 +1039,14 @@ void ImageWindow::autoScale( KuickImage *kuim )
 
     bool doIt = false;
 
-    if ( kdata->upScale )
+    if ( ImlibParams::kuickConfig()->upScale )
     {
 	if ( (newW < mw) && (newH < mh) )
         {
             doIt = true;
 
 	    float ratio1, ratio2;
-	    int maxUpScale = kdata->maxUpScale;
+	    int maxUpScale = ImlibParams::kuickConfig()->maxUpScale;
 
 	    ratio1 = static_cast<float>(mw)/newW;
 	    ratio2 = static_cast<float>(mh)/newH;
@@ -1088,7 +1058,7 @@ void ImageWindow::autoScale( KuickImage *kuim )
 	}
     }
 
-    if ( kdata->downScale )
+    if ( ImlibParams::kuickConfig()->downScale )
     {
 	// eventually set width and height to the best/max possible screen size
 	if ( (newW > mw) || (newH > mh) )
@@ -1112,13 +1082,13 @@ void ImageWindow::autoScale( KuickImage *kuim )
     }
 
     if ( doIt )
-        kuim->resize( newW, newH, idata->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
+        kuim->resize( newW, newH, ImlibParams::imlibConfig()->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
 }
 
-// only called when kdata->isModsEnabled is true
+// only called when ImlibParams::kuickConfig()->isModsEnabled is true
 bool ImageWindow::autoRotate( KuickImage *kuim )
 {
-    if ( kdata->autoRotation && ImlibWidget::autoRotate( kuim ) )
+    if ( ImlibParams::kuickConfig()->autoRotation && ImlibWidget::autoRotate( kuim ) )
         return true;
 
     else // rotation by metadata not available or not configured
@@ -1129,21 +1099,22 @@ bool ImageWindow::autoRotate( KuickImage *kuim )
         if ( kuim->flipMode() == FlipNone )
         {
             int flipMode = 0;
-            if ( kdata->flipVertically )
+            if ( ImlibParams::kuickConfig()->flipVertically )
                 flipMode |= FlipVertical;
-            if ( kdata->flipHorizontally )
+            if ( ImlibParams::kuickConfig()->flipHorizontally )
                 flipMode |= FlipHorizontal;
 
             kuim->flipAbs( flipMode );
         }
 
         if ( kuim->absRotation() == ROT_0 )
-            kuim->rotateAbs( kdata->rotation );
+            kuim->rotateAbs( ImlibParams::kuickConfig()->rotation );
     }
 
     return true;
 }
 
+// TODO: this function and next never used
 int ImageWindow::desktopWidth( bool totalScreen ) const
 {
     if ( myIsFullscreen || totalScreen )
@@ -1192,11 +1163,11 @@ void ImageWindow::maximize()
     if ( !m_kuim )
 	return;
 
-    bool oldUpscale = kdata->upScale;
-    bool oldDownscale = kdata->downScale;
+    bool oldUpscale = ImlibParams::kuickConfig()->upScale;
+    bool oldDownscale = ImlibParams::kuickConfig()->downScale;
 
-    kdata->upScale = true;
-    kdata->downScale = true;
+    ImlibParams::kuickConfig()->upScale = true;
+    ImlibParams::kuickConfig()->downScale = true;
 
     autoScale( m_kuim );
     updateWidget( true );
@@ -1204,8 +1175,8 @@ void ImageWindow::maximize()
     if ( !myIsFullscreen )
 	resizeOptimal( imageWidth(), imageHeight() );
 
-    kdata->upScale = oldUpscale;
-    kdata->downScale = oldDownscale;
+    ImlibParams::kuickConfig()->upScale = oldUpscale;
+    ImlibParams::kuickConfig()->downScale = oldDownscale;
 }
 
 bool ImageWindow::canZoomTo( int newWidth, int newHeight )
@@ -1218,7 +1189,7 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
     int desktopArea = desktopSize.width() * desktopSize.height();
     int imageArea = newWidth * newHeight;
 
-    if ( imageArea > desktopArea * kdata->maxZoomFactor )
+    if ( imageArea > desktopArea * ImlibParams::kuickConfig()->maxZoomFactor )
     {
         return KMessageBox::warningContinueCancel(
             this,

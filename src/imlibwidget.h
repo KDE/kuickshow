@@ -34,9 +34,10 @@ class ImlibWidget : public QScrollArea
 
 public:
 
-  ImlibWidget( ImData *_idata=0, QWidget *parent=0 );
-  ImlibWidget( ImData *_idata, ImlibData *id, QWidget *parent=0 );
+  explicit ImlibWidget(QWidget *parent = nullptr);
   virtual ~ImlibWidget();
+
+  QSize sizeHint() const override;
 
   QUrl          url()                   const;
   KuickFile *   currentFile()           const;
@@ -44,15 +45,13 @@ public:
   bool		loadImage( const QUrl& url );
   bool 		cacheImage( const QUrl& url );
   void 		zoomImage( float );
-  void 		setBrightness( int );
-  void 		setContrast( int );
-  void 		setGamma( int );
   void 		setRotation( Rotation );
   void 		setFlipMode( int mode );
 
-  int 		brightness()     const;
-  int 		contrast()		 const;
-  int 		gamma() 		 const;
+  void 		stepBrightness(int b);
+  void 		stepContrast(int c);
+  void 		stepGamma(int g);
+
   Rotation 	rotation() 		 const;
   FlipMode	flipMode() 		 const;
 
@@ -66,13 +65,15 @@ public:
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
 
+  void setUseModifications(bool enable = true);
+  void initModifications();
+
+
   /**
    * @return true if auto-rotation is not possible, e.g. because no metadata
    * about orientation is available
    */
   virtual bool  autoRotate( KuickImage *kuim );
-
-  ImlibData*	getImlibData() const 	       { return id; 		  }
 
 //  virtual void  reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt = false );
 
@@ -87,9 +88,9 @@ public slots:
 
 
 protected:
-  KuickImage *	loadImageInternal( KuickFile * file );
+//  KuickImage *	loadImageInternal( KuickFile * file );
   void 			showImage();
-  void          setImageModifier();
+//  void          setImageModifier();
   void 		    rotate( int );
   void 		    updateWidget( bool geometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
@@ -104,29 +105,33 @@ protected:
       updateWidget( geometryUpdate );
   }
 
-  bool		stillResizing, deleteImData, deleteImlibData;
-  bool          imlibModifierChanged;
+//  bool		stillResizing;
+//  bool          imlibModifierChanged;
 
   KuickImage 	*m_kuim;
   ImageCache 	*imageCache;
-  ImlibData     *id;
-  ImData    	*idata;
 
+private:
   // TODO: combine this (in a new custom class) with the rotete/flip/scale
   // modifications in KuickImage.  Be able to detect whether it is null
   // (i.e. whether it actually does anything).  Apply all of the requested
   // modifications in one place in KuickImage::toQImage().
-  ImlibColorModifier mod;
+  ImlibColorModifier myModifier;
 
   KuickFile *m_kuickFile;
   QCursor m_oldCursor;
 
-  static const int ImlibOffset;
-
-
 private:
-  void 		init();
+  void init();
+  KuickImage *loadImageInternal(KuickFile *file);
+  void stepBrightnessInternal(int b);
+  void stepContrastInternal(int c);
+  void stepGammaInternal(int g);
+
+  void setImageModifier();
+
   bool 		isAutoRendering;
+  bool 		myUseModifications;
   int 		myMaxImageCache;
   QColor 	myBackgroundColor;
   QLabel *myLabel;

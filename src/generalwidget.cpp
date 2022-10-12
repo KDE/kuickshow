@@ -27,6 +27,8 @@
 #include <QUrl>
 
 #include "kuickdata.h"
+#include "imdata.h"
+#include "imlibparams.h"
 
 
 GeneralWidget::GeneralWidget( QWidget *parent )
@@ -53,7 +55,7 @@ GeneralWidget::GeneralWidget( QWidget *parent )
 
 
   // load and show the saved settings
-  loadSettings( *kdata );
+  loadSettings();
   ui->cbFullscreen->setFocus();
 }
 
@@ -67,15 +69,16 @@ void GeneralWidget::slotURLClicked( const QString & url )
     QDesktopServices::openUrl(QUrl::fromUserInput(url));
 }
 
-void GeneralWidget::loadSettings( const KuickData& data )
+void GeneralWidget::loadSettings(const KuickData *kdata, const ImData *idata)
 {
-    ImData *idata = data.idata;
+    if (kdata==nullptr) kdata = ImlibParams::kuickConfig();	// normal, unless resetting to defaults
+    if (idata==nullptr) idata = ImlibParams::imlibConfig();
 
-    ui->colorButton->setColor( data.backgroundColor );
-    ui->editFilter->setText( data.fileFilter );
-    ui->cbFullscreen->setChecked( data.fullScreen );
-    ui->cbPreload->setChecked( data.preloadImage );
-    ui->cbLastdir->setChecked( data.startInLastDir );
+    ui->colorButton->setColor( kdata->backgroundColor );
+    ui->editFilter->setText( kdata->fileFilter );
+    ui->cbFullscreen->setChecked( kdata->fullScreen );
+    ui->cbPreload->setChecked( kdata->preloadImage );
+    ui->cbLastdir->setChecked( kdata->startInLastDir );
     ui->cbFastRemap->setChecked( idata->fastRemap );
     ui->cbOwnPalette->setChecked( idata->ownPalette );
     ui->cbSmoothScale->setChecked( idata->smoothScale );
@@ -87,15 +90,16 @@ void GeneralWidget::loadSettings( const KuickData& data )
     useOwnPalette(); // enable/disable remap-checkbox
 }
 
-void GeneralWidget::applySettings( KuickData& data)
+void GeneralWidget::applySettings()
 {
-    ImData *idata = data.idata;
+    KuickData *kdata = ImlibParams::kuickConfig();
+    ImData *idata = ImlibParams::imlibConfig();
 
-    data.backgroundColor = ui->colorButton->color();
-    data.fileFilter      = ui->editFilter->text();
-    data.fullScreen  	  = ui->cbFullscreen->isChecked();
-    data.preloadImage	  = ui->cbPreload->isChecked();
-    data.startInLastDir   = ui->cbLastdir->isChecked();
+    kdata->backgroundColor = ui->colorButton->color();
+    kdata->fileFilter      = ui->editFilter->text();
+    kdata->fullScreen  	  = ui->cbFullscreen->isChecked();
+    kdata->preloadImage	  = ui->cbPreload->isChecked();
+    kdata->startInLastDir   = ui->cbLastdir->isChecked();
 
     idata->smoothScale    = ui->cbSmoothScale->isChecked();
     idata->fastRemap 	  = ui->cbFastRemap->isChecked();

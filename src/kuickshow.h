@@ -93,7 +93,6 @@ public:
 
 protected:
     virtual void	readProperties( const KConfigGroup& kc ) override;
-    void 		initImlibParams( ImData *, ImlibInitParams * );
     void                tryShowNextImage();
 
 private slots:
@@ -138,11 +137,9 @@ private slots:
     void                doReplay();
 
 private:
-    Display *		getX11Display() const { return QX11Info::display(); }
-    int getX11Screen() const;
     void 		initGUI( const QUrl& startDir );
     bool	       	eventFilter( QObject *, QEvent * ) override;
-    void 		initImlib();
+    bool 		initImlib();
     void 		saveProperties( KConfigGroup& kc ) override;
     void 		saveSettings();
     bool 		haveBrowser() const;
@@ -163,7 +160,6 @@ private:
     FileWidget   	*fileWidget;
     KUrlComboBox	*cmbPath;
     KuickConfigDialog 	*dialog;
-    ImlibData           *id;
     ImageWindow 	*m_viewer;
     KToggleAction 	*oneWindowAction;
     DelayedRepeatEvent  *m_delayedRepeatItem;

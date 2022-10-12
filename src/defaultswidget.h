@@ -23,6 +23,7 @@
 
 #include "kuickdata.h"
 
+class ImData;
 class ImlibWidget;
 namespace Ui { class DefaultsWidget; }
 
@@ -35,8 +36,8 @@ public:
   DefaultsWidget( QWidget *parent );
   ~DefaultsWidget();
 
-  void 		loadSettings( const KuickData& data );
-  void 		applySettings( KuickData& data );
+    void 		loadSettings(const KuickData *kdata = nullptr, const ImData *idata = nullptr);
+    void 		applySettings();
 
 private:
   Ui::DefaultsWidget* ui;

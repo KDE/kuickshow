@@ -19,17 +19,18 @@
 #ifndef IMBLIBCONFIG_H
 #define IMBLIBCONFIG_H
 
-#include <KSharedConfig>
+
+#include <qstring.h>
 
 
 class ImData
 {
 public:
   ImData();
-  ~ImData() {};
+  ~ImData() = default;
 
-  void 		load( KSharedConfig::Ptr kc );
-  void 		save( KSharedConfig::Ptr kc );
+  void 		load();
+  void 		save();
 
   // new stuff..........
 

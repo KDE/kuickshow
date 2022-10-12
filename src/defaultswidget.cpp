@@ -23,6 +23,7 @@
 #include <QUrl>
 
 #include "imlibwidget.h"
+#include "imlibparams.h"
 
 
 DefaultsWidget::DefaultsWidget( QWidget *parent )
@@ -32,18 +33,18 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   ui = new Ui::DefaultsWidget;
   ui->setupUi(this);
 
-
   // set the properties that couldn't be set in the .ui file
-  QGridLayout* gbPreviewLayout = dynamic_cast<QGridLayout*>(ui->gbPreview->layout());
+  QGridLayout *gbPreviewLayout = static_cast<QGridLayout *>(ui->gbPreview->layout());
 
-  // The image widgets have to be created here, because the required parameters can only be set on creation.
+  // The image widgets have to be created here,
+  // because the required parameters can only be set on creation.
   // The generated code won't do that.
-  imOrig = new ImlibWidget(0L, ui->gbPreview);
+  imOrig = new ImlibWidget(ui->gbPreview);
+  imOrig->setUseModifications(false);
   gbPreviewLayout->addWidget(imOrig, 1, 0, Qt::AlignCenter | Qt::AlignTop);
 
-  imFiltered = new ImlibWidget(0L, imOrig->getImlibData(), ui->gbPreview);
+  imFiltered = new ImlibWidget(ui->gbPreview);
   gbPreviewLayout->addWidget(imFiltered, 1, 1, Qt::AlignCenter | Qt::AlignTop);
-
 
   // actions
   connect( ui->cbEnableMods, SIGNAL( toggled(bool) ), SLOT( enableWidgets(bool) ));
@@ -51,6 +52,7 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   connect(ui->cbUpScale, SIGNAL( toggled(bool)), ui->sbMaxUpScaleFactor,
             SLOT( setEnabled(bool) ));
 
+  // TODO: why is this necessary?  Widget cannot delete itself.
   connect( imFiltered, SIGNAL( destroyed() ), SLOT( slotNoImage() ));
 
   connect( ui->cbDownScale,        SIGNAL( clicked() ), SLOT( updatePreview() ));
@@ -64,22 +66,17 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   connect( ui->comboRotate,  SIGNAL( activated(int) ), SLOT( updatePreview() ));
 
-
   // load and display the test image
-  QString filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kuickshow/pics/calibrate.png"));
+  QString filename = QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("pics/calibrate.png"));
   if ( !imOrig->loadImage( QUrl::fromLocalFile(filename) ) )
     imOrig = 0L; // FIXME - display some errormessage!
   if ( !imFiltered->loadImage( QUrl::fromLocalFile(filename) ) )
     imFiltered = 0L; // FIXME - display some errormessage!
 
-  loadSettings( *kdata );
+  loadSettings();
 
-  if ( imOrig )
-    imOrig->setFixedSize( imOrig->size() );
-  if ( imFiltered )
-    imFiltered->setFixedSize( imFiltered->size() );
-
-  //layout()->activate();
+  if (imOrig!=nullptr) imOrig->setFixedSize(imOrig->sizeHint());
+  if (imFiltered!=nullptr) imFiltered->setFixedSize(imFiltered->sizeHint());
 }
 
 
@@ -93,47 +90,48 @@ DefaultsWidget::~DefaultsWidget()
     delete ui;
 }
 
-void DefaultsWidget::loadSettings( const KuickData& data )
+void DefaultsWidget::loadSettings(const KuickData *kdata, const ImData *idata)
 {
-    ui->cbDownScale->setChecked( data.downScale );
-    ui->cbUpScale->setChecked( data.upScale );
-    ui->sbMaxUpScaleFactor->setValue( data.maxUpScale );
+    if (kdata==nullptr) kdata = ImlibParams::kuickConfig();	// normal, unless resetting to defaults
+    if (idata==nullptr) idata = ImlibParams::imlibConfig();
 
-    ui->cbFlipVertically->setChecked( data.flipVertically );
-    ui->cbFlipHorizontally->setChecked( data.flipHorizontally );
+    ui->cbDownScale->setChecked( kdata->downScale );
+    ui->cbUpScale->setChecked( kdata->upScale );
+    ui->sbMaxUpScaleFactor->setValue( kdata->maxUpScale );
 
+    ui->cbFlipVertically->setChecked( kdata->flipVertically );
+    ui->cbFlipHorizontally->setChecked( kdata->flipHorizontally );
     ui->comboRotate->setCurrentIndex(static_cast<int>(data.rotation));
 
-    ImData *id = data.idata;
+    ui->sbBrightness->setValue( idata->brightness );
+    ui->sbContrast->setValue( idata->contrast );
+    ui->sbGamma->setValue( idata->gamma );
 
-    ui->sbBrightness->setValue( id->brightness );
-    ui->sbContrast->setValue( id->contrast );
-    ui->sbGamma->setValue( id->gamma );
-
-    ui->cbEnableMods->setChecked( data.isModsEnabled );
-    enableWidgets( data.isModsEnabled );
+    ui->cbEnableMods->setChecked( kdata->isModsEnabled );
+    enableWidgets( kdata->isModsEnabled );
 
     updatePreview();
 }
 
-void DefaultsWidget::applySettings( KuickData& data )
+
+void DefaultsWidget::applySettings()
 {
-    data.isModsEnabled = ui->cbEnableMods->isChecked();
+    KuickData *kdata = ImlibParams::kuickConfig();
+    ImData *idata = ImlibParams::imlibConfig();
 
-    data.downScale  = ui->cbDownScale->isChecked();
-    data.upScale    = ui->cbUpScale->isChecked();
-    data.maxUpScale = ui->sbMaxUpScaleFactor->value();
+    kdata->isModsEnabled = ui->cbEnableMods->isChecked();
 
-    data.flipVertically   = ui->cbFlipVertically->isChecked();
-    data.flipHorizontally = ui->cbFlipHorizontally->isChecked();
+    kdata->downScale  = ui->cbDownScale->isChecked();
+    kdata->upScale    = ui->cbUpScale->isChecked();
+    kdata->maxUpScale = ui->sbMaxUpScaleFactor->value();
 
-    data.rotation = currentRotation();
+    kdata->flipVertically   = ui->cbFlipVertically->isChecked();
+    kdata->flipHorizontally = ui->cbFlipHorizontally->isChecked();
+    kdata->rotation = currentRotation();
 
-    ImData *id = data.idata;
-
-    id->brightness = ui->sbBrightness->value();
-    id->contrast   = ui->sbContrast->value();
-    id->gamma      = ui->sbGamma->value();
+    idata->brightness = ui->sbBrightness->value();
+    idata->contrast   = ui->sbContrast->value();
+    idata->gamma      = ui->sbGamma->value();
 }
 
 void DefaultsWidget::updatePreview()
@@ -150,9 +148,10 @@ void DefaultsWidget::updatePreview()
     Rotation rotation = ui->cbEnableMods->isChecked() ? currentRotation() : ROT_0;
     imFiltered->setRotation( rotation );
 
-    imFiltered->setBrightness( ui->sbBrightness->value() );
-    imFiltered->setContrast( ui->sbContrast->value() );
-    imFiltered->setGamma( ui->sbGamma->value() );
+    imFiltered->initModifications();			// set absolute values
+    imFiltered->stepBrightness(ui->sbBrightness->value());
+    imFiltered->stepContrast(ui->sbContrast->value());
+    imFiltered->stepGamma(ui->sbGamma->value());
 
     imFiltered->updateImage();
     imFiltered->setAutoRender( true );

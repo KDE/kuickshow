@@ -17,7 +17,7 @@
 */
 
 #define DEBUG_TIMING
-#define DEBUG_CACHE
+#undef DEBUG_CACHE
 
 #include "imagecache.h"
 
@@ -32,13 +32,12 @@
 
 #include "kuickfile.h"
 #include "kuickimage.h"
+#include "imlibparams.h"
 
 
-ImageCache::ImageCache(ImlibData *id, int maxImages)
+ImageCache::ImageCache(int maxImages)
 {
-    myId        = id;
     idleCount   = 0;
-
     setMaxImages(maxImages);
 }
 
@@ -100,50 +99,9 @@ KuickImage *ImageCache::getKuimage(KuickFile *file)
 }
 
 
-KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod)
-{
-	if (file==nullptr || !file->isAvailable()) return (nullptr);
-        const QString fileName = file->localFile();
-        qDebug() << "loading" << fileName;
-
-	slotBusy();
-#ifdef DEBUG_TIMING
-	qDebug() << "starting to load image";
-	QElapsedTimer timer;
-	timer.start();
-#endif
-	ImlibImage *im = Imlib_load_image(myId, QFile::encodeName(fileName).data());
-#ifdef DEBUG_TIMING
-	qDebug() << "load took" << timer.elapsed() << "ms, ok" << (im!=nullptr);
-#endif
-	slotIdle();
-
-	if (im==nullptr)				// failed to load via imlib,
-	{						// fall back to loading via Qt
-		slotBusy();
-		im = loadImageWithQt(fileName);
-		slotIdle();
-		if (im==nullptr) return (nullptr);
-	}
-
-	Imlib_set_image_modifier(myId, im, const_cast<ImlibColorModifier *>(&mod));
-	KuickImage *kuim = new KuickImage(file, im, myId);
-	connect( kuim, SIGNAL( startRendering() ),   SLOT( slotBusy() ));
-	connect( kuim, SIGNAL( stoppedRendering() ), SLOT( slotIdle() ));
-
-	myCache.insert(file->url(), kuim, 1);
-#ifdef DEBUG_CACHE
-	qDebug() << "inserted" << file->url();
-	dumpCache();
-#endif
-	return (kuim);
-}
-
-
 // Note: the returned image's filename will not be the real filename (which it usually
 // isn't anyway, according to Imlib's sources).
-// TODO: can be made file-static once myId is a singleton
-ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
+static IMLIBIMAGE loadImageWithQt(const QString &fileName)
 {
     qDebug() << "loading" << fileName;
 
@@ -203,11 +161,50 @@ ImlibImage * ImageCache::loadImageWithQt( const QString& fileName ) const
 	}
     }
 
-    ImlibImage *im = Imlib_create_image_from_data( myId, newImageData, NULL,
-                                                   image.width(), image.height() );
+    IMLIBIMAGE im = Imlib_create_image_from_data(myId, newImageData, nullptr, w, h);
     delete[] newImageData;
 #ifdef DEBUG_TIMING
     qDebug() << "create took" << timer.elapsed() << "ms";
 #endif
     return (im);
+}
+
+
+KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod)
+{
+	if (file==nullptr || !file->isAvailable()) return (nullptr);
+        const QString fileName = file->localFile();
+        qDebug() << "loading" << fileName;
+
+	slotBusy();
+#ifdef DEBUG_TIMING
+	qDebug() << "starting to load image";
+	QElapsedTimer timer;
+	timer.start();
+#endif
+	IMLIBIMAGE im = Imlib_load_image(ImlibParams::imlibData(), QFile::encodeName(fileName).data());
+#ifdef DEBUG_TIMING
+	qDebug() << "load took" << timer.elapsed() << "ms, ok" << (im!=nullptr);
+#endif
+	slotIdle();
+
+	if (im==nullptr)				// failed to load via imlib,
+	{						// fall back to loading via Qt
+		slotBusy();
+		im = loadImageWithQt(fileName);
+		slotIdle();
+		if (im==nullptr) return (nullptr);
+	}
+
+	Imlib_set_image_modifier(ImlibParams::imlibData(), im, const_cast<ImlibColorModifier *>(&mod));
+	KuickImage *kuim = new KuickImage(file, im);
+	connect( kuim, SIGNAL( startRendering() ),   SLOT( slotBusy() ));
+	connect( kuim, SIGNAL( stoppedRendering() ), SLOT( slotIdle() ));
+
+	myCache.insert(file->url(), kuim, 1);
+#ifdef DEBUG_CACHE
+	qDebug() << "inserted" << file->url();
+	dumpCache();
+#endif
+	return (kuim);
 }

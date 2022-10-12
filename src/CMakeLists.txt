@@ -25,6 +25,7 @@ set(kuickshow_KDEINIT_SRCS
    printing.cpp
    openfilesanddirsdialog.cpp
    imagecache.cpp
+   imlibparams.cpp
 )
 
 ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
@@ -44,8 +45,20 @@ ecm_qt_declare_logging_category(kuickshow_KDEINIT_SRCS
    DESCRIPTION "KuickShow image viewer"
 )
 
+if (IMLIB_FOUND)
+  add_definitions(${IMLIB_DEFINITIONS})
+  add_compile_definitions("HAVE_IMLIB1")
+  add_compile_definitions("IMLIB1_VERSION=\"${IMLIB_VERSION}\"")
+endif ()
+if (IMLIB2_FOUND)
+  add_definitions(${IMLIB2_DEFINITIONS})
+  add_compile_definitions("HAVE_IMLIB2")
+  add_compile_definitions("IMLIB2_VERSION=\"${IMLIB2_VERSION}\"")
+endif ()
+
+
 # target kdeinit_kuickshow
-kf5_add_kdeinit_executable( kuickshow ${kuickshow_KDEINIT_SRCS})
+kf5_add_kdeinit_executable(kuickshow ${kuickshow_KDEINIT_SRCS})
 target_compile_options(kdeinit_kuickshow PRIVATE -std=c++11 -Wall --pedantic)
 target_compile_definitions(kdeinit_kuickshow PRIVATE ${IMLIB_DEFINITIONS} -DQT_NO_URL_CAST_FROM_STRING)
 target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS})
@@ -62,9 +75,20 @@ target_link_libraries(kdeinit_kuickshow
 	KF5::KIOFileWidgets
 	KF5::WindowSystem
 	KF5::XmlGui
-	${X11_LIBRARIES}
-	${IMLIB_LIBRARIES}
 )
+
+
+if (IMLIB_FOUND)
+target_link_libraries(kdeinit_kuickshow
+	${X11_LIBRARIES}
+	${IMLIB_LIBRARIES})
+endif ()
+if (IMLIB2_FOUND)
+target_link_libraries(kdeinit_kuickshow
+	${IMLIB2_LIBRARIES})
+endif ()
+
+
 
 install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
 

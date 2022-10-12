@@ -22,8 +22,6 @@
 #include <QColor>
 #include <QString>
 
-#include "imdata.h"
-
 
 // values are also used as combobox index defaultswidget.*
 enum Rotation { ROT_0=0, ROT_90=1, ROT_180=2, ROT_270=3 };
@@ -34,14 +32,11 @@ enum FlipMode { FlipNone = 0, FlipHorizontal = 1, FlipVertical = 2 };
 class KuickData
 {
 public:
-    KuickData();
-    ~KuickData();
+    explicit KuickData();
+    ~KuickData() = default;
 
     void 	load();
     void 	save();
-
-
-    ImData 	*idata;
 
     QString 	fileFilter;
     uint 	slideDelay;
@@ -78,11 +73,6 @@ public:
     Rotation 	rotation;
 
     QColor      backgroundColor;
-
-
 };
-
-
-extern KuickData* kdata;
 
 #endif

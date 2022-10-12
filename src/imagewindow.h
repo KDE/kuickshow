@@ -19,8 +19,6 @@
 #ifndef IMAGEWINDOW_H
 #define IMAGEWINDOW_H
 
-#include <QString>
-
 #include "imlibwidget.h"
 
 class KActionCollection;
@@ -45,19 +43,14 @@ class ImageWindow : public ImlibWidget
   Q_OBJECT
 
 public:
-  ImageWindow( ImData *_idata, ImlibData *id, QWidget *parent=0 );
-  ImageWindow( ImData *_idata=0, QWidget *parent=0 );
-  ~ImageWindow();
+  ImageWindow(QWidget *parent = nullptr);
+  virtual ~ImageWindow() = default;
 
   bool 		showNextImage( KuickFile * file );
   bool 		showNextImage( const QUrl& url );
   void 		scrollImage( int, int, bool restrict=true );
   void		setFullscreen( bool );
   bool 		isFullscreen() 	const { return myIsFullscreen; }
-
-  void          addBrightness( int );
-  void 		addContrast( int );
-  void 		addGamma( int );
 
   void 		updateActions();
 

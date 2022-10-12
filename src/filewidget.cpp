@@ -22,6 +22,7 @@
 #include <KActionMenu>
 #include <KCompletion>
 #include <KConfigGroup>
+#include <KSharedConfig>
 #include <KFileItemActions>
 #include <KFileItemListProperties>
 #include <KLocalizedString>
@@ -40,6 +41,7 @@
 #include "kuickdata.h"
 #include "kuickshow_debug.h"
 #include "kuickshow.h"
+#include "imlibparams.h"
 
 
 FileWidget::FileWidget( const QUrl& url, QWidget *parent )
@@ -115,7 +117,7 @@ void FileWidget::initActions()
 
 void FileWidget::reloadConfiguration()
 {
-    if ( kdata->fileFilter != nameFilter() ) {
+    if ( ImlibParams::kuickConfig()->fileFilter != nameFilter() ) {
 	// At first, our list must have folders
 	QStringList mimes;
 	mimes.append("inode/directory");
