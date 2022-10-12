@@ -65,8 +65,6 @@ void ImlibWidget::init()
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    int w = 1; // > 0 for XCreateWindow
-    int h = 1;
     myBackgroundColor = Qt::black;
     m_kuim              = 0L;
     m_kuickFile = 0L;

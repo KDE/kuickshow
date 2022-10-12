@@ -53,7 +53,6 @@ void SlideShowWidget::loadSettings(const KuickData *kdata, const ImData *idata)
 void SlideShowWidget::applySettings()
 {
     KuickData *kdata = ImlibParams::kuickConfig();
-    ImData *idata = ImlibParams::imlibConfig();
 
     kdata->slideDelay = ui->delayTime->value() * 1000;
     kdata->slideshowCycles = ui->cycles->value();
