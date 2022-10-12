@@ -33,20 +33,18 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   ui = new Ui::DefaultsWidget;
   ui->setupUi(this);
 
-
   // set the properties that couldn't be set in the .ui file
-  // TODO: will qobject_cast work?
-  QGridLayout* gbPreviewLayout = dynamic_cast<QGridLayout*>(ui->gbPreview->layout());
+  QGridLayout *gbPreviewLayout = static_cast<QGridLayout *>(ui->gbPreview->layout());
 
-  // The image widgets have to be created here, because the required parameters can only be set on creation.
+  // The image widgets have to be created here,
+  // because the required parameters can only be set on creation.
   // The generated code won't do that.
   imOrig = new ImlibWidget(ui->gbPreview);
-  // TODO: set ImlibWidget "do not use config" flag
+  imOrig->setUseModifications(false);
   gbPreviewLayout->addWidget(imOrig, 1, 0, Qt::AlignCenter | Qt::AlignTop);
 
   imFiltered = new ImlibWidget(ui->gbPreview);
   gbPreviewLayout->addWidget(imFiltered, 1, 1, Qt::AlignCenter | Qt::AlignTop);
-
 
   // actions
   connect( ui->cbEnableMods, SIGNAL( toggled(bool) ), SLOT( enableWidgets(bool) ));
@@ -68,9 +66,8 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   connect( ui->comboRotate,  SIGNAL( activated(int) ), SLOT( updatePreview() ));
 
-
   // load and display the test image
-  QString filename = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kuickshow/pics/calibrate.png"));
+  QString filename = QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("pics/calibrate.png"));
   if ( !imOrig->loadImage( QUrl::fromLocalFile(filename) ) )
     imOrig = 0L; // FIXME - display some errormessage!
   if ( !imFiltered->loadImage( QUrl::fromLocalFile(filename) ) )
@@ -78,12 +75,8 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
 
   loadSettings();
 
-  if ( imOrig )
-    imOrig->setFixedSize( imOrig->size() );
-  if ( imFiltered )
-    imFiltered->setFixedSize( imFiltered->size() );
-
-  //layout()->activate();
+  if (imOrig!=nullptr) imOrig->setFixedSize(imOrig->sizeHint());
+  if (imFiltered!=nullptr) imFiltered->setFixedSize(imFiltered->sizeHint());
 }
 
 
@@ -121,6 +114,7 @@ void DefaultsWidget::loadSettings(const KuickData *kdata, const ImData *idata)
     updatePreview();
 }
 
+
 void DefaultsWidget::applySettings()
 {
     KuickData *kdata = ImlibParams::kuickConfig();
@@ -155,11 +149,10 @@ void DefaultsWidget::updatePreview()
     Rotation rotation = ui->cbEnableMods->isChecked() ? currentRotation() : ROT_0;
     imFiltered->setRotation( rotation );
 
-// TODO: implement imFiltered->resetModifier() then use step....
-// 
-//     imFiltered->setBrightness( ui->sbBrightness->value() );
-//     imFiltered->setContrast( ui->sbContrast->value() );
-//     imFiltered->setGamma( ui->sbGamma->value() );
+    imFiltered->initModifications();			// set absolute values
+    imFiltered->stepBrightness(ui->sbBrightness->value());
+    imFiltered->stepContrast(ui->sbContrast->value());
+    imFiltered->stepGamma(ui->sbGamma->value());
 
     imFiltered->updateImage();
     imFiltered->setAutoRender( true );

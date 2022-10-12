@@ -1114,9 +1114,9 @@ void KuickShow::slotConfigApplied()
 {
     dialog->applyConfig();
 
-    initImlib();					// already initialised, so ignore failure
     ImlibParams::kuickConfig()->save();			// save updated configuration
     ImlibParams::imlibConfig()->save();
+    initImlib();					// already initialised, so ignore failure
 
     ImageWindow *viewer;
     QList<ImageWindow*>::ConstIterator it = s_viewers.constBegin();

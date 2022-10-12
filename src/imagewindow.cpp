@@ -477,38 +477,40 @@ void ImageWindow::zoomOut()
 }
 
 // The 'brightnessSteps', 'contrastSteps' and 'gammaSteps' are
-// all set to 1 by KuickData::KuickData().  There is no GUI for
-// them, but they could possibly be changed in the application's
-// config file.
+// all set to 1 by KuickData::KuickData().  The corresponding
+// 'brightnessFactor', 'contrastFactor' and 'gammaFactor' are
+// all set to 10 by ImData::ImData().  There is no GUI for those
+// settings, so it is reasonable to assume that the calculated
+// step will be either +10 or -10.
 
 void ImageWindow::moreBrightness()
 {
-    stepBrightness(ImlibParams::kuickConfig()->brightnessSteps);
+    stepBrightness(ImlibParams::kuickConfig()->brightnessSteps*ImlibParams::imlibConfig()->brightnessFactor);
 }
 
 void ImageWindow::moreContrast()
 {
-    stepContrast(ImlibParams::kuickConfig()->contrastSteps);
+    stepContrast(ImlibParams::kuickConfig()->contrastSteps*ImlibParams::imlibConfig()->contrastFactor);
 }
 
 void ImageWindow::moreGamma()
 {
-    stepGamma(ImlibParams::kuickConfig()->gammaSteps);
+    stepGamma(ImlibParams::kuickConfig()->gammaSteps*ImlibParams::imlibConfig()->gammaFactor);
 }
 
 void ImageWindow::lessBrightness()
 {
-    stepBrightness(-ImlibParams::kuickConfig()->brightnessSteps);
+    stepBrightness(-ImlibParams::kuickConfig()->brightnessSteps*ImlibParams::imlibConfig()->brightnessFactor);
 }
 
 void ImageWindow::lessContrast()
 {
-    stepContrast(-ImlibParams::kuickConfig()->contrastSteps);
+    stepContrast(-ImlibParams::kuickConfig()->contrastSteps*ImlibParams::imlibConfig()->contrastFactor);
 }
 
 void ImageWindow::lessGamma()
 {
-    stepGamma(-ImlibParams::kuickConfig()->gammaSteps);
+    stepGamma(-ImlibParams::kuickConfig()->gammaSteps*ImlibParams::imlibConfig()->gammaFactor);
 }
 
 void ImageWindow::imageDelete()

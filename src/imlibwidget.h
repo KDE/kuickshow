@@ -37,6 +37,8 @@ public:
   explicit ImlibWidget(QWidget *parent = nullptr);
   virtual ~ImlibWidget();
 
+  QSize sizeHint() const override;
+
   QUrl          url()                   const;
   KuickFile *   currentFile()           const;
   bool		loadImage( KuickFile * file);
@@ -62,6 +64,10 @@ public:
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );
+
+  void setUseModifications(bool enable = true);
+  void initModifications();
+
 
   /**
    * @return true if auto-rotation is not possible, e.g. because no metadata
@@ -125,6 +131,7 @@ private:
   void setImageModifier();
 
   bool 		isAutoRendering;
+  bool 		myUseModifications;
   int 		myMaxImageCache;
   QColor 	myBackgroundColor;
   QLabel *myLabel;

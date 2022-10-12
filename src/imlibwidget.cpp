@@ -45,7 +45,6 @@ static const int ImlibOffset = 256;
 static const int ImlibLimit = 256;
 
 
-
 ImlibWidget::ImlibWidget(QWidget *parent)
     : QScrollArea(parent)
 {
@@ -71,6 +70,7 @@ void ImlibWidget::init()
     myBackgroundColor = Qt::black;
     m_kuim              = 0L;
     m_kuickFile = 0L;
+    myUseModifications = true;
 
 #ifdef HAVE_IMLIB1
     if (ImlibParams::imlibData()==nullptr) qFatal("Imlib not initialised");
@@ -103,6 +103,13 @@ ImlibWidget::~ImlibWidget()
 #endif // HAVE_IMLIB2
 }
 
+
+QSize ImlibWidget::sizeHint() const
+{
+    return (myLabel->size());
+}
+
+
 QUrl ImlibWidget::url() const
 {
     if ( m_kuickFile )
@@ -116,32 +123,24 @@ KuickFile * ImlibWidget::currentFile() const
     return m_kuickFile;
 }
 
+
 // tries to load "filename" and returns the according KuickImage *
 // or 0L if unsuccessful
 KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
 {
     assert( file->isAvailable() );
 
-    // apply default image modifications
-#ifdef HAVE_IMLIB1
-    myModifier.brightness = ImlibOffset;
-    myModifier.contrast = ImlibOffset;
-    myModifier.gamma = ImlibOffset;
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    imlib_context_set_color_modifier(myModifier);
-    imlib_reset_color_modifier();
-
-    imlib_modify_color_modifier_brightness(0.0);	// initial default values
-    imlib_modify_color_modifier_contrast(1.0);
-    imlib_modify_color_modifier_gamma(1.0);
-#endif // HAVE_IMLIB2
-
-    // Set the configured image modification values.
-    // TODO: not if 'unmodified' flag set
-    stepBrightnessInternal(ImlibParams::imlibConfig()->brightness);
-    stepContrastInternal(ImlibParams::imlibConfig()->contrast);
-    stepGammaInternal(ImlibParams::imlibConfig()->gamma);
+    // Set the configured default image modification values,
+    // unless the 'myUseModifications' option is not set.  This
+    // will only be the case for the unmodified image preview
+    // in the "Modifications" settings dialogue.
+    initModifications();
+    if (myUseModifications)
+    {
+        stepBrightnessInternal(ImlibParams::imlibConfig()->brightness);
+        stepContrastInternal(ImlibParams::imlibConfig()->contrast);
+        stepGammaInternal(ImlibParams::imlibConfig()->gamma);
+    }
 
     KuickImage *kuim = imageCache->getKuimage( file );
     bool wasCached = true;
@@ -334,21 +333,21 @@ void ImlibWidget::stepGammaInternal(int g)
 
 void ImlibWidget::stepBrightness(int b)
 {
-    stepBrightnessInternal(b*ImlibParams::imlibConfig()->brightnessFactor);
+    stepBrightnessInternal(b);
     setImageModifier();
     autoUpdate();
 }
 
 void ImlibWidget::stepContrast(int c)
 {
-    stepContrastInternal(c*ImlibParams::imlibConfig()->contrastFactor);
+    stepContrastInternal(c);
     setImageModifier();
     autoUpdate();
 }
 
 void ImlibWidget::stepGamma(int g)
 {
-    stepGammaInternal(g*ImlibParams::imlibConfig()->gammaFactor);
+    stepGammaInternal(g);
     setImageModifier();
     autoUpdate();
 }
@@ -631,4 +630,30 @@ void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool
 */
 void ImlibWidget::rotated( KuickImage *, int )
 {
+}
+
+
+void ImlibWidget::setUseModifications(bool enable)
+{
+    qDebug() << enable;
+    myUseModifications = enable;
+}
+
+
+void ImlibWidget::initModifications()
+{
+    // Start with the default image modifications
+#ifdef HAVE_IMLIB1
+    myModifier.brightness = ImlibOffset;
+    myModifier.contrast = ImlibOffset;
+    myModifier.gamma = ImlibOffset;
+#endif // HAVE_IMLIB1
+#ifdef HAVE_IMLIB2
+    imlib_context_set_color_modifier(myModifier);
+    imlib_reset_color_modifier();
+
+    imlib_modify_color_modifier_brightness(0.0);	// initial default values
+    imlib_modify_color_modifier_contrast(1.0);
+    imlib_modify_color_modifier_gamma(1.0);
+#endif // HAVE_IMLIB2
 }
