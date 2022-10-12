@@ -54,9 +54,7 @@ FileFinder::FileFinder( QWidget *parent )
 
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
     KConfigGroup cs( config, "GeneralConfiguration" );
-    setCompletionMode( (KCompletion::CompletionMode)
-               cs.readEntry( "FileFinderCompletionMode",
-                                     int(KCompletion().completionMode())));
+    setCompletionMode(static_cast<KCompletion::CompletionMode>(cs.readEntry("FileFinderCompletionMode", static_cast<int>(KCompletion().completionMode()))));
 }
 
 FileFinder::~FileFinder()

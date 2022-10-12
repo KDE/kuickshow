@@ -200,7 +200,7 @@ void KuickFile::slotProgress( KJob *job, unsigned long percent )
     if ( percent >= 100 )
         percent = 99;
 
-    m_progress->setValue( (int) percent );
+    m_progress->setValue(static_cast<int>(percent));
 }
 
 bool operator==( const KuickFile& first, const KuickFile& second ) {

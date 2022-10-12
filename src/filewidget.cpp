@@ -432,7 +432,7 @@ void FileWidget::slotReturnPressed( const QString& t )
         setUrl( QUrl::fromLocalFile(dir), true );
     }
 
-    else if ( text.indexOf('/') != (int) text.length() -1 ) { // relative path
+    else if ( text.indexOf('/') != text.length() -1 ) { // relative path
 	QString dir = m_fileFinder->completion()->replacedPath( text );
         QUrl u = url().resolved(QUrl(dir));
 	setUrl( u, true );

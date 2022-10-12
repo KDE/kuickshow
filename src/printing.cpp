@@ -308,12 +308,12 @@ int KuickPrintDialogPage::scaleHeight() const
 
 void KuickPrintDialogPage::setScaleWidth( int pixels )
 {
-    ui->width->setValue( (int) pixelsToUnit( pixels ) );
+    ui->width->setValue(static_cast<int>(pixelsToUnit(pixels)));
 }
 
 void KuickPrintDialogPage::setScaleHeight( int pixels )
 {
-    ui->width->setValue( (int) pixelsToUnit( pixels ) );
+    ui->width->setValue(static_cast<int>(pixelsToUnit(pixels)));
 }
 
 int KuickPrintDialogPage::fromUnitToPixels( float /*value*/ ) const

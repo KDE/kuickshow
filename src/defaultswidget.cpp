@@ -102,7 +102,7 @@ void DefaultsWidget::loadSettings( const KuickData& data )
     ui->cbFlipVertically->setChecked( data.flipVertically );
     ui->cbFlipHorizontally->setChecked( data.flipHorizontally );
 
-    ui->comboRotate->setCurrentIndex( ( int )data.rotation );
+    ui->comboRotate->setCurrentIndex(static_cast<int>(data.rotation));
 
     ImData *id = data.idata;
 
@@ -173,5 +173,5 @@ void DefaultsWidget::enableWidgets( bool enable )
 
 Rotation DefaultsWidget::currentRotation() const
 {
-    return (Rotation) ui->comboRotate->currentIndex();
+    return (static_cast<Rotation>(ui->comboRotate->currentIndex()));
 }

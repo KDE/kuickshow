@@ -90,7 +90,7 @@ void KuickImage::rotate( Rotation rot )
 	    Imlib_flip_image_vertical( myId, myIm );
     }
 
-    myRotation = (Rotation) ((myRotation + rot) % 4);
+    myRotation = static_cast<Rotation>((myRotation + rot) % 4);
     setDirty(true);
 }
 
@@ -125,7 +125,7 @@ void KuickImage::flip( FlipMode flipMode )
     if ( flipMode & FlipVertical )
 	Imlib_flip_image_vertical( myId, myIm );
 
-    myFlipMode = (FlipMode) (myFlipMode ^ flipMode);
+    myFlipMode = static_cast<FlipMode>(myFlipMode ^ flipMode);
     setDirty(true);
 }
 
@@ -149,7 +149,7 @@ bool KuickImage::flipAbs( int mode )
     }
 
     if ( changed ) {
-        myFlipMode = (FlipMode) mode;
+        myFlipMode = static_cast<FlipMode>(mode);
         setDirty(true);
         return true;
     }

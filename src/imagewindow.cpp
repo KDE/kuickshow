@@ -456,7 +456,7 @@ void ImageWindow::addBrightness( int factor )
 	return;
 
     int oldValue = mod.brightness - ImlibOffset;
-    setBrightness( oldValue + (idata->brightnessFactor * (int) factor) );
+    setBrightness(oldValue+(idata->brightnessFactor*factor));
 }
 
 void ImageWindow::addContrast( int factor )
@@ -465,7 +465,7 @@ void ImageWindow::addContrast( int factor )
 	return;
 
     int oldValue = mod.contrast - ImlibOffset;
-    setContrast( oldValue + (idata->contrastFactor * (int) factor) );
+    setContrast(oldValue+(idata->contrastFactor*factor));
 }
 
 void ImageWindow::addGamma( int factor )
@@ -474,7 +474,7 @@ void ImageWindow::addGamma( int factor )
 	return;
 
     int oldValue = mod.gamma - ImlibOffset;
-    setGamma( oldValue + (idata->gammaFactor * (int) factor) );
+    setGamma(oldValue+(idata->gammaFactor*factor));
 }
 
 
@@ -770,8 +770,8 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     neww = botX - topX;
     newh = botY - topY;
 
-    factorx = ((float) width() / (float) neww);
-    factory = ((float) height() / (float) newh);
+    factorx = static_cast<float>(width())/neww;
+    factory = static_cast<float>(height())/newh;
 
     if ( factorx < factory ) // use the smaller factor
 	factor = factorx;
@@ -779,18 +779,18 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 
     uint w = 0; // shut up compiler!
     uint h = 0;
-    w = (uint) ( factor * (float) imageWidth() );
-    h = (uint) ( factor * (float) imageHeight() );
+    w = static_cast<uint>(factor*static_cast<float>(imageWidth()));
+    h = static_cast<uint>(factor*static_cast<float>(imageHeight()));
 
     if ( !canZoomTo( w, h ) )
 	return;
 
-    int xtmp = - (int) (factor * abs(xpos - topX) );
-    int ytmp = - (int) (factor * abs(ypos - topY) );
+    int xtmp = -static_cast<int>(factor*qAbs(xpos-topX));
+    int ytmp = -static_cast<int>(factor*qAbs(ypos-topY));
 
     // if image has different ratio (width()/height()), center it
-    int xcenter = (width()  - (int) (neww * factor)) / 2;
-    int ycenter = (height() - (int) (newh * factor)) / 2;
+    int xcenter = (width()  - static_cast<int>(neww * factor)) / 2;
+    int ycenter = (height() - static_cast<int>(newh * factor)) / 2;
 
     xtmp += xcenter;
     ytmp += ycenter;
@@ -1078,13 +1078,13 @@ void ImageWindow::autoScale( KuickImage *kuim )
 	    float ratio1, ratio2;
 	    int maxUpScale = kdata->maxUpScale;
 
-	    ratio1 = (float) mw / (float) newW;
-	    ratio2 = (float) mh / (float) newH;
+	    ratio1 = static_cast<float>(mw)/newW;
+	    ratio2 = static_cast<float>(mh)/newH;
 	    ratio1 = (ratio1 < ratio2) ? ratio1 : ratio2;
 	    if ( maxUpScale > 0 )
 		ratio1 = (ratio1 < maxUpScale) ? ratio1 : maxUpScale;
-	    newH = (int) ((float) newH * ratio1);
-	    newW = (int) ((float) newW * ratio1);
+	    newH = static_cast<int>(newH * ratio1);
+            newW = static_cast<int>(newW * ratio1);
 	}
     }
 
@@ -1097,16 +1097,16 @@ void ImageWindow::autoScale( KuickImage *kuim )
 
 	    if ( newW > mw )
             {
-		float ratio = (float) newW / (float) newH;
+		float ratio = static_cast<float>(newW)/static_cast<float>(newH);
 		newW = mw;
-		newH = (int) ((float) newW / ratio);
+		newH = static_cast<int>(newW/ratio);
 	    }
 
 	    // the previously calculated "h" might be larger than screen
 	    if ( newH > mh ) {
-		float ratio = (float) newW / (float) newH;
+		float ratio = static_cast<float>(newW)/static_cast<float>(newH);
 		newH = mh;
-		newW = (int) ((float) newH * ratio);
+		newW = static_cast<int>(newH*ratio);
 	    }
 	}
     }

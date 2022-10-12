@@ -280,8 +280,8 @@ void ImlibWidget::zoomImage( float factor )
     if ( factor == 1 || factor == 0 || !m_kuim )
 	return;
 
-    int newWidth  = (int) (factor * (float) m_kuim->width());
-    int newHeight = (int) (factor * (float) m_kuim->height());
+    int newWidth  = static_cast<int>(factor*m_kuim->width());
+    int newHeight = static_cast<int>(factor*m_kuim->height());
 
     if ( canZoomTo( newWidth, newHeight ) )
     {

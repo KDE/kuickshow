@@ -102,7 +102,7 @@ void KuickData::load()
   contrastSteps   = generalGroup.readEntry("ContrastStepSize", def.contrastSteps);
   gammaSteps      = generalGroup.readEntry("GammaStepSize", def.gammaSteps);
   scrollSteps     = generalGroup.readEntry("ScrollingStepSize", def.scrollSteps);
-  zoomSteps       = generalGroup.readEntry("ZoomStepSize", (double)def.zoomSteps);
+  zoomSteps       = generalGroup.readEntry("ZoomStepSize", static_cast<double>(def.zoomSteps));
 
   maxZoomFactor   = generalGroup.readEntry( "MaximumZoomFactorByDesktop", def.maxZoomFactor );
 
@@ -126,7 +126,7 @@ void KuickData::load()
       case ROT_90:
       case ROT_180:
       case ROT_270:
-          rotation = (Rotation) rawRotation;
+        rotation = static_cast<Rotation>(rawRotation);
           break;
 
       case 90:

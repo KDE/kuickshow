@@ -104,7 +104,7 @@ void GeneralWidget::applySettings( KuickData& data)
     idata->dither16bit 	  = ui->cbDither16bit->isChecked();
     idata->dither8bit 	  = ui->cbDither8bit->isChecked();
 
-    idata->maxCache	  = (uint) ui->maxCacheSpinBox->value() * 1024;
+    idata->maxCache	  = static_cast<uint>(ui->maxCacheSpinBox->value()*1024);
 }
 
 void GeneralWidget::useOwnPalette()

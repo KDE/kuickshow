@@ -65,9 +65,6 @@
 #include <QUrl>
 #include <QtGlobal>
 
-#include <assert.h>
-#include <stdio.h>
-
 #include "aboutwidget.h"
 #include "filecache.h"
 #include "filewidget.h"
@@ -451,7 +448,10 @@ void KuickShow::slotURLComboReturnPressed()
 
 void KuickShow::viewerDeleted()
 {
-    ImageWindow *viewer = (ImageWindow*) sender();
+    // Do not use qobject_cast here, it will return NULL
+    ImageWindow *viewer = static_cast<ImageWindow *>(sender());
+    if (viewer==nullptr) return;
+
     s_viewers.removeAll( viewer );
     if ( viewer == m_viewer )
         m_viewer = 0L;
@@ -459,7 +459,8 @@ void KuickShow::viewerDeleted()
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
         saveSettings();
         FileCache::shutdown();
-        ::exit(0);
+        QCoreApplication::quit();
+        deleteLater();
     }
 
     else if ( haveBrowser() ) {
@@ -1310,7 +1311,7 @@ void KuickShow::replayAdvance(DelayedRepeatEvent *event)
     }
 #endif
     // --------------------------------------------------------------
-    slotAdvanceImage( event->viewer, *(int *) (event->data) );
+    slotAdvanceImage(event->viewer, *static_cast<int *>(event->data));
 }
 
 void KuickShow::delayAction(DelayedRepeatEvent *event)
@@ -1351,10 +1352,10 @@ void KuickShow::doReplay()
     switch (m_delayedRepeatItem->action)
     {
         case DelayedRepeatEvent::DeleteCurrentFile:
-            performDeleteCurrentImage((QWidget *) m_delayedRepeatItem->data);
+            performDeleteCurrentImage(static_cast<QWidget *>(m_delayedRepeatItem->data));
             break;
         case DelayedRepeatEvent::TrashCurrentFile:
-            performTrashCurrentImage((QWidget *) m_delayedRepeatItem->data);
+            performTrashCurrentImage(static_cast<QWidget *>(m_delayedRepeatItem->data));
             break;
         case DelayedRepeatEvent::AdvanceViewer:
             replayAdvance(m_delayedRepeatItem);
