@@ -335,7 +335,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     QString caption = i18nc( "Filename (Imagewidth x Imageheight)",
                              "%3 (%1 x %2)",
                              m_kuim->originalWidth(), m_kuim->originalHeight(),
-                             m_kuim->url().toDisplayString() );
+                             m_kuim->url().fileName());
     setWindowTitle( caption );
 }
 
