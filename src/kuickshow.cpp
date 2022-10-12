@@ -574,6 +574,7 @@ bool KuickShow::showImage( const KFileItem& fi,
             s_viewers.append( m_viewer );
 
 	    connect( m_viewer, SIGNAL( nextSlideRequested() ), this, SLOT( nextSlide() ));
+	    connect( m_viewer, SIGNAL( duplicateWindow(const QUrl &) ), this, SLOT( slotDuplicateWindow(const QUrl &) ));
             connect( m_viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
             connect( m_viewer, SIGNAL( sigFocusWindow( ImageWindow *) ),
                      this, SLOT( slotSetActiveViewer( ImageWindow * ) ));
@@ -1387,6 +1388,13 @@ void KuickShow::slotToggleInlinePreview(bool on)
     QAction *defaultInlinePreview = fileWidget->actionCollection()->action( "inline preview" );
     defaultInlinePreview->setChecked(on);
 //	fileWidget->actionCollection("short view")
+}
+
+void KuickShow::slotDuplicateWindow(const QUrl &url)
+{
+    qDebug() << url;
+    KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url, false);
+    showImage(item, true);
 }
 
 void KuickShow::deleteAllViewers()

@@ -91,6 +91,7 @@ signals:
   void          requestImage( ImageWindow *, int advance );
   void          deleteImage(ImageWindow *viewer);
   void          trashImage(ImageWindow *viewer);
+  void          duplicateWindow(const QUrl &url);
   void		nextSlideRequested();
   void		prevSlideRequested();
 
@@ -142,6 +143,7 @@ protected:
 
 protected slots:
   void 		saveImage();
+  void          slotDuplicateWindow();
   void          slotRequestNext()           { emit requestImage( this, +1 ); }
   void          slotRequestPrevious()       { emit requestImage( this, -1 ); }
   void          reload();

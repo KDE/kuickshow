@@ -136,6 +136,11 @@ void ImageWindow::updateActions()
 
 void ImageWindow::setupActions()
 {
+    QAction *duplicateWindow = m_actions->addAction( "duplicate_window" );
+    duplicateWindow->setText( i18n("Duplicate Window") );
+    m_actions->setDefaultShortcut(duplicateWindow, Qt::Key_D );
+    connect( duplicateWindow, SIGNAL( triggered() ), this, SLOT( slotDuplicateWindow() ) );
+
     QAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
     m_actions->setDefaultShortcuts(nextImage, KStandardShortcut::next());
@@ -822,6 +827,7 @@ void ImageWindow::setPopupMenu()
 {
     viewerMenu = new QMenu( this );
 
+    viewerMenu->addAction(m_actions->action("duplicate_window"));
     viewerMenu->addAction(m_actions->action("next_image"));
     viewerMenu->addAction(m_actions->action("previous_image"));
     viewerMenu->addSeparator();
@@ -1221,6 +1227,11 @@ void ImageWindow::slotProperties()
 {
     KPropertiesDialog dlg( currentFile()->url(), this );
     dlg.exec();
+}
+
+void ImageWindow::slotDuplicateWindow()
+{
+    emit duplicateWindow(currentFile()->url());
 }
 
 void ImageWindow::setBusyCursor()

@@ -111,6 +111,7 @@ private slots:
     void		dirSelected( const QUrl& );
     void		configuration();
     void	      	about();
+    void		slotDuplicateWindow(const QUrl &url);
     void 		startSlideShow();
     void                pauseSlideShow();
     void 		nextSlide();
