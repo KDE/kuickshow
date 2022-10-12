@@ -315,6 +315,10 @@ void KuickShow::initGUI( const QUrl& startDir )
     showFullscreen->setText( i18n("Show Image in Fullscreen Mode") );
     connect( showFullscreen, SIGNAL( triggered() ), this, SLOT( slotShowFullscreen() ) );
 
+    // Provided by KDirOperator, but no icon as standard
+    QAction *previewAction = coll->action( "preview");
+    previewAction->setIcon(QIcon::fromTheme("document-preview"));
+
     QAction *defaultInlinePreview = coll->action( "inline preview" );
     KToggleAction *inlinePreviewAction = coll->add<KToggleAction>( "kuick_inlinePreview" );
     inlinePreviewAction->setText( defaultInlinePreview->text() );
