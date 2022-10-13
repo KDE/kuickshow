@@ -231,7 +231,7 @@ KuickShow::~KuickShow()
     delete m_viewer;
 
     FileCache::shutdown();
-    qApp->quit();
+//    qApp->quit();
 
     delete kdata;
 }
@@ -305,14 +305,17 @@ void KuickShow::initGUI( const QUrl& startDir )
 
     QAction *showInOther = coll->addAction( "kuick_showInOtherWindow" );
     showInOther->setText( i18n("Show Image") );
+    showInOther->setIcon( QIcon::fromTheme( "window-new" ) );
     connect( showInOther, SIGNAL( triggered() ), SLOT( slotShowInOtherWindow() ));
 
     QAction *showInSame = coll->addAction( "kuick_showInSameWindow" );
     showInSame->setText( i18n("Show Image in Active Window") );
+    showInSame->setIcon( QIcon::fromTheme( "viewimage" ) );
     connect( showInSame, SIGNAL( triggered() ), this, SLOT( slotShowInSameWindow() ) );
 
     QAction *showFullscreen = coll->addAction( "kuick_showFullscreen" );
     showFullscreen->setText( i18n("Show Image in Fullscreen Mode") );
+    showFullscreen->setIcon( QIcon::fromTheme( "view-fullscreen" ) );
     connect( showFullscreen, SIGNAL( triggered() ), this, SLOT( slotShowFullscreen() ) );
 
     // Provided by KDirOperator, but no icon as standard
@@ -333,10 +336,12 @@ void KuickShow::initGUI( const QUrl& startDir )
     QMenu *fileMenu = new QMenu( i18n("&File"), mBar );
     fileMenu->setObjectName( QString::fromLatin1( "file" ) );
     fileMenu->addAction(open);
+    fileMenu->addAction(coll->action("mkdir"));
+    fileMenu->addAction(coll->action("trash"));
+    fileMenu->addSeparator();
     fileMenu->addAction(showInOther);
     fileMenu->addAction(showInSame);
     fileMenu->addAction(showFullscreen);
-    fileMenu->addSeparator();
     fileMenu->addAction(slide);
     fileMenu->addAction(print);
     fileMenu->addSeparator();
@@ -344,15 +349,17 @@ void KuickShow::initGUI( const QUrl& startDir )
 
     QMenu *editMenu = new QMenu( i18n("&Edit"), mBar );
     editMenu->setObjectName( QString::fromLatin1( "edit" ) );
-    editMenu->addAction(coll->action("mkdir"));
-    editMenu->addAction(coll->action("trash"));
-    editMenu->addSeparator();
     editMenu->addAction(coll->action("properties"));
 
     KActionMenu *viewActionMenu = static_cast<KActionMenu *>(coll->action("view menu"));
+    // Ensure that the menu bar shows "View"
+    viewActionMenu->setText(i18n("View"));
+    viewActionMenu->setIcon(QIcon());
 
     QMenu *settingsMenu = new QMenu( i18n("&Settings"), mBar );
     settingsMenu->setObjectName( QString::fromLatin1( "settings" ) );
+    settingsMenu->addAction(oneWindowAction);
+    settingsMenu->addSeparator();
     settingsMenu->addAction(configure);
 
     mBar->addMenu( fileMenu );
