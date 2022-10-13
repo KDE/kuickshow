@@ -838,6 +838,13 @@ void ImageWindow::setPopupMenu()
     gammaMenu->addAction(m_actions->action("more_gamma"));
     gammaMenu->addAction(m_actions->action("less_gamma"));
 
+#ifdef HAVE_QTONLY
+    // Colour controls are not supported without Imlib at the moment.
+    brightnessMenu->setEnabled(false);
+    contrastMenu->setEnabled(false);
+    gammaMenu->setEnabled(false);
+#endif // HAVE_QTONLY
+
     viewerMenu->addAction(m_actions->action("zoom_in"));
     viewerMenu->addAction(m_actions->action("zoom_out"));
     viewerMenu->addAction(m_actions->action("original_size"));
