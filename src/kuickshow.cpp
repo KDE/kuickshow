@@ -849,20 +849,14 @@ void KuickShow::nextSlide( const KFileItem& item )
 void KuickShow::slotPrint()
 {
     const KFileItemList items = fileWidget->selectedItems();
-    if ( items.isEmpty() )
-        return;
-
-    KFileItemList::const_iterator it = items.constBegin();
-    const KFileItemList::const_iterator end = items.constEnd();
+    if (items.isEmpty()) return;
 
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow(this);
     iw->setObjectName( QString::fromLatin1("printing image"));
-    KFileItem item;
-	for ( ; it != end; ++it ) {
-		item = (*it);
-        if (FileWidget::isImage( item ) && iw->loadImage( item.url()))
-            iw->printImage();
+    for (const KFileItem &item : qAsConst(items))
+    {
+        if (FileWidget::isImage(item) && iw->loadImage(item.url())) iw->printImage();
     }
 
     delete iw;
@@ -885,14 +879,11 @@ void KuickShow::slotShowFullscreen()
 
 void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &urls)
 {
-    QList<QUrl>::ConstIterator it = urls.constBegin();
-    for ( ; it != urls.constEnd(); ++it )
+    for (const QUrl &url : qAsConst(urls))
     {
-        KFileItem item( *it );
-        if ( FileWidget::isImage( item ) )
-            showImage( item, true );
-        else
-            fileWidget->setUrl( *it, true );
+        KFileItem item(url);
+        if (FileWidget::isImage(item)) showImage( item, true );
+        else fileWidget->setUrl(url, true);
     }
 }
 
@@ -1168,12 +1159,9 @@ void KuickShow::slotConfigApplied()
     ImlibParams::imlibConfig()->save();
     initImlib();					// already initialised, so ignore failure
 
-    ImageWindow *viewer;
-    QList<ImageWindow*>::ConstIterator it = s_viewers.constBegin();
-    while ( it != s_viewers.constEnd() ) {
-        viewer = *it;
+    for (ImageWindow *viewer : qAsConst(s_viewers))
+    {
         viewer->updateActions();
-        ++it;
     }
 
     fileWidget->reloadConfiguration();
@@ -1213,12 +1201,12 @@ void KuickShow::readProperties( const KConfigGroup& kc )
     }
 
     QUrl listedURL = fileWidget->url();
-    const QStringList images = kc.readPathEntry( "Images shown", QStringList() );
-    QStringList::const_iterator it;
     bool hasCurrentURL = false;
-
-    for ( it = images.constBegin(); it != images.constEnd(); ++it ) {
-        KFileItem item( (QUrl( *it )) );
+    const QStringList images = kc.readPathEntry( "Images shown", QStringList() );
+    for (const QString &img : qAsConst(images))
+    {
+        const QUrl url(img);
+        KFileItem item(url);
         if ( item.isReadable() ) {
             if (showImage( item, true )) {
 				// Set the current URL in the file widget, if possible
@@ -1244,9 +1232,9 @@ void KuickShow::saveProperties( KConfigGroup& kc )
     kc.writePathEntry( "CurrentDirectory", fileWidget->url().url() );
 
     QStringList urls;
-    QList<ImageWindow*>::ConstIterator it;
-    for ( it = s_viewers.constBegin(); it != s_viewers.constEnd(); ++it ) {
-        const QUrl url = (*it)->url();			// checks currentFile() internally
+    for (const ImageWindow *viewer : qAsConst(s_viewers))
+    {
+        const QUrl url = viewer->url();			// checks currentFile() internally
         if (!url.isValid()) continue;			// no current file, ignore
         if ( url.isLocalFile() )
             urls.append( url.path() );
@@ -1447,10 +1435,10 @@ void KuickShow::slotDuplicateWindow(const QUrl &url)
 
 void KuickShow::deleteAllViewers()
 {
-    QList<ImageWindow*>::Iterator it = s_viewers.begin();
-    for ( ; it != s_viewers.end(); ++it ) {
-        (*it)->disconnect( SIGNAL( destroyed() ), this, SLOT( viewerDeleted() ));
-        delete (*it);
+    for (ImageWindow *viewer : qAsConst(s_viewers))
+    {
+        viewer->disconnect( SIGNAL( destroyed() ), this, SLOT( viewerDeleted() ));
+        delete viewer;
     }
 
     s_viewers.clear();

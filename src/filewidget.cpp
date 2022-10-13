@@ -125,9 +125,10 @@ void FileWidget::reloadConfiguration()
 	// Then, all the images!
 	QMimeDatabase mimedb;
 	QList<QMimeType> l = mimedb.allMimeTypes();
-	for (QList<QMimeType>::const_iterator it = l.begin(); it != l.end(); ++it)
-	    if (it->name().startsWith( "image/" ))
-		mimes.append( it->name() );
+	for (const QMimeType &mime : qAsConst(l))
+        {
+	    if (mime.name().startsWith("image/")) mimes.append(mime.name());
+        }
 
 	// Ok, show what we've done
 	setMimeFilter (mimes);
