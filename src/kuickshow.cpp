@@ -69,7 +69,6 @@
 #include "filecache.h"
 #include "filewidget.h"
 #include "imagewindow.h"
-#include "imdata.h"
 #include "imlibwidget.h"
 #include "kuick.h"
 #include "kuickconfigdlg.h"
@@ -80,9 +79,44 @@
 #include "imlibparams.h"
 
 
-KuickData* kdata;
+static QList<ImageWindow *> s_viewers;
 
-QList<ImageWindow*> KuickShow::s_viewers;
+
+// -----------------------------------------------------------------
+
+class DelayedRepeatEvent
+{
+public:
+    DelayedRepeatEvent( ImageWindow *view, QKeyEvent *ev ) {
+        viewer = view;
+        event  = ev;
+    }
+    DelayedRepeatEvent( ImageWindow *view, int act, void *d ) {
+        this->viewer = view;
+        this->action = act;
+        this->data   = d;
+        this->event  = 0L;
+    }
+
+    ~DelayedRepeatEvent() {
+        delete event;
+    }
+
+    enum Action
+    {
+        DeleteCurrentFile,
+        TrashCurrentFile,
+        AdvanceViewer
+    };
+
+    ImageWindow *viewer;
+    QKeyEvent *event;
+    int action;
+    void *data;
+};
+
+// -----------------------------------------------------------------
+
 
 KuickShow::KuickShow( const char *objName )
     : KXmlGuiWindow( 0L ),
@@ -96,8 +130,6 @@ KuickShow::KuickShow( const char *objName )
 {
     setObjectName(objName);
     aboutWidget = 0L;
-    kdata = new KuickData;
-    kdata->load();
 
     // This will report the build time version, there appears to
     // be no way to obtain the run time Imlib version.
@@ -119,9 +151,9 @@ KuickShow::KuickShow( const char *objName )
                                 QGuiApplication::applicationDisplayName(), imlibVersion),
                            i18n("Fatal Imlib Error"));
 
-        FileCache::shutdown();
         QCoreApplication::exit(1);
         deleteLater();					// to actually exit event loop
+        return;
     }
 
     resize( 400, 500 );
@@ -206,7 +238,7 @@ KuickShow::KuickShow( const char *objName )
         // else // we don't handle local non-images
     }
 
-    if ( (kdata->startInLastDir && args.count() == 0) || parser->isSet( "lastfolder" )) {
+    if ( (ImlibParams::kuickConfig()->startInLastDir && args.count() == 0) || parser->isSet( "lastfolder" )) {
         KConfigGroup sessGroup(kc, "SessionSettings");
         startDir = QUrl(sessGroup.readPathEntry( "CurrentDirectory", startDir.url() ));
     }
@@ -227,13 +259,8 @@ KuickShow::KuickShow( const char *objName )
 KuickShow::~KuickShow()
 {
     saveSettings();
-
-    delete m_viewer;
-
+    if (m_viewer!=nullptr) m_viewer->deleteLater();
     FileCache::shutdown();
-//    qApp->quit();
-
-    delete kdata;
 }
 
 // TODO convert to use xmlui file
@@ -328,7 +355,7 @@ void KuickShow::initGUI( const QUrl& startDir )
     inlinePreviewAction->setIcon( defaultInlinePreview->icon() );
     connect( inlinePreviewAction, SIGNAL( toggled(bool) ), this, SLOT( slotToggleInlinePreview(bool) ) );
 
-    QAction *quit = KStandardAction::quit( this, SLOT(slotQuit()), coll);
+    QAction *quit = KStandardAction::quit(this, &QObject::deleteLater, coll);
     coll->addAction( "quit", quit );
 
     // menubar
@@ -490,8 +517,6 @@ void KuickShow::viewerDeleted()
         m_viewer = 0L;
 
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
-        saveSettings();
-        FileCache::shutdown();
         QCoreApplication::quit();
         deleteLater();
     }
@@ -575,7 +600,7 @@ bool KuickShow::showImage( const KFileItem& fi,
                            bool newWindow, bool fullscreen, bool moveToTopLeft, bool ignoreFileType )
 {
     newWindow  |= !m_viewer;
-    fullscreen |= (newWindow && kdata->fullScreen);
+    fullscreen |= (newWindow && ImlibParams::kuickConfig()->fullScreen);
     if ( ignoreFileType || FileWidget::isImage( fi ) ) {
 
         if ( newWindow ) {
@@ -632,7 +657,7 @@ bool KuickShow::showImage( const KFileItem& fi,
                 }
             }
 
-            if ( kdata->preloadImage && fileWidget ) {
+            if ( ImlibParams::kuickConfig()->preloadImage && fileWidget ) {
                 // don't move cursor
                 KFileItem item = fileWidget->getItem( FileWidget::Next, true );
                 if ( !item.isNull() )
@@ -752,7 +777,7 @@ void KuickShow::tryShowNextImage()
 
 void KuickShow::startSlideShow()
 {
-    KFileItem item = kdata->slideshowStartAtFirst ?
+    KFileItem item = ImlibParams::kuickConfig()->slideshowStartAtFirst ?
                       fileWidget->gotoFirstImage() :
                       fileWidget->getCurrentItem(false);
 
@@ -760,17 +785,17 @@ void KuickShow::startSlideShow()
         m_slideshowCycle = 1;
         fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
         showImage( item, !oneWindowAction->isChecked(),
-                   kdata->slideshowFullscreen );
-	if(kdata->slideDelay)
-            m_slideTimer->start( kdata->slideDelay );
+                   ImlibParams::kuickConfig()->slideshowFullscreen );
+	if(ImlibParams::kuickConfig()->slideDelay)
+            m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
     }
 }
 
 void KuickShow::pauseSlideShow()
 {
     if(m_slideShowStopped) {
-	if(kdata->slideDelay)
-	    m_slideTimer->start( kdata->slideDelay );
+	if(ImlibParams::kuickConfig()->slideDelay)
+	    m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
 	m_slideShowStopped = false;
     }
     else {
@@ -789,8 +814,8 @@ void KuickShow::nextSlide()
 
     KFileItem item = fileWidget->getNext( true );
     if ( item.isNull() ) { // last image
-        if ( m_slideshowCycle < kdata->slideshowCycles
-             || kdata->slideshowCycles == 0 ) {
+        if ( m_slideshowCycle < ImlibParams::kuickConfig()->slideshowCycles
+             || ImlibParams::kuickConfig()->slideshowCycles == 0 ) {
             item = fileWidget->gotoFirstImage();
             if ( !item.isNull() ) {
                 nextSlide( item );
@@ -810,8 +835,8 @@ void KuickShow::nextSlide()
 void KuickShow::nextSlide( const KFileItem& item )
 {
     m_viewer->showNextImage( item.url() );
-    if(kdata->slideDelay)
-        m_slideTimer->start( kdata->slideDelay );
+    if(ImlibParams::kuickConfig()->slideDelay)
+        m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
 }
 
 
@@ -906,10 +931,10 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
 //        QString filename;
 //        KIO::NetAccess::download(item->url(), filename, this);
         view->showNextImage( item.url() );
-        if (m_slideTimer->isActive() && kdata->slideDelay)
-            m_slideTimer->start( kdata->slideDelay );
+        if (m_slideTimer->isActive() && ImlibParams::kuickConfig()->slideDelay)
+            m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
 
-        if ( kdata->preloadImage && !item_next.isNull() ) // preload next image
+        if ( ImlibParams::kuickConfig()->preloadImage && !item_next.isNull() ) // preload next image
             if ( FileWidget::isImage( item_next ) )
                 view->cacheImage( item_next.url() );
     }
@@ -922,18 +947,25 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
     bool ret = false;
     int eventType = e->type();
-    QKeyEvent *k = 0L;
-    if ( eventType == QEvent::KeyPress )
-        k = static_cast<QKeyEvent *>( e );
 
-    if ( k ) {
-        if ( KStandardShortcut::quit().contains( k->key() ) ) {
-            saveSettings();
+    QKeyEvent *k = nullptr;
+    if (eventType == QEvent::KeyPress) k = static_cast<QKeyEvent *>(e);
+
+    if (k!=nullptr)
+    {
+        // Forward the key shortcuts for "Quit" and "Handbook" from
+        // an image viewer window, to the main window, where they
+        // will be actioned.
+
+        QKeySequence seq(k->key()|k->modifiers());
+        if (KStandardShortcut::quit().contains(seq))
+        {
             deleteAllViewers();
-            FileCache::shutdown();
-            ::exit(0);
+            deleteLater();
+            return true;
         }
-        else if ( KStandardShortcut::help().contains( k->key() ) ) {
+        else if (KStandardShortcut::help().contains(seq))
+        {
             appHelpActivated();
             return true;
         }
@@ -1058,7 +1090,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             if ( FileWidget::isImage( item ) ) {
                 m_viewer->showNextImage( item.url() );
 
-                if ( kdata->preloadImage && !item_next.isNull() ) // preload next image
+                if ( ImlibParams::kuickConfig()->preloadImage && !item_next.isNull() ) // preload next image
                     if ( FileWidget::isImage( item_next ) )
                         m_viewer->cacheImage( item_next.url() );
 
@@ -1371,7 +1403,7 @@ void KuickShow::toggleBrowser()
 void KuickShow::slotOpenURL()
 {
     OpenFilesAndDirsDialog dlg(this, i18n("Select Files or Folder to Open"));
-    dlg.setNameFilter(i18n("Image Files (%1)").arg(kdata->fileFilter));
+    dlg.setNameFilter(i18n("Image Files (%1)").arg(ImlibParams::kuickConfig()->fileFilter));
     if(dlg.exec() != QDialog::Accepted) return;
 
     QList<QUrl> urls = dlg.selectedUrls();

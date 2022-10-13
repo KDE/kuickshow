@@ -20,12 +20,7 @@
 #define KUICKSHOW_H
 
 #include <KXmlGuiWindow>
-
-#include <QKeyEvent>
 #include <QPointer>
-#include <QX11Info>
-
-#include "imlib-wrapper.h"
 
 class KFileItem;
 class KToggleAction;
@@ -38,41 +33,9 @@ class QUrl;
 class AboutWidget;
 class FileWidget;
 class ImageWindow;
-class ImData;
 class KuickConfigDialog;
 class KuickFile;
-
-
-class DelayedRepeatEvent
-{
-public:
-    DelayedRepeatEvent( ImageWindow *view, QKeyEvent *ev ) {
-        viewer = view;
-        event  = ev;
-    }
-    DelayedRepeatEvent( ImageWindow *view, int act, void *d ) {
-        this->viewer = view;
-        this->action = act;
-        this->data   = d;
-        this->event  = 0L;
-    }
-
-    ~DelayedRepeatEvent() {
-        delete event;
-    }
-
-    enum Action
-    {
-        DeleteCurrentFile,
-        TrashCurrentFile,
-        AdvanceViewer
-    };
-
-    ImageWindow *viewer;
-    QKeyEvent *event;
-    int action;
-    void *data;
-};
+class DelayedRepeatEvent;
 
 
 class KuickShow : public KXmlGuiWindow
@@ -80,11 +43,10 @@ class KuickShow : public KXmlGuiWindow
     Q_OBJECT
 
 public:
-    KuickShow( const char *name=0 );
-    ~KuickShow();
+    explicit KuickShow(const char *name = nullptr);
+    virtual ~KuickShow();
 
     virtual void 	show();
-    static QList<ImageWindow*>  s_viewers;
 
     // overridden to make KDCOPActionProxy work -- all our actions are not
     // in the mainwindow's collection, but in the filewidget's.
@@ -98,7 +60,6 @@ protected:
 private slots:
     void		toggleBrowser();
     void 		slotToggleInlinePreview( bool on );
-    void 		slotQuit() { delete this; }
     void 		slotPrint();
     void 		slotConfigApplied();
     void 		slotConfigClosed();

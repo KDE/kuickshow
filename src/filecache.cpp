@@ -101,6 +101,9 @@ QTemporaryDir* FileCache::createTempDir()
             .arg(QDir::tempPath())
             .arg(QCoreApplication::applicationName())
             .arg(QCoreApplication::applicationPid());
+    // TODO: auto remove,
+    // then no need for destructor,
+    // then no need for shutdown()
     QTemporaryDir* dir = new QTemporaryDir(nameTemplate);
 
     if(!dir->isValid()) {
