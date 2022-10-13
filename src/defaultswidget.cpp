@@ -63,7 +63,6 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   connect( ui->sbBrightness, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
   connect( ui->sbContrast,   SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
   connect( ui->sbGamma,      SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-
   connect( ui->comboRotate,  SIGNAL( activated(int) ), SLOT( updatePreview() ));
 
   // load and display the test image
@@ -164,6 +163,10 @@ void DefaultsWidget::enableWidgets( bool enable )
     ui->sbMaxUpScaleFactor->setEnabled( enable & ui->cbUpScale->isChecked() );
 
     ui->gbGeometry->setEnabled( enable );
+#ifdef HAVE_QTONLY
+  // Disable GUI control groups that are only relevant for Imlib
+    enable = false;
+#endif // HAVE_QTONLY
     ui->gbAdjust->setEnabled( enable );
     ui->gbPreview->setEnabled( enable );
     updatePreview();
