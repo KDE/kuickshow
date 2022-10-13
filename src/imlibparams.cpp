@@ -42,6 +42,8 @@ bool ImlibParams::init()
 {
     mKuickConfig->load();				// read settings from config
     mImlibConfig->load();
+
+#ifndef HAVE_QTONLY
     const uint maxcache = mImlibConfig->maxCache*1024;	// cache size from settings
 
     Display *disp = QX11Info::display();
@@ -93,6 +95,7 @@ bool ImlibParams::init()
 
     mId = nullptr;					// nothing to deallocate
 #endif // HAVE_IMLIB2
+#endif // HAVE_QTONLY
     return (true);
 }
 

@@ -109,7 +109,11 @@ KuickShow::KuickShow( const char *objName )
     int imlibVersion = 2;
     qDebug() << "Configured for Imlib 2 version" << IMLIB2_VERSION;
 #endif // HAVE_IMLIB2
+#ifdef HAVE_QTONLY
+    qDebug() << "Configured for Qt only";
+#endif // HAVE_QTONLY
 
+#ifndef HAVE_QTONLY
     if (!initImlib())
     {
         KMessageBox::error(nullptr,
@@ -123,6 +127,7 @@ KuickShow::KuickShow( const char *objName )
         QCoreApplication::exit(1);
         deleteLater();					// to actually exit event loop
     }
+#endif // HAVE_QTONLY
 
     resize( 400, 500 );
 

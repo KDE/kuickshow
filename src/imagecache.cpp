@@ -99,6 +99,7 @@ KuickImage *ImageCache::getKuimage(KuickFile *file)
 }
 
 
+#ifndef HAVE_QTONLY
 // Note: the returned image's filename will not be the real filename (which it usually
 // isn't anyway, according to Imlib's sources).
 static IMLIBIMAGE loadImageWithQt(const QString &fileName)
@@ -168,6 +169,7 @@ static IMLIBIMAGE loadImageWithQt(const QString &fileName)
 #endif
     return (im);
 }
+#endif // HAVE_QTONLY
 
 
 KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod)
@@ -182,12 +184,27 @@ KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod
 	QElapsedTimer timer;
 	timer.start();
 #endif
+
+#ifdef HAVE_QTONLY
+        QImage im(fileName);
+        if (!im.isNull())
+        {
+            if (im.depth()!=32) im = im.convertToFormat(QImage::Format_RGB32);
+        }
+#else // HAVE_QTONLY
 	IMLIBIMAGE im = Imlib_load_image(ImlibParams::imlibData(), QFile::encodeName(fileName).data());
+        if (im==nullptr)
+        {
+            qWarning() << "image loading failed";
+            return (nullptr);
+        }
+#endif // HAVE_QTONLY
 #ifdef DEBUG_TIMING
-	qDebug() << "load took" << timer.elapsed() << "ms, ok" << (im!=nullptr);
+	qDebug() << "load took" << timer.elapsed() << "ms";
 #endif
 	slotIdle();
 
+#ifndef HAVE_QTONLY
 	if (im==nullptr)				// failed to load via imlib,
 	{						// fall back to loading via Qt
 		slotBusy();
@@ -196,7 +213,9 @@ KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod
 		if (im==nullptr) return (nullptr);
 	}
 
+        // TODO: for Qt only
 	Imlib_set_image_modifier(ImlibParams::imlibData(), im, const_cast<ImlibColorModifier *>(&mod));
+#endif // HAVE_QTONLY
 	KuickImage *kuim = new KuickImage(file, im);
 	connect( kuim, SIGNAL( startRendering() ),   SLOT( slotBusy() ));
 	connect( kuim, SIGNAL( stoppedRendering() ), SLOT( slotIdle() ));

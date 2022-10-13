@@ -16,10 +16,13 @@
 #ifdef HAVE_IMLIB2
 #include <Imlib2.h>
 #endif
+#ifdef HAVE_QTONLY
+#include <qimage.h>
+#endif
 
+#ifndef HAVE_QTONLY
 #undef index
 #undef rindex
-
 #undef Bool
 #undef Color
 #undef CursorShape
@@ -33,6 +36,7 @@
 #undef None
 #undef Status
 #undef Unsorted
+#endif
 
 // Although an Imlib2 'Imlib_Image' is conceptually the same as an
 // Imlib1 'ImlibImage', they cannot be directly substituted because
@@ -44,6 +48,9 @@
 #endif
 #ifdef HAVE_IMLIB2
 #define IMLIBIMAGE	Imlib_Image
+#endif
+#ifdef HAVE_QTONLY
+#define IMLIBIMAGE	QImage
 #endif
 
 #ifdef HAVE_IMLIB2
@@ -71,5 +78,14 @@
 
 // API documentation for Imlib1:  http://web.mit.edu/graphics/src/imlib-1.7/doc/
 // API documentation for Imlib2:  https://docs.enlightenment.org/api/imlib2/html/
+
+#ifdef HAVE_QTONLY
+// Data types in Imlib which are not used at all for Qt.  They are just
+// defined like this so that header files will work, use of them in code
+// needs to be conditional for Imlib only.
+#define ImlibColorModifier	int
+#define ImlibInitParams		void *
+#define ImlibData		void
+#endif // HAVE_QTONLY
 
 #endif

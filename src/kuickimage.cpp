@@ -21,10 +21,11 @@
 #ifdef HAVE_IMLIB2
 #define USE_IMLIB_SCALING
 #endif // HAVE_IMLIB2
+#ifdef HAVE_QTONLY
+#undef USE_IMLIB_SCALING
+#endif // HAVE_QTONLY
 
 #include "kuickimage.h"
-
-#include <qimage.h>
 
 #ifdef DEBUG_TIMING
 #include <qelapsedtimer.h>
@@ -33,14 +34,17 @@
 
 #include "imagemods.h"
 #include "imlibparams.h"
+#include "imdata.h"
 
 
-KuickImage::KuickImage(const KuickFile *file, IMLIBIMAGE im)
+KuickImage::KuickImage(const KuickFile *file, const IMLIBIMAGE &im)
     : QObject( 0L )
 {
     myFile     = file;
-    myOrigIm   = 0L;
     myIm       = im;
+#ifndef HAVE_QTONLY
+    myOrigIm   = nullptr;
+#endif // HAVE_QTONLY
 
 #ifdef HAVE_IMLIB1
     myWidth    = im->rgb_width;
@@ -51,6 +55,10 @@ KuickImage::KuickImage(const KuickFile *file, IMLIBIMAGE im)
     myWidth    = imlib_image_get_width();
     myHeight   = imlib_image_get_height();
 #endif // HAVE_IMLIB2
+#ifdef HAVE_QTONLY
+    myWidth    = im.width();
+    myHeight   = im.height();
+#endif // HAVE_QTONLY
 
     setDirty(true);
 
@@ -67,6 +75,7 @@ KuickImage::~KuickImage()
 		ImageMods::rememberFor( this );
 	}
 
+#ifndef HAVE_QTONLY
     if ( myOrigIm )
     {
 #ifdef HAVE_IMLIB1
@@ -90,6 +99,7 @@ KuickImage::~KuickImage()
 	imlib_free_image();
 #endif // HAVE_IMLIB2
     }
+#endif // HAVE_QTONLY
 }
 
 bool KuickImage::isModified() const
@@ -108,18 +118,27 @@ void KuickImage::rotate( Rotation rot )
 #endif // HAVE_IMLIB2
 
     if ( rot == ROT_180 ) { 		// rotate 180 degrees
+#ifdef HAVE_QTONLY
+	myIm = myIm.mirrored(true, true);
+#else // HAVE_QTONLY
 	Imlib_flip_image_horizontal( ImlibParams::imlibData(), myIm );
 	Imlib_flip_image_vertical( ImlibParams::imlibData(), myIm );
+#endif // HAVE_QTONLY
     }
-
     else if ( rot == ROT_90 || rot == ROT_270 ) {
 	qSwap( myWidth, myHeight );
+#ifdef HAVE_QTONLY
+        QTransform t;
+        t.rotate(rot==ROT_90 ? 90 : -90);
+	myIm = myIm.transformed(t);
+#else // HAVE_QTONLY
 	Imlib_rotate_image( ImlibParams::imlibData(), myIm, -1 );
 
 	if ( rot == ROT_90 ) 		// rotate 90 degrees
 	    Imlib_flip_image_horizontal( ImlibParams::imlibData(), myIm );
 	else if ( rot == ROT_270 ) 		// rotate 270 degrees
 	    Imlib_flip_image_vertical( ImlibParams::imlibData(), myIm );
+#endif // HAVE_QTONLY
     }
 
     myRotation = static_cast<Rotation>((myRotation + rot) % 4);
@@ -157,9 +176,17 @@ void KuickImage::flip( FlipMode flipMode )
 #endif // HAVE_IMLIB2
 
     if ( flipMode & FlipHorizontal )
+#ifdef HAVE_QTONLY
+	    myIm = myIm.mirrored(true, false);
+#else // HAVE_QTONLY
 	Imlib_flip_image_horizontal( ImlibParams::imlibData(), myIm );
+#endif // HAVE_QTONLY
     if ( flipMode & FlipVertical )
+#ifdef HAVE_QTONLY
+	    myIm = myIm.mirrored(false, true);
+#else // HAVE_QTONLY
 	Imlib_flip_image_vertical( ImlibParams::imlibData(), myIm );
+#endif // HAVE_QTONLY
 
     myFlipMode = static_cast<FlipMode>(myFlipMode ^ flipMode);
     setDirty(true);
@@ -178,13 +205,21 @@ bool KuickImage::flipAbs( int mode )
 
     if ( ((myFlipMode & FlipHorizontal) && !(mode & FlipHorizontal)) ||
 	 (!(myFlipMode & FlipHorizontal) && (mode & FlipHorizontal)) ) {
+#ifdef HAVE_QTONLY
+	myIm = myIm.mirrored(true, false);
+#else // HAVE_QTONLY
 	Imlib_flip_image_horizontal( ImlibParams::imlibData(), myIm );
+#endif // HAVE_QTONLY
 	changed = true;
     }
 
     if ( ((myFlipMode & FlipVertical) && !(mode & FlipVertical)) ||
 	 (!(myFlipMode & FlipVertical) && (mode & FlipVertical)) ) {
+#ifdef HAVE_QTONLY
+	myIm = myIm.mirrored(false, true);
+#else // HAVE_QTONLY
 	Imlib_flip_image_vertical( ImlibParams::imlibData(), myIm );
+#endif // HAVE_QTONLY
 	changed = true;
     }
 
@@ -205,6 +240,13 @@ void KuickImage::restoreOriginalSize()
 
 //	qDebug("-- restoreOriginalSize");
 
+#ifdef HAVE_QTONLY
+	if (!myOrigIm.isNull())
+	{
+		myIm = myOrigIm;
+		myOrigIm = QImage();
+	}
+#else // HAVE_QTONLY
 	if (myOrigIm!=nullptr)
 	{
 #ifdef HAVE_IMLIB1
@@ -217,6 +259,7 @@ void KuickImage::restoreOriginalSize()
 		myIm = myOrigIm;
 		myOrigIm = nullptr;
 	}
+#endif // HAVE_QTONLY
 
     myWidth   = myOrigWidth;
     myHeight  = myOrigHeight;
@@ -243,6 +286,7 @@ void KuickImage::resize( int width, int height, KuickImage::ResizeMode mode )
 }
 
 
+#ifndef HAVE_QTONLY
 #ifndef USE_IMLIB_SCALING
 static IMLIBIMAGE toImlibImage(ImlibData *id, const QImage &image)
 {
@@ -307,7 +351,8 @@ static IMLIBIMAGE toImlibImage(ImlibData *id, const QImage &image)
 #endif
 	return (im);
 }
-#endif
+#endif // USE_IMLIB_SCALING
+#endif // HAVE_QTONLY
 
 
 void KuickImage::fastResize( int width, int height )
@@ -326,6 +371,9 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	timer.start();
 #endif
 	emit startRendering();
+
+	Qt::TransformationMode mode = ImlibParams::imlibConfig()->smoothScale ? Qt::SmoothTransformation :
+		                                                                Qt::FastTransformation;
 #ifdef USE_IMLIB_SCALING
 #ifdef HAVE_IMLIB1
 	IMLIBIMAGE newIm = Imlib_clone_scaled_image(ImlibParams::imlibData(), myIm, newWidth, newHeight);
@@ -336,7 +384,10 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	imlib_context_set_anti_alias(1);
 	IMLIBIMAGE newIm = imlib_create_cropped_scaled_image(0, 0, myWidth, myHeight, newWidth, newHeight);
 #endif // HAVE_IMLIB2
-#else
+#else // USE_IMLIB_SCALING
+#ifdef HAVE_QTONLY
+	QImage newIm = myIm.scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, mode);
+#else // HAVE_QTONLY
 	// This uses Qt for scaling instead of Imlib, because Imlib1's
 	// scaling does not appear to have such good smoothing even
 	// if the "Smooth scaling" option is turned on.  It is slower,
@@ -345,16 +396,22 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	//
 	// Note from original: QImage::ScaleMin seems to have a bug
 	// (off-by-one, sometimes results in width being 1 pixel too small)
-	QImage scaledImage = toQImage().scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	QImage scaledImage = toQImage().scaled(newWidth, newHeight, Qt::IgnoreAspectRatio, mode);
 	IMLIBIMAGE newIm = toImlibImage(ImlibParams::imlibData(), scaledImage);
-#endif
+#endif // HAVE_QTONLY
+#endif // USE_IMLIB_SCALING
+
 	emit stoppedRendering();
 #ifdef DEBUG_TIMING
 	qDebug() << "resize took" << timer.elapsed() << "ms";
 #endif
+#ifdef HAVE_QTONLY
+	if (newIm.isNull()) return (false);
+	if (myOrigIm.isNull()) myOrigIm = myIm;
+#else // HAVE_QTONLY
 	if (newIm==nullptr) return (false);
-
 	if (myOrigIm==nullptr) myOrigIm = myIm;
+#endif // HAVE_QTONLY
 	else
 	{
 #ifdef HAVE_IMLIB1
@@ -379,7 +436,12 @@ QImage KuickImage::toQImage() const
 	emit startRendering();
 
 	IMLIBIMAGE im;
-	if (myOrigIm != 0L && myRotation == ROT_0 && myFlipMode == FlipNone
+	if (myRotation == ROT_0 && myFlipMode == FlipNone
+#ifdef HAVE_QTONLY
+	    && !myOrigIm.isNull()
+#else // HAVE_QTONLY
+	    && myOrigIm!=nullptr
+#endif // HAVE_QTONLY
 	    && myWidth == myOrigWidth && myHeight == myOrigHeight)
 	{
 		// use original image if no other modifications have been applied
@@ -401,11 +463,14 @@ QImage KuickImage::toQImage() const
 	const int h = imlib_image_get_height();
 #endif // HAVE_IMLIB2
 
+#ifndef HAVE_QTONLY
 #ifdef DEBUG_TIMING
 	qDebug() << "starting to render image size" << QSize(w, h);
 	QElapsedTimer timer;
 	timer.start();
 #endif
+#endif // HAVE_QTONLY
+
 	// TODO: be able to detect whether the modifier is actually needed,
 	// see comment in imlibwidget.h
 
@@ -430,8 +495,9 @@ QImage KuickImage::toQImage() const
 	imlib_context_set_image(tempImage);
 	imlib_apply_color_modifier();
 #endif // HAVE_IMLIB2
-	im = tempImage;
 
+#ifndef HAVE_QTONLY
+	im = tempImage;
 	QImage image(w, h, QImage::Format_RGB32);	// destination image
 
 #ifdef HAVE_IMLIB1
@@ -478,6 +544,9 @@ QImage KuickImage::toQImage() const
 #ifdef DEBUG_TIMING
 	qDebug() << "render took" << timer.elapsed() << "ms";
 #endif
+#else // HAVE_QTONLY
+	QImage &image = im;
+#endif // HAVE_QTONLY
 	emit stoppedRendering();
 	return image;
 }

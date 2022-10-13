@@ -19,7 +19,7 @@
 #ifndef KUICKIMAGE_H
 #define KUICKIMAGE_H
 
-#include <QObject>
+#include <qobject.h>
 
 #include "imlib-wrapper.h"
 
@@ -38,13 +38,13 @@ class KuickImage : public QObject
 public:
   enum ResizeMode { FAST, SMOOTH };
 
-  KuickImage(const KuickFile *file, IMLIBIMAGE im);
+  KuickImage(const KuickFile *file, const IMLIBIMAGE &im);
   virtual ~KuickImage();
 
-  int 		width() 	const { return myWidth;   }
-  int 		height()	const { return myHeight;  }
-  int 		originalWidth() const { return myOrigWidth; }
-  int 		originalHeight() const { return myOrigHeight; }
+  int 		width() 	const	{ return myWidth;   }
+  int 		height()	const	{ return myHeight;  }
+  int 		originalWidth() const	{ return myOrigWidth; }
+  int 		originalHeight() const	{ return myOrigHeight; }
 
   /**
    * Returns true if this image is modified against the original loaded
@@ -87,6 +87,7 @@ private:
   int 		myHeight;
   IMLIBIMAGE 	myOrigIm;
   IMLIBIMAGE 	myIm;
+
   bool 		myIsDirty;
 
   int 		myOrigWidth;
