@@ -24,7 +24,7 @@ public:
     // This is defined both for Imlib1 and Imlib2, although it
     // is not meaningful for the latter.  The compatibility macros
     // in 'imlib-wrapper.h' throw away the 'id' parameter.
-    static const ImlibData *imlibData()		{ return (self()->mId); }
+    static ImlibData *imlibData()		{ return (self()->mId); }
 
     // Access to the application configuration.
     static ImData *imlibConfig()		{ return (self()->mImlibConfig); }

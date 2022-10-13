@@ -53,6 +53,14 @@ GeneralWidget::GeneralWidget( QWidget *parent )
 
   connect( ui->cbOwnPalette, SIGNAL( clicked() ), this, SLOT( useOwnPalette() ) );
 
+#ifdef HAVE_QTONLY
+  // Disable GUI controls that are only relevant for Imlib
+  ui->cbFastRemap->setEnabled(false);
+  ui->cbOwnPalette->setEnabled(false);
+  ui->cbFastRender->setEnabled(false);
+  ui->cbDither16bit->setEnabled( false );
+  ui->cbDither8bit->setEnabled( false );
+#endif // HAVE_QTONLY
 
   // load and show the saved settings
   loadSettings();
@@ -113,5 +121,8 @@ void GeneralWidget::applySettings()
 
 void GeneralWidget::useOwnPalette()
 {
+#ifndef HAVE_QTONLY
+    // Keep the GUI control disabled if it is not relevant
     ui->cbFastRemap->setEnabled( ui->cbOwnPalette->isChecked() );
+#endif // HAVE_QTONLY
 }

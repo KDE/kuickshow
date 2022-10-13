@@ -20,6 +20,7 @@
 
 #include <QX11Info>
 #include <qdebug.h>
+#include <qstandardpaths.h>
 
 #include "kuickdata.h"
 #include "imdata.h"
@@ -42,6 +43,8 @@ bool ImlibParams::init()
 {
     mKuickConfig->load();				// read settings from config
     mImlibConfig->load();
+
+#ifndef HAVE_QTONLY
     const uint maxcache = mImlibConfig->maxCache*1024;	// cache size from settings
 
     Display *disp = QX11Info::display();
@@ -49,27 +52,29 @@ bool ImlibParams::init()
     Colormap cm = DefaultColormap(disp, DefaultScreen(disp));
 
 #ifdef HAVE_IMLIB1
-    par->paletteoverride = mImlibConfig->ownPalette  ? 1 : 0;
-    par->remap           = mImlibConfig->fastRemap   ? 1 : 0;
-    par->fastrender      = mImlibConfig->fastRender  ? 1 : 0;
-    par->hiquality       = mImlibConfig->dither16bit ? 1 : 0;
-    par->dither          = mImlibConfig->dither8bit  ? 1 : 0;
-    par->sharedmem       = 1;
-    par->sharedpixmaps   = 1;
-    par->visualid	 = vis->visualid;
+    ImlibInitParams par;
+
+    par.paletteoverride = mImlibConfig->ownPalette  ? 1 : 0;
+    par.remap           = mImlibConfig->fastRemap   ? 1 : 0;
+    par.fastrender      = mImlibConfig->fastRender  ? 1 : 0;
+    par.hiquality       = mImlibConfig->dither16bit ? 1 : 0;
+    par.dither          = mImlibConfig->dither8bit  ? 1 : 0;
+    par.sharedmem       = 1;
+    par.sharedpixmaps   = 1;
+    par.visualid	 = vis->visualid;
 
     // PARAMS_PALETTEOVERRIDE taken out because of segfault in imlib :o(
-    par->flags = ( PARAMS_REMAP | PARAMS_VISUALID | PARAMS_SHAREDMEM | PARAMS_SHAREDPIXMAPS |
+    par.flags = ( PARAMS_REMAP | PARAMS_VISUALID | PARAMS_SHAREDMEM | PARAMS_SHAREDPIXMAPS |
                    PARAMS_FASTRENDER | PARAMS_HIQUALITY | PARAMS_DITHER |
                    PARAMS_IMAGECACHESIZE | PARAMS_PIXMAPCACHESIZE );
 
-    par->imagecachesize  = maxcache;
-    par->pixmapcachesize = maxcache;
+    par.imagecachesize  = maxcache;
+    par.pixmapcachesize = maxcache;
 
     mId = Imlib_init_with_params(disp, &par);		// initialise Imlib
     if (mId==nullptr)					// failed to initialise
     {
-        qWarning() << "Imlib initialisation failed, trying with own palette file");
+        qWarning() << "Imlib initialisation failed, trying with own palette file";
         QString paletteFile = QStandardPaths::locate(QStandardPaths::AppDataLocation, "im_palette.pal");
         // FIXME - does the qstrdup() cure the segfault in imlib eventually?
         char *file = qstrdup(paletteFile.toLocal8Bit());
@@ -93,6 +98,7 @@ bool ImlibParams::init()
 
     mId = nullptr;					// nothing to deallocate
 #endif // HAVE_IMLIB2
+#endif // HAVE_QTONLY
     return (true);
 }
 

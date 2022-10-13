@@ -248,6 +248,7 @@ void ImlibWidget::stepBrightnessInternal(int b)
     imlib_context_set_color_modifier(myModifier);
     imlib_modify_color_modifier_brightness(b/double(ImlibLimit));
 #endif // HAVE_IMLIB2
+    // TODO: for Qt only
 }
 
 
@@ -291,6 +292,7 @@ void ImlibWidget::stepContrastInternal(int c)
     imlib_context_set_color_modifier(myModifier);
     imlib_modify_color_modifier_contrast(cc);
 #endif // HAVE_IMLIB2
+    // TODO: for Qt only
 }
 
 
@@ -318,6 +320,7 @@ void ImlibWidget::stepGammaInternal(int g)
     imlib_context_set_color_modifier(myModifier);
     imlib_modify_color_modifier_gamma(gg);
 #endif // HAVE_IMLIB2
+    // TODO: for Qt only
 }
 
 
@@ -571,7 +574,7 @@ void ImlibWidget::setImageModifier()
     if (m_kuim==nullptr) return;
 
 #ifdef HAVE_IMLIB1
-    Imlib_set_image_modifier(id, m_kuim->imlibImage(), &myModifier);
+    Imlib_set_image_modifier(ImlibParams::imlibData(), m_kuim->imlibImage(), &myModifier);
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
     imlib_context_set_color_modifier(myModifier);

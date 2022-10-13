@@ -844,6 +844,13 @@ void ImageWindow::setPopupMenu()
     gammaMenu->addAction(m_actions->action("more_gamma"));
     gammaMenu->addAction(m_actions->action("less_gamma"));
 
+#ifdef HAVE_QTONLY
+    // Colour controls are not supported without Imlib at the moment.
+    brightnessMenu->setEnabled(false);
+    contrastMenu->setEnabled(false);
+    gammaMenu->setEnabled(false);
+#endif // HAVE_QTONLY
+
     viewerMenu->addAction(m_actions->action("zoom_in"));
     viewerMenu->addAction(m_actions->action("zoom_out"));
     viewerMenu->addAction(m_actions->action("original_size"));
@@ -947,7 +954,7 @@ bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
 
     bool success = false;
 #if 0
-// TODO: Imlib 2
+// TODO: Imlib 2 and Qt
 ///////////////////////////////////////////////////////////////////////////
     ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
                                                    w, h );
