@@ -1441,7 +1441,7 @@ void KuickShow::slotToggleInlinePreview(bool on)
 void KuickShow::slotDuplicateWindow(const QUrl &url)
 {
     qDebug() << url;
-    KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url, false);
+    KFileItem item(url);
     showImage(item, true);
 }
 
