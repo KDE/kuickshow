@@ -47,8 +47,8 @@
 FileWidget::FileWidget( const QUrl& url, QWidget *parent )
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
-      m_fileFinder( 0L ),
-      m_fileItemActions( 0L )
+      m_fileFinder(nullptr),
+      m_fileItemActions(nullptr)
 {
     setEnableDirHighlighting( true );
 

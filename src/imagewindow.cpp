@@ -76,7 +76,7 @@
 #include "imlibparams.h"
 
 
-QCursor *ImageWindow::s_handCursor = 0L;
+QCursor *ImageWindow::s_handCursor = nullptr;
 
 ImageWindow::ImageWindow(QWidget *parent)
     : ImlibWidget(parent)
@@ -95,10 +95,10 @@ void ImageWindow::init()
     // This image window will automatically be given
     // a distinctive WM_CLASS by Qt.
 
-    viewerMenu = 0L;
-    gammaMenu = 0L;
-    brightnessMenu = 0L;
-    contrastMenu = 0L;
+    viewerMenu = nullptr;
+    gammaMenu = nullptr;
+    brightnessMenu = nullptr;
+    contrastMenu = nullptr;
 
 
     m_actions = new KActionCollection( this );
@@ -115,7 +115,7 @@ void ImageWindow::init()
     setupActions();
     imageCache->setMaxImages( ImlibParams::kuickConfig()->maxCachedImages );
 
-    transWidget    = 0L;
+    transWidget    = nullptr;
     myIsFullscreen = false;
 
     xpos = 0, ypos = 0;
@@ -580,7 +580,7 @@ void ImageWindow::keyReleaseEvent( QKeyEvent *e )
         updateCursor();
         if ( transWidget ) {
             delete transWidget;
-            transWidget = 0L;
+            transWidget = nullptr;
         }
     }
 
@@ -701,7 +701,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     if ( transWidget ) {
        // destroy the transparent widget, used for showing the rectangle (zoom)
 	delete transWidget;
-	transWidget = 0L;
+	transWidget = nullptr;
     }
 
     // only proceed if shift-Key is still pressed
@@ -896,7 +896,7 @@ void ImageWindow::saveImage()
     if ( !m_kuim )
         return;
 
-    QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), 0L);
+    QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), nullptr);
     keepSize->setChecked( true );
 
     QFileDialog dlg(this);

@@ -26,6 +26,7 @@
 #include <QSize>
 
 
+// TODO: can this just be a namespace?
 class Kuick
 {
 public:
@@ -33,7 +34,7 @@ public:
 	return KWindowSystem::workArea();
     }
 
-    static QSize frameSize( WId win = 0L ) {
+    static QSize frameSize(WId win = WId(0)) {
 	if ( win ) {
 	    KWindowInfo info(win, NET::WMFrameExtents | NET::WMGeometry | NET::WMDesktop);
 	    int wborder = info.frameGeometry().width() - info.geometry().width();

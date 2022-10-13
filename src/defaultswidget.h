@@ -47,7 +47,7 @@ private:
 
 private slots:
   void 		updatePreview();
-  void 		slotNoImage()		{ imFiltered = 0L; }
+  void 		slotNoImage()		{ imFiltered = nullptr; }
   void 		enableWidgets( bool );
 
 };

@@ -23,7 +23,7 @@
 #include "imlibparams.h"
 
 
-QCache<QUrl, ImageMods>* ImageMods::s_modifications = 0L;
+QCache<QUrl, ImageMods>* ImageMods::s_modifications = nullptr;
 
 QCache<QUrl, ImageMods>* ImageMods::getInstance() {
 	if ( !s_modifications) {

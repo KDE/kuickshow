@@ -66,8 +66,8 @@ void ImlibWidget::init()
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     myBackgroundColor = Qt::black;
-    m_kuim              = 0L;
-    m_kuickFile = 0L;
+    m_kuim              = nullptr;
+    m_kuickFile = nullptr;
     myUseModifications = true;
 
 #ifdef HAVE_IMLIB1
@@ -123,7 +123,7 @@ KuickFile * ImlibWidget::currentFile() const
 
 
 // tries to load "filename" and returns the according KuickImage *
-// or 0L if unsuccessful
+// or nullptr if unsuccessful
 KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
 {
     assert( file->isAvailable() );
@@ -149,7 +149,7 @@ KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
 
     if ( !kuim ) {// couldn't load file, maybe corrupt or wrong format
         qWarning("ImlibWidget: can't load image %s", qUtf8Printable(file->url().toDisplayString()));
-	return 0L;
+	return nullptr;
     }
 
     loaded( kuim, wasCached ); // maybe upscale/downscale/rotate in subclasses

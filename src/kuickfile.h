@@ -60,7 +60,7 @@ public:
     /**
      * @return true if download is in progress
      */
-    bool isDownloading() const { return m_job != 0L; }
+    bool isDownloading() const { return m_job != nullptr; }
 
     /**
      * @return true if a local file is available, that is,

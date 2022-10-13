@@ -32,7 +32,7 @@ namespace Ui { class KuickPrintDialogPage; }
 class Printing
 {
 public:
-    static bool printImage( ImageWindow& imageWin, QWidget *parent = 0L);
+    static bool printImage( ImageWindow& imageWin, QWidget *parent = nullptr);
     static bool printImageWithQt( const QString& filename, QPrinter& printer, KuickPrintDialogPage& dialogPage,
                                   const QString& originalFileName );
 
@@ -48,7 +48,7 @@ class KuickPrintDialogPage : public QWidget
     Q_OBJECT
 
 public:
-    KuickPrintDialogPage( QWidget *parent = 0L );
+    KuickPrintDialogPage( QWidget *parent = nullptr );
     ~KuickPrintDialogPage();
 
     bool printFilename();

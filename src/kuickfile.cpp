@@ -34,8 +34,8 @@
 KuickFile::KuickFile(const QUrl& url)
     : QObject(),
       m_url( url ),
-      m_job( 0L ),
-      m_progress( 0L ),
+      m_job(nullptr),
+      m_progress(nullptr),
       m_currentProgress( 0 )
 {
     if ( m_url.isLocalFile())
@@ -73,7 +73,7 @@ QString KuickFile::localFile() const
 
 bool KuickFile::hasDownloaded() const
 {
-    return !m_url.isLocalFile() && isAvailable() && m_job != 0L;
+    return !m_url.isLocalFile() && isAvailable() && m_job != nullptr;
 }
 
 // ### need an API for refreshing the file?
@@ -111,7 +111,7 @@ bool KuickFile::download()
 
     // TODO: generify background/foreground downloading?
 
-    return m_job != 0L;
+    return m_job != nullptr;
 }
 
 KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
@@ -141,7 +141,7 @@ KuickFile::DownloadStatus KuickFile::waitForDownload( QWidget *parent )
 
 	if ( canceled && m_job ) {
 		m_job->kill();
-		m_job = 0L;
+		m_job = nullptr;
 		m_currentProgress = 0;
 	}
     // ### when aborted, remove KuickImage from FileCache?
@@ -162,7 +162,7 @@ void KuickFile::slotResult( KJob *job )
         return;
     }
 
-    m_job = 0L;
+    m_job = nullptr;
 
     if ( job->error() != 0 ) {
     	m_currentProgress = 0;

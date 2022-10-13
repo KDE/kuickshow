@@ -95,7 +95,7 @@ public:
         this->viewer = view;
         this->action = act;
         this->data   = d;
-        this->event  = 0L;
+        this->event  = nullptr;
     }
 
     ~DelayedRepeatEvent() {
@@ -119,17 +119,17 @@ public:
 
 
 KuickShow::KuickShow( const char *objName )
-    : KXmlGuiWindow( 0L ),
+    : KXmlGuiWindow(nullptr),
       m_slideshowCycle( 1 ),
-      fileWidget( 0L ),
-      dialog( 0L ),
-      m_viewer( 0L ),
-      oneWindowAction( 0L ),
-      m_delayedRepeatItem( 0L ),
+      fileWidget(nullptr),
+      dialog(nullptr),
+      m_viewer(nullptr),
+      oneWindowAction(nullptr),
+      m_delayedRepeatItem(nullptr),
       m_slideShowStopped(false)
 {
     setObjectName(objName);
-    aboutWidget = 0L;
+    aboutWidget = nullptr;
 
     // This will report the build time version, there appears to
     // be no way to obtain the run time Imlib version.
@@ -519,7 +519,7 @@ void KuickShow::viewerDeleted()
 
     s_viewers.removeAll( viewer );
     if ( viewer == m_viewer )
-        m_viewer = 0L;
+        m_viewer = nullptr;
 
     if ( !haveBrowser() && s_viewers.isEmpty() ) {
         QCoreApplication::quit();
@@ -690,7 +690,7 @@ void KuickShow::slotTrashCurrentImage()
 void KuickShow::slotDeleteCurrentImage(ImageWindow *viewer)
 {
     if (!fileWidget) {
-        delayAction(new DelayedRepeatEvent(viewer, DelayedRepeatEvent::DeleteCurrentFile, 0L));
+        delayAction(new DelayedRepeatEvent(viewer, DelayedRepeatEvent::DeleteCurrentFile, nullptr));
         return;
     }
     performDeleteCurrentImage(viewer);
@@ -699,7 +699,7 @@ void KuickShow::slotDeleteCurrentImage(ImageWindow *viewer)
 void KuickShow::slotTrashCurrentImage(ImageWindow *viewer)
 {
     if (!fileWidget) {
-        delayAction(new DelayedRepeatEvent(viewer, DelayedRepeatEvent::TrashCurrentFile, 0L));
+        delayAction(new DelayedRepeatEvent(viewer, DelayedRepeatEvent::TrashCurrentFile, nullptr));
         return;
     }
     performTrashCurrentImage(viewer);
@@ -707,7 +707,7 @@ void KuickShow::slotTrashCurrentImage(ImageWindow *viewer)
 
 void KuickShow::performDeleteCurrentImage(QWidget *parent)
 {
-    assert(fileWidget != 0L);
+    assert(fileWidget != nullptr);
 
     KFileItemList list;
     const KFileItem &item = fileWidget->getCurrentItem(false);
@@ -731,7 +731,7 @@ void KuickShow::performDeleteCurrentImage(QWidget *parent)
 
 void KuickShow::performTrashCurrentImage(QWidget *parent)
 {
-    assert(fileWidget != 0L);
+    assert(fileWidget != nullptr);
 
     KFileItemList list;
     const KFileItem& item = fileWidget->getCurrentItem(false);
@@ -915,7 +915,7 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     if ( !fileWidget ) {
         if ( m_delayedRepeatItem )
             return;
-
+        // TODO: Urgh, third parameter = memory leak
         delayAction(new DelayedRepeatEvent( view, DelayedRepeatEvent::AdvanceViewer, new int(steps) ));
         return;
     }
@@ -1075,7 +1075,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 KFileItemList list;
                 list.append( it );
                 if ( fileWidget->del(list, window,
-                                     (k->modifiers() & Qt::ShiftModifier) == 0) == 0L )
+                                     !(k->modifiers() & Qt::ShiftModifier)) == nullptr )
                     return true; // aborted deletion
 
                 // ### check failure asynchronously and restore old item?
@@ -1144,7 +1144,7 @@ void KuickShow::configuration()
         initGUI( QUrl::fromLocalFile(QDir::homePath()) );
     }
 
-    dialog = new KuickConfigDialog( fileWidget->actionCollection(), 0L, false );
+    dialog = new KuickConfigDialog( fileWidget->actionCollection(), nullptr, false );
     dialog->setObjectName(QString::fromLatin1("dialog"));
     dialog->setWindowIcon( qApp->windowIcon() );
 
@@ -1189,7 +1189,7 @@ void KuickShow::slotConfigClosed()
 void KuickShow::about()
 {
     if ( !aboutWidget ) {
-        aboutWidget = new AboutWidget( 0L );
+        aboutWidget = new AboutWidget(nullptr);
         aboutWidget->setObjectName( QString::fromLatin1( "about" ) );
     }
 
@@ -1302,7 +1302,7 @@ void KuickShow::delayedRepeatEvent( ImageWindow *w, QKeyEvent *e )
 void KuickShow::abortDelayedEvent()
 {
     delete m_delayedRepeatItem;
-    m_delayedRepeatItem = 0L;
+    m_delayedRepeatItem = nullptr;
 }
 
 void KuickShow::slotReplayEvent()
@@ -1311,7 +1311,7 @@ void KuickShow::slotReplayEvent()
                 this, SLOT( slotReplayEvent() ));
 
     DelayedRepeatEvent *e = m_delayedRepeatItem;
-    m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
+    m_delayedRepeatItem = nullptr; // otherwise, eventFilter aborts
 
     eventFilter( e->viewer, e->event );
     delete e;
@@ -1387,7 +1387,7 @@ void KuickShow::doReplay()
     }
 
     delete m_delayedRepeatItem;
-    m_delayedRepeatItem = 0L;
+    m_delayedRepeatItem = nullptr;
 }
 
 void KuickShow::toggleBrowser()
@@ -1454,7 +1454,7 @@ void KuickShow::deleteAllViewers()
     }
 
     s_viewers.clear();
-    m_viewer = 0L;
+    m_viewer = nullptr;
 }
 
 KActionCollection * KuickShow::actionCollection() const

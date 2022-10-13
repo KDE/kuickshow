@@ -39,7 +39,7 @@
 
 
 KuickImage::KuickImage(const KuickFile *file, IMLIBIMAGE &im)
-    : QObject( 0L )
+    : QObject(nullptr)
 {
     myFile     = file;
     myIm       = im;
@@ -748,7 +748,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
     	myHeight = newHeight;
     }
 
-    return myIm != 0L;
+    return myIm != nullptr;
 //	return dst.copy();
 }
 #endif

@@ -68,9 +68,9 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   // load and display the test image
   QString filename = QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("pics/calibrate.png"));
   if ( !imOrig->loadImage( QUrl::fromLocalFile(filename) ) )
-    imOrig = 0L; // FIXME - display some errormessage!
+    imOrig = nullptr; // FIXME - display some errormessage!
   if ( !imFiltered->loadImage( QUrl::fromLocalFile(filename) ) )
-    imFiltered = 0L; // FIXME - display some errormessage!
+    imFiltered = nullptr; // FIXME - display some errormessage!
 
   loadSettings();
 

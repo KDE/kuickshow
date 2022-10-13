@@ -33,7 +33,7 @@ FileCache* FileCache::s_self = nullptr;
 
 FileCache::FileCache()
     : m_limit( 0 ),
-      m_tempDir( 0L )
+      m_tempDir(nullptr)
 {
     m_files.setMaxCost( 100 ); // good default? ### make configurable?
 }
@@ -48,7 +48,7 @@ void FileCache::shutdown()
     if ( s_self )
     {
         delete s_self;
-        s_self = 0L;
+        s_self = nullptr;
     }
 }
 
@@ -108,7 +108,7 @@ QTemporaryDir* FileCache::createTempDir()
 
     if(!dir->isValid()) {
         delete dir;
-        return 0L;
+        return nullptr;
     }
 
     return dir;
