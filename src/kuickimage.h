@@ -58,7 +58,6 @@ public:
   void 		flip( FlipMode flipMode );
   bool 		flipAbs( int mode );
   IMLIBIMAGE	imlibImage()	const { return myIm;      }
-//  const QString& filename() 	const { return myFilename;}
   const KuickFile& file()       const { return *myFile; }
   QUrl url()             const { return myFile->url(); }
 

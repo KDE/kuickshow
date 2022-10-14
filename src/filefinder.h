@@ -50,7 +50,6 @@ protected:
 
 private slots:
     void slotAccept( const QString& );
-
 };
 
 #endif // FILEFINDER_H

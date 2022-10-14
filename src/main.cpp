@@ -63,7 +63,6 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     // the parser is needed in KuickShow::KuickShow()
     app.setProperty("cmdlineParser", QVariant::fromValue<void *>(&parser));
 
-
     if ( app.isSessionRestored() )
 	RESTORE( KuickShow )
     else {

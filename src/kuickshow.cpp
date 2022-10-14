@@ -207,7 +207,7 @@ KuickShow::KuickShow( const char *objName )
         if ( FileWidget::isImage( item ) )
         {
             showImage( item, true, false, true ); // show in new window, not fullscreen-forced and move to 0,0
-//    showImage( &item, true, false, false ); // show in new window, not fullscreen-forced and not moving to 0,0
+            //showImage( &item, true, false, false ); // show in new window, not fullscreen-forced and not moving to 0,0
         }
         else if ( item.isDir() )
         {
@@ -457,10 +457,8 @@ void KuickShow::initGUI( const QUrl& startDir )
     coll->setDefaultShortcuts(coll->action( "reload" ), KStandardShortcut::reload());
     coll->setDefaultShortcut(coll->action( "short view" ), Qt::Key_F6);
     coll->setDefaultShortcut(coll->action( "detailed view" ), Qt::Key_F7);
-    //coll->setDefaultShortcut(coll->action( "show hidden" ), Qt::Key_F8);
     coll->setDefaultShortcut(coll->action( "mkdir" ), Qt::Key_F10);
     coll->setDefaultShortcut(coll->action( "preview" ), Qt::Key_F11);
-    //coll->setDefaultShortcut(coll->action( "separate dirs" ), Qt::Key_F12);
 }
 
 QLabel* KuickShow::createStatusBarLabel(int stretch)
@@ -539,24 +537,7 @@ void KuickShow::slotHighlighted( const KFileItem& item )
     QString meta;
     if ( image )
     {
-        /* KFileMetaInfo disappered in KF5.
-         * TODO: find alternative to KFileMetaInfo
-
-        KFileMetaInfo info;
-        // code snippet copied from KFileItem::metaInfo (KDE4)
-        if(item.isRegularFile() || item.isDir()) {
-            bool isLocalUrl;
-            QUrl url(item.mostLocalUrl(&isLocalUrl));
-            info = KFileMetaInfo(url.toLocalFile(), item.mimetype(), KFileMetaInfo::ContentInfo | KFileMetaInfo::TechnicalInfo);
-        }
-        if ( info.isValid() )
-        {
-            meta = info.item("sizeurl").value().toString();
-            const QString bpp = info.item( "BitDepth" ).value().toString();
-            if ( !bpp.isEmpty() )
-                meta.append( ", " ).append( bpp );
-        }
-        */
+        // TODO: find alternative to KFileMetaInfo (disappered in KF5)
     }
     sblblMetaInfo->setText(meta);
 
@@ -634,10 +615,7 @@ bool KuickShow::showImage( const KFileItem& fi,
         }
         else {
             // safeViewer->setFullscreen( fullscreen );
-
             if ( newWindow ) {
-//                safeViewer->show();
-
                 if ( !fullscreen && s_viewers.count() == 1 && moveToTopLeft ) {
                     // the WM might have moved us after showing -> strike back!
                     // move the first image to 0x0 workarea coord
@@ -907,8 +885,6 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     }
 
     if ( FileWidget::isImage( item ) ) {
-//        QString filename;
-//        KIO::NetAccess::download(item->url(), filename, this);
         view->showNextImage( item.url() );
         if (m_slideTimer->isActive() && ImlibParams::kuickConfig()->slideDelay)
             m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
@@ -1039,7 +1015,6 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             else if ( fileWidget->actionCollection()->action("delete")->shortcuts().contains( key ))
             {
-//      KFileItem *cur = fileWidget->getCurrentItem( false );
                 (void) fileWidget->getCurrentItem( false );
                 item = fileWidget->getNext( false ); // don't move
                 if ( item.isNull() )
@@ -1104,11 +1079,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
     } // isA ImageWindow
 
-
-    if ( ret )
-        return true;
-
-    return KXmlGuiWindow::eventFilter( o, e );
+    if (ret) return true;
+    return KXmlGuiWindow::eventFilter(o, e);
 }
 
 void KuickShow::configuration()
@@ -1188,13 +1160,13 @@ void KuickShow::readProperties( const KConfigGroup& kc )
         KFileItem item(url);
         if ( item.isReadable() ) {
             if (showImage( item, true )) {
-				// Set the current URL in the file widget, if possible
-				if ( !hasCurrentURL && listedURL.isParentOf( item.url() )) {
-					fileWidget->setInitialItem( item.url() );
-					hasCurrentURL = true;
-				}
+                // Set the current URL in the file widget, if possible
+                if ( !hasCurrentURL && listedURL.isParentOf( item.url() )) {
+                    fileWidget->setInitialItem( item.url() );
+                    hasCurrentURL = true;
+                }
             }
-		}
+        }
     }
 
     if ( !s_viewers.isEmpty() ) {
@@ -1221,6 +1193,7 @@ void KuickShow::saveProperties( KConfigGroup& kc )
             urls.append( url.toDisplayString() ); // ### check if writePathEntry( prettyUrl ) works!
     }
 
+    // TODO: can config read/write a list of URls directly?
     kc.writePathEntry( "Images shown", urls );
 }
 
@@ -1286,18 +1259,6 @@ void KuickShow::slotReplayEvent()
 
 void KuickShow::replayAdvance(DelayedRepeatEvent *event)
 {
-#if 0
-    // ### WORKAROUND for QIconView bug in Qt <= 3.0.3 at least
-    // Sigh. According to qt-bugs, they won't fix this bug ever. So you can't
-    // rely on sorting to be correct before the QIconView has been show()n.
-    if ( fileWidget && fileWidget->view() ) {
-        QWidget *widget = fileWidget->view()->widget();
-        if ( widget->inherits( "QIconView" ) || widget->child(0, "QIconView" ) ){
-            fileWidget->setSorting( fileWidget->sorting() );
-        }
-    }
-#endif
-    // --------------------------------------------------------------
     slotAdvanceImage(event->viewer, *static_cast<int *>(event->data));
 }
 
@@ -1309,8 +1270,6 @@ void KuickShow::delayAction(DelayedRepeatEvent *event)
     m_delayedRepeatItem = event;
 
     QUrl url = event->viewer->currentFile()->url();
-//    QFileInfo fi( event->viewer->filename() );
-//    start.setPath( fi.dirPath( true ) );
     initGUI( KIO::upUrl(url) );
 
     // see eventFilter() for explanation and similar code
@@ -1362,11 +1321,9 @@ void KuickShow::toggleBrowser()
         fileWidget->resize( size() ); // ### somehow fileWidget isn't resized!?
         show();
         raise();
-        KWindowSystem::activateWindow( winId() ); // ### this should not be necessary
-//         setFocus();
+        KWindowSystem::activateWindow(winId()); // ### this should not be necessary
     }
-    else if ( !s_viewers.isEmpty() )
-        hide();
+    else if (!s_viewers.isEmpty()) hide();
 }
 
 void KuickShow::slotOpenURL()
@@ -1399,7 +1356,6 @@ void KuickShow::slotToggleInlinePreview(bool on)
 	fileWidget->setInlinePreviewShown(on);
     QAction *defaultInlinePreview = fileWidget->actionCollection()->action( "inline preview" );
     defaultInlinePreview->setChecked(on);
-//	fileWidget->actionCollection("short view")
 }
 
 void KuickShow::slotDuplicateWindow(const QUrl &url)

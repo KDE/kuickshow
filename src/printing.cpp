@@ -208,8 +208,6 @@ KuickPrintDialogPage::~KuickPrintDialogPage()
     delete ui;
 }
 
-//    ### opts["app-kuickshow-alignment"] = ;
-
 bool KuickPrintDialogPage::printFilename()
 {
     return ui->addFileName->isChecked();

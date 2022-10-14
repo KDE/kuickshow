@@ -401,9 +401,9 @@ void ImlibWidget::showImageOriginalSize()
 
 bool ImlibWidget::autoRotate( KuickImage *kuim )
 {
-    /* KFileMetaInfo disappered in KF5.
-     * TODO: find alternative to KFileMetaInfo
+    // TODO: find alternative to KFileMetaInfo (disappered in KF5)
 
+    /*
     KFileMetaInfo metadatas( kuim->file().localFile() );
     if ( !metadatas.isValid() )
         return false;
@@ -610,25 +610,6 @@ void ImlibWidget::restoreCursor()
 }
 
 
-/*
-// Reparenting a widget in Qt in fact means destroying the old X window of the widget
-// and creating a new one. And since the X window used for the Imlib image is a child
-// of this widget's X window, destroying this widget's X window would mean also
-// destroying the Imlib image X window. Therefore it needs to be temporarily reparented
-// away and reparented back to the new X window.
-// Reparenting may happen e.g. when doing the old-style (non-NETWM) fullscreen changes.
-void ImlibWidget::reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt )
-{
-    XWindowAttributes attr;
-    XGetWindowAttributes( getX11Display(), win, &attr );
-    XUnmapWindow( getX11Display(), win );
-    XReparentWindow( getX11Display(), win, attr.root, 0, 0 );
-    QWidget::reparent( parent, f, p, showIt );
-    XReparentWindow( getX11Display(), win, winId(), attr.x, attr.y );
-    if( attr.map_state != IsUnmapped )
-        XMapWindow( getX11Display(), win );
-}
-*/
 void ImlibWidget::rotated( KuickImage *, int )
 {
 }

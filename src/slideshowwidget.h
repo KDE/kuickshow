@@ -29,6 +29,7 @@ namespace Ui { class SlideShowWidget; }
 class SlideShowWidget : public QWidget
 {
     Q_OBJECT
+
 public:
     explicit SlideShowWidget( QWidget *parent );
     virtual ~SlideShowWidget();

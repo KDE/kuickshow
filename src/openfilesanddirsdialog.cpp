@@ -34,7 +34,6 @@ OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& c
     // allow selection of directories
     setFileMode(QFileDialog::Directory);
 
-
     // The following code highly depends on the internals of QFileDialog.
 
     // find the button box within this dialog, so we can connect to the "Open" button

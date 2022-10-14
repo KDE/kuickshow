@@ -65,7 +65,7 @@ AboutWidget::AboutWidget( QWidget *parent )
         file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/kuickshow-night.jpg");
 
     QPixmap image;
-    if(image.load(file)) {
+    if (image.load(file)) {
         ui->picLogo->setPixmap(image);
     } else {
         qWarning("KuickShow: about-image not found/unreadable.");
@@ -83,6 +83,6 @@ void AboutWidget::mouseReleaseEvent(QMouseEvent* event)
     // Clicking anywhere on the frame except for the URL widget removes it.
     // Note: This only works as intended if the frame is displayed as a window. If it is used in another window's
     //       layout, it'll just remove itself from that window (and probably mess up the layout in the process).
-    if(!ui->urlHomepage->geometry().contains(event->pos()))
+    if (!ui->urlHomepage->geometry().contains(event->pos()))
         deleteLater();
 }

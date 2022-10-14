@@ -275,6 +275,7 @@ void ImageWindow::setupActions()
     QList<QKeySequence> shortcuts = fullscreenAction->shortcuts();
     if(!shortcuts.contains(Qt::Key_Return)) shortcuts << Qt::Key_Return;
     m_actions->setDefaultShortcuts(fullscreenAction, shortcuts);
+// TODO: make full screen work
 //    KAction *fullscreenAction = KStandardAction::fullScreen(this, &ImageWindow::toggleFullscreen, m_actions);
 //    m_actions->addAction( "", fullscreenAction );
 
@@ -427,10 +428,7 @@ bool ImageWindow::showNextImage( KuickFile *file )
 
     else {
 	// updateWidget( true ); // already called from loadImage()
-	if ( !isVisible() )
-		showWindow();
-
-//	showImage();
+	if (!isVisible()) showWindow();
 	return true;
     }
 }
@@ -527,13 +525,6 @@ void ImageWindow::imageTrash()
     emit trashImage(this);
 }
 
-///
-
-
-
-
-/////////////
-////
 // event handlers
 
 void ImageWindow::wheelEvent( QWheelEvent *e )
@@ -791,7 +782,6 @@ void ImageWindow::resizeEvent( QResizeEvent *e )
 
 void ImageWindow::dragEnterEvent( QDragEnterEvent *e )
 {
-    //  if ( e->provides( "image/*" ) ) // can't do this right now with Imlib
     if ( e->mimeData()->hasFormat( "text/uri-list" ) )
 	e->accept();
     else
@@ -817,9 +807,6 @@ void ImageWindow::dropEvent( QDropEvent *e )
 	e->ignore();
 }
 
-
-////////////////////
-/////////
 // misc stuff
 
 void ImageWindow::setPopupMenu()
@@ -1125,26 +1112,6 @@ bool ImageWindow::autoRotate( KuickImage *kuim )
     }
 
     return true;
-}
-
-// TODO: this function and next never used
-int ImageWindow::desktopWidth( bool totalScreen ) const
-{
-    if ( myIsFullscreen || totalScreen )
-    {
-        return QApplication::desktop()->screenGeometry(topLevelWidget()).width();
-    } else
-	return Kuick::workArea().width();
-}
-
-
-int ImageWindow::desktopHeight( bool totalScreen ) const
-{
-    if ( myIsFullscreen || totalScreen ) {
-        return QApplication::desktop()->screenGeometry(topLevelWidget()).height();
-    } else {
-	return Kuick::workArea().height();
-    }
 }
 
 QSize ImageWindow::maxImageSize() const

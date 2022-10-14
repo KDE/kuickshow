@@ -90,7 +90,6 @@ private slots:
     void                slotOpenURL();
     void		slotSetURL( const QUrl& );
     void		slotURLComboReturnPressed();
-//     void                invalidateImages( const KFileItemList& items );
     void		slotDeleteCurrentImage(ImageWindow *viewer);
     void		slotTrashCurrentImage(ImageWindow *viewer);
     void                slotDeleteCurrentImage();

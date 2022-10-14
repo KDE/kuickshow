@@ -59,7 +59,6 @@ private:
 
     int m_limit;
     QTemporaryDir* m_tempDir;
-
 };
 
 #endif // FILECACHE_H

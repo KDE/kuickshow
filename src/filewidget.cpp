@@ -57,7 +57,6 @@ FileWidget::FileWidget( const QUrl& url, QWidget *parent )
     readConfig( group );
     setView( KFile::Default );
 
-    // setOnlyDoubleClickSelectsFiles( true );
     reloadConfiguration();
 
     completionObject()->setCompletionMode( KCompletion::CompletionAuto );
@@ -95,13 +94,6 @@ void FileWidget::initActions()
     // properties dialog is now in kfile, but not at the right position,
     // so we move it to the real bottom
     menu->menu()->removeAction( coll->action( "properties" ) );
-/*
-    KMenu *pMenu = menu->menu();
-    int lastItemId = pMenu->idAt( pMenu->count() - 1 );
-    QMenuItem *mItem = pMenu->findItem( lastItemId );
-    if ( mItem && !mItem->isSeparator() )
-        menu->addSeparator();
-*/
     // those at the bottom
     menu->addAction(coll->action("kuick_print") );
     menu->addSeparator();
@@ -254,7 +246,6 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 
 bool FileWidget::isImage( const KFileItem& item )
 {
-//     return item && !item.isDir();
     if ( !item.isNull() )
     {
         return item.isReadable() && item.mimetype().startsWith( "image/");

@@ -30,7 +30,7 @@ class AboutWidget : public QFrame
     Q_OBJECT
 
 public:
-    AboutWidget(QWidget *parent = 0);
+    AboutWidget(QWidget *parent = nullptr);
 
 protected:
     ~AboutWidget();
@@ -38,7 +38,6 @@ protected:
 
 private:
     Ui::AboutWidget* ui;
-
 };
 
 #endif

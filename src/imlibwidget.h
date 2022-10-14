@@ -68,14 +68,11 @@ public:
   void setUseModifications(bool enable = true);
   void initModifications();
 
-
   /**
    * @return true if auto-rotation is not possible, e.g. because no metadata
    * about orientation is available
    */
   virtual bool  autoRotate( KuickImage *kuim );
-
-//  virtual void  reparent( QWidget* parent, Qt::WFlags f, const QPoint& p, bool showIt = false );
 
 public slots:
   void 		rotate90();
@@ -86,11 +83,8 @@ public slots:
   void 		showImageOriginalSize();
   inline void 	updateImage() 		{ updateWidget( true ); }
 
-
 protected:
-//  KuickImage *	loadImageInternal( KuickFile * file );
   void 			showImage();
-//  void          setImageModifier();
   void 		    rotate( int );
   void 		    updateWidget( bool geometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
@@ -104,9 +98,6 @@ protected:
     if ( isAutoRendering )
       updateWidget( geometryUpdate );
   }
-
-//  bool		stillResizing;
-//  bool          imlibModifierChanged;
 
   KuickImage 	*m_kuim;
   ImageCache 	*imageCache;
@@ -140,7 +131,6 @@ protected slots:
   bool 		cacheImage( KuickFile *file );
   void 		setBusyCursor();
   void 		restoreCursor();
-
 
 signals:
   void 		sigImageError( const KuickFile * file, const QString& );

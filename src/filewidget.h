@@ -96,7 +96,6 @@ private:
     QString m_currentURL;
     QUrl m_initialName;
     KFileItemActions *m_fileItemActions;
-
 };
 
 
