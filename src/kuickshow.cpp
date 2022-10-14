@@ -182,12 +182,14 @@ KuickShow::KuickShow( const char *objName )
     if ( numArgs >= 10 )
     {
         // Even though the 1st i18n string will never be used, it needs to exist for plural handling - mhunter
-        if ( KMessageBox::warningYesNo(
-                 this,
-                 i18np("Do you really want to display this 1 image at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.",
-                      "Do you really want to display these %n images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose %1, only the first image will be shown.", numArgs).arg(KStandardGuiItem::no().plainText()),
-                 i18n("Display Multiple Images?"))
-             != KMessageBox::Yes )
+        if (KMessageBox::questionYesNo(
+                this,
+                xi18ncp("@info",
+                        "Do you really want to display this 1 image at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose <interface>%2</interface>, only the first image will be shown.",
+                        "Do you really want to display these %1 images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose <interface>%2</interface>, only the first image will be shown.", numArgs, KStandardGuiItem::cancel().plainText()),
+                i18n("Display Multiple Images?"),
+                KGuiItem(i18n("Display"), KStandardGuiItem::yes().icon()),
+                KStandardGuiItem::cancel())!=KMessageBox::Yes)
         {
             numArgs = 1;
         }
@@ -607,8 +609,8 @@ bool KuickShow::showImage( const KFileItem& fi,
             connect(m_viewer, &ImlibWidget::sigImageError, this, &KuickShow::messageCantLoadImage);
             connect(m_viewer, &ImageWindow::requestImage, this, &KuickShow:: slotAdvanceImage);
 	    connect(m_viewer, &ImageWindow::pauseSlideShowSignal, this, &KuickShow::pauseSlideShow);
-            connect(m_viewer, &ImageWindow::deleteImage, this, QOverload<>::of(&KuickShow::slotDeleteCurrentImage));
-            connect(m_viewer, &ImageWindow::trashImage, this, QOverload<>::of(&KuickShow::slotTrashCurrentImage));
+            connect(m_viewer, &ImageWindow::deleteImage, this, QOverload<ImageWindow *>::of(&KuickShow::slotDeleteCurrentImage));
+            connect(m_viewer, &ImageWindow::trashImage, this, QOverload<ImageWindow *>::of(&KuickShow::slotTrashCurrentImage));
 
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
@@ -696,12 +698,12 @@ void KuickShow::performDeleteCurrentImage(QWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to delete\n <b>'%1'</b>?</qt>", item.url().toDisplayString(QUrl::PreferLocalFile)),
+            xi18nc("@info", "Do you really want to permanently delete the file<nl/><filename>%1</filename>?", item.url().toDisplayString(QUrl::PreferLocalFile)),
             i18n("Delete File"),
             KStandardGuiItem::del(),
             KStandardGuiItem::cancel(),
-            "Kuick_delete_current_image")
-        != KMessageBox::Continue)
+            "Kuick_delete_current_image",
+            KMessageBox::Dangerous)!=KMessageBox::Continue)
     {
         return;
     }
@@ -722,12 +724,12 @@ void KuickShow::performTrashCurrentImage(QWidget *parent)
 
     if (KMessageBox::warningContinueCancel(
             parent,
-            i18n("<qt>Do you really want to trash\n <b>'%1'</b>?</qt>", item.url().toDisplayString(QUrl::PreferLocalFile)),
+            xi18nc("@info", "Do you really want to trash the file<nl/><filename>%1</filename>?", item.url().toDisplayString(QUrl::PreferLocalFile)),
             i18n("Trash File"),
-            KGuiItem(i18nc("to trash", "&Trash"),"edittrash"),
+            KGuiItem(i18nc("to trash", "&Trash"), "user-trash"),
             KStandardGuiItem::cancel(),
-            "Kuick_trash_current_image")
-        != KMessageBox::Continue)
+            "Kuick_trash_current_image",
+            KMessageBox::Dangerous)!=KMessageBox::Continue)
     {
         return;
     }
