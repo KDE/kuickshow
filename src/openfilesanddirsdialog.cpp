@@ -22,6 +22,7 @@
 #include <QDialogButtonBox>
 #include <QPushButton>
 #include <QSignalMapper>
+#include <QDebug>
 
 
 OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& caption)
@@ -39,14 +40,13 @@ OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& c
     // find the button box within this dialog, so we can connect to the "Open" button
     QDialogButtonBox* bbox = findChild<QDialogButtonBox *>();
     if(bbox && (buttonOpen = bbox->button(QDialogButtonBox::Open))) {
-        //buttonOpen->disconnect(SIGNAL(clicked()));
-        connect(buttonOpen, SIGNAL(clicked()), SLOT(okClicked()));
+        connect(buttonOpen, &QAbstractButton::clicked, this, &OpenFilesAndDirsDialog::okClicked);
     } else {
-        qWarning("couldn't find QDialogButtonBox in QFileDialog; selection will not work correctly");
+        qWarning() << "couldn't find QDialogButtonBox in QFileDialog; selection will not work correctly";
     }
 
     // find the selection controls
-    QSignalMapper* mapper = new QSignalMapper(this);
+    QSignalMapper *mapper = new QSignalMapper(this);
     for (auto *view : findChildren<QAbstractItemView *>(QRegularExpression("^(?:treeView|listView)$"))) {
         // allow selection of multiple entries
         view->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -54,14 +54,10 @@ OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& c
         // we have to manually set the enabled-state of the "Open" button when the selection changes, because
         // the default only enables it when a directory is selected
         auto model = view->selectionModel();
-        connect(model, SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), mapper, SLOT(map()));
+        connect(model, &QItemSelectionModel::selectionChanged, mapper, QOverload<>::of(&QSignalMapper::map));
         mapper->setMapping(model, view);
     }
-    connect(mapper, SIGNAL(mapped(QWidget*)), SLOT(onSelectionChange(QWidget*)));
-}
-
-OpenFilesAndDirsDialog::~OpenFilesAndDirsDialog()
-{
+    connect(mapper, &QSignalMapper::mappedWidget, this, &OpenFilesAndDirsDialog::onSelectionChange);
 }
 
 

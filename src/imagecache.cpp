@@ -217,8 +217,8 @@ KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod
 	Imlib_set_image_modifier(ImlibParams::imlibData(), im, const_cast<ImlibColorModifier *>(&mod));
 #endif // HAVE_QTONLY
 	KuickImage *kuim = new KuickImage(file, const_cast<IMLIBIMAGE &>(im));
-	connect( kuim, SIGNAL( startRendering() ),   SLOT( slotBusy() ));
-	connect( kuim, SIGNAL( stoppedRendering() ), SLOT( slotIdle() ));
+	connect(kuim, &KuickImage::startRendering, this, &ImageCache::slotBusy);
+	connect(kuim, &KuickImage::stoppedRendering, this, &ImageCache::slotIdle);
 
 	myCache.insert(file->url(), kuim, 1);
 #ifdef DEBUG_CACHE

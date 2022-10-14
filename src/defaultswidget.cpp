@@ -47,23 +47,20 @@ DefaultsWidget::DefaultsWidget( QWidget *parent )
   gbPreviewLayout->addWidget(imFiltered, 1, 1, Qt::AlignCenter | Qt::AlignTop);
 
   // actions
-  connect( ui->cbEnableMods, SIGNAL( toggled(bool) ), SLOT( enableWidgets(bool) ));
-
-  connect(ui->cbUpScale, SIGNAL( toggled(bool)), ui->sbMaxUpScaleFactor,
-            SLOT( setEnabled(bool) ));
-
+  connect(ui->cbEnableMods, &QAbstractButton::toggled, this, &DefaultsWidget::enableWidgets);
+  connect(ui->cbUpScale, &QAbstractButton::toggled, ui->sbMaxUpScaleFactor, &QWidget::setEnabled);
   // TODO: why is this necessary?  Widget cannot delete itself.
-  connect( imFiltered, SIGNAL( destroyed() ), SLOT( slotNoImage() ));
+  connect(imFiltered, &QObject::destroyed, this, [this]() { imFiltered = nullptr; });
 
-  connect( ui->cbDownScale,        SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( ui->cbUpScale,          SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( ui->cbFlipVertically,   SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( ui->cbFlipHorizontally, SIGNAL( clicked() ), SLOT( updatePreview() ));
-  connect( ui->sbMaxUpScaleFactor, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( ui->sbBrightness, SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( ui->sbContrast,   SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( ui->sbGamma,      SIGNAL( valueChanged(int) ), SLOT( updatePreview() ));
-  connect( ui->comboRotate,  SIGNAL( activated(int) ), SLOT( updatePreview() ));
+  connect(ui->cbDownScale, &QAbstractButton::clicked, this, &DefaultsWidget::updatePreview);
+  connect(ui->cbUpScale, &QAbstractButton::clicked, this, &DefaultsWidget::updatePreview);
+  connect(ui->cbFlipVertically, &QAbstractButton::clicked, this, &DefaultsWidget::updatePreview);
+  connect(ui->cbFlipHorizontally, &QAbstractButton::clicked, this, &DefaultsWidget::updatePreview);
+  connect(ui->sbMaxUpScaleFactor, QOverload<int>::of(&QSpinBox::valueChanged), this, &DefaultsWidget::updatePreview);
+  connect(ui->sbBrightness, QOverload<int>::of(&QSpinBox::valueChanged), this, &DefaultsWidget::updatePreview);
+  connect(ui->sbContrast, QOverload<int>::of(&QSpinBox::valueChanged), this, &DefaultsWidget::updatePreview);
+  connect(ui->sbGamma, QOverload<int>::of(&QSpinBox::valueChanged), this, &DefaultsWidget::updatePreview);
+  connect(ui->comboRotate, QOverload<int>::of(&QComboBox::activated), this, &DefaultsWidget::updatePreview);
 
   // load and display the test image
   QString filename = QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("pics/calibrate.png"));

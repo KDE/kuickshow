@@ -62,9 +62,12 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
     browserKeyChooser = new KShortcutsEditor( coll, this );
     addPage( browserKeyChooser, i18n("Bro&wser Shortcuts") );
 
-    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(resetDefaults()));
-    connect(buttonBox()->button(QDialogButtonBox::Ok), SIGNAL(clicked()), SIGNAL(okClicked()));
-    connect(buttonBox()->button(QDialogButtonBox::Apply), SIGNAL(clicked()), SIGNAL(applyClicked()));
+    connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked,
+            this, &KuickConfigDialog::resetDefaults);
+    connect(buttonBox()->button(QDialogButtonBox::Ok), &QAbstractButton::clicked,
+            this, &KuickConfigDialog::okClicked);
+    connect(buttonBox()->button(QDialogButtonBox::Apply), &QAbstractButton::clicked,
+            this, &KuickConfigDialog::applyClicked);
 }
 
 KuickConfigDialog::~KuickConfigDialog()

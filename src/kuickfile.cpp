@@ -105,9 +105,9 @@ bool KuickFile::download()
     tempFilePtr.reset();
 
     m_job = KIO::file_copy( m_url, destURL, -1, KIO::HideProgressInfo | KIO::Overwrite ); // handling progress ourselves
-//    m_job->setAutoErrorHandlingEnabled( true );
-    connect( m_job, SIGNAL( result( KJob * )), SLOT( slotResult( KJob * ) ));
-    connect( m_job, SIGNAL( percent( KJob *, unsigned long )), SLOT( slotProgress( KJob *, unsigned long ) ));
+    // TODO: if m_job==nullptr (see 'return' below) then these will crash!
+    connect(m_job, &KJob::result, this, &KuickFile::slotResult);
+    connect(m_job, &KJob::percentChanged, this, &KuickFile::slotProgress);
 
     // TODO: generify background/foreground downloading?
 

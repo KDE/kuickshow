@@ -164,7 +164,7 @@ KuickShow::KuickShow( const char *objName )
     resize( 400, 500 );
 
     m_slideTimer = new QTimer( this );
-    connect( m_slideTimer, SIGNAL( timeout() ), SLOT( nextSlide() ));
+    connect(m_slideTimer, &QTimer::timeout, this, QOverload<>::of(&KuickShow::nextSlide));
 
     KSharedConfig::Ptr kc = KSharedConfig::openConfig();
 
@@ -221,8 +221,9 @@ KuickShow::KuickShow( const char *objName )
             if ( name == "application/octet-stream" ) { // unknown -> stat()
                 KIO::MimetypeJob* job = KIO::mimetype(url);
                 KJobWidgets::setWindow(job, this);
-                connect(job, &KIO::MimetypeJob::result, [job, &name]() {
-                    if(!job->error()) name = job->mimetype();
+                connect(job, &KIO::MimetypeJob::result, [job, &name]()
+                {
+                    if (!job->error()) name = job->mimetype();
                 });
                 job->exec();
             }
@@ -283,45 +284,35 @@ void KuickShow::initGUI( const QUrl& startDir )
 
     redirectDeleteAndTrashActions(coll);
 
-    connect( fileWidget, SIGNAL( fileSelected( const KFileItem& ) ),
-             this, SLOT( slotSelected( const KFileItem& ) ));
-
-    connect( fileWidget, SIGNAL( fileHighlighted( const KFileItem& )),
-             this, SLOT( slotHighlighted( const KFileItem& ) ));
-
-    connect( fileWidget, SIGNAL( urlEntered( const QUrl&  )),
-             this, SLOT( dirSelected( const QUrl& )) );
-
-
     fileWidget->setAcceptDrops(true);
-    connect( fileWidget, SIGNAL( dropped( const KFileItem&, QDropEvent *, const QList<QUrl> & )),
-             this, SLOT( slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &)) );
+    connect(fileWidget, &KDirOperator::fileSelected, this, &KuickShow::slotSelected);
+    connect(fileWidget, &KDirOperator::fileHighlighted, this, &KuickShow::slotHighlighted);
+    connect(fileWidget, &KDirOperator::urlEntered, this, &KuickShow::dirSelected);
+    connect(fileWidget, &KDirOperator::dropped, this, &KuickShow::slotDropped);
 
     // setup actions
-    QAction *open = KStandardAction::open( this, SLOT( slotOpenURL() ),
-                                      coll );
+    QAction *open = KStandardAction::open(this, &KuickShow::slotOpenURL, coll );
     coll->addAction( "openURL", open );
 
-    QAction *print = KStandardAction::print( this, SLOT( slotPrint() ),
-                                        coll );
-    coll->addAction( "kuick_print", print );
+    QAction *print = KStandardAction::print(this, &KuickShow::slotPrint, coll);
     print->setText( i18n("Print Image...") );
+    coll->addAction( "kuick_print", print );
 
     QAction *configure = coll->addAction( "kuick_configure" );
     configure->setText( i18n("Configure %1...", QGuiApplication::applicationDisplayName() ) );
     configure->setIcon( QIcon::fromTheme( "configure" ) );
-    connect( configure, SIGNAL( triggered() ), this, SLOT( configuration() ) );
+    connect(configure, &QAction::triggered, this, &KuickShow::configuration);
 
     QAction *slide = coll->addAction( "kuick_slideshow" );
     slide->setText( i18n("Start Slideshow" ) );
     slide->setIcon( QIcon::fromTheme("ksslide" ));
     coll->setDefaultShortcut(slide, Qt::Key_F2);
-    connect( slide, SIGNAL( triggered() ), this, SLOT( startSlideShow() ));
+    connect(slide, &QAction::triggered, this, &KuickShow::startSlideShow);
 
     QAction *about = coll->addAction( "about" );
     about->setText( i18n( "About KuickShow" ) );
     about->setIcon( QIcon::fromTheme("about") );
-    connect( about, SIGNAL( triggered() ), this, SLOT( about() ) );
+    connect(about, &QAction::triggered, this, &KuickShow::about);
 
     oneWindowAction = coll->add<KToggleAction>( "kuick_one window" );
     oneWindowAction->setText( i18n("Open Only One Image Window") );
@@ -332,23 +323,22 @@ void KuickShow::initGUI( const QUrl& startDir )
     m_toggleBrowserAction->setText( i18n("Show File Browser") );
     coll->setDefaultShortcut(m_toggleBrowserAction, Qt::Key_Space);
     m_toggleBrowserAction->setCheckedState(KGuiItem(i18n("Hide File Browser")));
-    connect( m_toggleBrowserAction, SIGNAL( toggled( bool ) ),
-             SLOT( toggleBrowser() ));
+    connect(m_toggleBrowserAction, &QAction::toggled, this, &KuickShow::toggleBrowser);
 
     QAction *showInOther = coll->addAction( "kuick_showInOtherWindow" );
     showInOther->setText( i18n("Show Image") );
     showInOther->setIcon( QIcon::fromTheme( "window-new" ) );
-    connect( showInOther, SIGNAL( triggered() ), SLOT( slotShowInOtherWindow() ));
+    connect(showInOther, &QAction::triggered, this, &KuickShow::slotShowInOtherWindow);
 
     QAction *showInSame = coll->addAction( "kuick_showInSameWindow" );
     showInSame->setText( i18n("Show Image in Active Window") );
     showInSame->setIcon( QIcon::fromTheme( "viewimage" ) );
-    connect( showInSame, SIGNAL( triggered() ), this, SLOT( slotShowInSameWindow() ) );
+    connect(showInSame, &QAction::triggered, this, &KuickShow::slotShowInSameWindow);
 
     QAction *showFullscreen = coll->addAction( "kuick_showFullscreen" );
     showFullscreen->setText( i18n("Show Image in Fullscreen Mode") );
     showFullscreen->setIcon( QIcon::fromTheme( "view-fullscreen" ) );
-    connect( showFullscreen, SIGNAL( triggered() ), this, SLOT( slotShowFullscreen() ) );
+    connect(showFullscreen, &QAction::triggered, this, &KuickShow::slotShowFullscreen);
 
     // Provided by KDirOperator, but no icon as standard
     QAction *previewAction = coll->action( "preview");
@@ -358,7 +348,7 @@ void KuickShow::initGUI( const QUrl& startDir )
     KToggleAction *inlinePreviewAction = coll->add<KToggleAction>( "kuick_inlinePreview" );
     inlinePreviewAction->setText( defaultInlinePreview->text() );
     inlinePreviewAction->setIcon( defaultInlinePreview->icon() );
-    connect( inlinePreviewAction, SIGNAL( toggled(bool) ), this, SLOT( slotToggleInlinePreview(bool) ) );
+    connect(inlinePreviewAction, &QAction::toggled, this, &KuickShow::slotToggleInlinePreview);
 
     QAction *quit = KStandardAction::quit(this, &QObject::deleteLater, coll);
     coll->addAction( "quit", quit );
@@ -418,13 +408,9 @@ void KuickShow::initGUI( const QUrl& startDir )
     KUrlCompletion *cmpl = new KUrlCompletion( KUrlCompletion::DirCompletion );
     cmbPath->setCompletionObject( cmpl );
     cmbPath->setAutoDeleteCompletionObject( true );
-
+    connect(cmbPath, &KUrlComboBox::urlActivated, this, &KuickShow::slotSetURL);
+    connect(cmbPath, QOverload<const QString &>::of(&KComboBox::returnPressed), this, &KuickShow::slotURLComboReturnPressed);
     addressToolBar->addWidget( cmbPath );
-
-    connect( cmbPath, SIGNAL( urlActivated( const QUrl& )),
-             this, SLOT( slotSetURL( const QUrl& )));
-    connect( cmbPath, SIGNAL( returnPressed()),
-             this, SLOT( slotURLComboReturnPressed()));
 
     tBar->addSeparator();
 
@@ -486,17 +472,17 @@ QLabel* KuickShow::createStatusBarLabel(int stretch)
 void KuickShow::redirectDeleteAndTrashActions(KActionCollection *coll)
 {
     QAction *action = coll->action("delete");
-    if (action)
+    if (action!=nullptr)
     {
         action->disconnect(fileWidget);
-        connect(action, SIGNAL(triggered()), this, SLOT(slotDeleteCurrentImage()));
+        connect(action, &QAction::triggered, this, QOverload<>::of(&KuickShow::slotDeleteCurrentImage));
     }
 
     action = coll->action("trash");
-    if (action)
+    if (action!=nullptr)
     {
         action->disconnect(fileWidget);
-        connect(action, SIGNAL(triggered()), this, SLOT(slotTrashCurrentImage()));
+        connect(action, &QAction::triggered, this, QOverload<>::of(&KuickShow::slotTrashCurrentImage));
     }
 }
 
@@ -614,21 +600,16 @@ bool KuickShow::showImage( const KFileItem& fi,
             m_viewer->setFullscreen( fullscreen );
             s_viewers.append( m_viewer );
 
-	    connect( m_viewer, SIGNAL( nextSlideRequested() ), this, SLOT( nextSlide() ));
-	    connect( m_viewer, SIGNAL( duplicateWindow(const QUrl &) ), this, SLOT( slotDuplicateWindow(const QUrl &) ));
-            connect( m_viewer, SIGNAL( destroyed() ), SLOT( viewerDeleted() ));
-            connect( m_viewer, SIGNAL( sigFocusWindow( ImageWindow *) ),
-                     this, SLOT( slotSetActiveViewer( ImageWindow * ) ));
-            connect( m_viewer, SIGNAL( sigImageError(const KuickFile *, const QString& ) ),
-                     this, SLOT( messageCantLoadImage(const KuickFile *, const QString &) ));
-            connect( m_viewer, SIGNAL( requestImage( ImageWindow *, int )),
-                     this, SLOT( slotAdvanceImage( ImageWindow *, int )));
-	    connect( m_viewer, SIGNAL( pauseSlideShowSignal() ),
-		     this, SLOT( pauseSlideShow() ) );
-        connect( m_viewer, SIGNAL (deleteImage (ImageWindow *)),
-                 this, SLOT (slotDeleteCurrentImage (ImageWindow *)));
-        connect( m_viewer, SIGNAL (trashImage (ImageWindow *)),
-                 this, SLOT (slotTrashCurrentImage (ImageWindow *)));
+	    connect(m_viewer, &ImageWindow::nextSlideRequested, this, QOverload<>::of(&KuickShow::nextSlide));
+	    connect(m_viewer, &ImageWindow::duplicateWindow, this, &KuickShow::slotDuplicateWindow);
+            connect(m_viewer, &QObject::destroyed, this, &KuickShow:: viewerDeleted);
+            connect(m_viewer, &ImageWindow::sigFocusWindow, this, &KuickShow::slotSetActiveViewer);
+            connect(m_viewer, &ImlibWidget::sigImageError, this, &KuickShow::messageCantLoadImage);
+            connect(m_viewer, &ImageWindow::requestImage, this, &KuickShow:: slotAdvanceImage);
+	    connect(m_viewer, &ImageWindow::pauseSlideShowSignal, this, &KuickShow::pauseSlideShow);
+            connect(m_viewer, &ImageWindow::deleteImage, this, QOverload<>::of(&KuickShow::slotDeleteCurrentImage));
+            connect(m_viewer, &ImageWindow::trashImage, this, QOverload<>::of(&KuickShow::slotTrashCurrentImage));
+
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
                 // after showing, otherwise we get some bogus geometry()
@@ -774,7 +755,7 @@ void KuickShow::tryShowNextImage()
         if (!haveBrowser())
         {
             // ### when simply calling toggleBrowser(), this main window is completely messed up
-            QTimer::singleShot(0, this, SLOT(toggleBrowser()));
+            QTimer::singleShot(0, this, &KuickShow::toggleBrowser);
         }
         m_viewer->deleteLater();
     }
@@ -1021,7 +1002,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                         if ( !fileWidget->dirLister()->rootItem().isNull() )
                         {
                         	fileWidget->setCurrentItem( file->url() );
-                        	QTimer::singleShot( 0, this, SLOT( slotReplayEvent()));
+                        	QTimer::singleShot(0, this, &KuickShow::slotReplayEvent);
                         }
                         else // finished, but no root-item -- probably an error, kill repeat-item!
                         {
@@ -1031,9 +1012,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 else // not finished yet
                 {
                         fileWidget->setInitialItem( file->url() );
-                        connect( fileWidget, SIGNAL( finished() ),
-                                 SLOT( slotReplayEvent() ));
-                    }
+                        connect(fileWidget, &FileWidget::finished, this, &KuickShow::slotReplayEvent);
+                }
 
                     return true;
                 }
@@ -1139,12 +1119,9 @@ void KuickShow::configuration()
     dialog->setObjectName(QString::fromLatin1("dialog"));
     dialog->setWindowIcon( qApp->windowIcon() );
 
-    connect( dialog, SIGNAL( okClicked() ),
-             this, SLOT( slotConfigApplied() ) );
-    connect( dialog, SIGNAL( applyClicked() ),
-             this, SLOT( slotConfigApplied() ) );
-    connect( dialog, SIGNAL( finished(int) ),
-             this, SLOT( slotConfigClosed() ) );
+    connect(dialog, &KuickConfigDialog::okClicked, this, &KuickShow::slotConfigApplied);
+    connect(dialog, &KuickConfigDialog::applyClicked, this, &KuickShow::slotConfigApplied);
+    connect(dialog, &QDialog::finished, this, &KuickShow::slotConfigClosed);
 
     fileWidget->actionCollection()->action( "kuick_configure" )->setEnabled( false );
     dialog->show();
@@ -1295,8 +1272,7 @@ void KuickShow::abortDelayedEvent()
 
 void KuickShow::slotReplayEvent()
 {
-    disconnect( fileWidget, SIGNAL( finished() ),
-                this, SLOT( slotReplayEvent() ));
+    disconnect(fileWidget, &FileWidget::finished, this, &KuickShow::slotReplayEvent);
 
     DelayedRepeatEvent *e = m_delayedRepeatItem;
     m_delayedRepeatItem = nullptr; // otherwise, eventFilter aborts
@@ -1340,13 +1316,12 @@ void KuickShow::delayAction(DelayedRepeatEvent *event)
          !fileWidget->dirLister()->rootItem().isNull() )
     {
         fileWidget->setCurrentItem( url );
-        QTimer::singleShot( 0, this, SLOT( doReplay()));
+        QTimer::singleShot(0, this, &KuickShow::doReplay);
     }
     else
     {
         fileWidget->setInitialItem( url );
-        connect( fileWidget, SIGNAL( finished() ),
-                 SLOT( doReplay() ));
+        connect(fileWidget, &FileWidget::finished, this, &KuickShow::doReplay);
     }
 }
 
@@ -1355,8 +1330,7 @@ void KuickShow::doReplay()
     if (!m_delayedRepeatItem)
         return;
 
-    disconnect( fileWidget, SIGNAL( finished() ),
-                this, SLOT( doReplay() ));
+    disconnect(fileWidget, &FileWidget::finished, this, &KuickShow::doReplay);
 
     switch (m_delayedRepeatItem->action)
     {
@@ -1437,7 +1411,7 @@ void KuickShow::deleteAllViewers()
 {
     for (ImageWindow *viewer : qAsConst(s_viewers))
     {
-        viewer->disconnect( SIGNAL( destroyed() ), this, SLOT( viewerDeleted() ));
+        disconnect(viewer, &QObject::destroyed, this, &KuickShow::viewerDeleted);
         delete viewer;
     }
 

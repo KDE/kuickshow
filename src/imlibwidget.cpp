@@ -84,8 +84,8 @@ void ImlibWidget::init()
 
     // TODO: ImageCache can also be a global singleton
     imageCache = new ImageCache(4); // cache 4 images (FIXME?)
-    connect( imageCache, SIGNAL( sigBusy() ), SLOT( setBusyCursor() ));
-    connect( imageCache, SIGNAL( sigIdle() ), SLOT( restoreCursor() ));
+    connect(imageCache, &ImageCache::sigBusy, this, &ImlibWidget::setBusyCursor);
+    connect(imageCache, &ImageCache::sigIdle, this, &ImlibWidget::restoreCursor);
 
 #ifdef HAVE_IMLIB2
     myModifier = imlib_create_color_modifier();
@@ -196,7 +196,7 @@ bool ImlibWidget::cacheImage( const QUrl& url )
         if ( !file->download() ) {
             return false;
         }
-        connect( file, SIGNAL( downloaded( KuickFile * )), SLOT( cacheImage( KuickFile * )) );
+        connect(file, &KuickFile::downloaded, this, QOverload<KuickFile *>::of(&ImlibWidget::cacheImage));
         return true; // optimistic
     }
 }

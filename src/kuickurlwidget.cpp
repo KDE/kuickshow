@@ -23,17 +23,17 @@
 #include <QUrl>
 
 
-KuickUrlWidget::KuickUrlWidget(QWidget* parent) : KUrlLabel(parent)
+KuickUrlWidget::KuickUrlWidget(QWidget *parent) : KUrlLabel(parent)
 {
-    connect(this, SIGNAL(leftClickedUrl()), SLOT(run()));
+    connect(this, QOverload<>::of(&KUrlLabel::leftClickedUrl), this, &KuickUrlWidget::run);
     setUseTips(true);
 }
 
-KuickUrlWidget::KuickUrlWidget(const QString& text, QWidget *parent)
+KuickUrlWidget::KuickUrlWidget(const QString &text, QWidget *parent)
     : KUrlLabel( parent )
 {
     setText( text );
-    connect( this, SIGNAL( leftClickedUrl() ), SLOT( run() ));
+    connect(this, QOverload<>::of(&KUrlLabel::leftClickedUrl), this, &KuickUrlWidget::run);
     setUseTips( true );
 }
 

@@ -64,28 +64,21 @@ FileWidget::FileWidget( const QUrl& url, QWidget *parent )
     dirCompletionObject()->setCompletionMode( KCompletion::CompletionAuto);
 
     slotViewChanged();
-    connect( this, SIGNAL( viewChanged( QAbstractItemView * )),
-	     SLOT( slotViewChanged() ));
+    connect(this, &KDirOperator::viewChanged, this, &FileWidget::slotViewChanged);
 
-    connect( dirLister(), SIGNAL( clear() ), SLOT( slotItemsCleared() ));
-    connect( dirLister(), SIGNAL( itemsDeleted( const KFileItemList&  ) ),
-	     SLOT( slotItemsDeleted( const KFileItemList& ) ));
+    connect(dirLister(), QOverload<>::of(&KCoreDirLister::clear), this, &FileWidget::slotItemsCleared);
+    connect(dirLister(), &KCoreDirLister::itemsDeleted, this, &FileWidget::slotItemsDeleted);
 
-    connect( this, SIGNAL( fileHighlighted( const KFileItem& )),
-	     SLOT( slotHighlighted( const KFileItem& )));
-
-    connect( this, SIGNAL(urlEntered(const QUrl&)),
-             SLOT( slotURLEntered( const QUrl& )));
-
+    connect(this, &KDirOperator::fileHighlighted, this, &FileWidget::slotHighlighted);
+    connect(this, &KDirOperator::urlEntered, this, &FileWidget::slotURLEntered);
     // should actually be KDirOperator's job!
-    connect( this, SIGNAL( finishedLoading() ), SLOT( slotFinishedLoading() ));
-
-    connect( this, SIGNAL( contextMenuAboutToShow( const KFileItem&, QMenu *) ),
-             SLOT( slotContextMenu( const KFileItem&, QMenu *)));
+    connect(this, &KDirOperator::finishedLoading, this, &FileWidget::slotFinishedLoading);
+    connect(this, &KDirOperator::contextMenuAboutToShow, this, &FileWidget::slotContextMenu);
 }
 
 FileWidget::~FileWidget()
 {
+    // TODO: not necessary, a child of 'this'
     delete m_fileFinder;
 }
 
@@ -234,11 +227,8 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
                 if ( !m_fileFinder ) {
 		    m_fileFinder = new FileFinder( this );
 		    m_fileFinder->setObjectName( "file finder" );
-		    connect( m_fileFinder, SIGNAL( completion(const QString&)),
-			     SLOT( findCompletion( const QString& )));
-		    connect( m_fileFinder,
-			     SIGNAL( enterDir( const QString& ) ),
-			     SLOT( slotReturnPressed( const QString& )));
+		    connect(m_fileFinder, &KLineEdit::completion, this, &FileWidget::findCompletion);
+		    connect(m_fileFinder, &FileFinder::enterDir, this, &FileWidget::slotReturnPressed);
 		    m_fileFinder->move( width()  - m_fileFinder->width(),
 					height() - m_fileFinder->height() );
 		}

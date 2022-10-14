@@ -200,7 +200,7 @@ KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent )
     ui = new Ui::KuickPrintDialogPage;
     ui->setupUi(this);
 
-    connect( ui->scale, SIGNAL( toggled( bool )), SLOT( toggleScaling( bool )));
+    connect(ui->scale, &QAbstractButton::toggled, this, &KuickPrintDialogPage::toggleScaling);
 }
 
 KuickPrintDialogPage::~KuickPrintDialogPage()

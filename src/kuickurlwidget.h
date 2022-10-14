@@ -27,12 +27,12 @@ class KuickUrlWidget : public KUrlLabel
     Q_OBJECT
 
 public:
-    explicit KuickUrlWidget(QWidget *parent = 0);
-    KuickUrlWidget( const QString& text, QWidget *parent );
+    explicit KuickUrlWidget(QWidget *parent = nullptr);
+    KuickUrlWidget(const QString &text, QWidget *parent);
+    virtual ~KuickUrlWidget() = default;
 
 protected slots:
     virtual void run();
-
 };
 
 #endif

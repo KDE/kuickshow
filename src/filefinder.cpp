@@ -38,12 +38,9 @@ FileFinder::FileFinder( QWidget *parent )
     setHandleSignals( true ); // we want the completionbox signals
     completionBox()->setTabHandling( true );
 
-    connect( completionBox(), SIGNAL( userCancelled(const QString&) ),
-             SLOT( hide() ));
-    connect( completionBox(), SIGNAL( activated( const QString& ) ),
-             SLOT( slotAccept( const QString& )));
-    connect( this, SIGNAL( returnPressed( const QString& )),
-             SLOT( slotAccept( const QString& ) ));
+    connect(completionBox(), &KCompletionBox::userCancelled, this, &FileFinder::hide);
+    connect(completionBox(), &KCompletionBox::textActivated, this, &FileFinder::slotAccept);
+    connect(this, &KLineEdit::returnKeyPressed, this, &FileFinder::slotAccept);
 
     KUrlCompletion *comp = new KUrlCompletion();
     comp->setReplaceHome( true );

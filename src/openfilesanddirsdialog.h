@@ -20,7 +20,6 @@
 #define OPENFILESANDDIRSDIALOG_H
 
 #include <QFileDialog>
-#include <QString>
 
 class QPushButton;
 
@@ -31,7 +30,7 @@ class OpenFilesAndDirsDialog : public QFileDialog
 
 public:
     explicit OpenFilesAndDirsDialog(QWidget* parent = nullptr, const QString& caption = QString());
-    ~OpenFilesAndDirsDialog();
+    virtual ~OpenFilesAndDirsDialog() = default;
 
 private slots:
     void onSelectionChange(QWidget* obj);

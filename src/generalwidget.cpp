@@ -48,10 +48,8 @@ GeneralWidget::GeneralWidget( QWidget *parent )
   ui->logo->setFixedSize( pixmap.size() );
 
   // actions
-  connect( ui->logo, SIGNAL( leftClickedUrl( const QString & ) ),
-            SLOT( slotURLClicked( const QString & ) ) );
-
-  connect( ui->cbOwnPalette, SIGNAL( clicked() ), this, SLOT( useOwnPalette() ) );
+  connect(ui->logo, QOverload<const QString &>::of(&KUrlLabel::leftClickedUrl), this, &GeneralWidget::slotURLClicked);
+  connect(ui->cbOwnPalette, &QAbstractButton::clicked, this, &GeneralWidget::useOwnPalette);
 
 #ifdef HAVE_QTONLY
   // Disable GUI controls that are only relevant for Imlib

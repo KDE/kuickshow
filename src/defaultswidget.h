@@ -33,8 +33,8 @@ class DefaultsWidget : public QWidget
   Q_OBJECT
 
 public:
-  DefaultsWidget( QWidget *parent );
-  ~DefaultsWidget();
+  explicit DefaultsWidget( QWidget *parent );
+  virtual ~DefaultsWidget();
 
     void 		loadSettings(const KuickData *kdata = nullptr, const ImData *idata = nullptr);
     void 		applySettings();
@@ -47,9 +47,7 @@ private:
 
 private slots:
   void 		updatePreview();
-  void 		slotNoImage()		{ imFiltered = nullptr; }
   void 		enableWidgets( bool );
-
 };
 
 #endif
