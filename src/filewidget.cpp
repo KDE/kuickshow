@@ -83,21 +83,23 @@ FileWidget::~FileWidget()
 
 void FileWidget::initActions()
 {
-    KActionCollection *coll = actionCollection();
-    KActionMenu *menu = static_cast<KActionMenu*>( coll->action("popupMenu") );
+     KActionCollection *coll = actionCollection();
 
-    menu->addAction(coll->action("kuick_showInOtherWindow"));
-    menu->addAction(coll->action("kuick_showInSameWindow"));
-    menu->addAction(coll->action("kuick_showFullscreen"));
-    menu->addSeparator();
+     // The popup menu is created with this action name
+     // by KDirOperator::setupActions().
+     KActionMenu *menu = static_cast<KActionMenu *>(coll->action("popupMenu"));
 
-    // properties dialog is now in kfile, but not at the right position,
-    // so we move it to the real bottom
-    menu->menu()->removeAction( coll->action( "properties" ) );
-    // those at the bottom
-    menu->addAction(coll->action("kuick_print") );
-    menu->addSeparator();
-    menu->addAction(coll->action("properties") );
+     // This action is not useful in KuickShow.  Its action name
+     // also comes from KDirOperator::setupActions().
+     menu->menu()->removeAction(coll->action("file manager"));
+
+     // Our permanent application-specific actions.
+     menu->addAction(coll->action("kuick_showInOtherWindow"));
+     menu->addAction(coll->action("kuick_showInSameWindow"));
+     menu->addAction(coll->action("kuick_showFullscreen"));
+     menu->addSeparator();
+     // Our own actions subsequent to these are added
+     // by slotContextMenu().
 }
 
 void FileWidget::reloadConfiguration()
@@ -128,21 +130,30 @@ bool FileWidget::hasFiles() const
 
 void FileWidget::slotContextMenu( const KFileItem& item, QMenu *popupMenu )
 {
+     KActionCollection *coll = actionCollection();
+
     bool image = isImage( item );
-    actionCollection()->action("kuick_showInSameWindow")->setEnabled( image );
-    actionCollection()->action("kuick_showInOtherWindow")->setEnabled( image );
-    actionCollection()->action("kuick_showFullscreen")->setEnabled( image );
-    actionCollection()->action("kuick_print")->setEnabled( image );
+    coll->action("kuick_showInSameWindow")->setEnabled( image );
+    coll->action("kuick_showInOtherWindow")->setEnabled( image );
+    coll->action("kuick_showFullscreen")->setEnabled( image );
+    coll->action("kuick_print")->setEnabled( image );
 
-    KActionCollection *coll = actionCollection();
-    KActionMenu *menu = static_cast<KActionMenu*>( coll->action("popupMenu") );
+    // Remove all of the menu actions following our last permanent one,
+    // the separator after "kuick_showFullscreen".  The ones applicable
+    // to this popup will then be added.
+    const QList<QAction *> acts = popupMenu->actions();
+    int lastIndex = acts.indexOf(coll->action("kuick_showFullscreen"));
+    if (lastIndex!=-1)
+    {
+        for (int i = acts.count()-1; i>(lastIndex+1); --i)
+        {
+            popupMenu->removeAction(acts[i]);
+        }
+    }
 
-    menu->addAction(coll->action("kuick_showInOtherWindow"));
-    menu->addAction(coll->action("kuick_showInSameWindow"));
-    menu->addAction(coll->action("kuick_showFullscreen"));
-    menu->addSeparator();
-
-    if (!item.isNull()) {
+    // Actions applicable to the selected file or current directory
+    if (!item.isNull())
+    {
 	KFileItemList items;
 	items.append(item);
 	KFileItemListProperties properties( items );
@@ -151,17 +162,14 @@ void FileWidget::slotContextMenu( const KFileItem& item, QMenu *popupMenu )
 	    m_fileItemActions->setParentWidget( this );
 	}
 	m_fileItemActions->setItemListProperties( properties );
-	m_fileItemActions->insertOpenWithActionsTo(nullptr, menu->menu(), QStringList());
+	// Action "Open With" or "Open Folder With"
+	m_fileItemActions->insertOpenWithActionsTo(nullptr, popupMenu, QStringList());
     }
 
-   // properties dialog is now in kfile, but not at the right position,
-    // so we move it to the real bottom
-    menu->menu()->removeAction( coll->action( "properties" ) );
-
-    // those at the bottom
-    menu->addAction(coll->action("kuick_print") );
-    menu->addSeparator();
-    menu->addAction(coll->action("properties") );
+    // Finally these actions at the bottom
+    popupMenu->addAction(coll->action("kuick_print"));
+    popupMenu->addSeparator();
+    popupMenu->addAction(coll->action("properties"));
 }
 
 void FileWidget::findCompletion( const QString& text )

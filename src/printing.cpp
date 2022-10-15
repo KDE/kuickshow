@@ -197,6 +197,8 @@ QString Printing::minimizeString( QString text, const QFontMetrics&
 KuickPrintDialogPage::KuickPrintDialogPage( QWidget *parent )
     : QWidget( parent )
 {
+    // TODO: UI anomaly, "Shrink image to fit" check box followed by a
+    // single "Print exact size" radio button which never gets enabled
     ui = new Ui::KuickPrintDialogPage;
     ui->setupUi(this);
 
