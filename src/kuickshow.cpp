@@ -1329,13 +1329,13 @@ void KuickShow::toggleBrowser()
 void KuickShow::slotOpenURL()
 {
     OpenFilesAndDirsDialog dlg(this, i18n("Select Files or Folder to Open"));
-    dlg.setNameFilter(i18n("Image Files (%1)").arg(ImlibParams::kuickConfig()->fileFilter));
+    dlg.setNameFilter(i18n("Image Files (%1)", ImlibParams::kuickConfig()->fileFilter));
     if(dlg.exec() != QDialog::Accepted) return;
 
     QList<QUrl> urls = dlg.selectedUrls();
     if(urls.isEmpty()) return;
 
-    for( auto url : urls ) {
+    for (const QUrl &url : urls) {
         KFileItem item( url );
         if ( FileWidget::isImage( item ) )
             showImage( item, true );

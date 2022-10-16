@@ -889,7 +889,7 @@ void ImageWindow::saveImage()
     dlg.setWindowTitle( i18n("Save As") );
     dlg.setOption(QFileDialog::DontUseNativeDialog);
     dlg.setAcceptMode(QFileDialog::AcceptSave);
-    dlg.setNameFilter(i18n("Image Files (%1)").arg(ImlibParams::kuickConfig()->fileFilter));
+    dlg.setNameFilter(i18n("Image Files (%1)", ImlibParams::kuickConfig()->fileFilter));
     dlg.setDirectoryUrl(QUrl::fromUserInput(m_saveDirectory, QDir::currentPath(), QUrl::AssumeLocalFile));
 
     // insert the checkbox below the filter box
