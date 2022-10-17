@@ -678,7 +678,7 @@ msgstr "Error fatal de la Imlib"
 #: src/kuickshow.cpp:1388
 #, kde-format
 msgid "Select Files or Folder to Open"
-msgstr "Seleccioneu els fitxers o carpetes que s'obrirà"
+msgstr "Seleccioneu els fitxers o carpetes que s'han d'obrir"
 
 #: src/main.cpp:36
 #, kde-format
