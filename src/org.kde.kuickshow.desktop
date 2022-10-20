@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Kuickshow
 Name[ar]=العارض السريع
-Name[ast]=Kuickshow
 Name[be]=Kuickshow
 Name[bg]=Kuickshow
 Name[bs]=Kuickshow
@@ -68,7 +67,6 @@ InitialPreference=6
 
 GenericName=Image Viewer
 GenericName[ar]=عارض الصّور
-GenericName[ast]=Visor d'imáxenes
 GenericName[be]=Праглядчык відарысаў
 GenericName[bg]=Преглед на изображения
 GenericName[bs]=Pregled slika
