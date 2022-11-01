@@ -1,0 +1,1481 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % French "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book id="kuickshow" lang="&language;">
+
+<bookinfo>
+<title
+>Manuel de &kuickshow;</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Éric</firstname
+><surname
+>Bischoff</surname
+><affiliation
+><address
+><email
+>e.bischoff@noos.fr</email
+></address
+></affiliation
+><contrib
+>Traduction française&nbsp;</contrib
+></othercredit
+> <othercredit role="translator"
+><firstname
+>Ludovic</firstname
+><surname
+>Grossard</surname
+><affiliation
+><address
+><email
+>grossard@kde.org</email
+></address
+></affiliation
+><contrib
+>Traduction française&nbsp;</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Peter</firstname
+><surname
+>Potrowl</surname
+><affiliation
+><address
+><email
+>peter017@gmail.com</email
+></address
+></affiliation
+><contrib
+>Traduction française&nbsp;</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>15/07/2012</date>
+<releaseinfo
+>0.9.2 (&kde; 4.8)</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>&kuickshow; est un navigateur/afficheur d'images confortable à utiliser. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>image</keyword>
+<keyword
+>Afficheur</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Introduction</title>
+
+<para
+>&kuickshow; est un navigateur/afficheur d'images confortable. Il possède un navigateur de fichiers dans lequel vous pouvez sélectionner des images qui sont alors affichées. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>Les formats d'images suivants sont gérés :</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Les images peuvent être affichées soit dans leur propre fenêtre, aussi grande que l'image elle-même, soit en plein écran.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>Utilisation de &kuickshow;</title>
+
+<para
+>L'utilisation de &kuickshow; est très simple. Le navigateur de fichiers liste les fichiers que vous pouvez sélectionner par un clic du &BGS; ou la touche <keycap
+>Entrée</keycap
+>.</para>
+
+<screenshot>
+<screeninfo
+>Voici une capture d'écran de &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Capture d'écran</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>Autres caractéristiques de &kuickshow;</title>
+
+<para
+>La boîte de dialogue de configuration fait apparaître plus de possibilités :</para>
+
+<itemizedlist>
+<listitem
+><para
+>Les images peuvent être automatiquement redimensionnées pour tenir à l'écran si elles sont trop grandes.</para>
+</listitem>
+<listitem
+><para
+>Vous pouvez choisir si les images doivent apparaître dans leur propre fenêtre, ou bien utiliser toujours la même fenêtre.</para>
+</listitem>
+<listitem
+><para
+>Vous pouvez régler un délai pour le diaporama.</para>
+</listitem>
+<listitem
+><para
+>Vous pouvez sélectionner les types de fichiers que le navigateur doit afficher.</para>
+</listitem>
+<listitem
+><para
+>Vous pouvez modifier le rapport vitesse/qualité</para
+></listitem>
+</itemizedlist>
+
+<para
+>Si vous cherchez un fichier particulier, saisissez simplement les premiers caractères de son nom dans le navigateur. Une petite fenêtre d'édition apparaîtra dans le coin en bas à droite. Lorsqu'un fichier correspondant est trouvé, il est coloré. Vous pouvez quitter la fenêtre d'édition en appuyant sur <keycap
+>Entrée</keycap
+> ou &Echap;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>La boîte de dialogue de configuration de &kuickshow;</title>
+
+<para
+>La boîte de dialogue de <guilabel
+>configuration de &kuickshow;</guilabel
+> contient cinq onglets. Trois d'entre eux, <link linkend="general-options"
+><guilabel
+>Général</guilabel
+></link
+>, <link linkend="modifications-options"
+><guilabel
+>Modifications</guilabel
+></link
+> et <link linkend="slideshow-options"
+><guilabel
+>Diaporama</guilabel
+></link
+> configurent le fonctionnement de &kuickshow;, et les deux autres, <guilabel
+>Raccourcis pour l'affichage</guilabel
+> et <guilabel
+>Raccourcis du navigateur</guilabel
+> vous permettent de personnaliser les raccourcis clavier pour les fenêtres correspondantes.</para>
+
+<sect1 id="general-options">
+<title
+>Options générales</title>
+
+<para
+>L'onglet <guilabel
+>Général</guilabel
+> contient les options permettant de configurer &kuickshow;.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Mode plein écran</guilabel
+></term>
+<listitem>
+<para
+>Si ceci est activé, les images s'ouvrent en mode plein écran. Si l'image n'est pas assez grande pour remplir l'écran, l'espace restant est rempli avec la couleur d'arrière plan sélectionnée plus bas. Ce mode est désactivé par défaut.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Précharger de l'image suivante</guilabel
+></term>
+<listitem>
+<para
+>Si ceci est activé, &kuickshow; chargera la prochaine image du dossier pendant que vous regardez l'image actuelle. Cela réduit le délai lorsque vous sélectionnez l'image suivante. C'est particulièrement utile pour les diaporama.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Se souvenir du dernier dossier</guilabel
+></term>
+<listitem>
+<para
+>Si ceci est activé, &kuickshow; enregistre le nom du dernier dossier à la fermeture du logiciel. Lors du démarrage suivant, &kuickshow; ouvrira ce dossier dans la fenêtre du navigateur.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Couleur de fond :</guilabel
+></term>
+<listitem>
+<para
+>Cliquez sur la barre colorée pour sélectionner une couleur d'arrière plan. Celle-ci est utilisée pour remplir l'écran en mode plein écran, ou la fenêtre, si vous l'avez redimensionnée avec une taille supérieure à celle de l'image.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>N'afficher que les fichiers avec l'extension :</guilabel
+></term>
+<listitem>
+<para
+>Vous pouvez configurer &kuickshow; pour n'afficher que certains types de fichiers parmi ceux qui sont gérés.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Qualité / vitesse</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Affichage rapide</guilabel
+></term>
+<listitem
+><para
+>Effectue un rendu rapide.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Diffusion en mode très coloré (15/16 bit)</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Diffusion en mode peu coloré (8 bits ou moins)</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Utiliser une palette de couleurs propre</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Changement de palette rapide</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Taille maximale du cache (Mo)</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>L'onglet Modifications</title>
+
+<para
+>Cocher <guilabel
+>Appliquer les modifications d'image par défaut</guilabel
+> pour ouvrir une image avec ces modifications dans &kuickshow;.</para>
+
+<variablelist>
+<title
+><guilabel
+>Dimensions</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Rétrécir l'image à la taille de l'écran si nécessaire</guilabel
+></term>
+<listitem>
+<para
+>Si ceci est activé, les grandes images sont affichées dans une fenêtre agrandie. Ce mode est activé par défaut.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Rétrécir l'image à la taille de l'écran si nécessaire, jusqu'à un facteur de :</guilabel
+></term>
+<listitem>
+<para
+>Si ceci est activé, &kuickshow; agrandit les petites images jusqu'au facteur sélectionné.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Géométrie</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Miroir vertical</guilabel
+></term>
+<listitem
+><para
+>Effectue une symétrie verticale de l'image</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Miroir horizontal</guilabel
+></term>
+<listitem
+><para
+>Effectue une symétrie horizontale de l'image </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Tourner l'image</guilabel
+></term>
+<listitem
+><para
+>Applique une rotation de 0, 90, 180 ou 270 degrés à l'image. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Ajustements</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Luminosité :</guilabel
+></term>
+<listitem
+><para
+>Éclaircit/assombrit l'image.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Contraste :</guilabel
+></term>
+<listitem
+><para
+>Augmente/diminue le contraste.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gamma :</guilabel
+></term>
+<listitem
+><para
+>Augmente/diminue le gamma. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Un <guilabel
+>Aperçu</guilabel
+> de l'image <guilabel
+>Originale</guilabel
+> et <guilabel
+>Modifiée</guilabel
+> est affiché sous ces options.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>L'onglet Diaporama</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Basculer en mode plein écran</guilabel
+></term>
+<listitem>
+<para
+>Indique si &kuickshow; doit basculer en mode plein écran au début du diaporama. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Commencer par l'image actuelle</guilabel
+></term>
+<listitem>
+<para
+>Indique si le diaporama doit commencer par la première image du dossier ou par l'image sélectionnée. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Intervalle de temps entre deux images :</guilabel
+></term>
+<listitem>
+<para
+>Temps qui s'écoule entre deux images du diaporama. Vous pouvez utiliser le curseur, saisir une nouvelle valeur dans le champ prévu à cet effet, ou utiliser la petite flèche pour augmenter ou diminuer la valeur. La valeur par défaut est 3 secondes.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Itérations (0 = infini) :</guilabel
+></term>
+<listitem>
+<para
+>Le nombre d'itérations. S'il est fixé à 0, le diaporama sera affiché en boucle jusqu'à ce que vous l'interrompiez. Vous pouvez utiliser le curseur, saisir une nouvelle valeur dans le champ prévu à cet effet, ou utiliser les petites flèches pour augmenter ou diminuer la valeur. La valeur par défaut est 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>Les onglets Raccourcis</title
+> 
+<para
+>Changez les raccourcis pour les différents modes de &kuickshow; dans les onglets <guilabel
+>Raccourcis de l'afficheur</guilabel
+> et dans les <guilabel
+>Raccourcis du navigateur</guilabel
+>.</para>
+
+<para
+>Pour plus d'informations, lisez la section à propos des <ulink url="help:/fundamentals/config.html#shortcuts"
+>Raccourcis</ulink
+> dans l'aide de base de &kde;.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>Référence des menus</title>
+
+<sect1 id="file-menu">
+<title
+>Le menu Fichier</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Ouvrir</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Ouvre une nouvelle image</action
+> dans &kuickshow;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Afficher l'image</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Affiche</action
+> l'image sélectionnée dans une nouvelle fenêtre d'image.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Afficher l'image dans la fenêtre active</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Affiche</action
+> l'image sélectionnée dans la fenêtre d'image active.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Afficher l'image en mode plein écran</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Affiche</action
+> l'image sélectionnée en mode plein écran. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Démarrer le diaporama</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Démarre</action
+> un diaporama composé des images du dossier.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Imprimer l'image...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Imprime l'image</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fichier</guimenu
+> <guimenuitem
+>Quitter</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Quitte</action
+> &kuickshow;. Si plusieurs fenêtres d'image sont ouvertes, elles seront toutes fermées.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+>Le menu Édition</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Nouveau dossier...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+><action
+>Crée</action
+> un nouveau dossier.</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Suppr</keycap
+></shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Déplacer vers la corbeille</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Déplace</action
+> le fichier actuel vers la corbeille. On vous demandera de confirmer.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Alt;<keycap
+>Entrée</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Édition</guimenu
+> <guimenuitem
+>Propriétés</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Affiche</action
+> les propriétés du fichier contenant l'image actuelle.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+>Le menu Affichage</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>Affichage</guimenu
+> <guimenuitem
+>Affichage simple</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Si cette option est active, seuls les noms des fichiers et des dossiers seront affichés.</para>
+<para
+>À comparer avec l'affichage détaillé.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>Affichage</guimenu
+> <guimenuitem
+>Affichage détaillé</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Si cette option est active, les noms, tailles, dates, permissions, propriétaires et groupes des fichiers sont affichés.</para>
+<para
+>À comparer avec l'affichage simplifié.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Affichage</guimenu
+> <guimenuitem
+>Vue en arbre</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Affichage</guimenu
+> <guimenuitem
+>Vue en arbre détaillé</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-help-menu">
+<title
+>Le menu Configuration et Aide</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Configurer &kuickshow;...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Ouvre une boîte de dialogue permettant de modifier certaines options</action
+>, comme décrit dans cette section. <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>&kuickshow; possède les menus habituels <guimenu
+>Aide</guimenu
+> de &kde;. Pour plus d'informations, lisez la section <ulink url="help:/fundamentals/menus.html#menus-help"
+>Menu Aide</ulink
+> de l'aide de base de &kde;. </para>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Référence des commandes</title>
+
+<sect1 id="keybindings">
+<title
+>La fenêtre des images</title>
+
+<para
+>Tous les raccourcis clavier peuvent être configurés depuis la <link linkend="configuration-dialog"
+>boîte de dialogue de configuration</link
+>.</para>
+
+<table>
+<title
+>Raccourcis clavier de la fenêtre des images</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Touche</entry>
+<entry
+>Action</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Page suivante</keycap
+></entry>
+<entry
+>Charge l'image suivante</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page précédente</keycap
+></entry>
+<entry
+>Charge l'image précédente</entry>
+</row>
+<row>
+<entry
+><keycap
+>Début</keycap
+></entry>
+<entry
+>Charge la première image</entry>
+</row>
+<row>
+<entry
+><keycap
+>Fin</keycap
+></entry>
+<entry
+>Charge la dernière image</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Zoom l'image</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Dézoome l'image</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Symétrie horizontale de l'image</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Symétrie verticale de l'image</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Rotation de 270&deg; dans le sens des aiguilles d'une montre (ce qui correspond à une rotation de 90&deg; dans le sens contraire des aiguilles d'une montre)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>Rotation de 90&deg; dans le sens des aiguilles d'une montre</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Effectue une rotation de 180&deg; dans le sens des aiguilles d'une montre</entry>
+</row>
+<row>
+<entry
+>Touches <keycap
+>flèches</keycap
+></entry>
+<entry
+>Déplace l'image (ou plutôt vous, le spectateur) si elle est plus grande que l'écran</entry>
+</row>
+<row>
+<entry
+><keycap
+>Entrée</keycap
+></entry>
+<entry
+>Alterne entre les modes fenêtre et plein écran</entry>
+</row>
+<row>
+<entry
+><keycap
+>Espace</keycap
+></entry>
+<entry
+>(dés)Active l'affichage du navigateur</entry>
+</row>
+<row>
+<entry
+>&Echap;</entry>
+<entry
+>Ferme la fenêtre de l'image. Ceci fermera complètement &kuickshow;, si vous n'avez plus aucune fenêtre du navigateur ouverte.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Maj;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>éclaircit/assombrit l'image</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Maj;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Augmente/diminue le contraste</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Maj;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Augmente/diminue la correction <firstterm
+>gamma</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Affiche l'image avec sa taille originale. Ceci n'est utile que lorsque vous avez activé le redimensionnement automatique.</entry>
+</row>
+<row>
+<entry
+>Entrée</entry>
+<entry
+>Affiche à nouveau l'image avec les réglages et taille par défaut.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Ouvre la boîte de dialogue <guilabel
+>enregistrer sous</guilabel
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>Suppr</keycap
+></entry>
+<entry
+>Supprime l'image actuelle. On vous demandera de confirmer.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Maj;<keycap
+>Suppr.</keycap
+></keycombo
+></entry>
+<entry
+>Supprime l'image actuelle sans demande de confirmation</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;<keycap
+>Entrée</keycap
+></keycombo
+></entry>
+<entry
+>Affiche les propriétés de l'image</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Ouvre l'aide en ligne (ce document)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>Quitte &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Utilisation de la souris dans la fenêtre des images</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Bouton de la souris</entry>
+<entry
+>Action</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>clic <mousebutton
+>droit</mousebutton
+></entry>
+<entry
+>Ouvre le menu contextuel avec plusieurs options</entry>
+</row>
+<row>
+<entry
+>glissé avec le bouton <mousebutton
+>gauche</mousebutton
+></entry>
+<entry
+>Déplace l'image, si elle ne tient pas dans la fenêtre.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Maj;<mousebutton
+> glissé avec le bouton gauche</mousebutton
+> </keycombo
+></entry>
+<entry
+>Dessine un rectangle que vous pouvez zoomer.</entry>
+</row>
+<row>
+<entry
+>Double clic <mousebutton
+>gauche</mousebutton
+></entry>
+<entry
+>Ferme l'image actuelle</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>La fenêtre du navigateur</title>
+
+<table>
+<title
+>Raccourcis clavier de la fenêtre du navigateur</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Raccourcis clavier</entry>
+<entry
+>Action</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Entrée</keycap
+></entry>
+<entry
+>Entre dans un dossier, ou bien ouvre une fenêtre d'image, en fonction de l'élément sélectionné.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page suivante</keycap
+></entry>
+<entry
+>Avance d'une page dans la liste des fichiers</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page précédente</keycap
+></entry>
+<entry
+>Recule d'une page dans la liste des fichiers</entry>
+</row>
+<row>
+<entry
+><keycap
+>Début</keycap
+></entry>
+<entry
+>Sélectionne le premier fichier ou dossier</entry>
+</row>
+<row>
+<entry
+><keycap
+>Fin</keycap
+></entry>
+<entry
+>Sélectionne le dernier fichier ou dossier</entry>
+</row>
+<row>
+<entry
+><keycap
+>Espace</keycap
+></entry>
+<entry
+>(dés)Active l'affichage du navigateur, si une fenêtre d'image est ouverte</entry>
+</row>
+<row>
+<entry
+><keycap
+>N'importe quel caractère numérique</keycap
+></entry>
+<entry
+>Ouvre un champ d'édition pour <quote
+>complètement</quote
+>. Saisissez le premier caractère d'un fichier à chercher, et s'il est trouvé, il sera sélectionné.</entry>
+</row>
+<!-- not in 0.9.2 kde 4.8
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Go to</quote
+> &mdash; lets you enter a folder to go
+to.</entry>
+</row>
+-->
+<row>
+<entry
+><keycap
+>Suppr</keycap
+></entry>
+<entry
+>Supprime le fichier actuel. On vous demandera de confirmer.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Maj;<keycap
+>Suppr.</keycap
+></keycombo
+></entry>
+<entry
+>Supprime le fichier actuel sans confirmation de suppression.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Ouvre l'aide en ligne (ce document)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Quitte &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Utilisation de la souris pour la fenêtre du navigateur</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Utilisation de la souris</entry>
+<entry
+>Action</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>clic <mousebutton
+>gauche</mousebutton
+></entry>
+<entry
+>Entre dans un dossier ou sélectionne une fenêtre d'image.</entry>
+</row>
+<row>
+<entry
+>clic <mousebutton
+>droit</mousebutton
+></entry>
+<entry
+>Ouvre un menu contextuel, avec plusieurs options.</entry>
+</row>
+<row>
+<entry
+>Double-clic</entry>
+<entry
+>Charge l'image sélectionnée ou entre dans le dossier sélectionné</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Remerciements et licence</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Programme copyright 1998-2009 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+
+<para
+>Documentation copyright 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+<para
+>Converti en DocBook &XML; et étendu par &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+<para
+>Traduction française par Éric Bischoff <email
+>e.bischoff@noos.fr</email
+>, Ludovic Grossard <email
+>grossard@kde.org</email
+> et Peter Potrowl <email
+>peter017@gmail.com</email
+>.</para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+

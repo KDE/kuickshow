@@ -1,0 +1,1452 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Ukrainian "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book id="kuickshow" lang="&language;">
+
+<bookinfo>
+<title
+>Підручник з &kuickshow;</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Юрій</firstname
+><surname
+>Чорноіван</surname
+><affiliation
+><address
+><email
+>yurchor@ukr.net</email
+></address
+></affiliation
+><contrib
+>Переклад українською</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>15 липня 2012 року</date>
+<releaseinfo
+>0.9.2 (&kde; 4.8)</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>&kuickshow; — це зручний переглядач зображень. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>зображення</keyword>
+<keyword
+>переглядач</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Вступ</title>
+
+<para
+>&kuickshow; — це зручний переглядач зображень. Програма відкриє перед вами вікно переглядача файлів, у якому ви зможете вибрати зображення, які буде показано. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>Програмою підтримуються зображення у таких форматах:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Зображення може бути показано як у режимі власного вікна програми, розміри якого збігатимуться з розмірами зображення, або у повноекранному режимі.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>Користування &kuickshow;</title>
+
+<para
+>Користуватися &kuickshow; дуже просто. У переглядачі файлів буде показано список файлів, які ви можете вибрати для перегляду за допомогою лівої кнопки миші або клавіші <keycap
+>Return</keycap
+>.</para>
+
+<screenshot>
+<screeninfo
+>Ось знімок вікна &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Знімок вікна</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>Додаткові можливості &kuickshow;</title>
+
+<para
+>За допомогою діалогового вікна параметрів ви зможете отримати доступ до додаткових можливостей:</para>
+
+<itemizedlist>
+<listitem
+><para
+>Зображення може бути автоматично зменшено до розмірів екрана, якщо розмір зображень більший за розмір екрана.</para>
+</listitem>
+<listitem
+><para
+>Ви можете визначити, чи буде кожне зображення показано у власному вікні, чи завжди використовуватиметься одне вікно для всіх зображень.</para>
+</listitem>
+<listitem
+><para
+>Ви можете визначити час показу слайдів під час показу слайдів.</para>
+</listitem>
+<listitem
+><para
+>Ви можете вказати, файли яких типів буде показано у переглядачі файлів.</para>
+</listitem>
+<listitem
+><para
+>Ви можете налаштувати відношення швидкість/якість</para
+></listitem>
+</itemizedlist>
+
+<para
+>Якщо вам потрібен лише певний файл, просто введіть декілька перших літер назви файла у переглядачі файлів. У нижньому правому куті з’явиться невеличке вікно редагування. Коли буде знайдено відповідний файл, його буде підсвічено. Закрити вікно редагування можна натисканням клавіш <keycap
+>Return</keycap
+> або &Esc;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>Діалогове вікно «Налаштування &kuickshow;»</title>
+
+<para
+>Діалогове вікно <guilabel
+>Налаштування &kuickshow;</guilabel
+> складається з 5 вкладок. Три з них, <link linkend="general-options"
+><guilabel
+>Загальне</guilabel
+></link
+>, <link linkend="modifications-options"
+><guilabel
+>Зміни</guilabel
+></link
+> і <link linkend="slideshow-options"
+><guilabel
+>Показ слайдів</guilabel
+></link
+>, призначено для налаштування роботи &kuickshow;, а інші дві, <link linkend="shortcuts-options"
+><guilabel
+>Скорочення переглядача</guilabel
+></link
+> і <link linkend="shortcuts-options"
+><guilabel
+>Скорочення навігатора</guilabel
+></link
+> надають вам змогу змінити клавіатурні скорочення у відповідних вікнах відповідно до ваших уподобань.</para>
+
+<sect1 id="general-options">
+<title
+>Загальні параметри</title>
+
+<para
+>На вкладці <guilabel
+>Загальне</guilabel
+> містяться пункти налаштування &kuickshow;.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Повноекранний режим</guilabel
+></term>
+<listitem>
+<para
+>Якщо позначено цей пункт, зображення буде показано у повноекранному режимі. Якщо розміри зображення будуть меншими за розміри екрана, решту екрана буде зафарбовано кольором тла, який можна вибрати нижче. Типово, цей пункт не позначено.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Попередньо завантажувати наступне зображення</guilabel
+></term>
+<listitem>
+<para
+>Якщо позначено цей пункт, &kuickshow; завантажуватиме наступне зображення з теки, доки ви переглядатимете поточне. Таким чином буде зменшено затримку перед показом наступного зображення, це особливо корисно під час показів слайдів.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Запам'ятовувати останню теку</guilabel
+></term>
+<listitem>
+<para
+>Якщо позначено цей пункт, &kuickshow; зберігатиме назву останньої теки у навігаторі під час виходу з програми. Під час наступного запуску &kuickshow; відкриє цю теку у вікні навігатора.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Колір тла:</guilabel
+></term>
+<listitem>
+<para
+>Натисніть кнопку з кольоровою позначкою, щоб вибрати колір тла. Цей колір буде використано для зафарбовування екрана у повноекранному режимі або у режимі окремого вікна, якщо ви збільшите розміри вікна понад розміри зображення.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Показувати тільки файли з суфіксом:</guilabel
+></term>
+<listitem>
+<para
+>&kuickshow; можна налаштувати так, щоб програма показувала лише файли деяких з типів, які вона здатна показувати.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Якість/швидкість</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Швидке відтворення зображень</guilabel
+></term>
+<listitem
+><para
+>Показувати зображення якомога швидше.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Змішування кольорів у режимах HiColor (15/16 біт)</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Змішування кольорів у режимах LowColor (&lt;=8 біт)</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Використовувати власну палітру кольорів</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Швидка зміна палітри</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Найбільший розмір кешу (МБ):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>Вкладка «Зміни»</title>
+
+<para
+>Позначте пункт <guilabel
+>Застосувати типові зміни до зображення</guilabel
+>, щоб програма &kuickshow; відкривала зображення з вказаними змінами.</para>
+
+<variablelist>
+<title
+><guilabel
+>Масштабування</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Зменшувати зображення, якщо воно більше екрана</guilabel
+></term>
+<listitem>
+<para
+>Якщо позначено цей пункт, великі зображення буде показано у максимізованому вікні. Типово, цей пункт позначено.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Збільшувати зображення, якщо воно менше екрана. Максимальне збільшення:</guilabel
+></term>
+<listitem>
+<para
+>Якщо позначено, &kuickshow; збільшуватиме малі зображення за вказаним коефіцієнтом масштабу.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Геометрія</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Віддзеркалити вертикально</guilabel
+></term>
+<listitem
+><para
+>Віддзеркалює зображення вертикально.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Віддзеркалити горизонтально</guilabel
+></term>
+<listitem
+><para
+>Віддзеркалює зображення горизонтально. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Обертання зображення</guilabel
+></term>
+<listitem
+><para
+>Обертає зображення на 0, 90, 180 або 270 градусів. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Коригування</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Яскравість:</guilabel
+></term>
+<listitem
+><para
+>Збільшує або зменшує яскравість зображення</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Контраст:</guilabel
+></term>
+<listitem
+><para
+>Збільшує або зменшує контрастність.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Гама:</guilabel
+></term>
+<listitem
+><para
+>Збільшує або зменшує ступінь контрастності. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Під цими пунктами буде показано <guilabel
+>Перегляд</guilabel
+> <guilabel
+>Оригінального</guilabel
+> і <guilabel
+>Зміненого</guilabel
+> зображення.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>Вкладка «Показ слайдів»</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Повноекранний режим</guilabel
+></term>
+<listitem>
+<para
+>Визначає, чи слід &kuickshow; переходити у повноекранний режим на початку показу слайдів. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Почати з поточного зображення</guilabel
+></term>
+<listitem>
+<para
+>Визначає, чи слід розпочинати показ слайдів з поточного зображення у теці, чи з зображення, яке було вибраним на час початку показу слайдів. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Затримка між слайдами:</guilabel
+></term>
+<listitem>
+<para
+>Проміжок часу між послідовними змінами зображень під час показу слайдів. Для того, щоб збільшити або зменшити значення цього параметра, ви можете скористатися повзунком, ввести нове значення у відповідне поле або скористатися маленькими стрілочками поряд з цим полем. Типовим значенням є 3 секунди.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ітерацій (0 = нескінченно):</guilabel
+></term>
+<listitem>
+<para
+>Кількість повторів. Якщо вказано значення 0, повторюватиме цикл зображень, до припинення показу слайдів користувачем. Для того, щоб збільшити або зменшити значення цього параметра, ви можете скористатися повзунком, ввести нове значення у відповідне поле або скористатися маленькими стрілочками поряд з цим полем. Типовим значенням є 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>Вкладки «Скорочення»</title
+> 
+<para
+>За допомогою вкладок <guilabel
+>Скорочення переглядача</guilabel
+> і <guilabel
+>Скорочення навігатора</guilabel
+> можна змінити клавіатурні скорочення для різних режимів роботи &kuickshow;.</para>
+
+<para
+>Додаткову інформацію можна отримати з розділу, присвяченого <ulink url="help:/fundamentals/config.html#shortcuts"
+>скороченням</ulink
+>, підручника з основ роботи у &kde;.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>Довідник з меню</title>
+
+<sect1 id="file-menu">
+<title
+>Меню «Файл»</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Відкрити</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває нове зображення</action
+> у &kuickshow;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Показати зображення</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Показує</action
+> вибране зображення у новому вікні показу зображень.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Показати зображення в активному вікні</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Показує</action
+> вибране зображення у активному вікні зображення.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Файл</guimenu
+> <guimenuitem
+>Показати зображення в повноекранному режимі</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Показує</action
+> вибране зображення у повноекранному режимі. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Почати показ слайдів</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Починає</action
+> показ слайдів зображень поточної теки.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Друкувати зображення...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Друкує зображення</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Файл</guimenu
+> <guimenuitem
+>Вийти</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Завершує роботу</action
+> &kuickshow;. Якщо ви відкрили декілька вікон перегляду зображень, всі ці вікна буде закрито.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+>Меню «Зміни»</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Створити теку...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+><action
+>Створює</action
+> теку.</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Пересунути до смітника</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Пересуває</action
+> поточний файл до теки смітника. Програма запитає вас щодо підтвердження цієї дії.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Alt;<keycap
+>Return</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Зміни</guimenu
+> <guimenuitem
+>Властивості</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Показує</action
+> властивості поточного файла зображення.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+>Меню «Перегляд»</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Скорочений перегляд</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Якщо буде позначено цей пункт, програма показуватиме лише назви файлів і тек.</para>
+<para
+>Порівняйте з докладним переглядом.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Докладний перегляд</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Якщо буде позначено цей пункт, програма показуватиме назви, дати, права на доступ, власників файлів і групу власників файлів.</para>
+<para
+>Порівняйте зі скороченим переглядом.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Ієрархічний вигляд</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Перегляд</guimenu
+> <guimenuitem
+>Детальний ієрархічний вигляд</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-help-menu">
+<title
+>Меню «Параметри» і «Довідка»</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Налаштувати &kuickshow;...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Відкриває діалогове вікно, у якому можна змінити деякі параметри програми</action
+>, які описано у розділі <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>У &kuickshow; передбачено типові пункти меню <guimenu
+>Довідка</guimenu
+> &kde;. Щоб дізнатися більше, ознайомтеся з розділом, присвяченим <ulink url="help:/fundamentals/menus.html#menus-help"
+>меню «Довідка»</ulink
+> підручника з основ роботи у &kde;. </para>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Довідка щодо команд</title>
+
+<sect1 id="keybindings">
+<title
+>Вікно зображення</title>
+
+<para
+>Всі клавіатурні скорочення можна налаштувати за допомогою <link linkend="configuration-dialog"
+>діалогового вікна налаштування</link
+>.</para>
+
+<table>
+<title
+>Клавіатурні скорочення вікна показу зображення</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Клавіша</entry>
+<entry
+>Дія</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Завантажити наступне зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Завантажити попереднє зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Завантажити перше зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Завантажити останнє зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Збільшує перегляд зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Зменшує перегляд зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Віддзеркалює зображення горизонтально</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Віддзеркалює зображення вертикально</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Обертає зображення на 270&deg; за годинниковою стрілкою (те саме, що поворот на 90&deg; проти годинникової стрілки)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>Обертає зображення на 90&deg; за годинниковою стрілкою</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Обертає зображення на 180&deg; за годинниковою стрілкою</entry>
+</row>
+<row>
+<entry
+>Клавіші з <keycap
+>стрілками</keycap
+></entry>
+<entry
+>Пересуває зображення (або, краще сказати, його перегляд), якщо розміри зображення більші за розміри екрана</entry>
+</row>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>Перемикає перегляд між повноекранним режимом і режимом вікна</entry>
+</row>
+<row>
+<entry
+><keycap
+>Пробіл</keycap
+></entry>
+<entry
+>Вмикає або вимикає показ навігатора</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>Закриває вікно перегляду зображення. Ця дія завершить роботу &kuickshow;, якщо не відкрито вікно навігатора зображеннями.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>Збільшує або зменшує яскравість зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Збільшує або зменшує контрастність зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Збільшує або зменшує <firstterm
+>ступінь контрастності</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Показує зображення у його початковому розмірі. Це скорочення буде корисним, лише якщо програма працює у режимі автоматично вибору масштабу.</entry>
+</row>
+<row>
+<entry
+>&Enter;</entry>
+<entry
+>Оновлює показ зображення з типовими параметрами і розмірами.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Відкриває діалогове вікно <guilabel
+>Зберегти як</guilabel
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>Вилучає поточне зображення. Програма запитає у вас підтвердження виконання дії.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Вилучає поточне зображення без підтвердження</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;<keycap
+>Return</keycap
+></keycombo
+></entry>
+<entry
+>Показує властивості зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Відкриває довідку програми (цей файл)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>Завершує роботу &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Використання миші у вікні зображення</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Кнопка миші</entry>
+<entry
+>Дія</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>Клацання <mousebutton
+>правою</mousebutton
+> кнопкою</entry>
+<entry
+>Відкриває контекстне меню з декількома пунктами</entry>
+</row>
+<row>
+<entry
+>Перетягування з натиснутою <mousebutton
+>лівою</mousebutton
+> кнопкою миші</entry>
+<entry
+>Пересуває перегляд зображення, якщо розміри зображення більші за розмір вікна.</entry>
+</row>
+<row>
+<entry
+>Перетягування з натиснутою <mousebutton
+>лівою</mousebutton
+> кнопкою миші і клавішею &Shift;</entry>
+<entry
+>Позначає прямокутник, за яким слід підібрати розмір перегляду.</entry>
+</row>
+<row>
+<entry
+>Подвійне клацання <mousebutton
+>лівою</mousebutton
+> кнопкою</entry>
+<entry
+>Закриває поточне зображення</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>Вікно перегляду</title>
+
+<table>
+<title
+>Клавіатурні скорочення у вікні перегляду</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Клавіатурні скорочення</entry>
+<entry
+>Дія</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>Відкриває теку або вікно перегляду зображення, залежно від вибраного елемента.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Перегляд наступного файла у списку файлів</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Перегляд попереднього файла зі списку файлів</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Виділяє перший файл або теку</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Вибір останнього файла або теки</entry>
+</row>
+<row>
+<entry
+><keycap
+>Пробіл</keycap
+></entry>
+<entry
+>Вмикає або вимикає показ навігатор, якщо відкрито вікно перегляду зображення</entry>
+</row>
+<row>
+<entry
+><keycap
+>будь-який буквено-цифровий символ</keycap
+></entry>
+<entry
+>Відкриває поле редагування, яке використовується для <quote
+>встановлення назви</quote
+>. Якщо ви введете перші символи назви файла, який ви шукаєте, і цей файл буде знайдено, програма виділить його позначку у навігаторі.</entry>
+</row>
+<!-- not in 0.9.2 kde 4.8
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Go to</quote
+> &mdash; lets you enter a folder to go
+to.</entry>
+</row>
+-->
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>Вилучає поточний файл. Програма запитає у вас підтвердження дії.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Вилучає поточний файл без запиту на підтвердження дії.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Відкриває довідку програми (цей файл)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Завершує роботу &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Використання миші у вікні перегляду</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Використання миші</entry>
+<entry
+>Дія</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>Клацання <mousebutton
+>лівою</mousebutton
+> кнопкою</entry>
+<entry
+>Увійти до теки або вибрати вікно зображення.</entry>
+</row>
+<row>
+<entry
+>Клацання <mousebutton
+>правою</mousebutton
+> кнопкою</entry>
+<entry
+>Відкриває контекстне меню з декількома пунктами.</entry>
+</row>
+<row>
+<entry
+>Подвійне клацання</entry>
+<entry
+>Завантажує вибране зображення і входить до вибраної теки</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Подяки і ліцензія</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Авторські права на програму належать &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail;, 1998–2009. </para>
+
+<para
+>Авторські права на документацію належать © 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail;, ©2001. </para>
+<para
+>Автор перетворення на &XML; DocBook і доповнення підручника — &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+<para
+>Переклад українською: Юрій Чорноіван <email
+>yurchor@ukr.net</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+

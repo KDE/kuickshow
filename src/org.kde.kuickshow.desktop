@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Kuickshow
 Name[ar]=العارض السريع
-Name[ast]=Kuickshow
 Name[be]=Kuickshow
 Name[bg]=Kuickshow
 Name[bs]=Kuickshow
@@ -28,6 +27,7 @@ Name[hu]=Kuickshow
 Name[is]=Kuickshow
 Name[it]=Kuickshow
 Name[ja]=Kuickshow
+Name[ka]=Kuickshow
 Name[km]=Kuickshow
 Name[ko]=Kuickshow
 Name[ku]=Kuickshow
@@ -67,11 +67,10 @@ InitialPreference=6
 
 GenericName=Image Viewer
 GenericName[ar]=عارض الصّور
-GenericName[ast]=Visor d'imáxenes
 GenericName[be]=Праглядчык відарысаў
 GenericName[bg]=Преглед на изображения
 GenericName[bs]=Pregled slika
-GenericName[ca]=Visor d'imatges
+GenericName[ca]=Visualitzador d'imatges
 GenericName[ca@valencia]=Visor d'imatges
 GenericName[cs]=Prohlížeč obrázků
 GenericName[da]=Billedfremviser
@@ -94,6 +93,7 @@ GenericName[hu]=Képmegjelenítő
 GenericName[is]=Myndskoðari
 GenericName[it]=Visore di immagini
 GenericName[ja]=画像ビューア
+GenericName[ka]=სურათების გალერეა
 GenericName[km]=កម្មវិធី​មើល​រូបភាព
 GenericName[ko]=그림 뷰어
 GenericName[ku]=Nîşanderê Wêneyan

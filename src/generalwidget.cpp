@@ -43,7 +43,7 @@ GeneralWidget::GeneralWidget( QWidget *parent )
 
   // the KuickShow logo
   QPixmap pixmap = KIconLoader::global()->loadIcon("logo", KIconLoader::User);
-  ui->logo->setUrl( "http://devel-home.kde.org/~pfeiffer/kuickshow/" );
+  ui->logo->setUrl(HOMEPAGE_URL);
   ui->logo->setPixmap( pixmap );
   ui->logo->setFixedSize( pixmap.size() );
 

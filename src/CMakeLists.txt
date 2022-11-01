@@ -59,6 +59,7 @@ else ()
   endif ()
 endif ()
 
+add_definitions("-DHOMEPAGE_URL=\"https://userbase.kde.org/KuickShow\"")
 
 # target kdeinit_kuickshow
 kf5_add_kdeinit_executable(kuickshow ${kuickshow_KDEINIT_SRCS})
@@ -80,7 +81,6 @@ target_link_libraries(kdeinit_kuickshow
 	KF5::XmlGui
 )
 
-
 if (IMLIB_FOUND)
 target_link_libraries(kdeinit_kuickshow
 	${X11_LIBRARIES}
@@ -91,17 +91,15 @@ target_link_libraries(kdeinit_kuickshow
 	${IMLIB2_LIBRARIES})
 endif ()
 
-
-
-install(TARGETS kdeinit_kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kdeinit_kuickshow  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 # target kuickshow
 target_link_libraries( kuickshow kdeinit_kuickshow )
-install(TARGETS kuickshow  ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS kuickshow  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
-install( PROGRAMS org.kde.kuickshow.desktop  DESTINATION  ${XDG_APPS_INSTALL_DIR} )
+install( PROGRAMS org.kde.kuickshow.desktop  DESTINATION  ${KDE_INSTALL_APPDIR} )
 
 ecm_qt_install_logging_categories(
   EXPORT kuickshow

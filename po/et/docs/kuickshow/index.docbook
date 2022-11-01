@@ -1,0 +1,1480 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY kappname "&kuickshow;">
+  <!ENTITY package "kdegraphics">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Estonian  "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book id="kuickshow" lang="&language;">
+
+<bookinfo>
+<title
+>&kuickshow; käsiraamat</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Marek</firstname
+><surname
+>Laane</surname
+><affiliation
+><address
+><email
+>bald@starman.ee</email
+></address
+></affiliation
+><contrib
+>Tõlge eesti keelde</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2012-07-15</date>
+<releaseinfo
+>0.9.2 (&kde; 4.8)</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>&kuickshow; on käepärane piltide sirvija/näitaja. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>pilt</keyword>
+<keyword
+>vaataja</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Sissejuhatus</title>
+
+<para
+>&kuickshow; on käepärane piltide sirvija/näitaja, mis pakub ka failide sirvijat, mille abil valida vaadatavaid pilte. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>Toetatud on järgmised pildivormingud:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Pilte saab vaadata nende aknas, mille suurus võrdub pildi suurusega, või täisekraanirežiimis.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>&kuickshow; kasutamine</title>
+
+<para
+>&kuickshow; kasutamine on üsna lihtne. Failide sirvija toob ära failid, mida saab valida &HVN;ga klõpsates või klahviga <keycap
+>Return</keycap
+>.</para>
+
+<screenshot>
+<screeninfo
+>&kuickshow; pilt</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Pilt</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>&kuickshow; võimalused</title>
+
+<para
+>Seadistustedialoog pakub mitmeid lisavõimalusi:</para>
+
+<itemizedlist>
+<listitem
+><para
+>Pilte saab panna automaatselt kahanema ja ekraanisuurusele sobituma, kui nad on liiga suured.</para>
+</listitem>
+<listitem
+><para
+>Saab määrata, kas pildid avatakse omaette aknas või alati ühes ja samas aknas.</para>
+</listitem>
+<listitem
+><para
+>Saab määrata slaidiseansi viivituse aja.</para>
+</listitem>
+<listitem
+><para
+>Saab määrata, millist tüüpi faile sirvija näitab.</para>
+</listitem>
+<listitem
+><para
+>Saab reguleerida kiiruse/kvaliteedi suhet</para
+></listitem>
+</itemizedlist>
+
+<para
+>Kui otsid konkreetset faili, sisesta sirvijas selle nime esimesed sümbolid, misjärel ilmub all paremal väike redigeerimisaken. Kui sobiv fail leitakse, tõstetakse see esile. Redigeerimisaknast saab lahkuda, vajutades klahvile <keycap
+>Return</keycap
+> või &Esc;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>&kuickshow; seadistamise dialoog</title>
+
+<para
+><guilabel
+>&kuickshow; seadistamise</guilabel
+> dialoog koosneb viiest kaardist. Kolm, nimelt <link linkend="general-options"
+><guilabel
+>Üldine</guilabel
+></link
+>, <link linkend="modifications-options"
+><guilabel
+>Muudatused</guilabel
+></link
+> ja <link linkend="slideshow-options"
+><guilabel
+>Slaidiseanss</guilabel
+></link
+> võimaldavad seadistada &kuickshow; tegevust, ülejäänud kaks, <link linkend="shortcuts-options"
+><guilabel
+>Näitaja kiirklahvid</guilabel
+></link
+> ning <link linkend="shortcuts-options"
+><guilabel
+>Sirvija kiirklahvid</guilabel
+></link
+> kohandada oma tahtmist mööda vastava akna kiirklahve.</para>
+
+<sect1 id="general-options">
+<title
+>Üldised valikud</title>
+
+<para
+>Kaardil <guilabel
+>Üldine</guilabel
+>  saab täpselt seadistada &kuickshow; käitumist.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Täisekraanirežiim</guilabel
+></term>
+<listitem>
+<para
+>Selle valimisel avatakse pildid kogu ekraani täitvana. Kui pilt ei ole piisavalt suur, täidetakse ülejäänud ekraan allpool valitava taustavärviga. Vaikimisi on see väljas.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Järgmise pildi eellaadimine</guilabel
+></term>
+<listitem>
+<para
+>Kui see on lubatud, laadib &kuickshow; kataloogis järgmist pilti ajal, mil vaadatakse eelmist. See kahandab viivitusaega järgmise pildi valimisel ning tuleb eriti kasuks slaidiprogrammi kasutamisel.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Viimane kataloog jäetakse meelde</guilabel
+></term>
+<listitem>
+<para
+>Selle märkimisel salvestab &kuickshow; väljumisel viimati kasutatud kausta ning &kuickshow; järgmisel käivitamisel avab sama kausta sirvija aknas.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Taustavärv</guilabel
+></term>
+<listitem>
+<para
+>Värviribal klõpsates saab valida taustavärvi. Sellega täidetakse ekraan täisekraanrežiimis või aken, kui see on pildist suurem.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Näidatakse ainult faile laiendiga:</guilabel
+></term>
+<listitem>
+<para
+>Siin saab määrata, et &kuickshow; näitaks ainult teatud tüüpi faile.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Kvaliteet/kiirus</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Kiire teisendamine</guilabel
+></term>
+<listitem
+><para
+>Teisendab pilte kiiresti.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pseudotoonimine HiColor (15/16-bitine) režiimides</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pseudotoonimine LowColor (&lt;=8-bitine) režiimides</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Oma värvipaleti kasutamine</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kiire paleti remappimine</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Maksimaalne vahemälu suurus (MB):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>Kaart Muudatused</title>
+
+<para
+>Kasti <guilabel
+>Pildi vaikemuudatuste rakendamine</guilabel
+> märkimisel avab &kuickshow; pildid siin tehtud muudatustega.</para>
+
+<variablelist>
+<title
+><guilabel
+>Skaleerimine</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Pildi kahandamine ekraani mõõtmeteni, kui on suurem</guilabel
+></term>
+<listitem>
+<para
+>Märkimisel näidatakse suuri pilte maksimeeritud aknas. Vaikimisi on märgitud.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pildi suurendamine ekraani mõõtmeteni, kui on väiksem, aga mitte rohkem korda kui</guilabel
+></term>
+<listitem>
+<para
+>Märkimisel suurendab &kuickshow; väikseid pilte maksimaalselt valitud teguri võrra.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Geomeetria</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Peegeldatakse vertikaalselt</guilabel
+></term>
+<listitem
+><para
+>Peegeldab pilti vertikaalselt.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Peegeldatakse horisontaalselt</guilabel
+></term>
+<listitem
+><para
+>Peegeldab pilti horisontaalselt. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Pilti pööratakse</guilabel
+></term>
+<listitem
+><para
+>Pöörab pilti 0, 90, 180 või 270 kraadi. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Täpsustused</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Heledus</guilabel
+></term>
+<listitem
+><para
+>Muudab pilti heledamaks/tumedamaks.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kontrast</guilabel
+></term>
+<listitem
+><para
+>Suurendab/kahandab kontrasti.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gamma</guilabel
+></term>
+<listitem
+><para
+>Suurendab/vähendab gammat. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Sektsioonis <guilabel
+>Eelvaatlus</guilabel
+> on näha vastavalt valitud valikutele pilt <guilabel
+>originaal</guilabel
+>is ja <guilabel
+>muudetud</guilabel
+> kujul.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>Kaart Slaidiseanss</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Lülitumine täisekraanile</guilabel
+></term>
+<listitem>
+<para
+>Siin saab määrata, kas &kuickshow; peaks lülituma slaidiseansi käivitamisel täisekraanirežiimi või mitte. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Alustatakse praegusest pildist</guilabel
+></term>
+<listitem>
+<para
+>Siin saab määrata, kas slaidiseanss tuleb käivitada kataloogi esimese pildiga või parajasti valitud pildiga. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Viivitus slaidide vahel</guilabel
+></term>
+<listitem>
+<para
+>Aeg, mis jääb piltide vahetamise vahele slaidiseansi kasutamisel. Väärtuse määramiseks võib kasutada liugurit, kirjutada selle väljale või liikuda kasti serval olevate nooltega. Vaikeväärtus on 3 sekundit.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kordused (0 = lõputult)</guilabel
+></term>
+<listitem>
+<para
+>Korduste arv. Kui see on 0, siis korratakse seni, kuni slaidiseansist väljud. Väärtuse määramiseks võib kasutada liugurit, kirjutada selle väljale või liikuda kasti serval olevate nooltega. Vaikeväärtus on 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>Kaardid Kiirklahvid</title
+> 
+<para
+>&kuickshow; erinevate režiimide kiirklahve saab muuta kaartidel <guilabel
+>Näitaja kiirklahvid</guilabel
+> ja <guilabel
+>Sirvija kiirklahvid</guilabel
+>.</para>
+
+<para
+>Täpsemat teavet annab &kde; põhialuste käsiraamatu <ulink url="help:/fundamentals/config.html#shortcuts"
+>kiirklahve</ulink
+> käsitlev osa.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>Menüükäsud</title>
+
+<sect1 id="file-menu">
+<title
+>Menüü Fail</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Ava</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Avab uue pildi</action
+> &kuickshow;'s.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Näita pilti</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Näitab</action
+> valitud pilti uues pildiaknas.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Näita pilti aktiivses aknas</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Näitab</action
+> valitud pilti aktiivses pildiaknas.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Fail</guimenu
+> <guimenuitem
+>Näita pilti täisekraanirežiimis</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Näitab</action
+> valitud pilti täisekraanirežiimis. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Käivita slaidiseanss</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Käivitab</action
+> kataloogi piltide slaidiseansi.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Trüki pilt...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Trükib pildi</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Fail</guimenu
+> <guimenuitem
+>Välju</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Lõpetab</action
+> &kuickshow; töö. Kui avatud on mitu pildiakent, suletakse need kõik.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+>Menüü Redigeerimine</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Uus kataloog...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+><action
+>Loob</action
+> uue kataloogi.</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Liiguta prügikasti</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Liigutab</action
+> aktiivse faili prügikasti. Sinu käest küsitakse kinnitust.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Alt;<keycap
+>Return</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Redigeerimine</guimenu
+> <guimenuitem
+>Omadused</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Näitab</action
+> aktiivse pildifaili omadusi.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+>Menüü Vaade</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>Vaade</guimenu
+> <guimenuitem
+>Lühike vaade</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Valimisel näidatakse ainult failide ja kataloogide nimesid.</para>
+<para
+>Võrdle detailse vaatega.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>Vaade</guimenu
+> <guimenuitem
+>Detailne vaade</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Valimisel näidatakse nimesid, suuruseid, kuupäevi, õiguseid, failide ja gruppide omanikke.</para>
+<para
+>Võrdle lühikese vaatega.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+> <guimenuitem
+>Puuvaade</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Vaade</guimenu
+> <guimenuitem
+>Üksikasjalik puuvaade</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-help-menu">
+<title
+>Menüü Seadistused ja Abi</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Seadistused</guimenu
+> <guimenuitem
+>&kuickshow; seadistamine...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Avab dialoogi mõningate valikute muutmiseks</action
+>, nagu eespool kirjeldatud. <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>&kuickshow; kasutab tavapäraseid &kde; menüü <guimenu
+>Abi</guimenu
+> kirjeid, millest kõneleb lähemalt &kde; põhialuste käsiraamatu <ulink url="help:/fundamentals/ui.html#menus-help"
+>menüüd Abi</ulink
+> käsitlev osa. </para>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Käskude seletused</title>
+
+<sect1 id="keybindings">
+<title
+>Pildiaken</title>
+
+<para
+>Kõik kiirklahvid on seadistatavad <link linkend="configuration-dialog"
+>seadistustedialoogis</link
+>.</para>
+
+<table>
+<title
+>Pildiakna kiirklahvid</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Klahv</entry>
+<entry
+>Toiming</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Laadib järgmise pildi</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Laadib eelmise pildi</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Laadib esimese pildi</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Laadib viimase pildi</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Suurendab pilti</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Vähendab pilti</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Peegeldab pilti horisontaalselt</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Peegeldab pilti vertikaalselt</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Keerab pilti 270&deg; päripäeva (mis on samas 90&deg; vastupäeva)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>Keerab pilti 90&deg; päripäeva</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Keerab pilti 180&deg; päripäeva</entry>
+</row>
+<row>
+<entry
+><keycap
+>Nooleklahvid</keycap
+></entry>
+<entry
+>Liigutab pilti, kui see on ekraanist suurem</entry>
+</row>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>Lülitab täisekraanilt aknarežiimile ja vastupidi</entry>
+</row>
+<row>
+<entry
+><keycap
+>Tühikuklahv</keycap
+></entry>
+<entry
+>Lülitab sirvija näitamise sisse ja välja</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>Sulgeb pildiakna. Sulgeb &kuickshow; täielikult, kui sirvija aken ei ole avatud.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>Muudab pilti heledamaks/tumedamaks</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Suurendab/kahandab kontrasti</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Rohkem/vähem <firstterm
+>gammat</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Näitab pilti originaalsuuruses. Sellel on mõtet ainult siis, kui on lubatud automaatne sobitamine.</entry>
+</row>
+<row>
+<entry
+>&Enter;</entry>
+<entry
+>Näitab pilti uuesti vaikeseadistuste ja -suurusega.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Avab dialoogi <guilabel
+>Salvesta kui...</guilabel
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>Kustutab parajasti vaadatava pildi. Sinu käest päritakse kinnitust.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Kustutab parajasti vaadatava pildi ilma kinnitust küsimata</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;<keycap
+>Return</keycap
+></keycombo
+></entry>
+<entry
+>Näitab pildi omadusi</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Avab abifaili (käesoleva käsiraamatu)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>Lõpetab &kuickshow; töö</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Hiire kasutamine pildiaknas</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Hiirenupp</entry>
+<entry
+>Toiming</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>Klõps <mousebutton
+>parema</mousebutton
+> nupuga</entry>
+<entry
+>Avab mitme võimalusega kontekstimenüü</entry>
+</row>
+<row>
+<entry
+>Lohistamine <mousebutton
+>vasaku</mousebutton
+> nupuga</entry>
+<entry
+>Liigutab pilti, kui see on aknast suurem.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<mousebutton
+>vasak klõps</mousebutton
+></keycombo
+> lohistamine</entry>
+<entry
+>Tähistab ristküliku, mida saab suurendada/vähendada.</entry>
+</row>
+<row>
+<entry
+>Topeltklõps <mousebutton
+>vasaku</mousebutton
+> nupuga</entry>
+<entry
+>Sulgeb parajasti vaadatava pildi</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>Sirvija aken</title>
+
+<table>
+<title
+>Sirvija akna kiirklahvid</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Kiirklahv</entry>
+<entry
+>Toiming</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>Siseneb kataloogi või avab pildiakna vastavalt valitud elemendile.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Liigub failinimekirjas ühe lehekülje võrra edasi</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Up</keycap
+></entry>
+<entry
+>Liigub failinimekirjas ühe lehekülje võrra tagasi</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Valib esimese faili või kataloogi</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Valib viimase faili või kataloogi</entry>
+</row>
+<row>
+<entry
+><keycap
+>Tühikuklahv</keycap
+></entry>
+<entry
+>Lülitab sirvija näitamise sisse ja välja, kui pildiaken on avatud</entry>
+</row>
+<row>
+<entry
+><keycap
+>suvaline number või täht</keycap
+></entry>
+<entry
+>Avab redigeerimisvälja, millel on automaatse <quote
+>lõpetamise</quote
+> võimalus: sisesta otsitava failinime esimesed tähed ja kui see leitakse, valitakse fail automaatselt.</entry>
+</row>
+<!-- not in 0.9.2 kde 4.8
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Go to</quote
+> &mdash; lets you enter a folder to go
+to.</entry>
+</row>
+-->
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>Kustutab aktiivse faili. Sinu käest küsitakse kinnitust.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>Kustutab aktiivse faili ilma kinnitust küsimata.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Avab abifaili (käesoleva käsiraamatu)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Lõpetab &kuickshow; töö</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Hiire kasutamine sirvija aknas</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Hiire kasutamine</entry>
+<entry
+>Toiming</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>Klõps <mousebutton
+>vasaku</mousebutton
+> nupuga</entry>
+<entry
+>Siseneb kataloogi või valib pildiakna.</entry>
+</row>
+<row>
+<entry
+>Klõps <mousebutton
+>parema</mousebutton
+> nupuga</entry>
+<entry
+>Avab mitme võimalusega kontekstimenüü.</entry>
+</row>
+<row>
+<entry
+>Topeltklõps</entry>
+<entry
+>Laeb valitud pildi või siseneb valitud kataloogi</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Autorid ja litsents</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Rakenduse autoriõigus 1998-2009: &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+
+<para
+>Dokumentatsiooni autoriõigus 2001: &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+<para
+>Teisendas DocBook &XML;-i ja laiendas: &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+<para
+>Tõlge eesti keelde: Marek Laane <email
+>bald@starman.ee</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+<appendix id="installation">
+<title
+>Paigaldamine</title>
+
+<sect1 id="getting-kuickshow">
+<title
+>&kuickshow; hankimine</title>
+&install.intro.documentation; </sect1>
+
+<sect1 id="requirements">
+<title
+>Nõuded</title>
+
+<para
+>&kuickshow; ehitamiseks ja kasutamiseks on vajalik Imlibi teek versiooniga 1.x.</para>
+</sect1>
+
+<sect1 id="compilation">
+<title
+>Kompileerimine ja paigaldamine</title>
+&install.compile.documentation; </sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+
