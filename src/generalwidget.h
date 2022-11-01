@@ -42,7 +42,7 @@ private:
 
 private slots:
     void 	useOwnPalette();
-    void slotURLClicked( const QString & );
+    void slotURLClicked();
 
 };
 

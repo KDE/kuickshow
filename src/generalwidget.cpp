@@ -48,7 +48,7 @@ GeneralWidget::GeneralWidget( QWidget *parent )
   ui->logo->setFixedSize( pixmap.size() );
 
   // actions
-  connect(ui->logo, QOverload<const QString &>::of(&KUrlLabel::leftClickedUrl), this, &GeneralWidget::slotURLClicked);
+  connect(ui->logo, QOverload<>::of(&KUrlLabel::leftClickedUrl), this, &GeneralWidget::slotURLClicked);
   connect(ui->cbOwnPalette, &QAbstractButton::clicked, this, &GeneralWidget::useOwnPalette);
 
 #ifdef HAVE_QTONLY
@@ -70,9 +70,9 @@ GeneralWidget::~GeneralWidget()
   delete ui;
 }
 
-void GeneralWidget::slotURLClicked( const QString & url )
+void GeneralWidget::slotURLClicked()
 {
-    QDesktopServices::openUrl(QUrl::fromUserInput(url));
+    QDesktopServices::openUrl(QUrl::fromUserInput(ui->logo->url()));
 }
 
 void GeneralWidget::loadSettings(const KuickData *kdata, const ImData *idata)
