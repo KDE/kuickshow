@@ -56,10 +56,12 @@ if (NOT IMLIB2_FOUND)
 endif ()
 
 if ((NOT IMLIB_FOUND) AND (NOT IMLIB2_FOUND))
-  message(WARNING "Either the IMLIB or IMLIB2 image library is required")
-  # So that feature_summary() below will report before giving a fatal error
-  set_package_properties(IMLIB PROPERTIES TYPE REQUIRED)
-  set_package_properties(IMLIB2 PROPERTIES TYPE REQUIRED)
+  message(STATUS "")
+  message(STATUS "Neither the IMLIB nor IMLIB2 image library was found or was")
+  message(STATUS "  configured to be used.")
+  message(STATUS "KuickShow will use Qt only, image modifications (brightness,")
+  message(STATUS "  contrast, gamma) will not be available.")
+  message(STATUS "")
 endif ()
 
 add_subdirectory( src ) 
