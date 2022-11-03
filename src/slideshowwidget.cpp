@@ -45,6 +45,7 @@ void SlideShowWidget::loadSettings(const KuickData *kdata, const ImData *idata)
     if (idata==nullptr) idata = ImlibParams::imlibConfig();
 
     ui->delayTime->setValue( kdata->slideDelay / 1000 );
+    // TODO: use special value text for 0=infinite
     ui->cycles->setValue( kdata->slideshowCycles );
     ui->fullScreen->setChecked( kdata->slideshowFullscreen );
     ui->startWithCurrent->setChecked( !kdata->slideshowStartAtFirst );

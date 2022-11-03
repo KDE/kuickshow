@@ -81,6 +81,9 @@ void KuickConfigDialog::applyConfig()
     defaultsWidget->applySettings();
     slideshowWidget->applySettings();
 
+    // TODO: this will save the shortcuts of the 2 action collections
+    // intermingled in the same default group, "Shortcuts".  Give each
+    // collection a different group name to distinguish them.
     imageKeyChooser->save();
     browserKeyChooser->save();
 
@@ -96,7 +99,7 @@ void KuickConfigDialog::resetDefaults()
     generalWidget->loadSettings(&kdata, &idata);
     defaultsWidget->loadSettings(&kdata, &idata);
     slideshowWidget->loadSettings(&kdata, &idata);
-	//TODO port it
-    //imageKeyChooser->allDefault();
-    //browserKeyChooser->allDefault();
+
+    imageKeyChooser->allDefault();
+    browserKeyChooser->allDefault();
 }
