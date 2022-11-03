@@ -292,6 +292,8 @@ void KuickShow::initGUI( const QUrl& startDir )
     connect(fileWidget, &KDirOperator::urlEntered, this, &KuickShow::dirSelected);
     connect(fileWidget, &KDirOperator::dropped, this, &KuickShow::slotDropped);
 
+    // TODO: don't need a unique variable for each action
+
     // setup actions
     QAction *open = KStandardAction::open(this, &KuickShow::slotOpenURL, coll );
     coll->addAction( "openURL", open );
@@ -570,6 +572,17 @@ void KuickShow::showFileItem( ImageWindow * /*view*/,
 
 }
 
+void KuickShow::slotShowWithUrl(const QUrl &url)
+{
+    QUrl u = url.adjusted(QUrl::RemoveFilename);
+    if (fileWidget==nullptr) initGUI(u);
+    else slotSetURL(u);
+    show();
+    raise();
+}
+
+
+// TODO: lots of bool parameters, replace with a single QFlags
 bool KuickShow::showImage( const KFileItem& fi,
                            bool newWindow, bool fullscreen, bool moveToTopLeft, bool ignoreFileType )
 {
@@ -592,6 +605,7 @@ bool KuickShow::showImage( const KFileItem& fi,
 	    connect(m_viewer, &ImageWindow::pauseSlideShowSignal, this, &KuickShow::pauseSlideShow);
             connect(m_viewer, &ImageWindow::deleteImage, this, QOverload<ImageWindow *>::of(&KuickShow::slotDeleteCurrentImage));
             connect(m_viewer, &ImageWindow::trashImage, this, QOverload<ImageWindow *>::of(&KuickShow::slotTrashCurrentImage));
+            connect(m_viewer, &ImageWindow::showFileBrowser, this, &KuickShow::slotShowWithUrl);
 
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
@@ -1055,22 +1069,16 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
         // doubleclick closes image window
         // and shows browser when last window closed via doubleclick
+        //
+        // TODO: this is obscure, undiscoverable (unless you are reading
+        // this comment now), and not a standard user interaction pattern.
         else if ( eventType == QEvent::MouseButtonDblClick )
         {
             QMouseEvent *ev = static_cast<QMouseEvent*>( e );
             if ( ev->button() == Qt::LeftButton )
             {
-                if ( s_viewers.count() == 1 )
-                {
-                    if ( !fileWidget )
-                    {
-                        initGUI( window->currentFile()->url() );
-                    }
-                    show();
-                    raise();
-                }
-
-                delete window;
+                if (s_viewers.count() == 1) slotShowWithUrl(window->currentFile()->url());
+                window->deleteLater();
 
                 ev->accept();
                 ret = true;

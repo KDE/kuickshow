@@ -75,7 +75,6 @@
 #include "imagecache.h"
 #include "imlibparams.h"
 
-
 QCursor *ImageWindow::s_handCursor = nullptr;
 
 ImageWindow::ImageWindow(QWidget *parent)
@@ -136,20 +135,22 @@ void ImageWindow::updateActions()
 
 void ImageWindow::setupActions()
 {
-    QAction *duplicateWindow = m_actions->addAction( "duplicate_window" );
-    duplicateWindow->setText( i18n("Duplicate Window") );
-    m_actions->setDefaultShortcut(duplicateWindow, Qt::Key_D );
-    connect(duplicateWindow, &QAction::triggered, this, &ImageWindow:: slotDuplicateWindow);
+    // TODO: don't need a unique variable for each action
+
+    QAction *a = m_actions->addAction( "duplicate_window" );
+    a->setText( i18n("Duplicate Window") );
+    m_actions->setDefaultShortcut(a, Qt::Key_D );
+    connect(a, &QAction::triggered, this, [this]() { emit duplicateWindow(currentFile()->url()); });
 
     QAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
     m_actions->setDefaultShortcuts(nextImage, KStandardShortcut::next());
-    connect(nextImage, &QAction::triggered, this, &ImageWindow::slotRequestNext);
+    connect(nextImage, &QAction::triggered, this, [this]() { emit requestImage(this, +1); });
 
     QAction* showPreviousImage = m_actions->addAction( "previous_image" );
     showPreviousImage->setText( i18n("Show Previous Image") );
     m_actions->setDefaultShortcuts(showPreviousImage, KStandardShortcut::prior());
-    connect( showPreviousImage, &QAction::triggered, this, &ImageWindow::slotRequestPrevious);
+    connect( showPreviousImage, &QAction::triggered, this, [this]() { emit requestImage(this, -1); });
 
     QAction* deleteImage = m_actions->addAction( "delete_image" );
     deleteImage->setText( i18n("Delete Image") );
@@ -209,11 +210,17 @@ void ImageWindow::setupActions()
     m_actions->setDefaultShortcuts(printImage, KStandardShortcut::print());
     connect(printImage, &QAction::triggered, this, &ImageWindow::printImage);
 
-    QAction *a =  KStandardAction::saveAs(this, QOverload<>::of(&ImageWindow::saveImage), m_actions);
-    m_actions->addAction( "save_image_as",  a );
+    a =  KStandardAction::saveAs(this, QOverload<>::of(&ImageWindow::saveImage), m_actions);
+    m_actions->addAction("save_image_as", a);
 
     a = KStandardAction::close(this, &QWidget::close, m_actions);
-    m_actions->addAction( "close_image", a );
+    m_actions->addAction("close_image", a);
+
+    a = m_actions->addAction("show_browser");
+    a->setText(i18n("Return to File Browser"));
+    a->setIcon(QIcon::fromTheme("view-list-icons"));
+    connect(a, &QAction::triggered, this, [this]() { emit showFileBrowser(currentFile()->url()); deleteLater(); });
+
     // --------
     QAction *moreBrighteness = m_actions->addAction( "more_brightness" );
     moreBrighteness->setText( i18n("More Brightness") );
@@ -547,10 +554,15 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
     if ( key == Qt::Key_Shift )
         updateCursor( ZoomCursor );
 
+    // TODO: is the second term necessary? Action is already connected to QWidget::close()
     if ( key == Qt::Key_Escape || KStandardShortcut::close().contains( key ) )
         close();
+    // TODO: is this necessary? Action is already connected to saveImage()
     else if ( KStandardShortcut::save().contains( key ) )
         saveImage();
+    // TODO: will this and next do anything?  Arrow keys are set as shortcuts
+    // for scroll_* actions, so unless they have been removed as shortcuts
+    // for those actions they will never be seen here.
     else if ( key == Qt::Key_Right || key == Qt::Key_Down )
         emit nextSlideRequested();
     else if ( key == Qt::Key_Left || key == Qt::Key_Up )
@@ -736,6 +748,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 	factor = factorx;
     else factor = factory;
 
+    // TODO: don't understand the next comment
     uint w = 0; // shut up compiler!
     uint h = 0;
     w = static_cast<uint>(factor*static_cast<float>(imageWidth()));
@@ -862,6 +875,7 @@ void ImageWindow::setPopupMenu()
     viewerMenu->addAction(m_actions->action("properties"));
 
     viewerMenu->addSeparator();
+    viewerMenu->addAction(m_actions->action("show_browser"));
     viewerMenu->addAction(m_actions->action("close_image"));
 }
 
@@ -1200,11 +1214,6 @@ void ImageWindow::slotProperties()
 {
     KPropertiesDialog dlg( currentFile()->url(), this );
     dlg.exec();
-}
-
-void ImageWindow::slotDuplicateWindow()
-{
-    emit duplicateWindow(currentFile()->url());
 }
 
 void ImageWindow::setBusyCursor()

@@ -94,6 +94,7 @@ signals:
   void          duplicateWindow(const QUrl &url);
   void		nextSlideRequested();
   void		prevSlideRequested();
+  void          showFileBrowser(const QUrl &url);
 
 protected:
 
@@ -143,9 +144,6 @@ protected:
 
 protected slots:
   void 		saveImage();
-  void          slotDuplicateWindow();
-  void          slotRequestNext()           { emit requestImage( this, +1 ); }
-  void          slotRequestPrevious()       { emit requestImage( this, -1 ); }
   void          reload();
   void          slotProperties();
   void          pauseSlideShow();

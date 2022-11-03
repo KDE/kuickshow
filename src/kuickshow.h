@@ -81,6 +81,7 @@ private slots:
     void 		slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &);
     void 		slotSetActiveViewer( ImageWindow *i ) { m_viewer = i; }
     void                slotAdvanceImage( ImageWindow *, int steps );
+    void                slotShowWithUrl(const QUrl &url);
 
     void 		slotShowInSameWindow();
     void 		slotShowInOtherWindow();
