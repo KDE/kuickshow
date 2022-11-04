@@ -57,6 +57,17 @@ protected:
     virtual void	readProperties( const KConfigGroup& kc ) override;
     void                tryShowNextImage();
 
+public:
+    enum ShowFlag
+    {
+        ShowDefault = 0x00,
+        NewWindow = 0x01,
+        FullScreen = 0x02,
+        NoMoveToTopLeft = 0x04,
+        IgnoreFileType = 0x08
+    };
+    Q_DECLARE_FLAGS(ShowFlags, ShowFlag)
+
 private slots:
     void		toggleBrowser();
     void 		slotToggleInlinePreview( bool on );
@@ -64,8 +75,7 @@ private slots:
     void 		slotConfigApplied();
     void 		slotConfigClosed();
     void 		messageCantLoadImage( const KuickFile *file, const QString& message );
-    bool     	showImage(const KFileItem&, bool newWindow = false,
-                          bool fullscreen = false, bool moveToTopLeft = true, bool ignoreFileType = false );
+    bool		showImage(const KFileItem&, KuickShow::ShowFlags flags);
     void 		showFileItem( ImageWindow *, const KFileItem * );
     void		slotHighlighted( const KFileItem& );
     void 		slotSelected( const KFileItem& );

@@ -79,6 +79,9 @@
 #include "imlibparams.h"
 
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(KuickShow::ShowFlags)
+
+
 static QList<ImageWindow *> s_viewers;
 
 
@@ -206,8 +209,8 @@ KuickShow::KuickShow( const char *objName )
 
         if ( FileWidget::isImage( item ) )
         {
-            showImage( item, true, false, true ); // show in new window, not fullscreen-forced and move to 0,0
-            //showImage( &item, true, false, false ); // show in new window, not fullscreen-forced and not moving to 0,0
+            // show in new window, not fullscreen-forced, and move to 0,0
+            showImage(item, NewWindow);
         }
         else if ( item.isDir() )
         {
@@ -235,7 +238,7 @@ KuickShow::KuickShow( const char *objName )
 	    // always return the right mimetype. The rest of KDE start a get() instead....
             if ( name.startsWith( "image/" ) || name.startsWith( "text/" ) )
             {
-                showImage( item, true, false, true, true );
+                showImage(item, NewWindow|IgnoreFileType);
             }
             else // assume directory, KDirLister will tell us if we can't list
             {
@@ -562,7 +565,7 @@ void KuickShow::dirSelected( const QUrl& url )
 
 void KuickShow::slotSelected( const KFileItem& item )
 {
-    showImage( item, !oneWindowAction->isChecked() );
+    showImage(item, (oneWindowAction->isChecked() ? ShowDefault : NewWindow));
 }
 
 // downloads item if necessary
@@ -582,18 +585,26 @@ void KuickShow::slotShowWithUrl(const QUrl &url)
 }
 
 
-// TODO: lots of bool parameters, replace with a single QFlags
-bool KuickShow::showImage( const KFileItem& fi,
-                           bool newWindow, bool fullscreen, bool moveToTopLeft, bool ignoreFileType )
-{
-    newWindow  |= !m_viewer;
-    fullscreen |= (newWindow && ImlibParams::kuickConfig()->fullScreen);
-    if ( ignoreFileType || FileWidget::isImage( fi ) ) {
+// TODO: this is never called without NoMoveToTopLeft, but it is not clear why
+// always moving thewindow to (0,0) is good from a UI point of view.  Perhaps a
+// better window placement strategy would be:
+//
+// Opening a new window: accept the window manager's placement.
+//
+// Reusing an existing window: centre the new window at the same place as
+// the centre of the old one, if allowed by its size and screen bounds.
 
-        if ( newWindow ) {
+bool KuickShow::showImage(const KFileItem &fi, KuickShow::ShowFlags flags)
+{
+    if (m_viewer==nullptr) flags |= NewWindow;
+    if ((flags & NewWindow) && ImlibParams::kuickConfig()->fullScreen) flags |= FullScreen;
+    if ((flags & IgnoreFileType) || FileWidget::isImage(fi))
+    {
+        if (flags & NewWindow)
+        {
             m_viewer = new ImageWindow(nullptr);
             m_viewer->setObjectName( QString::fromLatin1("image window") );
-            m_viewer->setFullscreen( fullscreen );
+            m_viewer->setFullscreen(flags & FullScreen);
             s_viewers.append( m_viewer );
 
 	    connect(m_viewer, &ImageWindow::nextSlideRequested, this, QOverload<>::of(&KuickShow::nextSlide));
@@ -607,7 +618,8 @@ bool KuickShow::showImage( const KFileItem& fi,
             connect(m_viewer, &ImageWindow::trashImage, this, QOverload<ImageWindow *>::of(&KuickShow::slotTrashCurrentImage));
             connect(m_viewer, &ImageWindow::showFileBrowser, this, &KuickShow::slotShowWithUrl);
 
-            if ( s_viewers.count() == 1 && moveToTopLeft ) {
+            if ( s_viewers.count() == 1 && !(flags & NoMoveToTopLeft))
+            {
                 // we have to move to 0x0 before showing _and_
                 // after showing, otherwise we get some bogus geometry()
                 m_viewer->move( Kuick::workArea().topLeft() );
@@ -629,15 +641,17 @@ bool KuickShow::showImage( const KFileItem& fi,
         }
         else {
             // safeViewer->setFullscreen( fullscreen );
-            if ( newWindow ) {
-                if ( !fullscreen && s_viewers.count() == 1 && moveToTopLeft ) {
+            if (flags & NewWindow)
+            {
+                if (!(flags & FullScreen) && s_viewers.count()==1 && !(flags & NoMoveToTopLeft))
+                {
                     // the WM might have moved us after showing -> strike back!
                     // move the first image to 0x0 workarea coord
                     safeViewer->move( Kuick::workArea().topLeft() );
                 }
             }
 
-            if ( ImlibParams::kuickConfig()->preloadImage && fileWidget ) {
+            if ( ImlibParams::kuickConfig()->preloadImage && fileWidget!=nullptr) {
                 // don't move cursor
                 KFileItem item = fileWidget->getItem( FileWidget::Next, true );
                 if ( !item.isNull() )
@@ -742,8 +756,7 @@ void KuickShow::tryShowNextImage()
     if (!m_viewer)
         return;
 
-    if (!next.isNull())
-        showImage(next, false);
+    if (!next.isNull()) showImage(next, ShowDefault);
     else
     {
         if (!haveBrowser())
@@ -764,8 +777,8 @@ void KuickShow::startSlideShow()
     if ( !item.isNull() ) {
         m_slideshowCycle = 1;
         fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
-        showImage( item, !oneWindowAction->isChecked(),
-                   ImlibParams::kuickConfig()->slideshowFullscreen );
+        showImage(item, (!oneWindowAction->isChecked() ? NewWindow : ShowDefault)|
+                         (ImlibParams::kuickConfig()->slideshowFullscreen ? FullScreen : ShowDefault));
 	if(ImlibParams::kuickConfig()->slideDelay)
             m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
     }
@@ -839,17 +852,17 @@ void KuickShow::slotPrint()
 
 void KuickShow::slotShowInOtherWindow()
 {
-    showImage( fileWidget->getCurrentItem( false ), true );
+    showImage(fileWidget->getCurrentItem(false), NewWindow);
 }
 
 void KuickShow::slotShowInSameWindow()
 {
-    showImage( fileWidget->getCurrentItem( false ), false );
+    showImage(fileWidget->getCurrentItem(false), ShowDefault);
 }
 
 void KuickShow::slotShowFullscreen()
 {
-    showImage( fileWidget->getCurrentItem( false ), false, true );
+    showImage(fileWidget->getCurrentItem(false), FullScreen);
 }
 
 void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &urls)
@@ -857,7 +870,7 @@ void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &
     for (const QUrl &url : qAsConst(urls))
     {
         KFileItem item(url);
-        if (FileWidget::isImage(item)) showImage( item, true );
+        if (FileWidget::isImage(item)) showImage(item, NewWindow);
         else fileWidget->setUrl(url, true);
     }
 }
@@ -1167,7 +1180,8 @@ void KuickShow::readProperties( const KConfigGroup& kc )
         const QUrl url(img);
         KFileItem item(url);
         if ( item.isReadable() ) {
-            if (showImage( item, true )) {
+            if (showImage(item, NewWindow))
+            {
                 // Set the current URL in the file widget, if possible
                 if ( !hasCurrentURL && listedURL.isParentOf( item.url() )) {
                     fileWidget->setInitialItem( item.url() );
@@ -1343,12 +1357,11 @@ void KuickShow::slotOpenURL()
     QList<QUrl> urls = dlg.selectedUrls();
     if(urls.isEmpty()) return;
 
-    for (const QUrl &url : urls) {
-        KFileItem item( url );
-        if ( FileWidget::isImage( item ) )
-            showImage( item, true );
-        else
-            fileWidget->setUrl( url, true );
+    for (const QUrl &url : urls)
+    {
+        KFileItem item(url);
+        if (FileWidget::isImage(item)) showImage(item, NewWindow);
+        else fileWidget->setUrl( url, true );
     }
 }
 
@@ -1370,7 +1383,7 @@ void KuickShow::slotDuplicateWindow(const QUrl &url)
 {
     qDebug() << url;
     KFileItem item(url);
-    showImage(item, true);
+    showImage(item, NewWindow);
 }
 
 void KuickShow::deleteAllViewers()
