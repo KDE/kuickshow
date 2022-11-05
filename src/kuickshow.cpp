@@ -82,6 +82,8 @@
 Q_DECLARE_OPERATORS_FOR_FLAGS(KuickShow::ShowFlags)
 
 
+// TODO: why is this static?  A member would be more sensible
+// (although there never exists more than one KuickShow).
 static QList<ImageWindow *> s_viewers;
 
 
@@ -586,7 +588,7 @@ void KuickShow::slotShowWithUrl(const QUrl &url)
 
 
 // TODO: this is never called without NoMoveToTopLeft, but it is not clear why
-// always moving thewindow to (0,0) is good from a UI point of view.  Perhaps a
+// always moving the window to (0,0) is good from a UI point of view.  Perhaps a
 // better window placement strategy would be:
 //
 // Opening a new window: accept the window manager's placement.

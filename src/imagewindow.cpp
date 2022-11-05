@@ -21,7 +21,6 @@
 #include <KActionCollection>
 #include <KCursor>
 #include <KIconLoader>
-#include <KIO/StoredTransferJob>
 #include <KJobWidgets>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -32,6 +31,8 @@
 #include <KToggleFullScreenAction>
 #include <KUrlMimeData>
 #include <KWindowSystem>
+
+#include <kio/filecopyjob.h>
 
 #include <QApplication>
 #include <QBitmap>
@@ -62,6 +63,7 @@
 #include <QTimer>
 #include <QUrl>
 #include <QWheelEvent>
+#include <QDebug>
 
 #include <netwm.h>
 #include <stdlib.h>
@@ -210,7 +212,7 @@ void ImageWindow::setupActions()
     m_actions->setDefaultShortcuts(printImage, KStandardShortcut::print());
     connect(printImage, &QAction::triggered, this, &ImageWindow::printImage);
 
-    a =  KStandardAction::saveAs(this, QOverload<>::of(&ImageWindow::saveImage), m_actions);
+    a =  KStandardAction::saveAs(this, QOverload<>::of(&ImageWindow::slotSaveImage), m_actions);
     m_actions->addAction("save_image_as", a);
 
     a = KStandardAction::close(this, &QWidget::close, m_actions);
@@ -280,6 +282,7 @@ void ImageWindow::setupActions()
 
     QAction *fullscreenAction = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, &ImageWindow::toggleFullscreen);
     QList<QKeySequence> shortcuts = fullscreenAction->shortcuts();
+    // TODO: is Key_Return really a sensible default shortcut?
     if(!shortcuts.contains(Qt::Key_Return)) shortcuts << Qt::Key_Return;
     m_actions->setDefaultShortcuts(fullscreenAction, shortcuts);
 // TODO: make full screen work
@@ -302,6 +305,7 @@ void ImageWindow::setupActions()
 
 void ImageWindow::showWindow()
 {
+    // TODO: do not use QWidget::show*(), see API doc for KToggleFullScreenAction
 	if ( myIsFullscreen )
 		showFullScreen();
 	else
@@ -559,7 +563,7 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
         close();
     // TODO: is this necessary? Action is already connected to saveImage()
     else if ( KStandardShortcut::save().contains( key ) )
-        saveImage();
+        slotSaveImage();
     // TODO: will this and next do anything?  Arrow keys are set as shortcuts
     // for scroll_* actions, so unless they have been removed as shortcuts
     // for those actions they will never be seen here.
@@ -879,6 +883,7 @@ void ImageWindow::setPopupMenu()
     viewerMenu->addAction(m_actions->action("close_image"));
 }
 
+
 void ImageWindow::printImage()
 {
     if ( !m_kuim )
@@ -891,30 +896,37 @@ void ImageWindow::printImage()
     }
 }
 
-void ImageWindow::saveImage()
-{
-    if ( !m_kuim )
-        return;
 
-    QCheckBox *keepSize = new QCheckBox( i18n("Keep original image size"), nullptr);
-    keepSize->setChecked( true );
+void ImageWindow::slotSaveImage()
+{
+    if (m_kuim==nullptr) return;
+
+    // TODO: not sure whether the "Keep original size" option is really useful.
+    // It only retains the original size - not rotation or colour modifications -
+    // and if turned on, there is the loss of quality involved in rescaling the
+    // scaled image back to the original size, plus the extra decoding and
+    // re-encoding if using a a lossy format (e.g. JPEG).  If to be supported it
+    // should retrieve the original unchanged image (myOrigIm in KuickImage) and
+    // save that.  However, a plain file copy would still be simpler.
+
+    QCheckBox *keepSize = new QCheckBox(i18n("Keep original image size"), nullptr);
+    // TODO: the historic behaviour, but a sensible default?
+    keepSize->setChecked(true);
 
     QFileDialog dlg(this);
-    dlg.setWindowTitle( i18n("Save As") );
+    dlg.setWindowTitle(i18n("Save Image As"));
+    // TODO: why is this necessary?  This forces the Qt-only dialogue
+    // which will not accept remote files.
     dlg.setOption(QFileDialog::DontUseNativeDialog);
     dlg.setAcceptMode(QFileDialog::AcceptSave);
     dlg.setNameFilter(i18n("Image Files (%1)", ImlibParams::kuickConfig()->fileFilter));
-    dlg.setDirectoryUrl(QUrl::fromUserInput(m_saveDirectory, QDir::currentPath(), QUrl::AssumeLocalFile));
+    if (m_saveDirectory.isValid()) dlg.setDirectoryUrl(m_saveDirectory);
+    dlg.selectFile(m_kuim->url().fileName());
 
-    // insert the checkbox below the filter box
-    if(QGridLayout* gl = qobject_cast<QGridLayout*>(dlg.layout())) {
-        gl->addWidget(keepSize, gl->rowCount(), 0, 1, gl->columnCount());
-    }
+    // Insert the checkbox below the filter box
+    QGridLayout *gl = qobject_cast<QGridLayout *>(dlg.layout());
+    if (gl!=nullptr) gl->addWidget(keepSize, gl->rowCount(), 0, 1, gl->columnCount());
 
-    QString selection = m_saveDirectory.isEmpty() ?
-                            m_kuim->url().url() :
-                            m_kuim->url().fileName();
-    dlg.selectFile( selection );
     if ( dlg.exec() == QDialog::Accepted )
     {
         QList<QUrl> urls = dlg.selectedUrls();
@@ -940,74 +952,94 @@ void ImageWindow::saveImage()
         }
     }
 
-    QString lastDir = dlg.directoryUrl().toDisplayString();
-    if ( lastDir != m_saveDirectory )
-        m_saveDirectory = lastDir;
+    // TODO: should be remembered only if successful?
+    QUrl lastDir = dlg.directoryUrl();
+    if (lastDir != m_saveDirectory) m_saveDirectory = lastDir;
 }
 
-bool ImageWindow::saveImage( const QUrl& dest, bool keepOriginalSize )
+
+bool ImageWindow::saveImage(const QUrl &dest, bool keepOriginalSize)
 {
+    qDebug() << "to" << dest;
+
     int w = keepOriginalSize ? m_kuim->originalWidth()  : m_kuim->width();
     int h = keepOriginalSize ? m_kuim->originalHeight() : m_kuim->height();
-    if ( m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == ROT_270 )
-        qSwap( w, h );
+    if (m_kuim->absRotation() == ROT_90 || m_kuim->absRotation() == ROT_270) qSwap(w, h);
 
     bool success = false;
-#if 0
-// TODO: Imlib 2 and Qt
-///////////////////////////////////////////////////////////////////////////
-    ImlibImage *saveIm = Imlib_clone_scaled_image( id, m_kuim->imlibImage(),
-                                                   w, h );
 
-	QString saveFile;
-	if ( dest.isLocalFile() )
-		saveFile = dest.path();
-	else
-	{
-
-		QString extension = QFileInfo( dest.fileName() ).completeSuffix();
+    QString saveFile;
+    if (dest.isLocalFile()) saveFile = dest.path();	// save directly to there
+    else						// need a copy for upload
+    {
+        QString extension = QFileInfo(dest.fileName()).completeSuffix();
         if(!extension.isEmpty()) extension.prepend('.');
         QScopedPointer<QTemporaryFile> tmpFilePtr(FileCache::self()->createTempFile(extension));
         if(tmpFilePtr.isNull()) return false;
 
         tmpFilePtr->setAutoRemove(false);
-        if ( !tmpFilePtr->open() )
-			return false;
+        if (!tmpFilePtr->open()) return false;
         saveFile = tmpFilePtr->fileName();
         tmpFilePtr->close();
-	}
-
-    if ( saveIm )
-    {
-        Imlib_apply_modifiers_to_rgb( ImlibParams::data(), saveIm );
-        success = Imlib_save_image( ImlibParams::data(), saveIm,
-                                    QFile::encodeName( saveFile ).data(),
-                                    NULL );
-        if ( success && !dest.isLocalFile() )
-        {
-        	if ( isFullscreen() )
-        		toggleFullscreen(); // otherwise upload window would block us invisibly
-
-            QFile sourceFile(saveFile);
-            if(!sourceFile.open(QIODevice::ReadOnly)) {
-                // TODO: implement better error handling
-                qWarning("failed to open file \"%s\": %s", qUtf8Printable(saveFile), qUtf8Printable(sourceFile.errorString()));
-                return false;
-            }
-
-            KIO::StoredTransferJob* job = KIO::storedPut(&sourceFile, dest, -1);
-            KJobWidgets::setWindow(job, this);
-            success = job->exec();
-
-            sourceFile.close();
-        }
-
-        Imlib_kill_image( ImlibParams::data(), saveIm );
     }
-#endif
-///////////////////////////////////////////////////////////////////////////
+    qDebug() << "saving to" << saveFile;
 
-    return success;
+#ifdef HAVE_IMLIB1
+    ImlibImage *saveIm = Imlib_clone_scaled_image(ImlibParams::data(), m_kuim->imlibImage(), w, h);
+    if (saveIm!=nullptr)
+    {
+        Imlib_apply_modifiers_to_rgb(ImlibParams::data(), saveIm);
+        success = Imlib_save_image(ImlibParams::data(), saveIm, QFile::encodeName(saveFile).constData(), nullptr);
+    }
+#endif // HAVE_IMLIB1
+#ifdef HAVE_IMLIB2
+    imlib_context_set_image(m_kuim->imlibImage());
+    imlib_context_set_anti_alias(1);
+    Imlib_Image saveIm = imlib_create_cropped_scaled_image(0, 0, m_kuim->width(), m_kuim->height(), w, h);
+    if (saveIm!=nullptr)
+    {
+        imlib_context_set_image(saveIm);
+        imlib_apply_color_modifier();
+
+        Imlib_Load_Error err;
+        imlib_save_image_with_error_return(QFile::encodeName(saveFile).constData(), &err);
+        // TODO: decode and report the error
+        success = (err==IMLIB_LOAD_ERROR_NONE);
+    }
+#endif // HAVE_IMLIB2
+#ifdef HAVE_QTONLY
+    QImage saveIm = m_kuim->imlibImage();
+    if (keepOriginalSize)
+    {
+	Qt::TransformationMode mode = ImlibParams::imlibConfig()->smoothScale ? Qt::SmoothTransformation :
+		                                                                Qt::FastTransformation;
+        QImage tempIm = saveImage.scaled(w, h, Qt::IgnoreAspectRatio, mode);
+        saveIm = tempIm;
+    }
+
+    success = saveIm.save(saveFile);
+#endif // HAVE_QTONLY
+
+    if (success && !dest.isLocalFile())
+    {
+        if (isFullscreen()) toggleFullscreen();
+        // Otherwise, the upload window would block us invisibly
+
+        KIO::FileCopyJob *job = KIO::file_copy(QUrl::fromLocalFile(saveFile), dest, -1);
+        KJobWidgets::setWindow(job, this);
+        success = job->exec();
+    }
+
+#ifdef HAVE_IMLIB1
+    Imlib_kill_image(ImlibParams::data(), saveIm);
+#endif
+#ifdef HAVE_IMLIB2
+    imlib_context_set_image(saveIm);
+    imlib_free_image();
+#endif
+
+    qDebug() << "save success?" << success;
+    return (success);
 }
 
 void ImageWindow::toggleFullscreen()

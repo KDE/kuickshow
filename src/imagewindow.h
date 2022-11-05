@@ -19,6 +19,8 @@
 #ifndef IMAGEWINDOW_H
 #define IMAGEWINDOW_H
 
+#include <qurl.h>
+
 #include "imlibwidget.h"
 
 class KActionCollection;
@@ -32,7 +34,6 @@ class QMenu;
 class QMouseEvent;
 class QResizeEvent;
 class QSize;
-class QUrl;
 class QWheelEvent;
 class QWidget;
 class KuickFile;
@@ -141,9 +142,8 @@ protected:
   QMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;
 
-
 protected slots:
-  void 		saveImage();
+  void 		slotSaveImage();
   void          reload();
   void          slotProperties();
   void          pauseSlideShow();
@@ -162,8 +162,7 @@ private:
   bool          isCursorHidden() const;
 
   bool 		myIsFullscreen;
-  int           m_numHeads;
-  QString   m_saveDirectory;
+  QUrl          m_saveDirectory;
 
   KActionCollection *m_actions;
 

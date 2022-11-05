@@ -132,7 +132,14 @@ private:
     FileWidget   	*fileWidget;
     KUrlComboBox	*cmbPath;
     KuickConfigDialog 	*dialog;
+
+    // This variable identifies the currently active image viewer window:
+    // that is, either a newly created one or the last ImageWindow that a
+    // filtered event was received on, see eventFilter().
+    //
+    // TODO: maybe it would be better renamed to 'm_activeViewer'.
     ImageWindow 	*m_viewer;
+
     KToggleAction 	*oneWindowAction;
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;
