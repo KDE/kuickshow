@@ -4,20 +4,20 @@
 # Pjetur G. Hjaltason <pjetur@pjetur.net>, 2003.
 # Þröstur Svanbergsson <throstur@bylur.net>, 2004.
 # Arnar Leosson <leosson@frisurf.no>, 2005.
-# Sveinn í Felli <sveinki@nett.is>, 2006, 2009, 2010, 2021.
+# Sveinn í Felli <sveinki@nett.is>, 2006, 2009, 2010, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2021-06-14 00:15+0000\n"
-"PO-Revision-Date: 2021-12-07 18:44+0000\n"
+"PO-Revision-Date: 2022-11-11 08:51+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -151,7 +151,7 @@ msgstr "Birtuskil:"
 #: src/defaultswidget.ui:226
 #, kde-format
 msgid "Gamma:"
-msgstr "Litleiðrétting:"
+msgstr "Litróf:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
 #: src/defaultswidget.ui:272
@@ -241,7 +241,7 @@ msgstr "Ótakmarkað"
 #: src/generalwidget.ui:91
 #, kde-format
 msgid " MB"
-msgstr " Mb"
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
 #: src/generalwidget.ui:104
@@ -296,7 +296,7 @@ msgstr "Flytja mynd í ruslið"
 #: src/imagewindow.cpp:181
 #, kde-format
 msgid "Restore Original Size"
-msgstr "Upprunaleg stærð"
+msgstr "Endurheimta upprunalega stærð"
 
 #: src/imagewindow.cpp:186
 #, kde-format
@@ -366,22 +366,22 @@ msgstr "Minna litróf"
 #: src/imagewindow.cpp:258
 #, kde-format
 msgid "Scroll Up"
-msgstr "Renna upp"
+msgstr "Skruna upp"
 
 #: src/imagewindow.cpp:263
 #, kde-format
 msgid "Scroll Down"
-msgstr "Renna niður"
+msgstr "Skruna niður"
 
 #: src/imagewindow.cpp:268
 #, kde-format
 msgid "Scroll Left"
-msgstr "Renna til vinstri"
+msgstr "Skruna til vinstri"
 
 #: src/imagewindow.cpp:273
 #, kde-format
 msgid "Scroll Right"
-msgstr "Renna til hægri"
+msgstr "Skruna til hægri"
 
 #: src/imagewindow.cpp:278
 #, kde-format
@@ -616,7 +616,7 @@ msgstr "&Stillingar"
 #: src/kuickshow.cpp:341
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Aðaltækjaslá"
+msgstr "Aðalverkfærastika"
 
 #: src/kuickshow.cpp:653
 #, kde-format
