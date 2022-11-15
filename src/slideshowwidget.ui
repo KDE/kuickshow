@@ -54,7 +54,7 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>&amp;Iterations (0 = infinite):</string>
+      <string>&amp;Iterations:</string>
      </property>
      <property name="buddy">
       <cstring>cycles</cstring>
