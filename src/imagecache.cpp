@@ -117,7 +117,7 @@ static IMLIBIMAGE loadImageWithQt(const QString &fileName)
 #endif
     if (image.isNull())
     {
-        qDebug() << "loading failed";
+        qDebug() << "Qt image load failed";
 	return (nullptr);
     }
 
@@ -138,27 +138,44 @@ static IMLIBIMAGE loadImageWithQt(const QString &fileName)
         }
     }
 
-    // convert to 24 bpp (discard alpha)
+    // Create an Imlib image from the loaded Qt image
 #ifdef DEBUG_TIMING
     qDebug() << "starting to create image";
     timer.start();
 #endif
-    int numPixels = image.width() * image.height();
-    const int NUM_BYTES_NEW  = 3; // 24 bpp
-    // TODO: use a QByteArray
-    uchar *newImageData = new uchar[numPixels * NUM_BYTES_NEW];
-    uchar *newData = newImageData;
+    const int w = image.width();
+    const int h = image.height();
+    const int numPixels = w*h;
 
-    int w = image.width();
-    int h = image.height();
+#ifdef HAVE_IMLIB1
+    const int NUM_BYTES_NEW  = 3;
+    uchar *newImageData = new uchar[numPixels*NUM_BYTES_NEW];
+    uchar *newData = newImageData;
+#endif // HAVE_IMLIB1
+#ifdef HAVE_IMLIB2
+    DATA32 *newImageData = new DATA32[numPixels];
+    DATA32 *newData = newImageData;
+#endif // HAVE_IMLIB2
 
     for (int y = 0; y < h; y++) {
-	QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
+	const QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
 	for (int x = 0; x < w; x++) {
-	    const QRgb& pixel = scanLine[x];
+	    const QRgb &pixel = scanLine[x];
+#ifdef HAVE_IMLIB1
+            // For Imlib1 the pixel data is specified to be 24-bit RGB
+            // stored as 3 bytes in that order in memory, regardless
+            // of the machine endianess.
 	    *(newData++) = qRed(pixel);
 	    *(newData++) = qGreen(pixel);
 	    *(newData++) = qBlue(pixel);
+#endif // HAVE_IMLIB1
+#ifdef HAVE_IMLIB2
+            // For Imlib2 the pixel data is specified to be 32-bit ARGB
+            // with A the most significant byte and B the least, stored
+            // in a 32-bit word.  The data is filled in this way so as
+            // to take account of the machine endianess.
+            *(newData++) = pixel;
+#endif // HAVE_IMLIB2
 	}
     }
 
@@ -193,11 +210,7 @@ KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod
         }
 #else // HAVE_QTONLY
 	IMLIBIMAGE im = Imlib_load_image(ImlibParams::imlibData(), QFile::encodeName(fileName).data());
-        if (im==nullptr)
-        {
-            qWarning() << "image loading failed";
-            return (nullptr);
-        }
+        if (im==nullptr) qWarning() << "Imlib image load failed";
 #endif // HAVE_QTONLY
 #ifdef DEBUG_TIMING
 	qDebug() << "load took" << timer.elapsed() << "ms";
