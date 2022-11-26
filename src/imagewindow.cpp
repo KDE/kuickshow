@@ -985,11 +985,11 @@ bool ImageWindow::saveImage(const QUrl &dest, bool keepOriginalSize)
     qDebug() << "saving to" << saveFile;
 
 #ifdef HAVE_IMLIB1
-    ImlibImage *saveIm = Imlib_clone_scaled_image(ImlibParams::data(), m_kuim->imlibImage(), w, h);
+    ImlibImage *saveIm = Imlib_clone_scaled_image(ImlibParams::imlibData(), m_kuim->imlibImage(), w, h);
     if (saveIm!=nullptr)
     {
-        Imlib_apply_modifiers_to_rgb(ImlibParams::data(), saveIm);
-        success = Imlib_save_image(ImlibParams::data(), saveIm, QFile::encodeName(saveFile).constData(), nullptr);
+        Imlib_apply_modifiers_to_rgb(ImlibParams::imlibData(), saveIm);
+        success = Imlib_save_image(ImlibParams::imlibData(), saveIm, QFile::encodeName(saveFile).data(), nullptr);
     }
 #endif // HAVE_IMLIB1
 #ifdef HAVE_IMLIB2
@@ -1013,7 +1013,7 @@ bool ImageWindow::saveImage(const QUrl &dest, bool keepOriginalSize)
     {
 	Qt::TransformationMode mode = ImlibParams::imlibConfig()->smoothScale ? Qt::SmoothTransformation :
 		                                                                Qt::FastTransformation;
-        QImage tempIm = saveImage.scaled(w, h, Qt::IgnoreAspectRatio, mode);
+        QImage tempIm = saveIm.scaled(w, h, Qt::IgnoreAspectRatio, mode);
         saveIm = tempIm;
     }
 
@@ -1031,7 +1031,7 @@ bool ImageWindow::saveImage(const QUrl &dest, bool keepOriginalSize)
     }
 
 #ifdef HAVE_IMLIB1
-    Imlib_kill_image(ImlibParams::data(), saveIm);
+    Imlib_kill_image(ImlibParams::imlibData(), saveIm);
 #endif
 #ifdef HAVE_IMLIB2
     imlib_context_set_image(saveIm);
