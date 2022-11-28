@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-06-14 00:15+0000\n"
+"POT-Creation-Date: 2022-11-28 00:46+0000\n"
 "PO-Revision-Date: 2021-01-18 19:18+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -271,143 +271,143 @@ msgstr "குயிக்க்ஷோ இணைய தளத்தை திற
 msgid "Preload next image"
 msgstr "அடுத்த பிம்பத்தை முன்னேற்றுமதி செய்"
 
-#: src/imagewindow.cpp:152
+#: src/imagewindow.cpp:151
 #, kde-format
 msgid "Show Next Image"
 msgstr "அடுத்த பிம்பத்தை காட்டு"
 
-#: src/imagewindow.cpp:157
+#: src/imagewindow.cpp:156
 #, kde-format
 msgid "Show Previous Image"
 msgstr "முந்தைய பிம்பத்தை காட்டு"
 
-#: src/imagewindow.cpp:162
+#: src/imagewindow.cpp:161
 #, fuzzy, kde-format
 msgid "Delete Image"
 msgstr "பிம்பத்தை மறுஏற்று"
 
-#: src/imagewindow.cpp:167
+#: src/imagewindow.cpp:166
 #, kde-format
 msgid "Move Image to Trash"
 msgstr ""
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:180
 #, kde-format
 msgid "Restore Original Size"
 msgstr "உண்மையான அளவை மீட்டெடு "
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:185
 #, kde-format
 msgid "Maximize"
 msgstr "பெரிதாக்கு"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:190
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90 டிகிரி சுழற்று"
 
-#: src/imagewindow.cpp:196
+#: src/imagewindow.cpp:195
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "180 டிகிரி சுழற்று"
 
-#: src/imagewindow.cpp:201
+#: src/imagewindow.cpp:200
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270 டிகிரி சுழற்று"
 
-#: src/imagewindow.cpp:206
+#: src/imagewindow.cpp:205
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "கிடைமட்டமாக திருப்பு"
 
-#: src/imagewindow.cpp:211
+#: src/imagewindow.cpp:210
 #, kde-format
 msgid "Flip Vertically"
 msgstr "உயரவாகில் திருப்பு "
 
-#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#: src/imagewindow.cpp:215 src/kuickshow.cpp:257
 #, kde-format
 msgid "Print Image..."
 msgstr "பிம்பத்தை அச்சடி"
 
-#: src/imagewindow.cpp:227
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "More Brightness"
 msgstr "அதிக பிரகாசம்"
 
-#: src/imagewindow.cpp:232
+#: src/imagewindow.cpp:231
 #, kde-format
 msgid "Less Brightness"
 msgstr "குறைந்த பிரகாசம்"
 
-#: src/imagewindow.cpp:237
+#: src/imagewindow.cpp:236
 #, kde-format
 msgid "More Contrast"
 msgstr "அதிக மாறுபாடு"
 
-#: src/imagewindow.cpp:242
+#: src/imagewindow.cpp:241
 #, kde-format
 msgid "Less Contrast"
 msgstr "குறைந்த மாறுபாடு"
 
-#: src/imagewindow.cpp:247
+#: src/imagewindow.cpp:246
 #, kde-format
 msgid "More Gamma"
 msgstr "அதிக காமா"
 
-#: src/imagewindow.cpp:252
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Less Gamma"
 msgstr "குறைந்த காமா"
 
-#: src/imagewindow.cpp:258
+#: src/imagewindow.cpp:257
 #, kde-format
 msgid "Scroll Up"
 msgstr "மேலே நகர்த்து"
 
-#: src/imagewindow.cpp:263
+#: src/imagewindow.cpp:262
 #, kde-format
 msgid "Scroll Down"
 msgstr "கீழே நகர்த்து"
 
-#: src/imagewindow.cpp:268
+#: src/imagewindow.cpp:267
 #, kde-format
 msgid "Scroll Left"
 msgstr "இடது பக்கம் நகர்த்து"
 
-#: src/imagewindow.cpp:273
+#: src/imagewindow.cpp:272
 #, kde-format
 msgid "Scroll Right"
 msgstr "வலது பக்கம் நகர்த்து"
 
-#: src/imagewindow.cpp:278
+#: src/imagewindow.cpp:277
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "படவில்லை காட்சியை தற்காலிகமாக நிறுத்து"
 
-#: src/imagewindow.cpp:290
+#: src/imagewindow.cpp:289
 #, kde-format
 msgid "Reload Image"
 msgstr "பிம்பத்தை மறுஏற்று"
 
-#: src/imagewindow.cpp:296
+#: src/imagewindow.cpp:295
 #, kde-format
 msgid "Properties"
 msgstr ""
 
-#: src/imagewindow.cpp:350
+#: src/imagewindow.cpp:349
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:453
+#: src/imagewindow.cpp:452
 #, fuzzy, kde-format
 msgid "Unable to download the image from %1."
 msgstr "பிம்பத்தை அச்சிட முடியவில்லை"
 
-#: src/imagewindow.cpp:469
+#: src/imagewindow.cpp:468
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -417,47 +417,47 @@ msgstr ""
 "%1 எனும் பிம்பத்தை ஏற்ற முடியவில்லை\n"
 "கோப்பு வடிவம் ஆதரிக்கபடவில்லை அல்லது உங்கள் உறுப்பு சரியாக நிறுவப்படவில்லை"
 
-#: src/imagewindow.cpp:909
+#: src/imagewindow.cpp:908
 #, kde-format
 msgid "Brightness"
 msgstr "பிரகாசம்"
 
-#: src/imagewindow.cpp:913
+#: src/imagewindow.cpp:912
 #, kde-format
 msgid "Contrast"
 msgstr "வித்தியாசம்"
 
-#: src/imagewindow.cpp:917
+#: src/imagewindow.cpp:916
 #, kde-format
 msgid "Gamma"
 msgstr "காமா"
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:955
 #, kde-format
 msgid "Unable to print the image."
 msgstr "பிம்பத்தை அச்சிட முடியவில்லை"
 
-#: src/imagewindow.cpp:957
+#: src/imagewindow.cpp:956
 #, kde-format
 msgid "Printing Failed"
 msgstr "அச்சிட முடியவில்லை"
 
-#: src/imagewindow.cpp:967
+#: src/imagewindow.cpp:966
 #, kde-format
 msgid "Keep original image size"
 msgstr "அசலான பிம்ப அளவை வைத்துக்கொள்"
 
-#: src/imagewindow.cpp:971
+#: src/imagewindow.cpp:970
 #, kde-format
 msgid "Save As"
 msgstr ""
 
-#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#: src/imagewindow.cpp:973 src/kuickshow.cpp:1389
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
 
-#: src/imagewindow.cpp:994
+#: src/imagewindow.cpp:993
 #, fuzzy, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -466,12 +466,12 @@ msgstr ""
 "கோப்பினை சேமிக்க முடியவில்லை\n"
 "தகடு நிரம்பி விட்டது அல்லது கோப்பினை எழுத அனுமதி இல்லை."
 
-#: src/imagewindow.cpp:997
+#: src/imagewindow.cpp:996
 #, kde-format
 msgid "File Saving Failed"
 msgstr "கோப்பினை சேமிக்க முடியவில்லை"
 
-#: src/imagewindow.cpp:1269
+#: src/imagewindow.cpp:1268
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
