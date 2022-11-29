@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:46+0000\n"
-"PO-Revision-Date: 2022-10-10 04:36+0200\n"
+"PO-Revision-Date: 2022-11-28 09:45+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -608,6 +608,8 @@ msgid ""
 "<qt>Do you really want to delete\n"
 " <b>'%1'</b>?</qt>"
 msgstr ""
+"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ\n"
+" <b>'%1'</b>?</qt>"
 
 #: src/kuickshow.cpp:654
 #, kde-format
@@ -620,6 +622,8 @@ msgid ""
 "<qt>Do you really want to trash\n"
 " <b>'%1'</b>?</qt>"
 msgstr ""
+"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, სანაგვეში გადააგდოთ\n"
+" <b>'%1'</b>?</qt>"
 
 #: src/kuickshow.cpp:680
 #, kde-format
@@ -663,7 +667,7 @@ msgstr "KuickShow"
 #: src/main.cpp:38
 #, kde-format
 msgid "A fast and versatile image viewer"
-msgstr ""
+msgstr "სწრაფი და მორგებადი სურათების დამთვალიერებელი"
 
 #: src/main.cpp:40
 #, kde-format
@@ -688,12 +692,12 @@ msgstr "Thorsten Scheuermann"
 #: src/main.cpp:57
 #, kde-format
 msgid "Start in the last visited folder, not the current working folder."
-msgstr ""
+msgstr "ბოლო სამუშაო და არა მიმდინარე საქაღალდეში გაშვება."
 
 #: src/main.cpp:58
 #, kde-format
 msgid "Optional image filenames/urls to show"
-msgstr ""
+msgstr "გამოსახულებების ფაილის სახელის/ბმულის ჩვენება (არასავალდებულო)"
 
 #: src/printing.cpp:52
 #, kde-format
@@ -710,13 +714,13 @@ msgstr "გამოსახულების პარამეტრებ�
 #: src/printing_page.ui:20
 #, kde-format
 msgid "Print fi&lename below image"
-msgstr ""
+msgstr "გამოსახულებების ქვემოთ მისი &ფაილის სახელის მიწერა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr ""
+msgstr "გამოსახულების &შავთეთრად დაბეჭდვა"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
@@ -752,13 +756,13 @@ msgstr "&სიმაღლე:"
 #: src/printing_page.ui:121
 #, kde-format
 msgid "Print e&xact size: "
-msgstr ""
+msgstr "&ზუსტი ზომით დაბეჭდვა: "
 
 #. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
 #: src/printing_page.ui:141
 #, kde-format
 msgid "Shrink image to &fit, if necessary"
-msgstr ""
+msgstr "თუ საჭიროა, დაპატარავება საზღვრებში ჩასატევად"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -770,25 +774,25 @@ msgstr "სლაიდშოუ"
 #: src/slideshowwidget.ui:20
 #, kde-format
 msgid "Switch to &full-screen"
-msgstr ""
+msgstr "&სრულეკრანიანი რეჟიმზე გადასვლა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
 #: src/slideshowwidget.ui:27
 #, kde-format
 msgid "S&tart with current image"
-msgstr ""
+msgstr "&მიმდინარე გამოსახულებით დაწყება"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/slideshowwidget.ui:34
 #, kde-format
 msgid "De&lay between slides:"
-msgstr ""
+msgstr "დრო სლაიდებს შორის:"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:44
 #, kde-format
 msgid "Wait for key"
-msgstr ""
+msgstr "ღილაკის მოლოდინი"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:47
@@ -800,4 +804,4 @@ msgstr " წმ"
 #: src/slideshowwidget.ui:57
 #, kde-format
 msgid "&Iterations (0 = infinite):"
-msgstr ""
+msgstr "&იტერაციები (0 = უსასრულო):"
