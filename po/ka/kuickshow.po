@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:46+0000\n"
-"PO-Revision-Date: 2022-11-28 09:45+0100\n"
+"PO-Revision-Date: 2022-11-30 07:05+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -201,13 +201,13 @@ msgstr "სწრაფი რენდერი"
 #: src/generalwidget.ui:50
 #, kde-format
 msgid "Dither in HiColor (15/16bit) modes"
-msgstr ""
+msgstr "დიზერნგი ბევრფერიან (15/16 ბიტი) რეჟიმებში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
 #: src/generalwidget.ui:57
 #, kde-format
 msgid "Dither in LowColor (<=8bit) modes"
-msgstr ""
+msgstr "დიზეინგი ცოტაფერიან (<=8 ბიტი) რეჟიმებში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
 #: src/generalwidget.ui:64
@@ -461,6 +461,8 @@ msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
+"ფაილის შენახვის შეცდომა.\n"
+"ალბათ ან დისკია სავსე, ან წვდომა ფაილის ჩასაწერად არ გაგაჩნიათ."
 
 #: src/imagewindow.cpp:996
 #, kde-format
@@ -474,6 +476,9 @@ msgid ""
 "resource-consuming and even make your computer hang.\n"
 "Do you want to continue?"
 msgstr ""
+"აპირებთ გახსნათ ძალიან დიდი გამოსახულება (%1 x %2 პიქსელი), რომელსაც "
+"შეიძლება ძალიან ბევრი რესურსები დასჭირდეს და კომპიუტერი შეიძლება დაეკიდოს.\n"
+"გნებავთ, გააგრძელოთ?"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -530,7 +535,13 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br>If you "
 "choose %1, only the first image will be shown."
 msgstr[0] ""
+"მართლა გნებავთ 1 გამოსახულების გახსნა? ამას საკმაო რესურსები სჭირდება და "
+"შეიძლება თქვენი კომპიუტერის რესურსების გადატვირთვა მოხდეს. თუ %1-ს აირჩევთ, "
+"ნაჩვენები მხოლოდ პირველი გამოსახულება იქნება."
 msgstr[1] ""
+"მართლა გნებავთ %n გამოსახულების გახსნა? ამას საკმაო რესურსები სჭირდება და "
+"შეიძლება თქვენი კომპიუტერის რესურსების გადატვირთვა მოხდეს. თუ %1-ს აირჩევთ, "
+"ნაჩვენები მხოლოდ პირველი გამოსახულება იქნება."
 
 #: src/kuickshow.cpp:132
 #, kde-format
@@ -648,6 +659,9 @@ msgid ""
 "Start kuickshow from the command line and look for error messages.\n"
 "The program will now quit."
 msgstr ""
+"\"Imlib\"-ის ინიციალიზაციის შეცდომა.\n"
+"გაუშვით kuickshow ბრძანების სტრიქონიდან და შეცდომის შეტყობინება წაიკითხეთ.\n"
+"პროგრამა მუშაობას ასრულებს."
 
 #: src/kuickshow.cpp:1238
 #, kde-format
