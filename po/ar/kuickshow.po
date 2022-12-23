@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:46+0000\n"
-"PO-Revision-Date: 2022-11-21 19:11+0400\n"
+"PO-Revision-Date: 2022-12-22 11:02+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -659,7 +659,7 @@ msgstr ""
 #: src/kuickshow.cpp:680
 #, kde-format
 msgid "Trash File"
-msgstr "ملف المهمّات"
+msgstr "ملف المهملات"
 
 #: src/kuickshow.cpp:681
 #, kde-format
