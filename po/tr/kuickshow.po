@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:46+0000\n"
-"PO-Revision-Date: 2023-01-18 22:31+0300\n"
+"PO-Revision-Date: 2023-01-31 01:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -421,7 +421,7 @@ msgid ""
 "properly."
 msgstr ""
 "%1 görseli yüklenemedi.\n"
-"Dosya biçimi desteklenmiyor veya lmlib kitaplığı düzgün yüklenmemiş olabilir."
+"Dosya biçimi desteklenmiyor veya lmlib kitaplığı düzgün kurulmamış olabilir."
 
 #: src/imagewindow.cpp:908
 #, kde-format
