@@ -1,4 +1,5 @@
 # Translation of kuickshow into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
 #
 msgid ""
@@ -6,8 +7,8 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:46+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-03-22 19:14+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -167,10 +168,9 @@ msgstr "Ŝanĝita"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
 #: src/generalwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&General"
+#, kde-format
 msgid "General"
-msgstr "&Ĝeneralo"
+msgstr "Ĝeneralo"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
 #: src/generalwidget.ui:20
@@ -538,10 +538,9 @@ msgid "Configure %1..."
 msgstr ""
 
 #: src/kuickshow.cpp:265
-#, fuzzy, kde-format
-#| msgid "Start slideshow"
+#, kde-format
 msgid "Start Slideshow"
-msgstr "Starti la lumbildon"
+msgstr ""
 
 #: src/kuickshow.cpp:271
 #, kde-format
@@ -762,10 +761,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "Start slideshow"
+#, kde-format
 msgid "Slideshow"
-msgstr "Starti la lumbildon"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
 #: src/slideshowwidget.ui:20
@@ -802,6 +800,3 @@ msgstr " s"
 #, kde-format
 msgid "&Iterations (0 = infinite):"
 msgstr ""
-
-#~ msgid "infinite"
-#~ msgstr "senlime"
