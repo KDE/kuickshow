@@ -5,7 +5,7 @@
 # Federico Cozzi <federicocozzi@federicocozzi.it>, 2004, 2005.
 # Nicola Ruggero <nixprog.adsl@tiscali.it>, 2005, 2006.
 # Nicola Ruggero <nicola@nxnt.org>, 2006, 2008.
-# Paolo Zamponi <zapaolo@email.it>, 2018.
+# Paolo Zamponi <feus73@gmail.com>, 2018.
 #
 msgid ""
 msgstr ""
