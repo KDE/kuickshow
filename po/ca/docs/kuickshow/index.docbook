@@ -174,7 +174,7 @@
 </listitem>
 <listitem
 ><para
->Podeu establir el temps de retard per a un passi de diapositives.</para>
+>Podeu establir el temps de retard per a una presentació de diapositives.</para>
 </listitem>
 <listitem
 ><para
@@ -209,7 +209,7 @@
 ></link
 > i <link linkend="slideshow-options"
 ><guilabel
->Passi de diapositives</guilabel
+>Presentació de diapositives</guilabel
 ></link
 > configuren la manera d'operar del &kuickshow;, i les altres dues, <link linkend="shortcuts-options"
 ><guilabel
@@ -249,7 +249,7 @@
 ></term>
 <listitem>
 <para
->Si se selecciona, el &kuickshow; carregarà la imatge següent a la carpeta, mentre esteu veient l'actual. Això reduirà el retard quan seleccioneu la següent imatge i és especialment útil per a passis de diapositives.</para>
+>Si se selecciona, el &kuickshow; carregarà la imatge següent a la carpeta, mentre esteu veient l'actual. Això reduirà el retard quan seleccioneu la següent imatge i és especialment útil per a presentacions de diapositives.</para>
 </listitem>
 </varlistentry>
 
@@ -500,7 +500,7 @@
 
 <sect1 id="slideshow-options">
 <title
->La pestanya Passi de diapositives</title>
+>La pestanya Presentació de diapositives</title>
 
 <variablelist>
 
@@ -511,7 +511,7 @@
 ></term>
 <listitem>
 <para
->Indica si el &kuickshow; canviarà al mode de pantalla completa quan comenci el passi de diapositives. </para
+>Indica si el &kuickshow; canviarà al mode de pantalla completa quan comenci la presentació de diapositives. </para
 ></listitem>
 </varlistentry>
 
@@ -522,7 +522,7 @@
 ></term>
 <listitem>
 <para
->Indica si el passi de diapositives haurà de començar amb la primera imatge a la carpeta o amb la imatge seleccionada. </para
+>Indica si la presentació de diapositives haurà de començar amb la primera imatge a la carpeta o amb la imatge seleccionada. </para
 ></listitem>
 </varlistentry>
 
@@ -533,7 +533,7 @@
 ></term>
 <listitem>
 <para
->El període de temps entre els canvis d'imatge durant el passi de diapositives. Podeu utilitzar el control lliscant, introduïu un valor nou al camp o utilitzeu les fletxes petites per a fer augmentar o disminuir el valor. El valor predeterminat és 3 segons.</para>
+>El període de temps entre els canvis d'imatge durant la presentació de diapositives. Podeu utilitzar el control lliscant, introduïu un valor nou al camp o utilitzeu les fletxes petites per a fer augmentar o disminuir el valor. El valor predeterminat és 3 segons.</para>
 </listitem>
 </varlistentry>
 
@@ -544,7 +544,7 @@
 ></term>
 <listitem>
 <para
->La quantitat d'iteracions. Si s'estableix a 0, es posarà en bucle fins que interrompeu el passi de diapositives. Podeu utilitzar el control lliscant, introduïu un valor nou al camp o utilitzeu les fletxes petites per a fer augmentar o disminuir el valor. El valor predeterminat és 1.</para>
+>La quantitat d'iteracions. Si s'estableix a 0, es posarà en bucle fins que interrompeu la presentació de diapositives. Podeu utilitzar el control lliscant, introduïu un valor nou al camp o utilitzeu les fletxes petites per a fer augmentar o disminuir el valor. El valor predeterminat és 1.</para>
 </listitem>
 </varlistentry>
 
@@ -663,14 +663,14 @@
 > <guimenu
 >Fitxer</guimenu
 > <guimenuitem
->Inicia el passi de diapositives</guimenuitem
+>Inicia la presentació de diapositives</guimenuitem
 > </menuchoice
 ></term>
 <listitem
 ><para
 ><action
 >Inicia</action
-> un passi de diapositives amb les imatges que es troben a la carpeta.</para
+> una presentació de diapositives amb les imatges que es troben a la carpeta.</para
 ></listitem>
 </varlistentry>
 
