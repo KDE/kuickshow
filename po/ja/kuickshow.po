@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
@@ -544,7 +544,6 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br>If you "
 "choose %1, only the first image will be shown."
 msgstr[0] ""
-msgstr[1] ""
 
 #: src/kuickshow.cpp:132
 #, kde-format
