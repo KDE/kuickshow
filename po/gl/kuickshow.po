@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-28 00:46+0000\n"
-"PO-Revision-Date: 2023-06-05 15:13+0200\n"
+"PO-Revision-Date: 2023-06-17 13:59+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -288,7 +288,7 @@ msgstr "Mostrar a imaxe previa"
 #: src/imagewindow.cpp:161
 #, kde-format
 msgid "Delete Image"
-msgstr "Borrar a imaxe"
+msgstr "Eliminar a imaxe"
 
 #: src/imagewindow.cpp:166
 #, kde-format
@@ -569,12 +569,12 @@ msgstr "Comezar a presentación"
 #: src/kuickshow.cpp:271
 #, kde-format
 msgid "About KuickShow"
-msgstr "Acerca de KuickShow"
+msgstr "Sobre KuickShow"
 
 #: src/kuickshow.cpp:276
 #, kde-format
 msgid "Open Only One Image Window"
-msgstr "Abrir só unha fiestra de imaxe"
+msgstr "Abrir só unha xanela de imaxe"
 
 #: src/kuickshow.cpp:281
 #, kde-format
@@ -594,7 +594,7 @@ msgstr "Mostrar a imaxe"
 #: src/kuickshow.cpp:292
 #, kde-format
 msgid "Show Image in Active Window"
-msgstr "Mostrar a imaxe na fiestra activa"
+msgstr "Mostrar a imaxe na xanela activa"
 
 #: src/kuickshow.cpp:296
 #, kde-format
@@ -631,7 +631,7 @@ msgstr "<qt>Seguro que quere eliminar <b>«%1»</b>?</qt>"
 #: src/kuickshow.cpp:654
 #, kde-format
 msgid "Delete File"
-msgstr "Borrar o ficheiro"
+msgstr "Eliminar o ficheiro"
 
 #: src/kuickshow.cpp:679
 #, kde-format
