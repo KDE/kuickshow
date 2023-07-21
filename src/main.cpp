@@ -22,6 +22,7 @@
 #include <QApplication>
 #include <QCommandLineParser>
 
+#include "imlib.h"
 #include "kuickshow.h"
 #include "version.h"
 
@@ -47,20 +48,7 @@ extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
     about.addCredit(i18n("Rober Hamberger"), QString(), QStringLiteral("rh474@bingo-ev.de"));
     about.addCredit(i18n("Thorsten Scheuermann"), QString(), QStringLiteral("uddn@rz.uni-karlsruhe.de"));
 
-#ifdef HAVE_IMLIB1
-    about.addComponent(i18n("Imlib 1"),
-                       i18n("Image processing library"),
-                       IMLIB1_VERSION,
-                       "http://web.mit.edu/graphics/src/imlib-1.7/doc/",
-                       KAboutLicense::LGPL);		// LGPL from package README file
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    about.addComponent(i18n("Imlib 2"),
-                       i18n("Image processing library"),
-                       IMLIB2_VERSION,
-                       "https://docs.enlightenment.org/api/imlib2/html/",
-                       KAboutLicense::BSDL);		// from SourceForge home page
-#endif // HAVE_IMLIB2
+    ImageLibrary::get()->addAboutData(about);
 
     KAboutData::setApplicationData(about);
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("kuickshow")));

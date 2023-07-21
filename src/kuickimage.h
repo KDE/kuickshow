@@ -21,13 +21,10 @@
 
 #include <qobject.h>
 
-#include "imlib-wrapper.h"
-
+#include "imlib.h"
 #include "kuickconfig.h"
 #include "kuickfile.h"
 
-class QImage;
-class QPixmap;
 class QUrl;
 
 
@@ -38,7 +35,7 @@ class KuickImage : public QObject
 public:
   enum ResizeMode { FAST, SMOOTH };
 
-  KuickImage(const KuickFile *file, IMLIBIMAGE &im);
+  KuickImage(const KuickFile *file, ImageHandle im);
   virtual ~KuickImage();
 
   int 		width() 	const	{ return myWidth;   }
@@ -57,7 +54,7 @@ public:
   bool		rotateAbs( Rotation rot );
   void 		flip( FlipMode flipMode );
   bool 		flipAbs( int mode );
-  IMLIBIMAGE	imlibImage()	const { return myIm;      }
+  ImageHandle&	imlibImage()	      { return myIm;      }
   const KuickFile& file()       const { return *myFile; }
   QUrl url()             const { return myFile->url(); }
 
@@ -84,8 +81,8 @@ private:
 
   int 		myWidth;
   int 		myHeight;
-  IMLIBIMAGE 	myOrigIm;
-  IMLIBIMAGE 	myIm;
+  ImageHandle myOrigIm;
+  ImageHandle myIm;
 
   bool 		myIsDirty;
 

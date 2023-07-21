@@ -69,6 +69,7 @@
 #include "filecache.h"
 #include "filewidget.h"
 #include "imagewindow.h"
+#include "imlib.h"
 #include "imlibwidget.h"
 #include "kuick.h"
 #include "kuickconfig.h"
@@ -76,7 +77,6 @@
 #include "kuickfile.h"
 #include "kuickshow_debug.h"
 #include "openfilesanddirsdialog.h"
-#include "imlibparams.h"
 
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KuickShow::ShowFlags)
@@ -141,33 +141,10 @@ KuickShow::KuickShow( const char *objName )
 
     // This will report the build time version, there appears to
     // be no way to obtain the run time Imlib version.
-#ifdef HAVE_IMLIB1
-    int imlibVersion = 1;
-    qDebug() << "Configured for Imlib 1 version" << IMLIB1_VERSION;
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    int imlibVersion = 2;
-    qDebug() << "Configured for Imlib 2 version" << IMLIB2_VERSION;
-#endif // HAVE_IMLIB2
-#ifdef HAVE_QTONLY
-    qDebug() << "Configured for Qt only";
-#endif // HAVE_QTONLY
+    const auto imlib = ImageLibrary::get();
+    qDebug("Compiled with image library: %s %s", qPrintable(imlib->getLibraryName()), qPrintable(imlib->getLibraryVersion()));
 
-#ifndef HAVE_QTONLY
-    if (!initImlib())
-    {
-        KMessageBox::error(nullptr,
-                           i18n("Unable to initialize the Imlib %2 library.\n\n"
-                                "More information may be available in the session log file,\n"
-                                "or can be obtained by starting %1 from a terminal.",
-                                QGuiApplication::applicationDisplayName(), imlibVersion),
-                           i18n("Fatal Imlib Error"));
-
-        QCoreApplication::exit(1);
-        deleteLater();					// to actually exit event loop
-        return;
-    }
-#endif // HAVE_QTONLY
+    if (!initImlib()) return;
 
     resize( 400, 500 );
 
@@ -1138,7 +1115,7 @@ void KuickShow::slotConfigApplied()
     dialog->applyConfig();
 
     KuickConfig::get().save();
-    initImlib();					// already initialised, so ignore failure
+    if (!initImlib()) return;
 
     for (ImageWindow *viewer : qAsConst(s_viewers))
     {
@@ -1256,7 +1233,20 @@ void KuickShow::messageCantLoadImage( const KuickFile *, const QString& message 
 
 bool KuickShow::initImlib()
 {
-    return (ImlibParams::self()->init());		// set up library, check success
+    ImageLibrary::reset();
+    auto imlib = ImageLibrary::get();
+    if (imlib->isInitialized()) return true;
+
+    KMessageBox::error(nullptr,
+                       i18n("Unable to initialize the image library \"%2\".\n\n"
+                            "More information may be available in the session log file,\n"
+                            "or can be obtained by starting %1 from a terminal.",
+                            QGuiApplication::applicationDisplayName(), imlib->getLibraryName()),
+                       i18n("Fatal Initialization Error"));
+
+    QCoreApplication::exit(1);
+    deleteLater();					// to actually exit event loop
+    return false;
 }
 
 

@@ -24,7 +24,7 @@ set(kuickshow_KDEINIT_SRCS
    printing.cpp
    openfilesanddirsdialog.cpp
    imagecache.cpp
-   imlibparams.cpp
+   imlib.cpp
 )
 
 ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
@@ -46,16 +46,14 @@ ecm_qt_declare_logging_category(kuickshow_KDEINIT_SRCS
 
 if (IMLIB_FOUND)
   add_definitions(${IMLIB_DEFINITIONS})
-  add_compile_definitions("HAVE_IMLIB1")
-  add_compile_definitions("IMLIB1_VERSION=\"${IMLIB_VERSION}\"")
+  add_compile_definitions("IMAGE_LIBRARY_VERSION=\"${IMLIB_VERSION}\"")
+  list(APPEND kuickshow_KDEINIT_SRCS imlib_imlib1.cpp)
+elseif (IMLIB2_FOUND)
+  add_definitions(${IMLIB2_DEFINITIONS})
+  add_compile_definitions("IMAGE_LIBRARY_VERSION=\"${IMLIB2_VERSION}\"")
+  list(APPEND kuickshow_KDEINIT_SRCS imlib_imlib2.cpp)
 else ()
-  if (IMLIB2_FOUND)
-    add_definitions(${IMLIB2_DEFINITIONS})
-    add_compile_definitions("HAVE_IMLIB2")
-    add_compile_definitions("IMLIB2_VERSION=\"${IMLIB2_VERSION}\"")
-  else ()
-    add_compile_definitions("HAVE_QTONLY")
-  endif ()
+  list(APPEND kuickshow_KDEINIT_SRCS imlib_qt.cpp)
 endif ()
 
 add_definitions("-DHOMEPAGE_URL=\"https://userbase.kde.org/KuickShow\"")

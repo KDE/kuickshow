@@ -32,7 +32,6 @@
 
 #include "kuickfile.h"
 #include "kuickimage.h"
-#include "imlibparams.h"
 
 
 ImageCache::ImageCache(int maxImages)
@@ -99,97 +98,7 @@ KuickImage *ImageCache::getKuimage(KuickFile *file)
 }
 
 
-#ifndef HAVE_QTONLY
-// Note: the returned image's filename will not be the real filename (which it usually
-// isn't anyway, according to Imlib's sources).
-static IMLIBIMAGE loadImageWithQt(const QString &fileName)
-{
-    qDebug() << "loading" << fileName;
-
-#ifdef DEBUG_TIMING
-    QElapsedTimer timer;
-    qDebug() << "starting to load image";
-    timer.start();
-#endif
-    QImage image( fileName );
-#ifdef DEBUG_TIMING
-    qDebug() << "load took" << timer.elapsed() << "ms, ok" << !image.isNull();
-#endif
-    if (image.isNull())
-    {
-        qDebug() << "Qt image load failed";
-	return (nullptr);
-    }
-
-    if (image.depth()!=32)
-    {
-#ifdef DEBUG_TIMING
-	qDebug() << "starting to convert image from depth" << image.depth();
-	timer.start();
-#endif
-	image = image.convertToFormat(QImage::Format_RGB32);
-#ifdef DEBUG_TIMING
-        qDebug() << "convert took" << timer.elapsed() << "ms, ok" << !image.isNull();
-#endif
-        if (image.isNull())
-        {
-            qDebug() << "converting to Format_RGB32 failed";
-            return (nullptr);
-        }
-    }
-
-    // Create an Imlib image from the loaded Qt image
-#ifdef DEBUG_TIMING
-    qDebug() << "starting to create image";
-    timer.start();
-#endif
-    const int w = image.width();
-    const int h = image.height();
-    const int numPixels = w*h;
-
-#ifdef HAVE_IMLIB1
-    const int NUM_BYTES_NEW  = 3;
-    uchar *newImageData = new uchar[numPixels*NUM_BYTES_NEW];
-    uchar *newData = newImageData;
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    DATA32 *newImageData = new DATA32[numPixels];
-    DATA32 *newData = newImageData;
-#endif // HAVE_IMLIB2
-
-    for (int y = 0; y < h; y++) {
-	const QRgb *scanLine = reinterpret_cast<QRgb *>( image.scanLine(y) );
-	for (int x = 0; x < w; x++) {
-	    const QRgb &pixel = scanLine[x];
-#ifdef HAVE_IMLIB1
-            // For Imlib1 the pixel data is specified to be 24-bit RGB
-            // stored as 3 bytes in that order in memory, regardless
-            // of the machine endianess.
-	    *(newData++) = qRed(pixel);
-	    *(newData++) = qGreen(pixel);
-	    *(newData++) = qBlue(pixel);
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-            // For Imlib2 the pixel data is specified to be 32-bit ARGB
-            // with A the most significant byte and B the least, stored
-            // in a 32-bit word.  The data is filled in this way so as
-            // to take account of the machine endianess.
-            *(newData++) = pixel;
-#endif // HAVE_IMLIB2
-	}
-    }
-
-    IMLIBIMAGE im = Imlib_create_image_from_data(ImlibParams::imlibData(), newImageData, nullptr, w, h);
-    delete[] newImageData;
-#ifdef DEBUG_TIMING
-    qDebug() << "create took" << timer.elapsed() << "ms";
-#endif
-    return (im);
-}
-#endif // HAVE_QTONLY
-
-
-KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod)
+KuickImage *ImageCache::loadImage(KuickFile *file, const ImageModifiers &mod)
 {
 	if (file==nullptr || !file->isAvailable()) return (nullptr);
         const QString fileName = file->localFile();
@@ -202,34 +111,19 @@ KuickImage *ImageCache::loadImage(KuickFile *file, const ImlibColorModifier &mod
 	timer.start();
 #endif
 
-#ifdef HAVE_QTONLY
-        QImage im(fileName);
-        if (!im.isNull())
-        {
-            if (im.depth()!=32) im = im.convertToFormat(QImage::Format_RGB32);
-        }
-#else // HAVE_QTONLY
-	IMLIBIMAGE im = Imlib_load_image(ImlibParams::imlibData(), QFile::encodeName(fileName).data());
-        if (im==nullptr) qWarning() << "Imlib image load failed";
-#endif // HAVE_QTONLY
+	ImageHandle image = ImageLibrary::loadImage(fileName);
 #ifdef DEBUG_TIMING
 	qDebug() << "load took" << timer.elapsed() << "ms";
 #endif
 	slotIdle();
 
-#ifndef HAVE_QTONLY
-	if (im==nullptr)				// failed to load via imlib,
-	{						// fall back to loading via Qt
-		slotBusy();
-		im = loadImageWithQt(fileName);
-		slotIdle();
-		if (im==nullptr) return (nullptr);
+	if (!image) {
+		qWarning("failed to load image %s", qPrintable(fileName));
+		return nullptr;
 	}
 
-        // TODO: for Qt only
-	Imlib_set_image_modifier(ImlibParams::imlibData(), im, const_cast<ImlibColorModifier *>(&mod));
-#endif // HAVE_QTONLY
-	KuickImage *kuim = new KuickImage(file, const_cast<IMLIBIMAGE &>(im));
+	ImageLibrary::setImageModifiers(image, mod);
+	KuickImage *kuim = new KuickImage(file, image);
 	connect(kuim, &KuickImage::startRendering, this, &ImageCache::slotBusy);
 	connect(kuim, &KuickImage::stoppedRendering, this, &ImageCache::slotIdle);
 

@@ -22,6 +22,7 @@
 #include <QStandardPaths>
 #include <QUrl>
 
+#include "imlib.h"
 #include "imlibwidget.h"
 
 
@@ -157,12 +158,12 @@ void DefaultsWidget::enableWidgets( bool enable )
     ui->sbMaxUpScaleFactor->setEnabled( enable & ui->cbUpScale->isChecked() );
 
     ui->gbGeometry->setEnabled( enable );
-#ifdef HAVE_QTONLY
-  // Disable GUI control groups that are only relevant for Imlib
-    enable = false;
-#endif // HAVE_QTONLY
-    ui->gbAdjust->setEnabled( enable );
-    ui->gbPreview->setEnabled( enable );
+
+    // some settings may not be supported with the compiled library in which case they're always disabled
+    const bool supportImageColorModifications = ImageLibrary::get()->supportsImageColorModifications();
+    ui->gbAdjust->setEnabled( enable && supportImageColorModifications );
+    ui->gbPreview->setEnabled( enable && supportImageColorModifications );
+
     updatePreview();
 }
 

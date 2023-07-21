@@ -33,15 +33,6 @@
 #include "kuickshow_debug.h"
 #include "imagemods.h"
 #include "imagecache.h"
-#include "imlibparams.h"
-
-#ifdef HAVE_IMLIB2
-#include <math.h>
-#endif // HAVE_IMLIB2
-
-
-static const int ImlibOffset = 256;
-static const int ImlibLimit = 256;
 
 
 ImlibWidget::ImlibWidget(QWidget *parent)
@@ -69,9 +60,9 @@ void ImlibWidget::init()
     m_kuickFile = nullptr;
     myUseModifications = true;
 
-#ifdef HAVE_IMLIB1
-    if (ImlibParams::imlibData()==nullptr) qFatal("Imlib not initialised");
-#endif // HAVE_IMLIB1
+    const auto imlib = ImageLibrary::get();
+    if (!imlib->isInitialized())
+        qFatal("ImlibWidget: ImageLibrary \"%s\" not initialized, aborting.", qPrintable(imlib->getLibraryName()));
 
     setAttribute( Qt::WA_DeleteOnClose );
     setAutoRender( true );
@@ -85,19 +76,11 @@ void ImlibWidget::init()
     imageCache = new ImageCache(4); // cache 4 images (FIXME?)
     connect(imageCache, &ImageCache::sigBusy, this, &ImlibWidget::setBusyCursor);
     connect(imageCache, &ImageCache::sigIdle, this, &ImlibWidget::restoreCursor);
-
-#ifdef HAVE_IMLIB2
-    myModifier = imlib_create_color_modifier();
-#endif // HAVE_IMLIB2
 }
 
 ImlibWidget::~ImlibWidget()
 {
     delete imageCache;
-#ifdef HAVE_IMLIB2
-    imlib_context_set_color_modifier(myModifier);
-    imlib_free_color_modifier();
-#endif // HAVE_IMLIB2
 }
 
 
@@ -219,108 +202,22 @@ void ImlibWidget::showImage()
 // update the image modification values.  If the modifier has been
 // reset as in loadImageInternal() above, this has the effect of
 // setting the absolute values.
-//
-// Imlib2's colour modifications are cumulative, there is no way
-// to set an absolute value without knowing the current value and
-// no way to read the current value.  Therefore, this is the only
-// way to actually set an absolute value.
 
 void ImlibWidget::stepBrightnessInternal(int b)
 {
-     if (b==0) return;							// no change
-     b = qBound(-ImlibLimit, b, +ImlibLimit);				// enforce limits
-
-#ifdef HAVE_IMLIB1
-    // ImlibOffset has already been added when the modifier
-    // was initialised in loadImageInternal().
-    myModifier.brightness += b;
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    // The value passed to imlib_modify_color_modifier_brightness()
-    // is cumulative.  Brightness values of 0 do not affect anything.
-    // -1.0 will make things completely black and 1.0 will make things
-    // all white.  Values in between vary brightness linearly.
-    //
-    // As opposed to contrast and gamma below, the cumulative effects
-    // of brightness appear to be additive.  Therefore, the brightness
-    // step is chosen to again take the same number of steps as for
-    // Imlib1 to reach the limits as above.
-    imlib_context_set_color_modifier(myModifier);
-    imlib_modify_color_modifier_brightness(b/double(ImlibLimit));
-#endif // HAVE_IMLIB2
-    // TODO: for Qt only
+	myModifier.setBrightness(myModifier.getBrightness() + b);
 }
 
 
 void ImlibWidget::stepContrastInternal(int c)
 {
-    if (c==0) return;							// no change
-    c = qBound(-ImlibLimit, c, +ImlibLimit);				// enforce limits
-
-#ifdef HAVE_IMLIB1
-    // See ImlibWidget::stepBrightness() above.
-    myModifier.contrast += c;
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    // The API documentation for imlib_modify_color_modifier_contrast()
-    // is confusing.  It says:
-    //
-    //   "Modifies the current color modifier by adjusting the contrast
-    //   by the value 'contrast_value'. The color modifier is modified
-    //   not set, so calling this repeatedly has cumulative effects.
-    //   Contrast of 1.0 does nothing. 0.0 will merge to gray, 2.0 will
-    //   double contrast etc."
-    //
-    // The "cumulative" effects do not seem to be additive:  for example,
-    // assuming that the contrast starts off at 1.0 as was explicitly set
-    // in loadImageInternal() above, it would be logical to assume that a
-    // subsequent step of 0.1 would make the new effective contrast 1.1 -
-    // that is, slightly greater than normal.  However, the effect of this
-    // value is actually to set the contrast very low (almost totally grey).
-    // To achieve a contrast step of 0.1 the value here needs to be set to
-    // 1.1, and for the other direction (less contrast) it needs to be
-    // 1/1.1 (approximately 0.91).  Perhaps what is happening is that the
-    // value multiplies the current contrast instead of adding to it.
-    //
-    // Working on this assumption, under Imlib1 the standard step of 10
-    // would have to be applied about 25 times to bring the contrast up
-    // to the limit of 256.  Therefore, the Imlib2 step is calculated to
-    // require the same number of steps to bring the contrast up to 2.0,
-    // although it is not certain whether this is a hard limit or what
-    // happens if it is exceeded.
-    double cc = pow(2, double(c)/ImlibLimit);
-    imlib_context_set_color_modifier(myModifier);
-    imlib_modify_color_modifier_contrast(cc);
-#endif // HAVE_IMLIB2
-    // TODO: for Qt only
+	myModifier.setContrast(myModifier.getContrast() + c);
 }
 
 
 void ImlibWidget::stepGammaInternal(int g)
 {
-    if (g==0) return;							// no change
-    g = qBound(-ImlibLimit, g, +ImlibLimit);				// enforce limits
-
-#ifdef HAVE_IMLIB1
-    // See ImlibWidget::stepBrightness() above.
-    myModifier.gamma += g;
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    // The API documentation for imlib_modify_color_modifier_gamma()
-    // says:
-    //
-    //   "Modifies the current color modifier by adjusting the gamma by
-    //   the value specified 'gamma_value'.  The color modifier is modified
-    //   not set, so calling this repeatedly has cumulative effects.  A
-    //   gamma of 1.0 is normal linear, 2.0 brightens and 0.5 darkens etc."
-    //
-    // The cumulative effect again seems to be multiplicative, see the
-    // comments in stepContrastInternal() above.
-    double gg = pow(2, double(g)/ImlibLimit);
-    imlib_context_set_color_modifier(myModifier);
-    imlib_modify_color_modifier_gamma(gg);
-#endif // HAVE_IMLIB2
-    // TODO: for Qt only
+	myModifier.setGamma(myModifier.getGamma() + g);
 }
 
 
@@ -573,13 +470,7 @@ void ImlibWidget::setImageModifier()
 {
     if (m_kuim==nullptr) return;
 
-#ifdef HAVE_IMLIB1
-    Imlib_set_image_modifier(ImlibParams::imlibData(), m_kuim->imlibImage(), &myModifier);
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    imlib_context_set_color_modifier(myModifier);
-#endif // HAVE_IMLIB2
-
+    ImageLibrary::setImageModifiers(m_kuim->imlibImage(), myModifier);
     m_kuim->setDirty( true );
 }
 
@@ -625,17 +516,5 @@ void ImlibWidget::setUseModifications(bool enable)
 void ImlibWidget::initModifications()
 {
     // Start with the default image modifications
-#ifdef HAVE_IMLIB1
-    myModifier.brightness = ImlibOffset;
-    myModifier.contrast = ImlibOffset;
-    myModifier.gamma = ImlibOffset;
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    imlib_context_set_color_modifier(myModifier);
-    imlib_reset_color_modifier();
-
-    imlib_modify_color_modifier_brightness(0.0);	// initial default values
-    imlib_modify_color_modifier_contrast(1.0);
-    imlib_modify_color_modifier_gamma(1.0);
-#endif // HAVE_IMLIB2
+    myModifier = ImageModifiers();
 }

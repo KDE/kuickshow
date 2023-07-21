@@ -12,9 +12,9 @@
 #ifndef IMLIBWIDGET_H
 #define IMLIBWIDGET_H
 
-#include <QScrollArea>
+#include "imlib.h"
 
-#include "imlib-wrapper.h"
+#include <QScrollArea>
 
 #include "kuickconfig.h"
 
@@ -102,11 +102,7 @@ protected:
   ImageCache 	*imageCache;
 
 private:
-  // TODO: combine this (in a new custom class) with the rotete/flip/scale
-  // modifications in KuickImage.  Be able to detect whether it is null
-  // (i.e. whether it actually does anything).  Apply all of the requested
-  // modifications in one place in KuickImage::toQImage().
-  ImlibColorModifier myModifier;
+  ImageModifiers myModifier;
 
   KuickFile *m_kuickFile;
   QCursor m_oldCursor;

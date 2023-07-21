@@ -10,10 +10,10 @@
 #ifndef IMAGECACHE_H
 #define IMAGECACHE_H
 
+#include "imlib.h"
+
 #include <qobject.h>
 #include <qcache.h>
-
-#include "imlib-wrapper.h"
 
 class KuickFile;
 class KuickImage;
@@ -32,7 +32,7 @@ public:
   int 			maxImages() const;
 
   KuickImage *		getKuimage(KuickFile *file);
-  KuickImage *		loadImage(KuickFile *file, const ImlibColorModifier &mod);
+  KuickImage *		loadImage(KuickFile *file, const ImageModifiers &mod);
 
 private:
   QCache<QUrl,KuickImage> myCache;

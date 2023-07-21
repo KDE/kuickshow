@@ -19,6 +19,7 @@
 #include "generalwidget.h"
 #include <ui_generalwidget.h>
 
+#include "imlib.h"
 #include "kuickconfig.h"
 
 #include <KIconLoader>
@@ -49,14 +50,13 @@ GeneralWidget::GeneralWidget( QWidget *parent )
   connect(ui->logo, QOverload<>::of(&KUrlLabel::leftClickedUrl), this, &GeneralWidget::slotURLClicked);
   connect(ui->cbOwnPalette, &QAbstractButton::clicked, this, &GeneralWidget::useOwnPalette);
 
-#ifdef HAVE_QTONLY
-  // Disable GUI controls that are only relevant for Imlib
-  ui->cbFastRemap->setEnabled(false);
-  ui->cbOwnPalette->setEnabled(false);
-  ui->cbFastRender->setEnabled(false);
-  ui->cbDither16bit->setEnabled( false );
-  ui->cbDither8bit->setEnabled( false );
-#endif // HAVE_QTONLY
+  // support for these settings depends on the compiled library
+  const auto imlib = ImageLibrary::get();
+  ui->cbFastRender->setEnabled(imlib->supportsFastRendering());
+  ui->cbDither16bit->setEnabled(imlib->supportsDithering());
+  ui->cbDither8bit->setEnabled(imlib->supportsDithering());
+  ui->cbOwnPalette->setEnabled(imlib->supportsColorPalette());
+  ui->cbFastRemap->setEnabled(imlib->supportsColorPalette());
 
   // load and show the saved settings
   loadSettings();
@@ -115,8 +115,6 @@ void GeneralWidget::applySettings()
 
 void GeneralWidget::useOwnPalette()
 {
-#ifndef HAVE_QTONLY
-    // Keep the GUI control disabled if it is not relevant
-    ui->cbFastRemap->setEnabled( ui->cbOwnPalette->isChecked() );
-#endif // HAVE_QTONLY
+    // only enable the control if the library supports color palettes
+    ui->cbFastRemap->setEnabled( ui->cbOwnPalette->isChecked() && ImageLibrary::get()->supportsColorPalette() );
 }

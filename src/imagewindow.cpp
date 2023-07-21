@@ -75,7 +75,6 @@
 #include "kuickimage.h"
 #include "printing.h"
 #include "imagecache.h"
-#include "imlibparams.h"
 
 QCursor *ImageWindow::s_handCursor = nullptr;
 
@@ -851,12 +850,11 @@ void ImageWindow::setPopupMenu()
     gammaMenu->addAction(m_actions->action("more_gamma"));
     gammaMenu->addAction(m_actions->action("less_gamma"));
 
-#ifdef HAVE_QTONLY
-    // Colour controls are not supported without Imlib at the moment.
-    brightnessMenu->setEnabled(false);
-    contrastMenu->setEnabled(false);
-    gammaMenu->setEnabled(false);
-#endif // HAVE_QTONLY
+    // only enable these settings if the compiled library supports color modifications
+    const bool supportImageColorModifications = ImageLibrary::get()->supportsImageColorModifications();
+    brightnessMenu->setEnabled(supportImageColorModifications);
+    contrastMenu->setEnabled(supportImageColorModifications);
+    gammaMenu->setEnabled(supportImageColorModifications);
 
     viewerMenu->addAction(m_actions->action("zoom_in"));
     viewerMenu->addAction(m_actions->action("zoom_out"));
@@ -988,42 +986,15 @@ bool ImageWindow::saveImage(const QUrl &dest, bool keepOriginalSize)
     }
     qDebug() << "saving to" << saveFile;
 
-#ifdef HAVE_IMLIB1
-    ImlibImage *saveIm = Imlib_clone_scaled_image(ImlibParams::imlibData(), m_kuim->imlibImage(), w, h);
-    if (saveIm!=nullptr)
-    {
-        Imlib_apply_modifiers_to_rgb(ImlibParams::imlibData(), saveIm);
-        success = Imlib_save_image(ImlibParams::imlibData(), saveIm, QFile::encodeName(saveFile).data(), nullptr);
-    }
-#endif // HAVE_IMLIB1
-#ifdef HAVE_IMLIB2
-    imlib_context_set_image(m_kuim->imlibImage());
-    imlib_context_set_anti_alias(1);
-    Imlib_Image saveIm = imlib_create_cropped_scaled_image(0, 0, m_kuim->width(), m_kuim->height(), w, h);
-    if (saveIm!=nullptr)
-    {
-        imlib_context_set_image(saveIm);
-        imlib_apply_color_modifier();
-
-        Imlib_Load_Error err;
-        imlib_save_image_with_error_return(QFile::encodeName(saveFile).constData(), &err);
-        // TODO: decode and report the error
-        success = (err==IMLIB_LOAD_ERROR_NONE);
-    }
-#endif // HAVE_IMLIB2
-#ifdef HAVE_QTONLY
-    QImage saveIm = m_kuim->imlibImage();
-    if (keepOriginalSize)
-    {
-	Qt::TransformationMode mode = KuickConfig::get().smoothScale ? Qt::SmoothTransformation :
-		                                                                Qt::FastTransformation;
-        QImage tempIm = saveIm.scaled(w, h, Qt::IgnoreAspectRatio, mode);
-        saveIm = tempIm;
+    // create a copy of the image if it has modifications
+    ImageHandle saveIm = m_kuim->imlibImage();
+    if (ImageLibrary::getImageSize(saveIm) != QSize(w, h) || ImageLibrary::getImageModifiers(saveIm).isSet()) {
+        saveIm = ImageLibrary::copyImage(saveIm);
+        ImageLibrary::resizeImageSmooth(saveIm, w, h);
     }
 
-    success = saveIm.save(saveFile);
-#endif // HAVE_QTONLY
-
+    // save the image
+    if (saveIm) success = ImageLibrary::saveImage(saveIm, saveFile);
     if (success && !dest.isLocalFile())
     {
         if (isFullscreen()) toggleFullscreen();
@@ -1033,14 +1004,6 @@ bool ImageWindow::saveImage(const QUrl &dest, bool keepOriginalSize)
         KJobWidgets::setWindow(job, this);
         success = job->exec();
     }
-
-#ifdef HAVE_IMLIB1
-    Imlib_kill_image(ImlibParams::imlibData(), saveIm);
-#endif
-#ifdef HAVE_IMLIB2
-    imlib_context_set_image(saveIm);
-    imlib_free_image();
-#endif
 
     qDebug() << "save success?" << success;
     return (success);
