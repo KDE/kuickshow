@@ -28,7 +28,6 @@
 #include <QX11Info>
 
 #include "filecache.h"
-#include "kuickdata.h"
 #include "kuickfile.h"
 #include "kuickimage.h"
 #include "kuickshow_debug.h"
@@ -135,9 +134,10 @@ KuickImage * ImlibWidget::loadImageInternal( KuickFile * file )
     initModifications();
     if (myUseModifications)
     {
-        stepBrightnessInternal(ImlibParams::imlibConfig()->brightness);
-        stepContrastInternal(ImlibParams::imlibConfig()->contrast);
-        stepGammaInternal(ImlibParams::imlibConfig()->gamma);
+        const KuickConfig& config = KuickConfig::get();
+        stepBrightnessInternal(config.brightness);
+        stepContrastInternal(config.contrast);
+        stepGammaInternal(config.gamma);
     }
 
     KuickImage *kuim = imageCache->getKuimage( file );
@@ -326,11 +326,11 @@ void ImlibWidget::stepGammaInternal(int g)
 
 // These three functions are passed step values from the GUI
 // via ImageWIndow::moreBrightness() etc.  The basic step up or
-// down is KuickData::brightnessSteps which is then multiplied
-// here by ImData::brightnessFactor, with the default values for
+// down is KuickConfig::brightnessSteps which is then multiplied
+// by KuickConfig::brightnessFactor, with the default values for
 // those being 1 and 10 respectively.  There is no GUI for those
-// settings, so it is reasonable to assume that the step will
-// be either +10 or -10.
+// settings, but they could possibly be changed in the application's
+// config file.
 
 void ImlibWidget::stepBrightness(int b)
 {
@@ -374,7 +374,7 @@ void ImlibWidget::zoomImage( float factor )
 
     if ( canZoomTo( newWidth, newHeight ) )
     {
-        m_kuim->resize( newWidth, newHeight, ImlibParams::imlibConfig()->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
+        m_kuim->resize( newWidth, newHeight, KuickConfig::get().smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
         autoUpdate( true );
     }
 }

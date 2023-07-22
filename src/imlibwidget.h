@@ -16,8 +16,7 @@
 
 #include "imlib-wrapper.h"
 
-#include "imdata.h"
-#include "kuickdata.h"
+#include "kuickconfig.h"
 
 class QCloseEvent;
 class QColor;

@@ -71,8 +71,8 @@
 #include "imagewindow.h"
 #include "imlibwidget.h"
 #include "kuick.h"
+#include "kuickconfig.h"
 #include "kuickconfigdlg.h"
-#include "kuickdata.h"
 #include "kuickfile.h"
 #include "kuickshow_debug.h"
 #include "openfilesanddirsdialog.h"
@@ -135,6 +135,9 @@ KuickShow::KuickShow( const char *objName )
 {
     setObjectName(objName);
     aboutWidget = nullptr;
+
+    KuickConfig& config = KuickConfig::get();
+    config.load();
 
     // This will report the build time version, there appears to
     // be no way to obtain the run time Imlib version.
@@ -251,7 +254,7 @@ KuickShow::KuickShow( const char *objName )
         // else // we don't handle local non-images
     }
 
-    if ( (ImlibParams::kuickConfig()->startInLastDir && args.count() == 0) || parser->isSet( "lastfolder" )) {
+    if ( (config.startInLastDir && args.count() == 0) || parser->isSet( "lastfolder" )) {
         KConfigGroup sessGroup(kc, "SessionSettings");
         startDir = QUrl(sessGroup.readPathEntry( "CurrentDirectory", startDir.url() ));
     }
@@ -598,8 +601,9 @@ void KuickShow::slotShowWithUrl(const QUrl &url)
 
 bool KuickShow::showImage(const KFileItem &fi, KuickShow::ShowFlags flags)
 {
+    const KuickConfig& config = KuickConfig::get();
     if (m_viewer==nullptr) flags |= NewWindow;
-    if ((flags & NewWindow) && ImlibParams::kuickConfig()->fullScreen) flags |= FullScreen;
+    if ((flags & NewWindow) && config.fullScreen) flags |= FullScreen;
     if ((flags & IgnoreFileType) || FileWidget::isImage(fi))
     {
         if (flags & NewWindow)
@@ -653,7 +657,7 @@ bool KuickShow::showImage(const KFileItem &fi, KuickShow::ShowFlags flags)
                 }
             }
 
-            if ( ImlibParams::kuickConfig()->preloadImage && fileWidget!=nullptr) {
+            if ( config.preloadImage && fileWidget!=nullptr) {
                 // don't move cursor
                 KFileItem item = fileWidget->getItem( FileWidget::Next, true );
                 if ( !item.isNull() )
@@ -772,7 +776,8 @@ void KuickShow::tryShowNextImage()
 
 void KuickShow::startSlideShow()
 {
-    KFileItem item = ImlibParams::kuickConfig()->slideshowStartAtFirst ?
+    const KuickConfig& config = KuickConfig::get();
+    KFileItem item = config.slideshowStartAtFirst ?
                       fileWidget->gotoFirstImage() :
                       fileWidget->getCurrentItem(false);
 
@@ -780,17 +785,18 @@ void KuickShow::startSlideShow()
         m_slideshowCycle = 1;
         fileWidget->actionCollection()->action("kuick_slideshow")->setEnabled( false );
         showImage(item, (!oneWindowAction->isChecked() ? NewWindow : ShowDefault)|
-                         (ImlibParams::kuickConfig()->slideshowFullscreen ? FullScreen : ShowDefault));
-	if(ImlibParams::kuickConfig()->slideDelay)
-            m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
+                         (config.slideshowFullscreen ? FullScreen : ShowDefault));
+	if(config.slideDelay)
+            m_slideTimer->start( config.slideDelay );
     }
 }
 
 void KuickShow::pauseSlideShow()
 {
     if(m_slideShowStopped) {
-	if(ImlibParams::kuickConfig()->slideDelay)
-	    m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
+        uint slideDelay = KuickConfig::get().slideDelay;
+        if(slideDelay)
+            m_slideTimer->start( slideDelay );
 	m_slideShowStopped = false;
     }
     else {
@@ -809,8 +815,8 @@ void KuickShow::nextSlide()
 
     KFileItem item = fileWidget->getNext( true );
     if ( item.isNull() ) { // last image
-        if ( m_slideshowCycle < ImlibParams::kuickConfig()->slideshowCycles
-             || ImlibParams::kuickConfig()->slideshowCycles == 0 ) {
+        uint slideshowCycles = KuickConfig::get().slideshowCycles;
+        if ( m_slideshowCycle < slideshowCycles || slideshowCycles == 0 ) {
             item = fileWidget->gotoFirstImage();
             if ( !item.isNull() ) {
                 nextSlide( item );
@@ -830,8 +836,9 @@ void KuickShow::nextSlide()
 void KuickShow::nextSlide( const KFileItem& item )
 {
     m_viewer->showNextImage( item.url() );
-    if(ImlibParams::kuickConfig()->slideDelay)
-        m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
+    uint slideDelay = KuickConfig::get().slideDelay;
+    if(slideDelay)
+        m_slideTimer->start( slideDelay );
 }
 
 
@@ -914,11 +921,12 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
     }
 
     if ( FileWidget::isImage( item ) ) {
+        const KuickConfig& config = KuickConfig::get();
         view->showNextImage( item.url() );
-        if (m_slideTimer->isActive() && ImlibParams::kuickConfig()->slideDelay)
-            m_slideTimer->start( ImlibParams::kuickConfig()->slideDelay );
+        if (m_slideTimer->isActive() && config.slideDelay)
+            m_slideTimer->start( config.slideDelay );
 
-        if ( ImlibParams::kuickConfig()->preloadImage && !item_next.isNull() ) // preload next image
+        if ( config.preloadImage && !item_next.isNull() ) // preload next image
             if ( FileWidget::isImage( item_next ) )
                 view->cacheImage( item_next.url() );
     }
@@ -1072,7 +1080,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             if ( FileWidget::isImage( item ) ) {
                 m_viewer->showNextImage( item.url() );
 
-                if ( ImlibParams::kuickConfig()->preloadImage && !item_next.isNull() ) // preload next image
+                if ( KuickConfig::get().preloadImage && !item_next.isNull() ) // preload next image
                     if ( FileWidget::isImage( item_next ) )
                         m_viewer->cacheImage( item_next.url() );
 
@@ -1129,8 +1137,7 @@ void KuickShow::slotConfigApplied()
 {
     dialog->applyConfig();
 
-    ImlibParams::kuickConfig()->save();			// save updated configuration
-    ImlibParams::imlibConfig()->save();
+    KuickConfig::get().save();
     initImlib();					// already initialised, so ignore failure
 
     for (ImageWindow *viewer : qAsConst(s_viewers))
@@ -1353,7 +1360,7 @@ void KuickShow::toggleBrowser()
 void KuickShow::slotOpenURL()
 {
     OpenFilesAndDirsDialog dlg(this, i18n("Select Files or Folder to Open"));
-    dlg.setNameFilter(i18n("Image Files (%1)", ImlibParams::kuickConfig()->fileFilter));
+    dlg.setNameFilter(i18n("Image Files (%1)", KuickConfig::get().fileFilter));
     if(dlg.exec() != QDialog::Accepted) return;
 
     QList<QUrl> urls = dlg.selectedUrls();

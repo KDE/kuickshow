@@ -21,8 +21,7 @@
 
 #include <QWidget>
 
-class KuickData;
-class ImData;
+class KuickConfig;
 namespace Ui { class SlideShowWidget; }
 
 
@@ -34,7 +33,7 @@ public:
     explicit SlideShowWidget( QWidget *parent );
     virtual ~SlideShowWidget();
 
-    void 		loadSettings(const KuickData *kdata = nullptr, const ImData *idata = nullptr);
+    void 		loadSettings(const KuickConfig* config = nullptr);
     void 		applySettings();
 
 private:

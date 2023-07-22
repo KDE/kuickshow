@@ -35,7 +35,6 @@
 
 #include "imagemods.h"
 #include "imlibparams.h"
-#include "imdata.h"
 
 
 KuickImage::KuickImage(const KuickFile *file, IMLIBIMAGE &im)
@@ -368,7 +367,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 #endif
 	emit startRendering();
 
-	Qt::TransformationMode mode = ImlibParams::imlibConfig()->smoothScale ? Qt::SmoothTransformation :
+	Qt::TransformationMode mode = KuickConfig::get().smoothScale ? Qt::SmoothTransformation :
 		                                                                Qt::FastTransformation;
 #ifdef USE_IMLIB_SCALING
 #ifdef HAVE_IMLIB1

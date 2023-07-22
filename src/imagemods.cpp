@@ -18,16 +18,12 @@
 
 #include "imagemods.h"
 
-#include "kuickdata.h"
-#include "imdata.h"
-#include "imlibparams.h"
-
 
 QCache<QUrl, ImageMods>* ImageMods::s_modifications = nullptr;
 
 QCache<QUrl, ImageMods>* ImageMods::getInstance() {
 	if ( !s_modifications) {
-		s_modifications = new QCache<QUrl, ImageMods>(ImlibParams::kuickConfig()->modificationCacheSize);
+		s_modifications = new QCache<QUrl, ImageMods>(KuickConfig::get().modificationCacheSize);
 	}
 	return s_modifications;
 }
@@ -57,7 +53,7 @@ bool ImageMods::restoreFor(KuickImage *kuim)
 	{
 		kuim->rotateAbs( mods->rotation );
 		kuim->flipAbs( mods->flipMode );
-		kuim->resize( mods->width, mods->height, ImlibParams::imlibConfig()->smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
+		kuim->resize( mods->width, mods->height, KuickConfig::get().smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
 		return true;
 	}
 

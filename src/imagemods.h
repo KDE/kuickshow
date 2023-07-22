@@ -22,6 +22,7 @@
 #include <QCache>
 #include <QUrl>
 
+#include "kuickconfig.h"
 #include "kuickimage.h"
 
 

@@ -19,16 +19,14 @@
 #include "generalwidget.h"
 #include <ui_generalwidget.h>
 
+#include "kuickconfig.h"
+
 #include <KIconLoader>
 #include <KLocalizedString>
 
 #include <QDesktopServices>
 #include <QPixmap>
 #include <QUrl>
-
-#include "kuickdata.h"
-#include "imdata.h"
-#include "imlibparams.h"
 
 
 GeneralWidget::GeneralWidget( QWidget *parent )
@@ -75,46 +73,44 @@ void GeneralWidget::slotURLClicked()
     QDesktopServices::openUrl(QUrl::fromUserInput(ui->logo->url()));
 }
 
-void GeneralWidget::loadSettings(const KuickData *kdata, const ImData *idata)
+void GeneralWidget::loadSettings(const KuickConfig* config)
 {
-    if (kdata==nullptr) kdata = ImlibParams::kuickConfig();	// normal, unless resetting to defaults
-    if (idata==nullptr) idata = ImlibParams::imlibConfig();
+    if (config == nullptr) config = &KuickConfig::get();
 
-    ui->colorButton->setColor( kdata->backgroundColor );
-    ui->editFilter->setText( kdata->fileFilter );
-    ui->cbFullscreen->setChecked( kdata->fullScreen );
-    ui->cbPreload->setChecked( kdata->preloadImage );
-    ui->cbLastdir->setChecked( kdata->startInLastDir );
-    ui->cbFastRemap->setChecked( idata->fastRemap );
-    ui->cbOwnPalette->setChecked( idata->ownPalette );
-    ui->cbSmoothScale->setChecked( idata->smoothScale );
-    ui->cbFastRender->setChecked( idata->fastRender );
-    ui->cbDither16bit->setChecked( idata->dither16bit );
-    ui->cbDither8bit->setChecked( idata->dither8bit );
-    ui->maxCacheSpinBox->setValue( idata->maxCache / 1024 );
+    ui->colorButton->setColor(config->backgroundColor);
+    ui->editFilter->setText(config->fileFilter);
+    ui->cbFullscreen->setChecked(config->fullScreen);
+    ui->cbPreload->setChecked(config->preloadImage);
+    ui->cbLastdir->setChecked(config->startInLastDir);
+    ui->cbFastRemap->setChecked(config->fastRemap);
+    ui->cbOwnPalette->setChecked(config->ownPalette);
+    ui->cbSmoothScale->setChecked(config->smoothScale);
+    ui->cbFastRender->setChecked(config->fastRender);
+    ui->cbDither16bit->setChecked(config->dither16bit);
+    ui->cbDither8bit->setChecked(config->dither8bit);
+    ui->maxCacheSpinBox->setValue(config->maxCache / 1024);
 
     useOwnPalette(); // enable/disable remap-checkbox
 }
 
 void GeneralWidget::applySettings()
 {
-    KuickData *kdata = ImlibParams::kuickConfig();
-    ImData *idata = ImlibParams::imlibConfig();
+    KuickConfig& config = KuickConfig::get();
 
-    kdata->backgroundColor = ui->colorButton->color();
-    kdata->fileFilter      = ui->editFilter->text();
-    kdata->fullScreen  	  = ui->cbFullscreen->isChecked();
-    kdata->preloadImage	  = ui->cbPreload->isChecked();
-    kdata->startInLastDir   = ui->cbLastdir->isChecked();
+    config.backgroundColor = ui->colorButton->color();
+    config.fileFilter      = ui->editFilter->text();
+    config.fullScreen  	  = ui->cbFullscreen->isChecked();
+    config.preloadImage	  = ui->cbPreload->isChecked();
+    config.startInLastDir   = ui->cbLastdir->isChecked();
 
-    idata->smoothScale    = ui->cbSmoothScale->isChecked();
-    idata->fastRemap 	  = ui->cbFastRemap->isChecked();
-    idata->ownPalette 	  = ui->cbOwnPalette->isChecked();
-    idata->fastRender 	  = ui->cbFastRender->isChecked();
-    idata->dither16bit 	  = ui->cbDither16bit->isChecked();
-    idata->dither8bit 	  = ui->cbDither8bit->isChecked();
+    config.smoothScale    = ui->cbSmoothScale->isChecked();
+    config.fastRemap 	  = ui->cbFastRemap->isChecked();
+    config.ownPalette 	  = ui->cbOwnPalette->isChecked();
+    config.fastRender 	  = ui->cbFastRender->isChecked();
+    config.dither16bit 	  = ui->cbDither16bit->isChecked();
+    config.dither8bit 	  = ui->cbDither8bit->isChecked();
 
-    idata->maxCache	  = static_cast<uint>(ui->maxCacheSpinBox->value()*1024);
+    config.maxCache	  = static_cast<uint>(ui->maxCacheSpinBox->value() * 1024);
 }
 
 void GeneralWidget::useOwnPalette()

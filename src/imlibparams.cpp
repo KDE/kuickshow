@@ -18,12 +18,11 @@
 
 #include "imlibparams.h"
 
+#include "kuickconfig.h"
+
 #include <QX11Info>
 #include <qdebug.h>
 #include <qstandardpaths.h>
-
-#include "kuickdata.h"
-#include "imdata.h"
 
 #include <stdlib.h>
 
@@ -32,20 +31,16 @@
 {
     qDebug();
 
-    mKuickConfig = new KuickData;			// default global application configuration
-    mImlibConfig = new ImData;				// default global Imlib configuration
-
     init();						// initialise the Imlib library
 }
 
 
 bool ImlibParams::init()
 {
-    mKuickConfig->load();				// read settings from config
-    mImlibConfig->load();
+    const KuickConfig& config = KuickConfig::get();
 
 #ifndef HAVE_QTONLY
-    const uint maxcache = mImlibConfig->maxCache*1024;	// cache size from settings
+    const uint maxcache = config.maxCache * 1024;	// cache size from settings
 
     Display *disp = QX11Info::display();
     Visual *vis = DefaultVisual(disp, DefaultScreen(disp));
@@ -54,11 +49,11 @@ bool ImlibParams::init()
 #ifdef HAVE_IMLIB1
     ImlibInitParams par;
 
-    par.paletteoverride = mImlibConfig->ownPalette  ? 1 : 0;
-    par.remap           = mImlibConfig->fastRemap   ? 1 : 0;
-    par.fastrender      = mImlibConfig->fastRender  ? 1 : 0;
-    par.hiquality       = mImlibConfig->dither16bit ? 1 : 0;
-    par.dither          = mImlibConfig->dither8bit  ? 1 : 0;
+    par.paletteoverride = config.ownPalette  ? 1 : 0;
+    par.remap           = config.fastRemap   ? 1 : 0;
+    par.fastrender      = config.fastRender  ? 1 : 0;
+    par.hiquality       = config.dither16bit ? 1 : 0;
+    par.dither          = config.dither8bit  ? 1 : 0;
     par.sharedmem       = 1;
     par.sharedpixmaps   = 1;
     par.visualid	 = vis->visualid;
@@ -94,7 +89,7 @@ bool ImlibParams::init()
     // Set the maximum number of colours to allocate for 8bpp or less
     imlib_set_color_usage(128);
     // Dither for depths<24bpp
-    imlib_context_set_dither((mImlibConfig->dither8bit || mImlibConfig->dither16bit)  ? 1 : 0);
+    imlib_context_set_dither((config.dither8bit || config.dither16bit)  ? 1 : 0);
 
     mId = nullptr;					// nothing to deallocate
 #endif // HAVE_IMLIB2

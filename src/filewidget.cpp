@@ -38,10 +38,9 @@
 #include <QTimer>
 
 #include "filefinder.h"
-#include "kuickdata.h"
+#include "kuickconfig.h"
 #include "kuickshow_debug.h"
 #include "kuickshow.h"
-#include "imlibparams.h"
 
 
 FileWidget::FileWidget( const QUrl& url, QWidget *parent )
@@ -104,7 +103,7 @@ void FileWidget::initActions()
 
 void FileWidget::reloadConfiguration()
 {
-    if ( ImlibParams::kuickConfig()->fileFilter != nameFilter() ) {
+    if ( KuickConfig::get().fileFilter != nameFilter() ) {
 	// At first, our list must have folders
 	QStringList mimes;
 	mimes.append("inode/directory");

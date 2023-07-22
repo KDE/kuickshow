@@ -12,9 +12,6 @@
 
 #include "imlib-wrapper.h"
 
-class ImData;
-class KuickData;
-
 
 class ImlibParams
 {
@@ -26,10 +23,6 @@ public:
     // in 'imlib-wrapper.h' throw away the 'id' parameter.
     static ImlibData *imlibData()		{ return (self()->mId); }
 
-    // Access to the application configuration.
-    static ImData *imlibConfig()		{ return (self()->mImlibConfig); }
-    static KuickData *kuickConfig()		{ return (self()->mKuickConfig); }
-
     bool init();
 
 private:
@@ -37,8 +30,6 @@ private:
     ~ImlibParams();
 
     ImlibData *mId;
-    ImData *mImlibConfig;
-    KuickData *mKuickConfig;
 };
 
 #endif

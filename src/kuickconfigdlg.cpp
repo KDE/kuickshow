@@ -28,7 +28,7 @@
 #include "defaultswidget.h"
 #include "generalwidget.h"
 #include "imagewindow.h"
-#include "kuickdata.h"
+#include "kuickconfig.h"
 #include "slideshowwidget.h"
 
 
@@ -93,12 +93,11 @@ void KuickConfigDialog::applyConfig()
 
 void KuickConfigDialog::resetDefaults()
 {
-    KuickData kdata;					// default settings, not from config
-    ImData idata;
+    KuickConfig defaultConfig;
 
-    generalWidget->loadSettings(&kdata, &idata);
-    defaultsWidget->loadSettings(&kdata, &idata);
-    slideshowWidget->loadSettings(&kdata, &idata);
+    generalWidget->loadSettings(&defaultConfig);
+    defaultsWidget->loadSettings(&defaultConfig);
+    slideshowWidget->loadSettings(&defaultConfig);
 
     imageKeyChooser->allDefault();
     browserKeyChooser->allDefault();

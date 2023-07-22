@@ -23,7 +23,7 @@
 
 #include "imlib-wrapper.h"
 
-#include "kuickdata.h"
+#include "kuickconfig.h"
 #include "kuickfile.h"
 
 class QImage;
