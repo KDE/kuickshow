@@ -605,7 +605,7 @@ bool KuickShow::showImage(const KFileItem &fi, KuickShow::ShowFlags flags)
             {
                 // we have to move to 0x0 before showing _and_
                 // after showing, otherwise we get some bogus geometry()
-                m_viewer->move( Kuick::workArea().topLeft() );
+                m_viewer->safeMoveWindow( Kuick::workArea().topLeft() );
             }
 
             m_viewer->installEventFilter( this );
@@ -630,7 +630,7 @@ bool KuickShow::showImage(const KFileItem &fi, KuickShow::ShowFlags flags)
                 {
                     // the WM might have moved us after showing -> strike back!
                     // move the first image to 0x0 workarea coord
-                    safeViewer->move( Kuick::workArea().topLeft() );
+                    safeViewer->safeMoveWindow( Kuick::workArea().topLeft() );
                 }
             }
 

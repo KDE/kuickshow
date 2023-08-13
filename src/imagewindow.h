@@ -64,6 +64,10 @@ public:
   void resizeOptimal( int w, int h );
   void autoScale( KuickImage *kuim );
   virtual bool autoRotate(KuickImage *kuim) override;
+  void safeMoveWindow(const QPoint& pos);
+  void safeMoveWindow(int x, int y) { safeMoveWindow(QPoint(x, y)); }
+  void safeResizeWindow(const QSize& size);
+  void safeResizeWindow(int width, int height) { safeResizeWindow(QSize(width, height)); }
 
   bool          saveImage( const QUrl& dest, bool keepOriginalSize );
 

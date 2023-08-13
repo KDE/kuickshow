@@ -326,11 +326,25 @@ void ImageWindow::setFullscreen( bool enable )
 //    centerImage(); // ### really necessary (multihead!)
 }
 
+void ImageWindow::safeMoveWindow(const QPoint& pos)
+{
+	// don't call QWidget::move() while the widget is in fullscreen mode, or its fullscreen flag is reset
+	// while the widget itself stays in fullscreen mode and doesn't return to normal mode with showNormal()
+	if (!myIsFullscreen) move(pos);
+}
+
+void ImageWindow::safeResizeWindow(const QSize& size)
+{
+	// don't call QWidget::resize() while the widget is in fullscreen mode, or its fullscreen flag is reset
+	// while the widget itself stays in fullscreen mode and doesn't return to normal mode with showNormal()
+	if (!myIsFullscreen) resize(size);
+}
+
 
 void ImageWindow::updateGeometry( int imWidth, int imHeight )
 {
 //     qDebug("::updateGeometry: %i, %i", imWidth, imHeight);
-    resize(imWidth, imHeight);
+    safeResizeWindow(imWidth, imHeight);
 
     if ( imWidth != width() || imHeight != height() ) {
 	if ( myIsFullscreen ) {
@@ -342,7 +356,7 @@ void ImageWindow::updateGeometry( int imWidth, int imHeight )
     }
     else { // image size == widget size
 	xpos = 0; ypos = 0;
-	move(0, 0);
+	safeMoveWindow(0, 0);
     }
 
     updateCursor();
@@ -381,7 +395,7 @@ void ImageWindow::centerImage()
 //         xpos = width()/2 - imageWidth()/2;
 
 //     ypos = height()/2 - imageHeight()/2;
-    move(xpos, ypos);
+    safeMoveWindow(xpos, ypos);
 }
 
 
@@ -775,11 +789,11 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     ytmp += ycenter;
 
     m_kuim->resize( w, h, KuickConfig::get().smoothScale ? KuickImage::SMOOTH : KuickImage::FAST );
-    resize( w, h );
+    safeResizeWindow( w, h );
     updateWidget( false );
 
     xpos = xtmp; ypos = ytmp;
-    move(xpos, ypos);
+    safeMoveWindow(xpos, ypos);
     scrollImage( 1, 1, true ); // unrestricted scrolling
 }
 
@@ -1150,7 +1164,7 @@ void ImageWindow::resizeOptimal( int w, int h )
     if ( neww == width() && newh == height() )
 	centerImage();
     else
-	resize( neww, newh ); // also centers the image
+	safeResizeWindow( neww, newh ); // also centers the image
 }
 
 void ImageWindow::maximize()
