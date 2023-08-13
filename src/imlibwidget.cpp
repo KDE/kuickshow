@@ -192,12 +192,6 @@ bool ImlibWidget::cacheImage( KuickFile * file )
 }
 
 
-void ImlibWidget::showImage()
-{
-    show();
-}
-
-
 // These three functions are passed a step value and cumulatively
 // update the image modification values.  If the modifier has been
 // reset as in loadImageInternal() above, this has the effect of
@@ -292,8 +286,6 @@ void ImlibWidget::showImageOriginalSize()
 
     m_kuim->restoreOriginalSize();
     autoUpdate( true );
-
-    showImage();
 }
 
 bool ImlibWidget::autoRotate( KuickImage *kuim )
@@ -435,7 +427,6 @@ void ImlibWidget::updateWidget(bool geometryUpdate)
 
     myLabel->setPixmap(QPixmap::fromImage(m_kuim->toQImage()));
     if (geometryUpdate) updateGeometry(m_kuim->width(), m_kuim->height());
-    showImage();
 }
 
 

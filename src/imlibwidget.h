@@ -83,7 +83,6 @@ public slots:
   inline void 	updateImage() 		{ updateWidget( true ); }
 
 protected:
-  void 			showImage();
   void 		    rotate( int );
   void 		    updateWidget( bool geometryUpdate=true );
   virtual void 	updateGeometry( int width, int height );
