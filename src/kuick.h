@@ -20,9 +20,10 @@
 #define KUICKGLOBALS_H
 
 #include <KWindowInfo>
-#include <KWindowSystem>
 
+#include <QGuiApplication>
 #include <QRect>
+#include <QScreen>
 #include <QSize>
 
 
@@ -31,7 +32,9 @@ class Kuick
 {
 public:
     static QRect workArea() {
-	return KWindowSystem::workArea();
+        // TODO: find a better solution to retrieve the work area: QScreen::availableGeometry() returns
+        // the entire screen's geometry and doesn't subtract the taskbar's size
+        return QGuiApplication::primaryScreen()->availableGeometry();
     }
 
     static QSize frameSize(WId win = WId(0)) {
