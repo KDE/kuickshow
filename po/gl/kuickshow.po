@@ -409,7 +409,7 @@ msgstr "%3 (%1 x %2)"
 #: src/imagewindow.cpp:452
 #, kde-format
 msgid "Unable to download the image from %1."
-msgstr "Non se pode obter a imaxe desde %1."
+msgstr "Non é posíbel obter a imaxe desde %1."
 
 #: src/imagewindow.cpp:468
 #, kde-format
@@ -418,7 +418,7 @@ msgid ""
 "Perhaps the file format is unsupported or your Imlib is not installed "
 "properly."
 msgstr ""
-"Non se pode cargar a imaxe %1.\n"
+"Non é posíbel cargar a imaxe %1.\n"
 "Quizás o formato do ficheiro non estea soportado ou  Imlib non está "
 "instalada axeitadamente."
 
@@ -440,7 +440,7 @@ msgstr "Gama"
 #: src/imagewindow.cpp:955
 #, kde-format
 msgid "Unable to print the image."
-msgstr "Non se pode imprimir a imaxe."
+msgstr "Non é posíbel imprimir a imaxe."
 
 #: src/imagewindow.cpp:956
 #, kde-format
@@ -468,7 +468,7 @@ msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
-"Non se puido gardar o ficheiro.\n"
+"Non foi posíbel gardar o ficheiro.\n"
 "Poida que o disco estea cheo, ou non teña permisos de escrita no ficheiro."
 
 #: src/imagewindow.cpp:996
@@ -662,7 +662,7 @@ msgid ""
 "Start kuickshow from the command line and look for error messages.\n"
 "The program will now quit."
 msgstr ""
-"Non se pode iniciar Imlib.\n"
+"Non é posíbel iniciar Imlib.\n"
 "Execute kuickshow desde a liña de ordes e olle as mensaxes de erro.\n"
 "Agora sairase do programa."
 
