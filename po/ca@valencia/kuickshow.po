@@ -293,7 +293,7 @@ msgstr "Suprimix la imatge"
 #: src/imagewindow.cpp:166
 #, kde-format
 msgid "Move Image to Trash"
-msgstr "Mou la imatge a la paperera"
+msgstr "Mou la imatge cap a dins de la paperera"
 
 #: src/imagewindow.cpp:180
 #, kde-format
@@ -378,12 +378,12 @@ msgstr "Desplaça avall"
 #: src/imagewindow.cpp:267
 #, kde-format
 msgid "Scroll Left"
-msgstr "Desplaça a l'esquerra"
+msgstr "Desplaça cap a l'esquerra"
 
 #: src/imagewindow.cpp:272
 #, kde-format
 msgid "Scroll Right"
-msgstr "Desplaça a la dreta"
+msgstr "Desplaça cap a la dreta"
 
 #: src/imagewindow.cpp:277
 #, kde-format
