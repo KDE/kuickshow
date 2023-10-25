@@ -368,12 +368,12 @@ msgstr "Menys gamma"
 #: src/imagewindow.cpp:257
 #, kde-format
 msgid "Scroll Up"
-msgstr "Desplaça amunt"
+msgstr "Desplaça cap amunt"
 
 #: src/imagewindow.cpp:262
 #, kde-format
 msgid "Scroll Down"
-msgstr "Desplaça avall"
+msgstr "Desplaça cap avall"
 
 #: src/imagewindow.cpp:267
 #, kde-format
