@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:26+0000\n"
-"PO-Revision-Date: 2023-10-21 13:54\n"
+"PO-Revision-Date: 2023-11-19 03:40\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -86,13 +86,13 @@ msgstr "几何属性"
 #: src/defaultswidget.ui:69
 #, kde-format
 msgid "Flip vertically"
-msgstr "垂直翻转"
+msgstr "翻转 (垂直)"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
 #: src/defaultswidget.ui:76
 #, kde-format
 msgid "Flip horizontally"
-msgstr "水平翻转"
+msgstr "翻转 (水平)"
 
 #. i18n: ectx: property (text), widget (QLabel, lbRotate)
 #: src/defaultswidget.ui:85
@@ -316,12 +316,12 @@ msgstr "旋转 270 度"
 #: src/imagewindow.cpp:205
 #, kde-format
 msgid "Flip Horizontally"
-msgstr "水平翻转"
+msgstr "翻转 (水平)"
 
 #: src/imagewindow.cpp:210
 #, kde-format
 msgid "Flip Vertically"
-msgstr "垂直翻转"
+msgstr "翻转 (垂直)"
 
 #: src/imagewindow.cpp:215 src/kuickshow.cpp:257
 #, kde-format
