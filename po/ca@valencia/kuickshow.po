@@ -640,13 +640,13 @@ msgid ""
 "<qt>Do you really want to trash\n"
 " <b>'%1'</b>?</qt>"
 msgstr ""
-"<qt>Segur que voleu llençar a la paperera\n"
+"<qt>Segur que voleu llençar a dins de la paperera\n"
 " <b>«%1»</b>?</qt>"
 
 #: src/kuickshow.cpp:680
 #, kde-format
 msgid "Trash File"
-msgstr "Llença a la paperera"
+msgstr "Llença a dins de la paperera"
 
 #: src/kuickshow.cpp:681
 #, kde-format
