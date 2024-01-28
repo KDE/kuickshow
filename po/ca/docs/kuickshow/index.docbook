@@ -73,7 +73,7 @@
 <!-- LW: put a nice screenshot here -->
 
 <para
->S'admeten els següents formats d'imatge:</para>
+>S'admeten els formats d'imatge següents:</para>
 <itemizedlist>
 <listitem
 ><para
@@ -166,7 +166,7 @@
 <itemizedlist>
 <listitem
 ><para
->Si les imatges són més grans, es poden reduir automàticament per adaptar-se a la pantalla.</para>
+>Si les imatges són més grans, es poden reduir automàticament per a adaptar-se a la pantalla.</para>
 </listitem>
 <listitem
 ><para
@@ -238,7 +238,7 @@
 ></term>
 <listitem>
 <para
->Si se selecciona, les imatges s'obriran en el mode de pantalla completa. Si la imatge no és prou gran per omplir la pantalla, la resta de la pantalla s'omplirà amb el color de fons seleccionat a continuació. El valor predeterminat és restar desactivat.</para>
+>Si se selecciona, les imatges s'obriran en el mode de pantalla completa. Si la imatge no és prou gran per a omplir la pantalla, la resta de la pantalla s'omplirà amb el color de fons seleccionat a continuació. El valor predeterminat és restar desactivat.</para>
 </listitem>
 </varlistentry>
 
@@ -249,7 +249,7 @@
 ></term>
 <listitem>
 <para
->Si se selecciona, el &kuickshow; carregarà la imatge següent a la carpeta, mentre esteu veient l'actual. Això reduirà el retard quan seleccioneu la següent imatge i és especialment útil per a presentacions de diapositives.</para>
+>Si se selecciona, el &kuickshow; carregarà la imatge següent a la carpeta, mentre esteu veient l'actual. Això reduirà el retard quan seleccioneu la imatge següent i és especialment útil per a presentacions de diapositives.</para>
 </listitem>
 </varlistentry>
 
