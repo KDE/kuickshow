@@ -10,19 +10,20 @@
 # license as the program which it accompanies.
 #
 # Diego Iastrubni <elcuco@kde.org>, 2005, 2012.
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:26+0000\n"
-"PO-Revision-Date: 2012-11-20 23:53+0200\n"
-"Last-Translator: Diego Iastrubni <elcuco@kde.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2024-03-07 15:35+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -55,10 +56,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&Modifications"
+#, kde-format
 msgid "Modifications"
-msgstr "&שינויים"
+msgstr "שינויים"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
 #: src/defaultswidget.ui:23
@@ -177,16 +177,15 @@ msgstr "התמונה עם השינויים"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
 #: src/generalwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&General"
+#, kde-format
 msgid "General"
-msgstr "&כללי"
+msgstr "כללי"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
 #: src/generalwidget.ui:20
 #, kde-format
 msgid "Remember last folder"
-msgstr ""
+msgstr "לזכור את התיקייה האחרונה"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbox2)
 #: src/generalwidget.ui:30
@@ -196,9 +195,9 @@ msgstr "איכות\\מהירות"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
 #: src/generalwidget.ui:36
-#, fuzzy, kde-format
+#, kde-format
 msgid "Smooth scaling"
-msgstr "שינוי קנה מידה"
+msgstr "שינוי קנה מידה חלק"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
 #: src/generalwidget.ui:43
@@ -289,9 +288,9 @@ msgid "Show Previous Image"
 msgstr "הצג את התמונה הקודמת"
 
 #: src/imagewindow.cpp:161
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delete Image"
-msgstr "טען תמונה מחדש"
+msgstr "מחיקת תמונה"
 
 #: src/imagewindow.cpp:166
 #, kde-format
@@ -401,7 +400,7 @@ msgstr "טען תמונה מחדש"
 #: src/imagewindow.cpp:295
 #, kde-format
 msgid "Properties"
-msgstr ""
+msgstr "מאפיינים"
 
 #: src/imagewindow.cpp:349
 #, kde-format
@@ -457,12 +456,12 @@ msgstr "שמור את גודל התמונה המקורי"
 #: src/imagewindow.cpp:970
 #, kde-format
 msgid "Save As"
-msgstr ""
+msgstr "שמירה בשם"
 
 #: src/imagewindow.cpp:973 src/kuickshow.cpp:1389
 #, kde-format
 msgid "Image Files (%1)"
-msgstr ""
+msgstr "קובצי תמונה (%1)"
 
 #: src/imagewindow.cpp:993
 #, fuzzy, kde-format
@@ -487,9 +486,9 @@ msgid ""
 msgstr ""
 
 #: src/kuickconfigdlg.cpp:40
-#, fuzzy, kde-format
+#, kde-format
 msgid "Configure"
-msgstr "הגדרות %1..."
+msgstr "הגדרה"
 
 #: src/kuickconfigdlg.cpp:46
 #, kde-format
@@ -527,6 +526,8 @@ msgid ""
 "Please wait while downloading\n"
 "%1"
 msgstr ""
+"נא להמתין לסיום ההורדה\n"
+"%1"
 
 #: src/kuickshow.cpp:130
 #, kde-format
@@ -544,7 +545,7 @@ msgstr[1] ""
 #: src/kuickshow.cpp:132
 #, kde-format
 msgid "Display Multiple Images?"
-msgstr ""
+msgstr "להציג מספר תמונות?"
 
 #: src/kuickshow.cpp:260
 #, kde-format
@@ -594,22 +595,22 @@ msgstr "הצג תמונה במצב מסך מלא"
 #: src/kuickshow.cpp:310
 #, kde-format
 msgid "&File"
-msgstr ""
+msgstr "&קובץ"
 
 #: src/kuickshow.cpp:322
 #, kde-format
 msgid "&Edit"
-msgstr ""
+msgstr "&עריכה"
 
 #: src/kuickshow.cpp:331
-#, fuzzy, kde-format
+#, kde-format
 msgid "&Settings"
-msgstr "הגדרות תמונה"
+msgstr "ה&גדרות"
 
 #: src/kuickshow.cpp:341
 #, kde-format
 msgid "Main Toolbar"
-msgstr ""
+msgstr "סרגל כלים ראשי"
 
 #: src/kuickshow.cpp:653
 #, kde-format
@@ -619,9 +620,9 @@ msgid ""
 msgstr ""
 
 #: src/kuickshow.cpp:654
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delete File"
-msgstr "טען תמונה מחדש"
+msgstr "מחיקת קובץ"
 
 #: src/kuickshow.cpp:679
 #, kde-format
@@ -647,7 +648,7 @@ msgstr "&אשפה"
 #: src/kuickshow.cpp:1209
 #, kde-format
 msgid "Image Error"
-msgstr ""
+msgstr "שגיאת תמונה"
 
 #: src/kuickshow.cpp:1234
 #, kde-format
@@ -683,22 +684,22 @@ msgstr "מציג תמונות מהיר ורב־תכליתי"
 #: src/main.cpp:40
 #, kde-format
 msgid "(c) 1998-2009, Carsten Pfeiffer"
-msgstr ""
+msgstr "(c) 1998‏-2009, קרסטן פייפר"
 
 #: src/main.cpp:45
 #, kde-format
 msgid "Carsten Pfeiffer"
-msgstr ""
+msgstr "קרסטן פייפר"
 
 #: src/main.cpp:47
 #, kde-format
 msgid "Rober Hamberger"
-msgstr ""
+msgstr "רוברט המברגר"
 
 #: src/main.cpp:48
 #, kde-format
 msgid "Thorsten Scheuermann"
-msgstr ""
+msgstr "תורסטן שוארמן"
 
 #: src/main.cpp:57
 #, kde-format
@@ -713,7 +714,7 @@ msgstr "שמות קבצי\\כתובות תמונות אופציונליים לה
 #: src/printing.cpp:52
 #, kde-format
 msgid "Print %1"
-msgstr ""
+msgstr "הדפסת %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
 #: src/printing_page.ui:14
@@ -731,13 +732,13 @@ msgstr "הד&פס את שם הקובץ מתחת לתמונה"
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr ""
+msgstr "הדפסת התמונה ב&שחור ולבן"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
 #, kde-format
 msgid "&Width:"
-msgstr ""
+msgstr "&רוחב:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, units)
 #: src/printing_page.ui:64
@@ -761,7 +762,7 @@ msgstr "אינצ'ים"
 #: src/printing_page.ui:108
 #, kde-format
 msgid "&Height:"
-msgstr ""
+msgstr "&גובה:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scale)
 #: src/printing_page.ui:121
@@ -777,10 +778,9 @@ msgstr "הק&טן את התמונה לפי הצורך על מנת שתתאים"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&Slideshow"
+#, kde-format
 msgid "Slideshow"
-msgstr "מצ&גת שקופיות"
+msgstr "מצגת"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
 #: src/slideshowwidget.ui:20
@@ -792,7 +792,7 @@ msgstr "&עבור למצב מסך מלא"
 #: src/slideshowwidget.ui:27
 #, kde-format
 msgid "S&tart with current image"
-msgstr ""
+msgstr "ה&תחלה עם התמונה הנוכחית"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/slideshowwidget.ui:34
