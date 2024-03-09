@@ -16,15 +16,15 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:26+0000\n"
-"PO-Revision-Date: 2024-03-07 15:35+0200\n"
+"PO-Revision-Date: 2024-03-08 07:02+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,19 +40,19 @@ msgstr "kde-l10n-he@kde.org"
 #: src/aboutwidget.ui:32
 #, kde-format
 msgid "(authors)"
-msgstr ""
+msgstr "(יוצרים)"
 
 #. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
 #: src/aboutwidget.ui:45
 #, kde-format
 msgid "(url)"
-msgstr ""
+msgstr "(כתובת)"
 
 #. i18n: ectx: property (text), widget (QLabel, lblCopyright)
 #: src/aboutwidget.ui:55
 #, kde-format
 msgid "(copyright)"
-msgstr ""
+msgstr "(זכויות יוצרים)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -64,7 +64,7 @@ msgstr "שינויים"
 #: src/defaultswidget.ui:23
 #, kde-format
 msgid "Apply default image modifications"
-msgstr "החל על התמונה את השינויים המוגדרים כברירת מחדל"
+msgstr "החלת השינויים המוגדרים כברירת מחדל על התמונה"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbScale)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
@@ -95,19 +95,19 @@ msgstr "סיבוב"
 #: src/defaultswidget.ui:69
 #, kde-format
 msgid "Flip vertically"
-msgstr "הפוך אנכית"
+msgstr "היפוך אנכית"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
 #: src/defaultswidget.ui:76
 #, kde-format
 msgid "Flip horizontally"
-msgstr "הפוך אופקית"
+msgstr "היפוך אופקית"
 
 #. i18n: ectx: property (text), widget (QLabel, lbRotate)
 #: src/defaultswidget.ui:85
 #, kde-format
 msgid "Rotate image:"
-msgstr "סובב תמונה:"
+msgstr "סיבוב תמונה:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:93
@@ -191,7 +191,7 @@ msgstr "לזכור את התיקייה האחרונה"
 #: src/generalwidget.ui:30
 #, kde-format
 msgid "Quality/Speed"
-msgstr "איכות\\מהירות"
+msgstr "איכות/מהירות"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
 #: src/generalwidget.ui:36
@@ -245,7 +245,7 @@ msgstr "ללא הגבלה"
 #: src/generalwidget.ui:91
 #, kde-format
 msgid " MB"
-msgstr " MB"
+msgstr " מ״ב"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
 #: src/generalwidget.ui:104
@@ -263,7 +263,7 @@ msgstr "צבע רקע:"
 #: src/generalwidget.ui:121
 #, kde-format
 msgid "Show only files with extension: "
-msgstr "הצג רק קבצים עם סיומות: "
+msgstr "להציג רק קבצים עם הסיומות: "
 
 #. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
 #: src/generalwidget.ui:128
@@ -275,17 +275,17 @@ msgstr "פתח את אתר האינטרנט של KuickShow"
 #: src/generalwidget.ui:138
 #, kde-format
 msgid "Preload next image"
-msgstr "טען מראש את התמונה הבאה"
+msgstr "לטעון את התמונה הבאה מראש"
 
 #: src/imagewindow.cpp:151
 #, kde-format
 msgid "Show Next Image"
-msgstr "הצג את התמונה הבאה"
+msgstr "להציג את התמונה הבאה"
 
 #: src/imagewindow.cpp:156
 #, kde-format
 msgid "Show Previous Image"
-msgstr "הצג את התמונה הקודמת"
+msgstr "להציג את התמונה הקודמת"
 
 #: src/imagewindow.cpp:161
 #, kde-format
@@ -295,47 +295,47 @@ msgstr "מחיקת תמונה"
 #: src/imagewindow.cpp:166
 #, kde-format
 msgid "Move Image to Trash"
-msgstr "העבר תמונה אל האשפה"
+msgstr "העברת תמונה לאשפה"
 
 #: src/imagewindow.cpp:180
 #, kde-format
 msgid "Restore Original Size"
-msgstr "שחזר לגודל המקורי"
+msgstr "שחזור לגודל המקורי"
 
 #: src/imagewindow.cpp:185
 #, kde-format
 msgid "Maximize"
-msgstr "הגדל"
+msgstr "הגדלה"
 
 #: src/imagewindow.cpp:190
 #, kde-format
 msgid "Rotate 90 Degrees"
-msgstr "סובב 90 מעלות"
+msgstr "סיבוב ב־90 מעלות"
 
 #: src/imagewindow.cpp:195
 #, kde-format
 msgid "Rotate 180 Degrees"
-msgstr "סובב 180 מעלות"
+msgstr "סיבוב ב־180 מעלות"
 
 #: src/imagewindow.cpp:200
 #, kde-format
 msgid "Rotate 270 Degrees"
-msgstr "סובב 270 מעלות"
+msgstr "סיבוב ב־270 מעלות"
 
 #: src/imagewindow.cpp:205
 #, kde-format
 msgid "Flip Horizontally"
-msgstr "הפוך אופקית"
+msgstr "היפוך אופקית"
 
 #: src/imagewindow.cpp:210
 #, kde-format
 msgid "Flip Vertically"
-msgstr "הפוך אנכית"
+msgstr "היפוך אנכית"
 
 #: src/imagewindow.cpp:215 src/kuickshow.cpp:257
 #, kde-format
 msgid "Print Image..."
-msgstr "הדפסת התמונה..."
+msgstr "הדפסת התמונה…"
 
 #: src/imagewindow.cpp:226
 #, kde-format
@@ -350,12 +350,12 @@ msgstr "בהיר פחות"
 #: src/imagewindow.cpp:236
 #, kde-format
 msgid "More Contrast"
-msgstr "חד יותר"
+msgstr "ניגודיות גבוהה יותר"
 
 #: src/imagewindow.cpp:241
 #, kde-format
 msgid "Less Contrast"
-msgstr "חד פחות"
+msgstr "ניגודיות נמוכה יותר"
 
 #: src/imagewindow.cpp:246
 #, kde-format
@@ -370,32 +370,32 @@ msgstr "פחות גאמה"
 #: src/imagewindow.cpp:257
 #, kde-format
 msgid "Scroll Up"
-msgstr "גלול למעלה"
+msgstr "גלילה למעלה"
 
 #: src/imagewindow.cpp:262
 #, kde-format
 msgid "Scroll Down"
-msgstr "גלול למטה"
+msgstr "גלילה למטה"
 
 #: src/imagewindow.cpp:267
 #, kde-format
 msgid "Scroll Left"
-msgstr "גלול שמאלה"
+msgstr "גלילה שמאלה"
 
 #: src/imagewindow.cpp:272
 #, kde-format
 msgid "Scroll Right"
-msgstr "גלול ימינה"
+msgstr "גלילה ימינה"
 
 #: src/imagewindow.cpp:277
 #, kde-format
 msgid "Pause Slideshow"
-msgstr "עצור מצגת שקופיות"
+msgstr "עצירת מצגת שקופיות"
 
 #: src/imagewindow.cpp:289
 #, kde-format
 msgid "Reload Image"
-msgstr "טען תמונה מחדש"
+msgstr "רענון תמונה"
 
 #: src/imagewindow.cpp:295
 #, kde-format
@@ -406,12 +406,12 @@ msgstr "מאפיינים"
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
-msgstr "%3 (%1 x %2)"
+msgstr "%3 (%1 × %2)"
 
 #: src/imagewindow.cpp:452
-#, fuzzy, kde-format
+#, kde-format
 msgid "Unable to download the image from %1."
-msgstr "אין אפשרות להדפיס את התמונה."
+msgstr "לא ניתן להוריד את התמונה מהכתובת %1."
 
 #: src/imagewindow.cpp:468
 #, kde-format
@@ -420,8 +420,8 @@ msgid ""
 "Perhaps the file format is unsupported or your Imlib is not installed "
 "properly."
 msgstr ""
-"אין אפשרות לטעון את התמונה %1.\n"
-"ייתכן שתבנית הקובץ אינה נתמכת או שהספרייה Imlib אינה מותקנת כהלכה."
+"לא ניתן לטעון את התמונה %1.\n"
+"כנראה שתבנית הקובץ לא נתמכת או שהספרייה Imlib אינה מותקנת כראוי."
 
 #: src/imagewindow.cpp:908
 #, kde-format
@@ -441,7 +441,7 @@ msgstr "גאמה"
 #: src/imagewindow.cpp:955
 #, kde-format
 msgid "Unable to print the image."
-msgstr "אין אפשרות להדפיס את התמונה."
+msgstr "לא ניתן להדפיס את התמונה."
 
 #: src/imagewindow.cpp:956
 #, kde-format
@@ -451,7 +451,7 @@ msgstr "ההדפסה נכשלה"
 #: src/imagewindow.cpp:966
 #, kde-format
 msgid "Keep original image size"
-msgstr "שמור את גודל התמונה המקורי"
+msgstr "שמירת גודל התמונה המקורי"
 
 #: src/imagewindow.cpp:970
 #, kde-format
@@ -464,13 +464,13 @@ msgid "Image Files (%1)"
 msgstr "קובצי תמונה (%1)"
 
 #: src/imagewindow.cpp:993
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
-"אין אפשרות לשמור את הקובץ.\n"
-"ייתכן שהדיסק מלא או שאין לך הרשאת כתיבה לקובץ."
+"לא ניתן לשמור את הקובץ.\n"
+"כנראה שהכונן מלא או שאין לך הרשאת כתיבה לקובץ."
 
 #: src/imagewindow.cpp:996
 #, kde-format
@@ -484,6 +484,9 @@ msgid ""
 "resource-consuming and even make your computer hang.\n"
 "Do you want to continue?"
 msgstr ""
+"פעולה זו תציג תמונה גדולה מאוד (%1 × %2 פיקסלים), מה שיכול לצרוך משאבי מערכת "
+"רבים עד לכדי הקפאת המערכת.\n"
+"להמשיך?"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -516,9 +519,9 @@ msgid "Bro&wser Shortcuts"
 msgstr "קי&צורי מקשים של הדפדפן"
 
 #: src/kuickfile.cpp:128
-#, fuzzy, kde-format
+#, kde-format
 msgid "Downloading %1..."
-msgstr "הגדרות %1..."
+msgstr "%1 בהורדה…"
 
 #: src/kuickfile.cpp:129
 #, kde-format
@@ -540,7 +543,11 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br>If you "
 "choose %1, only the first image will be shown."
 msgstr[0] ""
+"להציג את התמונה הזאת בו־זמנית? פעולה זו יכולה לצרוך משאבי מערכת רבים ולהעמיס "
+"על המחשב שלך.<br>בחירה ב־%1, תציג רק את התמונה הראשונה."
 msgstr[1] ""
+"להציג את %n התמונות האלה בו־זמנית? פעולה זו יכולה לצרוך משאבי מערכת רבים "
+"ולהעמיס על המחשב שלך.<br>בחירה ב־%1, תציג רק את התמונה הראשונה."
 
 #: src/kuickshow.cpp:132
 #, kde-format
@@ -550,47 +557,47 @@ msgstr "להציג מספר תמונות?"
 #: src/kuickshow.cpp:260
 #, kde-format
 msgid "Configure %1..."
-msgstr "הגדרות %1..."
+msgstr "הגדרת %1…"
 
 #: src/kuickshow.cpp:265
 #, kde-format
 msgid "Start Slideshow"
-msgstr "התחל מצגת שקופיות"
+msgstr "התחלת מצגת שקופיות"
 
 #: src/kuickshow.cpp:271
 #, kde-format
 msgid "About KuickShow"
-msgstr "אודות KuickShow"
+msgstr "על KuickShow"
 
 #: src/kuickshow.cpp:276
 #, kde-format
 msgid "Open Only One Image Window"
-msgstr "פתח חלון תמונה אחד בלבד"
+msgstr "פתיחת חלון תמונה אחד בלבד"
 
 #: src/kuickshow.cpp:281
 #, kde-format
 msgid "Show File Browser"
-msgstr "הצג את דפדפן הקבצים"
+msgstr "הצגת דפדפן הקבצים"
 
 #: src/kuickshow.cpp:283
 #, kde-format
 msgid "Hide File Browser"
-msgstr "הסתר את דפדפן הקבצים"
+msgstr "הסתרת דפדפן הקבצים"
 
 #: src/kuickshow.cpp:288
 #, kde-format
 msgid "Show Image"
-msgstr "הצג תמונה"
+msgstr "הצגת תמונה"
 
 #: src/kuickshow.cpp:292
 #, kde-format
 msgid "Show Image in Active Window"
-msgstr "הצג תמונה בחלון הפעיל"
+msgstr "הצגת תמונה בחלון הפעיל"
 
 #: src/kuickshow.cpp:296
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
-msgstr "הצג תמונה במצב מסך מלא"
+msgstr "הצגת תמונה במצב מסך מלא"
 
 #: src/kuickshow.cpp:310
 #, kde-format
@@ -618,6 +625,8 @@ msgid ""
 "<qt>Do you really want to delete\n"
 " <b>'%1'</b>?</qt>"
 msgstr ""
+"<qt>למחוק את\n"
+" <b>‚%1’</b>?</qt>"
 
 #: src/kuickshow.cpp:654
 #, kde-format
@@ -630,20 +639,19 @@ msgid ""
 "<qt>Do you really want to trash\n"
 " <b>'%1'</b>?</qt>"
 msgstr ""
-"<qt>האמת באמת ברצונך להעביר לאשפה את\n"
-" <b>\"%1\"trash\n"
-"</b>?</qt>"
+"<qt>להעביר לאשפה את\n"
+" <b>‚%1’</b>?</qt>"
 
 #: src/kuickshow.cpp:680
 #, kde-format
 msgid "Trash File"
-msgstr "העבר קובץ לאשפה"
+msgstr "השלכת קובץ לאשפה"
 
 #: src/kuickshow.cpp:681
 #, kde-format
 msgctxt "to trash"
 msgid "&Trash"
-msgstr "&אשפה"
+msgstr "ל&אשפה"
 
 #: src/kuickshow.cpp:1209
 #, kde-format
@@ -657,14 +665,14 @@ msgid ""
 "Start kuickshow from the command line and look for error messages.\n"
 "The program will now quit."
 msgstr ""
-"אין אפשרות לאתחל את \"Imlib\".\n"
-"הפעל את kuickshow משורת הפקודה וחפש הודעות שגיאה.\n"
+"לא ניתן לאתחל את „Imlib”.\n"
+"נא להפעיל את kuickshow משורת הפקודה ולחפש הודעות שגיאה.\n"
 "התוכנית תצא עכשיו."
 
 #: src/kuickshow.cpp:1238
 #, kde-format
 msgid "Fatal Imlib Error"
-msgstr "שגיאה קריטית של Imlib"
+msgstr "שגיאה מהותית ב־Imlib"
 
 #: src/kuickshow.cpp:1388
 #, kde-format
@@ -704,12 +712,12 @@ msgstr "תורסטן שוארמן"
 #: src/main.cpp:57
 #, kde-format
 msgid "Start in the last visited folder, not the current working folder."
-msgstr "התחל בתיקייה האחרונה שהתוכנית הייתה בה, ולא בתיקיית העבודה הנוכחית"
+msgstr "התחלה בתיקייה האחרונה שהתוכנית הייתה בה, ולא בתיקיית העבודה הנוכחית."
 
 #: src/main.cpp:58
 #, kde-format
 msgid "Optional image filenames/urls to show"
-msgstr "שמות קבצי\\כתובות תמונות אופציונליים להצגה"
+msgstr "שמות קובצי/כתובות תמונות כרשות להצגה"
 
 #: src/printing.cpp:52
 #, kde-format
@@ -726,13 +734,13 @@ msgstr "הגדרות תמונה"
 #: src/printing_page.ui:20
 #, kde-format
 msgid "Print fi&lename below image"
-msgstr "הד&פס את שם הקובץ מתחת לתמונה"
+msgstr "לה&דפיס את שם הקובץ מתחת לתמונה"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr "הדפסת התמונה ב&שחור ולבן"
+msgstr "הדפסת התמונה ב&שחור לבן"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
@@ -756,7 +764,7 @@ msgstr "סנטימטרים"
 #: src/printing_page.ui:74
 #, kde-format
 msgid "Inches"
-msgstr "אינצ'ים"
+msgstr "אינטשים"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/printing_page.ui:108
@@ -768,13 +776,13 @@ msgstr "&גובה:"
 #: src/printing_page.ui:121
 #, kde-format
 msgid "Print e&xact size: "
-msgstr "הדפ&ס בגודל מדויק: "
+msgstr "הדפ&סה בגודל מדויק: "
 
 #. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
 #: src/printing_page.ui:141
 #, kde-format
 msgid "Shrink image to &fit, if necessary"
-msgstr "הק&טן את התמונה לפי הצורך על מנת שתתאים"
+msgstr "הק&טנת התמונה לפי הצורך כדי שתתאים"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -786,7 +794,7 @@ msgstr "מצגת"
 #: src/slideshowwidget.ui:20
 #, kde-format
 msgid "Switch to &full-screen"
-msgstr "&עבור למצב מסך מלא"
+msgstr "מ&עבר למצב מסך מלא"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
 #: src/slideshowwidget.ui:27
@@ -804,13 +812,13 @@ msgstr "השהיה בין שקו&פיות:"
 #: src/slideshowwidget.ui:44
 #, kde-format
 msgid "Wait for key"
-msgstr ""
+msgstr "המתנה למקש"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:47
 #, kde-format
 msgid " sec"
-msgstr " שניות"
+msgstr " שנ׳"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
