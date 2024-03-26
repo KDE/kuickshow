@@ -1,0 +1,1453 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Slovenian "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book id="kuickshow" lang="&language;">
+
+<bookinfo>
+<title
+>&kuickshow; Priročnik</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>Matjaž</firstname
+><surname
+>Jeran</surname
+><affiliation
+><address
+><email
+>matjaz.jeran@amis.net</email
+></address
+></affiliation
+><contrib
+>Prevod</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>15.07.2012</date>
+<releaseinfo
+>0.9.2 (&kde; 4.8)</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>&kuickshow; je udoben brskalnik/pregledovalnik slik. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>kuickshow</keyword>
+<keyword
+>slika</keyword>
+<keyword
+>vpogledovalnik</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>Uvod</title>
+
+<para
+>&kuickshow; je udoben brskalnik/pregledovalnik slik. Prikaže brskalnik datotek, kjer lahko izberete slike, ki se nato prikažejo. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>Podprti so naslednji formati slik:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>Slike so lahko prikazane bodisi v lastnem oknu, tako velikem kot slika, ali v celotnem zaslonu.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>Uporaba &kuickshow;</title>
+
+<para
+>Uporaba &kuickshow; je zelo preprosto. Brskalnik datotek prikaže seznam datotek, ki jih lahko izberete z &LMB; kliknite ali tipko <keycap
+>Return</keycap
+>.</para>
+
+<screenshot>
+<screeninfo
+>Tukaj je posnetek zaslona &kuickshow;</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>Posnetek zaslona</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>Več &kuickshow; Lastnosti</title>
+
+<para
+>Pogovorno okno z možnostmi ponuja več možnosti:</para>
+
+<itemizedlist>
+<listitem
+><para
+>Slike se lahko samodejno skrčijo, da se prilegajo zaslonu, če so večje.</para>
+</listitem>
+<listitem
+><para
+>Konfigurirate lahko, ali naj se slike prikažejo v svojem oknu ali vedno uporabite isto okno.</para>
+</listitem>
+<listitem
+><para
+>Za diaprojekcijo lahko nastavite čas zakasnitve.</para>
+</listitem>
+<listitem
+><para
+>Brskalniku lahko naročite, katere vrste datotek naj prikaže.</para>
+</listitem>
+<listitem
+><para
+>Nastavite lahko razmerje med hitrostjo in kakovostjo</para
+></listitem>
+</itemizedlist>
+
+<para
+>Če iščete določeno datoteko, v brskalnik vnesite prvih nekaj znakov njenega imena datoteke. V spodnjem desnem kotu se prikaže majhno okno za urejanje. Ko je ustrezna datoteka najdena, je označena. Okno za urejanje lahko zapustite s pritiskom na <keycap
+>Return</keycap
+> ali &Esc;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>&kuickshow; Pogovorno okno za konfiguracijo</title>
+
+<para
+><guilabel
+>&kuickshow; Konfiguracijsko</guilabel
+> pogovorno okno vsebuje 5 zavihkov. Tri od njih, <link linkend="general-options"
+><guilabel
+>Splošno</guilabel
+></link
+>, <link linkend="modifications-options"
+><guilabel
+>Spremembe</guilabel
+></link
+> in <link linkend="slideshow-options"
+><guilabel
+>Predstavitev</guilabel
+></link
+> konfigurira delovanje &kuickshow; in drugih dveh, <link linkend="shortcuts-options"
+><guilabel
+>Bližnjice pregledovalnika</guilabel
+></link
+> in <link linkend="shortcuts-options"
+><guilabel
+>Bližnjice brskalnika</guilabel
+></link
+> vam omogočata prilagajanje bližnjic za ustrezna okna.</para>
+
+<sect1 id="general-options">
+<title
+>Splošne možnosti</title>
+
+<para
+><guilabel
+>Splošno</guilabel
+> vsebuje možnosti za konfiguracijo in nastavitev &kuickshow;.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>Celozaslonski način</guilabel
+></term>
+<listitem>
+<para
+>Če je to izbrano, se slike odprejo v celozaslonskem načinu. Če slika ni dovolj velika, da bi zapolnila zaslon, se preostali del zaslona zapolni z barvo ozadja izbrano spodaj. Privzeto je izklopljeno.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Vnaprej naloži naslednjo sliko</guilabel
+></term>
+<listitem>
+<para
+>Če je to izbrano, bo &kuickshow; naložil naslednjo sliko v mapi, medtem ko gledate trenutno. To zmanjša zakasnitev, ko izberete naslednjo sliko, in je še posebej uporabno za predstavitve.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Zapomni si zadnjo mapo</guilabel
+></term>
+<listitem>
+<para
+>Če je to izbrano, si &kuickshow; ob izhodu shrani ime zadnje mape. Ob naslednjem zagonu &kuickshow; bo odprl to mapo v oknu brskalnika.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Barva ozadja:</guilabel
+></term>
+<listitem>
+<para
+>Kliknite na barvno vrstico, da izberete barvo ozadja. To se uporablja za zapolnitev zaslona v celozaslonskem načinu ali okna, če ste ga spremenili v velikost, ki je večja od slike.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Prikaži samo datoteke s pripono:</guilabel
+></term>
+<listitem>
+<para
+>Konfigurirate lahko &kuickshow; da vam pokaže samo nekatere vrste datotek, ki jih zmore.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Kakovost/Hitrost</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Hitro upodabljanje</guilabel
+></term>
+<listitem
+><para
+>Hitro upodabljajte stvari.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Dither v načinih HiColor (15/16bit).</guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Dither v načinih LowColor (&lt;=8bit).</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Uporabite lastno barvno paleto</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Hitra preslikava palete</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Največja velikost predpomnilnika (MB):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>Zavihek Spremembe</title>
+
+<para
+>Označite <guilabel
+>Uporabi privzete spremembe slike</guilabel
+>, da odprete sliko s temi spremembami v &kuickshow;.</para>
+
+<variablelist>
+<title
+><guilabel
+>Lestvičenje</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Skrči sliko na velikost zaslona, če je večja</guilabel
+></term>
+<listitem>
+<para
+>Če je to izbrano, so velike slike prikazane v povečanem oknu. Privzeto je vklopljeno.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Skrči sliko na velikost zaslona, če je manjša, do faktorja:</guilabel
+></term>
+<listitem>
+<para
+>Če je to izbrano, &kuickshow; poveča povečavo majhnih slik do izbranega faktorja.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Geometrija</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Obrni navpično</guilabel
+></term>
+<listitem
+><para
+>Obrne sliko navpično.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Obrni vodoravno</guilabel
+></term>
+<listitem
+><para
+>Obrne sliko vodoravno. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Zavrti sliko</guilabel
+></term>
+<listitem
+><para
+>Zavrti sliko za 0, 90, 180 ali 270 stopinj. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>Prilagoditve</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>Svetlost:</guilabel
+></term>
+<listitem
+><para
+>Posvetli/potemni sliko.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Kontrast:</guilabel
+></term>
+<listitem
+><para
+>Dodaja/odstranjuje kontrast.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Gama:</guilabel
+></term>
+<listitem
+><para
+>Več/manj game. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>Pod to možnostjo je prikazan <guilabel
+>Predogled</guilabel
+> <guilabel
+>Izvirne</guilabel
+> in <guilabel
+>Spremenjene</guilabel
+> slike.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>Zavihek predstavitev</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>Preklopi na celozaslonski način</guilabel
+></term>
+<listitem>
+<para
+>Označuje, če &kuickshow; naj preklopi v celozaslonski način, ko začne predstavitev. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Začni s trenutno sliko</guilabel
+></term>
+<listitem>
+<para
+>Označuje, ali naj se predstavitev začne s prvo sliko v mapi ali s sliko, ki je izbrana. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Zamik med prikazanimi slikami:</guilabel
+></term>
+<listitem>
+<para
+>Čas med spremembami slike med predstavitvijo. Uporabite lahko drsnik, vnesete novo vrednost v polje ali uporabite majhne puščice, da povečate ali zmanjšate vrednost. Privzeto je 3 sekunde.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>Ponovitev (0 = neskončno):</guilabel
+></term>
+<listitem>
+<para
+>Število ponovitev. Če je nastavljeno na 0, se bo ponavljalo, dokler ne prekinete predstavitve. Uporabite lahko drsnik, vnesete novo vrednost v polje ali uporabite majhne puščice, da povečate ali zmanjšate vrednost. Privzeta vrednost je 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>Zavihki bližnjic</title
+> 
+<para
+>Spremenite bližnjice za različne načine &kuickshow; na zavihkih <guilabel
+>Bližnjice pregledovalnika</guilabel
+> in <guilabel
+>Bližnjice brskalnika</guilabel
+>.</para>
+
+<para
+>Za več informacij preberite razdelek o <ulink url="help:/fundamentals/config.html#shortcuts"
+>Bližnjicah</ulink
+> v &kde; Osnove.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>Referenca menija</title>
+
+<sect1 id="file-menu">
+<title
+>Meni Datoteka</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Odpri</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre novo sliko</action
+> v &kuickshow;.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Prikaži sliko</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Prikaže </action
+> izbrano sliko v oknu nove slike.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Prikaži sliko v aktivnem oknu</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Prikaže </action
+>izbrano sliko v oknu aktivne slike.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Prikaži sliko v celozaslonskem načinu</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Prikaže</action
+> izbrano sliko v celozaslonskem načinu. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Začni predstavitev</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Zažene</action
+> predstavitev slik v mapi.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Natisni sliko...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Natisne sliko</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Datoteka</guimenu
+> <guimenuitem
+>Zapri</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Zapusti</action
+> &kuickshow;. Če imate odprtih več oken s slikami, so vsa zaprta.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+>Meni Urejanje</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Nova mapa...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+><action
+>Ustvari</action
+> novo mapo.</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Premakni v koš</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Premakne</action
+> trenutno datoteko v koš. Pozvani boste, da potrdite dejanje.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Alt;<keycap
+>Return</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Uredi</guimenu
+> <guimenuitem
+>Lastnosti</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Prikaže</action
+> lastnosti trenutne slikovne datoteke.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+>Meni Pogled</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>Pogled</guimenu
+> <guimenuitem
+>Kratek pogled</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Če izberete to možnost, bodo prikazana samo imena datotek in map.</para>
+<para
+>Primerjajte to s podrobnim pogledom.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>Pogled</guimenu
+> <guimenuitem
+>Podrobni pogled</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>Če izberete to možnost, so prikazana imena, velikosti, datumi, dovoljenja, lastniki datotek in lastništva skupin.</para>
+<para
+>Primerjajte to s kratkim pogledom.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Pogled</guimenu
+> <guimenuitem
+>Drevesni pogled</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Pogled</guimenu
+> <guimenuitem
+>Podrobni drevesni pogled</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-help-menu">
+<title
+>Meni Nastavitve in pomoč</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>Nastavitve</guimenu
+> <guimenuitem
+>Konfiguriraj &kuickshow;...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>Odpre pogovorno okno za spreminjanje nekaterih možnosti</action
+>, kot je opisano v razdelku <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>&kuickshow; ima skupno &kde; Elementi menija <guimenu
+>Pomoč</guimenu
+>, za več informacij preberite razdelek <ulink url="help:/fundamentals/menus.html#menus-help"
+>Meni Pomoč</ulink
+> v &kde; Osnove. </para>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>Referenca ukazov</title>
+
+<sect1 id="keybindings">
+<title
+>Okno slike</title>
+
+<para
+>Vse bližnjice je mogoče konfigurirati v <link linkend="configuration-dialog"
+>konfiguracijskem pogovornem oknu</link
+>.</para>
+
+<table>
+<title
+>Bližnjice na tipkovnici za slikovno okno</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Tipka</entry>
+<entry
+>Akcija</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Naloži naslednjo sliko</entry>
+</row>
+<row>
+<entry
+><keycap
+>Stran gor</keycap
+></entry>
+<entry
+>Naloži prejšnjo sliko</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Naloži prvo sliko</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Naloži zadnjo sliko</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>Poveča sliko</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>Pomanjša sliko</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>Obrne sliko vodoravno</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>Obrne sliko navpično</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>Zavrti se za 270&deg; v smeri urinega kazalca (kar je tudi 90° v nasprotni smeri urinega kazalca)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>Zavrti se za 90° v smeri urinega kazalca</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>Zavrti se za 180&deg; v smeri urinega kazalca</entry>
+</row>
+<row>
+<entry
+><keycap
+>Puščične</keycap
+> tipke</entry>
+<entry
+>Premakne sliko (oziroma sebe, gledalca), če je večja od zaslona</entry>
+</row>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>Preklaplja med celozaslonskim in okenskim načinom</entry>
+</row>
+<row>
+<entry
+><keycap
+>Preslednica</keycap
+></entry>
+<entry
+>Preklopi prikaz brskalnika</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>Zapre slikovno okno. To bo zaprlo &kuickshow; v celoti, če nimate odprtega okna brskalnika.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>Posvetli/potemni sliko</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>Dodaja/odstranjuje kontrast</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>Več/manj <firstterm
+>gama</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>Prikaže sliko v izvirni velikosti. To je uporabno le, če ste omogočili samodejno lestvičenje.</entry>
+</row>
+<row>
+<entry
+>&Enter;</entry>
+<entry
+>Ponovno prikaže sliko s privzetimi nastavitvami in velikostjo.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>Odpre pogovorno okno <guilabel
+>Shrani kot</guilabel
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>Izbriše trenutno sliko. Morali boste potrditi zahtevo.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keycap
+>Izbriši</keycap
+></keycombo
+></entry>
+<entry
+>Izbriše trenutno sliko brez zahteve za potrditev</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;<keycap
+>Return</keycap
+></keycombo
+></entry>
+<entry
+>Prikaže lastnosti slike</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Odpre spletno pomoč (ta datoteka)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>Zapusti &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Uporaba miške na oknu</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Gumb miške</entry>
+<entry
+>Akcija</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><mousebutton
+>Desni</mousebutton
+> klik</entry>
+<entry
+>Odpre kontekstni meni z več možnostmi</entry>
+</row>
+<row>
+<entry
+><mousebutton
+>Levo</mousebutton
+> povlek</entry>
+<entry
+>Premakne sliko, če se ne prilega oknu.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<mousebutton
+>Levo</mousebutton
+> </keycombo
+> vlečenje</entry>
+<entry
+>Označuje pravokotnik, ki ga lahko povečate.</entry>
+</row>
+<row>
+<entry
+><mousebutton
+>Levi</mousebutton
+> dvojni klik</entry>
+<entry
+>Zapre trenutno sliko</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>Okno brskalnika</title>
+
+<table>
+<title
+>Povezave tipk okna brskalnika</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Vezava tipk</entry>
+<entry
+>Akcija</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>Odpre mapo ali odpre slikovno okno, odvisno od izbranega elementa.</entry>
+</row>
+<row>
+<entry
+><keycap
+>Page Down</keycap
+></entry>
+<entry
+>Pomakne eno stran naprej na seznamu datotek</entry>
+</row>
+<row>
+<entry
+><keycap
+>Stran gor</keycap
+></entry>
+<entry
+>Premakne stran navzgor na seznamu datotek</entry>
+</row>
+<row>
+<entry
+><keycap
+>Home</keycap
+></entry>
+<entry
+>Izbere prvo datoteko ali mapo</entry>
+</row>
+<row>
+<entry
+><keycap
+>End</keycap
+></entry>
+<entry
+>Izbere zadnjo datoteko ali mapo</entry>
+</row>
+<row>
+<entry
+><keycap
+>Preslednica</keycap
+></entry>
+<entry
+>Preklopi prikaz brskalnika, če je odprto slikovno okno</entry>
+</row>
+<row>
+<entry
+><keycap
+>poljuben alfanumerični znak</keycap
+></entry>
+<entry
+>Odpre polje za urejanje, ki se uporablja za <quote
+>dokončanje</quote
+>. Vnesite prve znake imena datoteke, ki jo želite poiskati, in če jo najdete, bo datoteka izbrana.</entry>
+</row>
+<!-- not in 0.9.2 kde 4.8
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Go to</quote
+> &mdash; lets you enter a folder to go
+to.</entry>
+</row>
+-->
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>Izbriše trenutno datoteko. Pozvani boste, da potrdite dejanje.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Shift;<keycap
+>Izbriši</keycap
+></keycombo
+></entry>
+<entry
+>Izbriše trenutno datoteko brez zahteve za potrditev.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>Odpre spletno pomoč (ta datoteka)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>Zapusti &kuickshow;</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>Uporaba miške v oknu brskalnika</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>Uporaba miške</entry>
+<entry
+>Akcija</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><mousebutton
+>Levi</mousebutton
+> klik</entry>
+<entry
+>Vnesite mapo ali izberite slikovno okno.</entry>
+</row>
+<row>
+<entry
+><mousebutton
+>Desni</mousebutton
+> klik</entry>
+<entry
+>Odpre kontekstni meni z več možnostmi.</entry>
+</row>
+<row>
+<entry
+>Dvojni klik</entry>
+<entry
+>Naloži izbrano sliko ali vstopi v izbrano mapo</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>Zasluge in licenca</title>
+
+<para
+>&kuickshow; </para>
+<para
+>Avtorske pravice za program 1998-2009 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+
+<para
+>Avtorske pravice za dokumentacijo 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+<para
+>Pretvoril v DocBook &XML; in razširil &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+<para
+>Prevod: Matjaž Jeran <email
+>matjaz.jeran@amis.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+
