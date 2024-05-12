@@ -333,7 +333,7 @@ msgstr "Invertix verticalment"
 #: src/imagewindow.cpp:215 src/kuickshow.cpp:257
 #, kde-format
 msgid "Print Image..."
-msgstr "Imprimix la imatge..."
+msgstr "Imprimix la imatge…"
 
 #: src/imagewindow.cpp:226
 #, kde-format
@@ -520,7 +520,7 @@ msgstr "Dreceres del &navegador"
 #: src/kuickfile.cpp:128
 #, kde-format
 msgid "Downloading %1..."
-msgstr "S'està descarregant %1..."
+msgstr "S'està descarregant %1…"
 
 #: src/kuickfile.cpp:129
 #, kde-format
@@ -558,7 +558,7 @@ msgstr "Mostre múltiples imatges?"
 #: src/kuickshow.cpp:260
 #, kde-format
 msgid "Configure %1..."
-msgstr "Configura %1..."
+msgstr "Configura %1…"
 
 #: src/kuickshow.cpp:265
 #, kde-format
