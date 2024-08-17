@@ -196,7 +196,7 @@ bool ImageLibraryImlib2::saveImage(const ImageHandleData* data, const QString& f
 
 	// save the image and clean up
 	int err;
-	imlib_save_image_with_errno_return(QFile::encodeName(filename), &err);
+	imlib_save_image_with_errno_return(QFile::encodeName(filename).constData(), &err);
 	if (err != 0) qWarning("Imlib2: failed to save image to \"%s\": errno = %d", qPrintable(filename), err);
 	if (freeSaveImage) imlib_free_image_and_decache();
 

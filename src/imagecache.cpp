@@ -72,14 +72,14 @@ int ImageCache::maxImages() const
 
 void ImageCache::slotBusy()
 {
-    if (idleCount==0) emit sigBusy();
+    if (idleCount==0) Q_EMIT sigBusy();
     ++idleCount;
 }
 
 void ImageCache::slotIdle()
 {
     --idleCount;
-    if (idleCount==0) emit sigIdle();
+    if (idleCount==0) Q_EMIT sigIdle();
 }
 
 

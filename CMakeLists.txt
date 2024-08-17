@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.28)
 project(kuickshow)
 
-set(QT_MIN_VERSION "5.4.0")
-set(KF5_MIN_VERSION "5.82.0")
+set(QT_MIN_VERSION "5.15.2")
+set(KF5_MIN_VERSION "5.116.0")
 set(ECM_MIN_VERSION ${KF5_MIN_VERSION})
 
 find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)

@@ -85,13 +85,13 @@ public:
 
 //    bool needsDownload();
 
-signals:
+Q_SIGNALS:
     /**
      * Signals that download has finished for that file. Will only be emitted for non-local files!
      */
     void downloaded( KuickFile * );
 
-private slots:
+private Q_SLOTS:
     void slotResult( KJob *job );
     void slotProgress( KJob *job, unsigned long percent );
 

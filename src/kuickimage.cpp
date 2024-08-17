@@ -178,7 +178,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 	QElapsedTimer timer;
 	timer.start();
 #endif
-	emit startRendering();
+	Q_EMIT startRendering();
 
 	// resize a copy of the current image
 	ImageHandle newIm = ImageLibrary::copyImage(myIm);
@@ -188,7 +188,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 		ImageLibrary::resizeImageFast(newIm, newWidth, newHeight);
 	}
 
-	emit stoppedRendering();
+	Q_EMIT stoppedRendering();
 #ifdef DEBUG_TIMING
 	qDebug() << "resize took" << timer.elapsed() << "ms";
 #endif
@@ -205,7 +205,7 @@ bool KuickImage::smoothResize( int newWidth, int newHeight )
 
 QImage KuickImage::toQImage() const
 {
-	emit startRendering();
+	Q_EMIT startRendering();
 
 	ImageHandle im;
 	if (myRotation == ROT_0 && myFlipMode == FlipNone && myOrigIm &&
@@ -221,6 +221,6 @@ QImage KuickImage::toQImage() const
 	}
 	QImage image = ImageLibrary::toQImage(im);
 
-	emit stoppedRendering();
+	Q_EMIT stoppedRendering();
 	return image;
 }

@@ -91,7 +91,7 @@ private:
   Rotation 	myRotation;
   FlipMode 	myFlipMode;
 
-signals:
+Q_SIGNALS:
   void 		startRendering() const;
   void 		stoppedRendering() const;
 };

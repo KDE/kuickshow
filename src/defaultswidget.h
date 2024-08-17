@@ -44,7 +44,7 @@ private:
 
   Rotation      currentRotation() const;
 
-private slots:
+private Q_SLOTS:
   void 		updatePreview();
   void 		enableWidgets( bool );
 };

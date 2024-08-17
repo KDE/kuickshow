@@ -112,7 +112,7 @@ public:
 	}
 
 
-private slots:
+private Q_SLOTS:
     void		toggleBrowser();
     void 		slotToggleInlinePreview( bool on );
     void 		slotPrint();

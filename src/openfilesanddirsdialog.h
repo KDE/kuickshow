@@ -32,7 +32,7 @@ public:
     explicit OpenFilesAndDirsDialog(QWidget* parent = nullptr, const QString& caption = QString());
     virtual ~OpenFilesAndDirsDialog() = default;
 
-private slots:
+private Q_SLOTS:
     void onSelectionChange(QWidget* obj);
     void okClicked();
 

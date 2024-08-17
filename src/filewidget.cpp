@@ -444,7 +444,7 @@ void FileWidget::slotReturnPressed( const QString& t )
 	    if ( item.isDir() )
 		setUrl( item.url(), true );
 	    else
-		emit fileSelected( item );
+		Q_EMIT fileSelected( item );
 	}
     }
 }
@@ -476,7 +476,7 @@ void FileWidget::slotFinishedLoading()
 	}
 
 	m_initialName = QUrl();
-	emit finished();
+	Q_EMIT finished();
 }
 
 QSize FileWidget::sizeHint() const

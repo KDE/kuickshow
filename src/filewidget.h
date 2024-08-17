@@ -62,7 +62,7 @@ public:
     static bool isImage( const KFileItem& );
 
 
-signals:
+Q_SIGNALS:
     void finished();
 
 protected:
@@ -70,7 +70,7 @@ protected:
     virtual void resizeEvent( QResizeEvent * ) override;
     virtual QSize sizeHint() const override;
 
-private slots:
+private Q_SLOTS:
     void slotReturnPressed( const QString& text );
     void findCompletion( const QString& );
     void slotViewChanged();

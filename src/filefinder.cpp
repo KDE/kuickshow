@@ -89,5 +89,5 @@ void FileFinder::hide()
 void FileFinder::slotAccept( const QString& dir )
 {
     hide();
-    emit enterDir( dir );
+    Q_EMIT enterDir( dir );
 }

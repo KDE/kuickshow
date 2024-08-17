@@ -138,17 +138,17 @@ void ImageWindow::setupActions()
     QAction *a = m_actions->addAction( "duplicate_window" );
     a->setText( i18n("Duplicate Window") );
     m_actions->setDefaultShortcut(a, Qt::Key_D );
-    connect(a, &QAction::triggered, this, [this]() { emit duplicateWindow(currentFile()->url()); });
+    connect(a, &QAction::triggered, this, [this]() { Q_EMIT duplicateWindow(currentFile()->url()); });
 
     QAction *nextImage = m_actions->addAction( "next_image" );
     nextImage->setText( i18n("Show Next Image") );
     m_actions->setDefaultShortcuts(nextImage, KStandardShortcut::next());
-    connect(nextImage, &QAction::triggered, this, [this]() { emit requestImage(this, +1); });
+    connect(nextImage, &QAction::triggered, this, [this]() { Q_EMIT requestImage(this, +1); });
 
     QAction* showPreviousImage = m_actions->addAction( "previous_image" );
     showPreviousImage->setText( i18n("Show Previous Image") );
     m_actions->setDefaultShortcuts(showPreviousImage, KStandardShortcut::prior());
-    connect( showPreviousImage, &QAction::triggered, this, [this]() { emit requestImage(this, -1); });
+    connect( showPreviousImage, &QAction::triggered, this, [this]() { Q_EMIT requestImage(this, -1); });
 
     QAction* deleteImage = m_actions->addAction( "delete_image" );
     deleteImage->setText( i18n("Delete Image") );
@@ -217,7 +217,7 @@ void ImageWindow::setupActions()
     a = m_actions->addAction("show_browser");
     a->setText(i18n("Return to File Browser"));
     a->setIcon(QIcon::fromTheme("view-list-icons"));
-    connect(a, &QAction::triggered, this, [this]() { emit showFileBrowser(currentFile()->url()); deleteLater(); });
+    connect(a, &QAction::triggered, this, [this]() { Q_EMIT showFileBrowser(currentFile()->url()); deleteLater(); });
 
     // --------
     QAction *moreBrighteness = m_actions->addAction( "more_brightness" );
@@ -425,7 +425,7 @@ bool ImageWindow::showNextImage( const QUrl& url )
     	case KuickFile::ERROR:
     	{
             QString tmp = i18n("Unable to download the image from %1.", url.toDisplayString());
-	        emit sigImageError( file, tmp );
+	        Q_EMIT sigImageError( file, tmp );
 	        return false;
     	}
 	    case KuickFile::CANCELED:
@@ -443,7 +443,7 @@ bool ImageWindow::showNextImage( KuickFile *file )
    	    QString tmp = i18n("Unable to load the image %1.\n"
                        "Perhaps the file format is unsupported or "
                        "your Imlib is not installed properly.", file->url().toDisplayString());
-        emit sigImageError( file, tmp );
+        Q_EMIT sigImageError( file, tmp );
 	return false;
     }
 
@@ -461,7 +461,7 @@ void ImageWindow::reload()
 
 void ImageWindow::pauseSlideShow()
 {
-    emit pauseSlideShowSignal();
+    Q_EMIT pauseSlideShowSignal();
 }
 
 // Slots for keyboard/popupmenu actions
@@ -542,12 +542,12 @@ void ImageWindow::lessGamma()
 
 void ImageWindow::imageDelete()
 {
-    emit deleteImage(this);
+    Q_EMIT deleteImage(this);
 }
 
 void ImageWindow::imageTrash()
 {
-    emit trashImage(this);
+    Q_EMIT trashImage(this);
 }
 
 // event handlers
@@ -562,7 +562,7 @@ void ImageWindow::wheelEvent( QWheelEvent *e )
         return;
 
     int steps = delta / WHEEL_DELTA;
-    emit requestImage( this, -steps );
+    Q_EMIT requestImage( this, -steps );
 }
 
 void ImageWindow::keyPressEvent( QKeyEvent *e )
@@ -582,9 +582,9 @@ void ImageWindow::keyPressEvent( QKeyEvent *e )
     // for scroll_* actions, so unless they have been removed as shortcuts
     // for those actions they will never be seen here.
     else if ( key == Qt::Key_Right || key == Qt::Key_Down )
-        emit nextSlideRequested();
+        Q_EMIT nextSlideRequested();
     else if ( key == Qt::Key_Left || key == Qt::Key_Up )
-        emit prevSlideRequested(); // For future use...
+        Q_EMIT prevSlideRequested(); // For future use...
 
     else {
         e->ignore();
@@ -798,7 +798,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 void ImageWindow::focusInEvent( QFocusEvent *ev )
 {
     ImlibWidget::focusInEvent( ev );
-    emit sigFocusWindow( this );
+    Q_EMIT sigFocusWindow( this );
 }
 
 

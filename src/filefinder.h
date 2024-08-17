@@ -41,14 +41,14 @@ public:
 
     virtual void hide();
 
-signals:
+Q_SIGNALS:
     void enterDir( const QString& );
 
 protected:
     virtual void focusOutEvent( QFocusEvent * ) override;
     virtual void keyPressEvent( QKeyEvent * ) override;
 
-private slots:
+private Q_SLOTS:
     void slotAccept( const QString& );
 };
 

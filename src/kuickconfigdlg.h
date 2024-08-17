@@ -39,10 +39,10 @@ public:
 
     void 		applyConfig();
 
-private slots:
+private Q_SLOTS:
     void 		resetDefaults();
 
-signals:
+Q_SIGNALS:
 	void okClicked();
 	void applyClicked();
 

@@ -72,7 +72,7 @@ public:
     int printScaleHeightPixels();
     void setPrintScaleHeightPixels( int scaleHeight );
 
-private slots:
+private Q_SLOTS:
     void toggleScaling( bool enable );
 
 private:

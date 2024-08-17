@@ -57,6 +57,7 @@ else ()
 endif ()
 
 add_definitions("-DHOMEPAGE_URL=\"https://userbase.kde.org/KuickShow\"")
+remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
 # target kdeinit_kuickshow
 kf5_add_kdeinit_executable(kuickshow ${kuickshow_KDEINIT_SRCS})

@@ -71,7 +71,7 @@ public:
 
   bool          saveImage( const QUrl& dest, bool keepOriginalSize );
 
-public slots:
+public Q_SLOTS:
   void 		zoomIn();
   void 		zoomOut();
   void          moreBrightness();
@@ -90,7 +90,7 @@ public slots:
   void 		imageDelete();
   void 		imageTrash();
 
-signals:
+Q_SIGNALS:
   void 		sigFocusWindow( ImageWindow * );
   // go advance images back/forth
   void          requestImage( ImageWindow *, int advance );
@@ -146,7 +146,7 @@ protected:
   QMenu    *viewerMenu, *gammaMenu, *brightnessMenu, *contrastMenu;
   QWidget       *transWidget;
 
-protected slots:
+protected Q_SLOTS:
   void 		slotSaveImage();
   void          reload();
   void          slotProperties();
@@ -154,7 +154,7 @@ protected slots:
   virtual void  setBusyCursor();
   virtual void  restoreCursor();
 
-signals:
+Q_SIGNALS:
   void          pauseSlideShowSignal();
 
 private:

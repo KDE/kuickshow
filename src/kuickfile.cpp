@@ -176,7 +176,7 @@ void KuickFile::slotResult( KJob *job )
     }
     else {
 	    m_localFile = static_cast<KIO::FileCopyJob*>(job)->destUrl().path();
-	    emit downloaded( this ); // before closing the progress dialog
+	    Q_EMIT downloaded( this ); // before closing the progress dialog
 
 	    if ( m_progress ) {
 	        m_progress->setValue( 100 );

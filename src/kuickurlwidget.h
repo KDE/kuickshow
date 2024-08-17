@@ -31,7 +31,7 @@ public:
     KuickUrlWidget(const QString &text, QWidget *parent);
     virtual ~KuickUrlWidget() = default;
 
-protected slots:
+protected Q_SLOTS:
     virtual void run();
 };
 

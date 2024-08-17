@@ -73,7 +73,7 @@ public:
    */
   virtual bool  autoRotate( KuickImage *kuim );
 
-public slots:
+public Q_SLOTS:
   void 		rotate90();
   void 		rotate270();
   void 		rotate180();
@@ -121,12 +121,12 @@ private:
   QColor 	myBackgroundColor;
   QLabel *myLabel;
 
-protected slots:
+protected Q_SLOTS:
   bool 		cacheImage( KuickFile *file );
   void 		setBusyCursor();
   void 		restoreCursor();
 
-signals:
+Q_SIGNALS:
   void 		sigImageError( const KuickFile * file, const QString& );
 
 };

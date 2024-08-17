@@ -42,11 +42,11 @@ private:
   void dumpCache() const;
 #endif
 
-private slots:
+private Q_SLOTS:
   void 			slotBusy();
   void 			slotIdle();
 
-signals:
+Q_SIGNALS:
   void			sigBusy();
   void 			sigIdle();
 };

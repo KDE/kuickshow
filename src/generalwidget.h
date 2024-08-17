@@ -39,7 +39,7 @@ public:
 private:
     Ui::GeneralWidget* ui;
 
-private slots:
+private Q_SLOTS:
     void 	useOwnPalette();
     void slotURLClicked();
 
