@@ -19,7 +19,6 @@
 #include "filewidget.h"
 
 #include <KActionCollection>
-#include <KActionMenu>
 #include <KCompletion>
 #include <KConfigGroup>
 #include <KSharedConfig>
@@ -47,8 +46,12 @@ FileWidget::FileWidget( const QUrl& url, QWidget *parent )
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
       m_fileFinder(nullptr),
-      m_fileItemActions(nullptr)
+      contextMenuInitialized(false),
+      numItemSpecificContextMenuItems(0)
 {
+	m_fileItemActions = new KFileItemActions(this);
+	m_fileItemActions->setParentWidget(this);
+
     setEnableDirHighlighting( true );
 
     KConfigGroup group(KSharedConfig::openConfig(), "Filebrowser");
@@ -80,27 +83,6 @@ FileWidget::~FileWidget()
     delete m_fileFinder;
 }
 
-void FileWidget::initActions()
-{
-     KActionCollection *coll = actionCollection();
-
-     // The popup menu is created with this action name
-     // by KDirOperator::setupActions().
-     KActionMenu *menu = static_cast<KActionMenu *>(coll->action("popupMenu"));
-
-     // This action is not useful in KuickShow.  Its action name
-     // also comes from KDirOperator::setupActions().
-     menu->menu()->removeAction(coll->action("file manager"));
-
-     // Our permanent application-specific actions.
-     menu->addAction(coll->action("kuick_showInOtherWindow"));
-     menu->addAction(coll->action("kuick_showInSameWindow"));
-     menu->addAction(coll->action("kuick_showFullscreen"));
-     menu->addSeparator();
-     // Our own actions subsequent to these are added
-     // by slotContextMenu().
-}
-
 void FileWidget::reloadConfiguration()
 {
     if ( KuickConfig::get().fileFilter != nameFilter() ) {
@@ -127,49 +109,76 @@ bool FileWidget::hasFiles() const
     return (numFiles() > 0);
 }
 
+
 void FileWidget::slotContextMenu( const KFileItem& item, QMenu *popupMenu )
 {
-     KActionCollection *coll = actionCollection();
-
-    bool image = isImage( item );
-    coll->action("kuick_showInSameWindow")->setEnabled( image );
-    coll->action("kuick_showInOtherWindow")->setEnabled( image );
-    coll->action("kuick_showFullscreen")->setEnabled( image );
-    coll->action("kuick_print")->setEnabled( image );
-
-    // Remove all of the menu actions following our last permanent one,
-    // the separator after "kuick_showFullscreen".  The ones applicable
-    // to this popup will then be added.
-    const QList<QAction *> acts = popupMenu->actions();
-    int lastIndex = acts.indexOf(coll->action("kuick_showFullscreen"));
-    if (lastIndex!=-1)
-    {
-        for (int i = acts.count()-1; i>(lastIndex+1); --i)
-        {
-            popupMenu->removeAction(acts[i]);
-        }
-    }
-
-    // Actions applicable to the selected file or current directory
-    if (!item.isNull())
-    {
-	KFileItemList items;
-	items.append(item);
-	KFileItemListProperties properties( items );
-	if ( !m_fileItemActions ) {
-	    m_fileItemActions = new KFileItemActions( this );
-	    m_fileItemActions->setParentWidget( this );
-	}
-	m_fileItemActions->setItemListProperties( properties );
-	// Action "Open With" or "Open Folder With"
-	m_fileItemActions->insertOpenWithActionsTo(nullptr, popupMenu, QStringList());
-    }
-
-    // Finally these actions at the bottom
-    popupMenu->addAction(coll->action("kuick_print"));
-    popupMenu->addSeparator();
-    popupMenu->addAction(coll->action("properties"));
+	initializeContextMenu(popupMenu);
+	removeItemSpecificContextMenuItems(popupMenu);
+	addItemSpecificContextMenuItems(popupMenu, item);
 }
+
+void FileWidget::initializeContextMenu(QMenu* popupMenu)
+{
+	if(contextMenuInitialized) return;
+
+	// all of the KuickShow specific menu items are inserted directly in front of the "Properties" item
+	KActionCollection* coll = actionCollection();
+	QAction* propertiesAction = coll->action("properties");
+
+	// make sure there is a separator
+	EnsureLastMenuItemIsSeparator(popupMenu, propertiesAction);
+
+	// add our own image actions
+	popupMenu->insertAction(propertiesAction, coll->action("kuick_showInOtherWindow"));
+	popupMenu->insertAction(propertiesAction, coll->action("kuick_showInSameWindow"));
+	popupMenu->insertAction(propertiesAction, coll->action("kuick_showFullscreen"));
+	popupMenu->insertSeparator(propertiesAction);
+	popupMenu->insertAction(propertiesAction, coll->action("kuick_print"));
+	popupMenu->insertSeparator(propertiesAction);
+
+	contextMenuInitialized = true;
+}
+
+void FileWidget::addItemSpecificContextMenuItems(QMenu* popupMenu, const KFileItem& item)
+{
+	if(item.isNull()) return;
+	KActionCollection* coll = actionCollection();
+	const int initialNumMenuItems = popupMenu->actions().size();
+
+	// all item-specific menu entries will be added right before the "print image" entry
+	auto printImageAction = coll->action("kuick_print");
+	if(printImageAction == nullptr) {
+		// this can only happen if the actions weren't properly initialized
+		qWarning("ERROR: action \"Print Image\" doesn't exist or couldn't be found");
+		return;
+	}
+
+	m_fileItemActions->setItemListProperties({{ item }});
+	m_fileItemActions->insertOpenWithActionsTo(printImageAction, popupMenu, QStringList());
+	int newNumMenuItems = popupMenu->actions().size() - initialNumMenuItems;
+
+	// make sure that there's a separator before the "print image" entry;
+	// it is unspecified whether insertOpenWithActionsTo(...) creates one or not
+	if(EnsureLastMenuItemIsSeparator(popupMenu, printImageAction))
+		newNumMenuItems++;
+
+	numItemSpecificContextMenuItems += newNumMenuItems;
+}
+
+void FileWidget::removeItemSpecificContextMenuItems(QMenu* popupMenu)
+{
+	KActionCollection *coll = actionCollection();
+	const auto actions = popupMenu->actions();
+
+	// all item-specific menu entries were added right before the "print image" entry
+	const int lastIndex = actions.indexOf(coll->action("kuick_print"));
+	const int firstIndex = lastIndex - numItemSpecificContextMenuItems;
+	for(int index = lastIndex - 1; index >= 0 && firstIndex <= index; index--) {
+		popupMenu->removeAction(actions[index]);
+	}
+	numItemSpecificContextMenuItems = 0;
+}
+
 
 void FileWidget::findCompletion( const QString& text )
 {
@@ -482,4 +491,35 @@ void FileWidget::resizeEvent( QResizeEvent *e )
     if ( m_fileFinder )
 	m_fileFinder->move( width()  - m_fileFinder->width(),
 			    height() - m_fileFinder->height() );
+}
+
+
+bool FileWidget::EnsureLastMenuItemIsSeparator(QMenu* menu, QAction* before)
+{
+	// a new separator is only added if:
+	// 1) the item in <before> exists (only if provided)
+	// 2) the separator is not added as the first menu item
+	// 3) neither the previous, nor the following item is a separator
+	const auto actions = menu->actions();
+	if(actions.empty()) return false;
+
+	if(before != nullptr) {
+		if(before->isSeparator()) return false;
+		int itemIndex = actions.indexOf(before);
+		if(itemIndex < 0) {
+			// rule 1) - <before> is not part of the menu
+			qDebug("WARNING: tried to add separator before invalid action: \"%s\"", qPrintable(before->text()));
+			return false;
+		} else if(itemIndex == 0) {
+			qDebug("WARNING: tried to add separator at the start of the menu");
+			return false;
+		} else if(actions[itemIndex - 1]->isSeparator()) {
+			return false;
+		}
+		menu->insertSeparator(before);
+	} else if(!actions.last()->isSeparator()) {
+		menu->addSeparator();
+	}
+
+	return true;
 }

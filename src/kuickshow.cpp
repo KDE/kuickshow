@@ -433,7 +433,6 @@ void KuickShow::initGUI( const QUrl& startDir )
 
     tBar->show();
 
-    fileWidget->initActions();
     fileWidget->clearHistory();
     dirSelected( fileWidget->url() );
 

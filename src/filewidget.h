@@ -60,7 +60,6 @@ public:
 
     static bool isImage( const KFileItem& );
 
-    void initActions();
 
 signals:
     void finished();
@@ -96,6 +95,15 @@ private:
     QString m_currentURL;
     QUrl m_initialName;
     KFileItemActions *m_fileItemActions;
+
+	bool contextMenuInitialized;
+	void initializeContextMenu(QMenu* popupMenu);
+
+	int numItemSpecificContextMenuItems;
+	void addItemSpecificContextMenuItems(QMenu* popupMenu, const KFileItem& item);
+	void removeItemSpecificContextMenuItems(QMenu* popupMenu);
+
+	static bool EnsureLastMenuItemIsSeparator(QMenu* menu, QAction* before);
 };
 
 
