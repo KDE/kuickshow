@@ -29,6 +29,7 @@ class KFileItemActions;
 class QEvent;
 class QResizeEvent;
 class FileFinder;
+class KuickShow;
 
 
 class FileWidget : public KDirOperator
@@ -38,7 +39,7 @@ class FileWidget : public KDirOperator
 public:
     enum WhichItem { Previous, Next, Current };
 
-    FileWidget( const QUrl& url, QWidget *parent = nullptr );
+    FileWidget(const QUrl& url, KuickShow *parent);
     ~FileWidget();
 
     bool hasFiles() const;

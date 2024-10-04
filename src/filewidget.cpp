@@ -18,7 +18,6 @@
 
 #include "filewidget.h"
 
-#include <KActionCollection>
 #include <KCompletion>
 #include <KConfigGroup>
 #include <KSharedConfig>
@@ -42,7 +41,7 @@
 #include "kuickshow.h"
 
 
-FileWidget::FileWidget( const QUrl& url, QWidget *parent )
+FileWidget::FileWidget(const QUrl& url, KuickShow *parent)
     : KDirOperator( url, parent ),
       m_validCompletion( false ),
       m_fileFinder(nullptr),
@@ -122,18 +121,18 @@ void FileWidget::initializeContextMenu(QMenu* popupMenu)
 	if(contextMenuInitialized) return;
 
 	// all of the KuickShow specific menu items are inserted directly in front of the "Properties" item
-	KActionCollection* coll = actionCollection();
-	QAction* propertiesAction = coll->action("properties");
+	const auto ks = dynamic_cast<KuickShow*>(parent());
+	QAction* propertiesAction = action(Properties);
 
 	// make sure there is a separator
 	EnsureLastMenuItemIsSeparator(popupMenu, propertiesAction);
 
 	// add our own image actions
-	popupMenu->insertAction(propertiesAction, coll->action("kuick_showInOtherWindow"));
-	popupMenu->insertAction(propertiesAction, coll->action("kuick_showInSameWindow"));
-	popupMenu->insertAction(propertiesAction, coll->action("kuick_showFullscreen"));
+	popupMenu->insertAction(propertiesAction, ks->kuickAction(KuickActionType::ShowImageInNewWindow));
+	popupMenu->insertAction(propertiesAction, ks->kuickAction(KuickActionType::ShowImageInActiveWindow));
+	popupMenu->insertAction(propertiesAction, ks->kuickAction(KuickActionType::ShowImageFullScreen));
 	popupMenu->insertSeparator(propertiesAction);
-	popupMenu->insertAction(propertiesAction, coll->action("kuick_print"));
+	popupMenu->insertAction(propertiesAction, ks->kuickAction(KuickActionType::PrintImage));
 	popupMenu->insertSeparator(propertiesAction);
 
 	contextMenuInitialized = true;
@@ -142,11 +141,11 @@ void FileWidget::initializeContextMenu(QMenu* popupMenu)
 void FileWidget::addItemSpecificContextMenuItems(QMenu* popupMenu, const KFileItem& item)
 {
 	if(item.isNull()) return;
-	KActionCollection* coll = actionCollection();
+	const auto ks = dynamic_cast<KuickShow*>(parent());
 	const int initialNumMenuItems = popupMenu->actions().size();
 
 	// all item-specific menu entries will be added right before the "print image" entry
-	auto printImageAction = coll->action("kuick_print");
+	auto printImageAction = ks->kuickAction(KuickActionType::PrintImage);
 	if(printImageAction == nullptr) {
 		// this can only happen if the actions weren't properly initialized
 		qWarning("ERROR: action \"Print Image\" doesn't exist or couldn't be found");
@@ -167,11 +166,11 @@ void FileWidget::addItemSpecificContextMenuItems(QMenu* popupMenu, const KFileIt
 
 void FileWidget::removeItemSpecificContextMenuItems(QMenu* popupMenu)
 {
-	KActionCollection *coll = actionCollection();
+	const auto ks = dynamic_cast<KuickShow*>(parent());
 	const auto actions = popupMenu->actions();
 
 	// all item-specific menu entries were added right before the "print image" entry
-	const int lastIndex = actions.indexOf(coll->action("kuick_print"));
+	const int lastIndex = actions.indexOf(ks->kuickAction(KuickActionType::PrintImage));
 	const int firstIndex = lastIndex - numItemSpecificContextMenuItems;
 	for(int index = lastIndex - 1; index >= 0 && firstIndex <= index; index--) {
 		popupMenu->removeAction(actions[index]);
@@ -216,7 +215,7 @@ bool FileWidget::eventFilter( QObject *o, QEvent *e )
 
 	if ( (k->modifiers() & (Qt::ControlModifier | Qt::AltModifier)) == 0 ) {
 	    int key = k->key();
- 	    if ( actionCollection()->action("delete")->shortcuts().contains( key ) )
+ 	    if ( action(Delete)->shortcuts().contains( key ) )
             {
                 k->accept();
 		KFileItem item = getCurrentItem( false );
