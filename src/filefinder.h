@@ -32,7 +32,7 @@ class FileFinder : public KLineEdit
     Q_OBJECT
 
 public:
-    explicit FileFinder( QWidget *parent=0 );
+    explicit FileFinder(QWidget* parent = nullptr);
     ~FileFinder();
 
     KUrlCompletion *completion() {
