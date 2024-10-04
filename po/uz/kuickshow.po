@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-06-14 00:15+0000\n"
+"POT-Creation-Date: 2023-11-05 12:26+0000\n"
 "PO-Revision-Date: 2006-05-11 22:51+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <floss-uz-l10n@googlegroups.com>\n"
@@ -270,143 +270,143 @@ msgstr ""
 msgid "Preload next image"
 msgstr ""
 
-#: src/imagewindow.cpp:152
+#: src/imagewindow.cpp:151
 #, kde-format
 msgid "Show Next Image"
 msgstr "Keyingi rasm"
 
-#: src/imagewindow.cpp:157
+#: src/imagewindow.cpp:156
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Oldingi rasm"
 
-#: src/imagewindow.cpp:162
+#: src/imagewindow.cpp:161
 #, kde-format
 msgid "Delete Image"
 msgstr "Rasmni oʻchirish"
 
-#: src/imagewindow.cpp:167
+#: src/imagewindow.cpp:166
 #, kde-format
 msgid "Move Image to Trash"
 msgstr ""
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:180
 #, kde-format
 msgid "Restore Original Size"
 msgstr "Asl oʻlcham"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:185
 #, kde-format
 msgid "Maximize"
 msgstr "Yoyish"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:190
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90 darajaga burish"
 
-#: src/imagewindow.cpp:196
+#: src/imagewindow.cpp:195
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "100 darajaga burish"
 
-#: src/imagewindow.cpp:201
+#: src/imagewindow.cpp:200
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270 darajaga burish"
 
-#: src/imagewindow.cpp:206
+#: src/imagewindow.cpp:205
 #, kde-format
 msgid "Flip Horizontally"
 msgstr ""
 
-#: src/imagewindow.cpp:211
+#: src/imagewindow.cpp:210
 #, kde-format
 msgid "Flip Vertically"
 msgstr ""
 
-#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#: src/imagewindow.cpp:215 src/kuickshow.cpp:257
 #, kde-format
 msgid "Print Image..."
 msgstr "Rasmni bosib chiqarish"
 
-#: src/imagewindow.cpp:227
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "More Brightness"
 msgstr "Koʻproq"
 
-#: src/imagewindow.cpp:232
+#: src/imagewindow.cpp:231
 #, kde-format
 msgid "Less Brightness"
 msgstr "Kamroq"
 
-#: src/imagewindow.cpp:237
+#: src/imagewindow.cpp:236
 #, kde-format
 msgid "More Contrast"
 msgstr "Koʻproq"
 
-#: src/imagewindow.cpp:242
+#: src/imagewindow.cpp:241
 #, kde-format
 msgid "Less Contrast"
 msgstr "Kamroq"
 
-#: src/imagewindow.cpp:247
+#: src/imagewindow.cpp:246
 #, kde-format
 msgid "More Gamma"
 msgstr "Koʻproq"
 
-#: src/imagewindow.cpp:252
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Less Gamma"
 msgstr "Kamroq"
 
-#: src/imagewindow.cpp:258
+#: src/imagewindow.cpp:257
 #, kde-format
 msgid "Scroll Up"
 msgstr "Yuqoriga varaqlash"
 
-#: src/imagewindow.cpp:263
+#: src/imagewindow.cpp:262
 #, kde-format
 msgid "Scroll Down"
 msgstr "Pastga varaqlash"
 
-#: src/imagewindow.cpp:268
+#: src/imagewindow.cpp:267
 #, kde-format
 msgid "Scroll Left"
 msgstr "Chapga varaqlash"
 
-#: src/imagewindow.cpp:273
+#: src/imagewindow.cpp:272
 #, kde-format
 msgid "Scroll Right"
 msgstr "Oʻngga varaqlash"
 
-#: src/imagewindow.cpp:278
+#: src/imagewindow.cpp:277
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Slayd shouni vaqtincha toʻxtatish"
 
-#: src/imagewindow.cpp:290
+#: src/imagewindow.cpp:289
 #, kde-format
 msgid "Reload Image"
 msgstr "Rasmni qayta yuklash"
 
-#: src/imagewindow.cpp:296
+#: src/imagewindow.cpp:295
 #, kde-format
 msgid "Properties"
 msgstr ""
 
-#: src/imagewindow.cpp:350
+#: src/imagewindow.cpp:349
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:453
+#: src/imagewindow.cpp:452
 #, fuzzy, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Rasmni bosib chiqarib boʻlmadi."
 
-#: src/imagewindow.cpp:469
+#: src/imagewindow.cpp:468
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -414,59 +414,59 @@ msgid ""
 "properly."
 msgstr ""
 
-#: src/imagewindow.cpp:909
+#: src/imagewindow.cpp:908
 #, kde-format
 msgid "Brightness"
 msgstr "Yorugʻlik"
 
-#: src/imagewindow.cpp:913
+#: src/imagewindow.cpp:912
 #, kde-format
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: src/imagewindow.cpp:917
+#: src/imagewindow.cpp:916
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:955
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Rasmni bosib chiqarib boʻlmadi."
 
-#: src/imagewindow.cpp:957
+#: src/imagewindow.cpp:956
 #, kde-format
 msgid "Printing Failed"
 msgstr "Bosib chiqarish muvaffaqiyatsiz tugadi"
 
-#: src/imagewindow.cpp:967
+#: src/imagewindow.cpp:966
 #, kde-format
 msgid "Keep original image size"
 msgstr ""
 
-#: src/imagewindow.cpp:971
+#: src/imagewindow.cpp:970
 #, kde-format
 msgid "Save As"
 msgstr ""
 
-#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#: src/imagewindow.cpp:973 src/kuickshow.cpp:1389
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
 
-#: src/imagewindow.cpp:994
+#: src/imagewindow.cpp:993
 #, kde-format
 msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
 
-#: src/imagewindow.cpp:997
+#: src/imagewindow.cpp:996
 #, kde-format
 msgid "File Saving Failed"
 msgstr ""
 
-#: src/imagewindow.cpp:1269
+#: src/imagewindow.cpp:1268
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "

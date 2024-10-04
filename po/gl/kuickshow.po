@@ -1,26 +1,27 @@
 # translation of kuickshow.po to galician
 # Copyright (C) 2003, 2006, 2008, 2009 Free Software Foundation, Inc.
-#
 # Xabi García <xabigf@gmx.net>, 2003.
 # Xabi G. Feal <xabigf@gmx.net>, 2006.
 # mvillarino <mvillarino@users.sourceforge.net>, 2008, 2009.
 # marce villarino <mvillarino@users.sourceforge.net>, 2009.
 # Xosé <xosecalvo@gmail.com>, 2009.
 # Marce Villarino <mvillarino@kde-espana.es>, 2012.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2018, 2019.
+# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-06-14 00:15+0000\n"
-"PO-Revision-Date: 2019-03-16 13:09+0100\n"
+"POT-Creation-Date: 2023-11-05 12:26+0000\n"
+"PO-Revision-Date: 2024-03-02 21:41+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
-"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
+"Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -60,7 +61,7 @@ msgstr "Modificacións"
 #: src/defaultswidget.ui:23
 #, kde-format
 msgid "Apply default image modifications"
-msgstr "Aplicar as modificacións predeterminadas da imaxe"
+msgstr "Aplicar as modificacións predeterminadas da imaxe."
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbScale)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
@@ -80,7 +81,7 @@ msgstr ""
 #: src/defaultswidget.ui:53
 #, kde-format
 msgid "Shrink image to screen size, if larger"
-msgstr "Axustar a imaxe ao tamaño da pantalla se é máis grande"
+msgstr "Axustar a imaxe ao tamaño da pantalla se é máis grande."
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbGeometry)
 #: src/defaultswidget.ui:63
@@ -92,13 +93,13 @@ msgstr "Xeometría"
 #: src/defaultswidget.ui:69
 #, kde-format
 msgid "Flip vertically"
-msgstr "Inverter verticalmente"
+msgstr "Inverter verticalmente."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
 #: src/defaultswidget.ui:76
 #, kde-format
 msgid "Flip horizontally"
-msgstr "Inverter horizontalmente"
+msgstr "Inverter horizontalmente."
 
 #. i18n: ectx: property (text), widget (QLabel, lbRotate)
 #: src/defaultswidget.ui:85
@@ -182,7 +183,7 @@ msgstr "Xeral"
 #: src/generalwidget.ui:20
 #, kde-format
 msgid "Remember last folder"
-msgstr "Lembrar o último cartafol"
+msgstr "Lembrar o último cartafol."
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbox2)
 #: src/generalwidget.ui:30
@@ -194,37 +195,37 @@ msgstr "Calidade/Velocidade"
 #: src/generalwidget.ui:36
 #, kde-format
 msgid "Smooth scaling"
-msgstr "Escalado suavizado"
+msgstr "Escalado suavizado."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
 #: src/generalwidget.ui:43
 #, kde-format
 msgid "Fast rendering"
-msgstr "Renderización rápida"
+msgstr "Renderización rápida."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
 #: src/generalwidget.ui:50
 #, kde-format
 msgid "Dither in HiColor (15/16bit) modes"
-msgstr "Esfumar nos modos HiColor (15/16bit)"
+msgstr "Esfumar nos modos HiColor (15/16bit)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
 #: src/generalwidget.ui:57
 #, kde-format
 msgid "Dither in LowColor (<=8bit) modes"
-msgstr "Esfumar nos modos LowColor (<=8bit)"
+msgstr "Esfumar nos modos LowColor (≤8bit)."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
 #: src/generalwidget.ui:64
 #, kde-format
 msgid "Use own color palette"
-msgstr "Empregar unha paleta de cores propia"
+msgstr "Usar unha paleta de cores propia."
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFastRemap)
 #: src/generalwidget.ui:71
 #, kde-format
 msgid "Fast palette remapping"
-msgstr "Retrazado de paleta rápido"
+msgstr "Cambio rápido de asociación da paleta."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/generalwidget.ui:78
@@ -248,7 +249,7 @@ msgstr " MB"
 #: src/generalwidget.ui:104
 #, kde-format
 msgid "Fullscreen mode"
-msgstr "Modo a pantalla completa"
+msgstr "Modo a pantalla completa."
 
 #. i18n: ectx: property (text), widget (QLabel, l0)
 #: src/generalwidget.ui:114
@@ -260,7 +261,7 @@ msgstr "Cor de fondo:"
 #: src/generalwidget.ui:121
 #, kde-format
 msgid "Show only files with extension: "
-msgstr "Mostrar só ficheiros coa extensión: "
+msgstr "Amosar só ficheiros coa extensión: "
 
 #. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
 #: src/generalwidget.ui:128
@@ -272,210 +273,210 @@ msgstr "Abrir o Sitio Web de Kuickshow"
 #: src/generalwidget.ui:138
 #, kde-format
 msgid "Preload next image"
-msgstr "Precargar a seguinte imaxe"
+msgstr "Precargar a seguinte imaxe."
 
-#: src/imagewindow.cpp:152
+#: src/imagewindow.cpp:151
 #, kde-format
 msgid "Show Next Image"
-msgstr "Mostrar a seguinte imaxe"
+msgstr "Amosar a seguinte imaxe"
 
-#: src/imagewindow.cpp:157
+#: src/imagewindow.cpp:156
 #, kde-format
 msgid "Show Previous Image"
-msgstr "Mostrar a imaxe previa"
+msgstr "Amosar a imaxe previa"
 
-#: src/imagewindow.cpp:162
+#: src/imagewindow.cpp:161
 #, kde-format
 msgid "Delete Image"
-msgstr "Borrar a imaxe"
+msgstr "Eliminar a imaxe"
 
-#: src/imagewindow.cpp:167
+#: src/imagewindow.cpp:166
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "Deitar a imaxe no lixo"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:180
 #, kde-format
 msgid "Restore Original Size"
 msgstr "Restabelecer o tamaño orixinal"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:185
 #, kde-format
 msgid "Maximize"
 msgstr "Maximizar"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:190
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Rotar 90 graos"
 
-#: src/imagewindow.cpp:196
+#: src/imagewindow.cpp:195
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Rotar 180 graos"
 
-#: src/imagewindow.cpp:201
+#: src/imagewindow.cpp:200
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Rotar 270 graos"
 
-#: src/imagewindow.cpp:206
+#: src/imagewindow.cpp:205
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Voltear horizontalmente"
 
-#: src/imagewindow.cpp:211
+#: src/imagewindow.cpp:210
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Voltear verticalmente"
 
-#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#: src/imagewindow.cpp:215 src/kuickshow.cpp:257
 #, kde-format
 msgid "Print Image..."
 msgstr "Imprimir a imaxe…"
 
-#: src/imagewindow.cpp:227
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "More Brightness"
 msgstr "Máis brillo"
 
-#: src/imagewindow.cpp:232
+#: src/imagewindow.cpp:231
 #, kde-format
 msgid "Less Brightness"
 msgstr "Menos brillo"
 
-#: src/imagewindow.cpp:237
+#: src/imagewindow.cpp:236
 #, kde-format
 msgid "More Contrast"
 msgstr "Máis contraste"
 
-#: src/imagewindow.cpp:242
+#: src/imagewindow.cpp:241
 #, kde-format
 msgid "Less Contrast"
 msgstr "Menos contraste"
 
-#: src/imagewindow.cpp:247
+#: src/imagewindow.cpp:246
 #, kde-format
 msgid "More Gamma"
 msgstr "Máis gama"
 
-#: src/imagewindow.cpp:252
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Less Gamma"
 msgstr "Menos gama"
 
-#: src/imagewindow.cpp:258
+#: src/imagewindow.cpp:257
 #, kde-format
 msgid "Scroll Up"
 msgstr "Desprazar cara enriba"
 
-#: src/imagewindow.cpp:263
+#: src/imagewindow.cpp:262
 #, kde-format
 msgid "Scroll Down"
 msgstr "Desprazar cara embaixo"
 
-#: src/imagewindow.cpp:268
+#: src/imagewindow.cpp:267
 #, kde-format
 msgid "Scroll Left"
-msgstr "Desprazar cara a esquerda"
+msgstr "Desprazar cara á esquerda"
 
-#: src/imagewindow.cpp:273
+#: src/imagewindow.cpp:272
 #, kde-format
 msgid "Scroll Right"
-msgstr "Desprazar cara a dereita"
+msgstr "Desprazar cara á dereita"
 
-#: src/imagewindow.cpp:278
+#: src/imagewindow.cpp:277
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Parar a presentación"
 
-#: src/imagewindow.cpp:290
+#: src/imagewindow.cpp:289
 #, kde-format
 msgid "Reload Image"
 msgstr "Recargar a imaxe"
 
-#: src/imagewindow.cpp:296
+#: src/imagewindow.cpp:295
 #, kde-format
 msgid "Properties"
-msgstr "Propriedades"
+msgstr "Propiedades"
 
-#: src/imagewindow.cpp:350
+#: src/imagewindow.cpp:349
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:453
+#: src/imagewindow.cpp:452
 #, kde-format
 msgid "Unable to download the image from %1."
-msgstr "Non se pode obter a imaxe desde %1."
+msgstr "Non é posíbel obter a imaxe desde %1."
 
-#: src/imagewindow.cpp:469
+#: src/imagewindow.cpp:468
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
 "Perhaps the file format is unsupported or your Imlib is not installed "
 "properly."
 msgstr ""
-"Non se pode cargar a imaxe %1.\n"
-"Quizás o formato do ficheiro non estea soportado ou  Imlib non está "
+"Non é posíbel cargar a imaxe %1.\n"
+"Quizais o formato do ficheiro non estea soportado ou  Imlib non está "
 "instalada axeitadamente."
 
-#: src/imagewindow.cpp:909
+#: src/imagewindow.cpp:908
 #, kde-format
 msgid "Brightness"
 msgstr "Brillo"
 
-#: src/imagewindow.cpp:913
+#: src/imagewindow.cpp:912
 #, kde-format
 msgid "Contrast"
 msgstr "Contraste"
 
-#: src/imagewindow.cpp:917
+#: src/imagewindow.cpp:916
 #, kde-format
 msgid "Gamma"
 msgstr "Gama"
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:955
 #, kde-format
 msgid "Unable to print the image."
-msgstr "Non se pode imprimir a imaxe."
+msgstr "Non é posíbel imprimir a imaxe."
 
-#: src/imagewindow.cpp:957
+#: src/imagewindow.cpp:956
 #, kde-format
 msgid "Printing Failed"
 msgstr "Fallou a impresión"
 
-#: src/imagewindow.cpp:967
+#: src/imagewindow.cpp:966
 #, kde-format
 msgid "Keep original image size"
 msgstr "Manter o tamaño orixinal da imaxe"
 
-#: src/imagewindow.cpp:971
+#: src/imagewindow.cpp:970
 #, kde-format
 msgid "Save As"
 msgstr "Gardar como"
 
-#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#: src/imagewindow.cpp:973 src/kuickshow.cpp:1389
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Ficheiros de imaxe (%1)"
 
-#: src/imagewindow.cpp:994
+#: src/imagewindow.cpp:993
 #, kde-format
 msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
-"Non se puido gardar o ficheiro.\n"
+"Non foi posíbel gardar o ficheiro.\n"
 "Poida que o disco estea cheo, ou non teña permisos de escrita no ficheiro."
 
-#: src/imagewindow.cpp:997
+#: src/imagewindow.cpp:996
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Fallou a garda do ficheiro"
 
-#: src/imagewindow.cpp:1269
+#: src/imagewindow.cpp:1268
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -542,18 +543,17 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br>If you "
 "choose %1, only the first image will be shown."
 msgstr[0] ""
-"Seguro que quere mostrar esta imaxe á vez? Isto pode consumir moitos "
-"recursos e sobrecargar o computador.<br>Se escolle %1 só se mostrará a "
-"primeira imaxe."
+"Seguro que quere amosar esta imaxe á vez? Isto pode consumir moitos recursos "
+"e sobrecargar o computador.<br>Se escolle %1 só se amosará a primeira imaxe."
 msgstr[1] ""
-"Seguro que quere mostrar estas %n imaxes á vez? Isto pode consumir moitos "
-"recursos e sobrecargar o computador.<br>Se escolle %1 só se mostrará a "
+"Seguro que quere amosar estas %n imaxes á vez? Isto pode consumir moitos "
+"recursos e sobrecargar o computador.<br>Se escolle %1 só se amosará a "
 "primeira imaxe."
 
 #: src/kuickshow.cpp:132
 #, kde-format
 msgid "Display Multiple Images?"
-msgstr "Desexa mostrar varias imaxes?"
+msgstr "Desexa amosar varias imaxes?"
 
 #: src/kuickshow.cpp:260
 #, kde-format
@@ -568,17 +568,17 @@ msgstr "Comezar a presentación"
 #: src/kuickshow.cpp:271
 #, kde-format
 msgid "About KuickShow"
-msgstr "Acerca de KuickShow"
+msgstr "Sobre KuickShow"
 
 #: src/kuickshow.cpp:276
 #, kde-format
 msgid "Open Only One Image Window"
-msgstr "Abrir só unha fiestra de imaxe"
+msgstr "Abrir só unha xanela de imaxe"
 
 #: src/kuickshow.cpp:281
 #, kde-format
 msgid "Show File Browser"
-msgstr "Mostrar o navegador de ficheiros"
+msgstr "Amosar o navegador de ficheiros"
 
 #: src/kuickshow.cpp:283
 #, kde-format
@@ -588,17 +588,17 @@ msgstr "Agochar o navegador de ficheiros"
 #: src/kuickshow.cpp:288
 #, kde-format
 msgid "Show Image"
-msgstr "Mostrar a imaxe"
+msgstr "Amosar a imaxe"
 
 #: src/kuickshow.cpp:292
 #, kde-format
 msgid "Show Image in Active Window"
-msgstr "Mostrar a imaxe na fiestra activa"
+msgstr "Amosar a imaxe na xanela activa"
 
 #: src/kuickshow.cpp:296
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
-msgstr "Mostrar a imaxe a pantalla completa"
+msgstr "Amosar a imaxe a pantalla completa"
 
 #: src/kuickshow.cpp:310
 #, kde-format
@@ -630,7 +630,7 @@ msgstr "<qt>Seguro que quere eliminar <b>«%1»</b>?</qt>"
 #: src/kuickshow.cpp:654
 #, kde-format
 msgid "Delete File"
-msgstr "Borrar o ficheiro"
+msgstr "Eliminar o ficheiro"
 
 #: src/kuickshow.cpp:679
 #, kde-format
@@ -662,14 +662,14 @@ msgid ""
 "Start kuickshow from the command line and look for error messages.\n"
 "The program will now quit."
 msgstr ""
-"Non se pode iniciar Imlib.\n"
+"Non é posíbel iniciar Imlib.\n"
 "Execute kuickshow desde a liña de ordes e olle as mensaxes de erro.\n"
 "Agora sairase do programa."
 
 #: src/kuickshow.cpp:1238
 #, kde-format
 msgid "Fatal Imlib Error"
-msgstr "Ocorreu un erro fatal de Imlib"
+msgstr "Produciuse un erro fatal de Imlib"
 
 #: src/kuickshow.cpp:1388
 #, kde-format
@@ -689,7 +689,7 @@ msgstr "Un visor de imaxes rápido e versátil"
 #: src/main.cpp:40
 #, kde-format
 msgid "(c) 1998-2009, Carsten Pfeiffer"
-msgstr "(c) 1998-2009, Carsten Pfeiffer"
+msgstr "© 1998-2009 Carsten Pfeiffer"
 
 #: src/main.cpp:45
 #, kde-format
@@ -715,7 +715,7 @@ msgstr ""
 #: src/main.cpp:58
 #, kde-format
 msgid "Optional image filenames/urls to show"
-msgstr "Nomes de ficheiro/url das imaxes a mostrar opcionalmente"
+msgstr "Nomes de ficheiro ou URL das imaxes a amosar opcionalmente"
 
 #: src/printing.cpp:52
 #, kde-format
@@ -732,13 +732,13 @@ msgstr "Opcións da imaxe"
 #: src/printing_page.ui:20
 #, kde-format
 msgid "Print fi&lename below image"
-msgstr "Imprimir o &nome do ficheiro por baixo da imaxe"
+msgstr "Imprimir o &nome do ficheiro por baixo da imaxe."
 
 #. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr "Imprimir a imaxe en &branco e negro"
+msgstr "Imprimir a imaxe en &branco e negro."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
@@ -780,7 +780,7 @@ msgstr "Tamaño e&xacto de impresión: "
 #: src/printing_page.ui:141
 #, kde-format
 msgid "Shrink image to &fit, if necessary"
-msgstr "Reducir a imaxe para que cai&ba, se é preciso"
+msgstr "Reducir a imaxe para que cai&ba, se é preciso."
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -792,13 +792,13 @@ msgstr "Presentación"
 #: src/slideshowwidget.ui:20
 #, kde-format
 msgid "Switch to &full-screen"
-msgstr "Trocar a &pantalla completa"
+msgstr "Trocar a &pantalla completa."
 
 #. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
 #: src/slideshowwidget.ui:27
 #, kde-format
 msgid "S&tart with current image"
-msgstr "Iniciar coa imaxe a&ctual"
+msgstr "Iniciar coa imaxe a&ctual."
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/slideshowwidget.ui:34

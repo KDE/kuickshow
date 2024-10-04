@@ -374,7 +374,7 @@
 <varlistentry>
 <term
 ><guilabel
->Tamanho máximo da cache (MB):</guilabel
+>Tamanho máximo do cache (MB):</guilabel
 ></term>
 <listitem>
 <para

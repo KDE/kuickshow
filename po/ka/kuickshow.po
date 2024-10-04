@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2021-06-14 00:15+0000\n"
-"PO-Revision-Date: 2022-10-10 04:36+0200\n"
+"POT-Creation-Date: 2023-11-05 12:26+0000\n"
+"PO-Revision-Date: 2022-11-30 07:05+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -201,13 +201,13 @@ msgstr "სწრაფი რენდერი"
 #: src/generalwidget.ui:50
 #, kde-format
 msgid "Dither in HiColor (15/16bit) modes"
-msgstr ""
+msgstr "დიზერნგი ბევრფერიან (15/16 ბიტი) რეჟიმებში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
 #: src/generalwidget.ui:57
 #, kde-format
 msgid "Dither in LowColor (<=8bit) modes"
-msgstr ""
+msgstr "დიზეინგი ცოტაფერიან (<=8 ბიტი) რეჟიმებში"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
 #: src/generalwidget.ui:64
@@ -269,143 +269,143 @@ msgstr "KuickShow -ის ვებგვერდის ჩვენება"
 msgid "Preload next image"
 msgstr "შემდეგი გამოსახულების წინასწარი ჩატვირთვა"
 
-#: src/imagewindow.cpp:152
+#: src/imagewindow.cpp:151
 #, kde-format
 msgid "Show Next Image"
 msgstr "შემდეგი გამოსახულების ჩვენება"
 
-#: src/imagewindow.cpp:157
+#: src/imagewindow.cpp:156
 #, kde-format
 msgid "Show Previous Image"
 msgstr "წინა გამოსახულების ჩვენება"
 
-#: src/imagewindow.cpp:162
+#: src/imagewindow.cpp:161
 #, kde-format
 msgid "Delete Image"
 msgstr "გამოსახულების წაშლა"
 
-#: src/imagewindow.cpp:167
+#: src/imagewindow.cpp:166
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "გამოსახულების სანაგვე ყუთში გადატანა"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:180
 #, kde-format
 msgid "Restore Original Size"
 msgstr "საწყისი ზომის დაბრუნება"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:185
 #, kde-format
 msgid "Maximize"
 msgstr "გადიდება"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:190
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90 გრადუსით შებრუნება"
 
-#: src/imagewindow.cpp:196
+#: src/imagewindow.cpp:195
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "180°-ით შებრუნება"
 
-#: src/imagewindow.cpp:201
+#: src/imagewindow.cpp:200
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270 გრადუსით შებრუნება"
 
-#: src/imagewindow.cpp:206
+#: src/imagewindow.cpp:205
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "ჰორიზონტალურად გადაბრუნება"
 
-#: src/imagewindow.cpp:211
+#: src/imagewindow.cpp:210
 #, kde-format
 msgid "Flip Vertically"
 msgstr "ვერტიკალურად გადაბრუნება"
 
-#: src/imagewindow.cpp:216 src/kuickshow.cpp:257
+#: src/imagewindow.cpp:215 src/kuickshow.cpp:257
 #, kde-format
 msgid "Print Image..."
 msgstr "გამოსახულების დაბეჭდვა..."
 
-#: src/imagewindow.cpp:227
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "More Brightness"
 msgstr "მეტი სიკაშკაშე"
 
-#: src/imagewindow.cpp:232
+#: src/imagewindow.cpp:231
 #, kde-format
 msgid "Less Brightness"
 msgstr "ნაკლები სიკაშკაშე"
 
-#: src/imagewindow.cpp:237
+#: src/imagewindow.cpp:236
 #, kde-format
 msgid "More Contrast"
 msgstr "მეტი კონტრასტი"
 
-#: src/imagewindow.cpp:242
+#: src/imagewindow.cpp:241
 #, kde-format
 msgid "Less Contrast"
 msgstr "ნაკლები კონტრასტი"
 
-#: src/imagewindow.cpp:247
+#: src/imagewindow.cpp:246
 #, kde-format
 msgid "More Gamma"
 msgstr "მეტი გამა"
 
-#: src/imagewindow.cpp:252
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Less Gamma"
 msgstr "ნაკლები გამა"
 
-#: src/imagewindow.cpp:258
+#: src/imagewindow.cpp:257
 #, kde-format
 msgid "Scroll Up"
 msgstr "მაღლა აქაჩვა"
 
-#: src/imagewindow.cpp:263
+#: src/imagewindow.cpp:262
 #, kde-format
 msgid "Scroll Down"
 msgstr "ქვემოთ ჩამოწევა"
 
-#: src/imagewindow.cpp:268
+#: src/imagewindow.cpp:267
 #, kde-format
 msgid "Scroll Left"
 msgstr "მარცხნივ გაწევა"
 
-#: src/imagewindow.cpp:273
+#: src/imagewindow.cpp:272
 #, kde-format
 msgid "Scroll Right"
 msgstr "მარჯვნივ გაწევა"
 
-#: src/imagewindow.cpp:278
+#: src/imagewindow.cpp:277
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "სლაიდშოუს შეჩერება"
 
-#: src/imagewindow.cpp:290
+#: src/imagewindow.cpp:289
 #, kde-format
 msgid "Reload Image"
 msgstr "გამოსახულების თავიდან ჩატვირთვა"
 
-#: src/imagewindow.cpp:296
+#: src/imagewindow.cpp:295
 #, kde-format
 msgid "Properties"
 msgstr "პარამეტრები"
 
-#: src/imagewindow.cpp:350
+#: src/imagewindow.cpp:349
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:453
+#: src/imagewindow.cpp:452
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "გამოსახულების %1-დან გადმოწეირს შეცდომა."
 
-#: src/imagewindow.cpp:469
+#: src/imagewindow.cpp:468
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -415,65 +415,70 @@ msgstr ""
 "გამოსახულების (%1) ჩატვირთვის შეცდომა.\n"
 "ალბათ, ფაილის ფორმატი მხარდაუჭერელია ამ თქვენი Imlib სწორად არაა დაყენებული."
 
-#: src/imagewindow.cpp:909
+#: src/imagewindow.cpp:908
 #, kde-format
 msgid "Brightness"
 msgstr "სიკაშკაშე"
 
-#: src/imagewindow.cpp:913
+#: src/imagewindow.cpp:912
 #, kde-format
 msgid "Contrast"
 msgstr "კონტრასტი"
 
-#: src/imagewindow.cpp:917
+#: src/imagewindow.cpp:916
 #, kde-format
 msgid "Gamma"
 msgstr "გამა"
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:955
 #, kde-format
 msgid "Unable to print the image."
 msgstr "გამოსახულების დაბეჭდვის შეცდომა."
 
-#: src/imagewindow.cpp:957
+#: src/imagewindow.cpp:956
 #, kde-format
 msgid "Printing Failed"
 msgstr "დაბეჭდვის შეცდომა"
 
-#: src/imagewindow.cpp:967
+#: src/imagewindow.cpp:966
 #, kde-format
 msgid "Keep original image size"
 msgstr "გამოსახულების საწყისი ზომის შენარჩეუნება"
 
-#: src/imagewindow.cpp:971
+#: src/imagewindow.cpp:970
 #, kde-format
 msgid "Save As"
 msgstr "შენახვა როგორც"
 
-#: src/imagewindow.cpp:974 src/kuickshow.cpp:1389
+#: src/imagewindow.cpp:973 src/kuickshow.cpp:1389
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "გამოსახულების ფაილები (%1)"
 
-#: src/imagewindow.cpp:994
+#: src/imagewindow.cpp:993
 #, kde-format
 msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
+"ფაილის შენახვის შეცდომა.\n"
+"ალბათ ან დისკია სავსე, ან წვდომა ფაილის ჩასაწერად არ გაგაჩნიათ."
 
-#: src/imagewindow.cpp:997
+#: src/imagewindow.cpp:996
 #, kde-format
 msgid "File Saving Failed"
 msgstr "ფაილის შენახვის შეცდომა"
 
-#: src/imagewindow.cpp:1269
+#: src/imagewindow.cpp:1268
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
 "resource-consuming and even make your computer hang.\n"
 "Do you want to continue?"
 msgstr ""
+"აპირებთ გახსნათ ძალიან დიდი გამოსახულება (%1 x %2 პიქსელი), რომელსაც "
+"შეიძლება ძალიან ბევრი რესურსები დასჭირდეს და კომპიუტერი შეიძლება დაეკიდოს.\n"
+"გნებავთ, გააგრძელოთ?"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -530,7 +535,13 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br>If you "
 "choose %1, only the first image will be shown."
 msgstr[0] ""
+"მართლა გნებავთ 1 გამოსახულების გახსნა? ამას საკმაო რესურსები სჭირდება და "
+"შეიძლება თქვენი კომპიუტერის რესურსების გადატვირთვა მოხდეს. თუ %1-ს აირჩევთ, "
+"ნაჩვენები მხოლოდ პირველი გამოსახულება იქნება."
 msgstr[1] ""
+"მართლა გნებავთ %n გამოსახულების გახსნა? ამას საკმაო რესურსები სჭირდება და "
+"შეიძლება თქვენი კომპიუტერის რესურსების გადატვირთვა მოხდეს. თუ %1-ს აირჩევთ, "
+"ნაჩვენები მხოლოდ პირველი გამოსახულება იქნება."
 
 #: src/kuickshow.cpp:132
 #, kde-format
@@ -608,6 +619,8 @@ msgid ""
 "<qt>Do you really want to delete\n"
 " <b>'%1'</b>?</qt>"
 msgstr ""
+"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ\n"
+" <b>'%1'</b>?</qt>"
 
 #: src/kuickshow.cpp:654
 #, kde-format
@@ -620,6 +633,8 @@ msgid ""
 "<qt>Do you really want to trash\n"
 " <b>'%1'</b>?</qt>"
 msgstr ""
+"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, სანაგვეში გადააგდოთ\n"
+" <b>'%1'</b>?</qt>"
 
 #: src/kuickshow.cpp:680
 #, kde-format
@@ -644,6 +659,9 @@ msgid ""
 "Start kuickshow from the command line and look for error messages.\n"
 "The program will now quit."
 msgstr ""
+"\"Imlib\"-ის ინიციალიზაციის შეცდომა.\n"
+"გაუშვით kuickshow ბრძანების სტრიქონიდან და შეცდომის შეტყობინება წაიკითხეთ.\n"
+"პროგრამა მუშაობას ასრულებს."
 
 #: src/kuickshow.cpp:1238
 #, kde-format
@@ -663,7 +681,7 @@ msgstr "KuickShow"
 #: src/main.cpp:38
 #, kde-format
 msgid "A fast and versatile image viewer"
-msgstr ""
+msgstr "სწრაფი და მორგებადი სურათების დამთვალიერებელი"
 
 #: src/main.cpp:40
 #, kde-format
@@ -688,12 +706,12 @@ msgstr "Thorsten Scheuermann"
 #: src/main.cpp:57
 #, kde-format
 msgid "Start in the last visited folder, not the current working folder."
-msgstr ""
+msgstr "ბოლო სამუშაო და არა მიმდინარე საქაღალდეში გაშვება."
 
 #: src/main.cpp:58
 #, kde-format
 msgid "Optional image filenames/urls to show"
-msgstr ""
+msgstr "გამოსახულებების ფაილის სახელის/ბმულის ჩვენება (არასავალდებულო)"
 
 #: src/printing.cpp:52
 #, kde-format
@@ -710,13 +728,13 @@ msgstr "გამოსახულების პარამეტრებ�
 #: src/printing_page.ui:20
 #, kde-format
 msgid "Print fi&lename below image"
-msgstr ""
+msgstr "გამოსახულებების ქვემოთ მისი &ფაილის სახელის მიწერა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr ""
+msgstr "გამოსახულების &შავთეთრად დაბეჭდვა"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
@@ -752,13 +770,13 @@ msgstr "&სიმაღლე:"
 #: src/printing_page.ui:121
 #, kde-format
 msgid "Print e&xact size: "
-msgstr ""
+msgstr "&ზუსტი ზომით დაბეჭდვა: "
 
 #. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
 #: src/printing_page.ui:141
 #, kde-format
 msgid "Shrink image to &fit, if necessary"
-msgstr ""
+msgstr "თუ საჭიროა, დაპატარავება საზღვრებში ჩასატევად"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -770,25 +788,25 @@ msgstr "სლაიდშოუ"
 #: src/slideshowwidget.ui:20
 #, kde-format
 msgid "Switch to &full-screen"
-msgstr ""
+msgstr "&სრულეკრანიანი რეჟიმზე გადასვლა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
 #: src/slideshowwidget.ui:27
 #, kde-format
 msgid "S&tart with current image"
-msgstr ""
+msgstr "&მიმდინარე გამოსახულებით დაწყება"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/slideshowwidget.ui:34
 #, kde-format
 msgid "De&lay between slides:"
-msgstr ""
+msgstr "დრო სლაიდებს შორის:"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:44
 #, kde-format
 msgid "Wait for key"
-msgstr ""
+msgstr "ღილაკის მოლოდინი"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:47
@@ -800,4 +818,4 @@ msgstr " წმ"
 #: src/slideshowwidget.ui:57
 #, kde-format
 msgid "&Iterations (0 = infinite):"
-msgstr ""
+msgstr "&იტერაციები (0 = უსასრულო):"

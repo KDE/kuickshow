@@ -65,7 +65,6 @@
 #include <QWheelEvent>
 #include <QDebug>
 
-#include <netwm.h>
 #include <stdlib.h>
 
 #include "filecache.h"
