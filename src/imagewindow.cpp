@@ -30,7 +30,6 @@
 #include <KStandardShortcut>
 #include <KToggleFullScreenAction>
 #include <KUrlMimeData>
-#include <KWindowSystem>
 
 #include <kio/filecopyjob.h>
 
@@ -124,8 +123,7 @@ void ImageWindow::init()
 
     // TODO: static non-POD data - is this advisable?
     static QPixmap imageIcon = KIconLoader::global()->loadIcon("imageviewer-medium", KIconLoader::User);
-    static QPixmap miniImageIcon = KIconLoader::global()->loadIcon( "imageviewer-small",KIconLoader::User);
-    KWindowSystem::setIcons( winId(), imageIcon, miniImageIcon );
+    setWindowIcon(imageIcon);
 }
 
 void ImageWindow::updateActions()

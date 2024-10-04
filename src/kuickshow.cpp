@@ -38,7 +38,6 @@
 #include <KToolBar>
 #include <KUrlComboBox>
 #include <KUrlCompletion>
-#include <KWindowSystem>
 
 #include <QAbstractItemView>
 #include <QGuiApplication>
@@ -166,13 +165,13 @@ KuickShow::KuickShow( const char *objName )
     if ( numArgs >= 10 )
     {
         // Even though the 1st i18n string will never be used, it needs to exist for plural handling - mhunter
-        if (KMessageBox::questionYesNo(
+        if (KMessageBox::questionTwoActions(
                 this,
                 xi18ncp("@info",
                         "Do you really want to display this 1 image at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose <interface>%2</interface>, only the first image will be shown.",
                         "Do you really want to display these %1 images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose <interface>%2</interface>, only the first image will be shown.", numArgs, KStandardGuiItem::cancel().plainText()),
                 i18n("Display Multiple Images?"),
-                KGuiItem(i18n("Display"), KStandardGuiItem::yes().icon()),
+                KGuiItem(i18n("Display"), KStandardGuiItem::guiItem(KStandardGuiItem::Yes).icon()),
                 KStandardGuiItem::cancel())!=KMessageBox::Yes)
         {
             numArgs = 1;
@@ -1263,7 +1262,6 @@ void KuickShow::toggleBrowser()
         fileWidget->resize( size() ); // ### somehow fileWidget isn't resized!?
         show();
         raise();
-        KWindowSystem::activateWindow(winId()); // ### this should not be necessary
     }
     else if (!s_viewers.isEmpty()) hide();
 }

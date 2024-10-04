@@ -56,7 +56,7 @@ FileWidget::FileWidget(const QUrl& url, KuickShow *parent)
     KConfigGroup group(KSharedConfig::openConfig(), "Filebrowser");
     setViewConfig( group );
     readConfig( group );
-    setView( KFile::Default );
+    setViewMode(KFile::Default);
 
     reloadConfiguration();
 
