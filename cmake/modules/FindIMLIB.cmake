@@ -63,6 +63,10 @@ else()
 
 	# next, set the exported variables
 	if (libImlib_FOUND)
+		# for some reason, <libImlib_CFLAGS> now also contains include directives ("-I...");
+		# filter these out here, or they'd later create compiler arguments like "-D-I..." which would fail the build
+		string(REGEX REPLACE "(^| )-I[^ ]*" "" libImlib_CFLAGS "${libImlib_CFLAGS}")
+
 		# the list of libraries must include the library paths
 		set(_libs "")
 		foreach(libdir ${libImlib_LIBDIR})
