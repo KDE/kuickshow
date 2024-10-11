@@ -69,7 +69,6 @@ target_link_libraries(kdeinit_kuickshow
 	Qt5::Core
 	Qt5::Gui
 	Qt5::PrintSupport
-	Qt5::X11Extras
 	KF5::I18n
 	KF5::IconThemes
 	KF5::KIOCore
@@ -81,11 +80,13 @@ target_link_libraries(kdeinit_kuickshow
 
 if (IMLIB_FOUND)
 target_link_libraries(kdeinit_kuickshow
+	Qt5::X11Extras
 	${X11_LIBRARIES}
 	${IMLIB_LIBRARIES})
 endif ()
 if (IMLIB2_FOUND)
 target_link_libraries(kdeinit_kuickshow
+	Qt5::X11Extras
 	${IMLIB2_LIBRARIES})
 endif ()
 

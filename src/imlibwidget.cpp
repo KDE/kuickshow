@@ -25,7 +25,6 @@
 #include <QImage>
 #include <QLabel>
 #include <QPalette>
-#include <QX11Info>
 
 #include "filecache.h"
 #include "kuickfile.h"

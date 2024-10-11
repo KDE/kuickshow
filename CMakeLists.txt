@@ -12,19 +12,26 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SO
 option(USE_IMLIB1 "Use Imlib1 for image processing" ON)
 option(USE_IMLIB2 "Use Imlib2 for image processing" ON)
 
-include(KDEInstallDirs)
-include(KDECMakeSettings)
-include(KDECompilerSettings NO_POLICY_SCOPE)
-include(ECMInstallIcons)
-include(ECMQtDeclareLoggingCategory)
-include(FeatureSummary)
+if (USE_IMLIB2)
+	find_package(IMLIB2)
+endif ()
+if (USE_IMLIB1 AND NOT IMLIB2_FOUND)
+	find_package(IMLIB)
+endif ()
+if (IMLIB_FOUND OR IMLIB2_FOUND)
+	find_package(X11 REQUIRED)
+endif ()
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED
+set(REQUIRED_QT_MODULES
 	Core
 	Gui
 	PrintSupport
-	X11Extras
 )
+if(IMLIB_FOUND OR IMLIB2_FOUND)
+	list(APPEND REQUIRED_QT_MODULES X11Extras)
+endif ()
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED ${REQUIRED_QT_MODULES})
+
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 	DocTools
 	I18n
@@ -35,34 +42,23 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 	XmlGui
 )
 
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(ECMInstallIcons)
+include(ECMQtDeclareLoggingCategory)
+include(FeatureSummary)
+
 set_package_properties(IMLIB PROPERTIES
-                       URL "https://download.gnome.org/sources/imlib/"
-                       DESCRIPTION "Image reading and processing library"
-                       TYPE OPTIONAL)
+	URL "https://download.gnome.org/sources/imlib/"
+	DESCRIPTION "Image reading and processing library"
+	TYPE OPTIONAL
+)
 set_package_properties(IMLIB2 PROPERTIES
-                       URL "https://sourceforge.net/projects/enlightenment/files/imlib2-src/"
-                       DESCRIPTION "Updated image reading and processing library"
-                       TYPE OPTIONAL)
-
-if (USE_IMLIB2)
-  find_package(IMLIB2)
-endif ()
-
-if (NOT IMLIB2_FOUND)
-  if (USE_IMLIB1)
-    find_package(IMLIB)
-    find_package(X11 REQUIRED)				# required at build time
-  endif ()
-endif ()
-
-if ((NOT IMLIB_FOUND) AND (NOT IMLIB2_FOUND))
-  message(STATUS "")
-  message(STATUS "Neither the IMLIB nor IMLIB2 image library was found or was")
-  message(STATUS "  configured to be used.")
-  message(STATUS "KuickShow will use Qt only, image modifications (brightness,")
-  message(STATUS "  contrast, gamma) will not be available.")
-  message(STATUS "")
-endif ()
+	URL "https://sourceforge.net/projects/enlightenment/files/imlib2-src/"
+	DESCRIPTION "Updated image reading and processing library"
+	TYPE OPTIONAL
+)
 
 add_subdirectory( src ) 
 add_subdirectory( misc ) 
