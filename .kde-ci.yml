@@ -8,7 +8,6 @@ Dependencies:
     'frameworks/kdoctools': '@stable'
     'frameworks/ki18n': '@stable'
     'frameworks/kiconthemes': '@stable'
-    'frameworks/kinit': '@stable'
     'frameworks/kio': '@stable'
     'frameworks/kwindowsystem': '@stable'
     'frameworks/kxmlgui': '@stable'

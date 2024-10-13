@@ -1,8 +1,8 @@
 
-# KuickShow main application
+# KuickShow application
 
 set(CMAKE_AUTOMOC ON)
-set(kuickshow_KDEINIT_SRCS
+set(kuickshow_SOURCES
    kuickshow.cpp 
    aboutwidget.cpp 
    generalwidget.cpp 
@@ -27,7 +27,7 @@ set(kuickshow_KDEINIT_SRCS
    imlib.cpp
 )
 
-ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
+ki18n_wrap_ui(kuickshow_SOURCES
    aboutwidget.ui
    printing_page.ui
    generalwidget.ui
@@ -35,7 +35,7 @@ ki18n_wrap_ui(kuickshow_KDEINIT_SRCS
    slideshowwidget.ui
 )
 
-ecm_qt_declare_logging_category(kuickshow_KDEINIT_SRCS
+ecm_qt_declare_logging_category(kuickshow_SOURCES
    HEADER kuickshow_debug.h
    IDENTIFIER KUICKSHOW_LOG
    CATEGORY_NAME org.kde.kuickshow
@@ -47,25 +47,25 @@ ecm_qt_declare_logging_category(kuickshow_KDEINIT_SRCS
 if (IMLIB_FOUND)
   add_definitions(${IMLIB_DEFINITIONS})
   add_compile_definitions("IMAGE_LIBRARY_VERSION=\"${IMLIB_VERSION}\"")
-  list(APPEND kuickshow_KDEINIT_SRCS imlib_imlib1.cpp)
+  list(APPEND kuickshow_SOURCES imlib_imlib1.cpp)
 elseif (IMLIB2_FOUND)
   add_definitions(${IMLIB2_DEFINITIONS})
   add_compile_definitions("IMAGE_LIBRARY_VERSION=\"${IMLIB2_VERSION}\"")
-  list(APPEND kuickshow_KDEINIT_SRCS imlib_imlib2.cpp)
+  list(APPEND kuickshow_SOURCES imlib_imlib2.cpp)
 else ()
-  list(APPEND kuickshow_KDEINIT_SRCS imlib_qt.cpp)
+  list(APPEND kuickshow_SOURCES imlib_qt.cpp)
 endif ()
 
 add_definitions("-DHOMEPAGE_URL=\"https://userbase.kde.org/KuickShow\"")
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
-# target kdeinit_kuickshow
-kf5_add_kdeinit_executable(kuickshow ${kuickshow_KDEINIT_SRCS})
-target_compile_options(kdeinit_kuickshow PRIVATE -std=c++11 -Wall --pedantic)
-target_compile_definitions(kdeinit_kuickshow PRIVATE ${IMLIB_DEFINITIONS} -DQT_NO_URL_CAST_FROM_STRING)
-target_include_directories(kdeinit_kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS})
+# target kuickshow
+add_executable(kuickshow ${kuickshow_SOURCES})
+target_compile_options(kuickshow PRIVATE -std=c++11 -Wall --pedantic)
+target_compile_definitions(kuickshow PRIVATE ${IMLIB_DEFINITIONS} -DQT_NO_URL_CAST_FROM_STRING)
+target_include_directories(kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS})
 
-target_link_libraries(kdeinit_kuickshow
+target_link_libraries(kuickshow
 	Qt5::Core
 	Qt5::Gui
 	Qt5::PrintSupport
@@ -79,21 +79,17 @@ target_link_libraries(kdeinit_kuickshow
 )
 
 if (IMLIB_FOUND)
-target_link_libraries(kdeinit_kuickshow
+target_link_libraries(kuickshow
 	Qt5::X11Extras
 	${X11_LIBRARIES}
 	${IMLIB_LIBRARIES})
 endif ()
 if (IMLIB2_FOUND)
-target_link_libraries(kdeinit_kuickshow
+target_link_libraries(kuickshow
 	Qt5::X11Extras
 	${IMLIB2_LIBRARIES})
 endif ()
 
-install(TARGETS kdeinit_kuickshow  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
-
-# target kuickshow
-target_link_libraries( kuickshow kdeinit_kuickshow )
 install(TARGETS kuickshow  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############

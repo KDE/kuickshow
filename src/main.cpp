@@ -27,7 +27,7 @@
 #include "version.h"
 
 
-extern "C" Q_DECL_EXPORT int kdemain(int argc, char **argv)
+int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("kuickshow");
