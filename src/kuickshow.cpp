@@ -168,8 +168,8 @@ KuickShow::KuickShow( const char *objName )
         if (KMessageBox::questionTwoActions(
                 this,
                 xi18ncp("@info",
-                        "Do you really want to display this 1 image at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose <interface>%2</interface>, only the first image will be shown.",
-                        "Do you really want to display these %1 images at the same time? This might be quite resource intensive and could overload your computer.<br>If you choose <interface>%2</interface>, only the first image will be shown.", numArgs, KStandardGuiItem::cancel().plainText()),
+                        "Do you really want to display this 1 image at the same time? This might be quite resource intensive and could overload your computer.<br/>If you choose <interface>%2</interface>, only the first image will be shown.",
+                        "Do you really want to display these %1 images at the same time? This might be quite resource intensive and could overload your computer.<br/>If you choose <interface>%2</interface>, only the first image will be shown.", numArgs, KStandardGuiItem::cancel().plainText()),
                 i18n("Display Multiple Images?"),
                 KGuiItem(i18n("Display"), KStandardGuiItem::guiItem(KStandardGuiItem::Yes).icon()),
                 KStandardGuiItem::cancel())!=KMessageBox::Yes)
