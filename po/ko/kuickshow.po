@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:26+0000\n"
+"POT-Creation-Date: 2024-10-14 01:45+0000\n"
 "PO-Revision-Date: 2021-06-03 02:44+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -268,117 +268,128 @@ msgstr "KuickShow 웹사이트 열기"
 msgid "Preload next image"
 msgstr "다음 그림 미리 불러오기"
 
-#: src/imagewindow.cpp:151
+#: src/imagewindow.cpp:139
+#, kde-format
+msgid "Duplicate Window"
+msgstr ""
+
+#: src/imagewindow.cpp:144
 #, kde-format
 msgid "Show Next Image"
 msgstr "다음 그림 표시"
 
-#: src/imagewindow.cpp:156
+#: src/imagewindow.cpp:149
 #, kde-format
 msgid "Show Previous Image"
 msgstr "이전 그림 표시"
 
-#: src/imagewindow.cpp:161
+#: src/imagewindow.cpp:154
 #, kde-format
 msgid "Delete Image"
 msgstr "그림 삭제"
 
-#: src/imagewindow.cpp:166
+#: src/imagewindow.cpp:159
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "그림을 휴지통으로 이동"
 
-#: src/imagewindow.cpp:180
+#: src/imagewindow.cpp:172
 #, kde-format
 msgid "Restore Original Size"
 msgstr "원본 크기 복원"
 
-#: src/imagewindow.cpp:185
+#: src/imagewindow.cpp:177
 #, kde-format
 msgid "Maximize"
 msgstr "최대화"
 
-#: src/imagewindow.cpp:190
+#: src/imagewindow.cpp:182
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90도 회전"
 
-#: src/imagewindow.cpp:195
+#: src/imagewindow.cpp:187
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "180도 회전"
 
-#: src/imagewindow.cpp:200
+#: src/imagewindow.cpp:192
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270도 회전"
 
-#: src/imagewindow.cpp:205
+#: src/imagewindow.cpp:197
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "상하 반전"
 
-#: src/imagewindow.cpp:210
+#: src/imagewindow.cpp:202
 #, kde-format
 msgid "Flip Vertically"
 msgstr "좌우 반전"
 
-#: src/imagewindow.cpp:215 src/kuickshow.cpp:257
+#: src/imagewindow.cpp:207 src/kuickshow.cpp:1374
 #, kde-format
 msgid "Print Image..."
 msgstr "그림 인쇄..."
 
-#: src/imagewindow.cpp:226
+#: src/imagewindow.cpp:218
+#, fuzzy, kde-format
+#| msgid "Show File Browser"
+msgid "Return to File Browser"
+msgstr "파일 탐색기 표시"
+
+#: src/imagewindow.cpp:224
 #, kde-format
 msgid "More Brightness"
 msgstr "밝기 증가"
 
-#: src/imagewindow.cpp:231
+#: src/imagewindow.cpp:229
 #, kde-format
 msgid "Less Brightness"
 msgstr "밝기 감소"
 
-#: src/imagewindow.cpp:236
+#: src/imagewindow.cpp:234
 #, kde-format
 msgid "More Contrast"
 msgstr "명암 증가"
 
-#: src/imagewindow.cpp:241
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "Less Contrast"
 msgstr "명암 감소"
 
-#: src/imagewindow.cpp:246
+#: src/imagewindow.cpp:244
 #, kde-format
 msgid "More Gamma"
 msgstr "감마 증가"
 
-#: src/imagewindow.cpp:251
+#: src/imagewindow.cpp:249
 #, kde-format
 msgid "Less Gamma"
 msgstr "감마 감소"
 
-#: src/imagewindow.cpp:257
+#: src/imagewindow.cpp:255
 #, kde-format
 msgid "Scroll Up"
 msgstr "위로 스크롤"
 
-#: src/imagewindow.cpp:262
+#: src/imagewindow.cpp:260
 #, kde-format
 msgid "Scroll Down"
 msgstr "아래로 스크롤"
 
-#: src/imagewindow.cpp:267
+#: src/imagewindow.cpp:265
 #, kde-format
 msgid "Scroll Left"
 msgstr "왼쪽으로 스크롤"
 
-#: src/imagewindow.cpp:272
+#: src/imagewindow.cpp:270
 #, kde-format
 msgid "Scroll Right"
 msgstr "오른쪽으로 스크롤"
 
-#: src/imagewindow.cpp:277
+#: src/imagewindow.cpp:275
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "슬라이드 쇼 일시 정지"
@@ -393,18 +404,18 @@ msgstr "그림 새로 고침"
 msgid "Properties"
 msgstr "속성"
 
-#: src/imagewindow.cpp:349
+#: src/imagewindow.cpp:362
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3(%1 x %2)"
 
-#: src/imagewindow.cpp:452
+#: src/imagewindow.cpp:427
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "%1에서 그림을 다운로드할 수 없습니다."
 
-#: src/imagewindow.cpp:468
+#: src/imagewindow.cpp:443
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -414,47 +425,48 @@ msgstr ""
 "그림 파일 %1을(를) 불러올 수 없습니다.\n"
 "파일을 지원하지 않거나 Imlib 설치가 잘못되었을 수도 있습니다."
 
-#: src/imagewindow.cpp:908
+#: src/imagewindow.cpp:852
 #, kde-format
 msgid "Brightness"
 msgstr "밝기"
 
-#: src/imagewindow.cpp:912
+#: src/imagewindow.cpp:856
 #, kde-format
 msgid "Contrast"
 msgstr "명암"
 
-#: src/imagewindow.cpp:916
+#: src/imagewindow.cpp:860
 #, kde-format
 msgid "Gamma"
 msgstr "감마"
 
-#: src/imagewindow.cpp:955
+#: src/imagewindow.cpp:907
 #, kde-format
 msgid "Unable to print the image."
 msgstr "그림을 인쇄할 수 없습니다."
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:908
 #, kde-format
 msgid "Printing Failed"
 msgstr "인쇄 실패"
 
-#: src/imagewindow.cpp:966
+#: src/imagewindow.cpp:925
 #, kde-format
 msgid "Keep original image size"
 msgstr "원본 그림 크기 유지"
 
-#: src/imagewindow.cpp:970
-#, kde-format
-msgid "Save As"
+#: src/imagewindow.cpp:930
+#, fuzzy, kde-format
+#| msgid "Save As"
+msgid "Save Image As"
 msgstr "다른 이름으로 저장"
 
-#: src/imagewindow.cpp:973 src/kuickshow.cpp:1389
+#: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "그림 파일(%1)"
 
-#: src/imagewindow.cpp:993
+#: src/imagewindow.cpp:953
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -463,12 +475,12 @@ msgstr ""
 "파일을 저장할 수 없습니다.\n"
 "디스크가 가득 찼거나 파일에 쓰기 권한이 없습니다."
 
-#: src/imagewindow.cpp:996
+#: src/imagewindow.cpp:956
 #, kde-format
 msgid "File Saving Failed"
 msgstr "파일 저장 오류"
 
-#: src/imagewindow.cpp:1268
+#: src/imagewindow.cpp:1203
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -478,6 +490,16 @@ msgstr ""
 "매우 큰 그림(%1 x %2픽셀)을 보려고 하고 있습니다. 자원을 많이 소모할 수도 있"
 "으며 컴퓨터가 응답하지 않을 수도 있습니다.\n"
 "계속 진행하시겠습니까?"
+
+#: src/imlib_imlib1.cpp:157
+#, kde-format
+msgid "Image loading and rendering library"
+msgstr ""
+
+#: src/imlib_imlib2.cpp:119
+#, kde-format
+msgid "Image processing library"
+msgstr ""
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -499,12 +521,12 @@ msgstr "수정(&M)"
 msgid "&Slideshow"
 msgstr "슬라이드 쇼(&S)"
 
-#: src/kuickconfigdlg.cpp:59
+#: src/kuickconfigdlg.cpp:60
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "뷰어 단축키(&V)"
 
-#: src/kuickconfigdlg.cpp:62
+#: src/kuickconfigdlg.cpp:63
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "탐색기 단축키(&W)"
@@ -523,187 +545,206 @@ msgstr ""
 "%1을(를)\n"
 "다운로드하는 동안 기다려 주십시오"
 
-#: src/kuickshow.cpp:130
-#, kde-format
+#: src/kuickshow.cpp:171
+#, fuzzy, kde-format
+#| msgid ""
+#| "Do you really want to display this 1 image at the same time? This might "
+#| "be quite resource intensive and could overload your computer.<br>If you "
+#| "choose %1, only the first image will be shown."
+#| msgid_plural ""
+#| "Do you really want to display these %n images at the same time? This "
+#| "might be quite resource intensive and could overload your computer.<br>If "
+#| "you choose %1, only the first image will be shown."
+msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
 "quite resource intensive and could overload your computer.<br>If you choose "
-"%1, only the first image will be shown."
+"<interface>%2</interface>, only the first image will be shown."
 msgid_plural ""
-"Do you really want to display these %n images at the same time? This might "
+"Do you really want to display these %1 images at the same time? This might "
 "be quite resource intensive and could overload your computer.<br>If you "
-"choose %1, only the first image will be shown."
+"choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "동시에 이 그림 %n개를 표시하시겠습니까? 자원을 많이 소모할 수도 있으며 컴퓨터"
 "가 응답하지 않을 수도 있습니다.<br> %1을(를) 선택하면 첫 번째 그림만 표시합니"
 "다."
 
-#: src/kuickshow.cpp:132
+#: src/kuickshow.cpp:173
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "여러 그림을 표시하시겠습니까?"
 
-#: src/kuickshow.cpp:260
+#: src/kuickshow.cpp:174
 #, kde-format
-msgid "Configure %1..."
-msgstr "%1 설정..."
+msgid "Display"
+msgstr ""
 
-#: src/kuickshow.cpp:265
-#, kde-format
-msgid "Start Slideshow"
-msgstr "슬라이드 쇼 시작"
-
-#: src/kuickshow.cpp:271
-#, kde-format
-msgid "About KuickShow"
-msgstr "KuickShow 정보"
-
-#: src/kuickshow.cpp:276
-#, kde-format
-msgid "Open Only One Image Window"
-msgstr "그림 창 한 개만 열기"
-
-#: src/kuickshow.cpp:281
-#, kde-format
-msgid "Show File Browser"
-msgstr "파일 탐색기 표시"
-
-#: src/kuickshow.cpp:283
-#, kde-format
-msgid "Hide File Browser"
-msgstr "파일 탐색기 숨기기"
-
-#: src/kuickshow.cpp:288
-#, kde-format
-msgid "Show Image"
-msgstr "그림 표시"
-
-#: src/kuickshow.cpp:292
-#, kde-format
-msgid "Show Image in Active Window"
-msgstr "활성 창에 그림 표시"
-
-#: src/kuickshow.cpp:296
-#, kde-format
-msgid "Show Image in Fullscreen Mode"
-msgstr "전체 화면 모드에서 그림 보기"
-
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:284
 #, kde-format
 msgid "&File"
 msgstr "파일(&F)"
 
-#: src/kuickshow.cpp:322
+#: src/kuickshow.cpp:298
 #, kde-format
 msgid "&Edit"
 msgstr "편집(&E)"
 
-#: src/kuickshow.cpp:331
+#: src/kuickshow.cpp:304
+#, kde-format
+msgid "View"
+msgstr ""
+
+#: src/kuickshow.cpp:307
 #, kde-format
 msgid "&Settings"
 msgstr "설정(&S)"
 
-#: src/kuickshow.cpp:341
+#: src/kuickshow.cpp:323
 #, kde-format
 msgid "Main Toolbar"
 msgstr "주 도구 모음"
 
-#: src/kuickshow.cpp:653
-#, kde-format
+#: src/kuickshow.cpp:607
+#, kde-kuit-format
+msgctxt "@info"
 msgid ""
-"<qt>Do you really want to delete\n"
-" <b>'%1'</b>?</qt>"
+"Do you really want to permanently delete the file<nl/><filename>%1</"
+"filename>?"
 msgstr ""
-"<qt>다음 파일을 정말로 지우시겠습니까?\n"
-"<b>'%1'</b></qt>"
 
-#: src/kuickshow.cpp:654
+#: src/kuickshow.cpp:608
 #, kde-format
 msgid "Delete File"
 msgstr "파일 삭제"
 
-#: src/kuickshow.cpp:679
-#, kde-format
-msgid ""
-"<qt>Do you really want to trash\n"
-" <b>'%1'</b>?</qt>"
+#: src/kuickshow.cpp:633
+#, fuzzy, kde-kuit-format
+#| msgid ""
+#| "<qt>Do you really want to trash\n"
+#| " <b>'%1'</b>?</qt>"
+msgctxt "@info"
+msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
 "<qt>다음 파일을 정말로 휴지통에 버리시겠습니까?\n"
 "<b>'%1'</b></qt>"
 
-#: src/kuickshow.cpp:680
+#: src/kuickshow.cpp:634
 #, kde-format
 msgid "Trash File"
 msgstr "파일을 휴지통으로 이동"
 
-#: src/kuickshow.cpp:681
+#: src/kuickshow.cpp:635
 #, kde-format
 msgctxt "to trash"
 msgid "&Trash"
 msgstr "휴지통으로 이동(&T)"
 
-#: src/kuickshow.cpp:1209
+#: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
 msgstr "그림 오류"
 
-#: src/kuickshow.cpp:1234
+#: src/kuickshow.cpp:1161
 #, kde-format
 msgid ""
-"Unable to initialize \"Imlib\".\n"
-"Start kuickshow from the command line and look for error messages.\n"
-"The program will now quit."
+"Unable to initialize the image library \"%2\".\n"
+"\n"
+"More information may be available in the session log file,\n"
+"or can be obtained by starting %1 from a terminal."
 msgstr ""
-"\"Imlib\"를 초기화할 수 없습니다.\n"
-"명령행에서 KuickShow를 시작한 다음 오류 메시지를 확인하십시오.\n"
-"프로그램을 종료합니다."
 
-#: src/kuickshow.cpp:1238
-#, kde-format
-msgid "Fatal Imlib Error"
+#: src/kuickshow.cpp:1165
+#, fuzzy, kde-format
+#| msgid "Fatal Imlib Error"
+msgid "Fatal Initialization Error"
 msgstr "치명적인 Imlib 오류"
 
-#: src/kuickshow.cpp:1388
+#: src/kuickshow.cpp:1271
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "열 파일이나 폴더 선택"
 
-#: src/main.cpp:36
+#: src/kuickshow.cpp:1332
+#, kde-format
+msgid "Start Slideshow"
+msgstr "슬라이드 쇼 시작"
+
+#: src/kuickshow.cpp:1335
+#, kde-format
+msgid "Show File Browser"
+msgstr "파일 탐색기 표시"
+
+#: src/kuickshow.cpp:1336
+#, kde-format
+msgid "Hide File Browser"
+msgstr "파일 탐색기 숨기기"
+
+#: src/kuickshow.cpp:1340
+#, kde-format
+msgid "Configure %1..."
+msgstr "%1 설정..."
+
+#: src/kuickshow.cpp:1344
+#, kde-format
+msgid "About KuickShow"
+msgstr "KuickShow 정보"
+
+#: src/kuickshow.cpp:1351
+#, kde-format
+msgid "Open Only One Image Window"
+msgstr "그림 창 한 개만 열기"
+
+#: src/kuickshow.cpp:1362
+#, kde-format
+msgid "Show Image"
+msgstr "그림 표시"
+
+#: src/kuickshow.cpp:1366
+#, kde-format
+msgid "Show Image in Active Window"
+msgstr "활성 창에 그림 표시"
+
+#: src/kuickshow.cpp:1370
+#, kde-format
+msgid "Show Image in Fullscreen Mode"
+msgstr "전체 화면 모드에서 그림 보기"
+
+#: src/main.cpp:37
 #, kde-format
 msgid "KuickShow"
 msgstr "KuickShow"
 
-#: src/main.cpp:38
+#: src/main.cpp:39
 #, kde-format
 msgid "A fast and versatile image viewer"
 msgstr "빠른 다기능 그림 뷰어"
 
-#: src/main.cpp:40
+#: src/main.cpp:41
 #, kde-format
 msgid "(c) 1998-2009, Carsten Pfeiffer"
 msgstr "(c) 1998-2009, Carsten Pfeiffer"
 
-#: src/main.cpp:45
+#: src/main.cpp:46
 #, kde-format
 msgid "Carsten Pfeiffer"
 msgstr "Carsten Pfeiffer"
 
-#: src/main.cpp:47
+#: src/main.cpp:48
 #, kde-format
 msgid "Rober Hamberger"
 msgstr "Rober Hamberger"
 
-#: src/main.cpp:48
+#: src/main.cpp:49
 #, kde-format
 msgid "Thorsten Scheuermann"
 msgstr "Thorsten Scheuermann"
 
-#: src/main.cpp:57
+#: src/main.cpp:59
 #, kde-format
 msgid "Start in the last visited folder, not the current working folder."
 msgstr "현재 작업 폴더가 아닌 마지막으로 방문한 폴더에서 시작합니다."
 
-#: src/main.cpp:58
+#: src/main.cpp:60
 #, kde-format
 msgid "Optional image filenames/urls to show"
 msgstr "표시할 추가적 그림 파일 이름이나 URL"
@@ -773,6 +814,12 @@ msgstr "정확한 크기로 인쇄(&X):"
 msgid "Shrink image to &fit, if necessary"
 msgstr "필요한 경우 그림을 축소해서 맞춤(&F)"
 
+#: src/slideshowwidget.cpp:46
+#, kde-format
+msgctxt "Run the slideshow until manually stopped"
+msgid "Forever"
+msgstr ""
+
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
 #, kde-format
@@ -811,6 +858,23 @@ msgstr " 초"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, kde-format
-msgid "&Iterations (0 = infinite):"
+#, fuzzy, kde-format
+#| msgid "&Iterations (0 = infinite):"
+msgid "&Iterations:"
 msgstr "반복 횟수(0=무한대)(&I):"
+
+#~ msgid ""
+#~ "<qt>Do you really want to delete\n"
+#~ " <b>'%1'</b>?</qt>"
+#~ msgstr ""
+#~ "<qt>다음 파일을 정말로 지우시겠습니까?\n"
+#~ "<b>'%1'</b></qt>"
+
+#~ msgid ""
+#~ "Unable to initialize \"Imlib\".\n"
+#~ "Start kuickshow from the command line and look for error messages.\n"
+#~ "The program will now quit."
+#~ msgstr ""
+#~ "\"Imlib\"를 초기화할 수 없습니다.\n"
+#~ "명령행에서 KuickShow를 시작한 다음 오류 메시지를 확인하십시오.\n"
+#~ "프로그램을 종료합니다."

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:26+0000\n"
+"POT-Creation-Date: 2024-10-14 01:45+0000\n"
 "PO-Revision-Date: 2020-08-18 11:02+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -280,117 +280,128 @@ msgstr "Website van KuickShow openen"
 msgid "Preload next image"
 msgstr "Volgende afbeelding voorladen"
 
-#: src/imagewindow.cpp:151
+#: src/imagewindow.cpp:139
+#, kde-format
+msgid "Duplicate Window"
+msgstr ""
+
+#: src/imagewindow.cpp:144
 #, kde-format
 msgid "Show Next Image"
 msgstr "Volgende afbeelding tonen"
 
-#: src/imagewindow.cpp:156
+#: src/imagewindow.cpp:149
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Vorige afbeelding tonen"
 
-#: src/imagewindow.cpp:161
+#: src/imagewindow.cpp:154
 #, kde-format
 msgid "Delete Image"
 msgstr "Afbeelding verwijderen"
 
-#: src/imagewindow.cpp:166
+#: src/imagewindow.cpp:159
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "Afbeelding naar de prullenbak verplaatsen"
 
-#: src/imagewindow.cpp:180
+#: src/imagewindow.cpp:172
 #, kde-format
 msgid "Restore Original Size"
 msgstr "Originele grootte herstellen"
 
-#: src/imagewindow.cpp:185
+#: src/imagewindow.cpp:177
 #, kde-format
 msgid "Maximize"
 msgstr "Maximaliseren"
 
-#: src/imagewindow.cpp:190
+#: src/imagewindow.cpp:182
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90 graden roteren"
 
-#: src/imagewindow.cpp:195
+#: src/imagewindow.cpp:187
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "180 graden roteren"
 
-#: src/imagewindow.cpp:200
+#: src/imagewindow.cpp:192
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270 graden roteren"
 
-#: src/imagewindow.cpp:205
+#: src/imagewindow.cpp:197
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Horizontaal spiegelen"
 
-#: src/imagewindow.cpp:210
+#: src/imagewindow.cpp:202
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Verticaal spiegelen"
 
-#: src/imagewindow.cpp:215 src/kuickshow.cpp:257
+#: src/imagewindow.cpp:207 src/kuickshow.cpp:1374
 #, kde-format
 msgid "Print Image..."
 msgstr "Afbeelding afdrukken..."
 
-#: src/imagewindow.cpp:226
+#: src/imagewindow.cpp:218
+#, fuzzy, kde-format
+#| msgid "Show File Browser"
+msgid "Return to File Browser"
+msgstr "Bestandsbrowser tonen"
+
+#: src/imagewindow.cpp:224
 #, kde-format
 msgid "More Brightness"
 msgstr "Helderheid versterken"
 
-#: src/imagewindow.cpp:231
+#: src/imagewindow.cpp:229
 #, kde-format
 msgid "Less Brightness"
 msgstr "Helderheid verminderen"
 
-#: src/imagewindow.cpp:236
+#: src/imagewindow.cpp:234
 #, kde-format
 msgid "More Contrast"
 msgstr "Contrast vermeerderen"
 
-#: src/imagewindow.cpp:241
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "Less Contrast"
 msgstr "Contrast verminderen"
 
-#: src/imagewindow.cpp:246
+#: src/imagewindow.cpp:244
 #, kde-format
 msgid "More Gamma"
 msgstr "Gamma vermeerderen"
 
-#: src/imagewindow.cpp:251
+#: src/imagewindow.cpp:249
 #, kde-format
 msgid "Less Gamma"
 msgstr "Gamma verminderen"
 
-#: src/imagewindow.cpp:257
+#: src/imagewindow.cpp:255
 #, kde-format
 msgid "Scroll Up"
 msgstr "Omhoog schuiven"
 
-#: src/imagewindow.cpp:262
+#: src/imagewindow.cpp:260
 #, kde-format
 msgid "Scroll Down"
 msgstr "Omlaag schuiven"
 
-#: src/imagewindow.cpp:267
+#: src/imagewindow.cpp:265
 #, kde-format
 msgid "Scroll Left"
 msgstr "Naar links schuiven"
 
-#: src/imagewindow.cpp:272
+#: src/imagewindow.cpp:270
 #, kde-format
 msgid "Scroll Right"
 msgstr "Naar rechts schuiven"
 
-#: src/imagewindow.cpp:277
+#: src/imagewindow.cpp:275
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Diavoorstelling pauzeren"
@@ -405,18 +416,18 @@ msgstr "Afbeelding herladen"
 msgid "Properties"
 msgstr "Eigenschappen"
 
-#: src/imagewindow.cpp:349
+#: src/imagewindow.cpp:362
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:452
+#: src/imagewindow.cpp:427
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "De afbeelding kon niet gedownload worden vanaf %1."
 
-#: src/imagewindow.cpp:468
+#: src/imagewindow.cpp:443
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -429,47 +440,48 @@ msgstr ""
 "Mogelijk wordt het afbeeldingformaat niet ondersteund, of is uw imlib-"
 "bibliotheek onjuist geïnstalleerd."
 
-#: src/imagewindow.cpp:908
+#: src/imagewindow.cpp:852
 #, kde-format
 msgid "Brightness"
 msgstr "Helderheid"
 
-#: src/imagewindow.cpp:912
+#: src/imagewindow.cpp:856
 #, kde-format
 msgid "Contrast"
 msgstr "Contrast"
 
-#: src/imagewindow.cpp:916
+#: src/imagewindow.cpp:860
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/imagewindow.cpp:955
+#: src/imagewindow.cpp:907
 #, kde-format
 msgid "Unable to print the image."
 msgstr "De afbeelding kon niet worden afgedrukt."
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:908
 #, kde-format
 msgid "Printing Failed"
 msgstr "Het afdrukken is mislukt"
 
-#: src/imagewindow.cpp:966
+#: src/imagewindow.cpp:925
 #, kde-format
 msgid "Keep original image size"
 msgstr "Originele afbeeldinggrootte behouden"
 
-#: src/imagewindow.cpp:970
-#, kde-format
-msgid "Save As"
+#: src/imagewindow.cpp:930
+#, fuzzy, kde-format
+#| msgid "Save As"
+msgid "Save Image As"
 msgstr "Opslaan als"
 
-#: src/imagewindow.cpp:973 src/kuickshow.cpp:1389
+#: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Afbeeldingsbestanden (%1)"
 
-#: src/imagewindow.cpp:993
+#: src/imagewindow.cpp:953
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -478,12 +490,12 @@ msgstr ""
 "Het bestand kon niet worden opgeslagen.\n"
 "Mogelijk is uw schijf vol of u hebt geen schrijftoegang tot het bestand."
 
-#: src/imagewindow.cpp:996
+#: src/imagewindow.cpp:956
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Het opslaan van het bestand is mislukt"
 
-#: src/imagewindow.cpp:1268
+#: src/imagewindow.cpp:1203
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -494,6 +506,16 @@ msgstr ""
 "pixels), dat kan erg veel bronnen in beslag nemen en zelfs uw computer laten "
 "hangen.\n"
 "Wilt u doorgaan?"
+
+#: src/imlib_imlib1.cpp:157
+#, kde-format
+msgid "Image loading and rendering library"
+msgstr ""
+
+#: src/imlib_imlib2.cpp:119
+#, kde-format
+msgid "Image processing library"
+msgstr ""
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -515,12 +537,12 @@ msgstr "&Wijzigingen"
 msgid "&Slideshow"
 msgstr "Diavoor&stelling"
 
-#: src/kuickconfigdlg.cpp:59
+#: src/kuickconfigdlg.cpp:60
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "&Viewer-sneltoetsen"
 
-#: src/kuickconfigdlg.cpp:62
+#: src/kuickconfigdlg.cpp:63
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "Bro&wser-sneltoetsen"
@@ -539,16 +561,25 @@ msgstr ""
 "Even geduld bij het downloaden\n"
 "%1"
 
-#: src/kuickshow.cpp:130
-#, kde-format
+#: src/kuickshow.cpp:171
+#, fuzzy, kde-format
+#| msgid ""
+#| "Do you really want to display this 1 image at the same time? This might "
+#| "be quite resource intensive and could overload your computer.<br>If you "
+#| "choose %1, only the first image will be shown."
+#| msgid_plural ""
+#| "Do you really want to display these %n images at the same time? This "
+#| "might be quite resource intensive and could overload your computer.<br>If "
+#| "you choose %1, only the first image will be shown."
+msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
 "quite resource intensive and could overload your computer.<br>If you choose "
-"%1, only the first image will be shown."
+"<interface>%2</interface>, only the first image will be shown."
 msgid_plural ""
-"Do you really want to display these %n images at the same time? This might "
+"Do you really want to display these %1 images at the same time? This might "
 "be quite resource intensive and could overload your computer.<br>If you "
-"choose %1, only the first image will be shown."
+"choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Wilt u echt deze ene afbeelding tegelijk weergeven? Dit kan erg veel bronnen "
 "nodig hebben en uw computer overladen.<br>Als u %1 kiest dan wordt alleen de "
@@ -558,172 +589,182 @@ msgstr[1] ""
 "bronnen nodig hebben en uw computer overladen.<br>Als u %1 kiest dan wordt "
 "alleen de eerste afbeelding getoond."
 
-#: src/kuickshow.cpp:132
+#: src/kuickshow.cpp:173
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Meer dan één afbeelding weergeven?"
 
-#: src/kuickshow.cpp:260
+#: src/kuickshow.cpp:174
 #, kde-format
-msgid "Configure %1..."
-msgstr "%1 configureren..."
+msgid "Display"
+msgstr ""
 
-#: src/kuickshow.cpp:265
-#, kde-format
-msgid "Start Slideshow"
-msgstr "Diavoorstelling starten"
-
-#: src/kuickshow.cpp:271
-#, kde-format
-msgid "About KuickShow"
-msgstr "Info over KuickShow"
-
-#: src/kuickshow.cpp:276
-#, kde-format
-msgid "Open Only One Image Window"
-msgstr "Niet meer dan één afbeeldingvenster openen"
-
-#: src/kuickshow.cpp:281
-#, kde-format
-msgid "Show File Browser"
-msgstr "Bestandsbrowser tonen"
-
-#: src/kuickshow.cpp:283
-#, kde-format
-msgid "Hide File Browser"
-msgstr "Bestandsbrowser verbergen"
-
-#: src/kuickshow.cpp:288
-#, kde-format
-msgid "Show Image"
-msgstr "Afbeelding tonen"
-
-#: src/kuickshow.cpp:292
-#, kde-format
-msgid "Show Image in Active Window"
-msgstr "Afbeelding in actief venster tonen"
-
-#: src/kuickshow.cpp:296
-#, kde-format
-msgid "Show Image in Fullscreen Mode"
-msgstr "Afbeelding in volledig scherm tonen"
-
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:284
 #, kde-format
 msgid "&File"
 msgstr "&Bestand"
 
-#: src/kuickshow.cpp:322
+#: src/kuickshow.cpp:298
 #, kde-format
 msgid "&Edit"
 msgstr "Be&werken"
 
-#: src/kuickshow.cpp:331
+#: src/kuickshow.cpp:304
+#, kde-format
+msgid "View"
+msgstr ""
+
+#: src/kuickshow.cpp:307
 #, kde-format
 msgid "&Settings"
 msgstr "&Instellingen"
 
-#: src/kuickshow.cpp:341
+#: src/kuickshow.cpp:323
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Hoofdwerkbalk"
 
-#: src/kuickshow.cpp:653
-#, kde-format
+#: src/kuickshow.cpp:607
+#, kde-kuit-format
+msgctxt "@info"
 msgid ""
-"<qt>Do you really want to delete\n"
-" <b>'%1'</b>?</qt>"
+"Do you really want to permanently delete the file<nl/><filename>%1</"
+"filename>?"
 msgstr ""
-"<qt>Wilt u echt\n"
-" <b>'%1'</b> verwijderen?</qt>"
 
-#: src/kuickshow.cpp:654
+#: src/kuickshow.cpp:608
 #, kde-format
 msgid "Delete File"
 msgstr "Bestand verwijderen"
 
-#: src/kuickshow.cpp:679
-#, kde-format
-msgid ""
-"<qt>Do you really want to trash\n"
-" <b>'%1'</b>?</qt>"
+#: src/kuickshow.cpp:633
+#, fuzzy, kde-kuit-format
+#| msgid ""
+#| "<qt>Do you really want to trash\n"
+#| " <b>'%1'</b>?</qt>"
+msgctxt "@info"
+msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
 "<qt>Wilt u echt\n"
 " <b>'%1'</b> naar de prullenbak verplaatsen?</qt>"
 
-#: src/kuickshow.cpp:680
+#: src/kuickshow.cpp:634
 #, kde-format
 msgid "Trash File"
 msgstr "Bestand naar prullenbak verplaatsen"
 
-#: src/kuickshow.cpp:681
+#: src/kuickshow.cpp:635
 #, kde-format
 msgctxt "to trash"
 msgid "&Trash"
 msgstr "Naar prullen&bak"
 
-#: src/kuickshow.cpp:1209
+#: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
 msgstr "Afbeeldingfout"
 
-#: src/kuickshow.cpp:1234
+#: src/kuickshow.cpp:1161
 #, kde-format
 msgid ""
-"Unable to initialize \"Imlib\".\n"
-"Start kuickshow from the command line and look for error messages.\n"
-"The program will now quit."
+"Unable to initialize the image library \"%2\".\n"
+"\n"
+"More information may be available in the session log file,\n"
+"or can be obtained by starting %1 from a terminal."
 msgstr ""
-"\"imlib\" kan niet worden geïnitialiseerd.\n"
-"Start kuickshow vanaf de commandoprompt en bekijk de foutmeldingen.\n"
-"De toepassing wordt nu afgesloten."
 
-#: src/kuickshow.cpp:1238
-#, kde-format
-msgid "Fatal Imlib Error"
+#: src/kuickshow.cpp:1165
+#, fuzzy, kde-format
+#| msgid "Fatal Imlib Error"
+msgid "Fatal Initialization Error"
 msgstr "Fatale Imlib-fout"
 
-#: src/kuickshow.cpp:1388
+#: src/kuickshow.cpp:1271
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Bestanden of map selecteren om te openen"
 
-#: src/main.cpp:36
+#: src/kuickshow.cpp:1332
+#, kde-format
+msgid "Start Slideshow"
+msgstr "Diavoorstelling starten"
+
+#: src/kuickshow.cpp:1335
+#, kde-format
+msgid "Show File Browser"
+msgstr "Bestandsbrowser tonen"
+
+#: src/kuickshow.cpp:1336
+#, kde-format
+msgid "Hide File Browser"
+msgstr "Bestandsbrowser verbergen"
+
+#: src/kuickshow.cpp:1340
+#, kde-format
+msgid "Configure %1..."
+msgstr "%1 configureren..."
+
+#: src/kuickshow.cpp:1344
+#, kde-format
+msgid "About KuickShow"
+msgstr "Info over KuickShow"
+
+#: src/kuickshow.cpp:1351
+#, kde-format
+msgid "Open Only One Image Window"
+msgstr "Niet meer dan één afbeeldingvenster openen"
+
+#: src/kuickshow.cpp:1362
+#, kde-format
+msgid "Show Image"
+msgstr "Afbeelding tonen"
+
+#: src/kuickshow.cpp:1366
+#, kde-format
+msgid "Show Image in Active Window"
+msgstr "Afbeelding in actief venster tonen"
+
+#: src/kuickshow.cpp:1370
+#, kde-format
+msgid "Show Image in Fullscreen Mode"
+msgstr "Afbeelding in volledig scherm tonen"
+
+#: src/main.cpp:37
 #, kde-format
 msgid "KuickShow"
 msgstr "KuickShow"
 
-#: src/main.cpp:38
+#: src/main.cpp:39
 #, kde-format
 msgid "A fast and versatile image viewer"
 msgstr "Een snelle en veelzijdige afbeeldingviewer"
 
-#: src/main.cpp:40
+#: src/main.cpp:41
 #, kde-format
 msgid "(c) 1998-2009, Carsten Pfeiffer"
 msgstr "(c) 1998-2009, Carsten Pfeiffer"
 
-#: src/main.cpp:45
+#: src/main.cpp:46
 #, kde-format
 msgid "Carsten Pfeiffer"
 msgstr "Carsten Pfeiffer"
 
-#: src/main.cpp:47
+#: src/main.cpp:48
 #, kde-format
 msgid "Rober Hamberger"
 msgstr "Rober Hamberger"
 
-#: src/main.cpp:48
+#: src/main.cpp:49
 #, kde-format
 msgid "Thorsten Scheuermann"
 msgstr "Thorsten Scheuermann"
 
-#: src/main.cpp:57
+#: src/main.cpp:59
 #, kde-format
 msgid "Start in the last visited folder, not the current working folder."
 msgstr "Opstarten in de laatstbezochte map, niet in de huidige werkmap."
 
-#: src/main.cpp:58
+#: src/main.cpp:60
 #, kde-format
 msgid "Optional image filenames/urls to show"
 msgstr "Optionele afbeeldingnamen/URL-adressen om te tonen"
@@ -793,6 +834,12 @@ msgstr "&Exacte grootte afdrukken: "
 msgid "Shrink image to &fit, if necessary"
 msgstr "A&fbeelding krimpen tot paginagrootte, indien nodig"
 
+#: src/slideshowwidget.cpp:46
+#, kde-format
+msgctxt "Run the slideshow until manually stopped"
+msgid "Forever"
+msgstr ""
+
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
 #, kde-format
@@ -831,9 +878,26 @@ msgstr " sec"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, kde-format
-msgid "&Iterations (0 = infinite):"
+#, fuzzy, kde-format
+#| msgid "&Iterations (0 = infinite):"
+msgid "&Iterations:"
 msgstr "Herhal&ingen (0 is oneindig):"
+
+#~ msgid ""
+#~ "<qt>Do you really want to delete\n"
+#~ " <b>'%1'</b>?</qt>"
+#~ msgstr ""
+#~ "<qt>Wilt u echt\n"
+#~ " <b>'%1'</b> verwijderen?</qt>"
+
+#~ msgid ""
+#~ "Unable to initialize \"Imlib\".\n"
+#~ "Start kuickshow from the command line and look for error messages.\n"
+#~ "The program will now quit."
+#~ msgstr ""
+#~ "\"imlib\" kan niet worden geïnitialiseerd.\n"
+#~ "Start kuickshow vanaf de commandoprompt en bekijk de foutmeldingen.\n"
+#~ "De toepassing wordt nu afgesloten."
 
 #~ msgid "infinite"
 #~ msgstr "oneindig"

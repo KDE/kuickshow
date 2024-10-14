@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:26+0000\n"
+"POT-Creation-Date: 2024-10-14 01:45+0000\n"
 "PO-Revision-Date: 2006-05-16 13:29-0500\n"
 "Last-Translator: Deepayan Sarkar <deepayan@bengalinux.org>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -276,117 +276,128 @@ msgstr "কুইক-শো ওয়েবসাইট খোলো"
 msgid "Preload next image"
 msgstr "পরবর্তী ছবি আগে থেকে লোড করে রাখো"
 
-#: src/imagewindow.cpp:151
+#: src/imagewindow.cpp:139
+#, kde-format
+msgid "Duplicate Window"
+msgstr ""
+
+#: src/imagewindow.cpp:144
 #, kde-format
 msgid "Show Next Image"
 msgstr "পরবর্তী ছবি দেখাও"
 
-#: src/imagewindow.cpp:156
+#: src/imagewindow.cpp:149
 #, kde-format
 msgid "Show Previous Image"
 msgstr "পূর্ববর্তী ছবি দেখাও"
 
-#: src/imagewindow.cpp:161
+#: src/imagewindow.cpp:154
 #, kde-format
 msgid "Delete Image"
 msgstr "ছবি মুছে ফেলো"
 
-#: src/imagewindow.cpp:166
+#: src/imagewindow.cpp:159
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "ছবি আবর্জনায় পাঠাও"
 
-#: src/imagewindow.cpp:180
+#: src/imagewindow.cpp:172
 #, kde-format
 msgid "Restore Original Size"
 msgstr "আসল মাপে ফিরে যাও"
 
-#: src/imagewindow.cpp:185
+#: src/imagewindow.cpp:177
 #, kde-format
 msgid "Maximize"
 msgstr "যথাসম্ভব বড় করো"
 
-#: src/imagewindow.cpp:190
+#: src/imagewindow.cpp:182
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90 ডিগ্রী ঘোরাও"
 
-#: src/imagewindow.cpp:195
+#: src/imagewindow.cpp:187
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "180 ডিগ্রী ঘোরাও"
 
-#: src/imagewindow.cpp:200
+#: src/imagewindow.cpp:192
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270 ডিগ্রী ঘোরাও"
 
-#: src/imagewindow.cpp:205
+#: src/imagewindow.cpp:197
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "অনুভূমিকভাবে উল্টাও"
 
-#: src/imagewindow.cpp:210
+#: src/imagewindow.cpp:202
 #, kde-format
 msgid "Flip Vertically"
 msgstr "উলম্বভাবে উল্টাও"
 
-#: src/imagewindow.cpp:215 src/kuickshow.cpp:257
+#: src/imagewindow.cpp:207 src/kuickshow.cpp:1374
 #, kde-format
 msgid "Print Image..."
 msgstr "ছবি ছাপাও..."
 
-#: src/imagewindow.cpp:226
+#: src/imagewindow.cpp:218
+#, fuzzy, kde-format
+#| msgid "Show File Browser"
+msgid "Return to File Browser"
+msgstr "ফাইল ব্রাউজার দেখাও"
+
+#: src/imagewindow.cpp:224
 #, kde-format
 msgid "More Brightness"
 msgstr "উজ্জ্বলতা বাড়াও"
 
-#: src/imagewindow.cpp:231
+#: src/imagewindow.cpp:229
 #, kde-format
 msgid "Less Brightness"
 msgstr "উজ্জ্বলতা কমাও"
 
-#: src/imagewindow.cpp:236
+#: src/imagewindow.cpp:234
 #, kde-format
 msgid "More Contrast"
 msgstr "বৈসাদৃশ্য (কনট্রাস্ট) বাড়াও"
 
-#: src/imagewindow.cpp:241
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "Less Contrast"
 msgstr "বৈসাদৃশ্য (কনট্রাস্ট) কমাও"
 
-#: src/imagewindow.cpp:246
+#: src/imagewindow.cpp:244
 #, kde-format
 msgid "More Gamma"
 msgstr "গামা বাড়াও"
 
-#: src/imagewindow.cpp:251
+#: src/imagewindow.cpp:249
 #, kde-format
 msgid "Less Gamma"
 msgstr "গামা কমাও"
 
-#: src/imagewindow.cpp:257
+#: src/imagewindow.cpp:255
 #, kde-format
 msgid "Scroll Up"
 msgstr "উপরে যাও"
 
-#: src/imagewindow.cpp:262
+#: src/imagewindow.cpp:260
 #, kde-format
 msgid "Scroll Down"
 msgstr "নিচে যাও"
 
-#: src/imagewindow.cpp:267
+#: src/imagewindow.cpp:265
 #, kde-format
 msgid "Scroll Left"
 msgstr "বাঁদিকে যাও"
 
-#: src/imagewindow.cpp:272
+#: src/imagewindow.cpp:270
 #, kde-format
 msgid "Scroll Right"
 msgstr "ডানদিকে যাও"
 
-#: src/imagewindow.cpp:277
+#: src/imagewindow.cpp:275
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "স্লাইড-শো বিরত রাখো"
@@ -401,18 +412,18 @@ msgstr "ছবি নতুন করে পড়ো"
 msgid "Properties"
 msgstr ""
 
-#: src/imagewindow.cpp:349
+#: src/imagewindow.cpp:362
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:452
+#: src/imagewindow.cpp:427
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "%1 থেকে ছবি ডাউনলোড করতে অক্ষম।"
 
-#: src/imagewindow.cpp:468
+#: src/imagewindow.cpp:443
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -422,47 +433,48 @@ msgstr ""
 "ছবি %1 লোড করতে অক্ষম।\n"
 "ফাইলটির ফরম্যাট সম্ভবত অসমর্থিত অথবা আপনার Imlib সঠিকভাবে ইনস্টল করা হয়নি।"
 
-#: src/imagewindow.cpp:908
+#: src/imagewindow.cpp:852
 #, kde-format
 msgid "Brightness"
 msgstr "উজ্জ্বলতা"
 
-#: src/imagewindow.cpp:912
+#: src/imagewindow.cpp:856
 #, kde-format
 msgid "Contrast"
 msgstr "বৈসাদৃশ্য (কনট্রাস্ট)"
 
-#: src/imagewindow.cpp:916
+#: src/imagewindow.cpp:860
 #, kde-format
 msgid "Gamma"
 msgstr "গামা"
 
-#: src/imagewindow.cpp:955
+#: src/imagewindow.cpp:907
 #, kde-format
 msgid "Unable to print the image."
 msgstr "ছবি ছাপাতে অক্ষম।"
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:908
 #, kde-format
 msgid "Printing Failed"
 msgstr "মুদ্রণ ব্যর্থ"
 
-#: src/imagewindow.cpp:966
+#: src/imagewindow.cpp:925
 #, kde-format
 msgid "Keep original image size"
 msgstr "ছবির আসল মাপ রাখো"
 
-#: src/imagewindow.cpp:970
-#, kde-format
-msgid "Save As"
-msgstr ""
+#: src/imagewindow.cpp:930
+#, fuzzy, kde-format
+#| msgid "Move Image to Trash"
+msgid "Save Image As"
+msgstr "ছবি আবর্জনায় পাঠাও"
 
-#: src/imagewindow.cpp:973 src/kuickshow.cpp:1389
+#: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
 
-#: src/imagewindow.cpp:993
+#: src/imagewindow.cpp:953
 #, fuzzy, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -471,17 +483,27 @@ msgstr ""
 "ফাইল সংরক্ষণ করা যায়নি।\n"
 "হয়ত ডিস্ক ভর্তি, অথবা আপনার ফাইলটি লেখার অনুমতি নেই।"
 
-#: src/imagewindow.cpp:996
+#: src/imagewindow.cpp:956
 #, kde-format
 msgid "File Saving Failed"
 msgstr "ফাইল সংরক্ষণ করা ব্যর্থ"
 
-#: src/imagewindow.cpp:1268
+#: src/imagewindow.cpp:1203
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
 "resource-consuming and even make your computer hang.\n"
 "Do you want to continue?"
+msgstr ""
+
+#: src/imlib_imlib1.cpp:157
+#, kde-format
+msgid "Image loading and rendering library"
+msgstr ""
+
+#: src/imlib_imlib2.cpp:119
+#, kde-format
+msgid "Image processing library"
 msgstr ""
 
 #: src/kuickconfigdlg.cpp:40
@@ -504,12 +526,12 @@ msgstr "&পরিবর্তন"
 msgid "&Slideshow"
 msgstr "স্লাই&ড-শো"
 
-#: src/kuickconfigdlg.cpp:59
+#: src/kuickconfigdlg.cpp:60
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "প্র&দর্শক শর্টকাট"
 
-#: src/kuickconfigdlg.cpp:62
+#: src/kuickconfigdlg.cpp:63
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "ব্রাউজার &শর্টকাট"
@@ -528,185 +550,196 @@ msgstr ""
 "অনুগ্রহ করে ডাউনলোড চলাকালীন অপেক্ষা করুন\n"
 "%1"
 
-#: src/kuickshow.cpp:130
+#: src/kuickshow.cpp:171
 #, kde-format
+msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
 "quite resource intensive and could overload your computer.<br>If you choose "
-"%1, only the first image will be shown."
+"<interface>%2</interface>, only the first image will be shown."
 msgid_plural ""
-"Do you really want to display these %n images at the same time? This might "
+"Do you really want to display these %1 images at the same time? This might "
 "be quite resource intensive and could overload your computer.<br>If you "
-"choose %1, only the first image will be shown."
+"choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/kuickshow.cpp:132
+#: src/kuickshow.cpp:173
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr ""
 
-#: src/kuickshow.cpp:260
+#: src/kuickshow.cpp:174
 #, kde-format
-msgid "Configure %1..."
-msgstr "%1 কনফিগার করো..."
+msgid "Display"
+msgstr ""
 
-#: src/kuickshow.cpp:265
-#, kde-format
-msgid "Start Slideshow"
-msgstr "স্লাইড-শো শুরু করো"
-
-#: src/kuickshow.cpp:271
-#, kde-format
-msgid "About KuickShow"
-msgstr "কুইক-শো সম্বন্ধে"
-
-#: src/kuickshow.cpp:276
-#, kde-format
-msgid "Open Only One Image Window"
-msgstr "একটিমাত্র ছবি উইণ্ডো খোলো"
-
-#: src/kuickshow.cpp:281
-#, kde-format
-msgid "Show File Browser"
-msgstr "ফাইল ব্রাউজার দেখাও"
-
-#: src/kuickshow.cpp:283
-#, kde-format
-msgid "Hide File Browser"
-msgstr "ফাইল ব্রাউজার লুকাও"
-
-#: src/kuickshow.cpp:288
-#, kde-format
-msgid "Show Image"
-msgstr "ছবি দেখাও"
-
-#: src/kuickshow.cpp:292
-#, kde-format
-msgid "Show Image in Active Window"
-msgstr "সক্রিয় উইণ্ডোতে ছবি দেখাও"
-
-#: src/kuickshow.cpp:296
-#, kde-format
-msgid "Show Image in Fullscreen Mode"
-msgstr "পর্দাজোড়া মোডে ছবি দেখাও"
-
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:284
 #, kde-format
 msgid "&File"
 msgstr ""
 
-#: src/kuickshow.cpp:322
+#: src/kuickshow.cpp:298
 #, kde-format
 msgid "&Edit"
 msgstr ""
 
-#: src/kuickshow.cpp:331
+#: src/kuickshow.cpp:304
+#, kde-format
+msgid "View"
+msgstr ""
+
+#: src/kuickshow.cpp:307
 #, fuzzy, kde-format
 msgid "&Settings"
 msgstr "ছবি সেটিংস"
 
-#: src/kuickshow.cpp:341
+#: src/kuickshow.cpp:323
 #, kde-format
 msgid "Main Toolbar"
 msgstr ""
 
-#: src/kuickshow.cpp:653
-#, kde-format
+#: src/kuickshow.cpp:607
+#, kde-kuit-format
+msgctxt "@info"
 msgid ""
-"<qt>Do you really want to delete\n"
-" <b>'%1'</b>?</qt>"
+"Do you really want to permanently delete the file<nl/><filename>%1</"
+"filename>?"
 msgstr ""
-"<qt>আপনি কি সত্যিই <b>'%1'</b>\n"
-" মুছে ফেলতে চান?</qt>"
 
-#: src/kuickshow.cpp:654
+#: src/kuickshow.cpp:608
 #, kde-format
 msgid "Delete File"
 msgstr "ফাইল মুছে ফেলো"
 
-#: src/kuickshow.cpp:679
-#, kde-format
-msgid ""
-"<qt>Do you really want to trash\n"
-" <b>'%1'</b>?</qt>"
+#: src/kuickshow.cpp:633
+#, fuzzy, kde-kuit-format
+#| msgid ""
+#| "<qt>Do you really want to trash\n"
+#| " <b>'%1'</b>?</qt>"
+msgctxt "@info"
+msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
 "<qt>আপনি কি সত্যিই <b>'%1'</b>\n"
 " আবর্জনায় পাঠাতে চান?</qt>"
 
-#: src/kuickshow.cpp:680
+#: src/kuickshow.cpp:634
 #, kde-format
 msgid "Trash File"
 msgstr "ফাইল আবর্জনায় পাঠাও"
 
-#: src/kuickshow.cpp:681
+#: src/kuickshow.cpp:635
 #, kde-format
 msgctxt "to trash"
 msgid "&Trash"
 msgstr "&আবর্জনা"
 
-#: src/kuickshow.cpp:1209
+#: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
 msgstr ""
 
-#: src/kuickshow.cpp:1234
+#: src/kuickshow.cpp:1161
 #, kde-format
 msgid ""
-"Unable to initialize \"Imlib\".\n"
-"Start kuickshow from the command line and look for error messages.\n"
-"The program will now quit."
+"Unable to initialize the image library \"%2\".\n"
+"\n"
+"More information may be available in the session log file,\n"
+"or can be obtained by starting %1 from a terminal."
 msgstr ""
-"\"Imlib\"চালু করেতে অক্ষম। আরো জানতে কম্যান্ড লাইন থেকে\n"
-"kuickshow চালু করুন এবং ত্রুটিসূচক বার্তাগুলি লক্ষ্য করুন।\n"
-"এই প্রোগ্রামটি এখন বন্ধ করা হবে।"
 
-#: src/kuickshow.cpp:1238
-#, kde-format
-msgid "Fatal Imlib Error"
+#: src/kuickshow.cpp:1165
+#, fuzzy, kde-format
+#| msgid "Fatal Imlib Error"
+msgid "Fatal Initialization Error"
 msgstr "মারাত্মক Imlib ত্রুটি"
 
-#: src/kuickshow.cpp:1388
+#: src/kuickshow.cpp:1271
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "খোলার জন্য ফাইল অথবা ফোল্ডার বেছে নিন"
 
-#: src/main.cpp:36
+#: src/kuickshow.cpp:1332
+#, kde-format
+msgid "Start Slideshow"
+msgstr "স্লাইড-শো শুরু করো"
+
+#: src/kuickshow.cpp:1335
+#, kde-format
+msgid "Show File Browser"
+msgstr "ফাইল ব্রাউজার দেখাও"
+
+#: src/kuickshow.cpp:1336
+#, kde-format
+msgid "Hide File Browser"
+msgstr "ফাইল ব্রাউজার লুকাও"
+
+#: src/kuickshow.cpp:1340
+#, kde-format
+msgid "Configure %1..."
+msgstr "%1 কনফিগার করো..."
+
+#: src/kuickshow.cpp:1344
+#, kde-format
+msgid "About KuickShow"
+msgstr "কুইক-শো সম্বন্ধে"
+
+#: src/kuickshow.cpp:1351
+#, kde-format
+msgid "Open Only One Image Window"
+msgstr "একটিমাত্র ছবি উইণ্ডো খোলো"
+
+#: src/kuickshow.cpp:1362
+#, kde-format
+msgid "Show Image"
+msgstr "ছবি দেখাও"
+
+#: src/kuickshow.cpp:1366
+#, kde-format
+msgid "Show Image in Active Window"
+msgstr "সক্রিয় উইণ্ডোতে ছবি দেখাও"
+
+#: src/kuickshow.cpp:1370
+#, kde-format
+msgid "Show Image in Fullscreen Mode"
+msgstr "পর্দাজোড়া মোডে ছবি দেখাও"
+
+#: src/main.cpp:37
 #, kde-format
 msgid "KuickShow"
 msgstr "কুইক-শো"
 
-#: src/main.cpp:38
+#: src/main.cpp:39
 #, kde-format
 msgid "A fast and versatile image viewer"
 msgstr "একটি দ্রুত এবং কুশল ছবি প্রদর্শক"
 
-#: src/main.cpp:40
+#: src/main.cpp:41
 #, kde-format
 msgid "(c) 1998-2009, Carsten Pfeiffer"
 msgstr ""
 
-#: src/main.cpp:45
+#: src/main.cpp:46
 #, kde-format
 msgid "Carsten Pfeiffer"
 msgstr ""
 
-#: src/main.cpp:47
+#: src/main.cpp:48
 #, kde-format
 msgid "Rober Hamberger"
 msgstr ""
 
-#: src/main.cpp:48
+#: src/main.cpp:49
 #, kde-format
 msgid "Thorsten Scheuermann"
 msgstr ""
 
-#: src/main.cpp:57
+#: src/main.cpp:59
 #, kde-format
 msgid "Start in the last visited folder, not the current working folder."
 msgstr "বর্তমান ফোল্ডারের বদলে শেষ পরিদর্শিত ফোল্ডারে আরম্ভ করো।"
 
-#: src/main.cpp:58
+#: src/main.cpp:60
 #, kde-format
 msgid "Optional image filenames/urls to show"
 msgstr ""
@@ -776,6 +809,12 @@ msgstr "&যথার্থ মাপে ছাপাও:"
 msgid "Shrink image to &fit, if necessary"
 msgstr "প্রয়োজন হলে ছবি ছো&ট করে আঁটাও"
 
+#: src/slideshowwidget.cpp:46
+#, kde-format
+msgctxt "Run the slideshow until manually stopped"
+msgid "Forever"
+msgstr ""
+
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
 #, fuzzy, kde-format
@@ -815,9 +854,26 @@ msgstr " সেকণ্ড"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, kde-format
-msgid "&Iterations (0 = infinite):"
+#, fuzzy, kde-format
+#| msgid "&Iterations (0 = infinite):"
+msgid "&Iterations:"
 msgstr "&কতবার দেখানো হবে (0 = অসীম):"
+
+#~ msgid ""
+#~ "<qt>Do you really want to delete\n"
+#~ " <b>'%1'</b>?</qt>"
+#~ msgstr ""
+#~ "<qt>আপনি কি সত্যিই <b>'%1'</b>\n"
+#~ " মুছে ফেলতে চান?</qt>"
+
+#~ msgid ""
+#~ "Unable to initialize \"Imlib\".\n"
+#~ "Start kuickshow from the command line and look for error messages.\n"
+#~ "The program will now quit."
+#~ msgstr ""
+#~ "\"Imlib\"চালু করেতে অক্ষম। আরো জানতে কম্যান্ড লাইন থেকে\n"
+#~ "kuickshow চালু করুন এবং ত্রুটিসূচক বার্তাগুলি লক্ষ্য করুন।\n"
+#~ "এই প্রোগ্রামটি এখন বন্ধ করা হবে।"
 
 #~ msgid "infinite"
 #~ msgstr "অসীম"
