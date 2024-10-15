@@ -10,20 +10,20 @@
 # Serdar Soytetir <tulliana@gmail.com>, 2008, 2009.
 # Ozan Çağlayan <ozan@pardus.org.tr>, 2010.
 # Volkan Gezer <volkangezer@gmail.com>, 2013.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-14 01:45+0000\n"
-"PO-Revision-Date: 2023-11-26 01:21+0300\n"
+"POT-Creation-Date: 2024-10-15 01:46+0000\n"
+"PO-Revision-Date: 2024-10-14 20:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 24.11.70\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, kde-format
@@ -280,7 +280,7 @@ msgstr "Sonraki görseli önyükle"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Pencereyi Çoğalt"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -340,13 +340,12 @@ msgstr "Dikey Olarak Ters Çevir"
 #: src/imagewindow.cpp:207 src/kuickshow.cpp:1374
 #, kde-format
 msgid "Print Image..."
-msgstr "Görseli Yazdır..."
+msgstr "Görseli Yazdır…"
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Dosya Tarayıcısını Göster"
+msgstr "Dosya Tarayıcısına Dön"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -465,10 +464,9 @@ msgid "Keep original image size"
 msgstr "Görselin özgün boyutunu koru"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Farklı Kaydet"
+msgstr "Görseli Farklı Kaydet"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -504,12 +502,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Görsel yükleme ve sunma kitaplığı"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Görsel işleme kitaplığı"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -544,7 +542,7 @@ msgstr "&Tarayıcı Kısayolları"
 #: src/kuickfile.cpp:128
 #, kde-format
 msgid "Downloading %1..."
-msgstr "%1 indiriliyor..."
+msgstr "%1 indiriliyor…"
 
 #: src/kuickfile.cpp:129
 #, kde-format
@@ -556,32 +554,35 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
 #| msgid ""
 #| "Do you really want to display this 1 image at the same time? This might "
 #| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
+#| "choose <interface>%2</interface>, only the first image will be shown."
 #| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
+#| "Do you really want to display these %1 images at the same time? This "
 #| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#| "you choose <interface>%2</interface>, only the first image will be shown."
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
-"quite resource intensive and could overload your computer.<br>If you choose "
+"quite resource intensive and could overload your computer.<br/>If you choose "
 "<interface>%2</interface>, only the first image will be shown."
 msgid_plural ""
 "Do you really want to display these %1 images at the same time? This might "
-"be quite resource intensive and could overload your computer.<br>If you "
+"be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
-"Bu görseli gerçekten aynı anda görüntülemek istiyor musunuz? Bu işlem çok "
-"fazla kaynak tükeyip bilgisayarınıza aşırı yüklenebilir.<br>%1 seçeneğini "
-"seçerseniz yalnızca ilk görsel gösterilecektir."
+"Bu 1 görseli aynı anda görüntülemeyi gerçekten istiyor musunuz? Bu, pek "
+"fazla özkaynak kullanabilir ve bilgisayarınızı aşırı yükleyebilir."
+"<br><interface>%2</interface> seçimini yaparsanız yalnızca ilk görsel "
+"gösterilir."
 msgstr[1] ""
-"Bu %n görseli gerçekten aynı anda görüntülemek istiyor musunuz? Bu işlem çok "
-"fazla kaynak tükeyip bilgisayarınıza aşırı yüklenebilir.<br>%1 seçeneğini "
-"seçerseniz yalnızca ilk görsel gösterilecektir."
+"Bu %1 görseli aynı anda görüntülemeyi gerçekten istiyor musunuz? Bu, pek "
+"fazla özkaynak kullanabilir ve bilgisayarınızı aşırı yükleyebilir."
+"<br><interface>%2</interface> seçimini yaparsanız yalnızca ilk görsel "
+"gösterilir."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -591,7 +592,7 @@ msgstr "Birden Fazla Görsel Görüntlensin mi?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Görüntü"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -606,7 +607,7 @@ msgstr "Dü&zen"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Görünüm"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -625,6 +626,8 @@ msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
 msgstr ""
+"<filename>%1</filename><nl/>dosyasını kalıcı olarak silmeyi gerçekten "
+"istiyor musunuz?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -632,15 +635,12 @@ msgid "Delete File"
 msgstr "Dosyayı Sil"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
-"<qt><b>'%1'</b> dosyasını gerçekten\n"
-"çöp kutusuna göndermek istiyor musunuz?</qt>"
+"<filename>%1</filename><nl/>dosyasını çöp kutusuna göndermeyi gerçekten "
+"istiyor musunuz?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -666,12 +666,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"“%2” görsel kitaplığı ilklendirilemiyor.\n"
+"\n"
+"Daha fazla bilgi oturum günlük dosyasından veya uçbirimden\n"
+"%1 başlatılarak alınabilir."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Sonlandırıcı Imlib Hatası"
+msgstr "Onulmaz İlklendirme Hatası"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -696,7 +699,7 @@ msgstr "Dosya Tarayıcısını Gizle"
 #: src/kuickshow.cpp:1340
 #, kde-format
 msgid "Configure %1..."
-msgstr "%1 Uygulamasını Yapılandır..."
+msgstr "%1 Uygulamasını Yapılandır…"
 
 #: src/kuickshow.cpp:1344
 #, kde-format
@@ -731,12 +734,12 @@ msgstr "KuickShow"
 #: src/main.cpp:39
 #, kde-format
 msgid "A fast and versatile image viewer"
-msgstr "Hızlı ve becerikli bir görsel görüntüleyici"
+msgstr "Hızlı ve becerikli bir görsel görüntüleyicisi"
 
 #: src/main.cpp:41
 #, kde-format
 msgid "(c) 1998-2009, Carsten Pfeiffer"
-msgstr "(c) 1998-2009, Carsten Pfeiffer"
+msgstr "© 1998–2009, Carsten Pfeiffer"
 
 #: src/main.cpp:46
 #, kde-format
@@ -761,7 +764,7 @@ msgstr "Son gidilen dizin ile başla, çalışılan dizin ile değil."
 #: src/main.cpp:60
 #, kde-format
 msgid "Optional image filenames/urls to show"
-msgstr "Gösterilecek isteğe bağlı dosya adları/URL'ler"
+msgstr "Gösterilecek isteğe bağlı dosya adları/URL’ler"
 
 #: src/printing.cpp:52
 #, kde-format
@@ -832,7 +835,7 @@ msgstr "&Gerekiyorsa görseli kağıt boyutlarına uydur"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Sonsuza dek"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -872,10 +875,9 @@ msgstr " sn"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "Ö&zyineleme sayısı (0 = sonsuz):"
+msgstr "Y&inelemeler:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

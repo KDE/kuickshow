@@ -11,20 +11,20 @@
 # Rinse de Vries <rinsedevries@kde.nl>, 2004, 2005, 2007, 2008.
 # Tom Albers <tomalbers@kde.nl>, 2004.
 # Bram Schoenmakers <bramschoenmakers@kde.nl>, 2006.
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2009, 2018, 2020.
+# SPDX-FileCopyrightText: 2009, 2018, 2020, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-14 01:45+0000\n"
-"PO-Revision-Date: 2020-08-18 11:02+0200\n"
+"POT-Creation-Date: 2024-10-15 01:46+0000\n"
+"PO-Revision-Date: 2024-10-14 11:30+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.04.3\n"
+"X-Generator: Lokalize 24.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -32,7 +32,7 @@ msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 "Otto Bruggeman,Rinse de Vries,Wilbert Berendsen,Antoon Tolboom,Freek de "
-"Kruijf"
+"Kruijf - t/m 2024"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -283,7 +283,7 @@ msgstr "Volgende afbeelding voorladen"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Venster dupliceren"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -346,10 +346,9 @@ msgid "Print Image..."
 msgstr "Afbeelding afdrukken..."
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Bestandsbrowser tonen"
+msgstr "Naar bestandsbrowser terugkeren"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -471,10 +470,9 @@ msgid "Keep original image size"
 msgstr "Originele afbeeldinggrootte behouden"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Opslaan als"
+msgstr "Afbeelding opslaan als"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -510,12 +508,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Bibliotheek voor laden en renderen van afbeelding"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Bibliotheek voor bewerken van afbeelding"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -562,32 +560,33 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
 #| msgid ""
 #| "Do you really want to display this 1 image at the same time? This might "
 #| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
+#| "choose <interface>%2</interface>, only the first image will be shown."
 #| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
+#| "Do you really want to display these %1 images at the same time? This "
 #| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#| "you choose <interface>%2</interface>, only the first image will be shown."
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
-"quite resource intensive and could overload your computer.<br>If you choose "
+"quite resource intensive and could overload your computer.<br/>If you choose "
 "<interface>%2</interface>, only the first image will be shown."
 msgid_plural ""
 "Do you really want to display these %1 images at the same time? This might "
-"be quite resource intensive and could overload your computer.<br>If you "
+"be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Wilt u echt deze ene afbeelding tegelijk weergeven? Dit kan erg veel bronnen "
-"nodig hebben en uw computer overladen.<br>Als u %1 kiest dan wordt alleen de "
-"eerste afbeelding getoond."
+"nodig hebben en uw computer overladen.<br>Als u <interface>%2</interface> "
+"kiest dan wordt alleen de eerste afbeelding getoond."
 msgstr[1] ""
-"Wilt u echt deze %n afbeeldingen tegelijk weergeven? Dit kan erg veel "
-"bronnen nodig hebben en uw computer overladen.<br>Als u %1 kiest dan wordt "
-"alleen de eerste afbeelding getoond."
+"Wilt u echt deze %1 afbeeldingen tegelijk weergeven? Dit kan erg veel "
+"bronnen nodig hebben en uw computer overladen.<br>Als u <interface>%2</"
+"interface> kiest dan wordt alleen de eerste afbeelding getoond."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -597,7 +596,7 @@ msgstr "Meer dan één afbeelding weergeven?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Weergave"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -612,7 +611,7 @@ msgstr "Be&werken"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Beeld"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -631,6 +630,7 @@ msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
 msgstr ""
+"Wilt u echt permanent verwijderen het bestand<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -638,15 +638,11 @@ msgid "Delete File"
 msgstr "Bestand verwijderen"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
-"<qt>Wilt u echt\n"
-" <b>'%1'</b> naar de prullenbak verplaatsen?</qt>"
+"Wilt u echt naar de prullenbak verplaatsen<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -672,12 +668,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Initialiseren van de afbeeldingenbibliotheek \"%2\" lukt niet.\n"
+"\n"
+"Meer informatie kan beschikbaar zijn in het logbestand van de sessie,\n"
+"of kan verkregen worden door %1 te starten vanaf een terminal."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Fatale Imlib-fout"
+msgstr "Fatale initialiseringsfout"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -838,7 +837,7 @@ msgstr "A&fbeelding krimpen tot paginagrootte, indien nodig"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Altijd"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -878,10 +877,9 @@ msgstr " sec"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "Herhal&ingen (0 is oneindig):"
+msgstr "&Iteraties:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

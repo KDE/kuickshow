@@ -5,20 +5,20 @@
 #
 # Kalle Pettersson <d99kalle@dtek.chalmers.se>, 2000.
 # Mattias Newzella <newzella@linux.nu>, 2001,2002, 2003.
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2004, 2005, 2006, 2007, 2009, 2018.
+# SPDX-FileCopyrightText: 2004, 2005, 2006, 2007, 2009, 2018, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-14 01:45+0000\n"
-"PO-Revision-Date: 2018-06-17 07:39+0100\n"
+"POT-Creation-Date: 2024-10-15 01:46+0000\n"
+"PO-Revision-Date: 2024-10-14 17:17+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -275,7 +275,7 @@ msgstr "Förladda nästa bild"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Duplicera fönster"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -338,10 +338,9 @@ msgid "Print Image..."
 msgstr "Skriv ut bild..."
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Visa filbläddrare"
+msgstr "Återgå till filbläddrare"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -460,10 +459,9 @@ msgid "Keep original image size"
 msgstr "Behåll ursprunglig bildstorlek"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Spara som"
+msgstr "Spara bild som"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -498,12 +496,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Bildinläsnings- och återgivningsbibliotek"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Bildbehandlingsbibliotek"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -550,31 +548,32 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-format
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info"
 #| msgid ""
 #| "Do you really want to display this 1 image at the same time? This might "
 #| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
+#| "choose <interface>%2</interface>, only the first image will be shown."
 #| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
+#| "Do you really want to display these %1 images at the same time? This "
 #| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#| "you choose <interface>%2</interface>, only the first image will be shown."
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
-"quite resource intensive and could overload your computer.<br>If you choose "
+"quite resource intensive and could overload your computer.<br/>If you choose "
 "<interface>%2</interface>, only the first image will be shown."
 msgid_plural ""
 "Do you really want to display these %1 images at the same time? This might "
-"be quite resource intensive and could overload your computer.<br>If you "
+"be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Vill du verkligen visa den här bilden samtidigt? Det kan vara riktigt "
-"resurskrävande och kan överbelasta datorn.<br>Om du väljer %1, visas bara "
+"resurskrävande och kan överbelasta datorn.<br>Om du väljer %2, visas bara "
 "den första bilden."
 msgstr[1] ""
-"Vill du verkligen visa de här %n bilderna samtidigt? Det kan vara riktigt "
-"resurskrävande och kan överbelasta datorn.<br>Om du väljer %1, visas bara "
+"Vill du verkligen visa de här %1 bilderna samtidigt? Det kan vara riktigt "
+"resurskrävande och kan överbelasta datorn.<br>Om du väljer %2, visas bara "
 "den första bilden."
 
 #: src/kuickshow.cpp:173
@@ -585,7 +584,7 @@ msgstr "Visa flera bilder?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Visning"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -600,7 +599,7 @@ msgstr "&Redigera"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Visa"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -619,6 +618,7 @@ msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
 msgstr ""
+"Vill du verkligen  ta bort filen<nl/><filename>%1</filename> permanent?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -626,15 +626,12 @@ msgid "Delete File"
 msgstr "Ta bort fil"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
-"<qt>Vill du verkligen flytta\n"
-" <b>'%1'</b> till papperskorgen?</qt>"
+"Vill du verkligen flytta filen<nl/><filename>%1</filename> till "
+"papperskorgen?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -660,12 +657,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Kunde inte att initiera bildbiblioteket \"%2\".\n"
+"\n"
+"Mer information kan finnas tillgänglig i sessionens loggfil,\n"
+"eller kan erhållas genom att starta %1 från en terminal."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Allvarligt Imlib-fel"
+msgstr "Allvarligt initieringsfel"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -826,7 +826,7 @@ msgstr "Krymp bilden till skärmstorlek i&fall den är större"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "För alltid"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -866,10 +866,9 @@ msgstr " sekunder"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&Iterationer (0=oändlig):"
+msgstr "Upprepn&ingar:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
