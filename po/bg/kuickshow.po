@@ -2,25 +2,25 @@
 # Bulgarian translation of KDE.
 # This file is licensed under the GPL.
 #
-# $Id: kuickshow.po 1692895 2024-10-15 02:09:53Z scripty $
+# $Id: kuickshow.po 1692973 2024-10-16 02:13:47Z scripty $
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2010.
-# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2022-07-02 19:57+0200\n"
+"PO-Revision-Date: 2024-10-15 23:09+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -276,7 +276,7 @@ msgstr "Предварително зареждане на следващото 
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Дублиране на прозорец"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -339,10 +339,9 @@ msgid "Print Image..."
 msgstr "Печат..."
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Показване на файловия браузър"
+msgstr "Връщане във файловия браузър"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -462,10 +461,9 @@ msgid "Keep original image size"
 msgstr "Запазване на оригиналния размер"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Запис като"
+msgstr "Запис на изображението като"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -500,12 +498,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Библиотека за зареждане и изобразяване на изображения"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Библиотека за обработване на изображения"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -552,15 +550,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -572,12 +562,12 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Наистина ли искате да покажете това 1 изображение едновременно? Това може да "
-"едоста интензивен ресурс и може да претовари компютъра ви.<br>Ако изберете"
-"%1, ще бъде показано само първото изображение."
+"е доста интензивен ресурс и може да претовари компютъра ви.<br/>Ако изберете "
+"<interface>%2</interface>, ще бъде показано само първото изображение."
 msgstr[1] ""
-"Наистина ли искате да покажете тези %n изображения едновременно? Това може "
-"да едоста интензивен ресурс и може да претовари компютъра ви.<br>Ако изберете"
-"%1, ще бъде показано само първото изображение."
+"Наистина ли искате да покажете тези %1изображения едновременно? Това може да "
+"е доста интензивен ресурс и може да претовари компютъра ви.<br/>Ако "
+"изберете<interface>%2</interface>, ще бъде показано само първото изображение."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -587,7 +577,7 @@ msgstr "Да се показват ли множество изображени�
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Показване"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -602,7 +592,7 @@ msgstr "&Редактиране"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Изглед"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -621,6 +611,8 @@ msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
 msgstr ""
+"Наистина ли искате да изтриете за постоянно файла<nl/><filename>%1</"
+"filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -628,15 +620,11 @@ msgid "Delete File"
 msgstr "Изтриване на файла"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
-"<qt>Наистина ли искате да преместите в кошчето\n"
-" <b>'%1'</b>?</qt>"
+"Наистина ли искате да преместите в кошчето файла<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -662,12 +650,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Не може да се инициализира библиотеката с изображения \"%2\".\n"
+"\n"
+"Повече информация може да има в регистрационния файл на сесията,\n"
+"или може да се получи чрез стартиране на %1 от терминал."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Фатална грешка в библиотеката Imlib"
+msgstr "Фатална грешка при инициализиране"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -828,7 +819,7 @@ msgstr "&Намаляване до размера на страницата, а�
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Непрекъснато"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -868,10 +859,9 @@ msgstr " сек"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "Повторен&ия (0 = безкрайно):"
+msgstr "Повторен&ия:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

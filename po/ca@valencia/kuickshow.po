@@ -1,9 +1,9 @@
 # Translation of kuickshow.po to Catalan (Valencian)
-# Copyright (C) 2002-2023 This_file_is_part_of_KDE
+# Copyright (C) 2002-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2018, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2018, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Albert Astals Cid <aacid@kde.org>, 2004.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2018, 2020.
 msgid ""
@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2023-05-02 19:54+0200\n"
+"PO-Revision-Date: 2024-10-15 09:59+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 24.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -278,7 +278,7 @@ msgstr "Precarrega la imatge següent"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Duplica la finestra"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -341,10 +341,9 @@ msgid "Print Image..."
 msgstr "Imprimix la imatge…"
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Mostra el navegador de fitxers"
+msgstr "Retorna al navegador de fitxers"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -464,10 +463,9 @@ msgid "Keep original image size"
 msgstr "Mantín la mida original de la imatge"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Anomena i guarda"
+msgstr "Anomena i guarda la imatge"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -502,12 +500,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Biblioteca de càrrega i renderització d'imatges"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Biblioteca de processament d'imatges"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -554,15 +552,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -574,12 +564,12 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Segur que voleu visualitzar 1 imatge a la vegada? Açò pot consumir força "
-"recursos i pot sobrecarregar l'ordinador.<br>Si escolliu %1, només es "
-"visualitzarà la primera imatge."
+"recursos i pot sobrecarregar l'ordinador.<br/>Si escolliu <interface>%2</"
+"interface>, només es visualitzarà la primera imatge."
 msgstr[1] ""
-"Segur que voleu visualitzar estes %n imatges a la vegada? Açò pot consumir "
-"força recursos i pot sobrecarregar l'ordinador.<br>Si escolliu %1, només es "
-"visualitzarà la primera imatge."
+"Segur que voleu visualitzar estes %1 imatges a la vegada? Açò pot consumir "
+"força recursos i pot sobrecarregar l'ordinador.<br/>Si escolliu <interface>"
+"%2</interface>, només es visualitzarà la primera imatge."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -589,7 +579,7 @@ msgstr "Mostre múltiples imatges?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Visualització"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -604,7 +594,7 @@ msgstr "E&dita"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Visualitza"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -622,7 +612,7 @@ msgctxt "@info"
 msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
-msgstr ""
+msgstr "Voleu suprimir permanentment el fitxer<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -630,15 +620,11 @@ msgid "Delete File"
 msgstr "Suprimix el fitxer"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
-"<qt>Segur que voleu llençar a dins de la paperera\n"
-" <b>«%1»</b>?</qt>"
+"Voleu llençar a dins de la paperera el fitxer<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -664,12 +650,16 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"No s'ha pogut restablir la biblioteca d'imatges «%2».\n"
+"\n"
+"Pot ser que hi haja més informació disponible en el fitxer de registre de "
+"sessió,\n"
+"o es pot obtindre iniciant %1 des d'un terminal."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Error fatal de la Imlib"
+msgstr "Error fatal d'inicialització"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -832,7 +822,7 @@ msgstr "Escala la imatge a la &mida de la pantalla, si fora més gran"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Per sempre"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -872,23 +862,6 @@ msgstr " seg"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&Iteracions (0 = infinit):"
-
-#~ msgid ""
-#~ "<qt>Do you really want to delete\n"
-#~ " <b>'%1'</b>?</qt>"
-#~ msgstr ""
-#~ "<qt>Segur que voleu suprimir\n"
-#~ " <b>«%1»</b>?</qt>"
-
-#~ msgid ""
-#~ "Unable to initialize \"Imlib\".\n"
-#~ "Start kuickshow from the command line and look for error messages.\n"
-#~ "The program will now quit."
-#~ msgstr ""
-#~ "No es pot restablir la «Imlib».\n"
-#~ "Inicieu KuickShow des de la línia d'ordres i busqueu missatges d'error.\n"
-#~ "El programa acabarà ara."
+msgstr "&Iteracions:"

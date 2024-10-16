@@ -2,20 +2,20 @@
 # Translation of kuickshow.po to Slovenian
 # Slovenian translation of kuickshow.
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: kuickshow.po 1692895 2024-10-15 02:09:53Z scripty $
+# $Id: kuickshow.po 1692973 2024-10-16 02:13:47Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2001.
 # Gregor Rakar <gregor.rakar@kiss.si>, 2003, 2004, 2005.
 # Jure Repinc <jlp@holodeck1.com>, 2005, 2006, 2007, 2010.
 # Andrej Mernik <andrejm@ubuntu.si>, 2012, 2013.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2020.
+# SPDX-FileCopyrightText: 2020, 2024 Matjaž Jeran <matjaz.jeran@amis.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2024-10-14 07:24+0200\n"
+"PO-Revision-Date: 2024-10-15 07:35+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -556,16 +556,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info"
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose <interface>%2</interface>, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %1 images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose <interface>%2</interface>, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -576,20 +567,20 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
-"Ali ste prepričani, da želite prikazati %1sliko naenkrat? To lahko porabi "
-"veliko sistemskih sredstev in preobremeni vaš računalnik.<br>Če izberete "
-"<interface>%2</interface>, bo prikazana samo prva slika."
+"Ali ste prepričani, da želite prikazati teh %1 slik naenkrat? To lahko "
+"porabi veliko sistemskih sredstev in preobremeni vaš računalnik.<br/>Če "
+"izberete <interface>%2</interface>, bo prikazana samo prva slika."
 msgstr[1] ""
-"Ali ste prepričani, da želite prikazati ti %1 sliki naenkrat? To lahko "
-"porabi veliko sistemskih sredstev in preobremeni vaš računalnik.<br>Če "
+"Ali ste prepričani, da želite prikazati to %1 sliko naenkrat? To lahko "
+"porabi veliko sistemskih sredstev in preobremeni vaš računalnik.<br/>Če "
 "izberete <interface>%2</interface>, bo prikazana samo prva slika."
 msgstr[2] ""
-"Ali ste prepričani, da želite prikazati te %1 slike naenkrat? To lahko "
-"porabi veliko sistemskih sredstev in preobremeni vaš računalnik.<br>Če "
-"izberete<interface>%2</interface>, bo prikazana samo prva slika."
+"Ali ste prepričani, da želite prikazati ti %1 sliki naenkrat? To lahko "
+"porabi veliko sistemskih sredstev in preobremeni vaš računalnik.<br/>Če "
+"izberete <interface>%2</interface>, bo prikazana samo prva slika."
 msgstr[3] ""
-"Ali ste prepričani, da želite prikazati vseh teh %1 slik naenkrat? To lahko "
-"porabi veliko sistemskih sredstev in preobremeni vaš računalnik.<br>Če "
+"Ali ste prepričani, da želite prikazati te %1 slike naenkrat? To lahko "
+"porabi veliko sistemskih sredstev in preobremeni vaš računalnik.<br/>Če "
 "izberete <interface>%2</interface>, bo prikazana samo prva slika."
 
 #: src/kuickshow.cpp:173
