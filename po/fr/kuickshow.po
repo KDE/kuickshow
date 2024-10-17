@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2024-04-26 11:19+0200\n"
+"PO-Revision-Date: 2024-10-15 17:40+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -24,10 +24,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
-"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
 "X-Generator: Lokalize 23.08.5\n"
+"X-Text-Markup: kde4\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -287,7 +287,7 @@ msgstr "Pré charger l'image suivante"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Dupliquer la fenêtre"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -350,10 +350,9 @@ msgid "Print Image..."
 msgstr "Imprimer une image..."
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Afficher un navigateur de fichiers"
+msgstr "Revenir à un navigateur de fichiers"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -473,10 +472,9 @@ msgid "Keep original image size"
 msgstr "Conserver la taille originale de l'image"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Enregistrer sous"
+msgstr "Enregistrer l'image sous"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -513,12 +511,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Bibliothèque de chargement et de rendu d'images"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Bibliothèque de traitement d'images"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -601,7 +599,7 @@ msgstr "Afficher plusieurs images ?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Affichage"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -616,7 +614,7 @@ msgstr "&Édition"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Vue"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -635,6 +633,8 @@ msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
 msgstr ""
+"Voulez-vous vraiment supprimer définitivement le fichier<nl/><filename>%1</"
+"filename> ?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -676,12 +676,16 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Impossible d'initialiser la bibliothèque d'images « %2 ».\n"
+"\n"
+"Plus d'informations peuvent être disponibles dans le fichier journal de "
+"session\n"
+"ou peut être obtenu en démarrant %1 à partir d'un terminal."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Problème critique de la bibliothèque « Imlib »"
+msgstr "Erreur critique durant l'initialisation"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -843,7 +847,7 @@ msgstr "Réduire l'image pour l'a&juster, si nécessaire"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Pour toujours"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -883,10 +887,9 @@ msgstr " secondes"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&Itérations (0 = infini) : "
+msgstr "&Itérations : "
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2024-03-08 07:02+0200\n"
+"PO-Revision-Date: 2024-10-16 15:36+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -280,7 +280,7 @@ msgstr "לטעון את התמונה הבאה מראש"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "שכפול חלון"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -343,10 +343,9 @@ msgid "Print Image..."
 msgstr "הדפסת התמונה…"
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "הצגת דפדפן הקבצים"
+msgstr "חזרה לדפדפן הקבצים"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -465,10 +464,9 @@ msgid "Keep original image size"
 msgstr "שמירת גודל התמונה המקורי"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "שמירה בשם"
+msgstr "שמירת תמונה בשם"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -503,12 +501,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "ספריית טעינה ועיבוד של תמונות"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "ספריית עיבוד תמונות"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -555,15 +553,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -575,10 +565,12 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "להציג את התמונה הזאת בו־זמנית? פעולה זו יכולה לצרוך משאבי מערכת רבים ולהעמיס "
-"על המחשב שלך.<br>בחירה ב־%1, תציג רק את התמונה הראשונה."
+"על המחשב שלך.<br/>בחירה ב־<interface>%2</interface>, תציג רק את התמונה "
+"הראשונה."
 msgstr[1] ""
-"להציג את %n התמונות האלה בו־זמנית? פעולה זו יכולה לצרוך משאבי מערכת רבים "
-"ולהעמיס על המחשב שלך.<br>בחירה ב־%1, תציג רק את התמונה הראשונה."
+"להציג את %1 התמונות האלה בו־זמנית? פעולה זו יכולה לצרוך משאבי מערכת רבים "
+"ולהעמיס על המחשב שלך.<br/>בחירה ב־<interface>%2</interface>, תציג רק את "
+"התמונה הראשונה."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -588,7 +580,7 @@ msgstr "להציג מספר תמונות?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "הצגה"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -603,7 +595,7 @@ msgstr "&עריכה"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "תצוגה"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -621,7 +613,7 @@ msgctxt "@info"
 msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
-msgstr ""
+msgstr "למחוק את הקובץ <nl/><filename>%1</filename> לצמיתות?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -629,15 +621,10 @@ msgid "Delete File"
 msgstr "מחיקת קובץ"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>להעביר לאשפה את\n"
-" <b>‚%1’</b>?</qt>"
+msgstr "להעביר לאשפה את הקובץ <nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -663,12 +650,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"לא ניתן לאתחל את ספריית התמונות „%2”.\n"
+"\n"
+"יש מידע נוסף בקובץ היומן של ההפעלה,\n"
+"או שאפשר לקבל אותו גם על ידי הפעלת %1 מהמסוף."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "שגיאה מהותית ב־Imlib"
+msgstr "שגיאה מהותית באתחול"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -829,7 +819,7 @@ msgstr "הק&טנת התמונה לפי הצורך כדי שתתאים"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "לתמיד"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -869,10 +859,9 @@ msgstr " שנ׳"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&חזרות (0=אינסוף):"
+msgstr "&חזרות:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
