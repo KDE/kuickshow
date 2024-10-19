@@ -334,10 +334,9 @@ msgid "Print Image..."
 msgstr "打印图像..."
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Hide File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "隐藏文件浏览器"
+msgstr ""
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -456,10 +455,9 @@ msgid "Keep original image size"
 msgstr "保留原始图片尺寸"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "另存为"
+msgstr ""
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -836,7 +834,6 @@ msgstr " 秒"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "重复次数（0=无限循环）(&I)："
+msgstr ""

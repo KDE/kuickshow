@@ -1,14 +1,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
-# Vit Pelcak <vit@pelcak.org>, 2013, 2018, 2021, 2023.
+# SPDX-FileCopyrightText: 2013, 2018, 2021, 2023, 2024 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2023-02-24 11:07+0100\n"
+"PO-Revision-Date: 2024-10-18 16:10+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -277,7 +277,7 @@ msgstr "Načíst následující obrázek"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Duplikovat okno"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -340,10 +340,9 @@ msgid "Print Image..."
 msgstr "Vytisknout obrázek..."
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Zobrazit prohlížeč souborů"
+msgstr "Vrátit se do prohlížeče souborů"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -463,10 +462,9 @@ msgid "Keep original image size"
 msgstr "Zachovat původní velikost obrázku"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Uložit jako"
+msgstr "Uložit obrázek jako"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -502,12 +500,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Knihovna na načítání a vykreslování obrázků."
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Knihovna pro práci s obrázky"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -554,15 +552,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -574,16 +564,16 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Opravdu si přejete tento obrázek zobrazit současně? To může způsobit "
-"přetížení vašeho počítače.<br>Pokud zvolíte %1, bude zobrazen pouze první "
-"obrázek."
+"přetížení vašeho počítače.<br/>Pokud zvolíte <interface>%2</interface>, bude "
+"zobrazen pouze první obrázek."
 msgstr[1] ""
-"Opravdu si přejete zobrazit současně tyto %n obrázky? To může způsobit "
-"přetížení vašeho počítače.<br>Pokud zvolíte %1, bude zobrazen pouze první "
-"obrázek."
+"Opravdu si přejete zobrazit současně tyto %1 obrázky? To může způsobit "
+"přetížení vašeho počítače.<br/>Pokud zvolíte <interface>%2</interface>, bude "
+"zobrazen pouze první obrázek."
 msgstr[2] ""
-"Opravdu si přejete zobrazit současně těchto %n obrázků? To může způsobit "
-"přetížení vašeho počítače.<br>Pokud zvolíte %1, bude zobrazen pouze první "
-"obrázek."
+"Opravdu si přejete zobrazit současně těchto %1 obrázků? To může způsobit "
+"přetížení vašeho počítače.<br/>Pokud zvolíte <interface>%2</interface>, bude "
+"zobrazen pouze první obrázek."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -593,7 +583,7 @@ msgstr "Zobrazit více obrázků?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Zobrazení"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -608,7 +598,7 @@ msgstr "&Upravit"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Pohled"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -626,7 +616,7 @@ msgctxt "@info"
 msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
-msgstr ""
+msgstr "Opravdu si přejete trvale smazat soubor<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -634,15 +624,10 @@ msgid "Delete File"
 msgstr "Smazat soubor"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>Opravdu přesunout do koše\n"
-" <b>'%1'</b>?</qt>"
+msgstr "Opravdu si přejete vyhodit soubor<nl/><filename>%1</filename> do koše?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -668,12 +653,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Nelze inicializovat knihovnu pro práci s obrázky \"%2\".\n"
+"\n"
+"Více informací můžete najít v souboru záznamu sezení,\n"
+"nebo je získáte spuštěním %1 z terminálu."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Fatální chyba knihovny Imlib"
+msgstr "Fatální chyba inicializace"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -835,7 +823,7 @@ msgstr "Zm&enšit obrázek na velikost obrazovky, je-li větší"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Napořád"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -875,23 +863,6 @@ msgstr " sek"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "Počet opa&kování (0 = neomezeně):"
-
-#~ msgid ""
-#~ "<qt>Do you really want to delete\n"
-#~ " <b>'%1'</b>?</qt>"
-#~ msgstr ""
-#~ "<qt>Opravdu smazat\n"
-#~ " <b>'%1'</b>?</qt>"
-
-#~ msgid ""
-#~ "Unable to initialize \"Imlib\".\n"
-#~ "Start kuickshow from the command line and look for error messages.\n"
-#~ "The program will now quit."
-#~ msgstr ""
-#~ "Nelze inicializovat \"Imlib\".\n"
-#~ "Spusťte kuickshow z příkazové řádky a sledujte chybový výpis.\n"
-#~ "Program bude nyní ukončen."
+msgstr "Opa&kování:"
