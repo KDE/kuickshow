@@ -1,17 +1,17 @@
 # translation of kuickshow.po to
-# Version: $Revision: 1692895 $
+# Version: $Revision: 1693190 $
 #
 # Copyright (C) 2002,2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 # Krzysztof Lichota <lichota@mimuw.edu.pl>, 2002, 2004, 2005, 2006, 2007.
 # Robert Gomulka <rgom@o2.pl>, 2006.
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2019, 2021, 2022.
+# SPDX-FileCopyrightText: 2011, 2019, 2021, 2022, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2022-04-10 08:53+0200\n"
+"PO-Revision-Date: 2024-10-19 13:28+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -20,16 +20,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Krystian Zubel"
+msgstr "Krystian Zubel, Łukasz Wojniłowicz"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "kzyletaz@wp.pl"
+msgstr "kzyletaz@wp.pl, lukasz.wojnilowicz@gmail.com"
 
 #. i18n: ectx: property (text), widget (QLabel, lblAuthors)
 #: src/aboutwidget.ui:32
@@ -276,7 +277,7 @@ msgstr "Wczytaj wstępnie kolejny obraz"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Powiel okno"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -339,10 +340,9 @@ msgid "Print Image..."
 msgstr "Drukuj obrazek..."
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Pokaż przeglądarkę plików"
+msgstr "Wróć do przeglądarki plików"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -462,10 +462,9 @@ msgid "Keep original image size"
 msgstr "Utrzymaj pierwotny rozmiar obrazka"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Zapisz jako"
+msgstr "Zapisz obraz jako"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -502,12 +501,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Biblioteka do wczytywania i wyświetlania obrazów"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Biblioteka do przetwarzana obrazów"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -554,15 +553,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -574,16 +565,19 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Czy na pewno chcesz wyświetlić ten 1 obraz w tym samym czasie? Może to być "
-"całkiem zaosob-chłonne i może przeciążyć twój komputer.<br> Jeżeli "
-"wybierzesz %1, to tylko pierwszy obraz zostanie pokazany ."
+"całkiem zasobochłonne i może przeciążyć twój komputer.<br/> Jeżeli "
+"wybierzesz <interface>%2</interface>, to tylko pierwszy obraz zostanie "
+"pokazany ."
 msgstr[1] ""
 "Czy na pewno chcesz wyświetlić te %1 obrazy w tym samym czasie? Może to być "
-"całkiem zaosob-chłonne i może przeciążyć twój komputer.<br> Jeżeli "
-"wybierzesz %1, to tylko pierwszy obraz zostanie pokazany ."
+"całkiem zasobochłonne i może przeciążyć twój komputer.<br/> Jeżeli "
+"wybierzesz <interface>%2</interface>, to tylko pierwszy obraz zostanie "
+"pokazany ."
 msgstr[2] ""
 "Czy na pewno chcesz wyświetlić te %1 obrazów w tym samym czasie? Może to być "
-"całkiem zaosob-chłonne i może przeciążyć twój komputer.<br> Jeżeli "
-"wybierzesz %1, to tylko pierwszy obraz zostanie pokazany ."
+"całkiem zasobochłonne i może przeciążyć twój komputer.<br/> Jeżeli "
+"wybierzesz <interface>%2</interface>, to tylko pierwszy obraz zostanie "
+"pokazany ."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -593,7 +587,7 @@ msgstr "Czy wyświetlić wiele obrazów?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Wyświetlanie"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -608,7 +602,7 @@ msgstr "&Edycja"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Widok"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -626,7 +620,7 @@ msgctxt "@info"
 msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
-msgstr ""
+msgstr "Czy na pewno trwale usunąć plik<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -634,15 +628,10 @@ msgid "Delete File"
 msgstr "Usuń plik"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>Czy na pewno wyrzucić do kosza\n"
-" <b>'%1'</b>?</qt>"
+msgstr "Czy na pewno przenieść do kosza plik<nl/> <filename>%1</filename>?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -668,12 +657,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Nie udało się wczytać biblioteki obrazów \"%2\".\n"
+"\n"
+"Więcej szczegółów może być dostępnych w pliku dziennika posiedzenia,\n"
+"lub po uruchomieniu %1 z terminala."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Fatalny błąd w Imlib"
+msgstr "Fatalny błąd wczytywania"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -834,7 +826,7 @@ msgstr "Odpowiednio zmniejsz obrazek, jeżeli konieczne"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Na zawsze"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -874,10 +866,9 @@ msgstr " sek"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "Liczba &iteracji (0 = nieskończona):"
+msgstr "Powtórzen&ia:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
