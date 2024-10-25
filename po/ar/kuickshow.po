@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2024-10-17 08:40+0400\n"
+"PO-Revision-Date: 2024-10-24 06:52+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -339,10 +339,9 @@ msgid "Print Image..."
 msgstr "طباعة الصورة..."
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "إظهار متصفح الملفات"
+msgstr "ارجع إلى متصفح الملفات"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -498,12 +497,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "مكتبة تحميل وعرض الصور"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "مكتبة معالجة صور"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -550,15 +549,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -570,28 +561,28 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "هل تريد حقًا عرض هذه الصورة الواحدة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة "
-"وقد يؤدي إلى زيادة التحميل على الكمبيوتر. <br> إذا اخترت %1 ، فسيتم عرض "
-"الصورة الأولى فقط."
+"وقد يؤدي إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</"
+"interface> ، فسيتم عرض الصورة الأولى فقط."
 msgstr[1] ""
 "هل تريد حقًا عرض هذه الصورة الواحدة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة "
-"وقد يؤدي إلى زيادة التحميل على الكمبيوتر. <br> إذا اخترت %1 ، فسيتم عرض "
-"الصورة الأولى فقط."
+"وقد يؤدي إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</"
+"interface> ، فسيتم عرض الصورة الأولى فقط."
 msgstr[2] ""
-"هل تريد حقًا عرض هاتين الصورتين في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد "
-"يؤدي إلى زيادة التحميل على الكمبيوتر. <br> إذا اخترت %1 ، فسيتم عرض الصورة "
-"الأولى فقط."
+"هل تريد حقًا عرض هذه الصورة الواحدة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة "
+"وقد يؤدي إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</"
+"interface> ، فسيتم عرض الصورة الأولى فقط."
 msgstr[3] ""
-"هل تريد حقًا عرض هاته %n الصور في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد "
-"يؤدي إلى زيادة التحميل على الكمبيوتر. <br> إذا اخترت %1 ، فسيتم عرض الصورة "
-"الأولى فقط."
+"هل تريد حقًا عرض هذه %1 صور في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد يؤدي "
+"إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</interface> ، "
+"فسيتم عرض الصورة الأولى فقط."
 msgstr[4] ""
-"هل تريد حقًا عرض هاته %n صورة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد يؤدي "
-"إلى زيادة التحميل على الكمبيوتر. <br> إذا اخترت %1 ، فسيتم عرض الصورة الأولى "
-"فقط."
+"هل تريد حقًا عرض هذه %1 صورة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد يؤدي "
+"إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</interface> ، "
+"فسيتم عرض الصورة الأولى فقط."
 msgstr[5] ""
-"هل تريد حقًا عرض هاته %n صورة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد يؤدي "
-"إلى زيادة التحميل على الكمبيوتر. <br> إذا اخترت %1 ، فسيتم عرض الصورة الأولى "
-"فقط."
+"هل تريد حقًا عرض هذه %1 صورة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد يؤدي "
+"إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</interface> ، "
+"فسيتم عرض الصورة الأولى فقط."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -601,7 +592,7 @@ msgstr "هل تريد عرض عدة صور؟"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "اعرض"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -634,7 +625,7 @@ msgctxt "@info"
 msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
-msgstr ""
+msgstr "هل تريد حقًا حذف الملف<nl/><filename>%1</filename> بشكل دائم؟"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -642,15 +633,10 @@ msgid "Delete File"
 msgstr "احذف الملفّ"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>هل تريد حقا أن ترمي\n"
-" <b>'%1'</b> في سلة المهملات؟</qt>"
+msgstr "هل تريد حقًا حذف الملف<nl/><filename>%1</filename>؟"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -676,12 +662,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"عذر تهيئة مكتبة الصور \"%2\".\n"
+"\n"
+"قد تتوفر معلومات إضافية في ملف سجل الجلسة،\n"
+"أو يمكن الحصول عليها عن طريق بدء تشغيل %1 من محطة طرفية."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "خطأ Imlib فادح"
+msgstr "خطأ بدء فادح"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -842,7 +831,7 @@ msgstr "قلّص الصورة إلى القياس ال&أوفق، إذا كان 
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "للأبد"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -882,10 +871,9 @@ msgstr " ثواني"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&حلقات التكرار (0 = لا نهائي):"
+msgstr "&تكرارات:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
