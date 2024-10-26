@@ -65,11 +65,11 @@ int main(int argc, char** argv)
     // the parser is needed in KuickShow::KuickShow()
     app.setProperty("cmdlineParser", QVariant::fromValue<void *>(&parser));
 
-    if ( app.isSessionRestored() )
-	RESTORE( KuickShow )
-    else {
-	(void) new KuickShow( "kuickshow" );
-    }
+	if(app.isSessionRestored()) {
+		kRestoreMainWindows<KuickShow>();
+	} else {
+		(void) new KuickShow("kuickshow");
+	}
 
     return app.exec();
 }
