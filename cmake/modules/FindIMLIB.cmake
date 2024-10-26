@@ -65,7 +65,8 @@ else()
 	if (libImlib_FOUND)
 		# for some reason, <libImlib_CFLAGS> now also contains include directives ("-I...");
 		# filter these out here, or they'd later create compiler arguments like "-D-I..." which would fail the build
-		string(REGEX REPLACE "(^| )-I[^ ]*" "" libImlib_CFLAGS "${libImlib_CFLAGS}")
+		set(_cflags "${libImlib_CFLAGS}")
+		list(FILTER _cflags EXCLUDE REGEX "^-I")
 
 		# the list of libraries must include the library paths
 		set(_libs "")
@@ -78,10 +79,11 @@ else()
 		set(_CACHED "YES")
 		set(IMLIB_FOUND true)
 		set(IMLIB_INCLUDE_DIRS "${libImlib_INCLUDEDIR}" CACHE PATH "Include path for Imlib.h")
-		set(IMLIB_DEFINITIONS "${libImlib_CFLAGS}" CACHE STRING "Compiler definitions for Imlib")
+		set(IMLIB_DEFINITIONS "${_cflags}" CACHE STRING "Compiler definitions for Imlib")
 		set(IMLIB_LIBRARIES "${_libs}" CACHE STRING "Libraries for Imlib")
 		set(IMLIB_VERSION "${libImlib_VERSION}" CACHE STRING "Version of Imlib")
 		unset(_libs)
+		unset(_cflags)
 
 		if (NOT IMLIB_FIND_QUIETLY)
 			message(STATUS "IMLIB definitions: ${IMLIB_DEFINITIONS}")

@@ -1,8 +1,16 @@
 
 # KuickShow application
 
-set(CMAKE_AUTOMOC ON)
-set(kuickshow_SOURCES
+# the target
+set(MAIN_TARGET kuickshow)
+
+# compile flags
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED on)
+
+# source files
+set(SOURCES
+   main.cpp
    kuickshow.cpp 
    aboutwidget.cpp 
    generalwidget.cpp 
@@ -10,7 +18,6 @@ set(kuickshow_SOURCES
    kuickconfigdlg.cpp 
    kuickfile.cpp
    filecache.cpp
-   main.cpp 
    defaultswidget.cpp 
    imagewindow.cpp 
    kuickimage.cpp
@@ -27,7 +34,7 @@ set(kuickshow_SOURCES
    imlib.cpp
 )
 
-ki18n_wrap_ui(kuickshow_SOURCES
+ki18n_wrap_ui(SOURCES
    aboutwidget.ui
    printing_page.ui
    generalwidget.ui
@@ -35,7 +42,10 @@ ki18n_wrap_ui(kuickshow_SOURCES
    slideshowwidget.ui
 )
 
-ecm_qt_declare_logging_category(kuickshow_SOURCES
+# Qt / KF specific settings
+set(CMAKE_AUTOMOC ON)
+
+ecm_qt_declare_logging_category(SOURCES
    HEADER kuickshow_debug.h
    IDENTIFIER KUICKSHOW_LOG
    CATEGORY_NAME org.kde.kuickshow
@@ -45,27 +55,22 @@ ecm_qt_declare_logging_category(kuickshow_SOURCES
 )
 
 if (IMLIB_FOUND)
-  add_definitions(${IMLIB_DEFINITIONS})
-  add_compile_definitions("IMAGE_LIBRARY_VERSION=\"${IMLIB_VERSION}\"")
-  list(APPEND kuickshow_SOURCES imlib_imlib1.cpp)
+  list(APPEND SOURCES imlib_imlib1.cpp)
 elseif (IMLIB2_FOUND)
-  add_definitions(${IMLIB2_DEFINITIONS})
-  add_compile_definitions("IMAGE_LIBRARY_VERSION=\"${IMLIB2_VERSION}\"")
-  list(APPEND kuickshow_SOURCES imlib_imlib2.cpp)
+  list(APPEND SOURCES imlib_imlib2.cpp)
 else ()
-  list(APPEND kuickshow_SOURCES imlib_qt.cpp)
+  list(APPEND SOURCES imlib_qt.cpp)
 endif ()
 
 add_definitions("-DHOMEPAGE_URL=\"https://userbase.kde.org/KuickShow\"")
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
-# target kuickshow
-add_executable(kuickshow ${kuickshow_SOURCES})
-target_compile_options(kuickshow PRIVATE -std=c++11 -Wall --pedantic)
-target_compile_definitions(kuickshow PRIVATE ${IMLIB_DEFINITIONS} -DQT_NO_URL_CAST_FROM_STRING)
-target_include_directories(kuickshow PRIVATE ${IMLIB_INCLUDE_DIRS})
+# the target
+add_executable(${MAIN_TARGET} ${SOURCES})
+target_compile_options(${MAIN_TARGET} PRIVATE -Wall --pedantic)
+target_compile_definitions(${MAIN_TARGET} PRIVATE -DQT_NO_URL_CAST_FROM_STRING)
 
-target_link_libraries(kuickshow
+target_link_libraries(${MAIN_TARGET}
 	Qt5::Core
 	Qt5::Gui
 	Qt5::PrintSupport
@@ -79,18 +84,21 @@ target_link_libraries(kuickshow
 )
 
 if (IMLIB_FOUND)
-target_link_libraries(kuickshow
-	Qt5::X11Extras
-	${X11_LIBRARIES}
-	${IMLIB_LIBRARIES})
-endif ()
-if (IMLIB2_FOUND)
-target_link_libraries(kuickshow
-	Qt5::X11Extras
-	${IMLIB2_LIBRARIES})
+	target_compile_definitions(${MAIN_TARGET} PRIVATE ${IMLIB_DEFINITIONS} "IMAGE_LIBRARY_VERSION=\"${IMLIB_VERSION}\"")
+	target_include_directories(${MAIN_TARGET} PRIVATE ${IMLIB_INCLUDE_DIRS})
+	target_link_libraries(${MAIN_TARGET}
+		Qt5::X11Extras
+		${X11_LIBRARIES}
+		${IMLIB_LIBRARIES})
+elseif (IMLIB2_FOUND)
+	target_compile_definitions(${MAIN_TARGET} PRIVATE ${IMLIB2_DEFINITIONS} "IMAGE_LIBRARY_VERSION=\"${IMLIB2_VERSION}\"")
+	target_include_directories(${MAIN_TARGET} PRIVATE ${IMLIB2_INCLUDE_DIRS})
+	target_link_libraries(${MAIN_TARGET}
+		Qt5::X11Extras
+		${IMLIB2_LIBRARIES})
 endif ()
 
-install(TARGETS kuickshow  ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS ${MAIN_TARGET} ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 

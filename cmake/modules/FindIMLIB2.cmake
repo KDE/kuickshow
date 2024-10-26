@@ -66,6 +66,11 @@ else()
 
 	# next, set the exported variables
 	if (libImlib2_FOUND)
+		# for some reason, <libImlib2_CFLAGS> now also contains include directives ("-I...");
+		# filter these out here, or they'd later create compiler arguments like "-D-I..." which would fail the build
+		set(_cflags "${libImlib2_CFLAGS}")
+		list(FILTER _cflags EXCLUDE REGEX "^-I")
+
 		# the list of libraries must include the library paths
 		set(_libs "")
 		foreach(libdir ${libImlib2_LIBDIR})
@@ -77,10 +82,11 @@ else()
 		set(_CACHED "YES")
 		set(IMLIB2_FOUND true)
 		set(IMLIB2_INCLUDE_DIRS "${libImlib2_INCLUDEDIR}" CACHE PATH "Include path for Imlib2.h")
-		set(IMLIB2_DEFINITIONS "${libImlib2_CFLAGS}" CACHE STRING "Compiler definitions for Imlib2")
+		set(IMLIB2_DEFINITIONS "${_cflags}" CACHE STRING "Compiler definitions for Imlib2")
 		set(IMLIB2_LIBRARIES "${_libs}" CACHE STRING "Libraries for Imlib2")
 		set(IMLIB2_VERSION "${libImlib2_VERSION}" CACHE STRING "Version of Imlib2")
 		unset(_libs)
+		unset(_cflags)
 
 		if (NOT IMLIB2_FIND_QUIETLY)
 			message(STATUS "IMLIB2 definitions: ${IMLIB2_DEFINITIONS}")
