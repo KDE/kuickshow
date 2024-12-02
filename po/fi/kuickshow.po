@@ -4,7 +4,7 @@
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2003.
 # Kim Enkovaara <kim.enkovaara@iki.fi>, 2003, 2004, 2005, 2006.
 # Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2003.
-# Tommi Nieminen <translator@legisign.org>, 2012, 2019.
+# SPDX-FileCopyrightText: 2012, 2019, 2024 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2013, 2014, 2019.
 #
 # KDE Finnish translation sprint participants:
@@ -15,16 +15,15 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-15 01:46+0000\n"
-"PO-Revision-Date: 2019-06-02 13:17+0300\n"
-"Last-Translator: Lasse Liehu <lasse.liehu@gmail.com>\n"
+"PO-Revision-Date: 2024-10-16 21:04+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-POT-Import-Date: 2012-12-01 22:20:27+0000\n"
-"X-Generator: Lokalize 19.04.1\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -280,7 +279,7 @@ msgstr "Esilataa seuraava kuva"
 #: src/imagewindow.cpp:139
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Ikkunan kaksoiskappale"
 
 #: src/imagewindow.cpp:144
 #, kde-format
@@ -343,10 +342,9 @@ msgid "Print Image..."
 msgstr "Tulosta kuva…"
 
 #: src/imagewindow.cpp:218
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Näytä tiedostoselain"
+msgstr "Palaa tiedostoselaimeen"
 
 #: src/imagewindow.cpp:224
 #, kde-format
@@ -465,10 +463,9 @@ msgid "Keep original image size"
 msgstr "Säilytä alkuperäinen kuvakoko"
 
 #: src/imagewindow.cpp:930
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Tallenna nimellä"
+msgstr "Tallenna kuva nimellä"
 
 #: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
 #, kde-format
@@ -503,12 +500,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Kuvan lataus- ja hahmonnuskirjasto"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Kuvankäsittelykirjasto"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -555,15 +552,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -575,12 +564,12 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Haluatko näyttää tämän kuvan yhtä aikaa? Tämä voi kuluttaa paljon resursseja "
-"ja ylikuormittaa tietokoneesi.<br>Jos valitset %1, vain ensimmäinen kuva "
-"näytetään."
+"ja ylikuormittaa tietokoneesi.<br/>Jos valitset <interface>%2</interface>, "
+"vain ensimmäinen kuva näytetään."
 msgstr[1] ""
-"Haluatko näyttää nämä %n kuvaa yhtä aikaa? Tämä voi kuluttaa paljon "
-"resursseja ja ylikuormittaa tietokoneesi.<br>Jos valitset %1, vain "
-"ensimmäinen kuva näytetään."
+"Haluatko näyttää nämä %1 kuvaa yhtä aikaa? Tämä voi kuluttaa paljon "
+"resursseja ja ylikuormittaa tietokoneesi.<br/>Jos valitset <interface>%2</"
+"interface>, vain ensimmäinen kuva näytetään."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -590,7 +579,7 @@ msgstr "Näytetäänkö useampi kuva?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Näyttö"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -605,7 +594,7 @@ msgstr "&Muokkaa"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Näkymä"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -624,6 +613,7 @@ msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
 msgstr ""
+"Haluatko varmasti poistaa pysyvästi tiedoston<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -631,15 +621,11 @@ msgid "Delete File"
 msgstr "Poista tiedosto"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
-"<qt>Haluatko varmasti siirtää roskakoriin tiedoston\n"
-" <b>”%1”</b>?</qt>"
+"Haluatko varmasti siirtää roskakoriin tiedoston<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -665,12 +651,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Kuvakirjastoa ”%2” ei voida alustaa.\n"
+"\n"
+"Lisätietoa löytyy istunnon lokitiedostosta tai käynnistämällä päätteessä "
+"ohjelman %1."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Vakava Imlib-virhe"
+msgstr "Vakava alustusvirhe"
 
 #: src/kuickshow.cpp:1271
 #, kde-format
@@ -831,7 +820,7 @@ msgstr "Kutista kuva &sopimaan, jos tarpeellista"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Aina"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -871,10 +860,9 @@ msgstr " s"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&Näyttökerrat (0 = toistetaan loputtomasti):"
+msgstr "T&oistokerrat:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
