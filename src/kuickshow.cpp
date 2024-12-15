@@ -1176,7 +1176,10 @@ bool KuickShow::haveBrowser() const
 
 void KuickShow::delayedRepeatEvent( ImageWindow *w, QKeyEvent *e )
 {
-    m_delayedRepeatItem = new DelayedRepeatEvent( w, new QKeyEvent( *e ) );
+	auto clonedEvent = new QKeyEvent(e->type(), e->key(), e->modifiers(),
+			e->nativeScanCode(), e->nativeVirtualKey(), e->nativeModifiers(),
+			e->text(), e->isAutoRepeat(), e->count());
+	m_delayedRepeatItem = new DelayedRepeatEvent(w, clonedEvent);
 }
 
 void KuickShow::abortDelayedEvent()
