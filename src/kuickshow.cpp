@@ -23,6 +23,7 @@
 #include <KActionMenu>
 #include <KConfigGroup>
 #include <KCursor>
+#include <KDirLister>
 #include <KHelpMenu>
 #include <KIconLoader>
 #include <KIO/MimetypeJob>
@@ -1178,7 +1179,7 @@ void KuickShow::delayedRepeatEvent( ImageWindow *w, QKeyEvent *e )
 {
 	auto clonedEvent = new QKeyEvent(e->type(), e->key(), e->modifiers(),
 			e->nativeScanCode(), e->nativeVirtualKey(), e->nativeModifiers(),
-			e->text(), e->isAutoRepeat(), e->count());
+			e->text(), e->isAutoRepeat(), e->count(), e->device());
 	m_delayedRepeatItem = new DelayedRepeatEvent(w, clonedEvent);
 }
 

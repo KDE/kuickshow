@@ -71,30 +71,30 @@ target_compile_options(${MAIN_TARGET} PRIVATE -Wall --pedantic)
 target_compile_definitions(${MAIN_TARGET} PRIVATE -DQT_NO_URL_CAST_FROM_STRING)
 
 target_link_libraries(${MAIN_TARGET}
-	Qt5::Core
-	Qt5::Gui
-	Qt5::PrintSupport
-	KF5::I18n
-	KF5::IconThemes
-	KF5::KIOCore
-	KF5::KIOWidgets
-	KF5::KIOFileWidgets
-	KF5::WindowSystem
-	KF5::XmlGui
+	Qt6::Core
+	Qt6::Gui
+	Qt6::PrintSupport
+	KF6::I18n
+	KF6::IconThemes
+	KF6::KIOCore
+	KF6::KIOWidgets
+	KF6::KIOFileWidgets
+	KF6::WindowSystem
+	KF6::XmlGui
 )
 
 if (IMLIB_FOUND)
 	target_compile_definitions(${MAIN_TARGET} PRIVATE ${IMLIB_DEFINITIONS} "IMAGE_LIBRARY_VERSION=\"${IMLIB_VERSION}\"")
 	target_include_directories(${MAIN_TARGET} PRIVATE ${IMLIB_INCLUDE_DIRS})
 	target_link_libraries(${MAIN_TARGET}
-		Qt5::X11Extras
+		Qt6::X11Extras
 		${X11_LIBRARIES}
 		${IMLIB_LIBRARIES})
 elseif (IMLIB2_FOUND)
 	target_compile_definitions(${MAIN_TARGET} PRIVATE ${IMLIB2_DEFINITIONS} "IMAGE_LIBRARY_VERSION=\"${IMLIB2_VERSION}\"")
 	target_include_directories(${MAIN_TARGET} PRIVATE ${IMLIB2_INCLUDE_DIRS})
 	target_link_libraries(${MAIN_TARGET}
-		Qt5::X11Extras
+		Qt6::X11Extras
 		${IMLIB2_LIBRARIES})
 endif ()
 

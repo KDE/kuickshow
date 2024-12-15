@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.28)
 project(kuickshow)
 
-set(QT_MIN_VERSION "5.15.2")
-set(KF_MIN_VERSION "5.116.0")
+set(QT_MIN_VERSION "6.0.0")
+set(KF_MIN_VERSION "6.0.0")
 set(ECM_MIN_VERSION ${KF_MIN_VERSION})
 
 find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
@@ -30,9 +30,9 @@ set(REQUIRED_QT_MODULES
 if(IMLIB_FOUND OR IMLIB2_FOUND)
 	list(APPEND REQUIRED_QT_MODULES X11Extras)
 endif ()
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED ${REQUIRED_QT_MODULES})
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED ${REQUIRED_QT_MODULES})
 
-find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
 	DocTools
 	I18n
 	IconThemes
@@ -66,7 +66,7 @@ add_subdirectory( icons )
 add_subdirectory( doc )
 
 ki18n_install(po)
-if(KF5DocTools_FOUND)
+if(KF6DocTools_FOUND)
     kdoctools_install(po)
 endif()
 

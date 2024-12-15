@@ -20,6 +20,7 @@
 
 #include <KCompletion>
 #include <KConfigGroup>
+#include <KDirLister>
 #include <KSharedConfig>
 #include <KFileItemActions>
 #include <KFileItemListProperties>

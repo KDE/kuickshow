@@ -4,10 +4,10 @@
 Dependencies:
 - 'on': ['@all']
   'require':
-    'frameworks/extra-cmake-modules': '@stable'
-    'frameworks/kdoctools': '@stable'
-    'frameworks/ki18n': '@stable'
-    'frameworks/kiconthemes': '@stable'
-    'frameworks/kio': '@stable'
-    'frameworks/kwindowsystem': '@stable'
-    'frameworks/kxmlgui': '@stable'
+    'frameworks/extra-cmake-modules': '@stable-kf6'
+    'frameworks/kdoctools': '@stable-kf6'
+    'frameworks/ki18n': '@stable-kf6'
+    'frameworks/kiconthemes': '@stable-kf6'
+    'frameworks/kio': '@stable-kf6'
+    'frameworks/kwindowsystem': '@stable-kf6'
+    'frameworks/kxmlgui': '@stable-kf6'
