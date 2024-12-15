@@ -18,7 +18,7 @@
 
 #include "kuickurlwidget.h"
 
-#include <KRun>
+#include <KIO/OpenUrlJob>
 
 #include <QUrl>
 
@@ -39,8 +39,10 @@ KuickUrlWidget::KuickUrlWidget(const QString &text, QWidget *parent)
 
 void KuickUrlWidget::run()
 {
-    QUrl ku( url() );
-    if ( ku.isValid() ) {
-	(void) new KRun( ku, this );
-    }
+	const QUrl ku(url());
+	if(ku.isValid()) {
+		auto job = new KIO::OpenUrlJob(ku, this);
+		job->start();
+		// the KJob instance auto-deletes itself
+	}
 }
