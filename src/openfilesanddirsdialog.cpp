@@ -21,7 +21,6 @@
 #include <QAbstractItemView>
 #include <QDialogButtonBox>
 #include <QPushButton>
-#include <QSignalMapper>
 #include <QDebug>
 
 
@@ -45,7 +44,6 @@ OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& c
     }
 
     // find the selection controls
-    QSignalMapper *mapper = new QSignalMapper(this);
     for (auto *view : findChildren<QAbstractItemView *>(QRegularExpression("^(?:treeView|listView)$"))) {
         // allow selection of multiple entries
         view->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -53,19 +51,10 @@ OpenFilesAndDirsDialog::OpenFilesAndDirsDialog(QWidget* parent, const QString& c
         // we have to manually set the enabled-state of the "Open" button when the selection changes, because
         // the default only enables it when a directory is selected
         auto model = view->selectionModel();
-        connect(model, &QItemSelectionModel::selectionChanged, mapper, QOverload<>::of(&QSignalMapper::map));
-        mapper->setMapping(model, view);
-    }
-    connect(mapper, &QSignalMapper::mappedWidget, this, &OpenFilesAndDirsDialog::onSelectionChange);
-}
-
-
-void OpenFilesAndDirsDialog::onSelectionChange(QWidget* obj)
-{
-    QAbstractItemView* view = qobject_cast<QAbstractItemView*>(obj);
-    if(view) {
-        auto slist = view->selectionModel()->selectedIndexes();
-        buttonOpen->setEnabled(!slist.isEmpty());
+        connect(model, &QItemSelectionModel::selectionChanged, this, [this, view] {
+            const auto slist = view->selectionModel()->selectedIndexes();
+            buttonOpen->setEnabled(!slist.isEmpty());
+        });
     }
 }
 

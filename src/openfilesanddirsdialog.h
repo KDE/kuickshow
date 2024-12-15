@@ -33,7 +33,6 @@ public:
     virtual ~OpenFilesAndDirsDialog() = default;
 
 private Q_SLOTS:
-    void onSelectionChange(QWidget* obj);
     void okClicked();
 
 private:
