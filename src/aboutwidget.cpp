@@ -19,8 +19,6 @@
 #include "aboutwidget.h"
 #include <ui_aboutwidget.h>
 
-#include <KWindowSystem>
-
 #include <QDateTime>
 #include <QMouseEvent>
 #include <QPixmap>
@@ -40,8 +38,8 @@ AboutWidget::AboutWidget( QWidget *parent )
     // now the properties that couldn't be set in the .ui file
 
     // KDE specific settings for "window" display (it's just a frame, not a real window)
-    KWindowSystem::setType(winId(), NET::Override);
-    KWindowSystem::setState(winId(), NET::KeepAbove | NET::SkipTaskbar);
+    setWindowFlag(Qt::FramelessWindowHint, true);
+    setWindowFlag(Qt::WindowStaysOnTopHint, true);
 
     // these settings are difficult to set in designer
     QPalette whitePalette((QColor(Qt::white)));
