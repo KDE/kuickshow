@@ -38,7 +38,6 @@
 #include <QCheckBox>
 #include <QContextMenuEvent>
 #include <QCursor>
-#include <QDesktopWidget>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QFileDialog>
@@ -371,9 +370,9 @@ void ImageWindow::centerImage()
     int w, h;
     if ( myIsFullscreen )
     {
-        QRect desktopRect = QApplication::desktop()->screenGeometry(this);
-        w = desktopRect.width();
-        h = desktopRect.height();
+        QRect geometry = Kuick::screenGeometry(this);
+        w = geometry.width();
+        h = geometry.height();
     }
     else
     {
@@ -1143,7 +1142,7 @@ bool ImageWindow::autoRotate( KuickImage *kuim )
 QSize ImageWindow::maxImageSize() const
 {
     if ( myIsFullscreen ) {
-        return QApplication::desktop()->screenGeometry(topLevelWidget()).size();
+        return Kuick::screenGeometry(topLevelWidget()).size();
     }
     else {
 	return Kuick::workArea().size() - Kuick::frameSize( winId() );
@@ -1191,7 +1190,7 @@ bool ImageWindow::canZoomTo( int newWidth, int newHeight )
     if ( !ImlibWidget::canZoomTo( newWidth, newHeight ) )
         return false;
 
-    QSize desktopSize = QApplication::desktop()->screenGeometry(topLevelWidget()).size();
+    QSize desktopSize = Kuick::screenGeometry(topLevelWidget()).size();
 
     int desktopArea = desktopSize.width() * desktopSize.height();
     int imageArea = newWidth * newHeight;

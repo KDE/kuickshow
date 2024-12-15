@@ -20,7 +20,6 @@
 
 #include <QApplication>
 #include <QCloseEvent>
-#include <QDesktopWidget>
 #include <QFile>
 #include <QImage>
 #include <QLabel>

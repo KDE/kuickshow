@@ -42,7 +42,6 @@
 #include <QAbstractItemView>
 #include <QGuiApplication>
 #include <QCommandLineParser>
-#include <QDesktopWidget>
 #include <QDialog>
 #include <QDir>
 #include <QDropEvent>

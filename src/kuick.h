@@ -25,6 +25,7 @@
 #include <QRect>
 #include <QScreen>
 #include <QSize>
+#include <QWidget>
 
 
 // TODO: can this just be a namespace?
@@ -36,6 +37,11 @@ public:
         // the entire screen's geometry and doesn't subtract the taskbar's size
         return QGuiApplication::primaryScreen()->availableGeometry();
     }
+
+	static QRect screenGeometry(QWidget* widget = nullptr) {
+		const QScreen* screen = widget != nullptr ? widget->screen() : QGuiApplication::primaryScreen();
+		return screen != nullptr ? screen->geometry() : QRect(0, 0, 1280, 720);
+	}
 
     static QSize frameSize(WId win = WId(0)) {
 	if ( win ) {
