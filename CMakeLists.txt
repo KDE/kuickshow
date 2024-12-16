@@ -9,8 +9,8 @@ find_package(ECM ${ECM_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 # If both options are set, then Imlib2 has priority
-option(USE_IMLIB1 "Use Imlib1 for image processing" ON)
-option(USE_IMLIB2 "Use Imlib2 for image processing" ON)
+option(USE_IMLIB1 "Use Imlib1 for image processing" OFF)
+option(USE_IMLIB2 "Use Imlib2 for image processing" OFF)
 
 if (USE_IMLIB2)
 	find_package(IMLIB2)
