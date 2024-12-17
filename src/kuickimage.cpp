@@ -16,7 +16,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#define DEBUG_TIMING
+//#define DEBUG_TIMING
 
 #include "kuickimage.h"
 

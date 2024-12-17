@@ -16,7 +16,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#define DEBUG_TIMING
+//#define DEBUG_TIMING
 #undef DEBUG_CACHE
 
 #include "imagecache.h"
@@ -102,7 +102,6 @@ KuickImage *ImageCache::loadImage(KuickFile *file, const ImageModifiers &mod)
 {
 	if (file==nullptr || !file->isAvailable()) return (nullptr);
         const QString fileName = file->localFile();
-        qDebug() << "loading" << fileName;
 
 	slotBusy();
 #ifdef DEBUG_TIMING
