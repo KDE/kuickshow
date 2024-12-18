@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:46+0000\n"
+"POT-Creation-Date: 2024-12-18 01:56+0000\n"
 "PO-Revision-Date: 2022-11-30 07:05+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -269,154 +269,154 @@ msgstr "KuickShow -ის ვებგვერდის ჩვენება"
 msgid "Preload next image"
 msgstr "შემდეგი გამოსახულების წინასწარი ჩატვირთვა"
 
-#: src/imagewindow.cpp:139
+#: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
 msgstr ""
 
-#: src/imagewindow.cpp:144
+#: src/imagewindow.cpp:143
 #, kde-format
 msgid "Show Next Image"
 msgstr "შემდეგი გამოსახულების ჩვენება"
 
-#: src/imagewindow.cpp:149
+#: src/imagewindow.cpp:148
 #, kde-format
 msgid "Show Previous Image"
 msgstr "წინა გამოსახულების ჩვენება"
 
-#: src/imagewindow.cpp:154
+#: src/imagewindow.cpp:153
 #, kde-format
 msgid "Delete Image"
 msgstr "გამოსახულების წაშლა"
 
-#: src/imagewindow.cpp:159
+#: src/imagewindow.cpp:158
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "გამოსახულების სანაგვე ყუთში გადატანა"
 
-#: src/imagewindow.cpp:172
+#: src/imagewindow.cpp:171
 #, kde-format
 msgid "Restore Original Size"
 msgstr "საწყისი ზომის დაბრუნება"
 
-#: src/imagewindow.cpp:177
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Maximize"
 msgstr "გადიდება"
 
-#: src/imagewindow.cpp:182
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90 გრადუსით შებრუნება"
 
-#: src/imagewindow.cpp:187
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "180°-ით შებრუნება"
 
-#: src/imagewindow.cpp:192
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270 გრადუსით შებრუნება"
 
-#: src/imagewindow.cpp:197
+#: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "ჰორიზონტალურად გადაბრუნება"
 
-#: src/imagewindow.cpp:202
+#: src/imagewindow.cpp:201
 #, kde-format
 msgid "Flip Vertically"
 msgstr "ვერტიკალურად გადაბრუნება"
 
-#: src/imagewindow.cpp:207 src/kuickshow.cpp:1374
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
 #, kde-format
 msgid "Print Image..."
 msgstr "გამოსახულების დაბეჭდვა..."
 
-#: src/imagewindow.cpp:218
+#: src/imagewindow.cpp:217
 #, fuzzy, kde-format
 #| msgid "Show File Browser"
 msgid "Return to File Browser"
 msgstr "ფაილის ბრაუზერის ჩვენება"
 
-#: src/imagewindow.cpp:224
+#: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Brightness"
 msgstr "მეტი სიკაშკაშე"
 
-#: src/imagewindow.cpp:229
+#: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Brightness"
 msgstr "ნაკლები სიკაშკაშე"
 
-#: src/imagewindow.cpp:234
+#: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Contrast"
 msgstr "მეტი კონტრასტი"
 
-#: src/imagewindow.cpp:239
+#: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Contrast"
 msgstr "ნაკლები კონტრასტი"
 
-#: src/imagewindow.cpp:244
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "More Gamma"
 msgstr "მეტი გამა"
 
-#: src/imagewindow.cpp:249
+#: src/imagewindow.cpp:248
 #, kde-format
 msgid "Less Gamma"
 msgstr "ნაკლები გამა"
 
-#: src/imagewindow.cpp:255
+#: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Up"
 msgstr "მაღლა აქაჩვა"
 
-#: src/imagewindow.cpp:260
+#: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Down"
 msgstr "ქვემოთ ჩამოწევა"
 
-#: src/imagewindow.cpp:265
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
 msgstr "მარცხნივ გაწევა"
 
-#: src/imagewindow.cpp:270
+#: src/imagewindow.cpp:269
 #, kde-format
 msgid "Scroll Right"
 msgstr "მარჯვნივ გაწევა"
 
-#: src/imagewindow.cpp:275
+#: src/imagewindow.cpp:274
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "სლაიდშოუს შეჩერება"
 
-#: src/imagewindow.cpp:289
+#: src/imagewindow.cpp:288
 #, kde-format
 msgid "Reload Image"
 msgstr "გამოსახულების თავიდან ჩატვირთვა"
 
-#: src/imagewindow.cpp:295
+#: src/imagewindow.cpp:294
 #, kde-format
 msgid "Properties"
 msgstr "პარამეტრები"
 
-#: src/imagewindow.cpp:362
+#: src/imagewindow.cpp:361
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:427
+#: src/imagewindow.cpp:426
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "გამოსახულების %1-დან გადმოწეირს შეცდომა."
 
-#: src/imagewindow.cpp:443
+#: src/imagewindow.cpp:442
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -426,48 +426,48 @@ msgstr ""
 "გამოსახულების (%1) ჩატვირთვის შეცდომა.\n"
 "ალბათ, ფაილის ფორმატი მხარდაუჭერელია ამ თქვენი Imlib სწორად არაა დაყენებული."
 
-#: src/imagewindow.cpp:852
+#: src/imagewindow.cpp:851
 #, kde-format
 msgid "Brightness"
 msgstr "სიკაშკაშე"
 
-#: src/imagewindow.cpp:856
+#: src/imagewindow.cpp:855
 #, kde-format
 msgid "Contrast"
 msgstr "კონტრასტი"
 
-#: src/imagewindow.cpp:860
+#: src/imagewindow.cpp:859
 #, kde-format
 msgid "Gamma"
 msgstr "გამა"
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:906
 #, kde-format
 msgid "Unable to print the image."
 msgstr "გამოსახულების დაბეჭდვის შეცდომა."
 
-#: src/imagewindow.cpp:908
+#: src/imagewindow.cpp:907
 #, kde-format
 msgid "Printing Failed"
 msgstr "დაბეჭდვის შეცდომა"
 
-#: src/imagewindow.cpp:925
+#: src/imagewindow.cpp:924
 #, kde-format
 msgid "Keep original image size"
 msgstr "გამოსახულების საწყისი ზომის შენარჩეუნება"
 
-#: src/imagewindow.cpp:930
+#: src/imagewindow.cpp:929
 #, fuzzy, kde-format
 #| msgid "Save As"
 msgid "Save Image As"
 msgstr "შენახვა როგორც"
 
-#: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "გამოსახულების ფაილები (%1)"
 
-#: src/imagewindow.cpp:953
+#: src/imagewindow.cpp:952
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -476,12 +476,12 @@ msgstr ""
 "ფაილის შენახვის შეცდომა.\n"
 "ალბათ ან დისკია სავსე, ან წვდომა ფაილის ჩასაწერად არ გაგაჩნიათ."
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:955
 #, kde-format
 msgid "File Saving Failed"
 msgstr "ფაილის შენახვის შეცდომა"
 
-#: src/imagewindow.cpp:1203
+#: src/imagewindow.cpp:1202
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -664,52 +664,52 @@ msgstr ""
 msgid "Fatal Initialization Error"
 msgstr "Imlib-ის ფატალური შეცდომა"
 
-#: src/kuickshow.cpp:1271
+#: src/kuickshow.cpp:1274
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "აირჩიეთ გასახსნელი ფაილები ან საქაღალდეები"
 
-#: src/kuickshow.cpp:1332
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
 msgstr "სლაიდშოუს დაწყება"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Show File Browser"
 msgstr "ფაილის ბრაუზერის ჩვენება"
 
-#: src/kuickshow.cpp:1336
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Hide File Browser"
 msgstr "ფაილის ბრაუზერის დამალვა"
 
-#: src/kuickshow.cpp:1340
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1-ის მორგება..."
 
-#: src/kuickshow.cpp:1344
+#: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
 msgstr "KuickShow-ის შესახებ"
 
-#: src/kuickshow.cpp:1351
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "გამოსახულების მხოლოდ ერთი ფანჯრის გახსნა"
 
-#: src/kuickshow.cpp:1362
+#: src/kuickshow.cpp:1365
 #, kde-format
 msgid "Show Image"
 msgstr "გამოსახულების ჩვენება"
 
-#: src/kuickshow.cpp:1366
+#: src/kuickshow.cpp:1369
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "გამოსახულების აქტიურ ფანჯარაში ჩვენება"
 
-#: src/kuickshow.cpp:1370
+#: src/kuickshow.cpp:1373
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "გამოსახულების მთელ ეკრანზე ჩვენება"

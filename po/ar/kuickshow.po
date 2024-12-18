@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:46+0000\n"
+"POT-Creation-Date: 2024-12-18 01:56+0000\n"
 "PO-Revision-Date: 2024-10-24 06:52+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -273,153 +273,153 @@ msgstr "إفتح موقع KuickShow"
 msgid "Preload next image"
 msgstr "تحميل تمهيديق للصورة التالية"
 
-#: src/imagewindow.cpp:139
+#: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
 msgstr "كرّر النّافذة"
 
-#: src/imagewindow.cpp:144
+#: src/imagewindow.cpp:143
 #, kde-format
 msgid "Show Next Image"
 msgstr "أعرض الصورة التالية "
 
-#: src/imagewindow.cpp:149
+#: src/imagewindow.cpp:148
 #, kde-format
 msgid "Show Previous Image"
 msgstr "اعرض الصورة السابقة "
 
-#: src/imagewindow.cpp:154
+#: src/imagewindow.cpp:153
 #, kde-format
 msgid "Delete Image"
 msgstr "احذف الصورة"
 
-#: src/imagewindow.cpp:159
+#: src/imagewindow.cpp:158
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "انقل الصورة إلى المهملات"
 
-#: src/imagewindow.cpp:172
+#: src/imagewindow.cpp:171
 #, kde-format
 msgid "Restore Original Size"
 msgstr "إستعادة القياس الأصلي"
 
-#: src/imagewindow.cpp:177
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Maximize"
 msgstr "كبّر"
 
-#: src/imagewindow.cpp:182
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "دوران 90 درجة"
 
-#: src/imagewindow.cpp:187
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "دوران 180 درجة"
 
-#: src/imagewindow.cpp:192
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "دوران 270 درجة"
 
-#: src/imagewindow.cpp:197
+#: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "قلب أفقي"
 
-#: src/imagewindow.cpp:202
+#: src/imagewindow.cpp:201
 #, kde-format
 msgid "Flip Vertically"
 msgstr "قلب عمودي"
 
-#: src/imagewindow.cpp:207 src/kuickshow.cpp:1374
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
 #, kde-format
 msgid "Print Image..."
 msgstr "طباعة الصورة..."
 
-#: src/imagewindow.cpp:218
+#: src/imagewindow.cpp:217
 #, kde-format
 msgid "Return to File Browser"
 msgstr "ارجع إلى متصفح الملفات"
 
-#: src/imagewindow.cpp:224
+#: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Brightness"
 msgstr "إضاءة أكثر"
 
-#: src/imagewindow.cpp:229
+#: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Brightness"
 msgstr "إضاءة أقل"
 
-#: src/imagewindow.cpp:234
+#: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Contrast"
 msgstr "تباين أكثر"
 
-#: src/imagewindow.cpp:239
+#: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Contrast"
 msgstr "تباين أقل"
 
-#: src/imagewindow.cpp:244
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "More Gamma"
 msgstr "غاما أكثر"
 
-#: src/imagewindow.cpp:249
+#: src/imagewindow.cpp:248
 #, kde-format
 msgid "Less Gamma"
 msgstr "غاما أقل"
 
-#: src/imagewindow.cpp:255
+#: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Up"
 msgstr "إنزلاق للأعلى"
 
-#: src/imagewindow.cpp:260
+#: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Down"
 msgstr "إنزلاق للأسفل"
 
-#: src/imagewindow.cpp:265
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
 msgstr "إنزلاق لليسار"
 
-#: src/imagewindow.cpp:270
+#: src/imagewindow.cpp:269
 #, kde-format
 msgid "Scroll Right"
 msgstr "إنزلاق لليمين"
 
-#: src/imagewindow.cpp:275
+#: src/imagewindow.cpp:274
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "قف العرض كشرائح مؤقتاً"
 
-#: src/imagewindow.cpp:289
+#: src/imagewindow.cpp:288
 #, kde-format
 msgid "Reload Image"
 msgstr "إعادة تحميل الصورة"
 
-#: src/imagewindow.cpp:295
+#: src/imagewindow.cpp:294
 #, kde-format
 msgid "Properties"
 msgstr "الخصائص"
 
-#: src/imagewindow.cpp:362
+#: src/imagewindow.cpp:361
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%1 (%2 × %3)"
 
-#: src/imagewindow.cpp:427
+#: src/imagewindow.cpp:426
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "غير قادر على تحميل الصورة من %1."
 
-#: src/imagewindow.cpp:443
+#: src/imagewindow.cpp:442
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -429,47 +429,47 @@ msgstr ""
 "غير قادر على تحميل الصورة %1.\n"
 "من المحتمل أن يكون الملف غير مدعوماً أو أن Imlib غير مثبت بطريقة صحيحة."
 
-#: src/imagewindow.cpp:852
+#: src/imagewindow.cpp:851
 #, kde-format
 msgid "Brightness"
 msgstr "البريق"
 
-#: src/imagewindow.cpp:856
+#: src/imagewindow.cpp:855
 #, kde-format
 msgid "Contrast"
 msgstr "التباين"
 
-#: src/imagewindow.cpp:860
+#: src/imagewindow.cpp:859
 #, kde-format
 msgid "Gamma"
 msgstr "غاما"
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:906
 #, kde-format
 msgid "Unable to print the image."
 msgstr "غير قادر على طباعة الصورة."
 
-#: src/imagewindow.cpp:908
+#: src/imagewindow.cpp:907
 #, kde-format
 msgid "Printing Failed"
 msgstr "فشلت الطباعة"
 
-#: src/imagewindow.cpp:925
+#: src/imagewindow.cpp:924
 #, kde-format
 msgid "Keep original image size"
 msgstr "الاحتفاظ بالقياس الأصلي للصورة"
 
-#: src/imagewindow.cpp:930
+#: src/imagewindow.cpp:929
 #, kde-format
 msgid "Save Image As"
 msgstr "احفظ الصورة كــ"
 
-#: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "ملفّات الصّور (%1)"
 
-#: src/imagewindow.cpp:953
+#: src/imagewindow.cpp:952
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -478,12 +478,12 @@ msgstr ""
 "تعذر حفظ الملف. \n"
 "ربما القرص ممتلئ ، أو ليس لديك إذن كتابة للملف."
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:955
 #, kde-format
 msgid "File Saving Failed"
 msgstr "فشل في حفظ الملف"
 
-#: src/imagewindow.cpp:1203
+#: src/imagewindow.cpp:1202
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -672,52 +672,52 @@ msgstr ""
 msgid "Fatal Initialization Error"
 msgstr "خطأ بدء فادح"
 
-#: src/kuickshow.cpp:1271
+#: src/kuickshow.cpp:1274
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "إختر الملفات أو المجلدات للفتح"
 
-#: src/kuickshow.cpp:1332
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
 msgstr "بدء العرض كشرائح"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Show File Browser"
 msgstr "إظهار متصفح الملفات"
 
-#: src/kuickshow.cpp:1336
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Hide File Browser"
 msgstr "إخفاء متصفح الملفات"
 
-#: src/kuickshow.cpp:1340
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
 msgstr "إعداد %1..."
 
-#: src/kuickshow.cpp:1344
+#: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
 msgstr "عن KuickShow"
 
-#: src/kuickshow.cpp:1351
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "إفتح نافذة صور واحدة فقط"
 
-#: src/kuickshow.cpp:1362
+#: src/kuickshow.cpp:1365
 #, kde-format
 msgid "Show Image"
 msgstr "أعرض الصورة"
 
-#: src/kuickshow.cpp:1366
+#: src/kuickshow.cpp:1369
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "أعرض الصورة في النافذة النشطة"
 
-#: src/kuickshow.cpp:1370
+#: src/kuickshow.cpp:1373
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "أعرض الصورة في نمط ملء الشاشة"

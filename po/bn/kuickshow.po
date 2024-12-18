@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-15 01:46+0000\n"
+"POT-Creation-Date: 2024-12-18 01:56+0000\n"
 "PO-Revision-Date: 2006-05-16 13:29-0500\n"
 "Last-Translator: Deepayan Sarkar <deepayan@bengalinux.org>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -276,154 +276,154 @@ msgstr "কুইক-শো ওয়েবসাইট খোলো"
 msgid "Preload next image"
 msgstr "পরবর্তী ছবি আগে থেকে লোড করে রাখো"
 
-#: src/imagewindow.cpp:139
+#: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
 msgstr ""
 
-#: src/imagewindow.cpp:144
+#: src/imagewindow.cpp:143
 #, kde-format
 msgid "Show Next Image"
 msgstr "পরবর্তী ছবি দেখাও"
 
-#: src/imagewindow.cpp:149
+#: src/imagewindow.cpp:148
 #, kde-format
 msgid "Show Previous Image"
 msgstr "পূর্ববর্তী ছবি দেখাও"
 
-#: src/imagewindow.cpp:154
+#: src/imagewindow.cpp:153
 #, kde-format
 msgid "Delete Image"
 msgstr "ছবি মুছে ফেলো"
 
-#: src/imagewindow.cpp:159
+#: src/imagewindow.cpp:158
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "ছবি আবর্জনায় পাঠাও"
 
-#: src/imagewindow.cpp:172
+#: src/imagewindow.cpp:171
 #, kde-format
 msgid "Restore Original Size"
 msgstr "আসল মাপে ফিরে যাও"
 
-#: src/imagewindow.cpp:177
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Maximize"
 msgstr "যথাসম্ভব বড় করো"
 
-#: src/imagewindow.cpp:182
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90 ডিগ্রী ঘোরাও"
 
-#: src/imagewindow.cpp:187
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "180 ডিগ্রী ঘোরাও"
 
-#: src/imagewindow.cpp:192
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270 ডিগ্রী ঘোরাও"
 
-#: src/imagewindow.cpp:197
+#: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "অনুভূমিকভাবে উল্টাও"
 
-#: src/imagewindow.cpp:202
+#: src/imagewindow.cpp:201
 #, kde-format
 msgid "Flip Vertically"
 msgstr "উলম্বভাবে উল্টাও"
 
-#: src/imagewindow.cpp:207 src/kuickshow.cpp:1374
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
 #, kde-format
 msgid "Print Image..."
 msgstr "ছবি ছাপাও..."
 
-#: src/imagewindow.cpp:218
+#: src/imagewindow.cpp:217
 #, fuzzy, kde-format
 #| msgid "Show File Browser"
 msgid "Return to File Browser"
 msgstr "ফাইল ব্রাউজার দেখাও"
 
-#: src/imagewindow.cpp:224
+#: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Brightness"
 msgstr "উজ্জ্বলতা বাড়াও"
 
-#: src/imagewindow.cpp:229
+#: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Brightness"
 msgstr "উজ্জ্বলতা কমাও"
 
-#: src/imagewindow.cpp:234
+#: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Contrast"
 msgstr "বৈসাদৃশ্য (কনট্রাস্ট) বাড়াও"
 
-#: src/imagewindow.cpp:239
+#: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Contrast"
 msgstr "বৈসাদৃশ্য (কনট্রাস্ট) কমাও"
 
-#: src/imagewindow.cpp:244
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "More Gamma"
 msgstr "গামা বাড়াও"
 
-#: src/imagewindow.cpp:249
+#: src/imagewindow.cpp:248
 #, kde-format
 msgid "Less Gamma"
 msgstr "গামা কমাও"
 
-#: src/imagewindow.cpp:255
+#: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Up"
 msgstr "উপরে যাও"
 
-#: src/imagewindow.cpp:260
+#: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Down"
 msgstr "নিচে যাও"
 
-#: src/imagewindow.cpp:265
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
 msgstr "বাঁদিকে যাও"
 
-#: src/imagewindow.cpp:270
+#: src/imagewindow.cpp:269
 #, kde-format
 msgid "Scroll Right"
 msgstr "ডানদিকে যাও"
 
-#: src/imagewindow.cpp:275
+#: src/imagewindow.cpp:274
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "স্লাইড-শো বিরত রাখো"
 
-#: src/imagewindow.cpp:289
+#: src/imagewindow.cpp:288
 #, kde-format
 msgid "Reload Image"
 msgstr "ছবি নতুন করে পড়ো"
 
-#: src/imagewindow.cpp:295
+#: src/imagewindow.cpp:294
 #, kde-format
 msgid "Properties"
 msgstr ""
 
-#: src/imagewindow.cpp:362
+#: src/imagewindow.cpp:361
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:427
+#: src/imagewindow.cpp:426
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "%1 থেকে ছবি ডাউনলোড করতে অক্ষম।"
 
-#: src/imagewindow.cpp:443
+#: src/imagewindow.cpp:442
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -433,48 +433,48 @@ msgstr ""
 "ছবি %1 লোড করতে অক্ষম।\n"
 "ফাইলটির ফরম্যাট সম্ভবত অসমর্থিত অথবা আপনার Imlib সঠিকভাবে ইনস্টল করা হয়নি।"
 
-#: src/imagewindow.cpp:852
+#: src/imagewindow.cpp:851
 #, kde-format
 msgid "Brightness"
 msgstr "উজ্জ্বলতা"
 
-#: src/imagewindow.cpp:856
+#: src/imagewindow.cpp:855
 #, kde-format
 msgid "Contrast"
 msgstr "বৈসাদৃশ্য (কনট্রাস্ট)"
 
-#: src/imagewindow.cpp:860
+#: src/imagewindow.cpp:859
 #, kde-format
 msgid "Gamma"
 msgstr "গামা"
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:906
 #, kde-format
 msgid "Unable to print the image."
 msgstr "ছবি ছাপাতে অক্ষম।"
 
-#: src/imagewindow.cpp:908
+#: src/imagewindow.cpp:907
 #, kde-format
 msgid "Printing Failed"
 msgstr "মুদ্রণ ব্যর্থ"
 
-#: src/imagewindow.cpp:925
+#: src/imagewindow.cpp:924
 #, kde-format
 msgid "Keep original image size"
 msgstr "ছবির আসল মাপ রাখো"
 
-#: src/imagewindow.cpp:930
+#: src/imagewindow.cpp:929
 #, fuzzy, kde-format
 #| msgid "Move Image to Trash"
 msgid "Save Image As"
 msgstr "ছবি আবর্জনায় পাঠাও"
 
-#: src/imagewindow.cpp:935 src/kuickshow.cpp:1272
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
 
-#: src/imagewindow.cpp:953
+#: src/imagewindow.cpp:952
 #, fuzzy, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -483,12 +483,12 @@ msgstr ""
 "ফাইল সংরক্ষণ করা যায়নি।\n"
 "হয়ত ডিস্ক ভর্তি, অথবা আপনার ফাইলটি লেখার অনুমতি নেই।"
 
-#: src/imagewindow.cpp:956
+#: src/imagewindow.cpp:955
 #, kde-format
 msgid "File Saving Failed"
 msgstr "ফাইল সংরক্ষণ করা ব্যর্থ"
 
-#: src/imagewindow.cpp:1203
+#: src/imagewindow.cpp:1202
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -654,52 +654,52 @@ msgstr ""
 msgid "Fatal Initialization Error"
 msgstr "মারাত্মক Imlib ত্রুটি"
 
-#: src/kuickshow.cpp:1271
+#: src/kuickshow.cpp:1274
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "খোলার জন্য ফাইল অথবা ফোল্ডার বেছে নিন"
 
-#: src/kuickshow.cpp:1332
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
 msgstr "স্লাইড-শো শুরু করো"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Show File Browser"
 msgstr "ফাইল ব্রাউজার দেখাও"
 
-#: src/kuickshow.cpp:1336
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Hide File Browser"
 msgstr "ফাইল ব্রাউজার লুকাও"
 
-#: src/kuickshow.cpp:1340
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1 কনফিগার করো..."
 
-#: src/kuickshow.cpp:1344
+#: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
 msgstr "কুইক-শো সম্বন্ধে"
 
-#: src/kuickshow.cpp:1351
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "একটিমাত্র ছবি উইণ্ডো খোলো"
 
-#: src/kuickshow.cpp:1362
+#: src/kuickshow.cpp:1365
 #, kde-format
 msgid "Show Image"
 msgstr "ছবি দেখাও"
 
-#: src/kuickshow.cpp:1366
+#: src/kuickshow.cpp:1369
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "সক্রিয় উইণ্ডোতে ছবি দেখাও"
 
-#: src/kuickshow.cpp:1370
+#: src/kuickshow.cpp:1373
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "পর্দাজোড়া মোডে ছবি দেখাও"
