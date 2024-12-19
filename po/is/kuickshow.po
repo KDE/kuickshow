@@ -4,20 +4,20 @@
 # Pjetur G. Hjaltason <pjetur@pjetur.net>, 2003.
 # Þröstur Svanbergsson <throstur@bylur.net>, 2004.
 # Arnar Leosson <leosson@frisurf.no>, 2005.
-# Sveinn í Felli <sveinki@nett.is>, 2006, 2009, 2010, 2021, 2022.
+# SPDX-FileCopyrightText: 2006, 2009, 2010, 2021, 2022, 2024 Sveinn í Felli <sveinki@nett.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-18 01:56+0000\n"
-"PO-Revision-Date: 2022-11-11 08:51+0000\n"
+"PO-Revision-Date: 2024-12-18 14:23+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -276,7 +276,7 @@ msgstr "Forhlaða næstu mynd"
 #: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Annan eins glugga"
 
 #: src/imagewindow.cpp:143
 #, kde-format
@@ -339,10 +339,9 @@ msgid "Print Image..."
 msgstr "Prenta mynd..."
 
 #: src/imagewindow.cpp:217
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Sýna skráarvafra"
+msgstr "Fara aftur í skráavafra"
 
 #: src/imagewindow.cpp:223
 #, kde-format
@@ -461,10 +460,9 @@ msgid "Keep original image size"
 msgstr "Halda upprunalegri myndstærð"
 
 #: src/imagewindow.cpp:929
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Vista sem"
+msgstr "Vista mynd sem"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
 #, kde-format
@@ -500,12 +498,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Aðgerðasafn fyrir hleðslu mynda og myndgerð"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Aðgerðasafn fyrir myndvinnslu"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -552,15 +550,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -572,12 +562,12 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Viltu í alvörunni sýna þessa 1 mynd á sama tíma? Þetta gæti tekið stóran "
-"hluta af vinnslugetu tölvunar, og jafnvel valdið því að hún frjósi.<br>Ef þú "
-"velur %1, verður aðeins fyrsta myndin sýnd."
+"hluta af vinnslugetu tölvunnar, og jafnvel valdið því að hún frjósi.<br/>Ef "
+"þú velur <interface>%2</interface>, verður aðeins fyrsta myndin sýnd."
 msgstr[1] ""
-"Viltu í alvörunni sýna þessar %n myndir á sama tíma? Þetta gæti tekið stóran "
-"hluta af vinnslugetu tölvunar, og jafnvel valdið því að hún frjósi.<br>Ef þú "
-"velur %1, verður aðeins fyrsta myndin sýnd."
+"Viltu í alvörunni sýna þessar %1 myndir á sama tíma? Þetta gæti tekið stóran "
+"hluta af vinnslugetu tölvunnar, og jafnvel valdið því að hún frjósi.<br/>Ef "
+"þú velur <interface>%2</interface>, verður aðeins fyrsta myndin sýnd."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -587,7 +577,7 @@ msgstr "Sýna margar myndir?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Skjár"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -602,7 +592,7 @@ msgstr "Br&eyta"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Skoða"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -620,7 +610,7 @@ msgctxt "@info"
 msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
-msgstr ""
+msgstr "Viltu í alvörunni eyða skránni <nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -628,15 +618,10 @@ msgid "Delete File"
 msgstr "Eyða skrá"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>Viltu í alvöru setja\n"
-" <b>'%1'</b> í ruslið?</qt>"
+msgstr "Viltu í alvörunni setja skrána <nl/><filename>%1</filename> í ruslið?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -662,12 +647,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Mistókst að frumstilla myndvinnsluaðgerðasafnið \"%2\".\n"
+"\n"
+"Nánari upplýsingar gætu verið í atvikaskrá setunnar,\n"
+"eða fengist með því að ræsa %1 af skipanalínu."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Banvæn imlib villa"
+msgstr "Banvæn frumstillingavilla"
 
 #: src/kuickshow.cpp:1274
 #, kde-format
@@ -828,7 +816,7 @@ msgstr "Smækka mynd svo passi, ef þar&f"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Að eilífu"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -868,10 +856,9 @@ msgstr " sek"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "Ítran&ir (0 = óendanlegt):"
+msgstr "Ítran&ir:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
