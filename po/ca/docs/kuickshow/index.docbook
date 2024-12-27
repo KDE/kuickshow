@@ -1286,9 +1286,7 @@
 >Qualsevol caràcter alfanumèric</keycap
 ></entry>
 <entry
->Obre el camp d'edició utilitzat per a la <quote
->compleció</quote
->. Introduïu els primers caràcters d'un nom de fitxer a cercar i, si es troba, aquest serà seleccionat.</entry>
+>Obre el camp d'edició utilitzat per a la «compleció». Introduïu els primers caràcters d'un nom de fitxer a cercar i, si es troba, se seleccionarà aquest.</entry>
 </row>
 <!-- not in 0.9.2 kde 4.8
 <row>

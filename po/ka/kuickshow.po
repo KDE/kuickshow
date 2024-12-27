@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-18 01:56+0000\n"
-"PO-Revision-Date: 2022-11-30 07:05+0100\n"
+"PO-Revision-Date: 2024-12-26 02:35+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -272,7 +272,7 @@ msgstr "შემდეგი გამოსახულების წინ�
 #: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "ფანჯრის დუბლირება"
 
 #: src/imagewindow.cpp:143
 #, kde-format
@@ -335,10 +335,9 @@ msgid "Print Image..."
 msgstr "გამოსახულების დაბეჭდვა..."
 
 #: src/imagewindow.cpp:217
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "ფაილის ბრაუზერის ჩვენება"
+msgstr "დაბრუნება ფაილის ბრაუზერზე"
 
 #: src/imagewindow.cpp:223
 #, kde-format
@@ -457,10 +456,9 @@ msgid "Keep original image size"
 msgstr "გამოსახულების საწყისი ზომის შენარჩეუნება"
 
 #: src/imagewindow.cpp:929
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "შენახვა როგორც"
+msgstr "გამოსახულების შენახვა, როგორც"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
 #, kde-format
@@ -495,12 +493,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "გამოსახულების ჩატვირთვისა და რენდერის ბიბლიოთეკა"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "გამოსახულების დამუშავების ბიბლიოთეკა"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -547,15 +545,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -566,13 +556,15 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
-"მართლა გნებავთ 1 გამოსახულების გახსნა? ამას საკმაო რესურსები სჭირდება და "
-"შეიძლება თქვენი კომპიუტერის რესურსების გადატვირთვა მოხდეს. თუ %1-ს აირჩევთ, "
-"ნაჩვენები მხოლოდ პირველი გამოსახულება იქნება."
+"მართლა გნებავთ 1 გამოსახულების ერთდროული ჩვენება? ამას საკმაო რესურსები "
+"სჭირდება და შეიძლება თქვენი კომპიუტერის რესურსების გადატვირთვა მოხდეს.<br/> "
+"თუ <interface>%2</interface>-ს აირჩევთ, ნაჩვენები მხოლოდ პირველი "
+"გამოსახულება იქნება."
 msgstr[1] ""
-"მართლა გნებავთ %n გამოსახულების გახსნა? ამას საკმაო რესურსები სჭირდება და "
-"შეიძლება თქვენი კომპიუტერის რესურსების გადატვირთვა მოხდეს. თუ %1-ს აირჩევთ, "
-"ნაჩვენები მხოლოდ პირველი გამოსახულება იქნება."
+"მართლა გნებავთ %1 გამოსახულების ერთდროული ჩვენება? ამას საკმაო რესურსები "
+"სჭირდება და შეიძლება თქვენი კომპიუტერის რესურსების გადატვირთვა მოხდეს. <br/"
+">თუ <interface>%2</interface>-ს აირჩევთ, ნაჩვენები მხოლოდ პირველი "
+"გამოსახულება იქნება."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -582,7 +574,7 @@ msgstr "ვაჩვენო ერთზე მეტი გამოსახ
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "ჩვენება"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -597,7 +589,7 @@ msgstr "&ჩასწორება"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "ხედი"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -615,7 +607,7 @@ msgctxt "@info"
 msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
-msgstr ""
+msgstr "მართლა გნებავთ, სამუდამოდ წაშალოთ ფაილი<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -623,15 +615,12 @@ msgid "Delete File"
 msgstr "ფაილის წაშლა"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 msgstr ""
-"<qt>დარწმუნებული ბრძანდებით, რომ გნებავთ, სანაგვეში გადააგდოთ\n"
-" <b>'%1'</b>?</qt>"
+"დარწმუნებული ბრძანდებით, რომ გნებავთ, სანაგვეში გადააგდოთ ფაილი<nl/"
+"><filename>'%1'</filename>?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -657,12 +646,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"გამოსახულების ბიბლიოთეკის \"%2\" ინიციალიზაცია შეუძლებელია.\n"
+"\n"
+"მეტი ინფორმაცია, შეიძლება, სესიის ჟურნალის ფაილში იყოს ხელმისაწვდომი,\n"
+"ან ტერმინალში გაუშვით %1."
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Imlib-ის ფატალური შეცდომა"
+msgstr "ფატალური ინიციალიზაციის შეცდომა"
 
 #: src/kuickshow.cpp:1274
 #, kde-format
@@ -823,7 +815,7 @@ msgstr "თუ საჭიროა, დაპატარავება ს�
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "სამუდამოდ"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -863,10 +855,9 @@ msgstr " წმ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&იტერაციები (0 = უსასრულო):"
+msgstr "&იტერაციები:"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
