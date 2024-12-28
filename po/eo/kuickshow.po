@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-18 01:56+0000\n"
-"PO-Revision-Date: 2024-01-03 14:17+0100\n"
+"PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -334,10 +334,9 @@ msgid "Print Image..."
 msgstr "Presi Bildon..."
 
 #: src/imagewindow.cpp:217
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Montri Dosier-Retumilon"
+msgstr "Reiri al Dosier-Foliumilo"
 
 #: src/imagewindow.cpp:223
 #, kde-format
@@ -457,10 +456,9 @@ msgid "Keep original image size"
 msgstr "Konservi originan bildograndecon"
 
 #: src/imagewindow.cpp:929
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Konservi kiel"
+msgstr "Konservi Bildon Kiel"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
 #, kde-format
@@ -567,12 +565,12 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Ĉu vi vere volas montri ĉi tiun 1 bildon samtempe? Ĉi tio povus esti sufiĉe "
-"rimedokonsuma kaj povus troŝarĝi vian komputilon.<br>Se vi elektas %1, nur "
-"la unua bildo estos montrata."
+"rimedokonsuma kaj povus troŝarĝi vian komputilon.<br/>Se vi elektas "
+"<interface>%2</interface>, nur la unua bildo estos montrata."
 msgstr[1] ""
 "Ĉu vi vere volas montri ĉi tiujn %n bildojn samtempe? Tio povus esti sufiĉe "
-"rimedokonsuma kaj povus troŝarĝi vian komputilon.<br>Se vi elektas %1, nur "
-"la unua bildo estos montrata."
+"rimedokonsuma kaj povus troŝarĝi vian komputilon.<br/>Se vi elektas "
+"<interface>%2</interface>, nur la unua bildo estos montrata."
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -582,7 +580,7 @@ msgstr "Ĉu montri plurajn bildojn?"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Montri"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -597,7 +595,7 @@ msgstr "&Redakti"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Vidi"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -616,6 +614,7 @@ msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
 msgstr ""
+"Ĉu vi vere volas porĉiame forigi la dosieron<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -623,15 +622,10 @@ msgid "Delete File"
 msgstr "Forigu dosieron"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>Ĉu vi vere volas forĵeti\n"
-"<b>'%1'</b>?</qt>"
+msgstr "Ĉu vi vere volas forĵeti la dosieron<nl/><filename>%1</filename>?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
@@ -659,10 +653,9 @@ msgid ""
 msgstr ""
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Fatala Imlib Eraro"
+msgstr "Fatala Pravaloriz-Eraro"
 
 #: src/kuickshow.cpp:1274
 #, kde-format
@@ -863,23 +856,6 @@ msgstr " s"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&Iteracioj (0 = senfina):"
-
-#~ msgid ""
-#~ "<qt>Do you really want to delete\n"
-#~ " <b>'%1'</b>?</qt>"
-#~ msgstr ""
-#~ "<qt>Ĉu vi vere volas forĵeti\n"
-#~ "<b>'%1'</b>?</qt>"
-
-#~ msgid ""
-#~ "Unable to initialize \"Imlib\".\n"
-#~ "Start kuickshow from the command line and look for error messages.\n"
-#~ "The program will now quit."
-#~ msgstr ""
-#~ "Ne eblas pravalorizi \"Imlib\".\n"
-#~ "Lanĉu kuickshow de la komandlinio kaj serĉu erarmesaĝojn.\n"
-#~ "La programo nun ĉesos."
+msgstr "&Iteracioj:"
