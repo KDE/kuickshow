@@ -1,408 +1,409 @@
-# Translation of kuickshow into esperanto.
-# Copyright (C) 2009 Free Software Foundation, Inc.
-# Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <olivermkellogg@gmail.com>, 2024.
+# Sanskrit translations for kuickshow package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kuickshow package.
+# Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <shreekantkalwar@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-18 01:56+0000\n"
-"PO-Revision-Date: 2024-12-29 19:47+0100\n"
-"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
-"Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
-"Language: eo\n"
+"PO-Revision-Date: 2024-12-29 23:06+0530\n"
+"Last-Translator: kali <shreekantkalwar@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
+"Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: pology\n"
+"Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Axel Rousseau,Oliver Kellogg"
+msgstr "भवतः नामानि"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org,olivermkellogg@gmail.com"
+msgstr "भवतः ईमेलपत्राणि"
 
 #. i18n: ectx: property (text), widget (QLabel, lblAuthors)
 #: src/aboutwidget.ui:32
 #, kde-format
 msgid "(authors)"
-msgstr "(aŭtoroj)"
+msgstr "(लेखकाः)"
 
 #. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
 #: src/aboutwidget.ui:45
 #, kde-format
 msgid "(url)"
-msgstr "(url)"
+msgstr "(url) ९."
 
 #. i18n: ectx: property (text), widget (QLabel, lblCopyright)
 #: src/aboutwidget.ui:55
 #, kde-format
 msgid "(copyright)"
-msgstr "(kopirajto)"
+msgstr "(प्रतिलिपिधर्मः)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
 #, kde-format
 msgid "Modifications"
-msgstr "Modifoj"
+msgstr "परिवर्तनम्"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
 #: src/defaultswidget.ui:23
 #, kde-format
 msgid "Apply default image modifications"
-msgstr "Apliki defaŭltajn bildajn modifojn"
+msgstr "पूर्वनिर्धारितप्रतिबिम्बसंशोधनं प्रयोजयन्तु"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbScale)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: src/defaultswidget.ui:30 src/printing_page.ui:37
 #, kde-format
 msgid "Scaling"
-msgstr "Skalado"
+msgstr "स्केलिंग्"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbUpScale)
 #: src/defaultswidget.ui:36
 #, kde-format
 msgid "Scale image to screen size, if smaller, up to factor:"
-msgstr "Skali bildon al ekrangrandeco, se pli malgranda, ĝis faktoro:"
+msgstr "चित्रं स्क्रीन आकारं प्रति, यदि लघुतरं, कारकपर्यन्तं स्केल कुर्वन्तु:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDownScale)
 #: src/defaultswidget.ui:53
 #, kde-format
 msgid "Shrink image to screen size, if larger"
-msgstr "Ŝrumpi bildon al ekrangrandeco, se pli granda"
+msgstr "चित्रं स्क्रीन आकारं प्रति संकुचयन्तु, यदि बृहत्तरम्"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbGeometry)
 #: src/defaultswidget.ui:63
 #, kde-format
 msgid "Geometry"
-msgstr "Geometrio"
+msgstr "ज्यामिति"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFlipVertically)
 #: src/defaultswidget.ui:69
 #, kde-format
 msgid "Flip vertically"
-msgstr "Renversi vertikale"
+msgstr "लम्बवत् पलटन्तु"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
 #: src/defaultswidget.ui:76
 #, kde-format
 msgid "Flip horizontally"
-msgstr "Renversi horizontale"
+msgstr "क्षैतिजरूपेण पलटन्तु"
 
 #. i18n: ectx: property (text), widget (QLabel, lbRotate)
 #: src/defaultswidget.ui:85
 #, kde-format
 msgid "Rotate image:"
-msgstr "Rotacii bildon:"
+msgstr "चित्रं परिभ्रमन्तु :"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:93
 #, kde-format
 msgid "0 Degrees"
-msgstr "0°"
+msgstr "० डिग्री"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:98
 #, kde-format
 msgid "90 Degrees"
-msgstr "90°"
+msgstr "९० डिग्री"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:103
 #, kde-format
 msgid "180 Degrees"
-msgstr "180 Gradoj"
+msgstr "१८० डिग्री"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:108
 #, kde-format
 msgid "270 Degrees"
-msgstr "270 Gradoj"
+msgstr "२७० डिग्री"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbAdjust)
 #: src/defaultswidget.ui:134
 #, kde-format
 msgid "Adjustments"
-msgstr "Alĝustigoj"
+msgstr "समायोजनानि"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/defaultswidget.ui:140
 #, kde-format
 msgid "Brightness:"
-msgstr "Brileco:"
+msgstr "कान्तिः :"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/defaultswidget.ui:183
 #, kde-format
 msgid "Contrast:"
-msgstr "Kontrasto:"
+msgstr "विप्रकर्ष:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/defaultswidget.ui:226
 #, kde-format
 msgid "Gamma:"
-msgstr "Gamo:"
+msgstr "गाम्मा :"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
 #: src/defaultswidget.ui:272
 #, kde-format
 msgid "Preview"
-msgstr "Antaŭrigardo"
+msgstr "पूर्वावलोकनम्"
 
 #. i18n: ectx: property (text), widget (QLabel, lbImOrig)
 #: src/defaultswidget.ui:281
 #, kde-format
 msgid "Original"
-msgstr "Originala"
+msgstr "मूल"
 
 #. i18n: ectx: property (text), widget (QLabel, lbImFiltered)
 #: src/defaultswidget.ui:288
 #, kde-format
 msgid "Modified"
-msgstr "Ŝanĝita"
+msgstr "परिवर्तित"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
 #: src/generalwidget.ui:14
 #, kde-format
 msgid "General"
-msgstr "Ĝenerala"
+msgstr "सामान्य"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
 #: src/generalwidget.ui:20
 #, kde-format
 msgid "Remember last folder"
-msgstr "Memori lastan dosierujon"
+msgstr "अन्तिमपुटं स्मर्यताम्"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbox2)
 #: src/generalwidget.ui:30
 #, kde-format
 msgid "Quality/Speed"
-msgstr "Kvalito/Rapideco"
+msgstr "गुणवत्ता/वेग"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
 #: src/generalwidget.ui:36
 #, kde-format
 msgid "Smooth scaling"
-msgstr "Glata skalado"
+msgstr "स्मूद स्केलिंग"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
 #: src/generalwidget.ui:43
 #, kde-format
 msgid "Fast rendering"
-msgstr "Rapida bildigo"
+msgstr "शीघ्रं प्रतिपादनम्"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
 #: src/generalwidget.ui:50
 #, kde-format
 msgid "Dither in HiColor (15/16bit) modes"
-msgstr "Dither en HiColor (15/16bit) reĝimoj"
+msgstr "HiColor (15/16bit) मोड्स् मध्ये Dither"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
 #: src/generalwidget.ui:57
 #, kde-format
 msgid "Dither in LowColor (<=8bit) modes"
-msgstr "Dither en LowColor (<=8bit) reĝimoj"
+msgstr "LowColor (<=8bit) मोड्स् मध्ये Dither"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
 #: src/generalwidget.ui:64
 #, kde-format
 msgid "Use own color palette"
-msgstr "Uzi propran koloran paletron"
+msgstr "स्वस्य वर्णपैलेट् इत्यस्य उपयोगं कुर्वन्तु"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFastRemap)
 #: src/generalwidget.ui:71
 #, kde-format
 msgid "Fast palette remapping"
-msgstr "Rapida paletro remapado"
+msgstr "द्रुतपैलेट् पुनः मानचित्रणम्"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/generalwidget.ui:78
 #, kde-format
 msgid "Maximum cache size: "
-msgstr "Maksimuma kaŝmemorgrando:"
+msgstr "अधिकतमः सञ्चयस्य आकारः :"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, maxCacheSpinBox)
 #: src/generalwidget.ui:88
 #, kde-format
 msgid "Unlimited"
-msgstr "Senlima"
+msgstr "असीमित"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, maxCacheSpinBox)
 #: src/generalwidget.ui:91
 #, kde-format
 msgid " MB"
-msgstr " MB"
+msgstr "MB"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
 #: src/generalwidget.ui:104
 #, kde-format
 msgid "Fullscreen mode"
-msgstr "Plenekrana reĝimo"
+msgstr "पूर्णपर्दे मोड"
 
 #. i18n: ectx: property (text), widget (QLabel, l0)
 #: src/generalwidget.ui:114
 #, kde-format
 msgid "Background color:"
-msgstr "Fona koloro:"
+msgstr "पृष्ठभूमिवर्णः :"
 
 #. i18n: ectx: property (text), widget (QLabel, l1)
 #: src/generalwidget.ui:121
 #, kde-format
 msgid "Show only files with extension: "
-msgstr "Montri nur dosierojn kun etendo:"
+msgstr "केवलं विस्तारयुक्तानि सञ्चिकानि दर्शयतु:"
 
 #. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
 #: src/generalwidget.ui:128
 #, kde-format
 msgid "Open KuickShow Website"
-msgstr "Malfermi KuickShow-Retejon"
+msgstr "KuickShow वेबसाइट् उद्घाटयन्तु"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
 #: src/generalwidget.ui:138
 #, kde-format
 msgid "Preload next image"
-msgstr "Antaŭŝargi la sekvan bildon"
+msgstr "अग्रिमः चित्रः पूर्वं लोड् कुर्वन्तु"
 
 #: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
-msgstr "Duobligita Fenestro"
+msgstr "डुप्लिकेट विण्डो"
 
 #: src/imagewindow.cpp:143
 #, kde-format
 msgid "Show Next Image"
-msgstr "Montri Sekvantan Bildon"
+msgstr "अग्रिमचित्रं दर्शयतु"
 
 #: src/imagewindow.cpp:148
 #, kde-format
 msgid "Show Previous Image"
-msgstr "Montri Antaŭan Bildon"
+msgstr "पूर्वचित्रं दर्शयतु"
 
 #: src/imagewindow.cpp:153
 #, kde-format
 msgid "Delete Image"
-msgstr "Forigi Bildon"
+msgstr "चित्रं विलोपयन्तु"
 
 #: src/imagewindow.cpp:158
 #, kde-format
 msgid "Move Image to Trash"
-msgstr "Movi Bildon al Rubujo"
+msgstr "चित्रं Trash - मध्ये स्थानान्तरयन्तु"
 
 #: src/imagewindow.cpp:171
 #, kde-format
 msgid "Restore Original Size"
-msgstr "Restarigi Originan Grandecon"
+msgstr "मूल आकार पुनर्स्थापित करें"
 
 #: src/imagewindow.cpp:176
 #, kde-format
 msgid "Maximize"
-msgstr "Maksimumigi"
+msgstr "अधिकतमं कुरुत"
 
 #: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 90 Degrees"
-msgstr "Rotacii 90 Gradojn"
+msgstr "९० डिग्री घुमाव"
 
 #: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 180 Degrees"
-msgstr "Rotacii 180 Gradojn"
+msgstr "१८० डिग्री घुमाव"
 
 #: src/imagewindow.cpp:191
 #, kde-format
 msgid "Rotate 270 Degrees"
-msgstr "Rotacii 270 Gradojn"
+msgstr "270 डिग्री घुमाव"
 
 #: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Horizontally"
-msgstr "Inversigi Horizontale"
+msgstr "क्षैतिजरूपेण पलटतु"
 
 #: src/imagewindow.cpp:201
 #, kde-format
 msgid "Flip Vertically"
-msgstr "Inversigi Vertikale"
+msgstr "लम्बवत् पलटतु"
 
 #: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
 #, kde-format
 msgid "Print Image..."
-msgstr "Presi Bildon..."
+msgstr "मुद्रणं चित्रम्..."
 
 #: src/imagewindow.cpp:217
 #, kde-format
 msgid "Return to File Browser"
-msgstr "Reiri al Dosier-Foliumilo"
+msgstr "File Browser इत्यत्र प्रत्यागच्छन्तु"
 
 #: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Brightness"
-msgstr "Pli da Brilo"
+msgstr "अधिकं कान्तिः"
 
 #: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Brightness"
-msgstr "Malpli Brilo"
+msgstr "न्यूनकान्तिः"
 
 #: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Contrast"
-msgstr "Pli da Kontrasto"
+msgstr "अधिकं विपरीतम्"
 
 #: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Contrast"
-msgstr "Malpli Kontrasto"
+msgstr "न्यूनविपरीतता"
 
 #: src/imagewindow.cpp:243
 #, kde-format
 msgid "More Gamma"
-msgstr "Pli Gamo"
+msgstr "अधिकं गाम्मा"
 
 #: src/imagewindow.cpp:248
 #, kde-format
 msgid "Less Gamma"
-msgstr "Malpli Gamo"
+msgstr "न्यूनं गाम्मा"
 
 #: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Up"
-msgstr "Rulumi supren"
+msgstr "उपरि स्क्रॉल कुर्वन्तु"
 
 #: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Down"
-msgstr "Rulumi malsupren"
+msgstr "अधः स्क्रॉल कुर्वन्तु"
 
 #: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
-msgstr "Rulumi maldekstren"
+msgstr "Scroll Left इति"
 
 #: src/imagewindow.cpp:269
 #, kde-format
 msgid "Scroll Right"
-msgstr "Rulumi dekstren"
+msgstr "Scroll Right इति"
 
 #: src/imagewindow.cpp:274
 #, kde-format
 msgid "Pause Slideshow"
-msgstr "Paŭzi prezenton"
+msgstr "स्लाइड शो विरामयतु"
 
 #: src/imagewindow.cpp:288
 #, kde-format
 msgid "Reload Image"
-msgstr "Reŝargi Bildon"
+msgstr "चित्रं पुनः लोडं कुर्वन्तु"
 
 #: src/imagewindow.cpp:294
 #, kde-format
 msgid "Properties"
-msgstr "Ecoj"
+msgstr "गुणाः"
 
 #: src/imagewindow.cpp:361
 #, kde-format
@@ -413,7 +414,7 @@ msgstr "%3 (%1 x %2)"
 #: src/imagewindow.cpp:426
 #, kde-format
 msgid "Unable to download the image from %1."
-msgstr "Ne eblas elŝuti la bildon de %1."
+msgstr "%1 तः चित्रं अवतरणं कर्तुं असमर्थः ।"
 
 #: src/imagewindow.cpp:442
 #, kde-format
@@ -422,49 +423,48 @@ msgid ""
 "Perhaps the file format is unsupported or your Imlib is not installed "
 "properly."
 msgstr ""
-"Ne eblas ŝargi la bildon %1.\n"
-"Eble la dosierformato estas nesubtenata aŭ via Imlib ne estas instalita "
-"ĝuste."
+"%1 प्रतिबिम्बं लोड् कर्तुं असमर्थम् । कदाचित् सञ्चिकास्वरूपं असमर्थितम् अथवा भवतः Imlib सम्यक् "
+"संस्थापितम् नास्ति ।"
 
 #: src/imagewindow.cpp:851
 #, kde-format
 msgid "Brightness"
-msgstr "Brilo"
+msgstr "कान्तिः"
 
 #: src/imagewindow.cpp:855
 #, kde-format
 msgid "Contrast"
-msgstr "Kontrasto"
+msgstr "विप्रकर्ष"
 
 #: src/imagewindow.cpp:859
 #, kde-format
 msgid "Gamma"
-msgstr "Gamo"
+msgstr "गाम्मा"
 
 #: src/imagewindow.cpp:906
 #, kde-format
 msgid "Unable to print the image."
-msgstr "Ne eblas presi la bildon."
+msgstr "चित्रं मुद्रयितुं असमर्थः।"
 
 #: src/imagewindow.cpp:907
 #, kde-format
 msgid "Printing Failed"
-msgstr "Presado Malsukcesis"
+msgstr "मुद्रणं विफलम्"
 
 #: src/imagewindow.cpp:924
 #, kde-format
 msgid "Keep original image size"
-msgstr "Konservi originan bildograndecon"
+msgstr "मूलप्रतिबिम्बस्य आकारं रक्षन्तु"
 
 #: src/imagewindow.cpp:929
 #, kde-format
 msgid "Save Image As"
-msgstr "Konservi Bildon Kiel"
+msgstr "चित्रं यथा रक्षन्तु"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
 #, kde-format
 msgid "Image Files (%1)"
-msgstr "Bilddosieroj (%1)"
+msgstr "चित्रसञ्चिकाः (%1) ."
 
 #: src/imagewindow.cpp:952
 #, kde-format
@@ -472,13 +472,13 @@ msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
-"Ne eblis konservi la dosieron.\n"
-"Eble la disko estas plena, aŭ vi ne havas skribpermeson al la dosiero."
+"सञ्चिकां रक्षितुं न शक्तवान् । कदाचित् डिस्क पूर्णा अस्ति, अथवा भवतः सञ्चिकायां लेखनस्य "
+"अनुमतिः नास्ति ।"
 
 #: src/imagewindow.cpp:955
 #, kde-format
 msgid "File Saving Failed"
-msgstr "Dosiera Konservado Malsukcesis"
+msgstr "सञ्चिकारक्षणं विफलम्"
 
 #: src/imagewindow.cpp:1202
 #, kde-format
@@ -487,63 +487,60 @@ msgid ""
 "resource-consuming and even make your computer hang.\n"
 "Do you want to continue?"
 msgstr ""
-"Vi estas rigardonta tre grandan bildon (%1 x %2 pikseloj), kiu povas esti "
-"tre rimeda kaj eĉ pendigi vian komputilon.\n"
-"Ĉu vi volas daŭrigi?"
+"भवान् अतीव विशालं चित्रं (%1 x %2 पिक्सेल) द्रष्टुं प्रवृत्तः अस्ति, यत् अतीव संसाधनग्राहकं "
+"भवितुम् अर्हति तथा च भवतः सङ्गणकं लम्बयितुं अपि शक्नोति । किं त्वं निरन्तरं कर्तुम् इच्छसि ?"
 
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr "Biblioteko por bildŝargo kaj bildigo"
+msgstr "इमेज लोडिंग् तथा रेण्डरिंग् पुस्तकालयः"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr "Bildprilabora biblioteko"
+msgstr "चित्रसंसाधनपुस्तकालयः"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
 msgid "Configure"
-msgstr "Agordi"
+msgstr "विन्यस्तं कुर्वन्तु"
 
 #: src/kuickconfigdlg.cpp:46
 #, kde-format
 msgid "&General"
-msgstr "Ĝe&nerala"
+msgstr "&सामान्य"
 
 #: src/kuickconfigdlg.cpp:50
 #, kde-format
 msgid "&Modifications"
-msgstr "&Modifoj"
+msgstr "&संशोधन"
 
 #: src/kuickconfigdlg.cpp:54
 #, kde-format
 msgid "&Slideshow"
-msgstr "&Bildprezento"
+msgstr "&स्लाइडशो"
 
 #: src/kuickconfigdlg.cpp:60
 #, kde-format
 msgid "&Viewer Shortcuts"
-msgstr "&Vidilaj Ŝparvojoj"
+msgstr "&दर्शक शॉर्टकट"
 
 #: src/kuickconfigdlg.cpp:63
 #, kde-format
 msgid "Bro&wser Shortcuts"
-msgstr "Bro&wser-Ŝparvojoj"
+msgstr "Bro&wser शॉर्टकट"
 
 #: src/kuickfile.cpp:128
 #, kde-format
 msgid "Downloading %1..."
-msgstr "Elŝutante %1..."
+msgstr "%1 डाउनलोड् करणम्..."
 
 #: src/kuickfile.cpp:129
 #, kde-format
 msgid ""
 "Please wait while downloading\n"
 "%1"
-msgstr ""
-"Bonvolu atendi dum elŝuto\n"
-"%1"
+msgstr "कृपया %1 अवतरणं कुर्वन् प्रतीक्षां कुर्वन्तु"
 
 #: src/kuickshow.cpp:171
 #, kde-kuit-format
@@ -557,48 +554,48 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
-"Ĉu vi vere volas montri ĉi tiun 1 bildon samtempe? Ĉi tio povus esti sufiĉe "
-"rimedokonsuma kaj povus troŝarĝi vian komputilon.<br/>Se vi elektas "
-"<interface>%2</interface>, nur la unua bildo estos montrata."
+"किं भवान् वास्तवमेव एतत् १ चित्रं एकस्मिन् समये प्रदर्शयितुम् इच्छति? एतत् स्यात्quite "
+"resource intensive and could overload your computer.<br/>यदि भवान् इच्छति "
+"<interface>%2</interface>, केवलं प्रथमं चित्रं दर्शयिष्यते ।"
 msgstr[1] ""
-"Ĉu vi vere volas montri ĉi tiujn %1 bildojn samtempe? Tio povus esti sufiĉe "
-"rimedokonsuma kaj povus troŝarĝi vian komputilon.<br/>Se vi elektas "
-"<interface>%2</interface>, nur la unua bildo estos montrata."
+"किं भवान् वास्तवमेव एतानि %1 चित्राणि एकस्मिन् समये प्रदर्शयितुम् इच्छति? एतत् स्यात्अत्यन्तं "
+"संसाधनगहनं भवतु तथा च भवतः सङ्गणकस्य अतिभारं कर्तुं शक्नोति।<br/>यदि भवान्...<interface>"
+"%2</interface> इति चिनोतु, केवलं प्रथमं चित्रं दर्शितं भविष्यति ।"
 
 #: src/kuickshow.cpp:173
 #, kde-format
 msgid "Display Multiple Images?"
-msgstr "Ĉu montri plurajn bildojn?"
+msgstr "बहुविधाः चित्राणि प्रदर्शयन्तु?"
 
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr "Montri"
+msgstr "प्रदर्शन"
 
 #: src/kuickshow.cpp:284
 #, kde-format
 msgid "&File"
-msgstr "&Dosiero"
+msgstr "&संचिका"
 
 #: src/kuickshow.cpp:298
 #, kde-format
 msgid "&Edit"
-msgstr "&Redakti"
+msgstr "&सम्पादन"
 
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr "Vidi"
+msgstr "दृश्यं"
 
 #: src/kuickshow.cpp:307
 #, kde-format
 msgid "&Settings"
-msgstr "A&gordo"
+msgstr "&सेटिंग्स"
 
 #: src/kuickshow.cpp:323
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Ĉefa ilobreto"
+msgstr "मुख्य साधनपट्टी"
 
 #: src/kuickshow.cpp:607
 #, kde-kuit-format
@@ -607,34 +604,35 @@ msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
 msgstr ""
-"Ĉu vi vere volas porĉiame forigi la dosieron<nl/><filename>%1</filename>?"
+"किं भवान् वास्तवमेव<nl/><filename>%1</filename> इति सञ्चिकां स्थायिरूपेण विलोपयितुम् "
+"इच्छति?"
 
 #: src/kuickshow.cpp:608
 #, kde-format
 msgid "Delete File"
-msgstr "Forigu dosieron"
+msgstr "सञ्चिकां विलोपयतु"
 
 #: src/kuickshow.cpp:633
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr "Ĉu vi vere volas forĵeti la dosieron<nl/><filename>%1</filename>?"
+msgstr "किं भवान् वास्तवमेव सञ्चिकां<nl/><filename>%1</filename> कचरे स्थापयितुम् इच्छति?"
 
 #: src/kuickshow.cpp:634
 #, kde-format
 msgid "Trash File"
-msgstr "Forĵeti dosieron"
+msgstr "कचरा सञ्चिका"
 
 #: src/kuickshow.cpp:635
 #, kde-format
 msgctxt "to trash"
 msgid "&Trash"
-msgstr "&Rubujen"
+msgstr "&तुच्छद्रव्य"
 
 #: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
-msgstr "Bilda Eraro"
+msgstr "चित्रदोषः"
 
 #: src/kuickshow.cpp:1161
 #, kde-format
@@ -644,90 +642,88 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
-"Ne eblas pravalorizi la bildbibliotekon \"%2\".\n"
-"\n"
-"Plia informo povus disponebli en la seanca protokoldosiero,\n"
-"aŭ povas atingati lanĉante %1 el terminalo."
+"\"%2\" इति चित्रपुस्तकालयस्य आरम्भं कर्तुं असमर्थः । अधिकसूचना सत्रवृत्तसञ्चिकायां उपलभ्यते, "
+"अथवा टर्मिनलतः %1 आरभ्य प्राप्तुं शक्यते ।"
 
 #: src/kuickshow.cpp:1165
 #, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Fatala Pravaloriz-Eraro"
+msgstr "घातक आरंभीकरण त्रुटि"
 
 #: src/kuickshow.cpp:1274
 #, kde-format
 msgid "Select Files or Folder to Open"
-msgstr "Elekti Dosierojn aŭ Dosierujojn Malfermendajn"
+msgstr "Open कर्तुं Files अथवा Folder इति चिनोतु"
 
 #: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
-msgstr "Komenci Bildaron"
+msgstr "स्लाइड शो आरभत"
 
 #: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Show File Browser"
-msgstr "Montri Dosier-Retumilon"
+msgstr "सञ्चिका ब्राउजर् दर्शयतु"
 
 #: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Hide File Browser"
-msgstr "Kaŝi Dosieran Retumilon"
+msgstr "सञ्चिका ब्राउजर् गोपयन्तु"
 
 #: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
-msgstr "Agordi %1..."
+msgstr "%1 विन्यस्यताम्..."
 
 #: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
-msgstr "Pri KuickShow"
+msgstr "KuickShow विषये"
 
 #: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Open Only One Image Window"
-msgstr "Malfermi Nur Unu Bildan Fenestron"
+msgstr "केवलं एकं चित्रविण्डो उद्घाटयन्तु"
 
 #: src/kuickshow.cpp:1365
 #, kde-format
 msgid "Show Image"
-msgstr "Montri Bildon"
+msgstr "चित्रं दर्शयतु"
 
 #: src/kuickshow.cpp:1369
 #, kde-format
 msgid "Show Image in Active Window"
-msgstr "Montri Bildon en Aktiva Fenestro"
+msgstr "सक्रियविण्डो मध्ये चित्रं दर्शयतु"
 
 #: src/kuickshow.cpp:1373
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
-msgstr "Montri Bildon en Plenekrana Reĝimo"
+msgstr "Fullscreen Mode इत्यत्र चित्रं दर्शयतु"
 
 #: src/main.cpp:37
 #, kde-format
 msgid "KuickShow"
-msgstr "KuickShow"
+msgstr "कुइक्शो"
 
 #: src/main.cpp:39
 #, kde-format
 msgid "A fast and versatile image viewer"
-msgstr "Rapida kaj diverstalenta bildospektilo"
+msgstr "एकः द्रुतगतिः बहुमुखी च चित्रदर्शकः"
 
 #: src/main.cpp:41
 #, kde-format
 msgid "(c) 1998-2009, Carsten Pfeiffer"
-msgstr "(c) 1998-2009, Carsten Pfeiffer"
+msgstr "(ग) 1998-2009, कार्स्टेन फीफर"
 
 #: src/main.cpp:46
 #, kde-format
 msgid "Carsten Pfeiffer"
-msgstr "Carsten Pfeiffer"
+msgstr "कार्स्टेन फीफर"
 
 #: src/main.cpp:48
 #, kde-format
 msgid "Rober Hamberger"
-msgstr "Rober Hamberger"
+msgstr "रोबर हैम्बर्गर"
 
 #: src/main.cpp:49
 #, kde-format
@@ -737,122 +733,122 @@ msgstr "Thorsten Scheuermann"
 #: src/main.cpp:59
 #, kde-format
 msgid "Start in the last visited folder, not the current working folder."
-msgstr "Komenci en la lasta vizitita dosierujo, ne en la nuna labordosierujo."
+msgstr "अन्तिमे आगतपुटे आरभत, न तु वर्तमानकार्यपुटे ।"
 
 #: src/main.cpp:60
 #, kde-format
 msgid "Optional image filenames/urls to show"
-msgstr "Laŭvolaj bildaj dosiernomoj/urls por montri"
+msgstr "दर्शयितुं वैकल्पिकं चित्रसञ्चिकानामानि/urls"
 
 #: src/printing.cpp:52
 #, kde-format
 msgid "Print %1"
-msgstr "Presi %1"
+msgstr "%1 मुद्रयन्तु"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
 #: src/printing_page.ui:14
 #, kde-format
 msgid "Image Settings"
-msgstr "Bilda agordo"
+msgstr "चित्रसेटिंग्स्"
 
 #. i18n: ectx: property (text), widget (QCheckBox, addFileName)
 #: src/printing_page.ui:20
 #, kde-format
 msgid "Print fi&lename below image"
-msgstr "Presi dosiernomon sub bi&ldo"
+msgstr "चित्रस्य अधः fi&lename मुद्रयन्तु"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr "Presi bildon en &nigre kaj blanka"
+msgstr "&black and white इत्यनेन चित्रं मुद्रयन्तु"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
 #, kde-format
 msgid "&Width:"
-msgstr "&Larĝo:"
+msgstr "&विस्तार:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, units)
 #: src/printing_page.ui:64
 #, kde-format
 msgid "Millimeters"
-msgstr "Milimetroj"
+msgstr "मिलीमीटर्"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, units)
 #: src/printing_page.ui:69
 #, kde-format
 msgid "Centimeters"
-msgstr "Centimetroj"
+msgstr "सेन्टिमीटर्"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, units)
 #: src/printing_page.ui:74
 #, kde-format
 msgid "Inches"
-msgstr "Coloj"
+msgstr "इञ्च्"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/printing_page.ui:108
 #, kde-format
 msgid "&Height:"
-msgstr "&Alto:"
+msgstr "&औनत्यम्‌:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scale)
 #: src/printing_page.ui:121
 #, kde-format
 msgid "Print e&xact size: "
-msgstr "Presi preci&zan grandecon:"
+msgstr "मुद्रणं e&cact size:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
 #: src/printing_page.ui:141
 #, kde-format
 msgid "Shrink image to &fit, if necessary"
-msgstr "Malgrandi&gi bildon al konveno, se necese"
+msgstr "आवश्यकतानुसारं &fit इति प्रतिबिम्बं संकुचयन्तु"
 
 #: src/slideshowwidget.cpp:46
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr "Porĉiame"
+msgstr "सदा"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
 #, kde-format
 msgid "Slideshow"
-msgstr "Bildoprezento"
+msgstr "स्लाइड शो"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
 #: src/slideshowwidget.ui:20
 #, kde-format
 msgid "Switch to &full-screen"
-msgstr "Ŝanĝi al &plen-ekrano"
+msgstr "&full-screen इत्यत्र स्विच कुर्वन्तु"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
 #: src/slideshowwidget.ui:27
 #, kde-format
 msgid "S&tart with current image"
-msgstr "Komenci kun ak&tuala bildo"
+msgstr "वर्तमान प्रतिबिम्बेन सह S&tart"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/slideshowwidget.ui:34
 #, kde-format
 msgid "De&lay between slides:"
-msgstr "Pro&krasto inter diapozitivoj:"
+msgstr "स्लाइड् मध्ये विलम्बः :"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:44
 #, kde-format
 msgid "Wait for key"
-msgstr "Atendi klavon"
+msgstr "कीलस्य प्रतीक्षां कुर्वन्तु"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:47
 #, kde-format
 msgid " sec"
-msgstr " s"
+msgstr "सेक"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
 #, kde-format
 msgid "&Iterations:"
-msgstr "&Iteracioj:"
+msgstr "&पुनरावृत्तिः :"
