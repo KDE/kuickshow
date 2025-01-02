@@ -34,7 +34,6 @@ public:
     static void shutdown();
 
     KuickFile * getFile( const QUrl& url );
-    void setLimit( int numFiles );
     int getLimit() const { return m_limit; }
 
     /**

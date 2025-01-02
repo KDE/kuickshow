@@ -59,7 +59,6 @@ public:
 
   void 		setAutoRender( bool enable )   { isAutoRendering = enable;}
   bool 		isAutoRenderEnabled() 	const  { return isAutoRendering;  }
-  void 		setMaxImageCache( int );
   int 		maxImageCache() 	const  { return myMaxImageCache;  }
   const QColor& backgroundColor() 	const;
   void 		setBackgroundColor( const QColor& );

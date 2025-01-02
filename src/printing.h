@@ -37,7 +37,6 @@ public:
                                   const QString& originalFileName );
 
 private:
-    static void addConfigPages();
     static QString minimizeString( QString text, const QFontMetrics& metrics,
                                    int maxWidth );
 
