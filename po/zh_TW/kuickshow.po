@@ -4,19 +4,20 @@
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2006, 2009.
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2008.
 # pan93412 <pan93412@gmail.com>, 2018.
+# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-18 01:56+0000\n"
-"PO-Revision-Date: 2018-07-27 00:53+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2025-01-02 19:01+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 24.12.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -273,7 +274,7 @@ msgstr "預讀下一張圖"
 #: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "重製視窗"
 
 #: src/imagewindow.cpp:143
 #, kde-format
@@ -336,10 +337,9 @@ msgid "Print Image..."
 msgstr "列印影像..."
 
 #: src/imagewindow.cpp:217
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "顯示檔案瀏覽器"
+msgstr "回到檔案瀏覽器"
 
 #: src/imagewindow.cpp:223
 #, kde-format
@@ -458,10 +458,9 @@ msgid "Keep original image size"
 msgstr "維持原始影像大小"
 
 #: src/imagewindow.cpp:929
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "另存新檔"
+msgstr "另存影像為"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
 #, kde-format
@@ -496,12 +495,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "影像載入與繪製函式庫"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "影像處理函式庫"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -546,15 +545,7 @@ msgid ""
 msgstr "下載 %1 中，請稍候"
 
 #: src/kuickshow.cpp:171
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -565,8 +556,8 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
-"您確定要同時顯示這 %n 張影像嗎？這可能會非常耗資源，甚至讓您的電腦停住。<br/>"
-"若您選擇 %1，則只有第一張會顯示。"
+"您確定要同時顯示這 %1 張影像嗎？這可能會非常耗資源，甚至讓您的電腦停住。<br/>"
+"若您選擇 <interface>%2</interface>，則只有第一張會顯示。"
 
 #: src/kuickshow.cpp:173
 #, kde-format
@@ -576,7 +567,7 @@ msgstr "要顯示多張影像嗎？"
 #: src/kuickshow.cpp:174
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "顯示"
 
 #: src/kuickshow.cpp:284
 #, kde-format
@@ -591,7 +582,7 @@ msgstr "編輯(&E)"
 #: src/kuickshow.cpp:304
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "檢視"
 
 #: src/kuickshow.cpp:307
 #, kde-format
@@ -609,7 +600,7 @@ msgctxt "@info"
 msgid ""
 "Do you really want to permanently delete the file<nl/><filename>%1</"
 "filename>?"
-msgstr ""
+msgstr "您確定要永久刪除檔案<nl/><filename>%1</filename> 嗎？"
 
 #: src/kuickshow.cpp:608
 #, kde-format
@@ -617,20 +608,15 @@ msgid "Delete File"
 msgstr "刪除檔案"
 
 #: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
+#, kde-kuit-format
 msgctxt "@info"
 msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>您真的要把\n"
-"<b>「%1」</b>丟到垃圾桶？</qt>"
+msgstr "您確定要將<nl/><filename>%1</filename>丟到垃圾桶嗎？"
 
 #: src/kuickshow.cpp:634
 #, kde-format
 msgid "Trash File"
-msgstr "垃圾桶檔案"
+msgstr "將檔案丟到垃圾桶"
 
 #: src/kuickshow.cpp:635
 #, kde-format
@@ -651,12 +637,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"無法初始化影像函式庫「%2」。\n"
+"\n"
+"工作階段日誌檔裡面可能會有更多資訊，\n"
+"也可以試著從終端機啟動 %1 來取得。"
 
 #: src/kuickshow.cpp:1165
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "嚴重的 Imlib 錯誤"
+msgstr "嚴重初始化錯誤"
 
 #: src/kuickshow.cpp:1274
 #, kde-format
@@ -817,7 +806,7 @@ msgstr "如果需要的話，縮小影像以適合紙張(&F)"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "永遠"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -857,10 +846,9 @@ msgstr " 秒"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "重複播放(&I)(0 = 無限次)："
+msgstr "重複次數(&I)："
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
