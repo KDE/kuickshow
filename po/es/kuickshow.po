@@ -526,12 +526,12 @@ msgstr "Pre&sentación"
 #: src/kuickconfigdlg.cpp:60
 #, kde-format
 msgid "&Viewer Shortcuts"
-msgstr "Accesos rápidos del &visor"
+msgstr "Atajos del &visor"
 
 #: src/kuickconfigdlg.cpp:63
 #, kde-format
 msgid "Bro&wser Shortcuts"
-msgstr "Accesos rápidos del &navegador"
+msgstr "Atajos del &navegador"
 
 #: src/kuickfile.cpp:128
 #, kde-format

@@ -258,9 +258,9 @@
 >Presentación</guilabel
 ></link
 > configuran el funcionamiento de &kuickshow;, y los otros dos, <guilabel
->Accesos rápidos del visor</guilabel
+>Atajos del visor</guilabel
 > y <guilabel
->Accesos rápidos del navegador</guilabel
+>Atajos del navegador</guilabel
 >, le permiten personalizar las asignaciones de teclas para las ventanas respectivas.</para>
 
 <sect1 id="general-options">
@@ -595,18 +595,18 @@
 
 <sect1 id="shortcuts-options">
 <title
->Las pestañas de Accesos rápidos</title
+>Las pestañas de atajos</title
 > 
 <para
->Cambia los accesos rápidos de las diferentes opcionesde &kuickshow; en los apartados <guilabel
->Accesos rápidos del visor</guilabel
+>Cambia los atajos de teclado de las diferentes opciones de &kuickshow; en los apartados <guilabel
+>Atajos del visor</guilabel
 > y <guilabel
->Accesos rápidos del navegador</guilabel
+>Atajos del navegador</guilabel
 > .</para>
 
 <para
 >Para más información consulte la sección sobre los <ulink url="help:/fundamentals/config.html#shortcuts"
->Accesos rápidos</ulink
+>Atajos de teclado</ulink
 > de los fundamentos de &kde;.</para>
 </sect1>
 
