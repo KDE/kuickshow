@@ -497,7 +497,6 @@ void ImlibWidget::rotated( KuickImage *, int )
 
 void ImlibWidget::setUseModifications(bool enable)
 {
-    qDebug() << enable;
     myUseModifications = enable;
 }
 
