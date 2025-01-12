@@ -10,20 +10,20 @@
 # Serdar Soytetir <tulliana@gmail.com>, 2008, 2009.
 # Ozan Çağlayan <ozan@pardus.org.tr>, 2010.
 # Volkan Gezer <volkangezer@gmail.com>, 2013.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-18 01:56+0000\n"
-"PO-Revision-Date: 2024-10-15 23:23+0300\n"
+"PO-Revision-Date: 2025-01-11 17:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, kde-format
@@ -820,7 +820,7 @@ msgstr "Görseli &tam boyutunda yazdır: "
 #: src/printing_page.ui:141
 #, kde-format
 msgid "Shrink image to &fit, if necessary"
-msgstr "&Gerekiyorsa görseli kağıt boyutlarına uydur"
+msgstr "&Gerekiyorsa görseli kâğıt boyutlarına uydur"
 
 #: src/slideshowwidget.cpp:46
 #, kde-format
