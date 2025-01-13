@@ -52,6 +52,7 @@ FileWidget::FileWidget(const QUrl& url, KuickShow *parent)
 	m_fileItemActions = new KFileItemActions(this);
 	m_fileItemActions->setParentWidget(this);
 
+	initializeActionNames();
     setEnableDirHighlighting( true );
 
     KConfigGroup group(KSharedConfig::openConfig(), "Filebrowser");
@@ -81,6 +82,59 @@ FileWidget::~FileWidget()
 {
     // TODO: not necessary, a child of 'this'
     delete m_fileFinder;
+}
+
+/*!
+ * \brief Assigns object names to all actions of KDirOperator.
+ *
+ * In KF6, most of the actions provided by KDirOperator no longer have object names, which makes it impossible to assign
+ * them keyboard shortcuts via KShortcutsEditor, as it uses the actions' names as configuration keys when storing and
+ * loading the shortcuts.
+ *
+ * This function sets the names of all KDirOperator's actions to the ones they had in KF5.
+ */
+void FileWidget::initializeActionNames() {
+	action(KDirOperator::PopupMenu)->setObjectName(QStringLiteral("popupMenu"));
+	action(KDirOperator::Up)->setObjectName(QStringLiteral("up"));
+	action(KDirOperator::Back)->setObjectName(QStringLiteral("back"));
+	action(KDirOperator::Forward)->setObjectName(QStringLiteral("forward"));
+	action(KDirOperator::Home)->setObjectName(QStringLiteral("home"));
+	action(KDirOperator::Reload)->setObjectName(QStringLiteral("reload"));
+	action(KDirOperator::New)->setObjectName(QStringLiteral("new"));
+	action(KDirOperator::NewFolder)->setObjectName(QStringLiteral("mkdir"));
+	action(KDirOperator::Rename)->setObjectName(QStringLiteral("rename"));
+	action(KDirOperator::Trash)->setObjectName(QStringLiteral("trash"));
+	action(KDirOperator::Delete)->setObjectName(QStringLiteral("delete"));
+	action(KDirOperator::SortMenu)->setObjectName(QStringLiteral("sorting menu"));
+	action(KDirOperator::SortByName)->setObjectName(QStringLiteral("by name"));
+	action(KDirOperator::SortBySize)->setObjectName(QStringLiteral("by size"));
+	action(KDirOperator::SortByDate)->setObjectName(QStringLiteral("by date"));
+	action(KDirOperator::SortByType)->setObjectName(QStringLiteral("by type"));
+	action(KDirOperator::SortAscending)->setObjectName(QStringLiteral("ascending"));
+	action(KDirOperator::SortDescending)->setObjectName(QStringLiteral("descending"));
+	action(KDirOperator::SortFoldersFirst)->setObjectName(QStringLiteral("dirs first"));
+	action(KDirOperator::SortHiddenFilesLast)->setObjectName(QStringLiteral("hidden files last"));
+	action(KDirOperator::ViewModeMenu)->setObjectName(QStringLiteral("view menu"));
+	action(KDirOperator::ViewIconsView)->setObjectName(QStringLiteral("icons view"));
+	action(KDirOperator::ViewCompactView)->setObjectName(QStringLiteral("compact view"));
+	action(KDirOperator::ViewDetailsView)->setObjectName(QStringLiteral("details view"));
+	action(KDirOperator::DecorationMenu)->setObjectName(QStringLiteral("decoration menu"));
+	action(KDirOperator::DecorationAtTop)->setObjectName(QStringLiteral("decorationAtTop"));
+	action(KDirOperator::DecorationAtLeft)->setObjectName(QStringLiteral("decorationAtLeft"));
+	action(KDirOperator::ShortView)->setObjectName(QStringLiteral("short view"));
+	action(KDirOperator::DetailedView)->setObjectName(QStringLiteral("detailed view"));
+	action(KDirOperator::TreeView)->setObjectName(QStringLiteral("tree view"));
+	action(KDirOperator::DetailedTreeView)->setObjectName(QStringLiteral("detailed tree view"));
+	action(KDirOperator::AllowExpansionInDetailsView)->setObjectName(QStringLiteral("allow expansion"));
+	action(KDirOperator::ShowHiddenFiles)->setObjectName(QStringLiteral("show hidden"));
+	action(KDirOperator::ShowPreviewPanel)->setObjectName(QStringLiteral("preview"));
+	action(KDirOperator::ShowPreview)->setObjectName(QStringLiteral("inline preview"));
+	action(KDirOperator::OpenContainingFolder)->setObjectName(QStringLiteral("file manager"));
+	action(KDirOperator::Properties)->setObjectName(QStringLiteral("properties"));
+
+	for(const auto action : allActions()) {
+		if(action->objectName().isEmpty()) qDebug("WARNING: action has no name: text = \"%s\"", qPrintable(action->text()));
+	}
 }
 
 void FileWidget::reloadConfiguration()

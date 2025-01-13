@@ -84,6 +84,8 @@ private Q_SLOTS:
     void slotFinishedLoading();
 
 private:
+	void initializeActionNames();
+
     KFileItem fileItemFor(const QModelIndex& index) const {
         if (index.isValid()) {
             return index.data(KDirModel::FileItemRole).value<KFileItem>();
