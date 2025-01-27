@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-18 01:56+0000\n"
-"PO-Revision-Date: 2025-01-19 11:42+0100\n"
+"PO-Revision-Date: 2025-01-26 20:12+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -419,7 +419,7 @@ msgstr "%3 (%1 x %2)"
 #: src/imagewindow.cpp:426
 #, kde-format
 msgid "Unable to download the image from %1."
-msgstr "Non é posíbel obter a imaxe desde %1."
+msgstr "Non é posíbel descargar a imaxe de %1."
 
 #: src/imagewindow.cpp:442
 #, kde-format
@@ -541,7 +541,7 @@ msgstr "Atallos do &navegador"
 #: src/kuickfile.cpp:128
 #, kde-format
 msgid "Downloading %1..."
-msgstr "Obtendo %1…"
+msgstr "Descargando %1…"
 
 #: src/kuickfile.cpp:129
 #, kde-format
@@ -549,7 +549,7 @@ msgid ""
 "Please wait while downloading\n"
 "%1"
 msgstr ""
-"Agarde mentres se está a transferir\n"
+"Agarde durante a descarga.\n"
 "%1"
 
 #: src/kuickshow.cpp:171
