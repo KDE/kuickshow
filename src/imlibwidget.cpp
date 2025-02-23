@@ -42,8 +42,8 @@ ImlibWidget::ImlibWidget(QWidget *parent)
 
 void ImlibWidget::init()
 {
-    myLabel = new QLabel(this);
-    setWidget(myLabel);
+    imageWidget = new QLabel(this);
+    setWidget(imageWidget);
     setWidgetResizable(true);
     // This is required so that the pixmap label fits the window exactly.
     setFrameStyle(QFrame::NoFrame);
@@ -65,10 +65,10 @@ void ImlibWidget::init()
     setAttribute( Qt::WA_DeleteOnClose );
     setAutoRender( true );
 
-    myLabel->setContentsMargins(0, 0, 0, 0);
-    myLabel->setPalette( QPalette( myBackgroundColor ));
-    myLabel->setBackgroundRole( QPalette::Window );
-    myLabel->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+    imageWidget->setContentsMargins(0, 0, 0, 0);
+    imageWidget->setPalette(QPalette(myBackgroundColor));
+    imageWidget->setBackgroundRole(QPalette::Window);
+    imageWidget->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     // TODO: ImageCache can also be a global singleton
     imageCache = new ImageCache(4); // cache 4 images (FIXME?)
@@ -84,7 +84,7 @@ ImlibWidget::~ImlibWidget()
 
 QSize ImlibWidget::sizeHint() const
 {
-    return (myLabel->size());
+    return imageWidget->size();
 }
 
 
@@ -423,7 +423,7 @@ void ImlibWidget::updateWidget(bool geometryUpdate)
 {
     if (m_kuim==nullptr) return;
 
-    myLabel->setPixmap(QPixmap::fromImage(m_kuim->toQImage()));
+    imageWidget->setPixmap(QPixmap::fromImage(m_kuim->toQImage()));
     if (geometryUpdate) updateGeometry(m_kuim->width(), m_kuim->height());
 }
 
@@ -431,7 +431,7 @@ void ImlibWidget::updateWidget(bool geometryUpdate)
 // here we just use the size of m_kuim, may be overridden in subclass
 void ImlibWidget::updateGeometry( int w, int h )
 {
-    myLabel->resize( w, h );
+    imageWidget->resize(w, h);
 }
 
 
@@ -445,7 +445,7 @@ void ImlibWidget::closeEvent( QCloseEvent *e )
 void ImlibWidget::setBackgroundColor( const QColor& color )
 {
     myBackgroundColor = color;
-    myLabel->setPalette( QPalette( myBackgroundColor ));
+    imageWidget->setPalette(QPalette(myBackgroundColor));
     repaint(); // FIXME - necessary at all?
 }
 

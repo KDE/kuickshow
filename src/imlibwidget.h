@@ -118,7 +118,7 @@ private:
   bool 		myUseModifications;
   int 		myMaxImageCache;
   QColor 	myBackgroundColor;
-  QLabel *myLabel;
+  QLabel* imageWidget;
 
 protected Q_SLOTS:
   bool 		cacheImage( KuickFile *file );
