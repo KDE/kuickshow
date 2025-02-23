@@ -226,7 +226,7 @@ void ImageWindow::setupActions()
 
     QAction *lessBrightness = m_actions->addAction( "less_brightness" );
     lessBrightness->setText(  i18n("Less Brightness") );
-    m_actions->setDefaultShortcut(lessBrightness, Qt::SHIFT + Qt::Key_B);
+    m_actions->setDefaultShortcut(lessBrightness, Qt::SHIFT | Qt::Key_B);
     connect(lessBrightness, &QAction::triggered, this, &ImageWindow::lessBrightness);
 
     QAction *moreContrast = m_actions->addAction( "more_contrast" );
@@ -236,7 +236,7 @@ void ImageWindow::setupActions()
 
     QAction *lessContrast = m_actions->addAction( "less_contrast" );
     lessContrast->setText( i18n("Less Contrast") );
-    m_actions->setDefaultShortcut(lessContrast, Qt::SHIFT + Qt::Key_C);
+    m_actions->setDefaultShortcut(lessContrast, Qt::SHIFT | Qt::Key_C);
     connect(lessContrast, &QAction::triggered, this, &ImageWindow::lessContrast);
 
     QAction *moreGamma = m_actions->addAction( "more_gamma" );
@@ -246,7 +246,7 @@ void ImageWindow::setupActions()
 
     QAction *lessGamma = m_actions->addAction( "less_gamma" );
     lessGamma->setText( i18n("Less Gamma") );
-    m_actions->setDefaultShortcut(lessGamma, Qt::SHIFT + Qt::Key_G);
+    m_actions->setDefaultShortcut(lessGamma, Qt::SHIFT | Qt::Key_G);
     connect(lessGamma, &QAction::triggered, this, &ImageWindow::lessGamma);
 
     // --------
@@ -292,7 +292,7 @@ void ImageWindow::setupActions()
 
     QAction *properties = m_actions->addAction("properties" );
     properties->setText( i18n("Properties") );
-    m_actions->setDefaultShortcut(properties, Qt::ALT + Qt::Key_Return);
+    m_actions->setDefaultShortcut(properties, Qt::ALT | Qt::Key_Return);
     connect(properties, &QAction::triggered, this, &ImageWindow::slotProperties);
 
     m_actions->readSettings();
@@ -608,8 +608,8 @@ void ImageWindow::keyReleaseEvent( QKeyEvent *e )
 
 void ImageWindow::mousePressEvent( QMouseEvent *e )
 {
-    xmove = e->x(); // for moving the image with the mouse
-    ymove = e->y();
+    xmove = e->pos().x(); // for moving the image with the mouse
+    ymove = e->pos().y();
 
     xzoom = xmove;  // for zooming with the mouse
     yzoom = ymove;
@@ -683,17 +683,17 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 	//qApp->processOneEvent();
 	qApp->processEvents( QEventLoop::ExcludeUserInputEvents );
 
-	int width  = e->x() - xposPress;
-	int height = e->y() - yposPress;
+	int width  = e->pos().x() - xposPress;
+	int height = e->pos().y() - yposPress;
 
 	if ( width < 0 ) {
 	    width = abs( width );
-	    xzoom = e->x();
+	    xzoom = e->pos().x();
 	}
 
 	if ( height < 0 ) {
 	    height = abs( height );
-	    yzoom = e->y();
+	    yzoom = e->pos().y();
 	}
 
 	QPen pen( Qt::white, 1, Qt::DashLine );
@@ -705,8 +705,8 @@ void ImageWindow::mouseMoveEvent( QMouseEvent *e )
 
     else { // move the image
 	// scrolling with mouse
-	uint xtmp = e->x();
-	uint ytmp = e->y();
+	uint xtmp = e->pos().x();
+	uint ytmp = e->pos().y();
 	scrollImage( xtmp - xmove, ytmp - ymove );
 	xmove = xtmp;
 	ymove = ytmp;
@@ -731,8 +731,8 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
     float factor, factorx, factory;
 
     // zoom into the selected area
-    uint x = e->x();
-    uint y = e->y();
+    uint x = e->pos().x();
+    uint y = e->pos().y();
 
     if ( xposPress == x || yposPress == y )
 	return;

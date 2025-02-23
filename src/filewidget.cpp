@@ -147,7 +147,7 @@ void FileWidget::reloadConfiguration()
 	// Then, all the images!
 	QMimeDatabase mimedb;
 	QList<QMimeType> l = mimedb.allMimeTypes();
-	for (const QMimeType &mime : qAsConst(l))
+	for (const QMimeType &mime : std::as_const(l))
         {
 	    if (mime.name().startsWith("image/")) mimes.append(mime.name());
         }

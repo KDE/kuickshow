@@ -745,7 +745,7 @@ void KuickShow::slotPrint()
     // don't show the image, just print
     ImageWindow *iw = new ImageWindow(this);
     iw->setObjectName( QString::fromLatin1("printing image"));
-    for (const KFileItem &item : qAsConst(items))
+    for (const KFileItem &item : std::as_const(items))
     {
         if (FileWidget::isImage(item) && iw->loadImage(item.url())) iw->printImage();
     }
@@ -770,7 +770,7 @@ void KuickShow::slotShowFullscreen()
 
 void KuickShow::slotDropped( const KFileItem&, QDropEvent *, const QList<QUrl> &urls)
 {
-    for (const QUrl &url : qAsConst(urls))
+    for (const QUrl &url : std::as_const(urls))
     {
         KFileItem item(url);
         if (FileWidget::isImage(item)) showImage(item, NewWindow);
@@ -1037,7 +1037,7 @@ void KuickShow::slotConfigApplied()
     KuickConfig::get().save();
     if (!initImlib()) return;
 
-    for (ImageWindow *viewer : qAsConst(s_viewers))
+    for (ImageWindow *viewer : std::as_const(s_viewers))
     {
         viewer->updateActions();
     }
@@ -1081,7 +1081,7 @@ void KuickShow::readProperties( const KConfigGroup& kc )
     QUrl listedURL = fileWidget->url();
     bool hasCurrentURL = false;
     const QStringList images = kc.readPathEntry( "Images shown", QStringList() );
-    for (const QString &img : qAsConst(images))
+    for (const QString &img : std::as_const(images))
     {
         const QUrl url(img);
         KFileItem item(url);
@@ -1111,7 +1111,7 @@ void KuickShow::saveProperties( KConfigGroup& kc )
     kc.writePathEntry( "CurrentDirectory", fileWidget->url().url() );
 
     QStringList urls;
-    for (const ImageWindow *viewer : qAsConst(s_viewers))
+    for (const ImageWindow *viewer : std::as_const(s_viewers))
     {
         const QUrl url = viewer->url();			// checks currentFile() internally
         if (!url.isValid()) continue;			// no current file, ignore
@@ -1309,7 +1309,7 @@ void KuickShow::slotDuplicateWindow(const QUrl &url)
 
 void KuickShow::deleteAllViewers()
 {
-    for (ImageWindow *viewer : qAsConst(s_viewers))
+    for (ImageWindow *viewer : std::as_const(s_viewers))
     {
         disconnect(viewer, &QObject::destroyed, this, &KuickShow::viewerDeleted);
         delete viewer;
@@ -1427,5 +1427,5 @@ void KuickShow::initializeBrowserActionCollection(KActionCollection* collection)
 	setDefaultShortcuts(fileWidget->action(KDirOperator::ShowPreviewPanel), { Qt::Key_F11 });
 	setDefaultShortcuts(kuickAction(KuickActionType::SlideShow), { Qt::Key_F2 });
 	setDefaultShortcuts(kuickAction(KuickActionType::ToggleBrowser), { Qt::Key_Space });
-	setDefaultShortcuts(kuickAction(KuickActionType::OneImageWindow), { Qt::CTRL + Qt::Key_N });
+	setDefaultShortcuts(kuickAction(KuickActionType::OneImageWindow), { Qt::CTRL | Qt::Key_N });
 }
