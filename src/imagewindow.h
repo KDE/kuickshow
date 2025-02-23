@@ -49,7 +49,7 @@ public:
 
   bool 		showNextImage( KuickFile * file );
   bool 		showNextImage( const QUrl& url );
-  void 		scrollImage( int, int, bool restrict=true );
+  void 		scrollImage( int x, int y );
   void		setFullscreen( bool );
   bool 		isFullscreen() 	const { return myIsFullscreen; }
 

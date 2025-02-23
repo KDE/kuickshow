@@ -395,7 +395,7 @@ void ImageWindow::centerImage()
 }
 
 
-void ImageWindow::scrollImage( int x, int y, bool restrict )
+void ImageWindow::scrollImage(int x, int y)
 {
     horizontalScrollBar()->setValue(horizontalScrollBar()->value()-x);
     verticalScrollBar()->setValue(verticalScrollBar()->value()-y);
@@ -790,7 +790,7 @@ void ImageWindow::mouseReleaseEvent( QMouseEvent *e )
 
     xpos = xtmp; ypos = ytmp;
     safeMoveWindow(xpos, ypos);
-    scrollImage( 1, 1, true ); // unrestricted scrolling
+    scrollImage( 1, 1 );
 }
 
 
