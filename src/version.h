@@ -1,3 +1,3 @@
 #ifndef KUICKSHOWVERSION
-#define KUICKSHOWVERSION "0.10.2"
+#define KUICKSHOWVERSION "0.11.0"
 #endif
