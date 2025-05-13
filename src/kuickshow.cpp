@@ -27,6 +27,8 @@
 #include <KHelpMenu>
 #include <KIconLoader>
 #include <KIO/MimetypeJob>
+#include <KIO/DeleteOrTrashJob>
+#include <KIO/AskUserActionInterface>
 #include <KJobWidgets>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -596,52 +598,38 @@ void KuickShow::slotTrashCurrentImage(ImageWindow *viewer)
 
 void KuickShow::performDeleteCurrentImage(QWidget *parent)
 {
-    assert(fileWidget != nullptr);
+    Q_ASSERT(fileWidget != nullptr);
 
-    KFileItemList list;
-    const KFileItem &item = fileWidget->getCurrentItem(false);
-    list.append (item);
+    const QList<QUrl> urls = { fileWidget->getCurrentItem(false).url() };
 
-    if (KMessageBox::warningContinueCancel(
-            parent,
-            xi18nc("@info", "Do you really want to permanently delete the file<nl/><filename>%1</filename>?", item.url().toDisplayString(QUrl::PreferLocalFile)),
-            i18n("Delete File"),
-            KStandardGuiItem::del(),
-            KStandardGuiItem::cancel(),
-            "Kuick_delete_current_image",
-            KMessageBox::Dangerous)!=KMessageBox::Continue)
-    {
-        return;
-    }
+    using Iface = KIO::AskUserActionInterface;
+    auto deleteJob = new KIO::DeleteOrTrashJob(urls, Iface::Delete, Iface::DefaultConfirmation, parent);
+    connect(deleteJob, &KIO::DeleteOrTrashJob::finished, this, [this, deleteJob](KJob *) {
+        if (deleteJob->error() != KJob::NoError) {
+            return;
+        }
 
-    tryShowNextImage();
-    fileWidget->del(list, nullptr, false);
+        tryShowNextImage();
+    });
+    deleteJob->start();
 }
 
 void KuickShow::performTrashCurrentImage(QWidget *parent)
 {
-    assert(fileWidget != nullptr);
+    Q_ASSERT(fileWidget != nullptr);
 
-    KFileItemList list;
-    const KFileItem& item = fileWidget->getCurrentItem(false);
-    if (item.isNull()) return;
+    const QList<QUrl> urls = { fileWidget->getCurrentItem(false).url() };
 
-    list.append (item);
+    using Iface = KIO::AskUserActionInterface;
+    auto deleteJob = new KIO::DeleteOrTrashJob(urls, Iface::Trash, Iface::DefaultConfirmation, parent);
+    connect(deleteJob, &KIO::DeleteOrTrashJob::finished, this, [this, deleteJob](KJob *) {
+        if (deleteJob->error() != KJob::NoError) {
+            return;
+        }
 
-    if (KMessageBox::warningContinueCancel(
-            parent,
-            xi18nc("@info", "Do you really want to trash the file<nl/><filename>%1</filename>?", item.url().toDisplayString(QUrl::PreferLocalFile)),
-            i18n("Trash File"),
-            KGuiItem(i18nc("to trash", "&Trash"), "user-trash"),
-            KStandardGuiItem::cancel(),
-            "Kuick_trash_current_image",
-            KMessageBox::Dangerous)!=KMessageBox::Continue)
-    {
-        return;
-    }
-
-    tryShowNextImage();
-    fileWidget->trash(list, parent, false, false);
+        tryShowNextImage();
+    });
+    deleteJob->start();
 }
 
 void KuickShow::tryShowNextImage()
@@ -946,19 +934,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
             else if (fileWidget->action(KDirOperator::Delete)->shortcuts().contains( key ))
             {
-                (void) fileWidget->getCurrentItem( false );
-                item = fileWidget->getNext( false ); // don't move
-                if ( item.isNull() )
-                    item = fileWidget->getPrevious( false );
-                KFileItem it( m_viewer->url() );
-                KFileItemList list;
-                list.append( it );
-                if ( fileWidget->del(list, window,
-                                     !(k->modifiers() & Qt::ShiftModifier)) == nullptr )
-                    return true; // aborted deletion
-
-                // ### check failure asynchronously and restore old item?
-                fileWidget->setCurrentItem( item );
+                performDeleteCurrentImage(fileWidget);
             }
 
             else if (kuickAction(KuickActionType::ToggleBrowser)->shortcuts().contains(key))

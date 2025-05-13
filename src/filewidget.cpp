@@ -25,6 +25,8 @@
 #include <KFileItemActions>
 #include <KFileItemListProperties>
 #include <KLocalizedString>
+#include <KIO/DeleteOrTrashJob>
+#include <KIO/AskUserActionInterface>
 
 #include <QAbstractItemModel>
 #include <QAbstractItemView>
@@ -266,24 +268,30 @@ void FileWidget::findCompletion( const QString& text )
 bool FileWidget::eventFilter( QObject *o, QEvent *e )
 {
     if ( e->type() == QEvent::KeyPress ) {
-	QKeyEvent *k = static_cast<QKeyEvent*>( e );
+        QKeyEvent *k = static_cast<QKeyEvent*>( e );
 
-	if ( (k->modifiers() & (Qt::ControlModifier | Qt::AltModifier)) == 0 ) {
-	    int key = k->key();
- 	    if ( action(Delete)->shortcuts().contains( key ) )
-            {
+        if ((k->modifiers() & (Qt::ControlModifier | Qt::AltModifier)) == 0) {
+            int key = k->key();
+            if (action(Delete)->shortcuts().contains(key)) {
                 k->accept();
-		KFileItem item = getCurrentItem( false );
-		if ( !item.isNull() ) {
-                    KFileItemList list;
-                    list.append( item );
-		    del( list, this, (k->modifiers() & Qt::ShiftModifier) == 0 );
-                }
-		return true;
-	    }
 
-	    const QString& text = k->text();
-	    if ( !text.isEmpty() && text.unicode()->isPrint() ) {
+                const QList<QUrl> urls = { getCurrentItem(false).url() };
+
+                if (!urls.at(0).isEmpty()) {
+                    using Iface = KIO::AskUserActionInterface;
+                    auto deleteJob = new KIO::DeleteOrTrashJob(urls, Iface::Delete, (k->modifiers() & Qt::ShiftModifier) == 0 ? Iface::ForceConfirmation : Iface::DefaultConfirmation, this);
+                    connect(deleteJob, &KIO::DeleteOrTrashJob::finished, this, [deleteJob](KJob *) {
+                        if (deleteJob->error() != KJob::NoError) {
+                            return;
+                        }
+                    });
+                    deleteJob->start();
+                }
+                return true;
+            }
+
+            const QString& text = k->text();
+            if ( !text.isEmpty() && text.unicode()->isPrint() ) {
                 k->accept();
 
                 if ( !m_fileFinder ) {
