@@ -5,13 +5,13 @@
 # Munzir Taha <munzir@kacst.edu.sa>, 2004.
 # محمد سعد  Mohamed SAAD <metehyi@free.fr>, 2006.
 # Youssef Chahibi <chahibi@gmail.com>, 2007.
-# SPDX-FileCopyrightText: 2021, 2022, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2022, 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-18 01:56+0000\n"
-"PO-Revision-Date: 2024-10-24 06:52+0400\n"
+"PO-Revision-Date: 2025-05-14 17:01+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -491,7 +491,7 @@ msgid ""
 "Do you want to continue?"
 msgstr ""
 "أنت على وشك عرض صورة كبيرة جدًا (%1 × %2 بكسل) ، والتي يمكن أن تستهلك الكثير "
-"من الموارد وقد تجعل الكمبيوتر معطلاً. \n"
+"من الموارد وقد تجعل الحاسوب معطلاً. \n"
 "هل تريد الاستمرار؟"
 
 #: src/imlib_imlib1.cpp:157
