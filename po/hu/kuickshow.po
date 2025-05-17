@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 3.5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-18 01:56+0000\n"
+"POT-Creation-Date: 2025-05-17 00:40+0000\n"
 "PO-Revision-Date: 2011-04-17 17:15+0200\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -330,7 +330,7 @@ msgstr "Tükrözés vízszintesen"
 msgid "Flip Vertically"
 msgstr "Tükrözés függőlegesen"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "A kép kinyomtatása…"
@@ -463,7 +463,7 @@ msgstr "Az eredeti képméret megőrzése"
 msgid "Save Image As"
 msgstr "Mentés másként"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -547,7 +547,7 @@ msgstr ""
 "Egy kis türelmet,\n"
 "%1 letöltése folyik"
 
-#: src/kuickshow.cpp:171
+#: src/kuickshow.cpp:173
 #, fuzzy, kde-kuit-format
 #| msgid ""
 #| "Do you really want to display this 1 image at the same time? This might "
@@ -575,82 +575,47 @@ msgstr[1] ""
 "lefoglal és túlságosan leterhelheti a gépet.<br>Ha a másik lehetőséget (%1) "
 "választja, csak az első kép fog megjelenni."
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Több képet szeretne megjeleníteni?"
 
-#: src/kuickshow.cpp:174
+#: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
 msgstr ""
 
-#: src/kuickshow.cpp:284
+#: src/kuickshow.cpp:286
 #, kde-format
 msgid "&File"
 msgstr "&Fájl"
 
-#: src/kuickshow.cpp:298
+#: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
 msgstr "S&zerkesztés"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
 msgstr ""
 
-#: src/kuickshow.cpp:307
+#: src/kuickshow.cpp:309
 #, kde-format
 msgid "&Settings"
 msgstr "&Beállítások"
 
-#: src/kuickshow.cpp:323
+#: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Fő eszköztár"
 
-#: src/kuickshow.cpp:607
-#, kde-kuit-format
-msgctxt "@info"
-msgid ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-msgstr ""
-
-#: src/kuickshow.cpp:608
-#, kde-format
-msgid "Delete File"
-msgstr "A fájl törlése"
-
-#: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
-msgctxt "@info"
-msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>Biztosan szeretné áthelyezni a Kukába ezt:\n"
-" <b>„%1”</b>?</qt>"
-
-#: src/kuickshow.cpp:634
-#, kde-format
-msgid "Trash File"
-msgstr "Áthelyezés a Kukába"
-
-#: src/kuickshow.cpp:635
-#, kde-format
-msgctxt "to trash"
-msgid "&Trash"
-msgstr "&Kukába"
-
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
 msgstr "Képhiba"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1137
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -659,58 +624,58 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1141
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "Hiba történt az Imlib könyvtárban"
 
-#: src/kuickshow.cpp:1274
+#: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Válassza ki a megnyitandó fájlokat vagy könyvtárt"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
 msgstr "A diavetítés megkezdése"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
 msgstr "Fájlböngésző megjelenítése"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Hide File Browser"
 msgstr "A fájlböngésző elrejtése"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1 beállításai…"
 
-#: src/kuickshow.cpp:1347
+#: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
 msgstr "A Kuickshow névjegye"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1330
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Csak egy ablakot használjon a program"
 
-#: src/kuickshow.cpp:1365
+#: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
 msgstr "A kép megjelenítése"
 
-#: src/kuickshow.cpp:1369
+#: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "A kép megjelenítése az aktív ablakban"
 
-#: src/kuickshow.cpp:1373
+#: src/kuickshow.cpp:1349
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "A kép megjelenítése teljes képernyős módban"
@@ -870,6 +835,26 @@ msgstr " s"
 #| msgid "&Iterations (0 = infinite):"
 msgid "&Iterations:"
 msgstr "&Iterációszám (0 = végtelen):"
+
+#~ msgid "Delete File"
+#~ msgstr "A fájl törlése"
+
+#, fuzzy
+#~| msgid ""
+#~| "<qt>Do you really want to trash\n"
+#~| " <b>'%1'</b>?</qt>"
+#~ msgctxt "@info"
+#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
+#~ msgstr ""
+#~ "<qt>Biztosan szeretné áthelyezni a Kukába ezt:\n"
+#~ " <b>„%1”</b>?</qt>"
+
+#~ msgid "Trash File"
+#~ msgstr "Áthelyezés a Kukába"
+
+#~ msgctxt "to trash"
+#~ msgid "&Trash"
+#~ msgstr "&Kukába"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

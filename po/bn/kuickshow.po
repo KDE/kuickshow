@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-18 01:56+0000\n"
+"POT-Creation-Date: 2025-05-17 00:40+0000\n"
 "PO-Revision-Date: 2006-05-16 13:29-0500\n"
 "Last-Translator: Deepayan Sarkar <deepayan@bengalinux.org>\n"
 "Language-Team: Bengali <kde-translation@bengalinux.org>\n"
@@ -336,7 +336,7 @@ msgstr "অনুভূমিকভাবে উল্টাও"
 msgid "Flip Vertically"
 msgstr "উলম্বভাবে উল্টাও"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "ছবি ছাপাও..."
@@ -469,7 +469,7 @@ msgstr "ছবির আসল মাপ রাখো"
 msgid "Save Image As"
 msgstr "ছবি আবর্জনায় পাঠাও"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -550,7 +550,7 @@ msgstr ""
 "অনুগ্রহ করে ডাউনলোড চলাকালীন অপেক্ষা করুন\n"
 "%1"
 
-#: src/kuickshow.cpp:171
+#: src/kuickshow.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -564,82 +564,47 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr ""
 
-#: src/kuickshow.cpp:174
+#: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
 msgstr ""
 
-#: src/kuickshow.cpp:284
+#: src/kuickshow.cpp:286
 #, kde-format
 msgid "&File"
 msgstr ""
 
-#: src/kuickshow.cpp:298
+#: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
 msgstr ""
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
 msgstr ""
 
-#: src/kuickshow.cpp:307
+#: src/kuickshow.cpp:309
 #, fuzzy, kde-format
 msgid "&Settings"
 msgstr "ছবি সেটিংস"
 
-#: src/kuickshow.cpp:323
+#: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
 msgstr ""
 
-#: src/kuickshow.cpp:607
-#, kde-kuit-format
-msgctxt "@info"
-msgid ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-msgstr ""
-
-#: src/kuickshow.cpp:608
-#, kde-format
-msgid "Delete File"
-msgstr "ফাইল মুছে ফেলো"
-
-#: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to trash\n"
-#| " <b>'%1'</b>?</qt>"
-msgctxt "@info"
-msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>আপনি কি সত্যিই <b>'%1'</b>\n"
-" আবর্জনায় পাঠাতে চান?</qt>"
-
-#: src/kuickshow.cpp:634
-#, kde-format
-msgid "Trash File"
-msgstr "ফাইল আবর্জনায় পাঠাও"
-
-#: src/kuickshow.cpp:635
-#, kde-format
-msgctxt "to trash"
-msgid "&Trash"
-msgstr "&আবর্জনা"
-
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
 msgstr ""
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1137
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -648,58 +613,58 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1141
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "মারাত্মক Imlib ত্রুটি"
 
-#: src/kuickshow.cpp:1274
+#: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "খোলার জন্য ফাইল অথবা ফোল্ডার বেছে নিন"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
 msgstr "স্লাইড-শো শুরু করো"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
 msgstr "ফাইল ব্রাউজার দেখাও"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Hide File Browser"
 msgstr "ফাইল ব্রাউজার লুকাও"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1 কনফিগার করো..."
 
-#: src/kuickshow.cpp:1347
+#: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
 msgstr "কুইক-শো সম্বন্ধে"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1330
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "একটিমাত্র ছবি উইণ্ডো খোলো"
 
-#: src/kuickshow.cpp:1365
+#: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
 msgstr "ছবি দেখাও"
 
-#: src/kuickshow.cpp:1369
+#: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "সক্রিয় উইণ্ডোতে ছবি দেখাও"
 
-#: src/kuickshow.cpp:1373
+#: src/kuickshow.cpp:1349
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "পর্দাজোড়া মোডে ছবি দেখাও"
@@ -858,6 +823,26 @@ msgstr " সেকণ্ড"
 #| msgid "&Iterations (0 = infinite):"
 msgid "&Iterations:"
 msgstr "&কতবার দেখানো হবে (0 = অসীম):"
+
+#~ msgid "Delete File"
+#~ msgstr "ফাইল মুছে ফেলো"
+
+#, fuzzy
+#~| msgid ""
+#~| "<qt>Do you really want to trash\n"
+#~| " <b>'%1'</b>?</qt>"
+#~ msgctxt "@info"
+#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
+#~ msgstr ""
+#~ "<qt>আপনি কি সত্যিই <b>'%1'</b>\n"
+#~ " আবর্জনায় পাঠাতে চান?</qt>"
+
+#~ msgid "Trash File"
+#~ msgstr "ফাইল আবর্জনায় পাঠাও"
+
+#~ msgctxt "to trash"
+#~ msgid "&Trash"
+#~ msgstr "&আবর্জনা"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

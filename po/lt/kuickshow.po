@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-18 01:56+0000\n"
+"POT-Creation-Date: 2025-05-17 00:40+0000\n"
 "PO-Revision-Date: 2011-07-26 19:35+0300\n"
 "Last-Translator: Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -332,7 +332,7 @@ msgstr "Apsukti horizontaliai"
 msgid "Flip Vertically"
 msgstr "Apsukti vertikaliai"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Spausdinti piešinį..."
@@ -465,7 +465,7 @@ msgstr "Išlaikyti pradinį paveikslėlio dydį"
 msgid "Save Image As"
 msgstr "Įrašyti kaip"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -547,7 +547,7 @@ msgid ""
 "%1"
 msgstr ""
 
-#: src/kuickshow.cpp:171
+#: src/kuickshow.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -563,77 +563,47 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr ""
 
-#: src/kuickshow.cpp:174
+#: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
 msgstr ""
 
-#: src/kuickshow.cpp:284
+#: src/kuickshow.cpp:286
 #, kde-format
 msgid "&File"
 msgstr "&Failas"
 
-#: src/kuickshow.cpp:298
+#: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
 msgstr "&Keisti"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
 msgstr ""
 
-#: src/kuickshow.cpp:307
+#: src/kuickshow.cpp:309
 #, kde-format
 msgid "&Settings"
 msgstr "&Nuostatos"
 
-#: src/kuickshow.cpp:323
+#: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Pagrindinė įrankinė"
 
-#: src/kuickshow.cpp:607
-#, kde-kuit-format
-msgctxt "@info"
-msgid ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-msgstr ""
-
-#: src/kuickshow.cpp:608
-#, kde-format
-msgid "Delete File"
-msgstr "Trinti failą"
-
-#: src/kuickshow.cpp:633
-#, kde-kuit-format
-msgctxt "@info"
-msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-
-#: src/kuickshow.cpp:634
-#, kde-format
-msgid "Trash File"
-msgstr ""
-
-#: src/kuickshow.cpp:635
-#, kde-format
-msgctxt "to trash"
-msgid "&Trash"
-msgstr ""
-
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
 msgstr "Paveikslėlio klaida"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1137
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -642,58 +612,58 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1141
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "Lemtinga Imlib klaida"
 
-#: src/kuickshow.cpp:1274
+#: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Pasirinkite failus ar aplanką atvėrimui"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Rodyti skaidres"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
 msgstr "Rodyti failų naršyklę"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Slėpti failų naršyklę"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
 msgstr "Konfigūruoti %1..."
 
-#: src/kuickshow.cpp:1347
+#: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
 msgstr "Apie KuickShow"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1330
 #, fuzzy, kde-format
 msgid "Open Only One Image Window"
 msgstr "Atverti tik vieną piešinio langą"
 
-#: src/kuickshow.cpp:1365
+#: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
 msgstr "Rodyti piešinį"
 
-#: src/kuickshow.cpp:1369
+#: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Rodyti piešinį aktyviame lange"
 
-#: src/kuickshow.cpp:1373
+#: src/kuickshow.cpp:1349
 #, fuzzy, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Pilno ekrano &veiksena"
@@ -853,6 +823,9 @@ msgstr " sek."
 #| msgid "&Iterations (0 = infinite):"
 msgid "&Iterations:"
 msgstr "Pa&kartojimų (0 = neribota):"
+
+#~ msgid "Delete File"
+#~ msgstr "Trinti failą"
 
 #, fuzzy
 #~ msgid ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-18 01:56+0000\n"
+"POT-Creation-Date: 2025-05-17 00:40+0000\n"
 "PO-Revision-Date: 2024-10-18 18:50+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -330,7 +330,7 @@ msgstr "Flip Horizontally"
 msgid "Flip Vertically"
 msgstr "Flip Vertically"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Print Image..."
@@ -462,7 +462,7 @@ msgstr "Keep original image size"
 msgid "Save Image As"
 msgstr "Save Image As"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Image Files (%1)"
@@ -546,7 +546,7 @@ msgstr ""
 "Please wait while downloading\n"
 "%1"
 
-#: src/kuickshow.cpp:171
+#: src/kuickshow.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -566,79 +566,47 @@ msgstr[1] ""
 "be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Display Multiple Images?"
 
-#: src/kuickshow.cpp:174
+#: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
 msgstr "Display"
 
-#: src/kuickshow.cpp:284
+#: src/kuickshow.cpp:286
 #, kde-format
 msgid "&File"
 msgstr "&File"
 
-#: src/kuickshow.cpp:298
+#: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
 msgstr "&Edit"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
 msgstr "View"
 
-#: src/kuickshow.cpp:307
+#: src/kuickshow.cpp:309
 #, kde-format
 msgid "&Settings"
 msgstr "&Settings"
 
-#: src/kuickshow.cpp:323
+#: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Main Toolbar"
 
-#: src/kuickshow.cpp:607
-#, kde-kuit-format
-msgctxt "@info"
-msgid ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-msgstr ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-
-#: src/kuickshow.cpp:608
-#, kde-format
-msgid "Delete File"
-msgstr "Delete File"
-
-#: src/kuickshow.cpp:633
-#, kde-kuit-format
-msgctxt "@info"
-msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr "Do you really want to delete the file<nl/><filename>%1</filename>?"
-
-#: src/kuickshow.cpp:634
-#, kde-format
-msgid "Trash File"
-msgstr "Move File to Wastebin"
-
-#: src/kuickshow.cpp:635
-#, kde-format
-msgctxt "to trash"
-msgid "&Trash"
-msgstr "Move &to Wastebin"
-
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
 msgstr "Image Error"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1137
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -651,57 +619,57 @@ msgstr ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1141
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Fatal Initialisation Error"
 
-#: src/kuickshow.cpp:1274
+#: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Select Files or Folder to Open"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Start Slideshow"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
 msgstr "Show File Browser"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Hide File Browser"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
 msgstr "Configure %1..."
 
-#: src/kuickshow.cpp:1347
+#: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
 msgstr "About KuickShow"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1330
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Open Only One Image Window"
 
-#: src/kuickshow.cpp:1365
+#: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
 msgstr "Show Image"
 
-#: src/kuickshow.cpp:1369
+#: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Show Image in Active Window"
 
-#: src/kuickshow.cpp:1373
+#: src/kuickshow.cpp:1349
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Show Image in Fullscreen Mode"
@@ -858,6 +826,28 @@ msgstr " sec"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Iterations:"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
+#~ "filename>?"
+#~ msgstr ""
+#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
+#~ "filename>?"
+
+#~ msgid "Delete File"
+#~ msgstr "Delete File"
+
+#~ msgctxt "@info"
+#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
+#~ msgstr "Do you really want to delete the file<nl/><filename>%1</filename>?"
+
+#~ msgid "Trash File"
+#~ msgstr "Move File to Wastebin"
+
+#~ msgctxt "to trash"
+#~ msgid "&Trash"
+#~ msgstr "Move &to Wastebin"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

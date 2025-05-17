@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-18 01:56+0000\n"
+"POT-Creation-Date: 2025-05-17 00:40+0000\n"
 "PO-Revision-Date: 2024-12-29 19:47+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -329,7 +329,7 @@ msgstr "Inversigi Horizontale"
 msgid "Flip Vertically"
 msgstr "Inversigi Vertikale"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Presi Bildon..."
@@ -461,7 +461,7 @@ msgstr "Konservi originan bildograndecon"
 msgid "Save Image As"
 msgstr "Konservi Bildon Kiel"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Bilddosieroj (%1)"
@@ -545,7 +545,7 @@ msgstr ""
 "Bonvolu atendi dum elŝuto\n"
 "%1"
 
-#: src/kuickshow.cpp:171
+#: src/kuickshow.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -565,78 +565,47 @@ msgstr[1] ""
 "rimedokonsuma kaj povus troŝarĝi vian komputilon.<br/>Se vi elektas "
 "<interface>%2</interface>, nur la unua bildo estos montrata."
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Ĉu montri plurajn bildojn?"
 
-#: src/kuickshow.cpp:174
+#: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
 msgstr "Montri"
 
-#: src/kuickshow.cpp:284
+#: src/kuickshow.cpp:286
 #, kde-format
 msgid "&File"
 msgstr "&Dosiero"
 
-#: src/kuickshow.cpp:298
+#: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
 msgstr "&Redakti"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
 msgstr "Vidi"
 
-#: src/kuickshow.cpp:307
+#: src/kuickshow.cpp:309
 #, kde-format
 msgid "&Settings"
 msgstr "A&gordo"
 
-#: src/kuickshow.cpp:323
+#: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Ĉefa ilobreto"
 
-#: src/kuickshow.cpp:607
-#, kde-kuit-format
-msgctxt "@info"
-msgid ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-msgstr ""
-"Ĉu vi vere volas porĉiame forigi la dosieron<nl/><filename>%1</filename>?"
-
-#: src/kuickshow.cpp:608
-#, kde-format
-msgid "Delete File"
-msgstr "Forigu dosieron"
-
-#: src/kuickshow.cpp:633
-#, kde-kuit-format
-msgctxt "@info"
-msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr "Ĉu vi vere volas forĵeti la dosieron<nl/><filename>%1</filename>?"
-
-#: src/kuickshow.cpp:634
-#, kde-format
-msgid "Trash File"
-msgstr "Forĵeti dosieron"
-
-#: src/kuickshow.cpp:635
-#, kde-format
-msgctxt "to trash"
-msgid "&Trash"
-msgstr "&Rubujen"
-
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
 msgstr "Bilda Eraro"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1137
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -649,57 +618,57 @@ msgstr ""
 "Plia informo povus disponebli en la seanca protokoldosiero,\n"
 "aŭ povas atingati lanĉante %1 el terminalo."
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1141
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Fatala Pravaloriz-Eraro"
 
-#: src/kuickshow.cpp:1274
+#: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Elekti Dosierojn aŭ Dosierujojn Malfermendajn"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Komenci Bildaron"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
 msgstr "Montri Dosier-Retumilon"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Kaŝi Dosieran Retumilon"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
 msgstr "Agordi %1..."
 
-#: src/kuickshow.cpp:1347
+#: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
 msgstr "Pri KuickShow"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1330
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Malfermi Nur Unu Bildan Fenestron"
 
-#: src/kuickshow.cpp:1365
+#: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
 msgstr "Montri Bildon"
 
-#: src/kuickshow.cpp:1369
+#: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Montri Bildon en Aktiva Fenestro"
 
-#: src/kuickshow.cpp:1373
+#: src/kuickshow.cpp:1349
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Montri Bildon en Plenekrana Reĝimo"
@@ -856,3 +825,24 @@ msgstr " s"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Iteracioj:"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
+#~ "filename>?"
+#~ msgstr ""
+#~ "Ĉu vi vere volas porĉiame forigi la dosieron<nl/><filename>%1</filename>?"
+
+#~ msgid "Delete File"
+#~ msgstr "Forigu dosieron"
+
+#~ msgctxt "@info"
+#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
+#~ msgstr "Ĉu vi vere volas forĵeti la dosieron<nl/><filename>%1</filename>?"
+
+#~ msgid "Trash File"
+#~ msgstr "Forĵeti dosieron"
+
+#~ msgctxt "to trash"
+#~ msgid "&Trash"
+#~ msgstr "&Rubujen"

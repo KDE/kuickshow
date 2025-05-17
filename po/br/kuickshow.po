@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegraphics/kuickshow.pot\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-18 01:56+0000\n"
+"POT-Creation-Date: 2025-05-17 00:40+0000\n"
 "PO-Revision-Date: 2004-09-20 15:44+0200\n"
 "Last-Translator: Thierry Vignaud <tvignaud@mandriva.com>\n"
 "Language-Team: br <LL@li.org>\n"
@@ -327,7 +327,7 @@ msgstr ""
 msgid "Flip Vertically"
 msgstr ""
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Moulañ ar skeudenn ..."
@@ -458,7 +458,7 @@ msgstr ""
 msgid "Save Image As"
 msgstr "Enrollañ e"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -537,7 +537,7 @@ msgstr ""
 "Gortozit en ur enkargañ mar plij\n"
 "%1"
 
-#: src/kuickshow.cpp:171
+#: src/kuickshow.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -551,82 +551,47 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Diskouez meur a skeudenn ?"
 
-#: src/kuickshow.cpp:174
+#: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
 msgstr ""
 
-#: src/kuickshow.cpp:284
+#: src/kuickshow.cpp:286
 #, kde-format
 msgid "&File"
 msgstr "&Restr"
 
-#: src/kuickshow.cpp:298
+#: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
 msgstr "&Aozañ"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
 msgstr ""
 
-#: src/kuickshow.cpp:307
+#: src/kuickshow.cpp:309
 #, kde-format
 msgid "&Settings"
 msgstr "&Kefluniadur"
 
-#: src/kuickshow.cpp:323
+#: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barrenn kentañ an ostilhoù"
 
-#: src/kuickshow.cpp:607
-#, kde-kuit-format
-msgctxt "@info"
-msgid ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-msgstr ""
-
-#: src/kuickshow.cpp:608
-#, kde-format
-msgid "Delete File"
-msgstr "Distruj Restr"
-
-#: src/kuickshow.cpp:633
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "<qt>Do you really want to delete\n"
-#| " <b>'%1'</b>?</qt>"
-msgctxt "@info"
-msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"<qt>Ha fellout a ra deoc'h da vat lemel\n"
-" <b>'%1'</b> ?</qt>"
-
-#: src/kuickshow.cpp:634
-#, kde-format
-msgid "Trash File"
-msgstr "Skeiñ kuit ar restr"
-
-#: src/kuickshow.cpp:635
-#, kde-format
-msgctxt "to trash"
-msgid "&Trash"
-msgstr "&Pod-lastez"
-
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
 msgstr "Fazi gant ar skeudenn"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1137
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -635,58 +600,58 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1141
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "Fazi Imlib sac'hus"
 
-#: src/kuickshow.cpp:1274
+#: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Dibabit ar restroù pe ar renkelloù da zigeriñ"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Loc'hañ an diskouezadur skeudennoù"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
 msgstr "Diskouez furcher ar restroù"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Kuzhat furcher ar restroù"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
 msgstr "Kefluniañ %1 ..."
 
-#: src/kuickshow.cpp:1347
+#: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
 msgstr "Diwar-benn KuickShow"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1330
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr ""
 
-#: src/kuickshow.cpp:1365
+#: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
 msgstr "Diskouez ar skeudenn"
 
-#: src/kuickshow.cpp:1369
+#: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Diskouez ar skeudenn er prenestr bev"
 
-#: src/kuickshow.cpp:1373
+#: src/kuickshow.cpp:1349
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Diskouez ar skeudenn e mod skramm leun"
@@ -845,6 +810,26 @@ msgstr " eil"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
+
+#~ msgid "Delete File"
+#~ msgstr "Distruj Restr"
+
+#, fuzzy
+#~| msgid ""
+#~| "<qt>Do you really want to delete\n"
+#~| " <b>'%1'</b>?</qt>"
+#~ msgctxt "@info"
+#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
+#~ msgstr ""
+#~ "<qt>Ha fellout a ra deoc'h da vat lemel\n"
+#~ " <b>'%1'</b> ?</qt>"
+
+#~ msgid "Trash File"
+#~ msgstr "Skeiñ kuit ar restr"
+
+#~ msgctxt "to trash"
+#~ msgid "&Trash"
+#~ msgstr "&Pod-lastez"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

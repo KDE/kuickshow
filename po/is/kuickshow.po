@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-18 01:56+0000\n"
+"POT-Creation-Date: 2025-05-17 00:40+0000\n"
 "PO-Revision-Date: 2024-12-18 14:23+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -333,7 +333,7 @@ msgstr "Spegla lárétt"
 msgid "Flip Vertically"
 msgstr "Spegla lóðrétt"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Prenta mynd..."
@@ -464,7 +464,7 @@ msgstr "Halda upprunalegri myndstærð"
 msgid "Save Image As"
 msgstr "Vista mynd sem"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Myndskrár (%1)"
@@ -549,7 +549,7 @@ msgstr ""
 "Bíddu á meðan hlaðið er inn\n"
 "%1"
 
-#: src/kuickshow.cpp:171
+#: src/kuickshow.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -569,77 +569,47 @@ msgstr[1] ""
 "hluta af vinnslugetu tölvunnar, og jafnvel valdið því að hún frjósi.<br/>Ef "
 "þú velur <interface>%2</interface>, verður aðeins fyrsta myndin sýnd."
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Sýna margar myndir?"
 
-#: src/kuickshow.cpp:174
+#: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
 msgstr "Skjár"
 
-#: src/kuickshow.cpp:284
+#: src/kuickshow.cpp:286
 #, kde-format
 msgid "&File"
 msgstr "&Skrá"
 
-#: src/kuickshow.cpp:298
+#: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
 msgstr "Br&eyta"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
 msgstr "Skoða"
 
-#: src/kuickshow.cpp:307
+#: src/kuickshow.cpp:309
 #, kde-format
 msgid "&Settings"
 msgstr "&Stillingar"
 
-#: src/kuickshow.cpp:323
+#: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Aðalverkfærastika"
 
-#: src/kuickshow.cpp:607
-#, kde-kuit-format
-msgctxt "@info"
-msgid ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-msgstr "Viltu í alvörunni eyða skránni <nl/><filename>%1</filename>?"
-
-#: src/kuickshow.cpp:608
-#, kde-format
-msgid "Delete File"
-msgstr "Eyða skrá"
-
-#: src/kuickshow.cpp:633
-#, kde-kuit-format
-msgctxt "@info"
-msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr "Viltu í alvörunni setja skrána <nl/><filename>%1</filename> í ruslið?"
-
-#: src/kuickshow.cpp:634
-#, kde-format
-msgid "Trash File"
-msgstr "Setja í ruslið"
-
-#: src/kuickshow.cpp:635
-#, kde-format
-msgctxt "to trash"
-msgid "&Trash"
-msgstr "&Ruslið"
-
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
 msgstr "Villa í mynd"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1137
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -652,57 +622,57 @@ msgstr ""
 "Nánari upplýsingar gætu verið í atvikaskrá setunnar,\n"
 "eða fengist með því að ræsa %1 af skipanalínu."
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1141
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Banvæn frumstillingavilla"
 
-#: src/kuickshow.cpp:1274
+#: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Veldu skrár eða möppu til að opna"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Hefja myndasýningu"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
 msgstr "Sýna skráarvafra"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Fela skráarvafra"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
 msgstr "Stilla %1..."
 
-#: src/kuickshow.cpp:1347
+#: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
 msgstr "Um KuickShow"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1330
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Opna aðeins einn myndglugga"
 
-#: src/kuickshow.cpp:1365
+#: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
 msgstr "Sýna mynd"
 
-#: src/kuickshow.cpp:1369
+#: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Sýna mynd í virkum glugga"
 
-#: src/kuickshow.cpp:1373
+#: src/kuickshow.cpp:1349
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Láta mynd fylla allan skjáinn"
@@ -859,6 +829,27 @@ msgstr " sek"
 #, kde-format
 msgid "&Iterations:"
 msgstr "Ítran&ir:"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
+#~ "filename>?"
+#~ msgstr "Viltu í alvörunni eyða skránni <nl/><filename>%1</filename>?"
+
+#~ msgid "Delete File"
+#~ msgstr "Eyða skrá"
+
+#~ msgctxt "@info"
+#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
+#~ msgstr ""
+#~ "Viltu í alvörunni setja skrána <nl/><filename>%1</filename> í ruslið?"
+
+#~ msgid "Trash File"
+#~ msgstr "Setja í ruslið"
+
+#~ msgctxt "to trash"
+#~ msgid "&Trash"
+#~ msgstr "&Ruslið"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"

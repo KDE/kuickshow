@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-18 01:56+0000\n"
+"POT-Creation-Date: 2025-05-17 00:40+0000\n"
 "PO-Revision-Date: 2024-10-15 19:42+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -335,7 +335,7 @@ msgstr "Перегорнути горизонтально"
 msgid "Flip Vertically"
 msgstr "Перегорнути вертикально"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1377
+#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Друкувати зображення..."
@@ -467,7 +467,7 @@ msgstr "Зберігати початковий розмір зображенн�
 msgid "Save Image As"
 msgstr "Зберегти зображення як"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1275
+#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "файли зображень (%1)"
@@ -552,7 +552,7 @@ msgstr ""
 "Будь ласка, зачекайте на завершення звантаження\n"
 "%1"
 
-#: src/kuickshow.cpp:171
+#: src/kuickshow.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -584,78 +584,47 @@ msgstr[3] ""
 ">Якщо ви оберете <interface>%2</interface>, буде показано лише перше "
 "зображення."
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Показати декілька зображень?"
 
-#: src/kuickshow.cpp:174
+#: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
 msgstr "Показ"
 
-#: src/kuickshow.cpp:284
+#: src/kuickshow.cpp:286
 #, kde-format
 msgid "&File"
 msgstr "&Файл"
 
-#: src/kuickshow.cpp:298
+#: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
 msgstr "З&міни"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
 msgstr "Перегляд"
 
-#: src/kuickshow.cpp:307
+#: src/kuickshow.cpp:309
 #, kde-format
 msgid "&Settings"
 msgstr "П&араметри"
 
-#: src/kuickshow.cpp:323
+#: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Головний пенал"
 
-#: src/kuickshow.cpp:607
-#, kde-kuit-format
-msgctxt "@info"
-msgid ""
-"Do you really want to permanently delete the file<nl/><filename>%1</"
-"filename>?"
-msgstr "Хочете остаточно вилучити файл<nl/><filename>%1</filename>?"
-
-#: src/kuickshow.cpp:608
-#, kde-format
-msgid "Delete File"
-msgstr "Вилучити файл"
-
-#: src/kuickshow.cpp:633
-#, kde-kuit-format
-msgctxt "@info"
-msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-msgstr ""
-"Ви справді хочете пересунути до смітника файл<nl/><filename>%1</filename>?"
-
-#: src/kuickshow.cpp:634
-#, kde-format
-msgid "Trash File"
-msgstr "Викинути файл"
-
-#: src/kuickshow.cpp:635
-#, kde-format
-msgctxt "to trash"
-msgid "&Trash"
-msgstr "Ви&кинути"
-
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
 msgstr "Помилка зображення"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1137
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -668,57 +637,57 @@ msgstr ""
 "Докладніші відомості можна знайти у файлі журналу сеансу або\n"
 "отримати відомості за допомогою команди %1 у терміналі."
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1141
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Критична помилка ініціалізації"
 
-#: src/kuickshow.cpp:1274
+#: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Відкрити файли або теку"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Почати показ слайдів"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
 msgstr "Показати навігацію файлів"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Сховати навігацію файлів"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
 msgstr "Налаштувати %1..."
 
-#: src/kuickshow.cpp:1347
+#: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
 msgstr "Про KuickShow"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1330
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Відкривати тільки одне вікно зображення"
 
-#: src/kuickshow.cpp:1365
+#: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
 msgstr "Показати зображення"
 
-#: src/kuickshow.cpp:1369
+#: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Показати зображення в активному вікні"
 
-#: src/kuickshow.cpp:1373
+#: src/kuickshow.cpp:1349
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Показати зображення в повноекранному режимі"
@@ -875,6 +844,27 @@ msgstr " с"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Ітерацій:"
+
+#~ msgctxt "@info"
+#~ msgid ""
+#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
+#~ "filename>?"
+#~ msgstr "Хочете остаточно вилучити файл<nl/><filename>%1</filename>?"
+
+#~ msgid "Delete File"
+#~ msgstr "Вилучити файл"
+
+#~ msgctxt "@info"
+#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
+#~ msgstr ""
+#~ "Ви справді хочете пересунути до смітника файл<nl/><filename>%1</filename>?"
+
+#~ msgid "Trash File"
+#~ msgstr "Викинути файл"
+
+#~ msgctxt "to trash"
+#~ msgid "&Trash"
+#~ msgstr "Ви&кинути"
 
 #~ msgid ""
 #~ "<qt>Do you really want to delete\n"
