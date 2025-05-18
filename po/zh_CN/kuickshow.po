@@ -807,10 +807,3 @@ msgstr " 秒"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Delete File"
-#~ msgstr "删除文件"
-
-#~ msgctxt "to trash"
-#~ msgid "&Trash"
-#~ msgstr "移动到回收站(&T)"
