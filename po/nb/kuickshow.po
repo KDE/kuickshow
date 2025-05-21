@@ -818,13 +818,3 @@ msgstr " sek"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Delete File"
-#~ msgstr "Slett fil"
-
-#~ msgid "Trash File"
-#~ msgstr "Flytt fil til søppelkurven"
-
-#~ msgctxt "to trash"
-#~ msgid "&Trash"
-#~ msgstr "&Søppelkurven"

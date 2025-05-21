@@ -816,13 +816,3 @@ msgstr " s"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Delete File"
-#~ msgstr "Slett fila"
-
-#~ msgid "Trash File"
-#~ msgstr "Legg i papirkorga"
-
-#~ msgctxt "to trash"
-#~ msgid "&Trash"
-#~ msgstr "Legg i &papirkorga"
