@@ -564,12 +564,12 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Segur que voleu visualitzar 1 imatge a la vegada? Açò pot consumir força "
-"recursos i pot sobrecarregar l'ordinador.<br/>Si escolliu <interface>%2</"
+"recursos i pot sobrecarregar l'ordinador.<br/>Si trieu <interface>%2</"
 "interface>, només es visualitzarà la primera imatge."
 msgstr[1] ""
 "Segur que voleu visualitzar estes %1 imatges a la vegada? Açò pot consumir "
-"força recursos i pot sobrecarregar l'ordinador.<br/>Si escolliu <interface>"
-"%2</interface>, només es visualitzarà la primera imatge."
+"força recursos i pot sobrecarregar l'ordinador.<br/>Si trieu <interface>%2</"
+"interface>, només es visualitzarà la primera imatge."
 
 #: src/kuickshow.cpp:175
 #, kde-format
@@ -834,24 +834,3 @@ msgstr " seg"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Iteracions:"
-
-#~ msgctxt "@info"
-#~ msgid ""
-#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
-#~ "filename>?"
-#~ msgstr "Voleu suprimir permanentment el fitxer<nl/><filename>%1</filename>?"
-
-#~ msgid "Delete File"
-#~ msgstr "Suprimix el fitxer"
-
-#~ msgctxt "@info"
-#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-#~ msgstr ""
-#~ "Voleu llençar a dins de la paperera el fitxer<nl/><filename>%1</filename>?"
-
-#~ msgid "Trash File"
-#~ msgstr "Llença a dins de la paperera"
-
-#~ msgctxt "to trash"
-#~ msgid "&Trash"
-#~ msgstr "A la &paperera"
