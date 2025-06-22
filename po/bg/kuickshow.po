@@ -2,7 +2,7 @@
 # Bulgarian translation of KDE.
 # This file is licensed under the GPL.
 #
-# $Id: kuickshow.po 1709012 2025-05-17 01:21:03Z scripty $
+# $Id: kuickshow.po 1711750 2025-06-21 10:54:20Z mkkdr $
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2010.
@@ -829,44 +829,3 @@ msgstr " сек"
 #, kde-format
 msgid "&Iterations:"
 msgstr "Повторен&ия:"
-
-#~ msgctxt "@info"
-#~ msgid ""
-#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
-#~ "filename>?"
-#~ msgstr ""
-#~ "Наистина ли искате да изтриете за постоянно файла<nl/><filename>%1</"
-#~ "filename>?"
-
-#~ msgid "Delete File"
-#~ msgstr "Изтриване на файла"
-
-#~ msgctxt "@info"
-#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-#~ msgstr ""
-#~ "Наистина ли искате да преместите в кошчето файла<nl/><filename>%1</"
-#~ "filename>?"
-
-#~ msgid "Trash File"
-#~ msgstr "Преместване на файла в кошчето"
-
-#~ msgctxt "to trash"
-#~ msgid "&Trash"
-#~ msgstr "В &кошчето"
-
-#~ msgid ""
-#~ "<qt>Do you really want to delete\n"
-#~ " <b>'%1'</b>?</qt>"
-#~ msgstr ""
-#~ "<qt>Наистина ли искате да изтриете\n"
-#~ " <b>'%1'</b>?</qt>"
-
-#~ msgid ""
-#~ "Unable to initialize \"Imlib\".\n"
-#~ "Start kuickshow from the command line and look for error messages.\n"
-#~ "The program will now quit."
-#~ msgstr ""
-#~ "Грешка при инициализиране на библиотеката \"Imlib\".\n"
-#~ "Моля стартирайте \"kuickshow\" от командния ред и вижте съобщението за "
-#~ "грешка.\n"
-#~ "Прекъсване на изпълнението."
