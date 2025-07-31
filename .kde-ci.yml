@@ -11,3 +11,6 @@ Dependencies:
       'frameworks/kio': '@stable-kf6'
       'frameworks/kwindowsystem': '@stable-kf6'
       'frameworks/kxmlgui': '@stable-kf6'
+
+Options:
+  require-passing-tests-on: ['@all']
