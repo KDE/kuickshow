@@ -60,7 +60,7 @@ msgstr "التغييرات"
 #: src/defaultswidget.ui:23
 #, kde-format
 msgid "Apply default image modifications"
-msgstr "طبِق التعديلات الافتراضية على الصورة"
+msgstr "طبِق التعديلات المبدئية على الصورة"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbScale)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
