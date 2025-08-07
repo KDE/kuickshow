@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-17 00:40+0000\n"
-"PO-Revision-Date: 2025-05-14 17:01+0400\n"
+"PO-Revision-Date: 2025-08-06 15:03+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -259,19 +259,19 @@ msgstr "لون الخلفية:"
 #: src/generalwidget.ui:121
 #, kde-format
 msgid "Show only files with extension: "
-msgstr "أعرض فقط الملفات ذات الإمتداد: "
+msgstr "أعرض فقط الملفات ذات الامتداد: "
 
 #. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
 #: src/generalwidget.ui:128
 #, kde-format
 msgid "Open KuickShow Website"
-msgstr "إفتح موقع KuickShow"
+msgstr "افتح موقع KuickShow"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
 #: src/generalwidget.ui:138
 #, kde-format
 msgid "Preload next image"
-msgstr "تحميل تمهيديق للصورة التالية"
+msgstr "تحميل تمهيدي للصورة التالية"
 
 #: src/imagewindow.cpp:138
 #, kde-format
@@ -301,7 +301,7 @@ msgstr "انقل الصورة إلى المهملات"
 #: src/imagewindow.cpp:171
 #, kde-format
 msgid "Restore Original Size"
-msgstr "إستعادة القياس الأصلي"
+msgstr "استعادة القياس الأصلي"
 
 #: src/imagewindow.cpp:176
 #, kde-format
@@ -376,22 +376,22 @@ msgstr "غاما أقل"
 #: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Up"
-msgstr "إنزلاق للأعلى"
+msgstr "انزلاق للأعلى"
 
 #: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Down"
-msgstr "إنزلاق للأسفل"
+msgstr "انزلاق للأسفل"
 
 #: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
-msgstr "إنزلاق لليسار"
+msgstr "انزلاق لليسار"
 
 #: src/imagewindow.cpp:269
 #, kde-format
 msgid "Scroll Right"
-msgstr "إنزلاق لليمين"
+msgstr "انزلاق لليمين"
 
 #: src/imagewindow.cpp:274
 #, kde-format
@@ -527,12 +527,12 @@ msgstr "&عرض كشرائح"
 #: src/kuickconfigdlg.cpp:60
 #, kde-format
 msgid "&Viewer Shortcuts"
-msgstr "إختصارات ال&مستعرض"
+msgstr "اختصارات ال&مستعرض"
 
 #: src/kuickconfigdlg.cpp:63
 #, kde-format
 msgid "Bro&wser Shortcuts"
-msgstr "إختصارات المت&صفح"
+msgstr "اختصارات المت&صفح"
 
 #: src/kuickfile.cpp:128
 #, kde-format
@@ -562,27 +562,27 @@ msgid_plural ""
 msgstr[0] ""
 "هل تريد حقًا عرض هذه الصورة الواحدة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة "
 "وقد يؤدي إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</"
-"interface> ، فسيتم عرض الصورة الأولى فقط."
+"interface> ، فستُعرض الصورة الأولى فقط."
 msgstr[1] ""
 "هل تريد حقًا عرض هذه الصورة الواحدة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة "
 "وقد يؤدي إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</"
-"interface> ، فسيتم عرض الصورة الأولى فقط."
+"interface> ، فستُعرض الأولى فقط."
 msgstr[2] ""
 "هل تريد حقًا عرض هذه الصورة الواحدة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة "
 "وقد يؤدي إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</"
-"interface> ، فسيتم عرض الصورة الأولى فقط."
+"interface> ، فستُعرض الأولى فقط."
 msgstr[3] ""
 "هل تريد حقًا عرض هذه %1 صور في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد يؤدي "
 "إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</interface> ، "
-"فسيتم عرض الصورة الأولى فقط."
+"فستُعرض الصورة الأولى فقط."
 msgstr[4] ""
 "هل تريد حقًا عرض هذه %1 صورة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد يؤدي "
 "إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</interface> ، "
-"فسيتم عرض الصورة الأولى فقط."
+"فستُعرض الصورة الأولى فقط."
 msgstr[5] ""
 "هل تريد حقًا عرض هذه %1 صورة في نفس الوقت؟ قد يتطلب هذا موارد كثيرة وقد يؤدي "
 "إلى زيادة التحميل على الحاسوب. <br/> إذا اخترت <interface>%2</interface> ، "
-"فسيتم عرض الصورة الأولى فقط."
+"فستُعرض الصورة الأولى فقط."
 
 #: src/kuickshow.cpp:175
 #, kde-format
@@ -645,7 +645,7 @@ msgstr "خطأ بدء فادح"
 #: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
-msgstr "إختر الملفات أو المجلدات للفتح"
+msgstr "اختر الملفات أو المجلدات للفتح"
 
 #: src/kuickshow.cpp:1311
 #, kde-format
@@ -675,7 +675,7 @@ msgstr "عن KuickShow"
 #: src/kuickshow.cpp:1330
 #, kde-format
 msgid "Open Only One Image Window"
-msgstr "إفتح نافذة صور واحدة فقط"
+msgstr "افتح نافذة صور واحدة فقط"
 
 #: src/kuickshow.cpp:1341
 #, kde-format
@@ -710,7 +710,7 @@ msgstr "(c) 1998-2009, Carsten Pfeiffer"
 #: src/main.cpp:46
 #, kde-format
 msgid "Carsten Pfeiffer"
-msgstr "Carsten Pfeiffer"
+msgstr "كارستن فايفر"
 
 #: src/main.cpp:48
 #, kde-format
@@ -725,7 +725,7 @@ msgstr "Thorsten Scheuermann"
 #: src/main.cpp:59
 #, kde-format
 msgid "Start in the last visited folder, not the current working folder."
-msgstr "ابدأ في آخر دليل تم زيارته، وليس في الدليل الحالي."
+msgstr "ابدأ في آخر دليل زُرته، وليس في الدليل الحالي."
 
 #: src/main.cpp:60
 #, kde-format
@@ -735,7 +735,7 @@ msgstr "وصلات شبكية /أسماء ملفات لصور اختيارية �
 #: src/printing.cpp:52
 #, kde-format
 msgid "Print %1"
-msgstr "إطبع %1"
+msgstr "اطبع %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
 #: src/printing_page.ui:14
@@ -747,13 +747,13 @@ msgstr "تعيينات الصورة"
 #: src/printing_page.ui:20
 #, kde-format
 msgid "Print fi&lename below image"
-msgstr "إطبع اسم الم&لف تحت الصورة"
+msgstr "اطبع اسم الم&لف تحت الصورة"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr "إطبع الصورة ب&الأسود والأبيض"
+msgstr "اطبع الصورة ب&الأسود والأبيض"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
@@ -783,13 +783,13 @@ msgstr "بوصات"
 #: src/printing_page.ui:108
 #, kde-format
 msgid "&Height:"
-msgstr "ال&إرتفاع:"
+msgstr "الارتفاع:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, scale)
 #: src/printing_page.ui:121
 #, kde-format
 msgid "Print e&xact size: "
-msgstr "إطبع القياس ال&تام: "
+msgstr "اطبع القياس ال&تام: "
 
 #. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
 #: src/printing_page.ui:141
@@ -819,7 +819,7 @@ msgstr "حوّل إلى ملء الشاشة"
 #: src/slideshowwidget.ui:27
 #, kde-format
 msgid "S&tart with current image"
-msgstr "إبدأ مع الصورة &الحالية"
+msgstr "ابدأ مع الصورة &الحالية"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/slideshowwidget.ui:34
@@ -831,7 +831,7 @@ msgstr "الفت&رة بين الشرائح:"
 #: src/slideshowwidget.ui:44
 #, kde-format
 msgid "Wait for key"
-msgstr "إنتظر المفتاح"
+msgstr "انتظر المفتاح"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:47
