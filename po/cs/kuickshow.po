@@ -836,25 +836,3 @@ msgstr " sek"
 #, kde-format
 msgid "&Iterations:"
 msgstr "Opa&kování:"
-
-#~ msgctxt "@info"
-#~ msgid ""
-#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
-#~ "filename>?"
-#~ msgstr ""
-#~ "Opravdu si přejete trvale smazat soubor<nl/><filename>%1</filename>?"
-
-#~ msgid "Delete File"
-#~ msgstr "Smazat soubor"
-
-#~ msgctxt "@info"
-#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-#~ msgstr ""
-#~ "Opravdu si přejete vyhodit soubor<nl/><filename>%1</filename> do koše?"
-
-#~ msgid "Trash File"
-#~ msgstr "Přesunout soubor do koše"
-
-#~ msgctxt "to trash"
-#~ msgid "&Trash"
-#~ msgstr "Vyhodi&t do koše"
