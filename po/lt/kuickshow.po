@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-17 00:40+0000\n"
-"PO-Revision-Date: 2011-07-26 19:35+0300\n"
+"PO-Revision-Date: 2025-10-18 20:35+0300\n"
 "Last-Translator: Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -17,67 +17,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Eugenijus Paulauskas"
+msgstr "Eugenijus Paulauskas, Moo"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "eugenijus@agvila.lt"
+msgstr "eugenijus@agvila.lt, <>"
 
 #. i18n: ectx: property (text), widget (QLabel, lblAuthors)
 #: src/aboutwidget.ui:32
 #, kde-format
 msgid "(authors)"
-msgstr ""
+msgstr "(autoriai)"
 
 #. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
 #: src/aboutwidget.ui:45
 #, kde-format
 msgid "(url)"
-msgstr ""
+msgstr "(url)"
 
 #. i18n: ectx: property (text), widget (QLabel, lblCopyright)
 #: src/aboutwidget.ui:55
 #, kde-format
 msgid "(copyright)"
-msgstr ""
+msgstr "(autorių teisės)"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&Modifications"
+#, kde-format
 msgid "Modifications"
-msgstr "&Modifikacijos"
+msgstr "Modifikacijos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
 #: src/defaultswidget.ui:23
 #, kde-format
 msgid "Apply default image modifications"
-msgstr "Pritaikyti pagrindines piešinio modifikacijas"
+msgstr "Taikyti numatytąsias paveikslų modifikacijas"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbScale)
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: src/defaultswidget.ui:30 src/printing_page.ui:37
 #, kde-format
 msgid "Scaling"
-msgstr "Mastelio nustatymas"
+msgstr "Mastelio keitimas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbUpScale)
 #: src/defaultswidget.ui:36
 #, kde-format
 msgid "Scale image to screen size, if smaller, up to factor:"
-msgstr "Jeigu didesnis, sumažinti piešinį iki ekrano dydžio, iki faktoriaus:"
+msgstr ""
+"Jei mažesnis, padidinti paveikslą iki ekrano dydžio. Didžiausias daugiklis:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDownScale)
 #: src/defaultswidget.ui:53
 #, kde-format
 msgid "Shrink image to screen size, if larger"
-msgstr "Jeigu didesnis, sumažinti piešinį iki ekrano dydžio"
+msgstr "Jei didesnis, sumažinti paveikslą iki ekrano dydžio"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbGeometry)
 #: src/defaultswidget.ui:63
@@ -89,19 +89,19 @@ msgstr "Geometrija"
 #: src/defaultswidget.ui:69
 #, kde-format
 msgid "Flip vertically"
-msgstr "Apsukti vertikaliai"
+msgstr "Apversti vertikaliai"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
 #: src/defaultswidget.ui:76
 #, kde-format
 msgid "Flip horizontally"
-msgstr "Apsukti horizontaliai"
+msgstr "Apversti horizontaliai"
 
 #. i18n: ectx: property (text), widget (QLabel, lbRotate)
 #: src/defaultswidget.ui:85
 #, kde-format
 msgid "Rotate image:"
-msgstr "Pasukti piešinį:"
+msgstr "Pasukti paveikslą:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:93
@@ -131,7 +131,7 @@ msgstr "270 laipsnių"
 #: src/defaultswidget.ui:134
 #, kde-format
 msgid "Adjustments"
-msgstr "Reguliavimai"
+msgstr "Koregavimai"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/defaultswidget.ui:140
@@ -167,20 +167,19 @@ msgstr "Originalas"
 #: src/defaultswidget.ui:288
 #, kde-format
 msgid "Modified"
-msgstr "Pakeistas"
+msgstr "Modifikuotas"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
 #: src/generalwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&General"
+#, kde-format
 msgid "General"
-msgstr "&Bendra"
+msgstr "Bendra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
 #: src/generalwidget.ui:20
 #, kde-format
 msgid "Remember last folder"
-msgstr "Atsiminti paskutinį aplanką"
+msgstr "Prisiminti paskutinį aplanką"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbox2)
 #: src/generalwidget.ui:30
@@ -190,45 +189,45 @@ msgstr "Kokybė ir greitis"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
 #: src/generalwidget.ui:36
-#, fuzzy, kde-format
+#, kde-format
 msgid "Smooth scaling"
-msgstr "Mastelio nustatymas"
+msgstr "Glotnus mastelio keitimas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFastRender)
 #: src/generalwidget.ui:43
 #, kde-format
 msgid "Fast rendering"
-msgstr "Greitas pateikimas"
+msgstr "Greitas atvaizdavimas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
 #: src/generalwidget.ui:50
 #, kde-format
 msgid "Dither in HiColor (15/16bit) modes"
-msgstr "Papildyti iki HiColor (15/16 bitų) režimo"
+msgstr "Sumaišyti spalvas HiColor (15/16 bitų) veiksenose"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
 #: src/generalwidget.ui:57
 #, kde-format
 msgid "Dither in LowColor (<=8bit) modes"
-msgstr "Papildyti iki LowColor (<=8 bitų) režimo"
+msgstr "Sumaišyti spalvas LowColor (<=8 bitų) veiksenose"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
 #: src/generalwidget.ui:64
 #, kde-format
 msgid "Use own color palette"
-msgstr "Naudoti savą spalvų paletę"
+msgstr "Naudoti nuosavą spalvų paletę"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFastRemap)
 #: src/generalwidget.ui:71
 #, kde-format
 msgid "Fast palette remapping"
-msgstr "Greita paletės atvaizdavimas"
+msgstr "Greitas paletės atvaizdavimas iš naujo"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/generalwidget.ui:78
 #, kde-format
 msgid "Maximum cache size: "
-msgstr "Didžiausias krepšio dydis: "
+msgstr "Didžiausias podėlio dydis: "
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, maxCacheSpinBox)
 #: src/generalwidget.ui:88
@@ -258,54 +257,54 @@ msgstr "Fono spalva:"
 #: src/generalwidget.ui:121
 #, kde-format
 msgid "Show only files with extension: "
-msgstr "Rodyti failus tik su tokiu plėtiniu:"
+msgstr "Rodyti tik failus su prievardžiu: "
 
 #. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
 #: src/generalwidget.ui:128
 #, kde-format
 msgid "Open KuickShow Website"
-msgstr "Atverti KuickShow žiniatinklio svetainę"
+msgstr "Atverti KuickShow interneto svetainę"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
 #: src/generalwidget.ui:138
 #, kde-format
 msgid "Preload next image"
-msgstr "Iš anksto įkelti kitą piešinį"
+msgstr "Iš anksto įkelti kitą paveikslą"
 
 #: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Dubliuoti langą"
 
 #: src/imagewindow.cpp:143
 #, kde-format
 msgid "Show Next Image"
-msgstr "Rodyti kitą piešinį"
+msgstr "Rodyti kitą paveikslą"
 
 #: src/imagewindow.cpp:148
 #, kde-format
 msgid "Show Previous Image"
-msgstr "Rodyti ankstesnį piešinį"
+msgstr "Rodyti ankstesnį paveikslą"
 
 #: src/imagewindow.cpp:153
 #, kde-format
 msgid "Delete Image"
-msgstr "Trinti paveikslėlį"
+msgstr "Ištrinti paveikslą"
 
 #: src/imagewindow.cpp:158
 #, kde-format
 msgid "Move Image to Trash"
-msgstr "Perkelti paveikslėlį į šiukšliadėžę"
+msgstr "Perkelti paveikslą į šiukšlinę"
 
 #: src/imagewindow.cpp:171
 #, kde-format
 msgid "Restore Original Size"
-msgstr "Grąžinti originalo dydį"
+msgstr "Atkurti pradinį dydį"
 
 #: src/imagewindow.cpp:176
 #, kde-format
 msgid "Maximize"
-msgstr "Išdidinti"
+msgstr "Išskleisti"
 
 #: src/imagewindow.cpp:181
 #, kde-format
@@ -325,23 +324,22 @@ msgstr "Pasukti 270 laipsnių"
 #: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Horizontally"
-msgstr "Apsukti horizontaliai"
+msgstr "Apversti horizontaliai"
 
 #: src/imagewindow.cpp:201
 #, kde-format
 msgid "Flip Vertically"
-msgstr "Apsukti vertikaliai"
+msgstr "Apversti vertikaliai"
 
 #: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
-msgstr "Spausdinti piešinį..."
+msgstr "Spausdinti paveikslą..."
 
 #: src/imagewindow.cpp:217
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Rodyti failų naršyklę"
+msgstr "Grįžti į failų naršymą"
 
 #: src/imagewindow.cpp:223
 #, kde-format
@@ -366,12 +364,12 @@ msgstr "Mažiau kontrasto"
 #: src/imagewindow.cpp:243
 #, kde-format
 msgid "More Gamma"
-msgstr "Daugiau Gamma"
+msgstr "Daugiau gamos"
 
 #: src/imagewindow.cpp:248
 #, kde-format
 msgid "Less Gamma"
-msgstr "Mažiau Gamma"
+msgstr "Mažiau gamos"
 
 #: src/imagewindow.cpp:254
 #, kde-format
@@ -394,14 +392,14 @@ msgid "Scroll Right"
 msgstr "Slinkti dešinėn"
 
 #: src/imagewindow.cpp:274
-#, fuzzy, kde-format
+#, kde-format
 msgid "Pause Slideshow"
-msgstr "Rodyti skaidres"
+msgstr "Pristabdyti skaidrių rodymą"
 
 #: src/imagewindow.cpp:288
 #, kde-format
 msgid "Reload Image"
-msgstr "Iš naujo įkelti piešinį"
+msgstr "Įkelti paveikslą iš naujo"
 
 #: src/imagewindow.cpp:294
 #, kde-format
@@ -415,9 +413,9 @@ msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
 #: src/imagewindow.cpp:426
-#, fuzzy, kde-format
+#, kde-format
 msgid "Unable to download the image from %1."
-msgstr "Nepavyksta išspausdinti paveikslo."
+msgstr "Nepavyksta atsisiųsti paveikslą iš %1."
 
 #: src/imagewindow.cpp:442
 #, kde-format
@@ -426,8 +424,8 @@ msgid ""
 "Perhaps the file format is unsupported or your Imlib is not installed "
 "properly."
 msgstr ""
-"Nepavyko įkelti piešinio %1\n"
-"Gal failo formatas nepalaikomas, arba Jūsų Imlib yra neteisingai įdiegta."
+"Nepavyko įkelti paveikslo %1\n"
+"Galbūt, failo formatas yra nepalaikomas, arba netinkamai įdiegta Imlib."
 
 #: src/imagewindow.cpp:851
 #, kde-format
@@ -447,45 +445,41 @@ msgstr "Gama"
 #: src/imagewindow.cpp:906
 #, kde-format
 msgid "Unable to print the image."
-msgstr "Nepavyksta išspausdinti paveikslo."
+msgstr "Nepavyko spausdinti paveikslo."
 
 #: src/imagewindow.cpp:907
 #, kde-format
 msgid "Printing Failed"
-msgstr "Spausdinimas nepavyko"
+msgstr "Nepavyko spausdinti"
 
 #: src/imagewindow.cpp:924
 #, kde-format
 msgid "Keep original image size"
-msgstr "Išlaikyti pradinį paveikslėlio dydį"
+msgstr "Išlaikyti pradinį paveikslo dydį"
 
 #: src/imagewindow.cpp:929
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Įrašyti kaip"
+msgstr "Įrašyti paveikslą kaip"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
-msgstr ""
+msgstr "Paveikslų failai (%1)"
 
 #: src/imagewindow.cpp:952
-#, fuzzy, kde-format
-#| msgid ""
-#| "Could not save the file.\n"
-#| "Perhaps the disk is full, or you don't have write permission to the file."
+#, kde-format
 msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
-"Nepavyksta išsaugoti failo.\n"
-"Gal diskas yra pilnas, arba Jūs neturite įrašymo į failą teisės."
+"Nepavyko įrašyti failo.\n"
+"Tikriausiai, nebėra vietos diske arba neturite leidimo rašyti į failą."
 
 #: src/imagewindow.cpp:955
 #, kde-format
 msgid "File Saving Failed"
-msgstr "Failo išsaugojimas nepavyko"
+msgstr "Nepavyko įrašyti failo"
 
 #: src/imagewindow.cpp:1202
 #, kde-format
@@ -494,16 +488,20 @@ msgid ""
 "resource-consuming and even make your computer hang.\n"
 "Do you want to continue?"
 msgstr ""
+"Jūs ketinate peržiūrėti labai didelį paveikslą (%1 x %2 pikselių), o tai "
+"gali naudoti labai daug išteklių ir netgi priversti jūsų kompiuterį "
+"užstrigti.\n"
+"Ar norite tęsti?"
 
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Paveikslų įkėlimo ir atvaizdavimo biblioteka"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Paveikslų apdorojimo biblioteka"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -523,17 +521,17 @@ msgstr "&Modifikacijos"
 #: src/kuickconfigdlg.cpp:54
 #, kde-format
 msgid "&Slideshow"
-msgstr "&Rodyti skaidres"
+msgstr "&Skaidrių rodymas"
 
 #: src/kuickconfigdlg.cpp:60
 #, kde-format
 msgid "&Viewer Shortcuts"
-msgstr "&Žiūriklio spartieji klav."
+msgstr "Ž&iūryklės spartieji klavišai"
 
 #: src/kuickconfigdlg.cpp:63
 #, kde-format
 msgid "Bro&wser Shortcuts"
-msgstr "&Naršyklės spartieji klav."
+msgstr "&Naršyklės spartieji klavišai"
 
 #: src/kuickfile.cpp:128
 #, kde-format
@@ -546,6 +544,8 @@ msgid ""
 "Please wait while downloading\n"
 "%1"
 msgstr ""
+"Palaukite, kol atsisiunčiama\n"
+"%1"
 
 #: src/kuickshow.cpp:173
 #, kde-kuit-format
@@ -559,19 +559,31 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
+"Ar tikrai norite tuo pačiu metu rodyti šį 1 paveikslą? This might be quite "
+"resource intensive and could overload your computer.<br/>If you choose "
+"<interface>%2</interface>, only the first image will be shown."
 msgstr[1] ""
+"Do you really want to display these %1 images at the same time? This might "
+"be quite resource intensive and could overload your computer.<br/>If you "
+"choose <interface>%2</interface>, only the first image will be shown."
 msgstr[2] ""
+"Do you really want to display these %1 images at the same time? This might "
+"be quite resource intensive and could overload your computer.<br/>If you "
+"choose <interface>%2</interface>, only the first image will be shown."
 msgstr[3] ""
+"Do you really want to display these %1 images at the same time? This might "
+"be quite resource intensive and could overload your computer.<br/>If you "
+"choose <interface>%2</interface>, only the first image will be shown."
 
 #: src/kuickshow.cpp:175
 #, kde-format
 msgid "Display Multiple Images?"
-msgstr ""
+msgstr "Rodyti keletą paveikslų?"
 
 #: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Rodyti"
 
 #: src/kuickshow.cpp:286
 #, kde-format
@@ -581,12 +593,12 @@ msgstr "&Failas"
 #: src/kuickshow.cpp:300
 #, kde-format
 msgid "&Edit"
-msgstr "&Keisti"
+msgstr "&Taisa"
 
 #: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Rodinys"
 
 #: src/kuickshow.cpp:309
 #, kde-format
@@ -596,12 +608,12 @@ msgstr "&Nuostatos"
 #: src/kuickshow.cpp:325
 #, kde-format
 msgid "Main Toolbar"
-msgstr "Pagrindinė įrankinė"
+msgstr "Pagrindinė įrankių juosta"
 
 #: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
-msgstr "Paveikslėlio klaida"
+msgstr "Paveikslo klaida"
 
 #: src/kuickshow.cpp:1137
 #, kde-format
@@ -611,22 +623,25 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Nepavyko inicijuoti paveikslų bibliotekos „%2“.\n"
+"\n"
+"Daugiau informacijos gali būti prieinama seanso žurnalo faile\n"
+"arba gauta paleidus %1 terminale."
 
 #: src/kuickshow.cpp:1141
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Lemtinga Imlib klaida"
+msgstr "Lemtingoji inicijavimo klaida"
 
 #: src/kuickshow.cpp:1250
 #, kde-format
 msgid "Select Files or Folder to Open"
-msgstr "Pasirinkite failus ar aplanką atvėrimui"
+msgstr "Pasirinkite, kuriuos failus ar aplanką atverti"
 
 #: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
-msgstr "Rodyti skaidres"
+msgstr "Pradėti skaidrių rodymą"
 
 #: src/kuickshow.cpp:1314
 #, kde-format
@@ -649,24 +664,24 @@ msgid "About KuickShow"
 msgstr "Apie KuickShow"
 
 #: src/kuickshow.cpp:1330
-#, fuzzy, kde-format
+#, kde-format
 msgid "Open Only One Image Window"
-msgstr "Atverti tik vieną piešinio langą"
+msgstr "Atverti tik vieną paveikslo langą"
 
 #: src/kuickshow.cpp:1341
 #, kde-format
 msgid "Show Image"
-msgstr "Rodyti piešinį"
+msgstr "Rodyti paveikslą"
 
 #: src/kuickshow.cpp:1345
 #, kde-format
 msgid "Show Image in Active Window"
-msgstr "Rodyti piešinį aktyviame lange"
+msgstr "Rodyti paveikslą aktyviame lange"
 
 #: src/kuickshow.cpp:1349
-#, fuzzy, kde-format
+#, kde-format
 msgid "Show Image in Fullscreen Mode"
-msgstr "Pilno ekrano &veiksena"
+msgstr "Rodyti paveikslą viso ekrano veiksenoje"
 
 #: src/main.cpp:37
 #, kde-format
@@ -676,12 +691,12 @@ msgstr "KuickShow"
 #: src/main.cpp:39
 #, kde-format
 msgid "A fast and versatile image viewer"
-msgstr "Greitas ir įvairiapusis piešinių žiūriklis"
+msgstr "Greita ir lanksti paveikslų žiūryklė"
 
 #: src/main.cpp:41
 #, kde-format
 msgid "(c) 1998-2009, Carsten Pfeiffer"
-msgstr "(c) 1998-2009, Carsten Pfeiffer"
+msgstr "(c) 1998–2009, Carsten Pfeiffer"
 
 #: src/main.cpp:46
 #, kde-format
@@ -699,15 +714,15 @@ msgid "Thorsten Scheuermann"
 msgstr "Thorsten Scheuermann"
 
 #: src/main.cpp:59
-#, fuzzy, kde-format
+#, kde-format
 msgid "Start in the last visited folder, not the current working folder."
 msgstr ""
-"Paleisti paskutiniame lankytame aplanke, ne dabartiniame darbiniame aplanke"
+"Paleisti paskutiniame lankytame aplanke, ne esamame darbiniame aplanke."
 
 #: src/main.cpp:60
 #, kde-format
 msgid "Optional image filenames/urls to show"
-msgstr "Pasirinktinai rodomas piešinio failo vardas arba URL"
+msgstr "Nebūtini paveikslo failo pavadinimai/URL adresai, kuriuos rodyti"
 
 #: src/printing.cpp:52
 #, kde-format
@@ -718,19 +733,19 @@ msgstr "Spausdinti %1"
 #: src/printing_page.ui:14
 #, kde-format
 msgid "Image Settings"
-msgstr "Piešinio nuostatos"
+msgstr "Paveikslo nuostatos"
 
 #. i18n: ectx: property (text), widget (QCheckBox, addFileName)
 #: src/printing_page.ui:20
 #, kde-format
 msgid "Print fi&lename below image"
-msgstr "Spausdinti failo &vardą po piešiniu"
+msgstr "Spausdinti po paveikslu fai&lo pavadinimą"
 
 #. i18n: ectx: property (text), widget (QCheckBox, blackwhite)
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr ""
+msgstr "Spausdinti juodai baltą paveikslą"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
@@ -772,44 +787,43 @@ msgstr "Spausdinti &tikslaus dydžio: "
 #: src/printing_page.ui:141
 #, kde-format
 msgid "Shrink image to &fit, if necessary"
-msgstr "Jeigu netelpa, su&mažinti piešinį"
+msgstr "Jei būtina, su&mažinti paveikslą taip, kad tilptų"
 
 #: src/slideshowwidget.cpp:46
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Amžinai"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&Slideshow"
+#, kde-format
 msgid "Slideshow"
-msgstr "&Rodyti skaidres"
+msgstr "Skaidrių rodymas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
 #: src/slideshowwidget.ui:20
 #, kde-format
 msgid "Switch to &full-screen"
-msgstr "Persijungti į &pilną ekraną"
+msgstr "Perjungti į &visą ekraną"
 
 #. i18n: ectx: property (text), widget (QCheckBox, startWithCurrent)
 #: src/slideshowwidget.ui:27
-#, fuzzy, kde-format
+#, kde-format
 msgid "S&tart with current image"
-msgstr "Rodyti dabartinį laiką"
+msgstr "Pradė&ti nuo esamo paveikslo"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/slideshowwidget.ui:34
 #, kde-format
 msgid "De&lay between slides:"
-msgstr "&Užlaikymas tarp skaidrių:"
+msgstr "De&lsa tarp skaidrių:"
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:44
-#, fuzzy, kde-format
+#, kde-format
 msgid "Wait for key"
-msgstr "Laukiama laikmenos"
+msgstr "Laukti klavišo paspaudimo"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:47
@@ -819,10 +833,9 @@ msgstr " sek."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "Pa&kartojimų (0 = neribota):"
+msgstr "Pa&kartojimų:"
 
 #~ msgid "Delete File"
 #~ msgstr "Trinti failą"
