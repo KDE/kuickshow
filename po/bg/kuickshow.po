@@ -2,17 +2,17 @@
 # Bulgarian translation of KDE.
 # This file is licensed under the GPL.
 #
-# $Id: kuickshow.po 1711750 2025-06-21 10:54:20Z mkkdr $
+# $Id: kuickshow.po 1721561 2025-10-28 14:29:44Z mkkdr $
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2010.
-# SPDX-FileCopyrightText: 2022, 2024 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-17 00:40+0000\n"
-"PO-Revision-Date: 2024-10-15 23:09+0200\n"
+"PO-Revision-Date: 2025-10-24 23:39+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -426,7 +426,7 @@ msgid ""
 "Perhaps the file format is unsupported or your Imlib is not installed "
 "properly."
 msgstr ""
-"Грешка при зареждане на изображението \"%1\".\n"
+"Грешка при зареждане на изображението „%1“.\n"
 "Възможни причини са неподдържан формат или неправилно инсталирана библиотека "
 "\"Imlib\"."
 
@@ -617,7 +617,7 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
-"Не може да се инициализира библиотеката с изображения \"%2\".\n"
+"Не може да се инициализира библиотеката с изображения „%2“.\n"
 "\n"
 "Повече информация може да има в регистрационния файл на сесията,\n"
 "или може да се получи чрез стартиране на %1 от терминал."
