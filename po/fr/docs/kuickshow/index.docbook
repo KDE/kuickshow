@@ -205,7 +205,7 @@
 >Autres caractéristiques de &kuickshow;</title>
 
 <para
->La boîte de dialogue de configuration fait apparaître plus de possibilités :</para>
+>La boite de dialogue de configuration fait apparaitre plus de possibilités :</para>
 
 <itemizedlist>
 <listitem
@@ -214,7 +214,7 @@
 </listitem>
 <listitem
 ><para
->Vous pouvez choisir si les images doivent apparaître dans leur propre fenêtre, ou bien utiliser toujours la même fenêtre.</para>
+>Vous pouvez choisir si les images doivent apparaitre dans leur propre fenêtre, ou bien utiliser toujours la même fenêtre.</para>
 </listitem>
 <listitem
 ><para
@@ -231,7 +231,7 @@
 </itemizedlist>
 
 <para
->Si vous cherchez un fichier particulier, saisissez simplement les premiers caractères de son nom dans le navigateur. Une petite fenêtre d'édition apparaîtra dans le coin en bas à droite. Lorsqu'un fichier correspondant est trouvé, il est coloré. Vous pouvez quitter la fenêtre d'édition en appuyant sur <keycap
+>Si vous cherchez un fichier particulier, saisissez simplement les premiers caractères de son nom dans le navigateur. Une petite fenêtre d'édition apparaitra dans le coin en bas à droite. Lorsqu'un fichier correspondant est trouvé, il est coloré. Vous pouvez quitter la fenêtre d'édition en appuyant sur <keycap
 >Entrée</keycap
 > ou &Echap;.</para>
 
@@ -240,10 +240,10 @@
 
 <chapter id="configuration-dialog">
 <title
->La boîte de dialogue de configuration de &kuickshow;</title>
+>La boite de dialogue de configuration de &kuickshow;</title>
 
 <para
->La boîte de dialogue de <guilabel
+>La boite de dialogue de <guilabel
 >configuration de &kuickshow;</guilabel
 > contient cinq onglets. Trois d'entre eux, <link linkend="general-options"
 ><guilabel
@@ -938,7 +938,7 @@
 <listitem
 ><para
 ><action
->Ouvre une boîte de dialogue permettant de modifier certaines options</action
+>Ouvre une boite de dialogue permettant de modifier certaines options</action
 >, comme décrit dans cette section. <xref linkend="configuration-dialog"/></para>
 </listitem>
 </varlistentry>
@@ -964,7 +964,7 @@
 
 <para
 >Tous les raccourcis clavier peuvent être configurés depuis la <link linkend="configuration-dialog"
->boîte de dialogue de configuration</link
+>boite de dialogue de configuration</link
 >.</para>
 
 <table>
@@ -1158,7 +1158,7 @@
 ></keycombo
 ></entry>
 <entry
->Ouvre la boîte de dialogue <guilabel
+>Ouvre la boite de dialogue <guilabel
 >enregistrer sous</guilabel
 ></entry>
 </row>
