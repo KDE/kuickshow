@@ -146,7 +146,7 @@ msgstr "对比度："
 #: src/defaultswidget.ui:226
 #, kde-format
 msgid "Gamma:"
-msgstr "伽玛："
+msgstr "伽马："
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
 #: src/defaultswidget.ui:272
@@ -361,12 +361,12 @@ msgstr "减小对比度"
 #: src/imagewindow.cpp:243
 #, kde-format
 msgid "More Gamma"
-msgstr "增大伽玛值"
+msgstr "增大伽马"
 
 #: src/imagewindow.cpp:248
 #, kde-format
 msgid "Less Gamma"
-msgstr "减小伽玛值"
+msgstr "减小伽马"
 
 #: src/imagewindow.cpp:254
 #, kde-format
