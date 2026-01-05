@@ -1,7 +1,7 @@
 # Translation of kuickshow.po to Romanian
 # Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
 # Claudiu Costin <claudiuc@kde.org>, 2004, 2005, 2006.
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2020.
+# SPDX-FileCopyrightText: 2008, 2009, 2020, 2025 Sergiu Bivol <sergiu@cip.md>
 # Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2009, 2011.
 # Cristian Oneț <onet.cristian@gmail.com>, 2011.
 #
@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2020-09-13 16:20+0100\n"
+"PO-Revision-Date: 2025-12-13 14:50+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
-"Language-Team: Romanian\n"
+"Language-Team: \n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -277,7 +277,7 @@ msgstr "Preîncarcă imaginea următoare"
 #: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Duplică fereastra"
 
 #: src/imagewindow.cpp:143
 #, kde-format
@@ -340,10 +340,9 @@ msgid "Print Image..."
 msgstr "Tipărește imaginea..."
 
 #: src/imagewindow.cpp:217
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Afișează exploratorul de fișiere"
+msgstr "Înapoi la navigatorul de fișiere"
 
 #: src/imagewindow.cpp:223
 #, kde-format
@@ -463,10 +462,9 @@ msgid "Keep original image size"
 msgstr "Păstrează mărimea imaginii originale"
 
 #: src/imagewindow.cpp:929
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Salvează ca"
+msgstr "Salvează imaginea ca"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
@@ -503,12 +501,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Bibliotecă de încărcare și randare a imaginilor"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Bibliotecă de procesare a imaginilor"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -594,7 +592,7 @@ msgstr "Afișați imagini multiple?"
 #: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Afișează"
 
 #: src/kuickshow.cpp:286
 #, kde-format
@@ -609,7 +607,7 @@ msgstr "&Editare"
 #: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Vizualizare"
 
 #: src/kuickshow.cpp:309
 #, kde-format
@@ -636,10 +634,9 @@ msgid ""
 msgstr ""
 
 #: src/kuickshow.cpp:1141
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Eroare fatală Imlib"
+msgstr "Eroare fatală la inițializare"
 
 #: src/kuickshow.cpp:1250
 #, kde-format
@@ -654,7 +651,7 @@ msgstr "Pornește diaporama"
 #: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Show File Browser"
-msgstr "Afișează exploratorul de fișiere"
+msgstr "Arată navigatorul de fișiere"
 
 #: src/kuickshow.cpp:1315
 #, kde-format
@@ -800,7 +797,7 @@ msgstr "Dacă este necesar, &micșorează imaginea să se încadreze"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Permanent"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -840,10 +837,9 @@ msgstr " sec"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&Iterații (0 = infinit):"
+msgstr "&Iterații:"
 
 #~ msgid "Delete File"
 #~ msgstr "Șterge fișierul"
