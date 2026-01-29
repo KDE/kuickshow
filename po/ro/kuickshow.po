@@ -1,7 +1,7 @@
 # Translation of kuickshow.po to Romanian
 # Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
 # Claudiu Costin <claudiuc@kde.org>, 2004, 2005, 2006.
-# SPDX-FileCopyrightText: 2008, 2009, 2020, 2025 Sergiu Bivol <sergiu@cip.md>
+# SPDX-FileCopyrightText: 2008, 2009, 2020, 2025, 2026 Sergiu Bivol <sergiu@cip.md>
 # Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2009, 2011.
 # Cristian Oneț <onet.cristian@gmail.com>, 2011.
 #
@@ -11,9 +11,9 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2025-12-13 14:50+0000\n"
+"PO-Revision-Date: 2026-01-28 20:03+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
-"Language-Team: \n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -553,15 +553,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:173
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -574,15 +566,18 @@ msgid_plural ""
 msgstr[0] ""
 "Sigur doriți să afișați o imagine în același timp? Acest lucru poate fi "
 "destul de consumator în resurse și vă poate chiar suprasolicita calculatorul."
-"<br> Dacă alegeți %1, numai prima imagine va fi afișată."
+"<br/>Dacă alegeți <interface>%2</interface>, numai prima imagine va fi "
+"afișată."
 msgstr[1] ""
-"Sigur doriți să afișați %n imagini în același timp? Acest lucru poate fi "
-"destul de consumator în resurse și vă poate chiar suprasolicita calculatorul."
-"<br> Dacă alegeți %1, numai prima imagine va fi afișată."
+"Sigur doriți să afișați aceste %1 imagini în același timp? Acest lucru poate "
+"fi destul de consumator în resurse și vă poate chiar suprasolicita "
+"calculatorul.<br/>Dacă alegeți <interface>%2</interface>, numai prima "
+"imagine va fi afișată."
 msgstr[2] ""
-"Sigur doriți să afișați %n de imagini în același timp? Acest lucru poate fi "
-"destul de consumator în resurse și vă poate chiar suprasolicita calculatorul."
-"<br> Dacă alegeți %1, numai prima imagine va fi afișată."
+"Sigur doriți să afișați aceste %1 de imagini în același timp? Acest lucru "
+"poate fi destul de consumator în resurse și vă poate chiar suprasolicita "
+"calculatorul.<br/>Dacă alegeți <interface>%2</interface>, numai prima "
+"imagine va fi afișată."
 
 #: src/kuickshow.cpp:175
 #, kde-format
@@ -632,6 +627,10 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Nu s-a putut inițializa biblioteca de imagini „%2”.\n"
+"\n"
+"Fișierul cu jurnalul sesiunii poate conține informații suplimentare,\n"
+"sau le puteți obține lansând %1 într-un terminal."
 
 #: src/kuickshow.cpp:1141
 #, kde-format
