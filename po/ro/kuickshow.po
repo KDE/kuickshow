@@ -4,7 +4,7 @@
 # SPDX-FileCopyrightText: 2008, 2009, 2020, 2025, 2026 Sergiu Bivol <sergiu@cip.md>
 # Florin Cătălin RUSSEN <cfrussen@yahoo.co.uk>, 2009, 2011.
 # Cristian Oneț <onet.cristian@gmail.com>, 2011.
-#
+# SPDX-FileCopyrightText: 2026 Viorel-Cătălin Răpițeanu <rapiteanu.catalin@gmail.com>
 #
 msgid ""
 msgstr ""
@@ -74,7 +74,7 @@ msgstr "Scalare"
 #, kde-format
 msgid "Scale image to screen size, if smaller, up to factor:"
 msgstr ""
-"Dacă este mai mică, scalează imaginea la mărimea ecranului pînă la factorul:"
+"Dacă este mai mică, scalează imaginea la mărimea ecranului până la factorul:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDownScale)
 #: src/defaultswidget.ui:53
@@ -387,7 +387,7 @@ msgstr "Defilează în jos"
 #: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
-msgstr "Defilează la stînga"
+msgstr "Defilează la stânga"
 
 #: src/imagewindow.cpp:269
 #, kde-format
@@ -493,7 +493,7 @@ msgid ""
 "resource-consuming and even make your computer hang.\n"
 "Do you want to continue?"
 msgstr ""
-"Sînteți pe cale să vizualizați o imagine foarte mare (%1 x %2 pixeli), "
+"Sunteți pe cale să vizualizați o imagine foarte mare (%1 x %2 pixeli), "
 "operație care poate fi foare consumatoare în resurse și chiar provoca "
 "blocarea calculatorului.\n"
 "Doriți să continuați?"
