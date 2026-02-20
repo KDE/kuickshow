@@ -47,10 +47,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&Modifications"
+#, kde-format
 msgid "Modifications"
-msgstr "&Modhnuithe"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbEnableMods)
 #: src/defaultswidget.ui:23
@@ -169,10 +168,9 @@ msgstr "Athraithe"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
 #: src/generalwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&General"
+#, kde-format
 msgid "General"
-msgstr "&Ginearálta"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
 #: src/generalwidget.ui:20
@@ -336,10 +334,9 @@ msgid "Print Image..."
 msgstr "Priontáil Íomhá..."
 
 #: src/imagewindow.cpp:217
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Taispeáin Brabhsálaí na gComhad"
+msgstr ""
 
 #: src/imagewindow.cpp:223
 #, kde-format
@@ -456,10 +453,9 @@ msgid "Keep original image size"
 msgstr ""
 
 #: src/imagewindow.cpp:929
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Sábháil Mar"
+msgstr ""
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
@@ -551,9 +547,6 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
 
 #: src/kuickshow.cpp:175
 #, kde-format
@@ -605,10 +598,9 @@ msgid ""
 msgstr ""
 
 #: src/kuickshow.cpp:1141
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Earráid Mharfach Imlib"
+msgstr ""
 
 #: src/kuickshow.cpp:1250
 #, kde-format
@@ -773,10 +765,9 @@ msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&Slideshow"
+#, kde-format
 msgid "Slideshow"
-msgstr "Taispeántas &Sleamhnán"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
 #: src/slideshowwidget.ui:20
@@ -813,39 +804,3 @@ msgstr " s"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Delete File"
-#~ msgstr "Scrios Comhad"
-
-#, fuzzy
-#~| msgid ""
-#~| "<qt>Do you really want to trash\n"
-#~| " <b>'%1'</b>?</qt>"
-#~ msgctxt "@info"
-#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-#~ msgstr ""
-#~ "<qt>An bhfuil tú cinnte gur mian leat\n"
-#~ " <b>'%1'</b> a chur sa bhruscar?</qt>"
-
-#~ msgid "Trash File"
-#~ msgstr "Cuir Comhad Sa Bhruscar"
-
-#~ msgctxt "to trash"
-#~ msgid "&Trash"
-#~ msgstr "&Bruscar"
-
-#~ msgid ""
-#~ "<qt>Do you really want to delete\n"
-#~ " <b>'%1'</b>?</qt>"
-#~ msgstr ""
-#~ "<qt>An bhfuil tú cinnte gur mian leat\n"
-#~ " <b>'%1'</b> a scriosadh?</qt>"
-
-#~ msgid "infinite"
-#~ msgstr "éigríochta"
-
-#~ msgid "Zoom In"
-#~ msgstr "Súmáil Isteach"
-
-#~ msgid "Zoom Out"
-#~ msgstr "Súmáil Amach"
