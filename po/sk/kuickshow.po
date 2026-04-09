@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -272,7 +272,7 @@ msgstr "Prednačítať ďalší obrázok"
 #: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Duplikovať okno"
 
 #: src/imagewindow.cpp:143
 #, kde-format
@@ -335,8 +335,7 @@ msgid "Print Image..."
 msgstr "Tlačiť obrázok..."
 
 #: src/imagewindow.cpp:217
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
 msgstr "Zobraziť prehliadač súborov"
 
@@ -458,10 +457,9 @@ msgid "Keep original image size"
 msgstr "Udržiavať pôvodnú veľkosť"
 
 #: src/imagewindow.cpp:929
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Uložiť ako"
+msgstr "Uložiť obrázok ako"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
@@ -496,12 +494,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Knižnica na načítanie a vykresľovanie obrázkov"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Knižnica na spracovanie obrázkov"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -548,15 +546,7 @@ msgstr ""
 "%1"
 
 #: src/kuickshow.cpp:173
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -567,17 +557,17 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
-"Naozaj chcete zobraziť tento obrázok? Môže to mať za následok zamrznutie "
-"počítača alebo príliš veľkú spotrebu systémových zdrojov.<br>Ak zvolíte %1, "
-"zobrazí sa len prvý obrázok."
+"Naozaj chcete zobrazit tento 1 obrazok naraz? Moze to byt dost narocne na "
+"zdroje a mohlo by to pretiazit vas pocitac.<br/>Ak zvolite <interface>%2</"
+"interface>, zobrazi sa len prvy obrazok."
 msgstr[1] ""
-"Naozaj chcete zobraziť tieto %n obrázky? Môže to mať za následok zamrznutie "
-"počítača alebo príliš veľkú spotrebu systémových zdrojov.<br>Ak zvolíte %1, "
-"zobrazí sa len prvý obrázok."
+"Naozaj chcete zobrazit tieto %1 obrazky naraz? Moze to byt dost narocne na "
+"zdroje a mohlo by to pretiazit vas pocitac.<br/>Ak zvolite <interface>%2</"
+"interface>, zobrazi sa len prvy obrazok."
 msgstr[2] ""
-"Naozaj chcete zobraziť týchto %n obrázkov? Môže to mať za následok "
-"zamrznutie počítača alebo príliš veľkú spotrebu systémových zdrojov.<br>Ak "
-"zvolíte %1, zobrazí sa len prvý obrázok."
+"Naozaj chcete zobrazit tychto %1 obrazkov naraz? Moze to byt dost narocne na "
+"zdroje a mohlo by to pretiazit vas pocitac.<br/>Ak zvolite <interface>%2</"
+"interface>, zobrazi sa len prvy obrazok."
 
 #: src/kuickshow.cpp:175
 #, kde-format
@@ -587,7 +577,7 @@ msgstr "Zobraziť viacero obrázkov?"
 #: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Obrazovka"
 
 #: src/kuickshow.cpp:286
 #, kde-format
@@ -602,7 +592,7 @@ msgstr "&Upraviť"
 #: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Zobraziť"
 
 #: src/kuickshow.cpp:309
 #, kde-format
@@ -629,8 +619,7 @@ msgid ""
 msgstr ""
 
 #: src/kuickshow.cpp:1141
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Kritická chyba Imlib"
 
@@ -793,7 +782,7 @@ msgstr "Z&menšiť obrázok, ak je to nutné"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Navždy"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -833,8 +822,7 @@ msgstr " sek"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
 msgstr "&Opakovania (0 = nekonečne):"
 
@@ -842,9 +830,6 @@ msgstr "&Opakovania (0 = nekonečne):"
 #~ msgstr "Zmazať súbor"
 
 #, fuzzy
-#~| msgid ""
-#~| "<qt>Do you really want to trash\n"
-#~| " <b>'%1'</b>?</qt>"
 #~ msgctxt "@info"
 #~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
 #~ msgstr ""
