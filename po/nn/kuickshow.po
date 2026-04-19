@@ -1,19 +1,18 @@
 # Translation of kuickshow to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2008, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2020-11-23 19:23+0100\n"
+"PO-Revision-Date: 2026-04-18 15:50+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.08.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -273,7 +272,7 @@ msgstr "Førehandsinnlast neste bilete"
 #: src/imagewindow.cpp:138
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Lag kopi av vindauge"
 
 #: src/imagewindow.cpp:143
 #, kde-format
@@ -338,7 +337,7 @@ msgstr "Skriv ut bilete …"
 #: src/imagewindow.cpp:217
 #, kde-format
 msgid "Return to File Browser"
-msgstr ""
+msgstr "Tilbake til filhandsamar"
 
 #: src/imagewindow.cpp:223
 #, kde-format
@@ -460,7 +459,7 @@ msgstr "Behald opphavleg biletstorleik"
 #: src/imagewindow.cpp:929
 #, kde-format
 msgid "Save Image As"
-msgstr ""
+msgstr "Lagra bilete som"
 
 #: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
 #, kde-format
@@ -495,12 +494,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Bibliotek for biletinnlasting og -oppteikning"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Bilethandsamingsbibliotek"
 
 #: src/kuickconfigdlg.cpp:40
 #, kde-format
@@ -558,7 +557,13 @@ msgid_plural ""
 "be quite resource intensive and could overload your computer.<br/>If you "
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
+"Er du sikker på at du vil visa dette biletet samtidig? Det vil krevja mykje "
+"ressursar og kan overbelasta datamaskina.<br/>Viss du vel <interface>%2</"
+"interface>, vert berre det første biletet vist."
 msgstr[1] ""
+"Er du sikker på at du vil visa desse %1 bileta samtidig? Det vil krevja "
+"mykje ressursar og kan overbelasta datamaskina.<br/>Viss du vel <interface>"
+"%2</interface>, vert berre det første biletet vist."
 
 #: src/kuickshow.cpp:175
 #, kde-format
@@ -568,7 +573,7 @@ msgstr "Visa fleire bilete?"
 #: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Vising"
 
 #: src/kuickshow.cpp:286
 #, kde-format
@@ -583,7 +588,7 @@ msgstr "&Rediger"
 #: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Vis"
 
 #: src/kuickshow.cpp:309
 #, kde-format
@@ -608,11 +613,15 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Klarte ikkje lasta inn biletbiblioteket «%2».\n"
+"\n"
+"Du finn kan henda meir informasjon in øktloggfila\n"
+"eller ved å køyra kommandoen «%1» i eit terminalvindauge."
 
 #: src/kuickshow.cpp:1141
 #, kde-format
 msgid "Fatal Initialization Error"
-msgstr ""
+msgstr "Kritisk feil ved bibliotekinnlasting"
 
 #: src/kuickshow.cpp:1250
 #, kde-format
@@ -773,7 +782,7 @@ msgstr "For&minsk om nødvendig biletet slik at det passar"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "For alltid"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -815,4 +824,4 @@ msgstr " s"
 #: src/slideshowwidget.ui:57
 #, kde-format
 msgid "&Iterations:"
-msgstr ""
+msgstr "&Gjentakingar:"
