@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kuickshow package.
 #
-# SPDX-FileCopyrightText: 2024 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2024, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:50+0000\n"
-"PO-Revision-Date: 2024-12-27 18:49+0100\n"
+"PO-Revision-Date: 2026-05-13 15:23+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -176,13 +176,13 @@ msgstr "General"
 #: src/generalwidget.ui:20
 #, kde-format
 msgid "Remember last folder"
-msgstr ""
+msgstr "Memora ultime dossier"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbox2)
 #: src/generalwidget.ui:30
 #, kde-format
 msgid "Quality/Speed"
-msgstr ""
+msgstr "Qualitata/Velocitate"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbSmoothScale)
 #: src/generalwidget.ui:36
@@ -276,12 +276,12 @@ msgstr "Duplica fenestra"
 #: src/imagewindow.cpp:143
 #, kde-format
 msgid "Show Next Image"
-msgstr ""
+msgstr "Monstra proxime imagine"
 
 #: src/imagewindow.cpp:148
 #, kde-format
 msgid "Show Previous Image"
-msgstr ""
+msgstr "Monstra previe imagine"
 
 #: src/imagewindow.cpp:153
 #, kde-format
@@ -306,17 +306,17 @@ msgstr "Maximiza"
 #: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 90 Degrees"
-msgstr ""
+msgstr "Rota 90 Grados"
 
 #: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 180 Degrees"
-msgstr ""
+msgstr "Rota 180 Grados"
 
 #: src/imagewindow.cpp:191
 #, kde-format
 msgid "Rotate 270 Degrees"
-msgstr ""
+msgstr "Rota 270 Grados"
 
 #: src/imagewindow.cpp:196
 #, kde-format
@@ -341,32 +341,32 @@ msgstr ""
 #: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Brightness"
-msgstr ""
+msgstr "Plus Brillantia"
 
 #: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Brightness"
-msgstr ""
+msgstr "Minus Brillantia"
 
 #: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Contrast"
-msgstr ""
+msgstr "Plus Contrasto"
 
 #: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Contrast"
-msgstr ""
+msgstr "Minus Contrasto"
 
 #: src/imagewindow.cpp:243
 #, kde-format
 msgid "More Gamma"
-msgstr ""
+msgstr "Plus Gamma"
 
 #: src/imagewindow.cpp:248
 #, kde-format
 msgid "Less Gamma"
-msgstr ""
+msgstr "Minus Gamma"
 
 #: src/imagewindow.cpp:254
 #, kde-format
@@ -396,7 +396,7 @@ msgstr "Pausa Slideshow (Presentation)"
 #: src/imagewindow.cpp:288
 #, kde-format
 msgid "Reload Image"
-msgstr ""
+msgstr "Recarga Imagine"
 
 #: src/imagewindow.cpp:294
 #, kde-format
@@ -586,7 +586,7 @@ msgstr "Barra de instrumento principal"
 #: src/kuickshow.cpp:1126
 #, kde-format
 msgid "Image Error"
-msgstr ""
+msgstr "Error de Imagine"
 
 #: src/kuickshow.cpp:1137
 #, kde-format
@@ -630,7 +630,7 @@ msgstr "Configura %1..."
 #: src/kuickshow.cpp:1323
 #, kde-format
 msgid "About KuickShow"
-msgstr ""
+msgstr "proposito de KuickShow"
 
 #: src/kuickshow.cpp:1330
 #, kde-format
@@ -655,7 +655,7 @@ msgstr ""
 #: src/main.cpp:37
 #, kde-format
 msgid "KuickShow"
-msgstr ""
+msgstr "KuickShow"
 
 #: src/main.cpp:39
 #, kde-format
@@ -675,12 +675,12 @@ msgstr "Carsten Pfeiffer"
 #: src/main.cpp:48
 #, kde-format
 msgid "Rober Hamberger"
-msgstr ""
+msgstr "Rober Hamberger"
 
 #: src/main.cpp:49
 #, kde-format
 msgid "Thorsten Scheuermann"
-msgstr ""
+msgstr "Thorsten Scheuermann"
 
 #: src/main.cpp:59
 #, kde-format
@@ -791,7 +791,7 @@ msgstr ""
 #: src/slideshowwidget.ui:44
 #, kde-format
 msgid "Wait for key"
-msgstr ""
+msgstr "Attende  clave"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, delayTime)
 #: src/slideshowwidget.ui:47
