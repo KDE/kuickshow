@@ -73,8 +73,6 @@
 #include "printing.h"
 #include "imagecache.h"
 
-QCursor *ImageWindow::s_handCursor = nullptr;
-
 ImageWindow::ImageWindow(QWidget *parent)
     : ImlibWidget(parent)
 {
@@ -100,14 +98,6 @@ void ImageWindow::init()
 
     m_actions = new KActionCollection( this );
     m_actions->addAssociatedWidget( this );
-
-    if ( !s_handCursor ) {
-        QString file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/handcursor.png");
-        if ( !file.isEmpty() )
-            s_handCursor = new QCursor( QPixmap(file) );
-        else
-            s_handCursor = new QCursor( Qt::ArrowCursor );
-    }
 
     setupActions();
     imageCache->setMaxImages( KuickConfig::get().maxCachedImages );
@@ -645,7 +635,7 @@ void ImageWindow::updateCursor( KuickCursor cursor )
             setCursor( Qt::ArrowCursor ); // need a magnify-cursor
             break;
         case MoveCursor:
-            setCursor( *s_handCursor );
+            setCursor( Qt::OpenHandCursor );
             break;
         case DefaultCursor:
         default:
@@ -653,7 +643,7 @@ void ImageWindow::updateCursor( KuickCursor cursor )
                 return;
 
             if ( imageWidth() > width() || imageHeight() > height() )
-                setCursor( *s_handCursor );
+                setCursor( Qt::OpenHandCursor );
             else
                 setCursor( Qt::ArrowCursor );
             break;
