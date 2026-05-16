@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-05-16 00:41+0000\n"
 "PO-Revision-Date: 2026-04-18 15:50+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -269,153 +269,153 @@ msgstr "Opna KuickShow-nettsida"
 msgid "Preload next image"
 msgstr "Førehandsinnlast neste bilete"
 
-#: src/imagewindow.cpp:138
+#: src/imagewindow.cpp:128
 #, kde-format
 msgid "Duplicate Window"
 msgstr "Lag kopi av vindauge"
 
-#: src/imagewindow.cpp:143
+#: src/imagewindow.cpp:133
 #, kde-format
 msgid "Show Next Image"
 msgstr "Vis neste bilete"
 
-#: src/imagewindow.cpp:148
+#: src/imagewindow.cpp:138
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Vis førre bilete"
 
-#: src/imagewindow.cpp:153
+#: src/imagewindow.cpp:143
 #, kde-format
 msgid "Delete Image"
 msgstr "Slett biletet"
 
-#: src/imagewindow.cpp:158
+#: src/imagewindow.cpp:148
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "Flytt biletet til papirkorga"
 
-#: src/imagewindow.cpp:171
+#: src/imagewindow.cpp:161
 #, kde-format
 msgid "Restore Original Size"
 msgstr "Gjenopprett opphavleg storleik"
 
-#: src/imagewindow.cpp:176
+#: src/imagewindow.cpp:166
 #, kde-format
 msgid "Maximize"
 msgstr "Maksimer"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:171
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Dei 90 gradar"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Drei 180 gradar"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Drei 270 gradar"
 
-#: src/imagewindow.cpp:196
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Spegla vassrett"
 
-#: src/imagewindow.cpp:201
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Spegla loddrett"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Skriv ut bilete …"
 
-#: src/imagewindow.cpp:217
+#: src/imagewindow.cpp:207
 #, kde-format
 msgid "Return to File Browser"
 msgstr "Tilbake til filhandsamar"
 
-#: src/imagewindow.cpp:223
+#: src/imagewindow.cpp:213
 #, kde-format
 msgid "More Brightness"
 msgstr "Meir lys"
 
-#: src/imagewindow.cpp:228
+#: src/imagewindow.cpp:218
 #, kde-format
 msgid "Less Brightness"
 msgstr "Mindre lys"
 
-#: src/imagewindow.cpp:233
+#: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Contrast"
 msgstr "Meir kontrast"
 
-#: src/imagewindow.cpp:238
+#: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Contrast"
 msgstr "Mindre kontrast"
 
-#: src/imagewindow.cpp:243
+#: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Gamma"
 msgstr "Høgare gamma"
 
-#: src/imagewindow.cpp:248
+#: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Gamma"
 msgstr "Lågare gamma"
 
-#: src/imagewindow.cpp:254
+#: src/imagewindow.cpp:244
 #, kde-format
 msgid "Scroll Up"
 msgstr "Rull opp"
 
-#: src/imagewindow.cpp:259
+#: src/imagewindow.cpp:249
 #, kde-format
 msgid "Scroll Down"
 msgstr "Rull ned"
 
-#: src/imagewindow.cpp:264
+#: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Left"
 msgstr "Rull til venstre"
 
-#: src/imagewindow.cpp:269
+#: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Right"
 msgstr "Rull til høgre"
 
-#: src/imagewindow.cpp:274
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Pausa lysbiletvising"
 
-#: src/imagewindow.cpp:288
+#: src/imagewindow.cpp:278
 #, kde-format
 msgid "Reload Image"
 msgstr "Last inn biletet på nytt"
 
-#: src/imagewindow.cpp:294
+#: src/imagewindow.cpp:284
 #, kde-format
 msgid "Properties"
 msgstr "Eigenskapar"
 
-#: src/imagewindow.cpp:361
+#: src/imagewindow.cpp:351
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 × %2)"
 
-#: src/imagewindow.cpp:426
+#: src/imagewindow.cpp:416
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Klarte ikkje lasta ned biletet frå %1."
 
-#: src/imagewindow.cpp:442
+#: src/imagewindow.cpp:432
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -426,47 +426,47 @@ msgstr ""
 "Det kan skuldast at filformatet ikkje er støtta eller at Imlib ikkje er "
 "skikkeleg installert."
 
-#: src/imagewindow.cpp:851
+#: src/imagewindow.cpp:841
 #, kde-format
 msgid "Brightness"
 msgstr "Lysstyrke"
 
-#: src/imagewindow.cpp:855
+#: src/imagewindow.cpp:845
 #, kde-format
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: src/imagewindow.cpp:859
+#: src/imagewindow.cpp:849
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/imagewindow.cpp:906
+#: src/imagewindow.cpp:896
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Klarte ikkje skruva ut biletet."
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:897
 #, kde-format
 msgid "Printing Failed"
 msgstr "Feil ved utskrift"
 
-#: src/imagewindow.cpp:924
+#: src/imagewindow.cpp:914
 #, kde-format
 msgid "Keep original image size"
 msgstr "Behald opphavleg biletstorleik"
 
-#: src/imagewindow.cpp:929
+#: src/imagewindow.cpp:919
 #, kde-format
 msgid "Save Image As"
 msgstr "Lagra bilete som"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Biletfiler (%1)"
 
-#: src/imagewindow.cpp:952
+#: src/imagewindow.cpp:942
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -475,12 +475,12 @@ msgstr ""
 "Klarte ikkje lagra fila.\n"
 "Det kan skuldast at disken er full eller at du ikkje har skriveløyve til fil."
 
-#: src/imagewindow.cpp:955
+#: src/imagewindow.cpp:945
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Feil ved lagring"
 
-#: src/imagewindow.cpp:1202
+#: src/imagewindow.cpp:1192
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "

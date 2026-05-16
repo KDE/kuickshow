@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-05-16 00:41+0000\n"
 "PO-Revision-Date: 2024-12-28 15:53+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -275,153 +275,153 @@ msgstr "Apri il sito web di KuickShow"
 msgid "Preload next image"
 msgstr "Precarica l'immagine successiva"
 
-#: src/imagewindow.cpp:138
+#: src/imagewindow.cpp:128
 #, kde-format
 msgid "Duplicate Window"
 msgstr "Duplica finestra"
 
-#: src/imagewindow.cpp:143
+#: src/imagewindow.cpp:133
 #, kde-format
 msgid "Show Next Image"
 msgstr "Mostra l'immagine successiva"
 
-#: src/imagewindow.cpp:148
+#: src/imagewindow.cpp:138
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Mostra l'immagine precedente"
 
-#: src/imagewindow.cpp:153
+#: src/imagewindow.cpp:143
 #, kde-format
 msgid "Delete Image"
 msgstr "Elimina immagine"
 
-#: src/imagewindow.cpp:158
+#: src/imagewindow.cpp:148
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "Cestina immagine"
 
-#: src/imagewindow.cpp:171
+#: src/imagewindow.cpp:161
 #, kde-format
 msgid "Restore Original Size"
 msgstr "Ripristina la dimensione originale"
 
-#: src/imagewindow.cpp:176
+#: src/imagewindow.cpp:166
 #, kde-format
 msgid "Maximize"
 msgstr "Massimizza"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:171
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Ruota di 90 gradi"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Ruota di 180 gradi"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Ruota di 270 gradi"
 
-#: src/imagewindow.cpp:196
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Ribalta orizzontalmente"
 
-#: src/imagewindow.cpp:201
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Ribalta verticalmente"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Stampa immagine..."
 
-#: src/imagewindow.cpp:217
+#: src/imagewindow.cpp:207
 #, kde-format
 msgid "Return to File Browser"
 msgstr "Ritorna al navigatore dei file"
 
-#: src/imagewindow.cpp:223
+#: src/imagewindow.cpp:213
 #, kde-format
 msgid "More Brightness"
 msgstr "Più luminosità"
 
-#: src/imagewindow.cpp:228
+#: src/imagewindow.cpp:218
 #, kde-format
 msgid "Less Brightness"
 msgstr "Meno luminosità"
 
-#: src/imagewindow.cpp:233
+#: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Contrast"
 msgstr "Più contrasto"
 
-#: src/imagewindow.cpp:238
+#: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Contrast"
 msgstr "Meno contrasto"
 
-#: src/imagewindow.cpp:243
+#: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Gamma"
 msgstr "Più gamma"
 
-#: src/imagewindow.cpp:248
+#: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Gamma"
 msgstr "Meno gamma"
 
-#: src/imagewindow.cpp:254
+#: src/imagewindow.cpp:244
 #, kde-format
 msgid "Scroll Up"
 msgstr "Scorri in alto"
 
-#: src/imagewindow.cpp:259
+#: src/imagewindow.cpp:249
 #, kde-format
 msgid "Scroll Down"
 msgstr "Scorri in basso"
 
-#: src/imagewindow.cpp:264
+#: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Left"
 msgstr "Scorri a sinistra"
 
-#: src/imagewindow.cpp:269
+#: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Right"
 msgstr "Scorri a destra"
 
-#: src/imagewindow.cpp:274
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Metti in pausa la presentazione"
 
-#: src/imagewindow.cpp:288
+#: src/imagewindow.cpp:278
 #, kde-format
 msgid "Reload Image"
 msgstr "Ricarica l'immagine"
 
-#: src/imagewindow.cpp:294
+#: src/imagewindow.cpp:284
 #, kde-format
 msgid "Properties"
 msgstr "Proprietà"
 
-#: src/imagewindow.cpp:361
+#: src/imagewindow.cpp:351
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:426
+#: src/imagewindow.cpp:416
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Impossibile scaricare l'immagine da %1."
 
-#: src/imagewindow.cpp:442
+#: src/imagewindow.cpp:432
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -432,47 +432,47 @@ msgstr ""
 "Forse il formato di file non è supportato oppure Imlib non è stata "
 "installata correttamente."
 
-#: src/imagewindow.cpp:851
+#: src/imagewindow.cpp:841
 #, kde-format
 msgid "Brightness"
 msgstr "Luminosità"
 
-#: src/imagewindow.cpp:855
+#: src/imagewindow.cpp:845
 #, kde-format
 msgid "Contrast"
 msgstr "Contrasto"
 
-#: src/imagewindow.cpp:859
+#: src/imagewindow.cpp:849
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/imagewindow.cpp:906
+#: src/imagewindow.cpp:896
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Impossibile stampare l'immagine."
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:897
 #, kde-format
 msgid "Printing Failed"
 msgstr "Stampa non riuscita"
 
-#: src/imagewindow.cpp:924
+#: src/imagewindow.cpp:914
 #, kde-format
 msgid "Keep original image size"
 msgstr "Mantieni le dimensioni originali dell'immagine"
 
-#: src/imagewindow.cpp:929
+#: src/imagewindow.cpp:919
 #, kde-format
 msgid "Save Image As"
 msgstr "Salva immagine come"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "File di immagine (%1)"
 
-#: src/imagewindow.cpp:952
+#: src/imagewindow.cpp:942
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -481,12 +481,12 @@ msgstr ""
 "Impossibile salvare il file.\n"
 "Forse il disco è pieno, oppure non hai il permesso di scrivere sul file."
 
-#: src/imagewindow.cpp:955
+#: src/imagewindow.cpp:945
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Salvataggio del file non riuscito"
 
-#: src/imagewindow.cpp:1202
+#: src/imagewindow.cpp:1192
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "

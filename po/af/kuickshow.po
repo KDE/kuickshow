@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-05-16 00:41+0000\n"
 "PO-Revision-Date: 2002-11-07 11:33+0200\n"
 "Last-Translator: WEB-Translator <http://kde.af.org.za>\n"
 "Language-Team: AFRIKAANS <AF@lia.org.za>\n"
@@ -269,153 +269,153 @@ msgstr "Open Vinnig-vertoon Webtuiste"
 msgid "Preload next image"
 msgstr "Vooraflaai volgende beeld"
 
-#: src/imagewindow.cpp:138
+#: src/imagewindow.cpp:128
 #, kde-format
 msgid "Duplicate Window"
 msgstr ""
 
-#: src/imagewindow.cpp:143
+#: src/imagewindow.cpp:133
 #, kde-format
 msgid "Show Next Image"
 msgstr "Vertoon Volgende Beeld"
 
-#: src/imagewindow.cpp:148
+#: src/imagewindow.cpp:138
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Vertoon Vorige Beeld"
 
-#: src/imagewindow.cpp:153
+#: src/imagewindow.cpp:143
 #, fuzzy, kde-format
 msgid "Delete Image"
 msgstr "Herlaai Beeld"
 
-#: src/imagewindow.cpp:158
+#: src/imagewindow.cpp:148
 #, kde-format
 msgid "Move Image to Trash"
 msgstr ""
 
-#: src/imagewindow.cpp:171
+#: src/imagewindow.cpp:161
 #, kde-format
 msgid "Restore Original Size"
 msgstr "Herstel Oorspronklike Grootte"
 
-#: src/imagewindow.cpp:176
+#: src/imagewindow.cpp:166
 #, kde-format
 msgid "Maximize"
 msgstr "Maksimeer"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:171
 #, fuzzy, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Roteer 90 grade"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:176
 #, fuzzy, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Roteer 180 grade"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:181
 #, fuzzy, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Roteer 270 grade"
 
-#: src/imagewindow.cpp:196
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Draai om Horisontaal"
 
-#: src/imagewindow.cpp:201
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Draai om Vertikaal"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "Druk Beeld..."
 
-#: src/imagewindow.cpp:217
+#: src/imagewindow.cpp:207
 #, fuzzy, kde-format
 msgid "Return to File Browser"
 msgstr "Vertoon/Steek weg die Lêer Blaaier"
 
-#: src/imagewindow.cpp:223
+#: src/imagewindow.cpp:213
 #, kde-format
 msgid "More Brightness"
 msgstr "Meer Helderheid"
 
-#: src/imagewindow.cpp:228
+#: src/imagewindow.cpp:218
 #, kde-format
 msgid "Less Brightness"
 msgstr "Minder Helderheid"
 
-#: src/imagewindow.cpp:233
+#: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Contrast"
 msgstr "Meer Kontras"
 
-#: src/imagewindow.cpp:238
+#: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Contrast"
 msgstr "Minder Kontras"
 
-#: src/imagewindow.cpp:243
+#: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Gamma"
 msgstr "Meer Gamma"
 
-#: src/imagewindow.cpp:248
+#: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Gamma"
 msgstr "Minder Gamma"
 
-#: src/imagewindow.cpp:254
+#: src/imagewindow.cpp:244
 #, kde-format
 msgid "Scroll Up"
 msgstr "Rol Begin"
 
-#: src/imagewindow.cpp:259
+#: src/imagewindow.cpp:249
 #, kde-format
 msgid "Scroll Down"
 msgstr "Rol Ondertoe"
 
-#: src/imagewindow.cpp:264
+#: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Left"
 msgstr "Rol Links"
 
-#: src/imagewindow.cpp:269
+#: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Right"
 msgstr "Rol Regterkant"
 
-#: src/imagewindow.cpp:274
+#: src/imagewindow.cpp:264
 #, fuzzy, kde-format
 msgid "Pause Slideshow"
 msgstr "Begin Skyfievertoning"
 
-#: src/imagewindow.cpp:288
+#: src/imagewindow.cpp:278
 #, kde-format
 msgid "Reload Image"
 msgstr "Herlaai Beeld"
 
-#: src/imagewindow.cpp:294
+#: src/imagewindow.cpp:284
 #, kde-format
 msgid "Properties"
 msgstr ""
 
-#: src/imagewindow.cpp:361
+#: src/imagewindow.cpp:351
 #, fuzzy, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%1 (%2 x %3)"
 
-#: src/imagewindow.cpp:426
+#: src/imagewindow.cpp:416
 #, fuzzy, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Nie moontlik na druk die beeld."
 
-#: src/imagewindow.cpp:442
+#: src/imagewindow.cpp:432
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -426,60 +426,60 @@ msgstr ""
 "Miskien die lêer formaat is nie ondersteunde of jou Imlib is nie "
 "geïnstalleer behoorlik."
 
-#: src/imagewindow.cpp:851
+#: src/imagewindow.cpp:841
 #, kde-format
 msgid "Brightness"
 msgstr "Helderheid"
 
-#: src/imagewindow.cpp:855
+#: src/imagewindow.cpp:845
 #, kde-format
 msgid "Contrast"
 msgstr "Kontras"
 
-#: src/imagewindow.cpp:859
+#: src/imagewindow.cpp:849
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/imagewindow.cpp:906
+#: src/imagewindow.cpp:896
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Nie moontlik na druk die beeld."
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:897
 #, kde-format
 msgid "Printing Failed"
 msgstr "Besig om te druk Gevaal"
 
-#: src/imagewindow.cpp:924
+#: src/imagewindow.cpp:914
 #, fuzzy, kde-format
 msgid "Keep original image size"
 msgstr "Herstel Oorspronklike Grootte"
 
-#: src/imagewindow.cpp:929
+#: src/imagewindow.cpp:919
 #, fuzzy, kde-format
 #| msgid "Show Image"
 msgid "Save Image As"
 msgstr "Vertoon Beeld"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
 
-#: src/imagewindow.cpp:952
+#: src/imagewindow.cpp:942
 #, kde-format
 msgid ""
 "Could not save the file.\n"
 "Perhaps the disk is full, or you do not have write permission to the file."
 msgstr ""
 
-#: src/imagewindow.cpp:955
+#: src/imagewindow.cpp:945
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Lêer Stooring Gevaal"
 
-#: src/imagewindow.cpp:1202
+#: src/imagewindow.cpp:1192
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:50+0000\n"
+"POT-Creation-Date: 2026-05-16 00:41+0000\n"
 "PO-Revision-Date: 2010-04-16 06:49+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
@@ -272,154 +272,154 @@ msgstr "KuickShow ਵੈਬਸਾਇਟ ਖੋਲ੍ਹੋ"
 msgid "Preload next image"
 msgstr "ਅਗਲਾ ਚਿੱਤਰ ਮੁੜ-ਲੋਡ"
 
-#: src/imagewindow.cpp:138
+#: src/imagewindow.cpp:128
 #, kde-format
 msgid "Duplicate Window"
 msgstr ""
 
-#: src/imagewindow.cpp:143
+#: src/imagewindow.cpp:133
 #, kde-format
 msgid "Show Next Image"
 msgstr "ਅੱਗੇ ਚਿੱਤਰ ਵੇਖੋ"
 
-#: src/imagewindow.cpp:148
+#: src/imagewindow.cpp:138
 #, kde-format
 msgid "Show Previous Image"
 msgstr "ਪਿਛਲਾ ਚਿੱਤਰ ਵੇਖੋ"
 
-#: src/imagewindow.cpp:153
+#: src/imagewindow.cpp:143
 #, kde-format
 msgid "Delete Image"
 msgstr "ਚਿੱਤਰ ਹਟਾਓ"
 
-#: src/imagewindow.cpp:158
+#: src/imagewindow.cpp:148
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "ਚਿੱਤਰ ਰੱਦੀ ਵਿੱਚ ਭੇਜੋ"
 
-#: src/imagewindow.cpp:171
+#: src/imagewindow.cpp:161
 #, kde-format
 msgid "Restore Original Size"
 msgstr "ਅਸਲੀ ਸਾਈਜ਼ ਮੁੜ-ਸਟੋਰ ਕਰੋ"
 
-#: src/imagewindow.cpp:176
+#: src/imagewindow.cpp:166
 #, kde-format
 msgid "Maximize"
 msgstr "ਵੱਧੋ-ਵੱਧ"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:171
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "90 ਡਿਗਰੀਆਂ ਘੁੰਮਾਓ"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "180 ਡਿਗਰੀਆਂ ਘੁੰਮਾਓ"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "270 ਡਿਗਰੀਆਂ ਘੁੰਮਾਓ"
 
-#: src/imagewindow.cpp:196
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "ਖਿਤਿਜੀ ਝਟਕੋ"
 
-#: src/imagewindow.cpp:201
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Flip Vertically"
 msgstr "ਲੰਬਕਾਰੀ ਝਟਕੋ"
 
-#: src/imagewindow.cpp:206 src/kuickshow.cpp:1353
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1353
 #, kde-format
 msgid "Print Image..."
 msgstr "ਚਿੱਤਰ ਪਰਿੰਟ ਕਰੋ..."
 
-#: src/imagewindow.cpp:217
+#: src/imagewindow.cpp:207
 #, fuzzy, kde-format
 #| msgid "Show File Browser"
 msgid "Return to File Browser"
 msgstr "ਫਾਇਲ ਬਰਾਊਜ਼ਰ ਵੇਖੋ"
 
-#: src/imagewindow.cpp:223
+#: src/imagewindow.cpp:213
 #, kde-format
 msgid "More Brightness"
 msgstr "ਹੋਰ ਚਮੀਕਲਾਪਨ"
 
-#: src/imagewindow.cpp:228
+#: src/imagewindow.cpp:218
 #, kde-format
 msgid "Less Brightness"
 msgstr "ਘੱਟ ਚਮੀਕਲਾਪਨ"
 
-#: src/imagewindow.cpp:233
+#: src/imagewindow.cpp:223
 #, kde-format
 msgid "More Contrast"
 msgstr "ਹੋਰ ਵੱਖਰੇਵਾਂ"
 
-#: src/imagewindow.cpp:238
+#: src/imagewindow.cpp:228
 #, kde-format
 msgid "Less Contrast"
 msgstr "ਘੱਟ ਵੱਖਰੇਵਾਂ"
 
-#: src/imagewindow.cpp:243
+#: src/imagewindow.cpp:233
 #, kde-format
 msgid "More Gamma"
 msgstr "ਹੋਰ ਗਾਮਾ"
 
-#: src/imagewindow.cpp:248
+#: src/imagewindow.cpp:238
 #, kde-format
 msgid "Less Gamma"
 msgstr "ਘੱਟ ਗਾਮਾ"
 
-#: src/imagewindow.cpp:254
+#: src/imagewindow.cpp:244
 #, kde-format
 msgid "Scroll Up"
 msgstr "ਉੱਤੇ ਜਾਓ"
 
-#: src/imagewindow.cpp:259
+#: src/imagewindow.cpp:249
 #, kde-format
 msgid "Scroll Down"
 msgstr "ਹੇਠਾਂ ਜਾਓ"
 
-#: src/imagewindow.cpp:264
+#: src/imagewindow.cpp:254
 #, kde-format
 msgid "Scroll Left"
 msgstr "ਖੱਬੇ ਸਕਰੋਲ"
 
-#: src/imagewindow.cpp:269
+#: src/imagewindow.cpp:259
 #, kde-format
 msgid "Scroll Right"
 msgstr "ਸੱਜੇ ਸਕਰੋਲ"
 
-#: src/imagewindow.cpp:274
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "ਸਲਾਇਡ-ਸ਼ੋ ਵਿਰਾਮ"
 
-#: src/imagewindow.cpp:288
+#: src/imagewindow.cpp:278
 #, kde-format
 msgid "Reload Image"
 msgstr "ਚਿੱਤਰ ਮੁੜ ਲੋਡ"
 
-#: src/imagewindow.cpp:294
+#: src/imagewindow.cpp:284
 #, kde-format
 msgid "Properties"
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
 
-#: src/imagewindow.cpp:361
+#: src/imagewindow.cpp:351
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:426
+#: src/imagewindow.cpp:416
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "%1 ਚਿੱਤਰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਅਸਮਰੱਥ।"
 
-#: src/imagewindow.cpp:442
+#: src/imagewindow.cpp:432
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -429,48 +429,48 @@ msgstr ""
 "ਚਿੱਤਰ %1 ਲੋਡ ਕਰਨ ਲਈ ਅਸਫ਼ਲ ਹੈ।\n"
 "ਸੰਭਵ ਤੌਰ 'ਤੇ ਫਾਇਲ ਫਾਰਮੈਟ ਲਈ ਸਹਿਯੋਗ ਨਹੀਂ ਹੈ ਜਾਂ ਤੁਹਾਡੀ Imlib ਠੀਕ ਤਰਾਂ ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।"
 
-#: src/imagewindow.cpp:851
+#: src/imagewindow.cpp:841
 #, kde-format
 msgid "Brightness"
 msgstr "ਚਮਕ"
 
-#: src/imagewindow.cpp:855
+#: src/imagewindow.cpp:845
 #, kde-format
 msgid "Contrast"
 msgstr "ਵੱਖਰੇਵਾਂ"
 
-#: src/imagewindow.cpp:859
+#: src/imagewindow.cpp:849
 #, kde-format
 msgid "Gamma"
 msgstr "ਗਾਮਾ"
 
-#: src/imagewindow.cpp:906
+#: src/imagewindow.cpp:896
 #, kde-format
 msgid "Unable to print the image."
 msgstr "ਚਿੱਤਰ ਪਰਿੰਟ ਕਰਨ ਲਈ ਅਸਮਰੱਥ।"
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:897
 #, kde-format
 msgid "Printing Failed"
 msgstr "ਪਰਿੰਟਿੰਗ ਫੇਲ੍ਹ ਹੋਈ"
 
-#: src/imagewindow.cpp:924
+#: src/imagewindow.cpp:914
 #, kde-format
 msgid "Keep original image size"
 msgstr "ਅਸਲੀ ਚਿੱਤਰ ਅਕਾਰ ਰੱਖੋ"
 
-#: src/imagewindow.cpp:929
+#: src/imagewindow.cpp:919
 #, fuzzy, kde-format
 #| msgid "Save As"
 msgid "Save Image As"
 msgstr "ਇੰਝ ਸੰਭਾਲੋ"
 
-#: src/imagewindow.cpp:934 src/kuickshow.cpp:1251
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1251
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
 
-#: src/imagewindow.cpp:952
+#: src/imagewindow.cpp:942
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -479,12 +479,12 @@ msgstr ""
 "ਫਾਇਲ ਨੂੰ ਸੰਭਾਲਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ ਹੈ।\n"
 "ਸੰਭਵ ਤੌਰ 'ਤੇ ਡਿਸਕ ਭਰ ਗਈ ਹੈ ਜਾਂ ਤੁਹਾਨੂੰ ਫਾਇਲ ਲਿਖਣ ਲਈ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ।"
 
-#: src/imagewindow.cpp:955
+#: src/imagewindow.cpp:945
 #, kde-format
 msgid "File Saving Failed"
 msgstr "ਫਾਇਲ ਸੰਭਾਲਣ ਲਈ ਫੇਲ੍ਹ"
 
-#: src/imagewindow.cpp:1202
+#: src/imagewindow.cpp:1192
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
