@@ -8,24 +8,25 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-16 00:41+0000\n"
-"PO-Revision-Date: 2013-09-08 07:04+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-05-31 19:55-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "ئابدۇقادىر ئابلىز, غەيرەت كەنجى"
+msgstr "ئابدۇقادىر ئابلىز، غەيرەت كەنجى"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "sahran.ug@gmail.com,  gheyret@gmail.com"
+msgstr "sahranbay@gmail.com, gheyret@gmail.com"
 
 #. i18n: ectx: property (text), widget (QLabel, lblAuthors)
 #: src/aboutwidget.ui:32
@@ -86,13 +87,13 @@ msgstr "گېئومېتىرىيە"
 #: src/defaultswidget.ui:69
 #, kde-format
 msgid "Flip vertically"
-msgstr "تىك ئايلاندۇر"
+msgstr "بويىغا ئۆرۈ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFlipHorizontally)
 #: src/defaultswidget.ui:76
 #, kde-format
 msgid "Flip horizontally"
-msgstr "گورىزونتال ئۆرۈش"
+msgstr "توغرىسىغا ئۆرۈ"
 
 #. i18n: ectx: property (text), widget (QLabel, lbRotate)
 #: src/defaultswidget.ui:85
@@ -104,25 +105,25 @@ msgstr ""
 #: src/defaultswidget.ui:93
 #, kde-format
 msgid "0 Degrees"
-msgstr "0 گرادۇس"
+msgstr "0 گىرادۇس"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:98
 #, kde-format
 msgid "90 Degrees"
-msgstr "90 گرادۇس"
+msgstr "90 گىرادۇس"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:103
 #, kde-format
 msgid "180 Degrees"
-msgstr "180 گرادۇس"
+msgstr "180 گىرادۇس"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:108
 #, kde-format
 msgid "270 Degrees"
-msgstr "270 گرادۇس"
+msgstr "270 گىرادۇس"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbAdjust)
 #: src/defaultswidget.ui:134
@@ -140,7 +141,7 @@ msgstr "يورۇقلۇق:"
 #: src/defaultswidget.ui:183
 #, kde-format
 msgid "Contrast:"
-msgstr "سېلىشتۇرما دەرىجە:"
+msgstr "سېلىشتۇرمىسى:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: src/defaultswidget.ui:226
@@ -168,10 +169,9 @@ msgstr "ئۆزگەرتىلگەن ۋاقتى"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, GeneralWidget)
 #: src/generalwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "&General"
+#, kde-format
 msgid "General"
-msgstr "ئادەتتىكى(&G)"
+msgstr "ئادەتتىكى"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbLastdir)
 #: src/generalwidget.ui:20
@@ -237,7 +237,7 @@ msgstr "چەكسىز"
 #: src/generalwidget.ui:91
 #, kde-format
 msgid " MB"
-msgstr " مېگابايت"
+msgstr " MB"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
 #: src/generalwidget.ui:104
@@ -431,7 +431,7 @@ msgstr "يورۇقلۇق"
 #: src/imagewindow.cpp:845
 #, kde-format
 msgid "Contrast"
-msgstr "ئاق-قارىلىقى"
+msgstr "سېلىشتۇرمىسى"
 
 #: src/imagewindow.cpp:849
 #, kde-format
@@ -454,10 +454,9 @@ msgid "Keep original image size"
 msgstr ""
 
 #: src/imagewindow.cpp:919
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "باشقا ئاتتا ساقلا"
+msgstr "سۈرەتنى باشقا ئاتتا ساقلاش"
 
 #: src/imagewindow.cpp:924 src/kuickshow.cpp:1251
 #, kde-format
@@ -557,7 +556,7 @@ msgstr ""
 #: src/kuickshow.cpp:176
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "كۆرسەتكۈچ"
 
 #: src/kuickshow.cpp:286
 #, kde-format
@@ -572,7 +571,7 @@ msgstr "تەھرىر(&E)"
 #: src/kuickshow.cpp:306
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "كۆرۈنۈش"
 
 #: src/kuickshow.cpp:309
 #, kde-format
@@ -611,7 +610,7 @@ msgstr ""
 #: src/kuickshow.cpp:1311
 #, kde-format
 msgid "Start Slideshow"
-msgstr "تام تەسۋىرىنى باشلاش"
+msgstr "تام تەسۋىرنى باشلا"
 
 #: src/kuickshow.cpp:1314
 #, kde-format
@@ -626,7 +625,7 @@ msgstr ""
 #: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "%1 نى سەپلە…"
 
 #: src/kuickshow.cpp:1323
 #, kde-format
@@ -762,14 +761,13 @@ msgstr ""
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "مەڭگۈ"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
-#, fuzzy, kde-format
-#| msgid "Pause Slideshow"
+#, kde-format
 msgid "Slideshow"
-msgstr "تام تەسۋىرنى ۋاقىتلىق توختات"
+msgstr "تام تەسۋىر"
 
 #. i18n: ectx: property (text), widget (QCheckBox, fullScreen)
 #: src/slideshowwidget.ui:20
@@ -810,7 +808,6 @@ msgstr ""
 #~ msgid "Delete File"
 #~ msgstr "ھۆججەت ئۆچۈر"
 
-#, fuzzy
 #~| msgid ""
 #~| "<qt>Do you really want to trash\n"
 #~| " <b>'%1'</b>?</qt>"
