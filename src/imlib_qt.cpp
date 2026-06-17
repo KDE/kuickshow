@@ -129,9 +129,13 @@ void ImageLibraryQt::flipImage(ImageHandleData* data, FlipMode flipMode)
 {
 	ImageHandleDataQt* d = castData(data);
 	if (flipMode != FlipNone) {
-		d->image = d->image.mirrored(flipMode & FlipHorizontal ? true : false, flipMode & FlipVertical ? true : false);
+		Qt::Orientations orient = Qt::Orientations();
+		if (flipMode & FlipHorizontal) orient |= Qt::Horizontal;
+		if (flipMode & FlipVertical) orient |= Qt::Vertical;
+		d->image = d->image.flipped(orient);
 	}
 }
+
 
 void ImageLibraryQt::rotateImage(ImageHandleData* data, Rotation rotation)
 {
@@ -149,8 +153,8 @@ void ImageLibraryQt::rotateImage(ImageHandleData* data, Rotation rotation)
 			break;
 
 		case ROT_180:
-			// use mirrored() for faster transformation
-			image = image.mirrored(true, true);
+			// use flipped() for faster transformation
+			image = image.flipped(Qt::Horizontal|Qt::Vertical);
 			break;
 
 		case ROT_270:

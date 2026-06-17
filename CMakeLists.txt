@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
 project(kuickshow)
 
-set(QT_MIN_VERSION "6.0.0")
+set(QT_MIN_VERSION "6.9.0")
 set(KF_MIN_VERSION "6.0.0")
 set(ECM_MIN_VERSION ${KF_MIN_VERSION})
 
