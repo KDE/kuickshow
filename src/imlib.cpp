@@ -9,11 +9,11 @@ struct ImageHandleDataWrapper
 {
 	Q_DISABLE_COPY_MOVE(ImageHandleDataWrapper)
 
-	ImageHandleDataWrapper(ImageLibrary::ImageHandleData* data, const std::shared_ptr<ImageLibrary>& libraryInstance) :
-		data(data), libraryInstance(libraryInstance)
+	ImageHandleDataWrapper(ImageLibrary::ImageHandleData* d, const std::shared_ptr<ImageLibrary>& instance) :
+		data(d), libraryInstance(instance)
 	{}
-	ImageHandleDataWrapper(ImageLibrary::ImageHandleData* data, std::shared_ptr<ImageLibrary>&& libraryInstance) :
-		data(data), libraryInstance(std::move(libraryInstance))
+	ImageHandleDataWrapper(ImageLibrary::ImageHandleData* d, std::shared_ptr<ImageLibrary>&& instance) :
+		data(d), libraryInstance(std::move(instance))
 	{}
 	~ImageHandleDataWrapper();
 

@@ -6,7 +6,7 @@
 // the image handle data
 struct ImageHandleDataQt : public ImageLibrary::ImageHandleData
 {
-	ImageHandleDataQt(const QImage& image, const ImageLibrary::ImageModifiers& modifiers) : image(image), modifiers(modifiers) {}
+	ImageHandleDataQt(const QImage& img, const ImageLibrary::ImageModifiers& mods) : image(img), modifiers(mods) {}
 	~ImageHandleDataQt();
 
 	QImage image;

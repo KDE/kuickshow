@@ -58,7 +58,7 @@ class ImageLibrary
 		{
 			public:
 				ImageModifiers() : brightness(), contrast(0), gamma(0) {}
-				ImageModifiers(int brightness, int contrast, int gamma) : brightness(brightness), contrast(contrast), gamma(gamma) {}
+				ImageModifiers(int b, int c, int g) : brightness(b), contrast(c), gamma(g) {}
 
 				bool isSet() const noexcept { return brightness != 0 || contrast != 0 || gamma != 0; }
 
