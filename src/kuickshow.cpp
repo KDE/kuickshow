@@ -318,7 +318,8 @@ void KuickShow::initGUI( const QUrl& startDir )
     mBar->addMenu( settingsMenu );
     mBar->addSeparator();
 
-    KHelpMenu* help = new KHelpMenu(this, QString(), false);
+    KHelpMenu *help = new KHelpMenu(this);
+    help->setShowWhatsThis(false);
     mBar->addMenu(help->menu());
 
     // toolbar
