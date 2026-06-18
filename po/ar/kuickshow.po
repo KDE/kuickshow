@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-16 00:41+0000\n"
+"POT-Creation-Date: 2026-06-18 00:41+0000\n"
 "PO-Revision-Date: 2026-02-19 08:22+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -333,7 +333,7 @@ msgstr "قلب أفقي"
 msgid "Flip Vertically"
 msgstr "قلب عمودي"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1353
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1354
 #, kde-format
 msgid "Print Image..."
 msgstr "طباعة الصورة..."
@@ -464,7 +464,7 @@ msgstr "الاحتفاظ بالقياس الأصلي للصورة"
 msgid "Save Image As"
 msgstr "احفظ الصورة كــ"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1251
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1252
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "ملفّات الصّور (%1)"
@@ -614,17 +614,17 @@ msgstr "عرض"
 msgid "&Settings"
 msgstr "إ&عدادات"
 
-#: src/kuickshow.cpp:325
+#: src/kuickshow.cpp:326
 #, kde-format
 msgid "Main Toolbar"
 msgstr "شريط الأدوات الرئيسي"
 
-#: src/kuickshow.cpp:1126
+#: src/kuickshow.cpp:1127
 #, kde-format
 msgid "Image Error"
 msgstr "خطأ صورة"
 
-#: src/kuickshow.cpp:1137
+#: src/kuickshow.cpp:1138
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -637,57 +637,57 @@ msgstr ""
 "قد تتوفر معلومات إضافية في ملف سجل الجلسة،\n"
 "أو يمكن الحصول عليها عن طريق بدء تشغيل %1 من محطة طرفية."
 
-#: src/kuickshow.cpp:1141
+#: src/kuickshow.cpp:1142
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "خطأ بدء فادح"
 
-#: src/kuickshow.cpp:1250
+#: src/kuickshow.cpp:1251
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "اختر الملفات أو المجلدات للفتح"
 
-#: src/kuickshow.cpp:1311
+#: src/kuickshow.cpp:1312
 #, kde-format
 msgid "Start Slideshow"
 msgstr "بدء العرض كشرائح"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Show File Browser"
 msgstr "إظهار متصفح الملفات"
 
-#: src/kuickshow.cpp:1315
+#: src/kuickshow.cpp:1316
 #, kde-format
 msgid "Hide File Browser"
 msgstr "إخفاء متصفح الملفات"
 
-#: src/kuickshow.cpp:1319
+#: src/kuickshow.cpp:1320
 #, kde-format
 msgid "Configure %1..."
 msgstr "إعداد %1..."
 
-#: src/kuickshow.cpp:1323
+#: src/kuickshow.cpp:1324
 #, kde-format
 msgid "About KuickShow"
 msgstr "عن KuickShow"
 
-#: src/kuickshow.cpp:1330
+#: src/kuickshow.cpp:1331
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "افتح نافذة صور واحدة فقط"
 
-#: src/kuickshow.cpp:1341
+#: src/kuickshow.cpp:1342
 #, kde-format
 msgid "Show Image"
 msgstr "أعرض الصورة"
 
-#: src/kuickshow.cpp:1345
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "أعرض الصورة في النافذة النشطة"
 
-#: src/kuickshow.cpp:1349
+#: src/kuickshow.cpp:1350
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "أعرض الصورة في نمط ملء الشاشة"

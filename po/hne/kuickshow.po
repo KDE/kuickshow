@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-16 00:41+0000\n"
+"POT-Creation-Date: 2026-06-18 00:41+0000\n"
 "PO-Revision-Date: 2009-02-17 13:26+0530\n"
 "Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
 "Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
@@ -333,7 +333,7 @@ msgstr "आड़ा लहुटाव"
 msgid "Flip Vertically"
 msgstr "खड़ा लहुटाव"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1353
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1354
 #, kde-format
 msgid "Print Image..."
 msgstr "फोटू छापव..."
@@ -465,7 +465,7 @@ msgstr "मूल फोटू आकार रखे रहें"
 msgid "Save Image As"
 msgstr "अइसन सहेजव"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1251
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1252
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -587,17 +587,17 @@ msgstr ""
 msgid "&Settings"
 msgstr "सेटिंग (&S)"
 
-#: src/kuickshow.cpp:325
+#: src/kuickshow.cpp:326
 #, kde-format
 msgid "Main Toolbar"
 msgstr "मुख्य औजार पट्टी"
 
-#: src/kuickshow.cpp:1126
+#: src/kuickshow.cpp:1127
 #, kde-format
 msgid "Image Error"
 msgstr "फोटू गलती "
 
-#: src/kuickshow.cpp:1137
+#: src/kuickshow.cpp:1138
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -606,58 +606,58 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1141
+#: src/kuickshow.cpp:1142
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "गंभीर Imlib गलती"
 
-#: src/kuickshow.cpp:1250
+#: src/kuickshow.cpp:1251
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "खोले बर फाइल या फोल्डर चुनव"
 
-#: src/kuickshow.cpp:1311
+#: src/kuickshow.cpp:1312
 #, kde-format
 msgid "Start Slideshow"
 msgstr "स्लाइड सो चालू करव"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Show File Browser"
 msgstr "फाइल ब्राउजर देखाव"
 
-#: src/kuickshow.cpp:1315
+#: src/kuickshow.cpp:1316
 #, kde-format
 msgid "Hide File Browser"
 msgstr "फाइल ब्राउजर लुकाव"
 
-#: src/kuickshow.cpp:1319
+#: src/kuickshow.cpp:1320
 #, kde-format
 msgid "Configure %1..."
 msgstr "कान्फिगर %1..."
 
-#: src/kuickshow.cpp:1323
+#: src/kuickshow.cpp:1324
 #, kde-format
 msgid "About KuickShow"
 msgstr "क्विक-सो के बारे में"
 
-#: src/kuickshow.cpp:1330
+#: src/kuickshow.cpp:1331
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "सिरिफ एक फोटू विंडो खोलव"
 
-#: src/kuickshow.cpp:1341
+#: src/kuickshow.cpp:1342
 #, kde-format
 msgid "Show Image"
 msgstr "फोटू देखाव"
 
-#: src/kuickshow.cpp:1345
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "सक्रिय विंडो मं फोटू देखाव"
 
-#: src/kuickshow.cpp:1349
+#: src/kuickshow.cpp:1350
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "फोटू ल पूरा स्क्रीन मोड मं देखाव"

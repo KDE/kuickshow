@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-16 00:41+0000\n"
+"POT-Creation-Date: 2026-06-18 00:41+0000\n"
 "PO-Revision-Date: 2022-04-15 19:12+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -329,7 +329,7 @@ msgstr "Prevrátiť horizontálne"
 msgid "Flip Vertically"
 msgstr "Prevrátiť vertikálne"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1353
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1354
 #, kde-format
 msgid "Print Image..."
 msgstr "Tlačiť obrázok..."
@@ -461,7 +461,7 @@ msgstr "Udržiavať pôvodnú veľkosť"
 msgid "Save Image As"
 msgstr "Uložiť obrázok ako"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1251
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1252
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Súbory obrázkov (%1)"
@@ -599,17 +599,17 @@ msgstr "Zobraziť"
 msgid "&Settings"
 msgstr "Na&stavenia"
 
-#: src/kuickshow.cpp:325
+#: src/kuickshow.cpp:326
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Hlavný panel nástrojov"
 
-#: src/kuickshow.cpp:1126
+#: src/kuickshow.cpp:1127
 #, kde-format
 msgid "Image Error"
 msgstr "Chyba obrázku"
 
-#: src/kuickshow.cpp:1137
+#: src/kuickshow.cpp:1138
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -622,57 +622,57 @@ msgstr ""
 "Ďalšie informácie môžu byť dostupné v súbore záznamu relácie,\n"
 "alebo ich môžete získať spustením %1 z terminálu."
 
-#: src/kuickshow.cpp:1141
+#: src/kuickshow.cpp:1142
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Kritická chyba Imlib"
 
-#: src/kuickshow.cpp:1250
+#: src/kuickshow.cpp:1251
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Vyberte súbory alebo priečinok, ktorý sa má otvoriť"
 
-#: src/kuickshow.cpp:1311
+#: src/kuickshow.cpp:1312
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Spustiť prezentáciu"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1315
 #, kde-format
 msgid "Show File Browser"
 msgstr "Zobraziť prehliadač súborov"
 
-#: src/kuickshow.cpp:1315
+#: src/kuickshow.cpp:1316
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Skryť prehliadač súborov"
 
-#: src/kuickshow.cpp:1319
+#: src/kuickshow.cpp:1320
 #, kde-format
 msgid "Configure %1..."
 msgstr "Nastaviť %1..."
 
-#: src/kuickshow.cpp:1323
+#: src/kuickshow.cpp:1324
 #, kde-format
 msgid "About KuickShow"
 msgstr "O KuickShow"
 
-#: src/kuickshow.cpp:1330
+#: src/kuickshow.cpp:1331
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Otvoriť iba jedno okno obrázkov"
 
-#: src/kuickshow.cpp:1341
+#: src/kuickshow.cpp:1342
 #, kde-format
 msgid "Show Image"
 msgstr "Zobraziť obrázok"
 
-#: src/kuickshow.cpp:1345
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Zobraziť obrázok v aktívnom okne"
 
-#: src/kuickshow.cpp:1349
+#: src/kuickshow.cpp:1350
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Zobraziť obrázok na celú obrazovku"
