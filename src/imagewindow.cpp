@@ -122,168 +122,156 @@ void ImageWindow::updateActions()
 
 void ImageWindow::setupActions()
 {
-    // TODO: don't need a unique variable for each action
+    // Navigation
+    QAction *act = KStandardAction::next(this, [this]() { Q_EMIT requestImage(this, +1); }, m_actions);
+    act->setText( i18n("Show Next Image") );
+    m_actions->addAction( "next_image", act );
 
-    QAction *a = m_actions->addAction( "duplicate_window" );
-    a->setText( i18n("Duplicate Window") );
-    m_actions->setDefaultShortcut(a, Qt::Key_D );
-    connect(a, &QAction::triggered, this, [this]() { Q_EMIT duplicateWindow(currentFile()->url()); });
+    act = KStandardAction::prior(this, [this]() { Q_EMIT requestImage(this, -1); }, m_actions);
+    act->setText( i18n("Show Previous Image") );
+    m_actions->addAction( "previous_image", act );
 
-    QAction *nextImage = m_actions->addAction( "next_image" );
-    nextImage->setText( i18n("Show Next Image") );
-    m_actions->setDefaultShortcuts(nextImage, KStandardShortcut::next());
-    connect(nextImage, &QAction::triggered, this, [this]() { Q_EMIT requestImage(this, +1); });
+    act = m_actions->addAction( "duplicate_window", this, [this]() { Q_EMIT duplicateWindow(currentFile()->url()); });
+    act->setText( i18n("Duplicate Window") );
+    act->setIcon( QIcon::fromTheme("edit-duplicate") );
+    m_actions->setDefaultShortcut(act, Qt::Key_D );
 
-    QAction* showPreviousImage = m_actions->addAction( "previous_image" );
-    showPreviousImage->setText( i18n("Show Previous Image") );
-    m_actions->setDefaultShortcuts(showPreviousImage, KStandardShortcut::prior());
-    connect( showPreviousImage, &QAction::triggered, this, [this]() { Q_EMIT requestImage(this, -1); });
+    // Zoom
+    act = KStandardAction::zoomIn(this, &ImageWindow::zoomIn, m_actions);
+    m_actions->setDefaultShortcut(act, Qt::Key_Plus);
+    m_actions->addAction( "zoom_in",  act );
 
-    QAction* deleteImage = m_actions->addAction( "delete_image" );
-    deleteImage->setText( i18n("Delete Image") );
-    m_actions->setDefaultShortcut(deleteImage, QKeySequence(Qt::ShiftModifier | Qt::Key_Delete));
-    connect(deleteImage, &QAction::triggered, this, &ImageWindow::imageDelete);
+    act = KStandardAction::zoomOut(this, &ImageWindow::zoomOut, m_actions);
+    m_actions->setDefaultShortcut(act, Qt::Key_Minus);
+    m_actions->addAction( "zoom_out",  act );
 
-    QAction *trashImage = m_actions->addAction( "trash_image" );
-    trashImage->setText( i18n("Move Image to Trash") );
-    m_actions->setDefaultShortcut(trashImage, Qt::Key_Delete);
-    connect(trashImage, &QAction::triggered, this, &ImageWindow::imageTrash);
+    act = KStandardAction::actualSize(this, &ImlibWidget::showImageOriginalSize, m_actions);
+    m_actions->setDefaultShortcut(act, Qt::Key_O);
+    m_actions->addAction( "original_size",  act );
 
-    QAction* zoomIn = KStandardAction::zoomIn(this, &ImageWindow::zoomIn, m_actions);
-    m_actions->setDefaultShortcut(zoomIn, Qt::Key_Plus);
-    m_actions->addAction( "zoom_in",  zoomIn );
+    act = m_actions->addAction( "maximize", this, &ImageWindow::maximize );
+    act->setText( i18n("Zooom to Maximum Size") );
+    act->setIcon( QIcon::fromTheme("zoom") );
+    m_actions->setDefaultShortcut(act, Qt::Key_M);
 
-    QAction *zoomOut = KStandardAction::zoomOut(this, &ImageWindow::zoomOut, m_actions);
-    m_actions->setDefaultShortcut(zoomOut, Qt::Key_Minus);
-    m_actions->addAction( "zoom_out",  zoomOut );
+    // Image transforms
+    act = m_actions->addAction( "rotate90", this, &ImageWindow::rotate90 );
+    act->setText( i18n("Rotate 90 Degrees") );
+    act->setIcon( QIcon::fromTheme("object-rotate-right") );
+    m_actions->setDefaultShortcut(act, Qt::Key_9);
 
-    QAction *restoreSize = m_actions->addAction( "original_size" );
-    restoreSize->setText( i18n("Restore Original Size") );
-    m_actions->setDefaultShortcut(restoreSize, Qt::Key_O);
-    connect(restoreSize, &QAction::triggered, this, &ImlibWidget::showImageOriginalSize);
+    act = m_actions->addAction( "rotate180", this, &ImageWindow::rotate180 );
+    act->setText( i18n("Rotate 180 Degrees") );
+    act->setIcon( QIcon::fromTheme("transform-rotate") );
+    m_actions->setDefaultShortcut(act, Qt::Key_8);
 
-    QAction *maximize = m_actions->addAction( "maximize" );
-    maximize->setText( i18n("Maximize") );
-    m_actions->setDefaultShortcut(maximize, Qt::Key_M);
-    connect(maximize, &QAction::triggered, this, &ImageWindow::maximize);
+    act = m_actions->addAction( "rotate270", this, &ImageWindow::rotate270 );
+    act->setText( i18n("Rotate 270 Degrees") );
+    act->setIcon( QIcon::fromTheme("object-rotate-left") );
+    m_actions->setDefaultShortcut(act, Qt::Key_7);
 
-    QAction *rotate90 = m_actions->addAction( "rotate90" );
-    rotate90->setText( i18n("Rotate 90 Degrees") );
-    m_actions->setDefaultShortcut(rotate90, Qt::Key_9);
-    connect(rotate90, &QAction::triggered, this, &ImageWindow::rotate90);
+    act = m_actions->addAction( "flip_horicontally", this, &ImageWindow::flipHoriz );
+    act->setText( i18n("Flip Horizontally") );
+    act->setIcon( QIcon::fromTheme("object-flip-horizontal") );
+    m_actions->setDefaultShortcut(act, Qt::Key_Asterisk);
 
-    QAction *rotate180 = m_actions->addAction( "rotate180" );
-    rotate180->setText( i18n("Rotate 180 Degrees") );
-    m_actions->setDefaultShortcut(rotate180, Qt::Key_8);
-    connect(rotate180, &QAction::triggered, this, &ImageWindow::rotate180);
+    act = m_actions->addAction( "flip_vertically", this, &ImageWindow::flipVert );
+    act->setText( i18n("Flip Vertically") );
+    act->setIcon( QIcon::fromTheme("object-flip-vertical") );
+    m_actions->setDefaultShortcut(act, Qt::Key_Slash);
 
-    QAction *rotate270 = m_actions->addAction( "rotate270" );
-    rotate270->setText( i18n("Rotate 270 Degrees") );
-    m_actions->setDefaultShortcut(rotate270, Qt::Key_7);
-    connect(rotate270, &QAction::triggered, this, &ImageWindow::rotate270);
+    // Image file actions
+    act = KStandardAction::deleteFile(this, &ImageWindow::imageDelete, m_actions);
+    act->setText( i18n("Delete Image") );
+    m_actions->addAction( "delete_image", act );
 
-    QAction *flipHori = m_actions->addAction( "flip_horicontally" );
-    flipHori->setText( i18n("Flip Horizontally") );
-    m_actions->setDefaultShortcut(flipHori, Qt::Key_Asterisk);
-    connect(flipHori, &QAction::triggered, this, &ImageWindow::flipHoriz);
+    act = KStandardAction::moveToTrash(this, &ImageWindow::imageTrash, m_actions);
+    act->setText( i18n("Move Image to Trash") );
+    m_actions->addAction( "trash_image", act );
 
-    QAction *flipVeri = m_actions->addAction( "flip_vertically" );
-    flipVeri->setText( i18n("Flip Vertically") );
-    m_actions->setDefaultShortcut(flipVeri, Qt::Key_Slash);
-    connect(flipVeri, &QAction::triggered, this, &ImageWindow::flipVert);
+    act = KStandardAction::print(this, &ImageWindow::printImage, m_actions);
+    act->setText( i18n("Print Image...") );
+    m_actions->addAction( "print_image", act );
 
-    QAction *printImage = m_actions->addAction( "print_image" );
-    printImage->setText( i18n("Print Image...") );
-    m_actions->setDefaultShortcuts(printImage, KStandardShortcut::print());
-    connect(printImage, &QAction::triggered, this, &ImageWindow::printImage);
+    act =  KStandardAction::saveAs(this, QOverload<>::of(&ImageWindow::slotSaveImage), m_actions);
+    m_actions->addAction("save_image_as", act);
 
-    a =  KStandardAction::saveAs(this, QOverload<>::of(&ImageWindow::slotSaveImage), m_actions);
-    m_actions->addAction("save_image_as", a);
+    const KGuiItem propsItem = KStandardGuiItem::properties();
+    act = m_actions->addAction( "properties", this, &ImageWindow::slotProperties );
+    act->setText( propsItem.text() );
+    act->setIcon( propsItem.icon() );
 
-    a = KStandardAction::close(this, &QWidget::close, m_actions);
-    m_actions->addAction("close_image", a);
+    // Closing the image window
+    act = KStandardAction::close(this, &QWidget::close, m_actions);
+    m_actions->addAction("close_image", act);
 
-    a = m_actions->addAction("show_browser");
-    a->setText(i18n("Return to File Browser"));
-    a->setIcon(QIcon::fromTheme("view-list-icons"));
-    connect(a, &QAction::triggered, this, [this]() { Q_EMIT showFileBrowser(currentFile()->url()); deleteLater(); });
+    act = m_actions->addAction( "show_browser", this, [this]() { Q_EMIT showFileBrowser(currentFile()->url()); deleteLater(); });
+    act->setText(i18n("Return to File Browser"));
+    act->setIcon(QIcon::fromTheme("view-list-icons"));
 
-    // --------
-    QAction *moreBrighteness = m_actions->addAction( "more_brightness" );
-    moreBrighteness->setText( i18n("More Brightness") );
-    m_actions->setDefaultShortcut(moreBrighteness, Qt::Key_B);
-    connect(moreBrighteness, &QAction::triggered, this, &ImageWindow::moreBrightness);
+    // Image modifications
+    act = m_actions->addAction( "more_brightness", this, &ImageWindow::moreBrightness );
+    act->setText( i18n("More Brightness") );
+    m_actions->setDefaultShortcut(act, Qt::Key_B);
 
-    QAction *lessBrightness = m_actions->addAction( "less_brightness" );
-    lessBrightness->setText(  i18n("Less Brightness") );
-    m_actions->setDefaultShortcut(lessBrightness, Qt::SHIFT | Qt::Key_B);
-    connect(lessBrightness, &QAction::triggered, this, &ImageWindow::lessBrightness);
+    act = m_actions->addAction( "less_brightness", this, &ImageWindow::lessBrightness );
+    act->setText(  i18n("Less Brightness") );
+    m_actions->setDefaultShortcut(act, Qt::SHIFT | Qt::Key_B);
 
-    QAction *moreContrast = m_actions->addAction( "more_contrast" );
-    moreContrast->setText( i18n("More Contrast") );
-    m_actions->setDefaultShortcut(moreContrast, Qt::Key_C);
-    connect(moreContrast, &QAction::triggered, this, &ImageWindow::moreContrast);
+    act = m_actions->addAction( "more_contrast", this, &ImageWindow::moreContrast );
+    act->setText( i18n("More Contrast") );
+    m_actions->setDefaultShortcut(act, Qt::Key_C);
 
-    QAction *lessContrast = m_actions->addAction( "less_contrast" );
-    lessContrast->setText( i18n("Less Contrast") );
-    m_actions->setDefaultShortcut(lessContrast, Qt::SHIFT | Qt::Key_C);
-    connect(lessContrast, &QAction::triggered, this, &ImageWindow::lessContrast);
+    act = m_actions->addAction( "less_contrast", this, &ImageWindow::lessContrast );
+    act->setText( i18n("Less Contrast") );
+    m_actions->setDefaultShortcut(act, Qt::SHIFT | Qt::Key_C);
 
-    QAction *moreGamma = m_actions->addAction( "more_gamma" );
-    moreGamma->setText( i18n("More Gamma") );
-    m_actions->setDefaultShortcut(moreGamma, Qt::Key_G);
-    connect(moreGamma, &QAction::triggered, this, &ImageWindow::moreGamma);
+    act = m_actions->addAction( "more_gamma", this, &ImageWindow::moreGamma );
+    act->setText( i18n("More Gamma") );
+    m_actions->setDefaultShortcut(act, Qt::Key_G);
 
-    QAction *lessGamma = m_actions->addAction( "less_gamma" );
-    lessGamma->setText( i18n("Less Gamma") );
-    m_actions->setDefaultShortcut(lessGamma, Qt::SHIFT | Qt::Key_G);
-    connect(lessGamma, &QAction::triggered, this, &ImageWindow::lessGamma);
+    act = m_actions->addAction( "less_gamma", this, &ImageWindow::lessGamma );
+    act->setText( i18n("Less Gamma") );
+    m_actions->setDefaultShortcut(act, Qt::SHIFT | Qt::Key_G);
 
-    // --------
-    QAction *scrollUp = m_actions->addAction( "scroll_up" );
-    scrollUp->setText( i18n("Scroll Up") );
-    m_actions->setDefaultShortcut(scrollUp, Qt::Key_Up);
-    connect(scrollUp, &QAction::triggered, this, &ImageWindow::scrollUp);
+    // Scrolling image, not in context menu
+    act = m_actions->addAction( "scroll_up", this, &ImageWindow::scrollUp );
+    act->setText( i18n("Scroll Up") );
+    m_actions->setDefaultShortcut(act, Qt::Key_Up);
 
-    QAction *scrollDown = m_actions->addAction( "scroll_down" );
-    scrollDown->setText( i18n("Scroll Down") );
-    m_actions->setDefaultShortcut(scrollDown, Qt::Key_Down);
-    connect(scrollDown, &QAction::triggered, this, &ImageWindow::scrollDown);
+    act = m_actions->addAction( "scroll_down", this, &ImageWindow::scrollDown );
+    act->setText( i18n("Scroll Down") );
+    m_actions->setDefaultShortcut(act, Qt::Key_Down);
 
-    QAction *scrollLeft = m_actions->addAction( "scroll_left" );
-    scrollLeft->setText( i18n("Scroll Left") );
-    m_actions->setDefaultShortcut(scrollLeft, Qt::Key_Left);
-    connect(scrollLeft, &QAction::triggered, this, &ImageWindow::scrollLeft);
+    act = m_actions->addAction( "scroll_left", this, &ImageWindow::scrollLeft );
+    act->setText( i18n("Scroll Left") );
+    m_actions->setDefaultShortcut(act, Qt::Key_Left);
 
-    QAction *scrollRight = m_actions->addAction( "scroll_right" );
-    scrollRight->setText( i18n("Scroll Right") );
-    m_actions->setDefaultShortcut(scrollRight, Qt::Key_Right);
-    connect(scrollRight, &QAction::triggered, this, &ImageWindow::scrollRight);
-    // --------
-    QAction *pause = m_actions->addAction( "kuick_slideshow_pause" );
-    pause->setText( i18n("Pause Slideshow") );
-    m_actions->setDefaultShortcut(pause, Qt::Key_P);
-    connect(pause, &QAction::triggered, this, &ImageWindow::pauseSlideShow);
+    act = m_actions->addAction( "scroll_right", this, &ImageWindow::scrollRight );
+    act->setText( i18n("Scroll Right") );
+    m_actions->setDefaultShortcut(act, Qt::Key_Right);
 
-    QAction *fullscreenAction = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, &ImageWindow::toggleFullscreen);
-    QList<QKeySequence> shortcuts = fullscreenAction->shortcuts();
+    // Not in context menu
+    act = m_actions->addAction( "kuick_slideshow_pause", this, &ImageWindow::pauseSlideShow );
+    act->setText( i18n("Pause Slideshow") );
+    m_actions->setDefaultShortcut(act, Qt::Key_P);
+
+    act = m_actions->addAction( KStandardAction::FullScreen, "fullscreen", this, &ImageWindow::toggleFullscreen);
+    QList<QKeySequence> shortcuts = act->shortcuts();
     // TODO: is Key_Return really a sensible default shortcut?
     if(!shortcuts.contains(Qt::Key_Return)) shortcuts << Qt::Key_Return;
-    m_actions->setDefaultShortcuts(fullscreenAction, shortcuts);
+    m_actions->setDefaultShortcuts(act, shortcuts);
 // TODO: make full screen work
 //    KAction *fullscreenAction = KStandardAction::fullScreen(this, &ImageWindow::toggleFullscreen, m_actions);
 //    m_actions->addAction( "", fullscreenAction );
 
-    QAction *reloadAction = m_actions->addAction( "reload_image" );
-    reloadAction->setText( i18n("Reload Image") );
-    if(!(shortcuts = KStandardShortcut::reload()).contains(Qt::Key_Enter)) shortcuts << Qt::Key_Enter;
-    m_actions->setDefaultShortcuts(reloadAction, shortcuts);
-    connect(reloadAction, &QAction::triggered, this, &ImageWindow:: reload);
-
-    QAction *properties = m_actions->addAction("properties" );
-    properties->setText( i18n("Properties") );
-    m_actions->setDefaultShortcut(properties, Qt::ALT | Qt::Key_Return);
-    connect(properties, &QAction::triggered, this, &ImageWindow::slotProperties);
+    act = KStandardAction::redisplay(this, &ImageWindow:: reload, m_actions);
+    act->setText( i18n("Reload Image") );
+    shortcuts = act->shortcuts();
+    // TODO: is Enter a sensible shortcut?  Standard action will provide F5, Ctrl-R.
+    if (!shortcuts.contains(Qt::Key_Enter)) shortcuts << Qt::Key_Enter;
+    m_actions->setDefaultShortcuts(act, shortcuts);
+    m_actions->addAction( "reload_image", act );
 
     m_actions->readSettings();
 }
@@ -833,9 +821,9 @@ void ImageWindow::setPopupMenu()
 {
     viewerMenu = new QMenu( this );
 
-    viewerMenu->addAction(m_actions->action("duplicate_window"));
     viewerMenu->addAction(m_actions->action("next_image"));
     viewerMenu->addAction(m_actions->action("previous_image"));
+    viewerMenu->addAction(m_actions->action("duplicate_window"));
     viewerMenu->addSeparator();
 
     brightnessMenu = new QMenu( i18n("Brightness"), viewerMenu );
