@@ -139,9 +139,6 @@ private:
     KUrlComboBox	*cmbPath;
     KuickConfigDialog 	*dialog;
 
-
-
-    KActionCollection *m_actions;
     void setupKuickActions();
     void initializeBrowserActionCollection(KActionCollection* collection) const;
 

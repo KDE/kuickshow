@@ -1298,8 +1298,8 @@ void KuickShow::deleteAllViewers()
 
 
 /*!
- * \brief Creates all KuickShow-specific QAction objects and stores them in the
- * @c m_actions collection.
+ * \brief Creates all KuickShow-specific QAction objects and stores them in our
+ * action collection.
  *
  * All created actions have their parent set to the current KuickShow instance.
 
@@ -1307,32 +1307,32 @@ void KuickShow::deleteAllViewers()
  */
 void KuickShow::setupKuickActions()
 {
-    m_actions = new KActionCollection(this, "KuickActions");;
+    KActionCollection *ac = actionCollection();
 
     // Application actions
-    QAction *act = m_actions->addAction("kuick_slideshow", this, &KuickShow::startSlideShow);
+    QAction *act = ac->addAction("kuick_slideshow", this, &KuickShow::startSlideShow);
     act->setText(i18n("Start Slideshow"));
     act->setIcon(QIcon::fromTheme("ksslide"));
-    m_actions->setDefaultShortcut(act, Qt::Key_F2);
+    ac->setDefaultShortcut(act, Qt::Key_F2);
 
     KToggleAction *toggle = new KToggleAction(i18n("Show File Browser"), this);
     toggle->setCheckedState(KGuiItem(i18n("Hide File Browser")));
     toggle->setIcon(QIcon::fromTheme("view-list-icons"));
     connect(toggle, &QAction::toggled, this, &KuickShow::toggleBrowser);
-    m_actions->addAction("toggleBrowser", toggle);
-    m_actions->setDefaultShortcut(act, Qt::Key_Space);
+    ac->addAction("toggleBrowser", toggle);
+    ac->setDefaultShortcut(act, Qt::Key_Space);
 
     act = KStandardAction::preferences(this, &KuickShow::configuration, this);
-    m_actions->addAction("kuick_configure", act);
+    ac->addAction("kuick_configure", act);
 
     act = KStandardAction::quit(this, &QObject::deleteLater, this);
-    m_actions->addAction("quit", act);
+    ac->addAction("quit", act);
 
     // Application settings
     toggle = new KToggleAction(i18n("Open Only One Image Window"), this);
     toggle->setIcon(QIcon::fromTheme("window-new"));
-    m_actions->addAction("kuick_one_window", toggle);
-    m_actions->setDefaultShortcut(act, Qt::CTRL | Qt::Key_N);
+    ac->addAction("kuick_one_window", toggle);
+    ac->setDefaultShortcut(act, Qt::CTRL | Qt::Key_N);
 
     // TODO: save and restore state in config
     act = fileWidget->action(KDirOperator::ShowPreview);
@@ -1340,30 +1340,30 @@ void KuickShow::setupKuickActions()
 
     // image actions
     act = KStandardAction::open(this, &KuickShow::slotOpenURL, this);
-    m_actions->addAction("openURL", act);
+    ac->addAction("openURL", act);
 
-    act = m_actions->addAction("kuick_showInOtherWindow", this, &KuickShow::slotShowInOtherWindow);
+    act = ac->addAction("kuick_showInOtherWindow", this, &KuickShow::slotShowInOtherWindow);
     act->setText(i18n("Show Image"));
     act->setIcon(QIcon::fromTheme("window-new"));
 
-    act = m_actions->addAction("kuick_showInSameWindow", this, &KuickShow::slotShowInSameWindow);
+    act = ac->addAction("kuick_showInSameWindow", this, &KuickShow::slotShowInSameWindow);
     act->setText(i18n("Show Image in Active Window"));
     act->setIcon(QIcon::fromTheme("viewimage"));
 
-    act = m_actions->addAction("kuick_showFullscreen", this, &KuickShow::slotShowFullscreen);
+    act = ac->addAction("kuick_showFullscreen", this, &KuickShow::slotShowFullscreen);
     act->setText(i18n("Show Image in Fullscreen Mode"));
     act->setIcon(QIcon::fromTheme("view-fullscreen"));
 
     act = KStandardAction::print(this, &KuickShow::slotPrint, this);
     act->setText(i18n("Print Image..."));
-    m_actions->addAction("kuick_print", act);
+    ac->addAction("kuick_print", act);
 
     // Manually fetch the configured shortcuts for *all* actions:
     // 1) The actions created above aren't part of any KActionCollection and therefore not automatically initialized.
     // 2) We define default shortcuts for some of FileWidget's actions, which must be taken into account when loading
     //    the shortcuts from the config file.
-    initializeBrowserActionCollection(m_actions);
-    m_actions->readSettings();
+    initializeBrowserActionCollection(ac);
+    ac->readSettings();
 }
 
 
@@ -1401,7 +1401,7 @@ void KuickShow::initializeBrowserActionCollection(KActionCollection* collection)
 
 QAction* KuickShow::kuickAction(const QString &name) const
 {
-    QAction *act = m_actions->action(name);
+    QAction *act = actionCollection()->action(name);
     if (act==nullptr) qWarning() << "unknown action" << name;
     return (act);
 }
