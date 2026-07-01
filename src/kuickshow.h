@@ -40,37 +40,6 @@ class KuickFile;
 class DelayedRepeatEvent;
 
 
-/*!
- * The actions created by class KuickShow.
- *
- * Each enum value corresponds to an action created by KuickShow. These actions can be accessed via
- * KuickShow::kuickAction(KuickActionType).
- */
-enum class KuickActionType : uint
-{
-	// application actions
-	SlideShow,
-	ToggleBrowser,
-	Configure,
-	Quit,
-
-	// application settings
-	OneImageWindow,
-
-	// image actions
-	OpenUrl,
-	ShowImageInNewWindow,
-	ShowImageInActiveWindow,
-	ShowImageFullScreen,
-	PrintImage,
-};
-
-inline uint qHash(KuickActionType action, uint seed = 0) noexcept
-{
-	return qHash(static_cast<uint>(action), seed);
-}
-
-
 class KuickShow : public KXmlGuiWindow
 {
     Q_OBJECT
@@ -97,17 +66,13 @@ public:
     };
     Q_DECLARE_FLAGS(ShowFlags, ShowFlag)
 
-
-	/*!
-	 * \brief Returns the QAction instance associated with \p actionType .
-	 *
-	 * @param actionType The action to return.
-	 * @return The requested action.
-	 */
-	inline QAction* kuickAction(KuickActionType actionType) const {
-		return kuickActions.value(actionType, nullptr);
-	}
-
+    /*!
+     * \brief Returns the QAction instance associated with the \p actionName.
+     *
+     * @param actionType The action to return.
+     * @return The requested action.
+     */
+    QAction *kuickAction(const QString &actionName) const;
 
 private Q_SLOTS:
     void		toggleBrowser();
@@ -174,9 +139,11 @@ private:
     KUrlComboBox	*cmbPath;
     KuickConfigDialog 	*dialog;
 
-	QHash<KuickActionType, QAction*> kuickActions;
-	void setupKuickActions();
-	void initializeBrowserActionCollection(KActionCollection* collection) const;
+
+
+    KActionCollection *m_actions;
+    void setupKuickActions();
+    void initializeBrowserActionCollection(KActionCollection* collection) const;
 
     // This variable identifies the currently active image viewer window:
     // that is, either a newly created one or the last ImageWindow that a

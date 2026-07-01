@@ -186,11 +186,11 @@ void FileWidget::initializeContextMenu(QMenu* popupMenu)
 	EnsureLastMenuItemIsSeparator(popupMenu, propertiesAction);
 
 	// add our own image actions
-	popupMenu->insertAction(propertiesAction, ks->kuickAction(KuickActionType::ShowImageInNewWindow));
-	popupMenu->insertAction(propertiesAction, ks->kuickAction(KuickActionType::ShowImageInActiveWindow));
-	popupMenu->insertAction(propertiesAction, ks->kuickAction(KuickActionType::ShowImageFullScreen));
+	popupMenu->insertAction(propertiesAction, ks->kuickAction("kuick_showInOtherWindow"));
+	popupMenu->insertAction(propertiesAction, ks->kuickAction("kuick_showInSameWindow"));
+	popupMenu->insertAction(propertiesAction, ks->kuickAction("kuick_showFullscreen"));
 	popupMenu->insertSeparator(propertiesAction);
-	popupMenu->insertAction(propertiesAction, ks->kuickAction(KuickActionType::PrintImage));
+	popupMenu->insertAction(propertiesAction, ks->kuickAction("kuick_print"));
 	popupMenu->insertSeparator(propertiesAction);
 
 	contextMenuInitialized = true;
@@ -203,7 +203,7 @@ void FileWidget::addItemSpecificContextMenuItems(QMenu* popupMenu, const KFileIt
 	const int initialNumMenuItems = popupMenu->actions().size();
 
 	// all item-specific menu entries will be added right before the "print image" entry
-	auto printImageAction = ks->kuickAction(KuickActionType::PrintImage);
+	auto printImageAction = ks->kuickAction("kuick_print");
 	if(printImageAction == nullptr) {
 		// this can only happen if the actions weren't properly initialized
 		qWarning("ERROR: action \"Print Image\" doesn't exist or couldn't be found");
@@ -235,7 +235,7 @@ void FileWidget::removeItemSpecificContextMenuItems(QMenu* popupMenu)
 	const auto actions = popupMenu->actions();
 
 	// all item-specific menu entries were added right before the "print image" entry
-	const int lastIndex = actions.indexOf(ks->kuickAction(KuickActionType::PrintImage));
+	const int lastIndex = actions.indexOf(ks->kuickAction("kuick_print"));
 	const int firstIndex = lastIndex - numItemSpecificContextMenuItems;
 	for(int index = lastIndex - 1; index >= 0 && firstIndex <= index; index--) {
 		popupMenu->removeAction(actions[index]);

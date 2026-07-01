@@ -274,25 +274,25 @@ void KuickShow::initGUI( const QUrl& startDir )
     connect(fileWidget->dirLister(), &KCoreDirLister::refreshItems, this, &KuickShow::slotFileRenamed);
 
     // Provided by KDirOperator, but no icon as standard
-	if(auto action = fileWidget->action(KDirOperator::ShowPreviewPanel))
-		action->setIcon(QIcon::fromTheme("document-preview"));
+    if (auto action = fileWidget->action(KDirOperator::ShowPreviewPanel))
+        action->setIcon(QIcon::fromTheme("document-preview"));
 
     // menubar
     QMenuBar *mBar = menuBar();
 
     QMenu *fileMenu = new QMenu( i18n("&File"), mBar );
     fileMenu->setObjectName( QString::fromLatin1( "file" ) );
-    fileMenu->addAction(kuickAction(KuickActionType::OpenUrl));
+    fileMenu->addAction(kuickAction("openURL"));
     fileMenu->addAction(fileWidget->action(KDirOperator::NewFolder));
     fileMenu->addAction(fileWidget->action(KDirOperator::Trash));
     fileMenu->addSeparator();
-    fileMenu->addAction(kuickAction(KuickActionType::ShowImageInNewWindow));
-    fileMenu->addAction(kuickAction(KuickActionType::ShowImageInActiveWindow));
-    fileMenu->addAction(kuickAction(KuickActionType::ShowImageFullScreen));
-    fileMenu->addAction(kuickAction(KuickActionType::SlideShow));
-    fileMenu->addAction(kuickAction(KuickActionType::PrintImage));
+    fileMenu->addAction(kuickAction("kuick_showInOtherWindow"));
+    fileMenu->addAction(kuickAction("kuick_showInSameWindow"));
+    fileMenu->addAction(kuickAction("kuick_showFullscreen"));
+    fileMenu->addAction(kuickAction("kuick_slideshow"));
+    fileMenu->addAction(kuickAction("kuick_print"));
     fileMenu->addSeparator();
-    fileMenu->addAction(kuickAction(KuickActionType::Quit));
+    fileMenu->addAction(kuickAction("quit"));
 
     QMenu *editMenu = new QMenu( i18n("&Edit"), mBar );
     editMenu->setObjectName( QString::fromLatin1( "edit" ) );
@@ -305,13 +305,13 @@ void KuickShow::initGUI( const QUrl& startDir )
 
     QMenu *settingsMenu = new QMenu( i18n("&Settings"), mBar );
     settingsMenu->setObjectName( QString::fromLatin1( "settings" ) );
-    settingsMenu->addAction(kuickAction(KuickActionType::OneImageWindow));
+    settingsMenu->addAction(kuickAction("kuick_one_window"));
     // These two need to be visible in the menus and should really appear
     // under "View", but that is already an action menu as above.
     settingsMenu->addAction(fileWidget->action(KDirOperator::ShowPreview));
     settingsMenu->addAction(fileWidget->action(KDirOperator::ShowPreviewPanel));
     settingsMenu->addSeparator();
-    settingsMenu->addAction(kuickAction(KuickActionType::Configure));
+    settingsMenu->addAction(kuickAction("kuick_configure"));
 
     mBar->addMenu( fileMenu );
     mBar->addMenu( editMenu );
@@ -336,10 +336,12 @@ void KuickShow::initGUI( const QUrl& startDir )
     tBar->addAction(fileWidget->action(KDirOperator::ShowPreview));
     tBar->addAction(fileWidget->action(KDirOperator::ShowPreviewPanel));
     tBar->addSeparator();
-    tBar->addAction(kuickAction(KuickActionType::SlideShow));
+    tBar->addAction(kuickAction("kuick_slideshow"));
     tBar->addSeparator();
-    tBar->addAction(kuickAction(KuickActionType::OneImageWindow));
-    tBar->addAction(kuickAction(KuickActionType::PrintImage));
+    tBar->addAction(kuickAction("kuick_one_window"));
+    tBar->addAction(kuickAction("kuick_print"));
+    tBar->addSeparator();
+    tBar->addAction(kuickAction("about"));
 
     // Address box in address tool bar
     KToolBar *addressToolBar = toolBar( "address_bar" );
@@ -359,7 +361,7 @@ void KuickShow::initGUI( const QUrl& startDir )
 
     KConfigGroup kc(KSharedConfig::openConfig(), "SessionSettings");
     bool oneWindow = kc.readEntry("OpenImagesInActiveWindow", true );
-    kuickAction(KuickActionType::OneImageWindow)->setChecked(oneWindow);
+    kuickAction("kuick_one_window")->setChecked(oneWindow);
 
     tBar->show();
 
@@ -428,7 +430,7 @@ void KuickShow::viewerDeleted()
 
     if ( fileWidget )
         // maybe a slideshow was stopped --> enable the action again
-        kuickAction(KuickActionType::SlideShow)->setEnabled(true);
+        kuickAction("kuick_slideshow")->setEnabled(true);
 
     m_slideTimer->stop();
 }
@@ -448,10 +450,10 @@ void KuickShow::slotHighlighted( const KFileItem& item )
     }
     sblblMetaInfo->setText(meta);
 
-	kuickAction(KuickActionType::PrintImage)->setEnabled(image);
-	kuickAction(KuickActionType::ShowImageInActiveWindow)->setEnabled(image);
-	kuickAction(KuickActionType::ShowImageInNewWindow)->setEnabled(image);
-	kuickAction(KuickActionType::ShowImageFullScreen)->setEnabled(image);
+	kuickAction("kuick_print")->setEnabled(image);
+	kuickAction("kuick_showInSameWindow")->setEnabled(image);
+	kuickAction("kuick_showInOtherWindow")->setEnabled(image);
+	kuickAction("kuick_showFullscreen")->setEnabled(image);
 }
 
 void KuickShow::dirSelected( const QUrl& url )
@@ -467,7 +469,7 @@ void KuickShow::dirSelected( const QUrl& url )
 
 void KuickShow::slotSelected( const KFileItem& item )
 {
-    showImage(item, kuickAction(KuickActionType::OneImageWindow)->isChecked() ? ShowDefault : NewWindow);
+    showImage(item, kuickAction("kuick_one_window")->isChecked() ? ShowDefault : NewWindow);
 }
 
 // downloads item if necessary
@@ -669,8 +671,8 @@ void KuickShow::startSlideShow()
 
     if ( !item.isNull() ) {
         m_slideshowCycle = 1;
-        kuickAction(KuickActionType::SlideShow)->setEnabled(false);
-        showImage(item, (!kuickAction(KuickActionType::OneImageWindow)->isChecked() ? NewWindow : ShowDefault) |
+        kuickAction("kuick_slideshow")->setEnabled(false);
+        showImage(item, (!kuickAction("kuick_one_window")->isChecked() ? NewWindow : ShowDefault) |
                          (config.slideshowFullscreen ? FullScreen : ShowDefault));
 	if(config.slideDelay)
             m_slideTimer->start( config.slideDelay );
@@ -695,7 +697,7 @@ void KuickShow::nextSlide()
 {
     if ( !m_viewer ) {
         m_slideshowCycle = 1;
-        kuickAction(KuickActionType::SlideShow)->setEnabled(true);
+        kuickAction("kuick_slideshow")->setEnabled(true);
         return;
     }
 
@@ -712,7 +714,7 @@ void KuickShow::nextSlide()
         }
 
         delete m_viewer;
-        kuickAction(KuickActionType::SlideShow)->setEnabled(true);
+        kuickAction("kuick_slideshow")->setEnabled(true);
         return;
     }
 
@@ -948,7 +950,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 performDeleteCurrentImage(fileWidget);
             }
 
-            else if (kuickAction(KuickActionType::ToggleBrowser)->shortcuts().contains(key))
+            else if (kuickAction("toggleBrowser")->shortcuts().contains(key))
             {
                 toggleBrowser();
                 return true; // don't pass keyEvent
@@ -1016,7 +1018,7 @@ void KuickShow::configuration()
     connect(dialog, &KuickConfigDialog::applyClicked, this, &KuickShow::slotConfigApplied);
     connect(dialog, &QDialog::finished, this, &KuickShow::slotConfigClosed);
 
-    kuickAction(KuickActionType::Configure)->setEnabled(false);
+    kuickAction("kuick_configure")->setEnabled(false);
     dialog->show();
 }
 
@@ -1040,7 +1042,7 @@ void KuickShow::slotConfigApplied()
 void KuickShow::slotConfigClosed()
 {
     dialog->deleteLater();
-    kuickAction(KuickActionType::Configure)->setEnabled(true);
+    kuickAction("kuick_configure")->setEnabled(true);
 }
 
 // ------ sessionmanagement - load / save current directory -----
@@ -1106,7 +1108,7 @@ void KuickShow::saveSettings()
 {
     KSharedConfig::Ptr kc = KSharedConfig::openConfig();
     KConfigGroup sessGroup(kc, "SessionSettings");
-    if(auto oneWindowAction = kuickAction(KuickActionType::OneImageWindow))
+    if(auto oneWindowAction = kuickAction("kuick_one_window"))
         sessGroup.writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
@@ -1296,64 +1298,82 @@ void KuickShow::deleteAllViewers()
 
 
 /*!
- * \brief Creates all KuickShow-specific QAction objects and stores them in KuickShow::kuickActions.
+ * \brief Creates all KuickShow-specific QAction objects and stores them in the
+ * @c m_actions collection.
  *
- * <p>All created actions have their parent set to the current KuickShow instance.
+ * All created actions have their parent set to the current KuickShow instance.
+
+ * @note The keys are used in the config file to identify the actions; do not modify them!
  */
 void KuickShow::setupKuickActions()
 {
-	QAction* action;
-	KToggleAction* toggleAction;
+    m_actions = new KActionCollection(this, "KuickActions");;
 
-	// application actions
-	kuickActions[KuickActionType::SlideShow] = action = new QAction(QIcon::fromTheme("ksslide"),
-			i18n("Start Slideshow"), this);
-	connect(action, &QAction::triggered, this, &KuickShow::startSlideShow);
+    // Application actions
+    QAction *act = m_actions->addAction("kuick_slideshow", this, &KuickShow::startSlideShow);
+    act->setText(i18n("Start Slideshow"));
+    act->setIcon(QIcon::fromTheme("ksslide"));
+    m_actions->setDefaultShortcut(act, Qt::Key_F2);
 
-	kuickActions[KuickActionType::ToggleBrowser] = toggleAction = new KToggleAction(i18n("Show File Browser"), this);
-	toggleAction->setCheckedState(KGuiItem(i18n("Hide File Browser")));
-	connect(toggleAction, &QAction::toggled, this, &KuickShow::toggleBrowser);
+    KToggleAction *toggle = new KToggleAction(i18n("Show File Browser"), this);
+    toggle->setCheckedState(KGuiItem(i18n("Hide File Browser")));
+    toggle->setIcon(QIcon::fromTheme("view-list-icons"));
+    connect(toggle, &QAction::toggled, this, &KuickShow::toggleBrowser);
+    m_actions->addAction("toggleBrowser", toggle);
+    m_actions->setDefaultShortcut(act, Qt::Key_Space);
 
-	kuickActions[KuickActionType::Configure] = action = new QAction(QIcon::fromTheme("configure"),
-			i18n("Configure %1...", QGuiApplication::applicationDisplayName()), this);
-	connect(action, &QAction::triggered, this, &KuickShow::configuration);
+    act = KStandardAction::preferences(this, &KuickShow::configuration, this);
+    m_actions->addAction("kuick_configure", act);
 
-	kuickActions[KuickActionType::Quit] = KStandardAction::quit(this, &QObject::deleteLater, this);
+    act = KStandardAction::quit(this, &QObject::deleteLater, this);
+    m_actions->addAction("quit", act);
 
-	// application settings
-	kuickActions[KuickActionType::OneImageWindow] = new KToggleAction(QIcon::fromTheme("window-new"),
-			i18n("Open Only One Image Window"), this);
+    // Application settings
+    toggle = new KToggleAction(i18n("Open Only One Image Window"), this);
+    toggle->setIcon(QIcon::fromTheme("window-new"));
+    m_actions->addAction("kuick_one_window", toggle);
+    m_actions->setDefaultShortcut(act, Qt::CTRL | Qt::Key_N);
 
-        // TODO: save and restore state in config
-	action = fileWidget->action(KDirOperator::ShowPreview);
-	connect(action, &QAction::triggered, this, &KuickShow::slotToggleInlinePreview);
+    // TODO: save and restore state in config
+    act = fileWidget->action(KDirOperator::ShowPreview);
+    connect(act, &QAction::toggled, this, &KuickShow::slotToggleInlinePreview);
 
-	// image actions
-	kuickActions[KuickActionType::OpenUrl] = KStandardAction::open(this, &KuickShow::slotOpenURL, this);
+    // image actions
+    act = KStandardAction::open(this, &KuickShow::slotOpenURL, this);
+    m_actions->addAction("openURL", act);
 
-	kuickActions[KuickActionType::ShowImageInNewWindow] = action = new QAction(QIcon::fromTheme("window-new"),
-			i18n("Show Image"), this);
-	connect(action, &QAction::triggered, this, &KuickShow::slotShowInOtherWindow);
+    act = m_actions->addAction("kuick_showInOtherWindow", this, &KuickShow::slotShowInOtherWindow);
+    act->setText(i18n("Show Image"));
+    act->setIcon(QIcon::fromTheme("window-new"));
 
-	kuickActions[KuickActionType::ShowImageInActiveWindow] = action = new QAction(QIcon::fromTheme("viewimage"),
-			i18n("Show Image in Active Window"), this);
-	connect(action, &QAction::triggered, this, &KuickShow::slotShowInSameWindow);
+    act = m_actions->addAction("kuick_showInSameWindow", this, &KuickShow::slotShowInSameWindow);
+    act->setText(i18n("Show Image in Active Window"));
+    act->setIcon(QIcon::fromTheme("viewimage"));
 
-	kuickActions[KuickActionType::ShowImageFullScreen] = action = new QAction(QIcon::fromTheme("view-fullscreen"),
-			i18n("Show Image in Fullscreen Mode"), this);
-	connect(action, &QAction::triggered, this, &KuickShow::slotShowFullscreen);
+    act = m_actions->addAction("kuick_showFullscreen", this, &KuickShow::slotShowFullscreen);
+    act->setText(i18n("Show Image in Fullscreen Mode"));
+    act->setIcon(QIcon::fromTheme("view-fullscreen"));
 
-	kuickActions[KuickActionType::PrintImage] = action = KStandardAction::print(this, &KuickShow::slotPrint, this);
-	action->setText(i18n("Print Image..."));
+    act = KStandardAction::print(this, &KuickShow::slotPrint, this);
+    act->setText(i18n("Print Image..."));
+    m_actions->addAction("kuick_print", act);
 
-	// Manually fetch the configured shortcuts for *all* actions:
-	// 1) The actions created above aren't part of any KActionCollection and therefore not automatically initialized.
-	// 2) We define default shortcuts for some of FileWidget's actions, which must be taken into account when loading
-	//    the shortcuts from the config file.
-	KActionCollection collection(nullptr, QString());
-	initializeBrowserActionCollection(&collection);
-	collection.readSettings();
+    // Manually fetch the configured shortcuts for *all* actions:
+    // 1) The actions created above aren't part of any KActionCollection and therefore not automatically initialized.
+    // 2) We define default shortcuts for some of FileWidget's actions, which must be taken into account when loading
+    //    the shortcuts from the config file.
+    initializeBrowserActionCollection(m_actions);
+    m_actions->readSettings();
 }
+
+
+static void setDefaultShortcuts(KActionCollection *collection, QAction* action, const QList<QKeySequence> &defaultShortcuts)
+{
+    auto currentShortcuts = action->shortcuts();
+    collection->setDefaultShortcuts(action, defaultShortcuts);
+    action->setShortcuts(currentShortcuts);
+}
+
 
 /*!
  * \brief Fills an existing KActionCollection with the actions of fileWidget and KuickShow's own actions.
@@ -1368,36 +1388,22 @@ void KuickShow::setupKuickActions()
  */
 void KuickShow::initializeBrowserActionCollection(KActionCollection* collection) const
 {
-	collection->clear();
 	collection->addActions(fileWidget->allActions());
-	// Note: the keys are used in the config file to identify the actions; do not modify!
-	collection->addAction(QStringLiteral("kuick_slideshow"), kuickAction(KuickActionType::SlideShow));
-	collection->addAction(QStringLiteral("toggleBrowser"), kuickAction(KuickActionType::ToggleBrowser));
-	collection->addAction(QStringLiteral("kuick_configure"), kuickAction(KuickActionType::Configure));
-	collection->addAction(QStringLiteral("quit"), kuickAction(KuickActionType::Quit));
-	collection->addAction(QStringLiteral("kuick_one window"), kuickAction(KuickActionType::OneImageWindow));
-	collection->addAction(QStringLiteral("kuick_inlinePreview"), fileWidget->action(KDirOperator::ShowPreview));
-	collection->addAction(QStringLiteral("openURL"), kuickAction(KuickActionType::OpenUrl));
-	collection->addAction(QStringLiteral("kuick_showInOtherWindow"), kuickAction(KuickActionType::ShowImageInNewWindow));
-	collection->addAction(QStringLiteral("kuick_showInSameWindow"), kuickAction(KuickActionType::ShowImageInActiveWindow));
-	collection->addAction(QStringLiteral("kuick_showFullscreen"), kuickAction(KuickActionType::ShowImageFullScreen));
-	collection->addAction(QStringLiteral("kuick_print"), kuickAction(KuickActionType::PrintImage));
 
-	auto setDefaultShortcuts = [&collection](QAction* action, const QList<QKeySequence>& defaultShortcuts) {
-		auto currentShortcuts = action->shortcuts();
-		collection->setDefaultShortcuts(action, defaultShortcuts);
-		action->setShortcuts(currentShortcuts);
-	};
+	setDefaultShortcuts(collection, fileWidget->action(KDirOperator::Reload), KStandardShortcut::reload());
+	setDefaultShortcuts(collection, fileWidget->action(KDirOperator::ShortView), { Qt::Key_F6 });
+	setDefaultShortcuts(collection, fileWidget->action(KDirOperator::DetailedView), { Qt::Key_F7 });
+	setDefaultShortcuts(collection, fileWidget->action(KDirOperator::NewFolder), { Qt::Key_F10 });
+	setDefaultShortcuts(collection, fileWidget->action(KDirOperator::ShowPreviewPanel), { Qt::Key_F11 });
+	setDefaultShortcuts(collection, fileWidget->action(KDirOperator::ShowPreview), { Qt::Key_F12 });
+}
 
-	setDefaultShortcuts(fileWidget->action(KDirOperator::Reload), KStandardShortcut::reload());
-	setDefaultShortcuts(fileWidget->action(KDirOperator::ShortView), { Qt::Key_F6 });
-	setDefaultShortcuts(fileWidget->action(KDirOperator::DetailedView), { Qt::Key_F7 });
-	setDefaultShortcuts(fileWidget->action(KDirOperator::NewFolder), { Qt::Key_F10 });
-	setDefaultShortcuts(fileWidget->action(KDirOperator::ShowPreviewPanel), { Qt::Key_F11 });
-	setDefaultShortcuts(fileWidget->action(KDirOperator::ShowPreview), { Qt::Key_F12 });
-	setDefaultShortcuts(kuickAction(KuickActionType::SlideShow), { Qt::Key_F2 });
-	setDefaultShortcuts(kuickAction(KuickActionType::ToggleBrowser), { Qt::Key_Space });
-	setDefaultShortcuts(kuickAction(KuickActionType::OneImageWindow), { Qt::CTRL | Qt::Key_N });
+
+QAction* KuickShow::kuickAction(const QString &name) const
+{
+    QAction *act = m_actions->action(name);
+    if (act==nullptr) qWarning() << "unknown action" << name;
+    return (act);
 }
 
 
