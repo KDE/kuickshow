@@ -237,6 +237,9 @@ KuickShow::KuickShow( const char *objName )
     }
 
     if ( s_viewers.isEmpty() || isDir ) {
+        // This call of initGUI() happens if the application is started with
+        // no command line arguments at all.  Here 'startDir' is the current
+        // working directory.
         initGUI( startDir );
 	if (!qApp->isSessionRestored()) // during session management, readProperties() will show()
         show();
@@ -480,7 +483,10 @@ void KuickShow::showFileItem( ImageWindow * /*view*/,
 
 void KuickShow::slotShowWithUrl(const QUrl &url)
 {
-    QUrl u = url.adjusted(QUrl::RemoveFilename);
+    const QUrl u = url.adjusted(QUrl::RemoveFilename);
+    // This call of initGUI() happens if the file browser is summoned from
+    // an image window, either by the "Return to File Browser" action or
+    // by a double click on the image window, see KuickShow::eventFilter().
     if (fileWidget==nullptr) initGUI(u);
     else slotSetURL(u);
     show();
@@ -852,7 +858,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 
     if ( window ) {
         // The XWindow used to display Imlib's image is being resized when
-        // switching images, causing enter- and leaveevents for this
+        // switching images, causing enter- and leave events for this
         // ImageWindow, leading to the cursor being unhidden. So we simply
         // don't pass those events to KCursor to prevent that.
         if ( eventType != QEvent::Leave && eventType != QEvent::Enter )
@@ -876,6 +882,11 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
                 if ( key != Qt::Key_Escape && key != Qt::Key_Shift && key != Qt::Key_Alt )
                 {
                     KuickFile *file = m_viewer->currentFile();
+
+                    // This call of initGUI() happens for a key press event over
+                    // an image window which is not captured by a QAction.  Since
+                    // the FileWidget does not yet exist, it is created here and
+                    // the key event is replayed when it is ready.
                     initGUI( KIO::upUrl(file->url()) );
 
                     // the fileBrowser will list the start-directory
@@ -921,6 +932,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             }
 
             // we definitely have a fileWidget here!
+            // TODO: check whether these keys can be implemented as actions
+            // then this block handling key events is superfluous
 
             if ( key == Qt::Key_Home || KStandardShortcut::begin().contains( k->key() ) )
             {
@@ -989,6 +1002,10 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
 void KuickShow::configuration()
 {
     if ( !fileWidget ) {
+        // This call of initGUI() happens if the "Configure" dialogue
+        // is requested when no FileWidget currently exists.
+        // TODO: this may be superfluous, because if there is no main
+        // window then there is no GUI to summon "Configure".
         initGUI( QUrl::fromLocalFile(QDir::homePath()) );
     }
 
@@ -1192,6 +1209,10 @@ void KuickShow::delayAction(DelayedRepeatEvent *event)
     m_delayedRepeatItem = event;
 
     QUrl url = event->viewer->currentFile()->url();
+
+    // This call of initGUI() happens for a delayed "Delete" or "Trash"
+    // operation from the ImageWindow when no FileBrowser existed at the
+    // time.
     initGUI( KIO::upUrl(url) );
 
     // see eventFilter() for explanation and similar code
