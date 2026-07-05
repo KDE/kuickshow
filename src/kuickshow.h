@@ -149,6 +149,7 @@ private Q_SLOTS:
     void		slotTrashCurrentImage(ImageWindow *viewer);
     void                slotDeleteCurrentImage();
     void                slotTrashCurrentImage();
+    void                slotFileRenamed(const QList<QPair<KFileItem, KFileItem>> &items);
 
     void                doReplay();
 

@@ -275,6 +275,7 @@ void KuickShow::initGUI( const QUrl& startDir )
     connect(fileWidget, &KDirOperator::fileHighlighted, this, &KuickShow::slotHighlighted);
     connect(fileWidget, &KDirOperator::urlEntered, this, &KuickShow::dirSelected);
     connect(fileWidget, &KDirOperator::dropped, this, &KuickShow::slotDropped);
+    connect(fileWidget->dirLister(), &KCoreDirLister::refreshItems, this, &KuickShow::slotFileRenamed);
 
     // Provided by KDirOperator, but no icon as standard
 	if(auto action = fileWidget->action(KDirOperator::ShowPreviewPanel))
@@ -1405,4 +1406,23 @@ void KuickShow::initializeBrowserActionCollection(KActionCollection* collection)
 	setDefaultShortcuts(kuickAction(KuickActionType::SlideShow), { Qt::Key_F2 });
 	setDefaultShortcuts(kuickAction(KuickActionType::ToggleBrowser), { Qt::Key_Space });
 	setDefaultShortcuts(kuickAction(KuickActionType::OneImageWindow), { Qt::CTRL | Qt::Key_N });
+}
+
+
+void KuickShow::slotFileRenamed(const QList<QPair<KFileItem, KFileItem>> &items)
+{
+    for (const QPair<KFileItem, KFileItem> &item : std::as_const(items)) {
+        const QUrl from = item.first.url();
+        const QUrl to = item.second.url();
+
+        for (ImageWindow *viewer : std::as_const(s_viewers)) {
+            KuickFile *kf = viewer->currentFile();
+            if (kf==nullptr) continue;
+
+            if (from==kf->url()) {			// viewing the renamed file
+                qDebug() << "update" << viewer->windowTitle() << "from" << from << "->" << to;
+                viewer->loadImage(to);
+            }
+        }
+    }
 }
