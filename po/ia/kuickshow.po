@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-18 00:41+0000\n"
+"POT-Creation-Date: 2026-07-06 00:42+0000\n"
 "PO-Revision-Date: 2026-05-15 11:09+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -329,7 +329,7 @@ msgstr "Colpa horizontalmente"
 msgid "Flip Vertically"
 msgstr "Colpa verticalmente"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1354
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
 #, kde-format
 msgid "Print Image..."
 msgstr "Imprime imagine..."
@@ -461,7 +461,7 @@ msgstr "Mantene dimension original de imagine"
 msgid "Save Image As"
 msgstr "Salva imagine como"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1252
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1274
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Files de Image (%1)"
@@ -576,37 +576,37 @@ msgstr "Monstra imagines multiple?"
 msgid "Display"
 msgstr "Monstrator"
 
-#: src/kuickshow.cpp:286
+#: src/kuickshow.cpp:290
 #, kde-format
 msgid "&File"
 msgstr "&File"
 
-#: src/kuickshow.cpp:300
+#: src/kuickshow.cpp:304
 #, kde-format
 msgid "&Edit"
 msgstr "&Edita"
 
-#: src/kuickshow.cpp:306
+#: src/kuickshow.cpp:310
 #, kde-format
 msgid "View"
 msgstr "Vista"
 
-#: src/kuickshow.cpp:309
+#: src/kuickshow.cpp:313
 #, kde-format
 msgid "&Settings"
 msgstr "Preferentia&s"
 
-#: src/kuickshow.cpp:326
+#: src/kuickshow.cpp:330
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barra de instrumento principal"
 
-#: src/kuickshow.cpp:1127
+#: src/kuickshow.cpp:1145
 #, kde-format
 msgid "Image Error"
 msgstr "Error de Imagine"
 
-#: src/kuickshow.cpp:1138
+#: src/kuickshow.cpp:1156
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -620,57 +620,57 @@ msgstr ""
 "session,\n"
 "o pote esser obtenite per initiar %1 ab un terminal."
 
-#: src/kuickshow.cpp:1142
+#: src/kuickshow.cpp:1160
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Error fatal de initialisation"
 
-#: src/kuickshow.cpp:1251
+#: src/kuickshow.cpp:1273
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Selige Files o Dossier a aperir"
 
-#: src/kuickshow.cpp:1312
+#: src/kuickshow.cpp:1334
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Starta presentation (slideshow)"
 
-#: src/kuickshow.cpp:1315
+#: src/kuickshow.cpp:1337
 #, kde-format
 msgid "Show File Browser"
 msgstr "Monstra Navigator de file"
 
-#: src/kuickshow.cpp:1316
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Cela Navigator de file"
 
-#: src/kuickshow.cpp:1320
+#: src/kuickshow.cpp:1342
 #, kde-format
 msgid "Configure %1..."
 msgstr "Configura %1..."
 
-#: src/kuickshow.cpp:1324
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "About KuickShow"
 msgstr "proposito de KuickShow"
 
-#: src/kuickshow.cpp:1331
+#: src/kuickshow.cpp:1353
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Aperi solmente un fenestra de imagine"
 
-#: src/kuickshow.cpp:1342
+#: src/kuickshow.cpp:1364
 #, kde-format
 msgid "Show Image"
 msgstr "Monstra imagine"
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1368
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Monstra imagine in fenestra active"
 
-#: src/kuickshow.cpp:1350
+#: src/kuickshow.cpp:1372
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Monstra imagine a schermo plen"

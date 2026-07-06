@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-18 00:41+0000\n"
+"POT-Creation-Date: 2026-07-06 00:42+0000\n"
 "PO-Revision-Date: 2025-01-26 20:12+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -335,7 +335,7 @@ msgstr "Voltear horizontalmente"
 msgid "Flip Vertically"
 msgstr "Voltear verticalmente"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1354
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
 #, kde-format
 msgid "Print Image..."
 msgstr "Imprimir a imaxe…"
@@ -467,7 +467,7 @@ msgstr "Manter o tamaño orixinal da imaxe"
 msgid "Save Image As"
 msgstr "Gardar a imaxe como"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1252
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1274
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Ficheiros de imaxe (%1)"
@@ -582,37 +582,37 @@ msgstr "Desexa amosar varias imaxes?"
 msgid "Display"
 msgstr "Amosar"
 
-#: src/kuickshow.cpp:286
+#: src/kuickshow.cpp:290
 #, kde-format
 msgid "&File"
 msgstr "&Ficheiro"
 
-#: src/kuickshow.cpp:300
+#: src/kuickshow.cpp:304
 #, kde-format
 msgid "&Edit"
 msgstr "&Editar"
 
-#: src/kuickshow.cpp:306
+#: src/kuickshow.cpp:310
 #, kde-format
 msgid "View"
 msgstr "Vista"
 
-#: src/kuickshow.cpp:309
+#: src/kuickshow.cpp:313
 #, kde-format
 msgid "&Settings"
 msgstr "&Configuración"
 
-#: src/kuickshow.cpp:326
+#: src/kuickshow.cpp:330
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barra de ferramentas principal"
 
-#: src/kuickshow.cpp:1127
+#: src/kuickshow.cpp:1145
 #, kde-format
 msgid "Image Error"
 msgstr "Hai un erro na imaxe"
 
-#: src/kuickshow.cpp:1138
+#: src/kuickshow.cpp:1156
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -625,57 +625,57 @@ msgstr ""
 "Pode que haxa moita máis información no ficheiro de rexistro da sesión,\n"
 "ou pode obterse iniciando %1 desde un terminal."
 
-#: src/kuickshow.cpp:1142
+#: src/kuickshow.cpp:1160
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Erro fatal de preparación"
 
-#: src/kuickshow.cpp:1251
+#: src/kuickshow.cpp:1273
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Escolla os ficheiros ou o cartafol a abrir"
 
-#: src/kuickshow.cpp:1312
+#: src/kuickshow.cpp:1334
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Comezar a presentación"
 
-#: src/kuickshow.cpp:1315
+#: src/kuickshow.cpp:1337
 #, kde-format
 msgid "Show File Browser"
 msgstr "Amosar o navegador de ficheiros"
 
-#: src/kuickshow.cpp:1316
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Agochar o navegador de ficheiros"
 
-#: src/kuickshow.cpp:1320
+#: src/kuickshow.cpp:1342
 #, kde-format
 msgid "Configure %1..."
 msgstr "Configurar %1…"
 
-#: src/kuickshow.cpp:1324
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "About KuickShow"
 msgstr "Sobre KuickShow"
 
-#: src/kuickshow.cpp:1331
+#: src/kuickshow.cpp:1353
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Abrir só unha xanela de imaxe"
 
-#: src/kuickshow.cpp:1342
+#: src/kuickshow.cpp:1364
 #, kde-format
 msgid "Show Image"
 msgstr "Amosar a imaxe"
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1368
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Amosar a imaxe na xanela activa"
 
-#: src/kuickshow.cpp:1350
+#: src/kuickshow.cpp:1372
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Amosar a imaxe a pantalla completa"

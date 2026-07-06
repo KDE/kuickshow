@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-18 00:41+0000\n"
+"POT-Creation-Date: 2026-07-06 00:42+0000\n"
 "PO-Revision-Date: 2024-10-15 09:59+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -335,7 +335,7 @@ msgstr "Invertix horitzontalment"
 msgid "Flip Vertically"
 msgstr "Invertix verticalment"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1354
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
 #, kde-format
 msgid "Print Image..."
 msgstr "Imprimix la imatge…"
@@ -467,7 +467,7 @@ msgstr "Mantín la mida original de la imatge"
 msgid "Save Image As"
 msgstr "Anomena i guarda la imatge"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1252
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1274
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Fitxers d'imatge (%1)"
@@ -581,37 +581,37 @@ msgstr "Mostre múltiples imatges?"
 msgid "Display"
 msgstr "Visualització"
 
-#: src/kuickshow.cpp:286
+#: src/kuickshow.cpp:290
 #, kde-format
 msgid "&File"
 msgstr "Fi&txer"
 
-#: src/kuickshow.cpp:300
+#: src/kuickshow.cpp:304
 #, kde-format
 msgid "&Edit"
 msgstr "E&dita"
 
-#: src/kuickshow.cpp:306
+#: src/kuickshow.cpp:310
 #, kde-format
 msgid "View"
 msgstr "Visualitza"
 
-#: src/kuickshow.cpp:309
+#: src/kuickshow.cpp:313
 #, kde-format
 msgid "&Settings"
 msgstr "Con&figuració"
 
-#: src/kuickshow.cpp:326
+#: src/kuickshow.cpp:330
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barra d'eines principal"
 
-#: src/kuickshow.cpp:1127
+#: src/kuickshow.cpp:1145
 #, kde-format
 msgid "Image Error"
 msgstr "S'ha produït un error d'imatge"
 
-#: src/kuickshow.cpp:1138
+#: src/kuickshow.cpp:1156
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -625,57 +625,57 @@ msgstr ""
 "sessió,\n"
 "o es pot obtindre iniciant %1 des d'un terminal."
 
-#: src/kuickshow.cpp:1142
+#: src/kuickshow.cpp:1160
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Error fatal d'inicialització"
 
-#: src/kuickshow.cpp:1251
+#: src/kuickshow.cpp:1273
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Trieu els fitxers o les carpetes que s'han d'obrir"
 
-#: src/kuickshow.cpp:1312
+#: src/kuickshow.cpp:1334
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Inicia la presentació de diapositives"
 
-#: src/kuickshow.cpp:1315
+#: src/kuickshow.cpp:1337
 #, kde-format
 msgid "Show File Browser"
 msgstr "Mostra el navegador de fitxers"
 
-#: src/kuickshow.cpp:1316
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Oculta el navegador de fitxers"
 
-#: src/kuickshow.cpp:1320
+#: src/kuickshow.cpp:1342
 #, kde-format
 msgid "Configure %1..."
 msgstr "Configura %1…"
 
-#: src/kuickshow.cpp:1324
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "About KuickShow"
 msgstr "Quant a KuickShow"
 
-#: src/kuickshow.cpp:1331
+#: src/kuickshow.cpp:1353
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Obri només una finestra d'imatge"
 
-#: src/kuickshow.cpp:1342
+#: src/kuickshow.cpp:1364
 #, kde-format
 msgid "Show Image"
 msgstr "Mostra la imatge"
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1368
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Mostra la imatge en la finestra activa"
 
-#: src/kuickshow.cpp:1350
+#: src/kuickshow.cpp:1372
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Mostra la imatge en el mode de pantalla completa"
