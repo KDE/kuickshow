@@ -336,7 +336,7 @@ void KuickShow::initGUI( const QUrl& startDir )
     tBar->addSeparator();
     tBar->addAction(fileWidget->action(KDirOperator::ShortView));
     tBar->addAction(fileWidget->action(KDirOperator::DetailedView));
-    tBar->addAction(kuickAction(KuickActionType::InlinePreview));
+    tBar->addAction(fileWidget->action(KDirOperator::ShowPreview));
     tBar->addAction(fileWidget->action(KDirOperator::ShowPreviewPanel));
     tBar->addSeparator();
     tBar->addAction(kuickAction(KuickActionType::SlideShow));
@@ -374,6 +374,7 @@ void KuickShow::initGUI( const QUrl& startDir )
     setCentralWidget( fileWidget );
 
     setupGUI( KXmlGuiWindow::Save );
+    slotToggleInlinePreview();				// initialise with KDirOperator state
 }
 
 QLabel* KuickShow::createStatusBarLabel(int stretch)
@@ -1285,18 +1286,14 @@ void KuickShow::slotOpenURL()
     }
 }
 
-void KuickShow::slotToggleInlinePreview(bool on)
+void KuickShow::slotToggleInlinePreview()
 {
-	int iconSize;
-	if (on) {
-		iconSize = KIconLoader::SizeEnormous;
-	} else {
-		iconSize = KIconLoader::SizeSmall;
-	}
-	fileWidget->setIconSize( iconSize );
-	fileWidget->setInlinePreviewShown(on);
     QAction *defaultInlinePreview = fileWidget->action(KDirOperator::ShowPreview);
-    defaultInlinePreview->setChecked(on);
+    const bool on = (defaultInlinePreview->isChecked());
+
+    const int iconSize = (on ? KIconLoader::SizeEnormous : KIconLoader::SizeSmall);
+    fileWidget->setIconSize(iconSize);
+    fileWidget->setInlinePreviewShown(on);
 }
 
 void KuickShow::slotDuplicateWindow(const QUrl &url)
@@ -1352,10 +1349,9 @@ void KuickShow::setupKuickActions()
 	kuickActions[KuickActionType::OneImageWindow] = new KToggleAction(QIcon::fromTheme("window-new"),
 			i18n("Open Only One Image Window"), this);
 
-	const QAction* defaultInlinePreview = fileWidget->action(KDirOperator::ShowPreview);
-	kuickActions[KuickActionType::InlinePreview] = toggleAction = new KToggleAction(defaultInlinePreview->icon(),
-			defaultInlinePreview->text(), this);
-	connect(toggleAction, &QAction::toggled, this, &KuickShow::slotToggleInlinePreview);
+        // TODO: save and restore state in config
+	action = fileWidget->action(KDirOperator::ShowPreview);
+	connect(action, &QAction::triggered, this, &KuickShow::slotToggleInlinePreview);
 
 	// image actions
 	kuickActions[KuickActionType::OpenUrl] = KStandardAction::open(this, &KuickShow::slotOpenURL, this);
@@ -1406,7 +1402,7 @@ void KuickShow::initializeBrowserActionCollection(KActionCollection* collection)
 	collection->addAction(QStringLiteral("about"), kuickAction(KuickActionType::About));
 	collection->addAction(QStringLiteral("quit"), kuickAction(KuickActionType::Quit));
 	collection->addAction(QStringLiteral("kuick_one window"), kuickAction(KuickActionType::OneImageWindow));
-	collection->addAction(QStringLiteral("kuick_inlinePreview"), kuickAction(KuickActionType::InlinePreview));
+	collection->addAction(QStringLiteral("kuick_inlinePreview"), fileWidget->action(KDirOperator::ShowPreview));
 	collection->addAction(QStringLiteral("openURL"), kuickAction(KuickActionType::OpenUrl));
 	collection->addAction(QStringLiteral("kuick_showInOtherWindow"), kuickAction(KuickActionType::ShowImageInNewWindow));
 	collection->addAction(QStringLiteral("kuick_showInSameWindow"), kuickAction(KuickActionType::ShowImageInActiveWindow));
@@ -1424,6 +1420,7 @@ void KuickShow::initializeBrowserActionCollection(KActionCollection* collection)
 	setDefaultShortcuts(fileWidget->action(KDirOperator::DetailedView), { Qt::Key_F7 });
 	setDefaultShortcuts(fileWidget->action(KDirOperator::NewFolder), { Qt::Key_F10 });
 	setDefaultShortcuts(fileWidget->action(KDirOperator::ShowPreviewPanel), { Qt::Key_F11 });
+	setDefaultShortcuts(fileWidget->action(KDirOperator::ShowPreview), { Qt::Key_F12 });
 	setDefaultShortcuts(kuickAction(KuickActionType::SlideShow), { Qt::Key_F2 });
 	setDefaultShortcuts(kuickAction(KuickActionType::ToggleBrowser), { Qt::Key_Space });
 	setDefaultShortcuts(kuickAction(KuickActionType::OneImageWindow), { Qt::CTRL | Qt::Key_N });

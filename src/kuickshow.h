@@ -58,7 +58,6 @@ enum class KuickActionType : uint
 
 	// application settings
 	OneImageWindow,
-	InlinePreview,
 
 	// image actions
 	OpenUrl,
@@ -114,7 +113,7 @@ public:
 
 private Q_SLOTS:
     void		toggleBrowser();
-    void 		slotToggleInlinePreview( bool on );
+    void 		slotToggleInlinePreview();
     void 		slotPrint();
     void 		slotConfigApplied();
     void 		slotConfigClosed();
