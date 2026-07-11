@@ -177,9 +177,10 @@ void FileWidget::initializeContextMenu(QMenu* popupMenu)
 {
 	if(contextMenuInitialized) return;
 
-	// all of the KuickShow specific menu items are inserted directly in front of the "Properties" item
-	const auto ks = dynamic_cast<KuickShow*>(parent());
-	QAction* propertiesAction = action(Properties);
+	// All of the KuickShow-provided menu items are inserted directly in
+	// front of the "Properties" item.
+	const auto *ks = qobject_cast<KuickShow*>(parent());
+	QAction *propertiesAction = action(KDirOperator::Properties);
 
 	// make sure there is a separator
 	EnsureLastMenuItemIsSeparator(popupMenu, propertiesAction);
@@ -198,7 +199,7 @@ void FileWidget::initializeContextMenu(QMenu* popupMenu)
 void FileWidget::addItemSpecificContextMenuItems(QMenu* popupMenu, const KFileItem& item)
 {
 	if(item.isNull()) return;
-	const auto ks = dynamic_cast<KuickShow*>(parent());
+	const auto *ks = qobject_cast<KuickShow *>(parent());
 	const int initialNumMenuItems = popupMenu->actions().size();
 
 	// all item-specific menu entries will be added right before the "print image" entry
@@ -211,9 +212,16 @@ void FileWidget::addItemSpecificContextMenuItems(QMenu* popupMenu, const KFileIt
 
 	m_fileItemActions->setItemListProperties({{ item }});
 	m_fileItemActions->insertOpenWithActionsTo(printImageAction, popupMenu, QStringList());
+
+	// insertOpenWithActionsTo() above also appears to add a separator at the
+	// very end of the menu (after "Properties").  This confuses the count of
+	// how many item-specific actions were added to the menu, so if it is
+	// present then remove it again.
+	QAction *lastAct = popupMenu->actions().last();
+	if (lastAct->isSeparator()) popupMenu->removeAction(lastAct);
 	int newNumMenuItems = popupMenu->actions().size() - initialNumMenuItems;
 
-	// make sure that there's a separator before the "print image" entry;
+	// make sure that there's a separator before the "Print Image" entry;
 	// it is unspecified whether insertOpenWithActionsTo(...) creates one or not
 	if(EnsureLastMenuItemIsSeparator(popupMenu, printImageAction))
 		newNumMenuItems++;
@@ -223,7 +231,7 @@ void FileWidget::addItemSpecificContextMenuItems(QMenu* popupMenu, const KFileIt
 
 void FileWidget::removeItemSpecificContextMenuItems(QMenu* popupMenu)
 {
-	const auto ks = dynamic_cast<KuickShow*>(parent());
+	const auto *ks = qobject_cast<KuickShow *>(parent());
 	const auto actions = popupMenu->actions();
 
 	// all item-specific menu entries were added right before the "print image" entry
