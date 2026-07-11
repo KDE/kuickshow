@@ -313,6 +313,10 @@ void KuickShow::initGUI( const QUrl& startDir )
     QMenu *settingsMenu = new QMenu( i18n("&Settings"), mBar );
     settingsMenu->setObjectName( QString::fromLatin1( "settings" ) );
     settingsMenu->addAction(kuickAction(KuickActionType::OneImageWindow));
+    // These two need to be visible in the menus and should really appear
+    // under "View", but that is already an action menu as above.
+    settingsMenu->addAction(fileWidget->action(KDirOperator::ShowPreview));
+    settingsMenu->addAction(fileWidget->action(KDirOperator::ShowPreviewPanel));
     settingsMenu->addSeparator();
     settingsMenu->addAction(kuickAction(KuickActionType::Configure));
 
