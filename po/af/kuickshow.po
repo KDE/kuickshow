@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:42+0000\n"
+"POT-Creation-Date: 2026-07-12 00:42+0000\n"
 "PO-Revision-Date: 2002-11-07 11:33+0200\n"
 "Last-Translator: WEB-Translator <http://kde.af.org.za>\n"
 "Language-Team: AFRIKAANS <AF@lia.org.za>\n"
@@ -462,7 +462,7 @@ msgstr "Herstel Oorspronklike Grootte"
 msgid "Save Image As"
 msgstr "Vertoon Beeld"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1274
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -583,17 +583,17 @@ msgstr ""
 msgid "&Settings"
 msgstr "Beeld Instellings"
 
-#: src/kuickshow.cpp:330
+#: src/kuickshow.cpp:334
 #, kde-format
 msgid "Main Toolbar"
 msgstr ""
 
-#: src/kuickshow.cpp:1145
+#: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
 msgstr ""
 
-#: src/kuickshow.cpp:1156
+#: src/kuickshow.cpp:1161
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -602,42 +602,42 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1160
+#: src/kuickshow.cpp:1165
 #, fuzzy, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Fatale Imlib fout"
 
-#: src/kuickshow.cpp:1273
+#: src/kuickshow.cpp:1278
 #, fuzzy, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Kies Lêers of Gids na Open"
 
-#: src/kuickshow.cpp:1334
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Begin Skyfievertoning"
 
-#: src/kuickshow.cpp:1337
+#: src/kuickshow.cpp:1338
 #, fuzzy, kde-format
 msgid "Show File Browser"
 msgstr "Vertoon/Steek weg die Lêer Blaaier"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1339
 #, fuzzy, kde-format
 msgid "Hide File Browser"
 msgstr "Vertoon/Steek weg die Lêer Blaaier"
 
-#: src/kuickshow.cpp:1342
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
 msgstr "Konfigureer %1..."
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
 msgstr "Aangaande Vinnig-vertoon"
 
-#: src/kuickshow.cpp:1353
+#: src/kuickshow.cpp:1354
 #, fuzzy, kde-format
 msgid "Open Only One Image Window"
 msgstr "Open slegs een Beeld Venster"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:42+0000\n"
+"POT-Creation-Date: 2026-07-12 00:42+0000\n"
 "PO-Revision-Date: 2025-01-02 19:01+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -462,7 +462,7 @@ msgstr "維持原始影像大小"
 msgid "Save Image As"
 msgstr "另存影像為"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1274
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "圖片檔案 (%1)"
@@ -589,17 +589,17 @@ msgstr "檢視"
 msgid "&Settings"
 msgstr "設定(&S)"
 
-#: src/kuickshow.cpp:330
+#: src/kuickshow.cpp:334
 #, kde-format
 msgid "Main Toolbar"
 msgstr "主工具列"
 
-#: src/kuickshow.cpp:1145
+#: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
 msgstr "影像錯誤"
 
-#: src/kuickshow.cpp:1156
+#: src/kuickshow.cpp:1161
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -612,42 +612,42 @@ msgstr ""
 "工作階段日誌檔裡面可能會有更多資訊，\n"
 "也可以試著從終端機啟動 %1 來取得。"
 
-#: src/kuickshow.cpp:1160
+#: src/kuickshow.cpp:1165
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "嚴重初始化錯誤"
 
-#: src/kuickshow.cpp:1273
+#: src/kuickshow.cpp:1278
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "選擇檔案或資料夾來開啟"
 
-#: src/kuickshow.cpp:1334
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
 msgstr "開始播放投影片"
 
-#: src/kuickshow.cpp:1337
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Show File Browser"
 msgstr "顯示檔案瀏覽器"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Hide File Browser"
 msgstr "隱藏檔案瀏覽器"
 
-#: src/kuickshow.cpp:1342
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
 msgstr "設定 %1..."
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
 msgstr "關於 Kuickshow"
 
-#: src/kuickshow.cpp:1353
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "只開啟一個影像視窗"

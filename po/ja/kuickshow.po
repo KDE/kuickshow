@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:42+0000\n"
+"POT-Creation-Date: 2026-07-12 00:42+0000\n"
 "PO-Revision-Date: 2007-05-07 23:00+0900\n"
 "Last-Translator: Yukiko Bando <ybando@k6.dion.ne.jp>\n"
 "Language-Team: Japanese <Kdeveloper@kde.gr.jp>\n"
@@ -472,7 +472,7 @@ msgstr "元のサイズに保つ"
 msgid "Save Image As"
 msgstr "名前を付けて保存"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1274
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -598,17 +598,17 @@ msgstr ""
 msgid "&Settings"
 msgstr "設定(&S)"
 
-#: src/kuickshow.cpp:330
+#: src/kuickshow.cpp:334
 #, kde-format
 msgid "Main Toolbar"
 msgstr "メインツールバー"
 
-#: src/kuickshow.cpp:1145
+#: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
 msgstr "画像エラー"
 
-#: src/kuickshow.cpp:1156
+#: src/kuickshow.cpp:1161
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -617,43 +617,43 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1160
+#: src/kuickshow.cpp:1165
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "Imlib の致命的エラー"
 
-#: src/kuickshow.cpp:1273
+#: src/kuickshow.cpp:1278
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "開くファイルまたはフォルダを選択"
 
-#: src/kuickshow.cpp:1334
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
 msgstr "スライドショーを開始"
 
-#: src/kuickshow.cpp:1337
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Show File Browser"
 msgstr "ファイルブラウザを表示する"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Hide File Browser"
 msgstr "ファイルブラウザを隠す"
 
-#: src/kuickshow.cpp:1342
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1 を設定..."
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
 msgstr "KuickShow について"
 
-#: src/kuickshow.cpp:1353
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "画像ウィンドウを 1 つだけ開く"

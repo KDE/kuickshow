@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:42+0000\n"
+"POT-Creation-Date: 2026-07-12 00:42+0000\n"
 "PO-Revision-Date: 2024-12-28 15:53+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -467,7 +467,7 @@ msgstr "Mantieni le dimensioni originali dell'immagine"
 msgid "Save Image As"
 msgstr "Salva immagine come"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1274
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "File di immagine (%1)"
@@ -601,17 +601,17 @@ msgstr "Visualizza"
 msgid "&Settings"
 msgstr "Impo&stazioni"
 
-#: src/kuickshow.cpp:330
+#: src/kuickshow.cpp:334
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barra degli strumenti principale"
 
-#: src/kuickshow.cpp:1145
+#: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
 msgstr "Errore immagine"
 
-#: src/kuickshow.cpp:1156
+#: src/kuickshow.cpp:1161
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -625,42 +625,42 @@ msgstr ""
 "della\n"
 "sessione, o potrebbero essere ottenute avviando %1 da riga di comando."
 
-#: src/kuickshow.cpp:1160
+#: src/kuickshow.cpp:1165
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Errore fatale di inizializzazione"
 
-#: src/kuickshow.cpp:1273
+#: src/kuickshow.cpp:1278
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Seleziona i file o le cartelle da aprire"
 
-#: src/kuickshow.cpp:1334
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Inizia presentazione"
 
-#: src/kuickshow.cpp:1337
+#: src/kuickshow.cpp:1338
 #, kde-format
 msgid "Show File Browser"
 msgstr "Mostra il browser di file"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Nascondi il browser di file"
 
-#: src/kuickshow.cpp:1342
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
 msgstr "Configura %1..."
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
 msgstr "Informazioni su KuickShow"
 
-#: src/kuickshow.cpp:1353
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Apri una sola finestra di immagine"

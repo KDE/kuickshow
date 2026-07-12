@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-06 00:42+0000\n"
+"POT-Creation-Date: 2026-07-12 00:42+0000\n"
 "PO-Revision-Date: 2002-09-23 12:04SAST\n"
 "Last-Translator: Lwandle Mgidlana <lwandle@translate.org.za>\n"
 "Language-Team: Xhosa <xhosa@translate.org.za>\n"
@@ -468,7 +468,7 @@ msgstr "Gcina kwakhona Ubungakanani Boqobo"
 msgid "Save Image As"
 msgstr "Bonisa umfanekiso"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1274
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -591,17 +591,17 @@ msgstr ""
 msgid "&Settings"
 msgstr "Izicwangciso Zomfanekiso"
 
-#: src/kuickshow.cpp:330
+#: src/kuickshow.cpp:334
 #, kde-format
 msgid "Main Toolbar"
 msgstr ""
 
-#: src/kuickshow.cpp:1145
+#: src/kuickshow.cpp:1150
 #, kde-format
 msgid "Image Error"
 msgstr ""
 
-#: src/kuickshow.cpp:1156
+#: src/kuickshow.cpp:1161
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -610,42 +610,42 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1160
+#: src/kuickshow.cpp:1165
 #, fuzzy, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Imposiso yomonakalo Imlib"
 
-#: src/kuickshow.cpp:1273
+#: src/kuickshow.cpp:1278
 #, fuzzy, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Khetha Iifayile okanye Isilawulo Sokuvula"
 
-#: src/kuickshow.cpp:1334
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Qala Umboniso wotyibiliko"
 
-#: src/kuickshow.cpp:1337
+#: src/kuickshow.cpp:1338
 #, fuzzy, kde-format
 msgid "Show File Browser"
 msgstr "Bonisa/Fihla Ifayile Yomkhangeli Zincwadi"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1339
 #, fuzzy, kde-format
 msgid "Hide File Browser"
 msgstr "Bonisa/Fihla Ifayile Yomkhangeli Zincwadi"
 
-#: src/kuickshow.cpp:1342
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Configure %1..."
 msgstr "Qwalasela %1..."
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1347
 #, kde-format
 msgid "About KuickShow"
 msgstr "Malunga ne KuickShow"
 
-#: src/kuickshow.cpp:1353
+#: src/kuickshow.cpp:1354
 #, fuzzy, kde-format
 msgid "Open Only One Image Window"
 msgstr "Vula kuphela i Window Yomfanekiso enye"
