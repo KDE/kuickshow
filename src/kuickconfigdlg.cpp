@@ -43,24 +43,29 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 
     generalWidget = new GeneralWidget( this );
     generalWidget->setObjectName( QString::fromLatin1( "general widget" ) );
-    addPage( generalWidget, i18n("&General") );
+    KPageWidgetItem *page = addPage( generalWidget, i18n("&General") );
+    page->setIcon(QIcon::fromTheme("configure"));
 
     defaultsWidget = new DefaultsWidget( this );
     defaultsWidget->setObjectName( QString::fromLatin1( "defaults widget" ) );
-    addPage( defaultsWidget, i18n("&Modifications") );
+    page = addPage( defaultsWidget, i18n("&Modifications") );
+    page->setIcon(QIcon::fromTheme("calibrate"));
 
     slideshowWidget = new SlideShowWidget( this );
     slideshowWidget->setObjectName( QString::fromLatin1( "slideshow widget" ) );
-    addPage( slideshowWidget, i18n("&Slideshow")  );
+    page = addPage( slideshowWidget, i18n("&Slideshow")  );
+    page->setIcon(QIcon::fromTheme("ksslide"));
 
     // TODO: this can be a child of us, then no need to delete in destructor
     imageWindow = new ImageWindow(); // just to get the accel...
     imageWindow->hide();
     imageKeyChooser = new KShortcutsEditor( imageWindow->actionCollection(), this );
-    addPage( imageKeyChooser, i18n("&Viewer Shortcuts") );
+    page = addPage( imageKeyChooser, i18n("&Viewer Shortcuts") );
+    page->setIcon(QIcon::fromTheme("configure-shortcuts"));
 
     browserKeyChooser = new KShortcutsEditor( coll, this );
-    addPage( browserKeyChooser, i18n("Bro&wser Shortcuts") );
+    page = addPage( browserKeyChooser, i18n("Bro&wser Shortcuts") );
+    page->setIcon(QIcon::fromTheme("configure-shortcuts"));
 
     connect(buttonBox()->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked,
             this, &KuickConfigDialog::resetDefaults);
