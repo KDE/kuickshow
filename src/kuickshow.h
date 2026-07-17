@@ -33,7 +33,6 @@ class QEvent;
 class QLabel;
 class QString;
 class QUrl;
-class AboutWidget;
 class FileWidget;
 class ImageWindow;
 class KuickConfigDialog;
@@ -53,7 +52,6 @@ enum class KuickActionType : uint
 	SlideShow,
 	ToggleBrowser,
 	Configure,
-	About,
 	Quit,
 
 	// application settings
@@ -124,7 +122,6 @@ private Q_SLOTS:
     void 		slotSelected( const KFileItem& );
     void		dirSelected( const QUrl& );
     void		configuration();
-    void	      	about();
     void		slotDuplicateWindow(const QUrl &url);
     void 		startSlideShow();
     void                pauseSlideShow();
@@ -191,7 +188,6 @@ private:
     DelayedRepeatEvent  *m_delayedRepeatItem;
     QTimer              *m_slideTimer;
     bool                m_slideShowStopped;
-    QPointer<AboutWidget> aboutWidget;
 
     QLabel* sblblUrlInfo;
     QLabel* sblblMetaInfo;

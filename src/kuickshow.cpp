@@ -18,7 +18,6 @@
 
 #include "kuickshow.h"
 
-#include <KAboutData>
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KConfigGroup>
@@ -55,18 +54,13 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QMimeDatabase>
-#include <QMouseEvent>
-#include <QSize>
 #include <QStandardPaths>
 #include <QStatusBar>
-#include <QString>
 #include <QScreen>
 #include <QTextStream>
 #include <QTimer>
 #include <QUrl>
-#include <QtGlobal>
 
-#include "aboutwidget.h"
 #include "filecache.h"
 #include "filewidget.h"
 #include "imagewindow.h"
@@ -134,7 +128,6 @@ KuickShow::KuickShow( const char *objName )
       m_slideShowStopped(false)
 {
     setObjectName(objName);
-    aboutWidget = nullptr;
 
     KuickConfig& config = KuickConfig::get();
     config.load();
@@ -347,8 +340,6 @@ void KuickShow::initGUI( const QUrl& startDir )
     tBar->addSeparator();
     tBar->addAction(kuickAction(KuickActionType::OneImageWindow));
     tBar->addAction(kuickAction(KuickActionType::PrintImage));
-    tBar->addSeparator();
-    tBar->addAction(kuickAction(KuickActionType::About));
 
     // Address box in address tool bar
     KToolBar *addressToolBar = toolBar( "address_bar" );
@@ -1052,22 +1043,6 @@ void KuickShow::slotConfigClosed()
     kuickAction(KuickActionType::Configure)->setEnabled(true);
 }
 
-void KuickShow::about()
-{
-    if ( !aboutWidget ) {
-        aboutWidget = new AboutWidget(nullptr);
-        aboutWidget->setObjectName( QString::fromLatin1( "about" ) );
-    }
-
-    aboutWidget->adjustSize();
-
-    QScreen *screen = windowHandle()->screen();
-    const QRect screenRect = screen->geometry();
-    aboutWidget->move(screenRect.center().x() - aboutWidget->width() / 2, screenRect.center().y() - aboutWidget->height() / 2);
-
-    aboutWidget->show();
-}
-
 // ------ sessionmanagement - load / save current directory -----
 void KuickShow::readProperties( const KConfigGroup& kc )
 {
@@ -1343,10 +1318,6 @@ void KuickShow::setupKuickActions()
 			i18n("Configure %1...", QGuiApplication::applicationDisplayName()), this);
 	connect(action, &QAction::triggered, this, &KuickShow::configuration);
 
-	kuickActions[KuickActionType::About] = action = new QAction(QIcon::fromTheme("about"),
-			i18n("About KuickShow"), this);
-	connect(action, &QAction::triggered, this, &KuickShow::about);
-
 	kuickActions[KuickActionType::Quit] = KStandardAction::quit(this, &QObject::deleteLater, this);
 
 	// application settings
@@ -1403,7 +1374,6 @@ void KuickShow::initializeBrowserActionCollection(KActionCollection* collection)
 	collection->addAction(QStringLiteral("kuick_slideshow"), kuickAction(KuickActionType::SlideShow));
 	collection->addAction(QStringLiteral("toggleBrowser"), kuickAction(KuickActionType::ToggleBrowser));
 	collection->addAction(QStringLiteral("kuick_configure"), kuickAction(KuickActionType::Configure));
-	collection->addAction(QStringLiteral("about"), kuickAction(KuickActionType::About));
 	collection->addAction(QStringLiteral("quit"), kuickAction(KuickActionType::Quit));
 	collection->addAction(QStringLiteral("kuick_one window"), kuickAction(KuickActionType::OneImageWindow));
 	collection->addAction(QStringLiteral("kuick_inlinePreview"), fileWidget->action(KDirOperator::ShowPreview));
