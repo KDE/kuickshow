@@ -22,12 +22,7 @@
 #include "imlib.h"
 #include "kuickconfig.h"
 
-#include <KIconLoader>
 #include <KLocalizedString>
-
-#include <QDesktopServices>
-#include <QPixmap>
-#include <QUrl>
 
 
 GeneralWidget::GeneralWidget( QWidget *parent )
@@ -37,17 +32,7 @@ GeneralWidget::GeneralWidget( QWidget *parent )
   ui = new Ui::GeneralWidget;
   ui->setupUi(this);
 
-
   // now the properties that couldn't be set in the .ui file
-
-  // the KuickShow logo
-  QPixmap pixmap = KIconLoader::global()->loadIcon("logo", KIconLoader::User);
-  ui->logo->setUrl(HOMEPAGE_URL);
-  ui->logo->setPixmap( pixmap );
-  ui->logo->setFixedSize( pixmap.size() );
-
-  // actions
-  connect(ui->logo, QOverload<>::of(&KUrlLabel::leftClickedUrl), this, &GeneralWidget::slotURLClicked);
   connect(ui->cbOwnPalette, &QAbstractButton::clicked, this, &GeneralWidget::useOwnPalette);
 
   // support for these settings depends on the compiled library
@@ -66,11 +51,6 @@ GeneralWidget::GeneralWidget( QWidget *parent )
 GeneralWidget::~GeneralWidget()
 {
   delete ui;
-}
-
-void GeneralWidget::slotURLClicked()
-{
-    QDesktopServices::openUrl(QUrl::fromUserInput(ui->logo->url()));
 }
 
 void GeneralWidget::loadSettings(const KuickConfig* config)

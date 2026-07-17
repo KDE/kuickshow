@@ -18,11 +18,11 @@
 
 #include "kuickconfigdlg.h"
 
-#include <QDialogButtonBox>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KShortcutsDialog>
 
+#include <QDialogButtonBox>
 #include <QPushButton>
 
 #include "defaultswidget.h"
@@ -30,6 +30,7 @@
 #include "imagewindow.h"
 #include "kuickconfig.h"
 #include "slideshowwidget.h"
+#include "aboutwidget.h"
 
 
 KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent, bool modal )
@@ -53,8 +54,13 @@ KuickConfigDialog::KuickConfigDialog( KActionCollection *_coll, QWidget *parent,
 
     slideshowWidget = new SlideShowWidget( this );
     slideshowWidget->setObjectName( QString::fromLatin1( "slideshow widget" ) );
-    page = addPage( slideshowWidget, i18n("&Slideshow")  );
+    page = addPage( slideshowWidget, i18n("&Slideshow") );
     page->setIcon(QIcon::fromTheme("ksslide"));
+
+    QWidget *aboutWidget = new AboutWidget( this );
+    aboutWidget->setObjectName( QString::fromLatin1( "about widget" ) );
+    page = addPage( aboutWidget, i18n("Info") );
+    page->setIcon(QIcon::fromTheme("help-about"));
 
     // TODO: this can be a child of us, then no need to delete in destructor
     imageWindow = new ImageWindow(); // just to get the accel...

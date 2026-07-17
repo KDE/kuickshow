@@ -21,7 +21,6 @@
 
 #include <QFrame>
 
-class QMouseEvent;
 namespace Ui { class AboutWidget; }
 
 
@@ -33,8 +32,7 @@ public:
     AboutWidget(QWidget *parent = nullptr);
 
 protected:
-    ~AboutWidget();
-    void mouseReleaseEvent(QMouseEvent* event) override;
+    ~AboutWidget() = default;
 
 private:
     Ui::AboutWidget* ui;

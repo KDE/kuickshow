@@ -35,7 +35,6 @@ set(SOURCES
 )
 
 ki18n_wrap_ui(SOURCES
-   aboutwidget.ui
    printing_page.ui
    generalwidget.ui
    defaultswidget.ui

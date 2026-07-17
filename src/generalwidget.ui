@@ -122,16 +122,6 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="2" alignment="Qt::AlignRight">
-    <widget class="KUrlLabel" name="logo">
-     <property name="tipText">
-      <string>Open KuickShow Website</string>
-     </property>
-     <property name="useTips">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0" colspan="2">
     <widget class="QCheckBox" name="cbPreload">
      <property name="text">
@@ -164,11 +154,6 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KUrlLabel</class>
-   <extends>QLabel</extends>
-   <header>kurllabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

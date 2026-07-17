@@ -41,8 +41,6 @@ private:
 
 private Q_SLOTS:
     void 	useOwnPalette();
-    void slotURLClicked();
-
 };
 
 #endif

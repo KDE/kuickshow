@@ -17,70 +17,56 @@
 */
 
 #include "aboutwidget.h"
-#include <ui_aboutwidget.h>
+
+#include <kiconloader.h>
 
 #include <QDateTime>
-#include <QMouseEvent>
 #include <QPixmap>
 #include <QStandardPaths>
+#include <QGridLayout>
+#include <QLabel>
+#include <QGuiApplication>
 
-#include "version.h"
+#include <klocalizedstring.h>
 
 
 AboutWidget::AboutWidget( QWidget *parent )
     : QFrame( parent )
 {
-    // setup the widget based on its .ui file
-    ui = new Ui::AboutWidget;
-    ui->setupUi(this);
+    QGridLayout *gl = new QGridLayout(this);
+    gl->setRowMinimumHeight(0, 30);
 
+    QLabel *websiteLabel = new QLabel(i18n("<A HREF=\"%2\">%1 Website</A>", QGuiApplication::applicationDisplayName(), HOMEPAGE_URL), this);
+    websiteLabel->setOpenExternalLinks(true);
+    websiteLabel->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
+    gl->addWidget(websiteLabel, 1, 0, Qt::AlignLeft);
 
-    // now the properties that couldn't be set in the .ui file
+    QLabel *websiteLogo = new QLabel(this);
+    websiteLogo->setPixmap(KIconLoader::global()->loadIcon("logo", KIconLoader::User));
+    gl->addWidget(websiteLogo, 1, 1, Qt::AlignRight);
 
-    // KDE specific settings for "window" display (it's just a frame, not a real window)
-    setWindowFlag(Qt::FramelessWindowHint, true);
-    setWindowFlag(Qt::WindowStaysOnTopHint, true);
+    gl->setRowMinimumHeight(2, 30);
 
-    // these settings are difficult to set in designer
-    QPalette whitePalette((QColor(Qt::white)));
-    setPalette(whitePalette);
-    ui->groupBox->setPalette(whitePalette);
-    ui->groupBox->setBackgroundRole(QPalette::Window);
-
-    // fill the labels
-    ui->lblAuthors->setText("Kuickshow " KUICKSHOWVERSION " was brought to you by");
-    ui->urlHomepage->setText("Carsten Pfeiffer");
-    ui->urlHomepage->setUrl(HOMEPAGE_URL);
-    ui->lblCopyright->setText("(C) 1998-2009");
-
-    // load & show the logo
+    // Load & show the logo
     int hour = QTime::currentTime().hour();
     QString file;
 
+    // TODO: can get active hours from KIdleTime?
+    // Going by these hours, either you don't have to work very hard
+    // or are at an extreme latitude...
     if ( hour >= 10 && hour < 16 )
         file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/kuickshow-day.jpg");
     else
         file = QStandardPaths::locate(QStandardPaths::AppDataLocation, "pics/kuickshow-night.jpg");
 
-    QPixmap image;
-    if (image.load(file)) {
-        ui->picLogo->setPixmap(image);
+    QPixmap image(file);;
+    if (!image.isNull()) {
+        QLabel *pixLabel = new QLabel(this);
+        pixLabel->setPixmap(image);
+        gl->addWidget(pixLabel, 3, 0, 1, -1, Qt::AlignHCenter|Qt::AlignTop);
     } else {
-        qWarning("KuickShow: about-image not found/unreadable.");
+        qWarning() << "Image not found or unreadable";
     }
-}
 
-AboutWidget::~AboutWidget()
-{
-    delete ui;
-}
-
-
-void AboutWidget::mouseReleaseEvent(QMouseEvent* event)
-{
-    // Clicking anywhere on the frame except for the URL widget removes it.
-    // Note: This only works as intended if the frame is displayed as a window. If it is used in another window's
-    //       layout, it'll just remove itself from that window (and probably mess up the layout in the process).
-    if (!ui->urlHomepage->geometry().contains(event->pos()))
-        deleteLater();
+    gl->setRowStretch(3, 1);
 }
