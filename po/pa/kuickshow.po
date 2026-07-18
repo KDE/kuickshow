@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-12 00:42+0000\n"
+"POT-Creation-Date: 2026-07-18 00:42+0000\n"
 "PO-Revision-Date: 2010-04-16 06:49+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
@@ -29,22 +29,9 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "aalam@users.sf.net"
 
-#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
-#: src/aboutwidget.ui:32
+#: src/aboutwidget.cpp:39
 #, kde-format
-msgid "(authors)"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
-#: src/aboutwidget.ui:45
-#, kde-format
-msgid "(url)"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
-#: src/aboutwidget.ui:55
-#, kde-format
-msgid "(copyright)"
+msgid "<A HREF=\"%2\">%1 Website</A>"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
@@ -260,14 +247,8 @@ msgstr "ਬੈਕਗਰਾਊਂਡ ਰੰਗ:"
 msgid "Show only files with extension: "
 msgstr "ਇਸ ਐਕਸ਼ਟੇਸ਼ਨ ਨਾਲ ਹੀ ਫਾਇਲਾਂ ਵੇਖੋ:"
 
-#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
-#: src/generalwidget.ui:128
-#, kde-format
-msgid "Open KuickShow Website"
-msgstr "KuickShow ਵੈਬਸਾਇਟ ਖੋਲ੍ਹੋ"
-
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
-#: src/generalwidget.ui:138
+#: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
 msgstr "ਅਗਲਾ ਚਿੱਤਰ ਮੁੜ-ਲੋਡ"
@@ -332,7 +313,7 @@ msgstr "ਖਿਤਿਜੀ ਝਟਕੋ"
 msgid "Flip Vertically"
 msgstr "ਲੰਬਕਾਰੀ ਝਟਕੋ"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
 msgstr "ਚਿੱਤਰ ਪਰਿੰਟ ਕਰੋ..."
@@ -465,7 +446,7 @@ msgstr "ਅਸਲੀ ਚਿੱਤਰ ਅਕਾਰ ਰੱਖੋ"
 msgid "Save Image As"
 msgstr "ਇੰਝ ਸੰਭਾਲੋ"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -502,32 +483,37 @@ msgstr ""
 msgid "Image processing library"
 msgstr ""
 
-#: src/kuickconfigdlg.cpp:40
+#: src/kuickconfigdlg.cpp:41
 #, kde-format
 msgid "Configure"
 msgstr "ਸੰਰਚਨਾ"
 
-#: src/kuickconfigdlg.cpp:46
+#: src/kuickconfigdlg.cpp:47
 #, kde-format
 msgid "&General"
 msgstr "ਸਧਾਰਨ(&G)"
 
-#: src/kuickconfigdlg.cpp:50
+#: src/kuickconfigdlg.cpp:52
 #, kde-format
 msgid "&Modifications"
 msgstr "ਸੋਧਾਂ(&M)"
 
-#: src/kuickconfigdlg.cpp:54
+#: src/kuickconfigdlg.cpp:57
 #, kde-format
 msgid "&Slideshow"
 msgstr "ਸਲਾਇਡ-ਸ਼ੋ(&S)"
 
-#: src/kuickconfigdlg.cpp:60
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:69
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "ਦਰਸ਼ਕ ਸ਼ਾਰਟਕੱਟ(&V)"
 
-#: src/kuickconfigdlg.cpp:63
+#: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "ਬਰਾਊਜ਼ਰ ਸ਼ਾਰਟਕੱਟ(&w)"
@@ -546,7 +532,7 @@ msgstr ""
 "%1\n"
 "ਡਾਊਨਲੋਡ ਹੋਣ ਤੱਕ ਉਡੀਕੋ ਜੀ"
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:166
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -560,47 +546,47 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/kuickshow.cpp:175
+#: src/kuickshow.cpp:168
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "ਕਈ ਚਿੱਤਰ ਵੇਖਣੇ ਹਨ?"
 
-#: src/kuickshow.cpp:176
+#: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
 msgstr ""
 
-#: src/kuickshow.cpp:290
+#: src/kuickshow.cpp:283
 #, kde-format
 msgid "&File"
 msgstr "ਫਾਇਲ(&F)"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:297
 #, kde-format
 msgid "&Edit"
 msgstr "ਸੋਧ(&E)"
 
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
 msgstr ""
 
-#: src/kuickshow.cpp:313
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "&Settings"
 msgstr "ਸੈਟਿੰਗ(&S)"
 
-#: src/kuickshow.cpp:334
+#: src/kuickshow.cpp:327
 #, kde-format
 msgid "Main Toolbar"
 msgstr "ਮੁੱਖ ਟੂਲਬਾਰ"
 
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1125
 #, kde-format
 msgid "Image Error"
 msgstr "ਚਿੱਤਰ ਗਲਤੀ"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1136
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -609,58 +595,53 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1140
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "ਘਾਤਕ Imlib ਗਲਤੀ"
 
-#: src/kuickshow.cpp:1278
+#: src/kuickshow.cpp:1253
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "ਖੋਲ੍ਹਣ ਲਈ ਫਾਇਲਾਂ ਜਾਂ ਫੋਲਡਰ ਚੁਣੋ"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1310
 #, kde-format
 msgid "Start Slideshow"
 msgstr "ਸਲਾਇਡ-ਸ਼ੋ ਸ਼ੁਰੂ"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1313
 #, kde-format
 msgid "Show File Browser"
 msgstr "ਫਾਇਲ ਬਰਾਊਜ਼ਰ ਵੇਖੋ"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Hide File Browser"
 msgstr "ਫਾਇਲ ਬਰਾਊਜ਼ਰ ਓਹਲੇ"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1 ਸੰਰਚਨਾ..."
 
-#: src/kuickshow.cpp:1347
-#, kde-format
-msgid "About KuickShow"
-msgstr "KuickShow ਬਾਰੇ"
-
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1325
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "ਕੇਵਲ ਇੱਕ ਚਿੱਤਰ ਵਿੰਡੋ ਹੀ ਖੋਲ੍ਹੋ"
 
-#: src/kuickshow.cpp:1364
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Show Image"
 msgstr "ਚਿੱਤਰ ਵੇਖੋ"
 
-#: src/kuickshow.cpp:1368
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "ਚਿੱਤਰ ਐਕਟਿਵ ਵਿੰਡੋ ਵਿੱਚ ਵੇਖੋ"
 
-#: src/kuickshow.cpp:1372
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "ਚਿੱਤਰ ਪੂਰੀ ਸਕਰੀਨ ਮੋਡ ਵਿੱਚ ਵੇਖੋ"
@@ -819,6 +800,12 @@ msgstr " ਸਕਿੰਟ"
 #| msgid "&Iterations (0 = infinite):"
 msgid "&Iterations:"
 msgstr "ਚੱਕਰ (&I) (0 = ਬੇਅੰਤ):"
+
+#~ msgid "Open KuickShow Website"
+#~ msgstr "KuickShow ਵੈਬਸਾਇਟ ਖੋਲ੍ਹੋ"
+
+#~ msgid "About KuickShow"
+#~ msgstr "KuickShow ਬਾਰੇ"
 
 #~ msgid "Delete File"
 #~ msgstr "ਫਾਇਲ ਹਟਾਓ"

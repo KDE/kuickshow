@@ -2,7 +2,7 @@
 # Translation of kuickshow.po to Slovenian
 # Slovenian translation of kuickshow.
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: kuickshow.po 1741180 2026-07-12 01:27:35Z scripty $
+# $Id: kuickshow.po 1741645 2026-07-18 01:28:24Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2001.
@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-12 00:42+0000\n"
+"POT-Creation-Date: 2026-07-18 00:42+0000\n"
 "PO-Revision-Date: 2024-10-15 07:35+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -39,23 +39,10 @@ msgstr ""
 "andrej.vernekar@moj.net,gregor.rakar@kiss.si,jlp@holodeck1.com,"
 "andrejm@ubuntu.si,matjaz.jeran@amis.net"
 
-#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
-#: src/aboutwidget.ui:32
+#: src/aboutwidget.cpp:39
 #, kde-format
-msgid "(authors)"
-msgstr "(avtorji)"
-
-#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
-#: src/aboutwidget.ui:45
-#, kde-format
-msgid "(url)"
-msgstr "(url)"
-
-#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
-#: src/aboutwidget.ui:55
-#, kde-format
-msgid "(copyright)"
-msgstr "(copyright)"
+msgid "<A HREF=\"%2\">%1 Website</A>"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -268,14 +255,8 @@ msgstr "Barva ozadja:"
 msgid "Show only files with extension: "
 msgstr "Pokaži samo datoteke s pripono: "
 
-#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
-#: src/generalwidget.ui:128
-#, kde-format
-msgid "Open KuickShow Website"
-msgstr "Odpri spletno stran KuickShow"
-
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
-#: src/generalwidget.ui:138
+#: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
 msgstr "Prednaloži naslednjo sliko"
@@ -340,7 +321,7 @@ msgstr "Zrcali vodoravno"
 msgid "Flip Vertically"
 msgstr "Zrcali navpično"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
 msgstr "Natisni sliko ..."
@@ -471,7 +452,7 @@ msgstr "Ohrani prvotno velikost slike"
 msgid "Save Image As"
 msgstr "Shrani sliko kot"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Datoteke s slikami (%1)"
@@ -511,32 +492,37 @@ msgstr "Knjižnica za nalaganje in upodabljanje slik"
 msgid "Image processing library"
 msgstr "Knjižnica za obdelavo slik"
 
-#: src/kuickconfigdlg.cpp:40
+#: src/kuickconfigdlg.cpp:41
 #, kde-format
 msgid "Configure"
 msgstr "Nastavi"
 
-#: src/kuickconfigdlg.cpp:46
+#: src/kuickconfigdlg.cpp:47
 #, kde-format
 msgid "&General"
 msgstr "Splošno"
 
-#: src/kuickconfigdlg.cpp:50
+#: src/kuickconfigdlg.cpp:52
 #, kde-format
 msgid "&Modifications"
 msgstr "Prilagoditve"
 
-#: src/kuickconfigdlg.cpp:54
+#: src/kuickconfigdlg.cpp:57
 #, kde-format
 msgid "&Slideshow"
 msgstr "Predstavitev"
 
-#: src/kuickconfigdlg.cpp:60
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:69
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "Bližnjice pregledovalnika"
 
-#: src/kuickconfigdlg.cpp:63
+#: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "Bližnjice brskalnika"
@@ -555,7 +541,7 @@ msgstr ""
 "Počakajte med prejemanjem\n"
 "%1"
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:166
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -583,47 +569,47 @@ msgstr[3] ""
 "porabi veliko sistemskih sredstev in preobremeni vaš računalnik.<br/>Če "
 "izberete <interface>%2</interface>, bo prikazana samo prva slika."
 
-#: src/kuickshow.cpp:175
+#: src/kuickshow.cpp:168
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Naj prikažem več slik?"
 
-#: src/kuickshow.cpp:176
+#: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
 msgstr "Prikaži"
 
-#: src/kuickshow.cpp:290
+#: src/kuickshow.cpp:283
 #, kde-format
 msgid "&File"
 msgstr "Datoteka"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:297
 #, kde-format
 msgid "&Edit"
 msgstr "Ur&edi"
 
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
 msgstr "Pogled"
 
-#: src/kuickshow.cpp:313
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "&Settings"
 msgstr "Na&stavitve"
 
-#: src/kuickshow.cpp:334
+#: src/kuickshow.cpp:327
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Glavna orodna vrstica"
 
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1125
 #, kde-format
 msgid "Image Error"
 msgstr "Napaka slike"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1136
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -636,57 +622,52 @@ msgstr ""
 "Več informacij je morda na voljo v datoteki dnevnika seje,\n"
 "ali pa jih lahko pridobite z zagonom %1 iz terminala."
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1140
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Usodna napaka pri inicializaciji"
 
-#: src/kuickshow.cpp:1278
+#: src/kuickshow.cpp:1253
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Izberite datoteke ali mape za odprtje"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1310
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Začni predstavitev"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1313
 #, kde-format
 msgid "Show File Browser"
 msgstr "Prikaži brskalnik datotek"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Skrij brskalnik datotek"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
 msgstr "Nastavi %1 ..."
 
-#: src/kuickshow.cpp:1347
-#, kde-format
-msgid "About KuickShow"
-msgstr "O KuickShow"
-
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1325
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Odpri samo eno okno s sliko"
 
-#: src/kuickshow.cpp:1364
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Show Image"
 msgstr "Prikaži sliko"
 
-#: src/kuickshow.cpp:1368
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Prikaži sliko v dejavnem oknu"
 
-#: src/kuickshow.cpp:1372
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Prikaži sliko v celozaslonskem načinu"
@@ -843,6 +824,21 @@ msgstr " sek."
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Iteracij:"
+
+#~ msgid "(authors)"
+#~ msgstr "(avtorji)"
+
+#~ msgid "(url)"
+#~ msgstr "(url)"
+
+#~ msgid "(copyright)"
+#~ msgstr "(copyright)"
+
+#~ msgid "Open KuickShow Website"
+#~ msgstr "Odpri spletno stran KuickShow"
+
+#~ msgid "About KuickShow"
+#~ msgstr "O KuickShow"
 
 #~ msgctxt "@info"
 #~ msgid ""

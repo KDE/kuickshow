@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-12 00:42+0000\n"
+"POT-Creation-Date: 2026-07-18 00:42+0000\n"
 "PO-Revision-Date: 2013-11-11 15:10+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bhld@lists.linux.org.ba>\n"
@@ -25,22 +25,9 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "samir.ribic@etf.unsa.ba,adautbegov1@etf.unsa.ba"
 
-#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
-#: src/aboutwidget.ui:32
+#: src/aboutwidget.cpp:39
 #, kde-format
-msgid "(authors)"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
-#: src/aboutwidget.ui:45
-#, kde-format
-msgid "(url)"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
-#: src/aboutwidget.ui:55
-#, kde-format
-msgid "(copyright)"
+msgid "<A HREF=\"%2\">%1 Website</A>"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
@@ -256,14 +243,8 @@ msgstr "Boja pozadine:"
 msgid "Show only files with extension: "
 msgstr "Pokaži samo datoteke sa ekstenzijom: "
 
-#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
-#: src/generalwidget.ui:128
-#, kde-format
-msgid "Open KuickShow Website"
-msgstr "Otvori KuickShow web stranicu"
-
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
-#: src/generalwidget.ui:138
+#: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
 msgstr "Učitaj sljedeću sliku prije prikaza"
@@ -328,7 +309,7 @@ msgstr "Okreni vodoravno"
 msgid "Flip Vertically"
 msgstr "Okreni uspravno"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
 msgstr "Štampaj sliku..."
@@ -461,7 +442,7 @@ msgstr "Sačuvaj originalnu veličinu slike"
 msgid "Save Image As"
 msgstr "Snimi kao"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -501,32 +482,37 @@ msgstr ""
 msgid "Image processing library"
 msgstr ""
 
-#: src/kuickconfigdlg.cpp:40
+#: src/kuickconfigdlg.cpp:41
 #, kde-format
 msgid "Configure"
 msgstr "Podesi"
 
-#: src/kuickconfigdlg.cpp:46
+#: src/kuickconfigdlg.cpp:47
 #, kde-format
 msgid "&General"
 msgstr "&Općenito"
 
-#: src/kuickconfigdlg.cpp:50
+#: src/kuickconfigdlg.cpp:52
 #, kde-format
 msgid "&Modifications"
 msgstr "&Izmjene"
 
-#: src/kuickconfigdlg.cpp:54
+#: src/kuickconfigdlg.cpp:57
 #, kde-format
 msgid "&Slideshow"
 msgstr "&Slajdovi"
 
-#: src/kuickconfigdlg.cpp:60
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:69
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "&Prečice preglednika"
 
-#: src/kuickconfigdlg.cpp:63
+#: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "Prečice &izbornika"
@@ -545,7 +531,7 @@ msgstr ""
 "Molim sačekajte tokom prenosa\n"
 "%1"
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:166
 #, fuzzy, kde-kuit-format
 #| msgid ""
 #| "Do you really want to display this 1 image at the same time? This might "
@@ -577,47 +563,47 @@ msgstr[2] ""
 "potrebno dosta resursa  i može preopteretiti vaš računar.<br>Ako izaberete "
 "%1, bit će prikazana samo prva slika."
 
-#: src/kuickshow.cpp:175
+#: src/kuickshow.cpp:168
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Prikazati više slika?"
 
-#: src/kuickshow.cpp:176
+#: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
 msgstr ""
 
-#: src/kuickshow.cpp:290
+#: src/kuickshow.cpp:283
 #, kde-format
 msgid "&File"
 msgstr "&Datoteka"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:297
 #, kde-format
 msgid "&Edit"
 msgstr "&Izmijeni"
 
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
 msgstr ""
 
-#: src/kuickshow.cpp:313
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "&Settings"
 msgstr "&Postavke"
 
-#: src/kuickshow.cpp:334
+#: src/kuickshow.cpp:327
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Glavna alatna traka"
 
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1125
 #, kde-format
 msgid "Image Error"
 msgstr "Greška sa slikom"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1136
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -626,58 +612,53 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1140
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "Fatalna Imlib greška"
 
-#: src/kuickshow.cpp:1278
+#: src/kuickshow.cpp:1253
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Izaberite datoteke ili direktorij koji želite otvoriti"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1310
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Pokreni slajdove"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1313
 #, kde-format
 msgid "Show File Browser"
 msgstr "Prikaži izbornik datoteka"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Sakrij izbornik datoteka"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
 msgstr "Podesi %1..."
 
-#: src/kuickshow.cpp:1347
-#, kde-format
-msgid "About KuickShow"
-msgstr "O KuickShow-u"
-
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1325
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Otvori samo jednu sliku u prozoru"
 
-#: src/kuickshow.cpp:1364
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Show Image"
 msgstr "Prikaži sliku"
 
-#: src/kuickshow.cpp:1368
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Prikaži sliku u aktivnom prozoru"
 
-#: src/kuickshow.cpp:1372
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Prrikaži sliku u punom ekranu"
@@ -837,6 +818,12 @@ msgstr " sek"
 #| msgid "&Iterations (0 = infinite):"
 msgid "&Iterations:"
 msgstr "&Iteracija (0 = beskonačno)"
+
+#~ msgid "Open KuickShow Website"
+#~ msgstr "Otvori KuickShow web stranicu"
+
+#~ msgid "About KuickShow"
+#~ msgstr "O KuickShow-u"
 
 #~ msgid "Delete File"
 #~ msgstr "Obriši datoteku"

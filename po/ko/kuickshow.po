@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-12 00:42+0000\n"
+"POT-Creation-Date: 2026-07-18 00:42+0000\n"
 "PO-Revision-Date: 2024-12-10 01:10+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -27,23 +27,10 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kde@peremen.name"
 
-#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
-#: src/aboutwidget.ui:32
+#: src/aboutwidget.cpp:39
 #, kde-format
-msgid "(authors)"
-msgstr "(작성자)"
-
-#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
-#: src/aboutwidget.ui:45
-#, kde-format
-msgid "(url)"
-msgstr "(url)"
-
-#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
-#: src/aboutwidget.ui:55
-#, kde-format
-msgid "(copyright)"
-msgstr "(저작권)"
+msgid "<A HREF=\"%2\">%1 Website</A>"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -256,14 +243,8 @@ msgstr "배경색:"
 msgid "Show only files with extension: "
 msgstr "다음 확장자의 파일 이름만 표시:"
 
-#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
-#: src/generalwidget.ui:128
-#, kde-format
-msgid "Open KuickShow Website"
-msgstr "KuickShow 웹사이트 열기"
-
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
-#: src/generalwidget.ui:138
+#: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
 msgstr "다음 그림 미리 불러오기"
@@ -328,7 +309,7 @@ msgstr "상하 반전"
 msgid "Flip Vertically"
 msgstr "좌우 반전"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
 msgstr "그림 인쇄..."
@@ -459,7 +440,7 @@ msgstr "원본 그림 크기 유지"
 msgid "Save Image As"
 msgstr "다른 이름으로 그림 저장"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "그림 파일(%1)"
@@ -499,32 +480,37 @@ msgstr "그림 표시 및 렌더링 라이브러리"
 msgid "Image processing library"
 msgstr "그림 처리 라이브러리"
 
-#: src/kuickconfigdlg.cpp:40
+#: src/kuickconfigdlg.cpp:41
 #, kde-format
 msgid "Configure"
 msgstr "설정"
 
-#: src/kuickconfigdlg.cpp:46
+#: src/kuickconfigdlg.cpp:47
 #, kde-format
 msgid "&General"
 msgstr "일반(&G)"
 
-#: src/kuickconfigdlg.cpp:50
+#: src/kuickconfigdlg.cpp:52
 #, kde-format
 msgid "&Modifications"
 msgstr "수정(&M)"
 
-#: src/kuickconfigdlg.cpp:54
+#: src/kuickconfigdlg.cpp:57
 #, kde-format
 msgid "&Slideshow"
 msgstr "슬라이드 쇼(&S)"
 
-#: src/kuickconfigdlg.cpp:60
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:69
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "뷰어 단축키(&V)"
 
-#: src/kuickconfigdlg.cpp:63
+#: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "탐색기 단축키(&W)"
@@ -543,7 +529,7 @@ msgstr ""
 "%1을(를)\n"
 "다운로드하는 동안 기다려 주십시오"
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:166
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -559,47 +545,47 @@ msgstr[0] ""
 "가 응답하지 않을 수도 있습니다.<br/><interface>%2</interface>을(를) 선택하면 "
 "첫 번째 그림만 표시합니다."
 
-#: src/kuickshow.cpp:175
+#: src/kuickshow.cpp:168
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "여러 그림을 표시하시겠습니까?"
 
-#: src/kuickshow.cpp:176
+#: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
 msgstr "표시"
 
-#: src/kuickshow.cpp:290
+#: src/kuickshow.cpp:283
 #, kde-format
 msgid "&File"
 msgstr "파일(&F)"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:297
 #, kde-format
 msgid "&Edit"
 msgstr "편집(&E)"
 
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
 msgstr "보기"
 
-#: src/kuickshow.cpp:313
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "&Settings"
 msgstr "설정(&S)"
 
-#: src/kuickshow.cpp:334
+#: src/kuickshow.cpp:327
 #, kde-format
 msgid "Main Toolbar"
 msgstr "주 도구 모음"
 
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1125
 #, kde-format
 msgid "Image Error"
 msgstr "그림 오류"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1136
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -612,57 +598,52 @@ msgstr ""
 "자세한 정보는 세션 로그 파일을 참조하거나,\n"
 "%1을(를) 터미널에서 시작하여 확인할 수 있습니다."
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1140
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "치명적인 초기화 오류"
 
-#: src/kuickshow.cpp:1278
+#: src/kuickshow.cpp:1253
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "열 파일이나 폴더 선택"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1310
 #, kde-format
 msgid "Start Slideshow"
 msgstr "슬라이드 쇼 시작"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1313
 #, kde-format
 msgid "Show File Browser"
 msgstr "파일 탐색기 표시"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Hide File Browser"
 msgstr "파일 탐색기 숨기기"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1 설정..."
 
-#: src/kuickshow.cpp:1347
-#, kde-format
-msgid "About KuickShow"
-msgstr "KuickShow 정보"
-
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1325
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "그림 창 한 개만 열기"
 
-#: src/kuickshow.cpp:1364
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Show Image"
 msgstr "그림 표시"
 
-#: src/kuickshow.cpp:1368
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "활성 창에 그림 표시"
 
-#: src/kuickshow.cpp:1372
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "전체 화면 모드에서 그림 보기"
@@ -819,6 +800,21 @@ msgstr " 초"
 #, kde-format
 msgid "&Iterations:"
 msgstr "반복 횟수(&I):"
+
+#~ msgid "(authors)"
+#~ msgstr "(작성자)"
+
+#~ msgid "(url)"
+#~ msgstr "(url)"
+
+#~ msgid "(copyright)"
+#~ msgstr "(저작권)"
+
+#~ msgid "Open KuickShow Website"
+#~ msgstr "KuickShow 웹사이트 열기"
+
+#~ msgid "About KuickShow"
+#~ msgstr "KuickShow 정보"
 
 #~ msgctxt "@info"
 #~ msgid ""

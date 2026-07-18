@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-12 00:42+0000\n"
+"POT-Creation-Date: 2026-07-18 00:42+0000\n"
 "PO-Revision-Date: 2026-05-02 19:42+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -36,23 +36,10 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "tulliana@gmail.com, onur@pardus.org.tr, emir_sari@icloud.com"
 
-#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
-#: src/aboutwidget.ui:32
+#: src/aboutwidget.cpp:39
 #, kde-format
-msgid "(authors)"
-msgstr "(yazarlar)"
-
-#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
-#: src/aboutwidget.ui:45
-#, kde-format
-msgid "(url)"
-msgstr "(url)"
-
-#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
-#: src/aboutwidget.ui:55
-#, kde-format
-msgid "(copyright)"
-msgstr "(telif hakkı)"
+msgid "<A HREF=\"%2\">%1 Website</A>"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -265,14 +252,8 @@ msgstr "Arka plan rengi:"
 msgid "Show only files with extension: "
 msgstr "Yalnızca bu uzantıya sahip dosyaları göster: "
 
-#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
-#: src/generalwidget.ui:128
-#, kde-format
-msgid "Open KuickShow Website"
-msgstr "KuickShow Web Sayfasını Aç"
-
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
-#: src/generalwidget.ui:138
+#: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
 msgstr "Sonraki görseli önyükle"
@@ -337,7 +318,7 @@ msgstr "Yatay Olarak Ters Çevir"
 msgid "Flip Vertically"
 msgstr "Dikey Olarak Ters Çevir"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
 msgstr "Görseli Yazdır…"
@@ -468,7 +449,7 @@ msgstr "Görselin özgün boyutunu koru"
 msgid "Save Image As"
 msgstr "Görseli Farklı Kaydet"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Görsel Dosyaları (%1)"
@@ -509,32 +490,37 @@ msgstr "Görsel yükleme ve sunma kitaplığı"
 msgid "Image processing library"
 msgstr "Görsel işleme kitaplığı"
 
-#: src/kuickconfigdlg.cpp:40
+#: src/kuickconfigdlg.cpp:41
 #, kde-format
 msgid "Configure"
 msgstr "Yapılandır"
 
-#: src/kuickconfigdlg.cpp:46
+#: src/kuickconfigdlg.cpp:47
 #, kde-format
 msgid "&General"
 msgstr "&Genel"
 
-#: src/kuickconfigdlg.cpp:50
+#: src/kuickconfigdlg.cpp:52
 #, kde-format
 msgid "&Modifications"
 msgstr "&Değişiklikler"
 
-#: src/kuickconfigdlg.cpp:54
+#: src/kuickconfigdlg.cpp:57
 #, kde-format
 msgid "&Slideshow"
 msgstr "&Slayt Gösterisi"
 
-#: src/kuickconfigdlg.cpp:60
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:69
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "Görüntüleyici &Kısayolları"
 
-#: src/kuickconfigdlg.cpp:63
+#: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "&Tarayıcı Kısayolları"
@@ -553,7 +539,7 @@ msgstr ""
 "Lütfen bu dosya indirilirken bekleyin\n"
 "%1"
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:166
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -575,47 +561,47 @@ msgstr[1] ""
 "><interface>%2</interface> seçimini yaparsanız yalnızca ilk görsel "
 "gösterilir."
 
-#: src/kuickshow.cpp:175
+#: src/kuickshow.cpp:168
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Birden Fazla Görsel Görüntlensin mi?"
 
-#: src/kuickshow.cpp:176
+#: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
 msgstr "Görüntü"
 
-#: src/kuickshow.cpp:290
+#: src/kuickshow.cpp:283
 #, kde-format
 msgid "&File"
 msgstr "&Dosya"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:297
 #, kde-format
 msgid "&Edit"
 msgstr "Dü&zen"
 
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
 msgstr "Görünüm"
 
-#: src/kuickshow.cpp:313
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "&Settings"
 msgstr "Ayar&lar"
 
-#: src/kuickshow.cpp:334
+#: src/kuickshow.cpp:327
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Ana Araç Çubuğu"
 
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1125
 #, kde-format
 msgid "Image Error"
 msgstr "Görsel Hatası"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1136
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -628,57 +614,52 @@ msgstr ""
 "Daha fazla bilgi oturum günlük dosyasından veya uçbirimden\n"
 "%1 başlatılarak alınabilir."
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1140
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Onulmaz İlklendirme Hatası"
 
-#: src/kuickshow.cpp:1278
+#: src/kuickshow.cpp:1253
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Açılacak Dosya ya da Dizinleri Seç"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1310
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Slayt Gösterisini Başlat"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1313
 #, kde-format
 msgid "Show File Browser"
 msgstr "Dosya Tarayıcısını Göster"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Dosya Tarayıcısını Gizle"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1 Uygulamasını Yapılandır…"
 
-#: src/kuickshow.cpp:1347
-#, kde-format
-msgid "About KuickShow"
-msgstr "KuickShow Hakkında"
-
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1325
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Yalnızca Bir Görsel Penceresi Aç"
 
-#: src/kuickshow.cpp:1364
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Show Image"
 msgstr "Görseli Göster"
 
-#: src/kuickshow.cpp:1368
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Görseli Etkin Pencerede Göster"
 
-#: src/kuickshow.cpp:1372
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Görseli Tam Ekran Kipinde Göster"
@@ -835,6 +816,21 @@ msgstr " sn"
 #, kde-format
 msgid "&Iterations:"
 msgstr "Y&inelemeler:"
+
+#~ msgid "(authors)"
+#~ msgstr "(yazarlar)"
+
+#~ msgid "(url)"
+#~ msgstr "(url)"
+
+#~ msgid "(copyright)"
+#~ msgstr "(telif hakkı)"
+
+#~ msgid "Open KuickShow Website"
+#~ msgstr "KuickShow Web Sayfasını Aç"
+
+#~ msgid "About KuickShow"
+#~ msgstr "KuickShow Hakkında"
 
 #~ msgctxt "@info"
 #~ msgid ""

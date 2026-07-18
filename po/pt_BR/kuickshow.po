@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-12 00:42+0000\n"
+"POT-Creation-Date: 2026-07-18 00:42+0000\n"
 "PO-Revision-Date: 2025-08-29 08:59-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -35,23 +35,10 @@ msgid "Your emails"
 msgstr ""
 "felipe@conectiva.com.br, lisiane@conectiva.com.br, elchevive@opensuse.org"
 
-#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
-#: src/aboutwidget.ui:32
+#: src/aboutwidget.cpp:39
 #, kde-format
-msgid "(authors)"
-msgstr "(autores)"
-
-#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
-#: src/aboutwidget.ui:45
-#, kde-format
-msgid "(url)"
-msgstr "(url)"
-
-#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
-#: src/aboutwidget.ui:55
-#, kde-format
-msgid "(copyright)"
-msgstr "(copyright)"
+msgid "<A HREF=\"%2\">%1 Website</A>"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -265,14 +252,8 @@ msgstr "Cor do plano de fundo:"
 msgid "Show only files with extension: "
 msgstr "Mostrar somente os arquivos com a extensão: "
 
-#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
-#: src/generalwidget.ui:128
-#, kde-format
-msgid "Open KuickShow Website"
-msgstr "Abrir site da Internet do KuickShow"
-
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
-#: src/generalwidget.ui:138
+#: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
 msgstr "Pré-carregar próxima imagem"
@@ -337,7 +318,7 @@ msgstr "Refletir na horizontal"
 msgid "Flip Vertically"
 msgstr "Refletir na vertical"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
 msgstr "Imprimir imagem..."
@@ -469,7 +450,7 @@ msgstr "Manter o tamanho original da imagem"
 msgid "Save Image As"
 msgstr "Salvar a imagem como"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Arquivos de imagem (%1)"
@@ -510,32 +491,37 @@ msgstr "Biblioteca de carregamento e renderização de imagens"
 msgid "Image processing library"
 msgstr "Biblioteca de processamento de imagens"
 
-#: src/kuickconfigdlg.cpp:40
+#: src/kuickconfigdlg.cpp:41
 #, kde-format
 msgid "Configure"
 msgstr "Configurar"
 
-#: src/kuickconfigdlg.cpp:46
+#: src/kuickconfigdlg.cpp:47
 #, kde-format
 msgid "&General"
 msgstr "&Geral"
 
-#: src/kuickconfigdlg.cpp:50
+#: src/kuickconfigdlg.cpp:52
 #, kde-format
 msgid "&Modifications"
 msgstr "&Modificações"
 
-#: src/kuickconfigdlg.cpp:54
+#: src/kuickconfigdlg.cpp:57
 #, kde-format
 msgid "&Slideshow"
 msgstr "Apresentação de &slides"
 
-#: src/kuickconfigdlg.cpp:60
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:69
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "&Atalhos do visualizador"
 
-#: src/kuickconfigdlg.cpp:63
+#: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "Atalhos do &navegador"
@@ -554,7 +540,7 @@ msgstr ""
 "Aguarde enquanto estiver baixando\n"
 "%1"
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:166
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -574,47 +560,47 @@ msgstr[1] ""
 "muitos recursos e sobrecarregar seu computador.<br/>Se você escolher "
 "<interface>%2</interface>, somente a primeira imagem será mostrada."
 
-#: src/kuickshow.cpp:175
+#: src/kuickshow.cpp:168
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "Exibir múltiplas imagens?"
 
-#: src/kuickshow.cpp:176
+#: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
 msgstr "Exibir"
 
-#: src/kuickshow.cpp:290
+#: src/kuickshow.cpp:283
 #, kde-format
 msgid "&File"
 msgstr "&Arquivo"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:297
 #, kde-format
 msgid "&Edit"
 msgstr "&Editar"
 
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
 msgstr "Visualizar"
 
-#: src/kuickshow.cpp:313
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "&Settings"
 msgstr "&Configurações"
 
-#: src/kuickshow.cpp:334
+#: src/kuickshow.cpp:327
 #, kde-format
 msgid "Main Toolbar"
 msgstr "Barra de ferramentas principal"
 
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1125
 #, kde-format
 msgid "Image Error"
 msgstr "Erro na imagem"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1136
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -627,57 +613,52 @@ msgstr ""
 "Mais informações podem estar disponíveis no arquivo de log da sessão,\n"
 "ou podem ser obtidas iniciando %1 em um terminal."
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1140
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Erro de inicialização fatal"
 
-#: src/kuickshow.cpp:1278
+#: src/kuickshow.cpp:1253
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Selecionar arquivos ou pastas a abrir"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1310
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Iniciar apresentação de slides"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1313
 #, kde-format
 msgid "Show File Browser"
 msgstr "Mostrar o navegador de arquivos"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Ocultar o navegador de arquivos"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
 msgstr "Configurar %1..."
 
-#: src/kuickshow.cpp:1347
-#, kde-format
-msgid "About KuickShow"
-msgstr "Sobre o KuickShow"
-
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1325
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Abrir somente uma janela de imagem"
 
-#: src/kuickshow.cpp:1364
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Show Image"
 msgstr "Mostrar imagem"
 
-#: src/kuickshow.cpp:1368
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Mostrar imagem na janela ativa"
 
-#: src/kuickshow.cpp:1372
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Mostrar imagem em modo de tela cheia"
@@ -834,6 +815,21 @@ msgstr " seg"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Iterações:"
+
+#~ msgid "(authors)"
+#~ msgstr "(autores)"
+
+#~ msgid "(url)"
+#~ msgstr "(url)"
+
+#~ msgid "(copyright)"
+#~ msgstr "(copyright)"
+
+#~ msgid "Open KuickShow Website"
+#~ msgstr "Abrir site da Internet do KuickShow"
+
+#~ msgid "About KuickShow"
+#~ msgstr "Sobre o KuickShow"
 
 #~ msgid "Delete File"
 #~ msgstr "Excluir arquivo"

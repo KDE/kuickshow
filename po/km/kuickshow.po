@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-12 00:42+0000\n"
+"POT-Creation-Date: 2026-07-18 00:42+0000\n"
 "PO-Revision-Date: 2010-11-04 16:35+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -28,22 +28,9 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "khoemsokhem@khmeros.info,​​evannak@khmeros.info,piseth_dv@khmeros.info"
 
-#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
-#: src/aboutwidget.ui:32
+#: src/aboutwidget.cpp:39
 #, kde-format
-msgid "(authors)"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
-#: src/aboutwidget.ui:45
-#, kde-format
-msgid "(url)"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
-#: src/aboutwidget.ui:55
-#, kde-format
-msgid "(copyright)"
+msgid "<A HREF=\"%2\">%1 Website</A>"
 msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
@@ -259,14 +246,8 @@ msgstr "ពណ៌​ផ្ទៃ​ខាង​ក្រោយ ៖"
 msgid "Show only files with extension: "
 msgstr "បង្ហាញ​តែ​ឯកសារ​មាន​កន្ទុយ ៖ "
 
-#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
-#: src/generalwidget.ui:128
-#, kde-format
-msgid "Open KuickShow Website"
-msgstr "បើក​តំបន់​បណ្ដាញ KuickShow"
-
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
-#: src/generalwidget.ui:138
+#: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
 msgstr "ផ្ទុក​រូបភាព​បន្ទាប់​ជា​មុន"
@@ -331,7 +312,7 @@ msgstr "ត្រឡប់ផ្ដេក"
 msgid "Flip Vertically"
 msgstr "ត្រឡប់​បញ្ឈរ"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
 msgstr "បោះពុម្ព​រូបភាព..."
@@ -464,7 +445,7 @@ msgstr "រក្សា​ទំហំ​រូបភាព​ដើម"
 msgid "Save Image As"
 msgstr "រក្សា​ទុកជា​"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
@@ -503,32 +484,37 @@ msgstr ""
 msgid "Image processing library"
 msgstr ""
 
-#: src/kuickconfigdlg.cpp:40
+#: src/kuickconfigdlg.cpp:41
 #, kde-format
 msgid "Configure"
 msgstr "កំណត់​រចនា​សម្ព័ន្ធ​"
 
-#: src/kuickconfigdlg.cpp:46
+#: src/kuickconfigdlg.cpp:47
 #, kde-format
 msgid "&General"
 msgstr "ទូទៅ"
 
-#: src/kuickconfigdlg.cpp:50
+#: src/kuickconfigdlg.cpp:52
 #, kde-format
 msgid "&Modifications"
 msgstr "ការ​កែប្រែ"
 
-#: src/kuickconfigdlg.cpp:54
+#: src/kuickconfigdlg.cpp:57
 #, kde-format
 msgid "&Slideshow"
 msgstr "បញ្ចាំង​ស្លាយ"
 
-#: src/kuickconfigdlg.cpp:60
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:69
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "ផ្លូវកាត់​កម្មវិធី​មើល"
 
-#: src/kuickconfigdlg.cpp:63
+#: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "ផ្លូវកាត់​កម្មវិធី​រុករក"
@@ -547,7 +533,7 @@ msgstr ""
 "សូម​រង់ចាំខណៈពេល​ទាញយក\n"
 "%1"
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:166
 #, fuzzy, kde-kuit-format
 #| msgid ""
 #| "Do you really want to display this 1 image at the same time? This might "
@@ -570,47 +556,47 @@ msgstr[0] ""
 "តើ​អ្នក​ពិតជា​ចង់​បង្ហាញ​រូបភាពទាំង %n នេះ​នៅពេល​តែ​មួយ​ឬ ? នេះ​ប្រហែល​ជា​ធនធានដ៏ល្អ ហើយ​អាច​"
 "ផ្ទុកក្នុងកុំព្យូទ័រ​របស់​អ្នក ។<br>ប្រសិនបើ​អ្នក​ជ្រើស %1 មាន​តែ​រូបភាព​ដំបូង​ប៉ុណ្ណោះ​នឹង​ត្រូវ​បានបង្ហាញ ។"
 
-#: src/kuickshow.cpp:175
+#: src/kuickshow.cpp:168
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "បង្ហាញ​រូបភាព​ច្រើន ?"
 
-#: src/kuickshow.cpp:176
+#: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
 msgstr ""
 
-#: src/kuickshow.cpp:290
+#: src/kuickshow.cpp:283
 #, kde-format
 msgid "&File"
 msgstr "ឯកសារ​"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:297
 #, kde-format
 msgid "&Edit"
 msgstr "កែ​សម្រួល​"
 
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
 msgstr ""
 
-#: src/kuickshow.cpp:313
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "&Settings"
 msgstr "ការ​កំណត់​"
 
-#: src/kuickshow.cpp:334
+#: src/kuickshow.cpp:327
 #, kde-format
 msgid "Main Toolbar"
 msgstr "របារ​ឧបករណ៍​មេ​"
 
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1125
 #, kde-format
 msgid "Image Error"
 msgstr "កំហុស​រូបភាព​"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1136
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -619,58 +605,53 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1140
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "កំហុស Imlib ធ្ងន់ធ្ងរ"
 
-#: src/kuickshow.cpp:1278
+#: src/kuickshow.cpp:1253
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "ជ្រើស​ឯកសារ ឬ ថត​ដែល​ត្រូវ​បើក"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1310
 #, kde-format
 msgid "Start Slideshow"
 msgstr "ចាប់ផ្ដើម​បញ្ចាំង​ស្លាយ"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1313
 #, kde-format
 msgid "Show File Browser"
 msgstr "បង្ហាញ​កម្មវិធី​រុករក​ឯកសារ"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Hide File Browser"
 msgstr "លាក់​កម្មវិធី​រុករក​ឯកសារ"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
 msgstr "កំណត់​រចនា​សម្ព័ន្ធ %1..."
 
-#: src/kuickshow.cpp:1347
-#, kde-format
-msgid "About KuickShow"
-msgstr "អំពី KuickShow"
-
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1325
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "បើក​តែ​បង្អួច​រូបភាព​មួយ​ប៉ុណ្ណោះ"
 
-#: src/kuickshow.cpp:1364
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Show Image"
 msgstr "បង្ហាញ​រូបភាព"
 
-#: src/kuickshow.cpp:1368
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "បង្ហាញ​រូបភាព​ក្នុង​បង្អួច​សកម្ម"
 
-#: src/kuickshow.cpp:1372
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "បង្ហាញ​រូបភាព​ក្នុង​របៀប​ពេញ​អេក្រង់"
@@ -829,6 +810,12 @@ msgstr " វិ."
 #| msgid "&Iterations (0 = infinite):"
 msgid "&Iterations:"
 msgstr "អន្តរកម្ម (0 = អនន្ត) ៖"
+
+#~ msgid "Open KuickShow Website"
+#~ msgstr "បើក​តំបន់​បណ្ដាញ KuickShow"
+
+#~ msgid "About KuickShow"
+#~ msgstr "អំពី KuickShow"
 
 #~ msgid "Delete File"
 #~ msgstr "លុប​ឯកសារ"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-12 00:42+0000\n"
+"POT-Creation-Date: 2026-07-18 00:42+0000\n"
 "PO-Revision-Date: 2024-12-29 23:06+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -29,23 +29,10 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "भवतः ईमेलपत्राणि"
 
-#. i18n: ectx: property (text), widget (QLabel, lblAuthors)
-#: src/aboutwidget.ui:32
+#: src/aboutwidget.cpp:39
 #, kde-format
-msgid "(authors)"
-msgstr "(लेखकाः)"
-
-#. i18n: ectx: property (text), widget (KuickUrlWidget, urlHomepage)
-#: src/aboutwidget.ui:45
-#, kde-format
-msgid "(url)"
-msgstr "(url) ९."
-
-#. i18n: ectx: property (text), widget (QLabel, lblCopyright)
-#: src/aboutwidget.ui:55
-#, kde-format
-msgid "(copyright)"
-msgstr "(प्रतिलिपिधर्मः)"
+msgid "<A HREF=\"%2\">%1 Website</A>"
+msgstr ""
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -258,14 +245,8 @@ msgstr "पृष्ठभूमिवर्णः :"
 msgid "Show only files with extension: "
 msgstr "केवलं विस्तारयुक्तानि सञ्चिकानि दर्शयतु:"
 
-#. i18n: ectx: property (tipText), widget (KUrlLabel, logo)
-#: src/generalwidget.ui:128
-#, kde-format
-msgid "Open KuickShow Website"
-msgstr "KuickShow वेबसाइट् उद्घाटयन्तु"
-
 #. i18n: ectx: property (text), widget (QCheckBox, cbPreload)
-#: src/generalwidget.ui:138
+#: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
 msgstr "अग्रिमः चित्रः पूर्वं लोड् कुर्वन्तु"
@@ -330,7 +311,7 @@ msgstr "क्षैतिजरूपेण पलटतु"
 msgid "Flip Vertically"
 msgstr "लम्बवत् पलटतु"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1376
+#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
 msgstr "मुद्रणं चित्रम्..."
@@ -461,7 +442,7 @@ msgstr "मूलप्रतिबिम्बस्य आकारं रक�
 msgid "Save Image As"
 msgstr "चित्रं यथा रक्षन्तु"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1279
+#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "चित्रसञ्चिकाः (%1) ."
@@ -500,32 +481,37 @@ msgstr "इमेज लोडिंग् तथा रेण्डरिंग
 msgid "Image processing library"
 msgstr "चित्रसंसाधनपुस्तकालयः"
 
-#: src/kuickconfigdlg.cpp:40
+#: src/kuickconfigdlg.cpp:41
 #, kde-format
 msgid "Configure"
 msgstr "विन्यस्तं कुर्वन्तु"
 
-#: src/kuickconfigdlg.cpp:46
+#: src/kuickconfigdlg.cpp:47
 #, kde-format
 msgid "&General"
 msgstr "&सामान्य"
 
-#: src/kuickconfigdlg.cpp:50
+#: src/kuickconfigdlg.cpp:52
 #, kde-format
 msgid "&Modifications"
 msgstr "&संशोधन"
 
-#: src/kuickconfigdlg.cpp:54
+#: src/kuickconfigdlg.cpp:57
 #, kde-format
 msgid "&Slideshow"
 msgstr "&स्लाइडशो"
 
-#: src/kuickconfigdlg.cpp:60
+#: src/kuickconfigdlg.cpp:62
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/kuickconfigdlg.cpp:69
 #, kde-format
 msgid "&Viewer Shortcuts"
 msgstr "&दर्शक शॉर्टकट"
 
-#: src/kuickconfigdlg.cpp:63
+#: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
 msgstr "Bro&wser शॉर्टकट"
@@ -542,7 +528,7 @@ msgid ""
 "%1"
 msgstr "कृपया %1 अवतरणं कुर्वन् प्रतीक्षां कुर्वन्तु"
 
-#: src/kuickshow.cpp:173
+#: src/kuickshow.cpp:166
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -562,47 +548,47 @@ msgstr[1] ""
 "संसाधनगहनं भवतु तथा च भवतः सङ्गणकस्य अतिभारं कर्तुं शक्नोति।<br/>यदि भवान्...<interface>"
 "%2</interface> इति चिनोतु, केवलं प्रथमं चित्रं दर्शितं भविष्यति ।"
 
-#: src/kuickshow.cpp:175
+#: src/kuickshow.cpp:168
 #, kde-format
 msgid "Display Multiple Images?"
 msgstr "बहुविधाः चित्राणि प्रदर्शयन्तु?"
 
-#: src/kuickshow.cpp:176
+#: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
 msgstr "प्रदर्शन"
 
-#: src/kuickshow.cpp:290
+#: src/kuickshow.cpp:283
 #, kde-format
 msgid "&File"
 msgstr "&संचिका"
 
-#: src/kuickshow.cpp:304
+#: src/kuickshow.cpp:297
 #, kde-format
 msgid "&Edit"
 msgstr "&सम्पादन"
 
-#: src/kuickshow.cpp:310
+#: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
 msgstr "दृश्यं"
 
-#: src/kuickshow.cpp:313
+#: src/kuickshow.cpp:306
 #, kde-format
 msgid "&Settings"
 msgstr "&सेटिंग्स"
 
-#: src/kuickshow.cpp:334
+#: src/kuickshow.cpp:327
 #, kde-format
 msgid "Main Toolbar"
 msgstr "मुख्य साधनपट्टी"
 
-#: src/kuickshow.cpp:1150
+#: src/kuickshow.cpp:1125
 #, kde-format
 msgid "Image Error"
 msgstr "चित्रदोषः"
 
-#: src/kuickshow.cpp:1161
+#: src/kuickshow.cpp:1136
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -613,57 +599,52 @@ msgstr ""
 "\"%2\" इति चित्रपुस्तकालयस्य आरम्भं कर्तुं असमर्थः । अधिकसूचना सत्रवृत्तसञ्चिकायां उपलभ्यते, "
 "अथवा टर्मिनलतः %1 आरभ्य प्राप्तुं शक्यते ।"
 
-#: src/kuickshow.cpp:1165
+#: src/kuickshow.cpp:1140
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "घातक आरंभीकरण त्रुटि"
 
-#: src/kuickshow.cpp:1278
+#: src/kuickshow.cpp:1253
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Open कर्तुं Files अथवा Folder इति चिनोतु"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1310
 #, kde-format
 msgid "Start Slideshow"
 msgstr "स्लाइड शो आरभत"
 
-#: src/kuickshow.cpp:1338
+#: src/kuickshow.cpp:1313
 #, kde-format
 msgid "Show File Browser"
 msgstr "सञ्चिका ब्राउजर् दर्शयतु"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Hide File Browser"
 msgstr "सञ्चिका ब्राउजर् गोपयन्तु"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
 msgstr "%1 विन्यस्यताम्..."
 
-#: src/kuickshow.cpp:1347
-#, kde-format
-msgid "About KuickShow"
-msgstr "KuickShow विषये"
-
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1325
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "केवलं एकं चित्रविण्डो उद्घाटयन्तु"
 
-#: src/kuickshow.cpp:1364
+#: src/kuickshow.cpp:1335
 #, kde-format
 msgid "Show Image"
 msgstr "चित्रं दर्शयतु"
 
-#: src/kuickshow.cpp:1368
+#: src/kuickshow.cpp:1339
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "सक्रियविण्डो मध्ये चित्रं दर्शयतु"
 
-#: src/kuickshow.cpp:1372
+#: src/kuickshow.cpp:1343
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Fullscreen Mode इत्यत्र चित्रं दर्शयतु"
@@ -820,6 +801,21 @@ msgstr "सेक"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&पुनरावृत्तिः :"
+
+#~ msgid "(authors)"
+#~ msgstr "(लेखकाः)"
+
+#~ msgid "(url)"
+#~ msgstr "(url) ९."
+
+#~ msgid "(copyright)"
+#~ msgstr "(प्रतिलिपिधर्मः)"
+
+#~ msgid "Open KuickShow Website"
+#~ msgstr "KuickShow वेबसाइट् उद्घाटयन्तु"
+
+#~ msgid "About KuickShow"
+#~ msgstr "KuickShow विषये"
 
 #~ msgctxt "@info"
 #~ msgid ""
