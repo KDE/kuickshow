@@ -511,7 +511,7 @@ msgstr "&Prezentace"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Informace"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format

@@ -1,22 +1,23 @@
-# translation of kuickshow.po to Spanish
-# Copyright (C) 2002,2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+# Spanish translations for kuickshow.po package.
+# Copyright (C) 2002-2026 This file is copyright:
+# This file is distributed under the same license as the kuickshow package.
 #
-# SPDX-FileCopyrightText: 2002, 2003, 2004 Miguel Revilla Rodríguez <yo@miguelrevilla.com>
+# SPDX-FileCopyrightText: 2002-2004 Miguel Revilla Rodríguez <yo@miguelrevilla.com>
 # SPDX-FileCopyrightText: 2005 Santiago Fernandez Sancho <santi@kde-es.org>
-# SPDX-FileCopyrightText: 2005, 2006, 2007, 2009, 2018, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2005-2007, 2009, 2018, 2024, 2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-18 00:42+0000\n"
-"PO-Revision-Date: 2024-10-15 12:18+0200\n"
+"PO-Revision-Date: 2026-07-19 00:04+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 26.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -32,7 +33,7 @@ msgstr "ecuadra@eloihr.net,jaime@kde.org,yo@miguelrevilla.com"
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">Sitio web de %1</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -314,7 +315,7 @@ msgstr "Voltear verticalmente"
 #: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
 #, kde-format
 msgid "Print Image..."
-msgstr "Imprimir imagen..."
+msgstr "Imprimir imagen…"
 
 #: src/imagewindow.cpp:207
 #, kde-format
@@ -507,7 +508,7 @@ msgstr "Pre&sentación"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Información"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
@@ -522,7 +523,7 @@ msgstr "Atajos del &navegador"
 #: src/kuickfile.cpp:128
 #, kde-format
 msgid "Downloading %1..."
-msgstr "Descargando %1..."
+msgstr "Descargando %1…"
 
 #: src/kuickfile.cpp:129
 #, kde-format
@@ -634,7 +635,7 @@ msgstr "Ocultar el navegador de archivos"
 #: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Configure %1..."
-msgstr "Configurar %1..."
+msgstr "Configurar %1…"
 
 #: src/kuickshow.cpp:1325
 #, kde-format
@@ -808,62 +809,3 @@ msgstr " seg"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Iteraciones:"
-
-#~ msgid "(authors)"
-#~ msgstr "(autores)"
-
-#~ msgid "(url)"
-#~ msgstr "(url)"
-
-#~ msgid "(copyright)"
-#~ msgstr "(copyright)"
-
-#~ msgid "Open KuickShow Website"
-#~ msgstr "Abrir página web de KuickShow"
-
-#~ msgid "About KuickShow"
-#~ msgstr "Acerca de KuickShow"
-
-#~ msgctxt "@info"
-#~ msgid ""
-#~ "Do you really want to permanently delete the file<nl/><filename>%1</"
-#~ "filename>?"
-#~ msgstr ""
-#~ "¿Realmente desea borrar de forma permanente el archivo<nl/><filename>%1</"
-#~ "filename>?"
-
-#~ msgid "Delete File"
-#~ msgstr "Borrar archivo"
-
-#~ msgctxt "@info"
-#~ msgid "Do you really want to trash the file<nl/><filename>%1</filename>?"
-#~ msgstr ""
-#~ "¿Seguro que quiere tirar a la papelera el archivo<nl/><filename>%1</"
-#~ "filename>?"
-
-#~ msgid "Trash File"
-#~ msgstr "Tirar archivo a la papelera"
-
-#~ msgctxt "to trash"
-#~ msgid "&Trash"
-#~ msgstr "&Tirar a la papelera"
-
-#~ msgid ""
-#~ "<qt>Do you really want to delete\n"
-#~ " <b>'%1'</b>?</qt>"
-#~ msgstr ""
-#~ "<qt>¿Seguro que quiere eliminar\n"
-#~ "<b>«%1»</b>?</qt>"
-
-#~ msgid ""
-#~ "Unable to initialize \"Imlib\".\n"
-#~ "Start kuickshow from the command line and look for error messages.\n"
-#~ "The program will now quit."
-#~ msgstr ""
-#~ "No se puede inicializar «Imlib».\n"
-#~ "Inicie kuickshow desde la línea de órdenes y busque algún mensaje de "
-#~ "error.\n"
-#~ "Se cerrará la aplicación ahora."
-
-#~ msgid "infinite"
-#~ msgstr "infinitas"
