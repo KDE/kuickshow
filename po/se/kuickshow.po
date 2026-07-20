@@ -790,9 +790,3 @@ msgstr " s"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Open KuickShow Website"
-#~ msgstr "Raba KuickShow:a fierpmádatbáikki"
-
-#~ msgid "About KuickShow"
-#~ msgstr "KuickShow-dieđut"

@@ -807,18 +807,3 @@ msgstr " s"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Gjentakingar:"
-
-#~ msgid "(authors)"
-#~ msgstr "(forfattarar)"
-
-#~ msgid "(url)"
-#~ msgstr "(adresse)"
-
-#~ msgid "(copyright)"
-#~ msgstr "(opphavsrett)"
-
-#~ msgid "Open KuickShow Website"
-#~ msgstr "Opna KuickShow-nettsida"
-
-#~ msgid "About KuickShow"
-#~ msgstr "Om KuickShow"

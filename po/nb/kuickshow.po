@@ -799,9 +799,3 @@ msgstr " sek"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Open KuickShow Website"
-#~ msgstr "Åpne KuickShows nettsted"
-
-#~ msgid "About KuickShow"
-#~ msgstr "Om KuickShow"
