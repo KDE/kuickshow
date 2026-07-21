@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-18 00:42+0000\n"
-"PO-Revision-Date: 2026-05-15 11:09+0200\n"
+"PO-Revision-Date: 2026-07-20 11:49+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -30,7 +30,7 @@ msgstr "g.sora@tiscali.it"
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">%1 Sito Web</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -506,7 +506,7 @@ msgstr "&Slideshow (Sequentia de diapositivas)"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
