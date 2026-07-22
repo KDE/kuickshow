@@ -788,15 +788,3 @@ msgstr " 秒"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "(authors)"
-#~ msgstr "(作者)"
-
-#~ msgid "(url)"
-#~ msgstr "(url)"
-
-#~ msgid "(copyright)"
-#~ msgstr "(版权)"
-
-#~ msgid "About KuickShow"
-#~ msgstr "关于 KuickShow"

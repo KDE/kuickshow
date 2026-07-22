@@ -4,20 +4,20 @@
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2006, 2009.
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2008.
 # pan93412 <pan93412@gmail.com>, 2018.
-# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2025-2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-18 00:42+0000\n"
-"PO-Revision-Date: 2025-01-02 19:01+0900\n"
+"PO-Revision-Date: 2026-07-22 01:22+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 26.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -33,7 +33,7 @@ msgstr "yochenhsieh@xuite.net"
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">%1 網站</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -136,7 +136,7 @@ msgstr "對比："
 #: src/defaultswidget.ui:226
 #, kde-format
 msgid "Gamma:"
-msgstr "Gamma:"
+msgstr "Gamma："
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
 #: src/defaultswidget.ui:272
@@ -506,7 +506,7 @@ msgstr "投影片播放(&S)"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "資訊"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
