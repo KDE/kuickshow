@@ -2,17 +2,17 @@
 # Bulgarian translation of KDE.
 # This file is licensed under the GPL.
 #
-# $Id: kuickshow.po 1741645 2026-07-18 01:28:24Z scripty $
+# $Id: kuickshow.po 1741977 2026-07-22 13:30:43Z mkkdr $
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2006, 2007, 2008.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2010.
-# SPDX-FileCopyrightText: 2022, 2024, 2025 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022, 2024-2026 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-18 00:42+0000\n"
-"PO-Revision-Date: 2025-10-24 23:39+0200\n"
+"PO-Revision-Date: 2026-07-22 15:28+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -35,7 +35,7 @@ msgstr "radnev@yahoo.com,donangel@poboxes.com,B.Aleksandrov@cnsys.bg"
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">Уебстраница %1</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -509,7 +509,7 @@ msgstr "&Слайдшоу"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Информация"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
