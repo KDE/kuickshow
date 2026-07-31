@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-18 00:42+0000\n"
+"POT-Creation-Date: 2026-07-31 00:43+0000\n"
 "PO-Revision-Date: 2019-09-29 12:21+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -263,78 +263,73 @@ msgstr "Намоиши файлҳо фақат бо масофат"
 msgid "Preload next image"
 msgstr "Пурбори тасвири оянда"
 
-#: src/imagewindow.cpp:128
-#, kde-format
-msgid "Duplicate Window"
-msgstr ""
-
-#: src/imagewindow.cpp:133
+#: src/imagewindow.cpp:127
 #, kde-format
 msgid "Show Next Image"
 msgstr "Намоиши Тасвири Оянда"
 
-#: src/imagewindow.cpp:138
+#: src/imagewindow.cpp:131
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Намоиши Тасвири Пешина"
 
-#: src/imagewindow.cpp:143
+#: src/imagewindow.cpp:135
 #, kde-format
-msgid "Delete Image"
-msgstr "Нобуд кардани Тасвир"
-
-#: src/imagewindow.cpp:148
-#, kde-format
-msgid "Move Image to Trash"
+msgid "Duplicate Window"
 msgstr ""
 
-#: src/imagewindow.cpp:161
+#: src/imagewindow.cpp:153
 #, kde-format
-msgid "Restore Original Size"
-msgstr "Гузоштани андозаи оригиналӣ"
+msgid "Zooom to Maximum Size"
+msgstr ""
 
-#: src/imagewindow.cpp:166
-#, kde-format
-msgid "Maximize"
-msgstr "Максималӣ"
-
-#: src/imagewindow.cpp:171
+#: src/imagewindow.cpp:159
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Гардиши 90 дараҷа"
 
-#: src/imagewindow.cpp:176
+#: src/imagewindow.cpp:164
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Гардиши 180 дараҷа"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:169
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Гардиши 270 дараҷа"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:174
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Гузоштани Уфуқӣ"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:179
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Гузоштани Амудӣ"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
+#: src/imagewindow.cpp:185
+#, kde-format
+msgid "Delete Image"
+msgstr "Нобуд кардани Тасвир"
+
+#: src/imagewindow.cpp:189
+#, kde-format
+msgid "Move Image to Trash"
+msgstr ""
+
+#: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
 #, kde-format
 msgid "Print Image..."
 msgstr "Чоп кардани тасвир..."
 
-#: src/imagewindow.cpp:207
+#: src/imagewindow.cpp:209
 #, fuzzy, kde-format
 #| msgid "Show File Browser"
 msgid "Return to File Browser"
 msgstr "Намоиши браузери файл"
 
-#: src/imagewindow.cpp:213
+#: src/imagewindow.cpp:214
 #, kde-format
 msgid "More Brightness"
 msgstr "Сер равшанӣ"
@@ -344,73 +339,68 @@ msgstr "Сер равшанӣ"
 msgid "Less Brightness"
 msgstr "Камравшанӣ"
 
-#: src/imagewindow.cpp:223
+#: src/imagewindow.cpp:222
 #, kde-format
 msgid "More Contrast"
 msgstr "Сер акс"
 
-#: src/imagewindow.cpp:228
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "Less Contrast"
 msgstr "Кам акс"
 
-#: src/imagewindow.cpp:233
+#: src/imagewindow.cpp:230
 #, kde-format
 msgid "More Gamma"
 msgstr "Сер гамма"
 
-#: src/imagewindow.cpp:238
+#: src/imagewindow.cpp:234
 #, kde-format
 msgid "Less Gamma"
 msgstr "Кам гамма"
 
-#: src/imagewindow.cpp:244
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "Scroll Up"
 msgstr "Ба боло"
 
-#: src/imagewindow.cpp:249
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "Scroll Down"
 msgstr "Ба поен"
 
-#: src/imagewindow.cpp:254
+#: src/imagewindow.cpp:247
 #, kde-format
 msgid "Scroll Left"
 msgstr "Ба чап "
 
-#: src/imagewindow.cpp:259
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Scroll Right"
 msgstr "Ба рост"
 
-#: src/imagewindow.cpp:264
+#: src/imagewindow.cpp:256
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Интизоршавии намоиши қабат"
 
-#: src/imagewindow.cpp:278
+#: src/imagewindow.cpp:269
 #, kde-format
 msgid "Reload Image"
 msgstr "Пурбори Тасвир"
 
-#: src/imagewindow.cpp:284
-#, kde-format
-msgid "Properties"
-msgstr ""
-
-#: src/imagewindow.cpp:351
+#: src/imagewindow.cpp:339
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:416
+#: src/imagewindow.cpp:404
 #, fuzzy, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Тасвирро чоп карда натавонист."
 
-#: src/imagewindow.cpp:432
+#: src/imagewindow.cpp:420
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -421,48 +411,48 @@ msgstr ""
 "Мумкин,ки формати файл нигоҳ дошта нашудааст ё Imlib - и шумо таври  бо "
 "даркори барқарор нашудааст."
 
-#: src/imagewindow.cpp:841
+#: src/imagewindow.cpp:829
 #, kde-format
 msgid "Brightness"
 msgstr "Равшанӣ"
 
-#: src/imagewindow.cpp:845
+#: src/imagewindow.cpp:833
 #, kde-format
 msgid "Contrast"
 msgstr "Тазод"
 
-#: src/imagewindow.cpp:849
+#: src/imagewindow.cpp:837
 #, kde-format
 msgid "Gamma"
 msgstr "Гамма"
 
-#: src/imagewindow.cpp:896
+#: src/imagewindow.cpp:884
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Тасвирро чоп карда натавонист."
 
-#: src/imagewindow.cpp:897
+#: src/imagewindow.cpp:885
 #, kde-format
 msgid "Printing Failed"
 msgstr "Чоп нашуд"
 
-#: src/imagewindow.cpp:914
+#: src/imagewindow.cpp:902
 #, kde-format
 msgid "Keep original image size"
 msgstr "Нигоҳ доштани андозаи тасвири аввал"
 
-#: src/imagewindow.cpp:919
+#: src/imagewindow.cpp:907
 #, fuzzy, kde-format
 #| msgid "Show Image"
 msgid "Save Image As"
 msgstr "Намоиши тасвир"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
+#: src/imagewindow.cpp:912 src/kuickshow.cpp:1256
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
 
-#: src/imagewindow.cpp:942
+#: src/imagewindow.cpp:930
 #, fuzzy, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -472,12 +462,12 @@ msgstr ""
 "Мумкин,ки диск ҷои холи надорад,ё ин ки шумо  рухсат барои сабт карданро "
 "надоред."
 
-#: src/imagewindow.cpp:945
+#: src/imagewindow.cpp:933
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Нигоҳ доштани файли нодуруст"
 
-#: src/imagewindow.cpp:1192
+#: src/imagewindow.cpp:1180
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -591,12 +581,12 @@ msgstr "Танзимоти Тасвир"
 msgid "Main Toolbar"
 msgstr ""
 
-#: src/kuickshow.cpp:1125
+#: src/kuickshow.cpp:1127
 #, kde-format
 msgid "Image Error"
 msgstr ""
 
-#: src/kuickshow.cpp:1136
+#: src/kuickshow.cpp:1138
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -605,53 +595,48 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1140
+#: src/kuickshow.cpp:1142
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "Хатогии ногузори Imlib"
 
-#: src/kuickshow.cpp:1253
+#: src/kuickshow.cpp:1255
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Интихоби Файлҳо  ё Папкаҳо барои кушодан"
 
-#: src/kuickshow.cpp:1310
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Намоиши слайд сар кунед"
 
-#: src/kuickshow.cpp:1313
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Show File Browser"
 msgstr "Намоиши браузери файл"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Пинҳони браузери файл"
 
-#: src/kuickshow.cpp:1318
-#, kde-format
-msgid "Configure %1..."
-msgstr "Танзимоти %1..."
-
-#: src/kuickshow.cpp:1325
+#: src/kuickshow.cpp:1332
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Фақат як тирезаи тасвирро кушодан"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "Show Image"
 msgstr "Намоиши тасвир"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1350
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Намоиши тасвир дар тирезаи фаъол"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Ҳолати пурраи экранро нишон диҳед"
@@ -812,6 +797,15 @@ msgstr " сон"
 #| msgid "&Iterations (0 = infinite):"
 msgid "&Iterations:"
 msgstr "&Такроршавиҳо(0= беохир):"
+
+#~ msgid "Restore Original Size"
+#~ msgstr "Гузоштани андозаи оригиналӣ"
+
+#~ msgid "Maximize"
+#~ msgstr "Максималӣ"
+
+#~ msgid "Configure %1..."
+#~ msgstr "Танзимоти %1..."
 
 #~ msgid "Open KuickShow Website"
 #~ msgstr "Кушодани Сайти НамоишиТез"

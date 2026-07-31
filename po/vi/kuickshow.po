@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-18 00:42+0000\n"
+"POT-Creation-Date: 2026-07-31 00:43+0000\n"
 "PO-Revision-Date: 2007-07-07 22:37+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -252,78 +252,73 @@ msgstr "HIện chỉ tệp có phần mở rộng: "
 msgid "Preload next image"
 msgstr "Nạp sẵn ảnh kế"
 
-#: src/imagewindow.cpp:128
-#, kde-format
-msgid "Duplicate Window"
-msgstr ""
-
-#: src/imagewindow.cpp:133
+#: src/imagewindow.cpp:127
 #, kde-format
 msgid "Show Next Image"
 msgstr "Hiện ảnh kế"
 
-#: src/imagewindow.cpp:138
+#: src/imagewindow.cpp:131
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Hiện ảnh trước"
 
-#: src/imagewindow.cpp:143
+#: src/imagewindow.cpp:135
 #, kde-format
-msgid "Delete Image"
-msgstr "Xoá ảnh"
-
-#: src/imagewindow.cpp:148
-#, kde-format
-msgid "Move Image to Trash"
+msgid "Duplicate Window"
 msgstr ""
 
-#: src/imagewindow.cpp:161
+#: src/imagewindow.cpp:153
 #, kde-format
-msgid "Restore Original Size"
-msgstr "Phục hồi kích cỡ gốc"
+msgid "Zooom to Maximum Size"
+msgstr ""
 
-#: src/imagewindow.cpp:166
-#, kde-format
-msgid "Maximize"
-msgstr "Phóng to"
-
-#: src/imagewindow.cpp:171
+#: src/imagewindow.cpp:159
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Xoay 90°"
 
-#: src/imagewindow.cpp:176
+#: src/imagewindow.cpp:164
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Xoay 180°"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:169
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Xoay 270°"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:174
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Lật ngang"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:179
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Lật dọc"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
+#: src/imagewindow.cpp:185
+#, kde-format
+msgid "Delete Image"
+msgstr "Xoá ảnh"
+
+#: src/imagewindow.cpp:189
+#, kde-format
+msgid "Move Image to Trash"
+msgstr ""
+
+#: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
 #, kde-format
 msgid "Print Image..."
 msgstr "In ảnh..."
 
-#: src/imagewindow.cpp:207
+#: src/imagewindow.cpp:209
 #, fuzzy, kde-format
 #| msgid "Show File Browser"
 msgid "Return to File Browser"
 msgstr "Hiện bộ duyệt tệp"
 
-#: src/imagewindow.cpp:213
+#: src/imagewindow.cpp:214
 #, kde-format
 msgid "More Brightness"
 msgstr "Tăng độ sáng"
@@ -333,74 +328,69 @@ msgstr "Tăng độ sáng"
 msgid "Less Brightness"
 msgstr "Giảm độ sáng"
 
-#: src/imagewindow.cpp:223
+#: src/imagewindow.cpp:222
 #, kde-format
 msgid "More Contrast"
 msgstr "Tăng độ tương phản"
 
-#: src/imagewindow.cpp:228
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "Less Contrast"
 msgstr "Giảm độ tương phản"
 
-#: src/imagewindow.cpp:233
+#: src/imagewindow.cpp:230
 #, kde-format
 msgid "More Gamma"
 msgstr "Tăng Gamma (γ)"
 
-#: src/imagewindow.cpp:238
+#: src/imagewindow.cpp:234
 #, kde-format
 msgid "Less Gamma"
 msgstr "Giảm Gamma (γ)"
 
-#: src/imagewindow.cpp:244
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "Scroll Up"
 msgstr "Cuộn lên"
 
-#: src/imagewindow.cpp:249
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "Scroll Down"
 msgstr "Cuộn xuống"
 
-#: src/imagewindow.cpp:254
+#: src/imagewindow.cpp:247
 #, kde-format
 msgid "Scroll Left"
 msgstr "Cuộn bên trái"
 
-#: src/imagewindow.cpp:259
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Scroll Right"
 msgstr "Cuộn bên phải"
 
-#: src/imagewindow.cpp:264
+#: src/imagewindow.cpp:256
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Tạm dừng chiếu ảnh"
 
-#: src/imagewindow.cpp:278
+#: src/imagewindow.cpp:269
 #, kde-format
 msgid "Reload Image"
 msgstr "Nạp lại ảnh"
 
-#: src/imagewindow.cpp:284
-#, kde-format
-msgid "Properties"
-msgstr "Thuộc tính"
-
-#: src/imagewindow.cpp:351
+#: src/imagewindow.cpp:339
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 × %2)"
 
-#: src/imagewindow.cpp:416
+#: src/imagewindow.cpp:404
 #, fuzzy, kde-format
 #| msgid "Unable to print the image."
 msgid "Unable to download the image from %1."
 msgstr "Không thể in ảnh."
 
-#: src/imagewindow.cpp:432
+#: src/imagewindow.cpp:420
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -410,48 +400,48 @@ msgstr ""
 "Không thể nạp ảnh %1.\n"
 "Có lẽ định dạng tệp không được hỗ trợ, hoặc lmlib chưa được cài đặt đúng."
 
-#: src/imagewindow.cpp:841
+#: src/imagewindow.cpp:829
 #, kde-format
 msgid "Brightness"
 msgstr "Độ sáng"
 
-#: src/imagewindow.cpp:845
+#: src/imagewindow.cpp:833
 #, kde-format
 msgid "Contrast"
 msgstr "Độ tương phản"
 
-#: src/imagewindow.cpp:849
+#: src/imagewindow.cpp:837
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma (γ)"
 
-#: src/imagewindow.cpp:896
+#: src/imagewindow.cpp:884
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Không thể in ảnh."
 
-#: src/imagewindow.cpp:897
+#: src/imagewindow.cpp:885
 #, kde-format
 msgid "Printing Failed"
 msgstr "Lỗi in"
 
-#: src/imagewindow.cpp:914
+#: src/imagewindow.cpp:902
 #, kde-format
 msgid "Keep original image size"
 msgstr "Giữ kích cỡ ảnh gốc"
 
-#: src/imagewindow.cpp:919
+#: src/imagewindow.cpp:907
 #, fuzzy, kde-format
 #| msgid "Save As"
 msgid "Save Image As"
 msgstr "Lưu dạng"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
+#: src/imagewindow.cpp:912 src/kuickshow.cpp:1256
 #, kde-format
 msgid "Image Files (%1)"
 msgstr ""
 
-#: src/imagewindow.cpp:942
+#: src/imagewindow.cpp:930
 #, fuzzy, kde-format
 #| msgid ""
 #| "Could not save the file.\n"
@@ -463,12 +453,12 @@ msgstr ""
 "Không thể lưu tệp.\n"
 "Có lẽ đĩa đầy, hoặc bạn không có quyền ghi vào tệp đó."
 
-#: src/imagewindow.cpp:945
+#: src/imagewindow.cpp:933
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Lỗi lưu tệp"
 
-#: src/imagewindow.cpp:1192
+#: src/imagewindow.cpp:1180
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -582,12 +572,12 @@ msgstr "Thiết &lập"
 msgid "Main Toolbar"
 msgstr "Thanh công cụ chính"
 
-#: src/kuickshow.cpp:1125
+#: src/kuickshow.cpp:1127
 #, kde-format
 msgid "Image Error"
 msgstr "Lỗi ảnh"
 
-#: src/kuickshow.cpp:1136
+#: src/kuickshow.cpp:1138
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -596,53 +586,48 @@ msgid ""
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
 
-#: src/kuickshow.cpp:1140
+#: src/kuickshow.cpp:1142
 #, fuzzy, kde-format
 #| msgid "Fatal Imlib Error"
 msgid "Fatal Initialization Error"
 msgstr "Lỗi lmlib nghiêm trọng"
 
-#: src/kuickshow.cpp:1253
+#: src/kuickshow.cpp:1255
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Chọn các tệp hay thư mục cần mở"
 
-#: src/kuickshow.cpp:1310
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Bắt đầu chiếu ảnh"
 
-#: src/kuickshow.cpp:1313
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Show File Browser"
 msgstr "Hiện bộ duyệt tệp"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Ẩn bộ duyệt tệp"
 
-#: src/kuickshow.cpp:1318
-#, kde-format
-msgid "Configure %1..."
-msgstr "Cấu hình %1..."
-
-#: src/kuickshow.cpp:1325
+#: src/kuickshow.cpp:1332
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Mở chỉ một cửa sổ ảnh"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "Show Image"
 msgstr "Hiện ảnh"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1350
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Hiện ảnh trong cửa sổ đang dùng"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Hiện ảnh trong chế độ toàn màn hình"
@@ -803,6 +788,18 @@ msgstr " giây"
 #| msgid "&Iterations (0 = infinite):"
 msgid "&Iterations:"
 msgstr "&Lần lặp lại (0 = vô hạn):"
+
+#~ msgid "Restore Original Size"
+#~ msgstr "Phục hồi kích cỡ gốc"
+
+#~ msgid "Maximize"
+#~ msgstr "Phóng to"
+
+#~ msgid "Properties"
+#~ msgstr "Thuộc tính"
+
+#~ msgid "Configure %1..."
+#~ msgstr "Cấu hình %1..."
 
 #~ msgid "Open KuickShow Website"
 #~ msgstr "Mở địa chỉ Web Kuickshow"

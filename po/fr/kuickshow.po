@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-18 00:42+0000\n"
+"POT-Creation-Date: 2026-07-31 00:43+0000\n"
 "PO-Revision-Date: 2026-07-19 09:38+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -265,77 +265,72 @@ msgstr "Afficher uniquement les fichiers ayant l'extension :"
 msgid "Preload next image"
 msgstr "Pré charger l'image suivante"
 
-#: src/imagewindow.cpp:128
-#, kde-format
-msgid "Duplicate Window"
-msgstr "Dupliquer la fenêtre"
-
-#: src/imagewindow.cpp:133
+#: src/imagewindow.cpp:127
 #, kde-format
 msgid "Show Next Image"
 msgstr "Afficher l'image suivante"
 
-#: src/imagewindow.cpp:138
+#: src/imagewindow.cpp:131
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Afficher l'image précédente"
 
-#: src/imagewindow.cpp:143
+#: src/imagewindow.cpp:135
 #, kde-format
-msgid "Delete Image"
-msgstr "Supprimer une image"
+msgid "Duplicate Window"
+msgstr "Dupliquer la fenêtre"
 
-#: src/imagewindow.cpp:148
+#: src/imagewindow.cpp:153
 #, kde-format
-msgid "Move Image to Trash"
-msgstr "Déplacer une image dans la corbeille"
+msgid "Zooom to Maximum Size"
+msgstr ""
 
-#: src/imagewindow.cpp:161
-#, kde-format
-msgid "Restore Original Size"
-msgstr "Restaurer la taille originale"
-
-#: src/imagewindow.cpp:166
-#, kde-format
-msgid "Maximize"
-msgstr "Maximiser"
-
-#: src/imagewindow.cpp:171
+#: src/imagewindow.cpp:159
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Rotation de 90 degrés"
 
-#: src/imagewindow.cpp:176
+#: src/imagewindow.cpp:164
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Rotation de 180 degrés"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:169
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Rotation de 270 degrés"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:174
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Retourner horizontalement"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:179
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Retourner verticalement"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
+#: src/imagewindow.cpp:185
+#, kde-format
+msgid "Delete Image"
+msgstr "Supprimer une image"
+
+#: src/imagewindow.cpp:189
+#, kde-format
+msgid "Move Image to Trash"
+msgstr "Déplacer une image dans la corbeille"
+
+#: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
 #, kde-format
 msgid "Print Image..."
 msgstr "Imprimer une image..."
 
-#: src/imagewindow.cpp:207
+#: src/imagewindow.cpp:209
 #, kde-format
 msgid "Return to File Browser"
 msgstr "Revenir à un navigateur de fichiers"
 
-#: src/imagewindow.cpp:213
+#: src/imagewindow.cpp:214
 #, kde-format
 msgid "More Brightness"
 msgstr "Plus de luminosité"
@@ -345,73 +340,68 @@ msgstr "Plus de luminosité"
 msgid "Less Brightness"
 msgstr "Moins de luminosité"
 
-#: src/imagewindow.cpp:223
+#: src/imagewindow.cpp:222
 #, kde-format
 msgid "More Contrast"
 msgstr "Plus de contraste"
 
-#: src/imagewindow.cpp:228
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "Less Contrast"
 msgstr "Moins de contraste"
 
-#: src/imagewindow.cpp:233
+#: src/imagewindow.cpp:230
 #, kde-format
 msgid "More Gamma"
 msgstr "Plus de gamma"
 
-#: src/imagewindow.cpp:238
+#: src/imagewindow.cpp:234
 #, kde-format
 msgid "Less Gamma"
 msgstr "Moins de gamma"
 
-#: src/imagewindow.cpp:244
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "Scroll Up"
 msgstr "Faire défiler vers le haut"
 
-#: src/imagewindow.cpp:249
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "Scroll Down"
 msgstr "Faire défiler vers le bas"
 
-#: src/imagewindow.cpp:254
+#: src/imagewindow.cpp:247
 #, kde-format
 msgid "Scroll Left"
 msgstr "Faire défiler vers la gauche"
 
-#: src/imagewindow.cpp:259
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Scroll Right"
 msgstr "Faire défiler vers la droite"
 
-#: src/imagewindow.cpp:264
+#: src/imagewindow.cpp:256
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Mettre le diaporama en pause"
 
-#: src/imagewindow.cpp:278
+#: src/imagewindow.cpp:269
 #, kde-format
 msgid "Reload Image"
 msgstr "Recharger une image"
 
-#: src/imagewindow.cpp:284
-#, kde-format
-msgid "Properties"
-msgstr "Propriétés"
-
-#: src/imagewindow.cpp:351
+#: src/imagewindow.cpp:339
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:416
+#: src/imagewindow.cpp:404
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Impossible de télécharger l'image depuis %1."
 
-#: src/imagewindow.cpp:432
+#: src/imagewindow.cpp:420
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -422,47 +412,47 @@ msgstr ""
 "Le format de fichier n'est peut-être pas géré ou bien la bibliothèque "
 "« Imlib » n'est pas correctement installée."
 
-#: src/imagewindow.cpp:841
+#: src/imagewindow.cpp:829
 #, kde-format
 msgid "Brightness"
 msgstr "Luminosité"
 
-#: src/imagewindow.cpp:845
+#: src/imagewindow.cpp:833
 #, kde-format
 msgid "Contrast"
 msgstr "Contraste"
 
-#: src/imagewindow.cpp:849
+#: src/imagewindow.cpp:837
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/imagewindow.cpp:896
+#: src/imagewindow.cpp:884
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Impossible d'imprimer l'image."
 
-#: src/imagewindow.cpp:897
+#: src/imagewindow.cpp:885
 #, kde-format
 msgid "Printing Failed"
 msgstr "Problème lors de l'impression."
 
-#: src/imagewindow.cpp:914
+#: src/imagewindow.cpp:902
 #, kde-format
 msgid "Keep original image size"
 msgstr "Conserver la taille originale de l'image"
 
-#: src/imagewindow.cpp:919
+#: src/imagewindow.cpp:907
 #, kde-format
 msgid "Save Image As"
 msgstr "Enregistrer l'image sous"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
+#: src/imagewindow.cpp:912 src/kuickshow.cpp:1256
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Fichiers image (%1)"
 
-#: src/imagewindow.cpp:942
+#: src/imagewindow.cpp:930
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -472,12 +462,12 @@ msgstr ""
 "Votre disque est peut-être plein ou vous n'avez pas les droits d'accès en "
 "écriture dans le fichier."
 
-#: src/imagewindow.cpp:945
+#: src/imagewindow.cpp:933
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Problème lors de l'enregistrement du fichier"
 
-#: src/imagewindow.cpp:1192
+#: src/imagewindow.cpp:1180
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -605,12 +595,12 @@ msgstr "&Configuration"
 msgid "Main Toolbar"
 msgstr "Barre principale d'outils"
 
-#: src/kuickshow.cpp:1125
+#: src/kuickshow.cpp:1127
 #, kde-format
 msgid "Image Error"
 msgstr "Erreur d'image"
 
-#: src/kuickshow.cpp:1136
+#: src/kuickshow.cpp:1138
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -624,52 +614,47 @@ msgstr ""
 "session\n"
 "ou peut être obtenu en démarrant %1 à partir d'un terminal."
 
-#: src/kuickshow.cpp:1140
+#: src/kuickshow.cpp:1142
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Erreur critique durant l'initialisation"
 
-#: src/kuickshow.cpp:1253
+#: src/kuickshow.cpp:1255
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Sélectionnez des fichiers ou un dossier à ouvrir"
 
-#: src/kuickshow.cpp:1310
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Démarrer le diaporama"
 
-#: src/kuickshow.cpp:1313
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Show File Browser"
 msgstr "Afficher un navigateur de fichiers"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Cacher un navigateur de fichiers"
 
-#: src/kuickshow.cpp:1318
-#, kde-format
-msgid "Configure %1..."
-msgstr "Configurer %1..."
-
-#: src/kuickshow.cpp:1325
+#: src/kuickshow.cpp:1332
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Ouvrir une seule fenêtre d'images"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "Show Image"
 msgstr "Afficher une image"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1350
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Afficher une image dans la fenêtre active"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Afficher une image en mode « Plein écran »"
@@ -827,6 +812,18 @@ msgstr " secondes"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Itérations : "
+
+#~ msgid "Restore Original Size"
+#~ msgstr "Restaurer la taille originale"
+
+#~ msgid "Maximize"
+#~ msgstr "Maximiser"
+
+#~ msgid "Properties"
+#~ msgstr "Propriétés"
+
+#~ msgid "Configure %1..."
+#~ msgstr "Configurer %1..."
 
 #~ msgid "(authors)"
 #~ msgstr "(auteurs)"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-18 00:42+0000\n"
+"POT-Creation-Date: 2026-07-31 00:43+0000\n"
 "PO-Revision-Date: 2024-12-18 14:23+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -254,77 +254,72 @@ msgstr "Sýna aðeins skrár með endingunni: "
 msgid "Preload next image"
 msgstr "Forhlaða næstu mynd"
 
-#: src/imagewindow.cpp:128
-#, kde-format
-msgid "Duplicate Window"
-msgstr "Annan eins glugga"
-
-#: src/imagewindow.cpp:133
+#: src/imagewindow.cpp:127
 #, kde-format
 msgid "Show Next Image"
 msgstr "Sýna næstu mynd"
 
-#: src/imagewindow.cpp:138
+#: src/imagewindow.cpp:131
 #, kde-format
 msgid "Show Previous Image"
 msgstr "Sýna fyrri mynd"
 
-#: src/imagewindow.cpp:143
+#: src/imagewindow.cpp:135
 #, kde-format
-msgid "Delete Image"
-msgstr "Eyða mynd"
+msgid "Duplicate Window"
+msgstr "Annan eins glugga"
 
-#: src/imagewindow.cpp:148
+#: src/imagewindow.cpp:153
 #, kde-format
-msgid "Move Image to Trash"
-msgstr "Flytja mynd í ruslið"
+msgid "Zooom to Maximum Size"
+msgstr ""
 
-#: src/imagewindow.cpp:161
-#, kde-format
-msgid "Restore Original Size"
-msgstr "Endurheimta upprunalega stærð"
-
-#: src/imagewindow.cpp:166
-#, kde-format
-msgid "Maximize"
-msgstr "Hámarka"
-
-#: src/imagewindow.cpp:171
+#: src/imagewindow.cpp:159
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Snúa 90 gráður"
 
-#: src/imagewindow.cpp:176
+#: src/imagewindow.cpp:164
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Snúa 180 gráður"
 
-#: src/imagewindow.cpp:181
+#: src/imagewindow.cpp:169
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Snúa 270 gráður"
 
-#: src/imagewindow.cpp:186
+#: src/imagewindow.cpp:174
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Spegla lárétt"
 
-#: src/imagewindow.cpp:191
+#: src/imagewindow.cpp:179
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Spegla lóðrétt"
 
-#: src/imagewindow.cpp:196 src/kuickshow.cpp:1347
+#: src/imagewindow.cpp:185
+#, kde-format
+msgid "Delete Image"
+msgstr "Eyða mynd"
+
+#: src/imagewindow.cpp:189
+#, kde-format
+msgid "Move Image to Trash"
+msgstr "Flytja mynd í ruslið"
+
+#: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
 #, kde-format
 msgid "Print Image..."
 msgstr "Prenta mynd..."
 
-#: src/imagewindow.cpp:207
+#: src/imagewindow.cpp:209
 #, kde-format
 msgid "Return to File Browser"
 msgstr "Fara aftur í skráavafra"
 
-#: src/imagewindow.cpp:213
+#: src/imagewindow.cpp:214
 #, kde-format
 msgid "More Brightness"
 msgstr "Meiri birta"
@@ -334,73 +329,68 @@ msgstr "Meiri birta"
 msgid "Less Brightness"
 msgstr "Minni birta"
 
-#: src/imagewindow.cpp:223
+#: src/imagewindow.cpp:222
 #, kde-format
 msgid "More Contrast"
 msgstr "Meiri birtuskil"
 
-#: src/imagewindow.cpp:228
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "Less Contrast"
 msgstr "Minni birtuskil"
 
-#: src/imagewindow.cpp:233
+#: src/imagewindow.cpp:230
 #, kde-format
 msgid "More Gamma"
 msgstr "Sterkara litróf"
 
-#: src/imagewindow.cpp:238
+#: src/imagewindow.cpp:234
 #, kde-format
 msgid "Less Gamma"
 msgstr "Minna litróf"
 
-#: src/imagewindow.cpp:244
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "Scroll Up"
 msgstr "Skruna upp"
 
-#: src/imagewindow.cpp:249
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "Scroll Down"
 msgstr "Skruna niður"
 
-#: src/imagewindow.cpp:254
+#: src/imagewindow.cpp:247
 #, kde-format
 msgid "Scroll Left"
 msgstr "Skruna til vinstri"
 
-#: src/imagewindow.cpp:259
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Scroll Right"
 msgstr "Skruna til hægri"
 
-#: src/imagewindow.cpp:264
+#: src/imagewindow.cpp:256
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Gera hlé á myndasýningu"
 
-#: src/imagewindow.cpp:278
+#: src/imagewindow.cpp:269
 #, kde-format
 msgid "Reload Image"
 msgstr "Endurlesa mynd"
 
-#: src/imagewindow.cpp:284
-#, kde-format
-msgid "Properties"
-msgstr "Eiginleikar"
-
-#: src/imagewindow.cpp:351
+#: src/imagewindow.cpp:339
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%1 (%2 x %3)"
 
-#: src/imagewindow.cpp:416
+#: src/imagewindow.cpp:404
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Gat ekki náð í mynd frá %1."
 
-#: src/imagewindow.cpp:432
+#: src/imagewindow.cpp:420
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -410,47 +400,47 @@ msgstr ""
 "Get ekki hlaðið inn mynd %1.\n"
 "Kannski er þetta snið ekki stutt eða imlib ekki rétt sett upp."
 
-#: src/imagewindow.cpp:841
+#: src/imagewindow.cpp:829
 #, kde-format
 msgid "Brightness"
 msgstr "Birtustig"
 
-#: src/imagewindow.cpp:845
+#: src/imagewindow.cpp:833
 #, kde-format
 msgid "Contrast"
 msgstr "Birtuskil"
 
-#: src/imagewindow.cpp:849
+#: src/imagewindow.cpp:837
 #, kde-format
 msgid "Gamma"
 msgstr "Litróf (gamma)"
 
-#: src/imagewindow.cpp:896
+#: src/imagewindow.cpp:884
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Gat ekki prentað mynd."
 
-#: src/imagewindow.cpp:897
+#: src/imagewindow.cpp:885
 #, kde-format
 msgid "Printing Failed"
 msgstr "Prentun mistókst"
 
-#: src/imagewindow.cpp:914
+#: src/imagewindow.cpp:902
 #, kde-format
 msgid "Keep original image size"
 msgstr "Halda upprunalegri myndstærð"
 
-#: src/imagewindow.cpp:919
+#: src/imagewindow.cpp:907
 #, kde-format
 msgid "Save Image As"
 msgstr "Vista mynd sem"
 
-#: src/imagewindow.cpp:924 src/kuickshow.cpp:1254
+#: src/imagewindow.cpp:912 src/kuickshow.cpp:1256
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Myndskrár (%1)"
 
-#: src/imagewindow.cpp:942
+#: src/imagewindow.cpp:930
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -459,12 +449,12 @@ msgstr ""
 "Gat ekki vistað skrá.\n"
 "Kannski er diskurinn fullur eða þú hefur ekki skrifréttindi í þessa möppu."
 
-#: src/imagewindow.cpp:945
+#: src/imagewindow.cpp:933
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Mistókst að vista skrá"
 
-#: src/imagewindow.cpp:1192
+#: src/imagewindow.cpp:1180
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -590,12 +580,12 @@ msgstr "&Stillingar"
 msgid "Main Toolbar"
 msgstr "Aðalverkfærastika"
 
-#: src/kuickshow.cpp:1125
+#: src/kuickshow.cpp:1127
 #, kde-format
 msgid "Image Error"
 msgstr "Villa í mynd"
 
-#: src/kuickshow.cpp:1136
+#: src/kuickshow.cpp:1138
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -608,52 +598,47 @@ msgstr ""
 "Nánari upplýsingar gætu verið í atvikaskrá setunnar,\n"
 "eða fengist með því að ræsa %1 af skipanalínu."
 
-#: src/kuickshow.cpp:1140
+#: src/kuickshow.cpp:1142
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Banvæn frumstillingavilla"
 
-#: src/kuickshow.cpp:1253
+#: src/kuickshow.cpp:1255
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Veldu skrár eða möppu til að opna"
 
-#: src/kuickshow.cpp:1310
+#: src/kuickshow.cpp:1314
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Hefja myndasýningu"
 
-#: src/kuickshow.cpp:1313
+#: src/kuickshow.cpp:1318
 #, kde-format
 msgid "Show File Browser"
 msgstr "Sýna skráarvafra"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1319
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Fela skráarvafra"
 
-#: src/kuickshow.cpp:1318
-#, kde-format
-msgid "Configure %1..."
-msgstr "Stilla %1..."
-
-#: src/kuickshow.cpp:1325
+#: src/kuickshow.cpp:1332
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Opna aðeins einn myndglugga"
 
-#: src/kuickshow.cpp:1335
+#: src/kuickshow.cpp:1346
 #, kde-format
 msgid "Show Image"
 msgstr "Sýna mynd"
 
-#: src/kuickshow.cpp:1339
+#: src/kuickshow.cpp:1350
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Sýna mynd í virkum glugga"
 
-#: src/kuickshow.cpp:1343
+#: src/kuickshow.cpp:1354
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Láta mynd fylla allan skjáinn"
@@ -810,6 +795,18 @@ msgstr " sek"
 #, kde-format
 msgid "&Iterations:"
 msgstr "Ítran&ir:"
+
+#~ msgid "Restore Original Size"
+#~ msgstr "Endurheimta upprunalega stærð"
+
+#~ msgid "Maximize"
+#~ msgstr "Hámarka"
+
+#~ msgid "Properties"
+#~ msgstr "Eiginleikar"
+
+#~ msgid "Configure %1..."
+#~ msgstr "Stilla %1..."
 
 #~ msgid "(authors)"
 #~ msgstr "(höfundar)"
