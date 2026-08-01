@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-31 00:43+0000\n"
-"PO-Revision-Date: 2026-07-18 20:14+0300\n"
+"PO-Revision-Date: 2026-07-31 19:09+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -100,25 +100,25 @@ msgstr "Görseli döndür:"
 #: src/defaultswidget.ui:93
 #, kde-format
 msgid "0 Degrees"
-msgstr "0 Derece"
+msgstr "0 derece"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:98
 #, kde-format
 msgid "90 Degrees"
-msgstr "90 Derece"
+msgstr "90 derece"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:103
 #, kde-format
 msgid "180 Degrees"
-msgstr "180 Derece"
+msgstr "180 derece"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, comboRotate)
 #: src/defaultswidget.ui:108
 #, kde-format
 msgid "270 Degrees"
-msgstr "270 Derece"
+msgstr "270 derece"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbAdjust)
 #: src/defaultswidget.ui:134
@@ -190,19 +190,19 @@ msgstr "Yumuşak ölçekleme"
 #: src/generalwidget.ui:43
 #, kde-format
 msgid "Fast rendering"
-msgstr "Hızlı sunum"
+msgstr "Hızlı sunma"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither16bit)
 #: src/generalwidget.ui:50
 #, kde-format
 msgid "Dither in HiColor (15/16bit) modes"
-msgstr "Yüksek Renk kiplerinde (15/16bit) titreme"
+msgstr "Yüksek renk kiplerinde (15/16 bit) titret"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbDither8bit)
 #: src/generalwidget.ui:57
 #, kde-format
 msgid "Dither in LowColor (<=8bit) modes"
-msgstr "Düşük Renk kiplerinde (<=8bit) titreme"
+msgstr "Düşük renk kiplerinde (≤ 8 bit) titret"
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbOwnPalette)
 #: src/generalwidget.ui:64
@@ -276,7 +276,7 @@ msgstr "Pencereyi Çoğalt"
 #: src/imagewindow.cpp:153
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "En Büyük Boyuta Yakınlaştır"
 
 #: src/imagewindow.cpp:159
 #, kde-format
@@ -316,7 +316,7 @@ msgstr "Görseli Çöp Kutusuna Taşı"
 #: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
 #, kde-format
 msgid "Print Image..."
-msgstr "Görseli Yazdır…"
+msgstr "Görseli Bas…"
 
 #: src/imagewindow.cpp:209
 #, kde-format
@@ -692,7 +692,7 @@ msgstr "Gösterilecek isteğe bağlı dosya adları/URL’ler"
 #: src/printing.cpp:52
 #, kde-format
 msgid "Print %1"
-msgstr "Yazdır %1"
+msgstr "Yazdır: %1"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, KuickPrintDialogPage)
 #: src/printing_page.ui:14
@@ -710,7 +710,7 @@ msgstr "Gö&rselin altına dosya adını yazdır"
 #: src/printing_page.ui:30
 #, kde-format
 msgid "Print image in &black and white"
-msgstr "Görs&eli siyah beyaz yazdır"
+msgstr "Görs&eli siyah beyaz bas"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: src/printing_page.ui:53
@@ -746,7 +746,7 @@ msgstr "&Yükseklik:"
 #: src/printing_page.ui:121
 #, kde-format
 msgid "Print e&xact size: "
-msgstr "Görseli &tam boyutunda yazdır: "
+msgstr "Görseli &tam boyutta bas: "
 
 #. i18n: ectx: property (text), widget (QCheckBox, shrinkToFit)
 #: src/printing_page.ui:141

@@ -2,7 +2,7 @@
 # Translation of kuickshow.po to Slovenian
 # Slovenian translation of kuickshow.
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: kuickshow.po 1742641 2026-07-31 01:31:16Z scripty $
+# $Id: kuickshow.po 1742702 2026-08-01 01:32:44Z scripty $
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2001.
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-31 00:43+0000\n"
-"PO-Revision-Date: 2026-07-18 06:33+0200\n"
+"PO-Revision-Date: 2026-07-31 07:16+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -279,7 +279,7 @@ msgstr "Podvoji okno"
 #: src/imagewindow.cpp:153
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "Povečaj na največjo velikost"
 
 #: src/imagewindow.cpp:159
 #, kde-format
