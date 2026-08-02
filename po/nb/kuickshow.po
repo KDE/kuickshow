@@ -784,15 +784,3 @@ msgstr " sek"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Restore Original Size"
-#~ msgstr "Gjenopprett opprinnelig størrelse"
-
-#~ msgid "Maximize"
-#~ msgstr "Maksimer"
-
-#~ msgid "Properties"
-#~ msgstr "Egenskaper"
-
-#~ msgid "Configure %1..."
-#~ msgstr "Tilpass %1 …"

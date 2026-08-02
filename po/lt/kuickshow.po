@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-31 00:43+0000\n"
-"PO-Revision-Date: 2026-07-20 17:21+0300\n"
+"PO-Revision-Date: 2026-08-01 14:40+0300\n"
 "Last-Translator: Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -270,7 +270,7 @@ msgstr "Dubliuoti langą"
 #: src/imagewindow.cpp:153
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "Didinti iki didžiausio dydžio"
 
 #: src/imagewindow.cpp:159
 #, kde-format

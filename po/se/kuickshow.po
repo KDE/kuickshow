@@ -775,12 +775,3 @@ msgstr " s"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Restore Original Size"
-#~ msgstr "Máhcat álgovuolggalaš sturrodahkii"
-
-#~ msgid "Maximize"
-#~ msgstr "Maksimere"
-
-#~ msgid "Configure %1..."
-#~ msgstr "Heivet %1 …"

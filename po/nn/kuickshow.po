@@ -1,5 +1,6 @@
 # Translation of kuickshow to Norwegian Nynorsk
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2008, 2020, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
@@ -792,15 +793,3 @@ msgstr " s"
 #, kde-format
 msgid "&Iterations:"
 msgstr "&Gjentakingar:"
-
-#~ msgid "Restore Original Size"
-#~ msgstr "Gjenopprett opphavleg storleik"
-
-#~ msgid "Maximize"
-#~ msgstr "Maksimer"
-
-#~ msgid "Properties"
-#~ msgstr "Eigenskapar"
-
-#~ msgid "Configure %1..."
-#~ msgstr "Set opp %1 …"
