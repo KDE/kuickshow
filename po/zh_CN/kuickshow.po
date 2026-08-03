@@ -773,15 +773,3 @@ msgstr " 秒"
 #, kde-format
 msgid "&Iterations:"
 msgstr ""
-
-#~ msgid "Restore Original Size"
-#~ msgstr "恢复原始尺寸"
-
-#~ msgid "Maximize"
-#~ msgstr "最大化效果"
-
-#~ msgid "Properties"
-#~ msgstr "属性"
-
-#~ msgid "Configure %1..."
-#~ msgstr "配置 %1..."
