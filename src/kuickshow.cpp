@@ -1046,13 +1046,6 @@ bool KuickShow::haveBrowser() const
     return fileWidget && fileWidget->isVisible();
 }
 
-void KuickShow::delayedRepeatEvent( ImageWindow *w, QKeyEvent *e )
-{
-	auto clonedEvent = new QKeyEvent(e->type(), e->key(), e->modifiers(),
-			e->nativeScanCode(), e->nativeVirtualKey(), e->nativeModifiers(),
-			e->text(), e->isAutoRepeat(), e->count(), e->device());
-	m_delayedRepeatItem = new DelayedRepeatEvent(w, clonedEvent);
-}
 
 void KuickShow::abortDelayedEvent()
 {

@@ -121,7 +121,6 @@ private:
     void 		saveProperties( KConfigGroup& kc ) override;
     void 		saveSettings();
     bool 		haveBrowser() const;
-    void 		delayedRepeatEvent( ImageWindow *, QKeyEvent * );
     void		abortDelayedEvent();
     void                deleteAllViewers();
     void                redirectDeleteAndTrashActions();
