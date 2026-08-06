@@ -832,19 +832,15 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
     if ( m_delayedRepeatItem ) // we probably need to install an eventFilter over
         return true;    // kapp, to make it really safe
 
-    bool ret = false;
-    int eventType = e->type();
-
-    QKeyEvent *k = nullptr;
-    if (eventType == QEvent::KeyPress) k = static_cast<QKeyEvent *>(e);
-
-    if (k!=nullptr)
+    const int eventType = e->type();
+    if (eventType == QEvent::KeyPress)
     {
-        // Forward the key shortcuts for "Quit" and "Handbook" from
-        // an image viewer window, to the main window, where they
-        // will be actioned.
+        QKeyEvent *ke = static_cast<QKeyEvent *>(e);
+        QKeySequence seq(ke->key() | ke->modifiers());
 
-        QKeySequence seq(k->key()|k->modifiers());
+        // Forward the key shortcuts for "Quit" and "Handbook" from
+        // an image viewer window to the main window, where they
+        // will be actioned.
         if (KStandardShortcut::quit().contains(seq))
         {
             deleteAllViewers();
@@ -858,10 +854,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
         }
     }
 
-
-    ImageWindow *window = dynamic_cast<ImageWindow*>( o );
-
-    if ( window ) {
+    ImageWindow *window = qobject_cast<ImageWindow *>( o );
+    if ( window != nullptr ) {
         // The XWindow used to display Imlib's image is being resized when
         // switching images, causing enter- and leave events for this
         // ImageWindow, leading to the cursor being unhidden. So we simply
@@ -870,112 +864,26 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             KCursor::autoHideEventFilter( o, e );
 
         m_viewer = window;
-        QString img;
-        KFileItem item;      // the image to be shown
-        KFileItem item_next; // the image to be cached
 
-        if ( k ) { // keypress
-            ret = true;
-            int key = k->key();
-
-            // Qt::Key_Shift shouldn't load the browser in nobrowser mode, it
-            // is used for zooming in the imagewindow
-            // Qt::Key_Alt shouldn't either - otherwise Alt+F4 doesn't work, the
-            // F4 gets eaten (by NetAccess' modal dialog maybe?)
-            if ( !fileWidget )
-            {
-                if ( key != Qt::Key_Escape && key != Qt::Key_Shift && key != Qt::Key_Alt )
-                {
-                    KuickFile *file = m_viewer->currentFile();
-
-                    // This call of initGUI() happens for a key press event over
-                    // an image window which is not captured by a QAction.  Since
-                    // the FileWidget does not yet exist, it is created here and
-                    // the key event is replayed when it is ready.
-                    initGUI( KIO::upUrl(file->url()) );
-
-                    // the fileBrowser will list the start-directory
-                    // asynchronously so we can't immediately continue. There
-                    // is no current-item and no next-item (actually no item
-                    // at all). So we tell the browser the initial
-                    // current-item and wait for it to tell us when it's ready.
-                    // Then we will replay this KeyEvent.
-                    delayedRepeatEvent( m_viewer, k );
-
-                    // OK, once again, we have a problem with the now async and
-                    // sync KDirLister :( If the startDir is already cached by
-                    // KDirLister, we won't ever get that finished() signal
-                    // because it is emitted before we can connect(). So if
-                    // our dirlister has a rootFileItem, we assume the
-                    // directory is read already and simply call
-                    // slotReplayEvent() without the need for the finished()
-                    // signal.
-
-                    // see slotAdvanceImage() for similar code
-                    if ( fileWidget->dirLister()->isFinished() )
-                    {
-                        if ( !fileWidget->dirLister()->rootItem().isNull() )
-                        {
-                        	fileWidget->setCurrentItem( file->url() );
-                        	QTimer::singleShot(0, this, &KuickShow::slotReplayEvent);
-                        }
-                        else // finished, but no root-item -- probably an error, kill repeat-item!
-                        {
-                        	abortDelayedEvent();
-                        }
-                }
-                else // not finished yet
-                {
-                        fileWidget->setInitialItem( file->url() );
-                        connect(fileWidget, &FileWidget::finished, this, &KuickShow::slotReplayEvent);
-                }
-
-                    return true;
-                }
-
-                return KXmlGuiWindow::eventFilter( o, e );
-            }
-
-            // we definitely have a fileWidget here!
-
-            if (fileWidget->action(KDirOperator::Delete)->shortcuts().contains( key ))
-            {
-                performDeleteCurrentImage(fileWidget);
-            }
-
-            else if (kuickAction("toggleBrowser")->shortcuts().contains(key))
-            {
-                toggleBrowser();
-                return true; // don't pass keyEvent
-            }
-            else
-            {
-                ret = false;
-            }
-        } // keyPressEvent on ImageWindow
-
-
-        // doubleclick closes image window
-        // and shows browser when last window closed via doubleclick
+        // A double click in an image window closes it, and returns to the
+        // file browser when the last window is closed.
         //
         // TODO: this is obscure, undiscoverable (unless you are reading
         // this comment now), and not a standard user interaction pattern.
-        else if ( eventType == QEvent::MouseButtonDblClick )
+        if ( eventType == QEvent::MouseButtonDblClick )
         {
-            QMouseEvent *ev = static_cast<QMouseEvent*>( e );
-            if ( ev->button() == Qt::LeftButton )
+            QMouseEvent *me = static_cast<QMouseEvent *>( e );
+            if ( me->button() == Qt::LeftButton )
             {
                 if (s_viewers.count() == 1) slotShowWithUrl(window->currentFile()->url());
                 window->deleteLater();
-
-                ev->accept();
-                ret = true;
+                me->accept();
+                return true;
             }
         }
 
-    } // isA ImageWindow
+    } // is an ImageWindow
 
-    if (ret) return true;
     return KXmlGuiWindow::eventFilter(o, e);
 }
 
@@ -1304,7 +1212,7 @@ void KuickShow::setupKuickActions()
     toggle->setIcon(QIcon::fromTheme("view-list-icons"));
     connect(toggle, &QAction::toggled, this, &KuickShow::toggleBrowser);
     ac->addAction("toggleBrowser", toggle);
-    ac->setDefaultShortcut(act, Qt::Key_Space);
+    ac->setDefaultShortcut(toggle, Qt::Key_Space);
 
     act = KStandardAction::preferences(this, &KuickShow::configuration, this);
     ac->addAction("kuick_configure", act);
