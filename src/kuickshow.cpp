@@ -974,7 +974,7 @@ void KuickShow::readProperties( const KConfigGroup& kc )
 
 void KuickShow::saveProperties( KConfigGroup& kc )
 {
-    kc.writeEntry( "Browser visible", fileWidget && fileWidget->isVisible() );
+    kc.writeEntry( "Browser visible", fileWidget!=nullptr && fileWidget->isVisible() );
     if (fileWidget)
     kc.writePathEntry( "CurrentDirectory", fileWidget->url().url() );
 
@@ -999,11 +999,13 @@ void KuickShow::saveSettings()
 {
     KSharedConfig::Ptr kc = KSharedConfig::openConfig();
     KConfigGroup sessGroup(kc, "SessionSettings");
-    // TODO: action may have been destroyed before we get here
-    if(auto oneWindowAction = kuickAction("kuick_one_window"))
-        sessGroup.writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
     if ( fileWidget ) {
+        // This action will only exist if there is a FileWidget
+        auto *oneWindowAction = kuickAction("kuick_one_window");
+        if (oneWindowAction!=nullptr)
+            sessGroup.writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
+
         sessGroup.writePathEntry( "CurrentDirectory", fileWidget->url().toDisplayString() );
         KConfigGroup group( kc, "Filebrowser" );
         fileWidget->writeConfig( group);
