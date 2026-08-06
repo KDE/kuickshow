@@ -131,6 +131,23 @@ void ImageWindow::setupActions()
     act->setText( i18n("Show Previous Image") );
     m_actions->addAction( "previous_image", act );
 
+    // Image navigation actions, not in context menu or toolbar
+    act = KStandardAction::firstPage(this, [this]() { Q_EMIT requestImage(this, INT_MIN); }, m_actions);
+    act->setText(i18n("Show First Image"));
+
+    auto cuts = act->shortcuts();
+    if (!cuts.contains(Qt::Key_Home)) cuts.prepend(Qt::Key_Home);
+    m_actions->addAction("first_image", act);
+    m_actions->setDefaultShortcuts(act, cuts);
+
+    act = KStandardAction::lastPage(this, [this]() { Q_EMIT requestImage(this, INT_MAX); }, m_actions);
+    act->setText(i18n("Show Last Image"));
+
+    cuts = act->shortcuts();
+    if (!cuts.contains(Qt::Key_End)) cuts.prepend(Qt::Key_End);
+    m_actions->addAction("last_image", act);
+    m_actions->setDefaultShortcuts(act, cuts);
+
     act = m_actions->addAction( "duplicate_window", this, [this]() { Q_EMIT duplicateWindow(currentFile()->url()); });
     act->setText( i18n("Duplicate Window") );
     act->setIcon( QIcon::fromTheme("edit-duplicate") );

@@ -796,12 +796,19 @@ void KuickShow::slotAdvanceImage( ImageWindow *view, int steps )
         return;
     }
 
-    if ( steps > 0 ) {
+    if ( steps == INT_MIN ) {
+        item = fileWidget->gotoFirstImage();
+        item_next = fileWidget->getNext(false);
+    }
+    else if ( steps == INT_MAX ) {
+        item = fileWidget->gotoLastImage();
+        item_next = fileWidget->getPrevious(false);
+    }
+    else if ( steps > 0 ) {
         for ( int i = 0; i < steps; i++ )
             item = fileWidget->getNext( true );
         item_next = fileWidget->getNext( false );
     }
-
     else if ( steps < 0 ) {
         for ( int i = steps; i < 0; i++ )
             item = fileWidget->getPrevious( true );
@@ -930,22 +937,8 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             }
 
             // we definitely have a fileWidget here!
-            // TODO: check whether these keys can be implemented as actions
-            // then this block handling key events is superfluous
 
-            if ( key == Qt::Key_Home || KStandardShortcut::begin().contains( k->key() ) )
-            {
-                item = fileWidget->gotoFirstImage();
-                item_next = fileWidget->getNext( false );
-            }
-
-            else if ( key == Qt::Key_End || KStandardShortcut::end().contains( k->key() ) )
-            {
-                item = fileWidget->gotoLastImage();
-                item_next = fileWidget->getPrevious( false );
-            }
-
-            else if (fileWidget->action(KDirOperator::Delete)->shortcuts().contains( key ))
+            if (fileWidget->action(KDirOperator::Delete)->shortcuts().contains( key ))
             {
                 performDeleteCurrentImage(fileWidget);
             }
@@ -959,17 +952,6 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
             {
                 ret = false;
             }
-
-            if ( FileWidget::isImage( item ) ) {
-                m_viewer->showNextImage( item.url() );
-
-                if ( KuickConfig::get().preloadImage && !item_next.isNull() ) // preload next image
-                    if ( FileWidget::isImage( item_next ) )
-                        m_viewer->cacheImage( item_next.url() );
-
-                ret = true; // don't pass keyEvent
-            }
-
         } // keyPressEvent on ImageWindow
 
 
@@ -996,6 +978,7 @@ bool KuickShow::eventFilter( QObject *o, QEvent *e )
     if (ret) return true;
     return KXmlGuiWindow::eventFilter(o, e);
 }
+
 
 void KuickShow::configuration()
 {
@@ -1098,7 +1081,7 @@ void KuickShow::saveProperties( KConfigGroup& kc )
             urls.append( url.toDisplayString() ); // ### check if writePathEntry( prettyUrl ) works!
     }
 
-    // TODO: can config read/write a list of URls directly?
+    // TODO: can config read/write a list of URLs directly?
     kc.writePathEntry( "Images shown", urls );
 }
 
@@ -1108,6 +1091,7 @@ void KuickShow::saveSettings()
 {
     KSharedConfig::Ptr kc = KSharedConfig::openConfig();
     KConfigGroup sessGroup(kc, "SessionSettings");
+    // TODO: action may have been destroyed before we get here
     if(auto oneWindowAction = kuickAction("kuick_one_window"))
         sessGroup.writeEntry( "OpenImagesInActiveWindow", oneWindowAction->isChecked() );
 
@@ -1338,7 +1322,7 @@ void KuickShow::setupKuickActions()
     act = fileWidget->action(KDirOperator::ShowPreview);
     connect(act, &QAction::toggled, this, &KuickShow::slotToggleInlinePreview);
 
-    // image actions
+    // Image actions
     act = KStandardAction::open(this, &KuickShow::slotOpenURL, this);
     ac->addAction("openURL", act);
 
