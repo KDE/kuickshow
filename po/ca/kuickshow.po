@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-31 00:43+0000\n"
+"POT-Creation-Date: 2026-08-07 00:43+0000\n"
 "PO-Revision-Date: 2026-07-31 11:02+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -265,133 +265,145 @@ msgstr "Mostra la imatge següent"
 msgid "Show Previous Image"
 msgstr "Mostra la imatge anterior"
 
-#: src/imagewindow.cpp:135
+#: src/imagewindow.cpp:136
+#, fuzzy, kde-format
+#| msgid "Show Next Image"
+msgid "Show First Image"
+msgstr "Mostra la imatge següent"
+
+#: src/imagewindow.cpp:144
+#, fuzzy, kde-format
+#| msgid "Show Next Image"
+msgid "Show Last Image"
+msgstr "Mostra la imatge següent"
+
+#: src/imagewindow.cpp:152
 #, kde-format
 msgid "Duplicate Window"
 msgstr "Duplica la finestra"
 
-#: src/imagewindow.cpp:153
+#: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
 msgstr "Zoom a mida màxima"
 
-#: src/imagewindow.cpp:159
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Gira 90 graus"
 
-#: src/imagewindow.cpp:164
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Gira 180 graus"
 
-#: src/imagewindow.cpp:169
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Gira 270 graus"
 
-#: src/imagewindow.cpp:174
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Inverteix horitzontalment"
 
-#: src/imagewindow.cpp:179
+#: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Inverteix verticalment"
 
-#: src/imagewindow.cpp:185
+#: src/imagewindow.cpp:202
 #, kde-format
 msgid "Delete Image"
 msgstr "Suprimeix la imatge"
 
-#: src/imagewindow.cpp:189
+#: src/imagewindow.cpp:206
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "Mou la imatge a la paperera"
 
-#: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
+#: src/imagewindow.cpp:210 src/kuickshow.cpp:1245
 #, kde-format
 msgid "Print Image..."
 msgstr "Imprimeix la imatge..."
 
-#: src/imagewindow.cpp:209
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "Return to File Browser"
 msgstr "Retorna al navegador de fitxers"
 
-#: src/imagewindow.cpp:214
+#: src/imagewindow.cpp:231
 #, kde-format
 msgid "More Brightness"
 msgstr "Més brillantor"
 
-#: src/imagewindow.cpp:218
+#: src/imagewindow.cpp:235
 #, kde-format
 msgid "Less Brightness"
 msgstr "Menys brillantor"
 
-#: src/imagewindow.cpp:222
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "More Contrast"
 msgstr "Més contrast"
 
-#: src/imagewindow.cpp:226
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "Less Contrast"
 msgstr "Menys contrast"
 
-#: src/imagewindow.cpp:230
+#: src/imagewindow.cpp:247
 #, kde-format
 msgid "More Gamma"
 msgstr "Més gamma"
 
-#: src/imagewindow.cpp:234
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Less Gamma"
 msgstr "Menys gamma"
 
-#: src/imagewindow.cpp:239
+#: src/imagewindow.cpp:256
 #, kde-format
 msgid "Scroll Up"
 msgstr "Desplaça amunt"
 
-#: src/imagewindow.cpp:243
+#: src/imagewindow.cpp:260
 #, kde-format
 msgid "Scroll Down"
 msgstr "Desplaça avall"
 
-#: src/imagewindow.cpp:247
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
 msgstr "Desplaça a l'esquerra"
 
-#: src/imagewindow.cpp:251
+#: src/imagewindow.cpp:268
 #, kde-format
 msgid "Scroll Right"
 msgstr "Desplaça a la dreta"
 
-#: src/imagewindow.cpp:256
+#: src/imagewindow.cpp:273
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Fes pausa en la presentació de diapositives"
 
-#: src/imagewindow.cpp:269
+#: src/imagewindow.cpp:286
 #, kde-format
 msgid "Reload Image"
 msgstr "Torna a carregar la imatge"
 
-#: src/imagewindow.cpp:339
+#: src/imagewindow.cpp:356
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:404
+#: src/imagewindow.cpp:421
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "No s'ha pogut descarregar la imatge des de %1."
 
-#: src/imagewindow.cpp:420
+#: src/imagewindow.cpp:437
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -402,47 +414,47 @@ msgstr ""
 "Potser el format de fitxer no és compatible o la Imlib no està correctament "
 "instal·lada."
 
-#: src/imagewindow.cpp:829
+#: src/imagewindow.cpp:846
 #, kde-format
 msgid "Brightness"
 msgstr "Brillantor"
 
-#: src/imagewindow.cpp:833
+#: src/imagewindow.cpp:850
 #, kde-format
 msgid "Contrast"
 msgstr "Contrast"
 
-#: src/imagewindow.cpp:837
+#: src/imagewindow.cpp:854
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/imagewindow.cpp:884
+#: src/imagewindow.cpp:901
 #, kde-format
 msgid "Unable to print the image."
 msgstr "No s'ha pogut imprimir la imatge."
 
-#: src/imagewindow.cpp:885
+#: src/imagewindow.cpp:902
 #, kde-format
 msgid "Printing Failed"
 msgstr "Ha fallat la impressió"
 
-#: src/imagewindow.cpp:902
+#: src/imagewindow.cpp:919
 #, kde-format
 msgid "Keep original image size"
 msgstr "Mantén la mida original de la imatge"
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:924
 #, kde-format
 msgid "Save Image As"
 msgstr "Desa la imatge com a"
 
-#: src/imagewindow.cpp:912 src/kuickshow.cpp:1256
+#: src/imagewindow.cpp:929 src/kuickshow.cpp:1143
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Fitxers d'imatge (%1)"
 
-#: src/imagewindow.cpp:930
+#: src/imagewindow.cpp:947
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -451,12 +463,12 @@ msgstr ""
 "No s'ha pogut desar el fitxer.\n"
 "Potser el disc està ple, o no teniu permís d'escriptura al fitxer."
 
-#: src/imagewindow.cpp:933
+#: src/imagewindow.cpp:950
 #, kde-format
 msgid "File Saving Failed"
 msgstr "No s'ha pogut desar el fitxer"
 
-#: src/imagewindow.cpp:1180
+#: src/imagewindow.cpp:1197
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -581,12 +593,12 @@ msgstr "A&rranjament"
 msgid "Main Toolbar"
 msgstr "Barra d'eines principal"
 
-#: src/kuickshow.cpp:1127
+#: src/kuickshow.cpp:1021
 #, kde-format
 msgid "Image Error"
 msgstr "Error d'imatge"
 
-#: src/kuickshow.cpp:1138
+#: src/kuickshow.cpp:1032
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -600,47 +612,47 @@ msgstr ""
 "sessió,\n"
 "o es pot obtenir iniciant %1 des d'un terminal."
 
-#: src/kuickshow.cpp:1142
+#: src/kuickshow.cpp:1036
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Error fatal d'inicialització"
 
-#: src/kuickshow.cpp:1255
+#: src/kuickshow.cpp:1142
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Trieu els fitxers o carpetes a obrir"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1201
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Inicia la presentació de diapositives"
 
-#: src/kuickshow.cpp:1318
+#: src/kuickshow.cpp:1205
 #, kde-format
 msgid "Show File Browser"
 msgstr "Mostra el navegador de fitxers"
 
-#: src/kuickshow.cpp:1319
+#: src/kuickshow.cpp:1206
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Oculta el navegador de fitxers"
 
-#: src/kuickshow.cpp:1332
+#: src/kuickshow.cpp:1219
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Obre només una finestra d'imatge"
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1233
 #, kde-format
 msgid "Show Image"
 msgstr "Mostra la imatge"
 
-#: src/kuickshow.cpp:1350
+#: src/kuickshow.cpp:1237
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Mostra la imatge a la finestra activa"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1241
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Mostra la imatge en el mode de pantalla completa"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-31 00:43+0000\n"
+"POT-Creation-Date: 2026-08-07 00:43+0000\n"
 "PO-Revision-Date: 2024-12-29 19:47+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -260,133 +260,145 @@ msgstr "Montri Sekvantan Bildon"
 msgid "Show Previous Image"
 msgstr "Montri Antaŭan Bildon"
 
-#: src/imagewindow.cpp:135
+#: src/imagewindow.cpp:136
+#, fuzzy, kde-format
+#| msgid "Show Next Image"
+msgid "Show First Image"
+msgstr "Montri Sekvantan Bildon"
+
+#: src/imagewindow.cpp:144
+#, fuzzy, kde-format
+#| msgid "Show Next Image"
+msgid "Show Last Image"
+msgstr "Montri Sekvantan Bildon"
+
+#: src/imagewindow.cpp:152
 #, kde-format
 msgid "Duplicate Window"
 msgstr "Duobligita Fenestro"
 
-#: src/imagewindow.cpp:153
+#: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
 msgstr ""
 
-#: src/imagewindow.cpp:159
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Rotacii 90 Gradojn"
 
-#: src/imagewindow.cpp:164
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Rotacii 180 Gradojn"
 
-#: src/imagewindow.cpp:169
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Rotacii 270 Gradojn"
 
-#: src/imagewindow.cpp:174
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Inversigi Horizontale"
 
-#: src/imagewindow.cpp:179
+#: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Inversigi Vertikale"
 
-#: src/imagewindow.cpp:185
+#: src/imagewindow.cpp:202
 #, kde-format
 msgid "Delete Image"
 msgstr "Forigi Bildon"
 
-#: src/imagewindow.cpp:189
+#: src/imagewindow.cpp:206
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "Movi Bildon al Rubujo"
 
-#: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
+#: src/imagewindow.cpp:210 src/kuickshow.cpp:1245
 #, kde-format
 msgid "Print Image..."
 msgstr "Presi Bildon..."
 
-#: src/imagewindow.cpp:209
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "Return to File Browser"
 msgstr "Reiri al Dosier-Foliumilo"
 
-#: src/imagewindow.cpp:214
+#: src/imagewindow.cpp:231
 #, kde-format
 msgid "More Brightness"
 msgstr "Pli da Brilo"
 
-#: src/imagewindow.cpp:218
+#: src/imagewindow.cpp:235
 #, kde-format
 msgid "Less Brightness"
 msgstr "Malpli Brilo"
 
-#: src/imagewindow.cpp:222
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "More Contrast"
 msgstr "Pli da Kontrasto"
 
-#: src/imagewindow.cpp:226
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "Less Contrast"
 msgstr "Malpli Kontrasto"
 
-#: src/imagewindow.cpp:230
+#: src/imagewindow.cpp:247
 #, kde-format
 msgid "More Gamma"
 msgstr "Pli Gamo"
 
-#: src/imagewindow.cpp:234
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Less Gamma"
 msgstr "Malpli Gamo"
 
-#: src/imagewindow.cpp:239
+#: src/imagewindow.cpp:256
 #, kde-format
 msgid "Scroll Up"
 msgstr "Rulumi supren"
 
-#: src/imagewindow.cpp:243
+#: src/imagewindow.cpp:260
 #, kde-format
 msgid "Scroll Down"
 msgstr "Rulumi malsupren"
 
-#: src/imagewindow.cpp:247
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
 msgstr "Rulumi maldekstren"
 
-#: src/imagewindow.cpp:251
+#: src/imagewindow.cpp:268
 #, kde-format
 msgid "Scroll Right"
 msgstr "Rulumi dekstren"
 
-#: src/imagewindow.cpp:256
+#: src/imagewindow.cpp:273
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Paŭzi prezenton"
 
-#: src/imagewindow.cpp:269
+#: src/imagewindow.cpp:286
 #, kde-format
 msgid "Reload Image"
 msgstr "Reŝargi Bildon"
 
-#: src/imagewindow.cpp:339
+#: src/imagewindow.cpp:356
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:404
+#: src/imagewindow.cpp:421
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Ne eblas elŝuti la bildon de %1."
 
-#: src/imagewindow.cpp:420
+#: src/imagewindow.cpp:437
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -397,47 +409,47 @@ msgstr ""
 "Eble la dosierformato estas nesubtenata aŭ via Imlib ne estas instalita "
 "ĝuste."
 
-#: src/imagewindow.cpp:829
+#: src/imagewindow.cpp:846
 #, kde-format
 msgid "Brightness"
 msgstr "Brilo"
 
-#: src/imagewindow.cpp:833
+#: src/imagewindow.cpp:850
 #, kde-format
 msgid "Contrast"
 msgstr "Kontrasto"
 
-#: src/imagewindow.cpp:837
+#: src/imagewindow.cpp:854
 #, kde-format
 msgid "Gamma"
 msgstr "Gamo"
 
-#: src/imagewindow.cpp:884
+#: src/imagewindow.cpp:901
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Ne eblas presi la bildon."
 
-#: src/imagewindow.cpp:885
+#: src/imagewindow.cpp:902
 #, kde-format
 msgid "Printing Failed"
 msgstr "Presado Malsukcesis"
 
-#: src/imagewindow.cpp:902
+#: src/imagewindow.cpp:919
 #, kde-format
 msgid "Keep original image size"
 msgstr "Konservi originan bildograndecon"
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:924
 #, kde-format
 msgid "Save Image As"
 msgstr "Konservi Bildon Kiel"
 
-#: src/imagewindow.cpp:912 src/kuickshow.cpp:1256
+#: src/imagewindow.cpp:929 src/kuickshow.cpp:1143
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Bilddosieroj (%1)"
 
-#: src/imagewindow.cpp:930
+#: src/imagewindow.cpp:947
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -446,12 +458,12 @@ msgstr ""
 "Ne eblis konservi la dosieron.\n"
 "Eble la disko estas plena, aŭ vi ne havas skribpermeson al la dosiero."
 
-#: src/imagewindow.cpp:933
+#: src/imagewindow.cpp:950
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Dosiera Konservado Malsukcesis"
 
-#: src/imagewindow.cpp:1180
+#: src/imagewindow.cpp:1197
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -576,12 +588,12 @@ msgstr "A&gordo"
 msgid "Main Toolbar"
 msgstr "Ĉefa ilobreto"
 
-#: src/kuickshow.cpp:1127
+#: src/kuickshow.cpp:1021
 #, kde-format
 msgid "Image Error"
 msgstr "Bilda Eraro"
 
-#: src/kuickshow.cpp:1138
+#: src/kuickshow.cpp:1032
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -594,47 +606,47 @@ msgstr ""
 "Plia informo povus disponebli en la seanca protokoldosiero,\n"
 "aŭ povas atingati lanĉante %1 el terminalo."
 
-#: src/kuickshow.cpp:1142
+#: src/kuickshow.cpp:1036
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Fatala Pravaloriz-Eraro"
 
-#: src/kuickshow.cpp:1255
+#: src/kuickshow.cpp:1142
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Elekti Dosierojn aŭ Dosierujojn Malfermendajn"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1201
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Komenci Bildaron"
 
-#: src/kuickshow.cpp:1318
+#: src/kuickshow.cpp:1205
 #, kde-format
 msgid "Show File Browser"
 msgstr "Montri Dosier-Retumilon"
 
-#: src/kuickshow.cpp:1319
+#: src/kuickshow.cpp:1206
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Kaŝi Dosieran Retumilon"
 
-#: src/kuickshow.cpp:1332
+#: src/kuickshow.cpp:1219
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Malfermi Nur Unu Bildan Fenestron"
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1233
 #, kde-format
 msgid "Show Image"
 msgstr "Montri Bildon"
 
-#: src/kuickshow.cpp:1350
+#: src/kuickshow.cpp:1237
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Montri Bildon en Aktiva Fenestro"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1241
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Montri Bildon en Plenekrana Reĝimo"

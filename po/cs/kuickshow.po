@@ -2,21 +2,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
 # SPDX-FileCopyrightText: 2013, 2018, 2021, 2023, 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-31 00:43+0000\n"
-"PO-Revision-Date: 2024-10-18 16:10+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"POT-Creation-Date: 2026-08-07 00:43+0000\n"
+"PO-Revision-Date: 2026-08-06 23:04+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -35,7 +36,7 @@ msgstr ""
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">Web %1</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -265,133 +266,145 @@ msgstr "Zobrazit následující obrázek"
 msgid "Show Previous Image"
 msgstr "Zobrazit předchozí obrázek"
 
-#: src/imagewindow.cpp:135
+#: src/imagewindow.cpp:136
+#, fuzzy, kde-format
+#| msgid "Show Next Image"
+msgid "Show First Image"
+msgstr "Zobrazit následující obrázek"
+
+#: src/imagewindow.cpp:144
+#, fuzzy, kde-format
+#| msgid "Show Next Image"
+msgid "Show Last Image"
+msgstr "Zobrazit následující obrázek"
+
+#: src/imagewindow.cpp:152
 #, kde-format
 msgid "Duplicate Window"
 msgstr "Duplikovat okno"
 
-#: src/imagewindow.cpp:153
+#: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "Přiblížit na maximální velikost"
 
-#: src/imagewindow.cpp:159
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Otočit o 90°"
 
-#: src/imagewindow.cpp:164
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Otočit o 180°"
 
-#: src/imagewindow.cpp:169
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Otočit o 270°"
 
-#: src/imagewindow.cpp:174
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Převrátit vodorovně"
 
-#: src/imagewindow.cpp:179
+#: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Převrátit svisle"
 
-#: src/imagewindow.cpp:185
+#: src/imagewindow.cpp:202
 #, kde-format
 msgid "Delete Image"
 msgstr "Smazat obrázek"
 
-#: src/imagewindow.cpp:189
+#: src/imagewindow.cpp:206
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "Přesunout obrázek do koše"
 
-#: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
+#: src/imagewindow.cpp:210 src/kuickshow.cpp:1245
 #, kde-format
 msgid "Print Image..."
 msgstr "Vytisknout obrázek..."
 
-#: src/imagewindow.cpp:209
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "Return to File Browser"
 msgstr "Vrátit se do prohlížeče souborů"
 
-#: src/imagewindow.cpp:214
+#: src/imagewindow.cpp:231
 #, kde-format
 msgid "More Brightness"
 msgstr "Více jasu"
 
-#: src/imagewindow.cpp:218
+#: src/imagewindow.cpp:235
 #, kde-format
 msgid "Less Brightness"
 msgstr "Méně jasu"
 
-#: src/imagewindow.cpp:222
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "More Contrast"
 msgstr "Více kontrastu"
 
-#: src/imagewindow.cpp:226
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "Less Contrast"
 msgstr "Méně kontrastu"
 
-#: src/imagewindow.cpp:230
+#: src/imagewindow.cpp:247
 #, kde-format
 msgid "More Gamma"
 msgstr "Více gamy"
 
-#: src/imagewindow.cpp:234
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Less Gamma"
 msgstr "Méně gamy"
 
-#: src/imagewindow.cpp:239
+#: src/imagewindow.cpp:256
 #, kde-format
 msgid "Scroll Up"
 msgstr "Posunout nahoru"
 
-#: src/imagewindow.cpp:243
+#: src/imagewindow.cpp:260
 #, kde-format
 msgid "Scroll Down"
 msgstr "Posunout dolů"
 
-#: src/imagewindow.cpp:247
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
 msgstr "Posunout doleva"
 
-#: src/imagewindow.cpp:251
+#: src/imagewindow.cpp:268
 #, kde-format
 msgid "Scroll Right"
 msgstr "Posunout doprava"
 
-#: src/imagewindow.cpp:256
+#: src/imagewindow.cpp:273
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Pozastavit prezentaci"
 
-#: src/imagewindow.cpp:269
+#: src/imagewindow.cpp:286
 #, kde-format
 msgid "Reload Image"
 msgstr "Načíst obrázek znovu"
 
-#: src/imagewindow.cpp:339
+#: src/imagewindow.cpp:356
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:404
+#: src/imagewindow.cpp:421
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Obrázek nelze z %1 stáhnout."
 
-#: src/imagewindow.cpp:420
+#: src/imagewindow.cpp:437
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -402,47 +415,47 @@ msgstr ""
 "Možná není tento typ souboru podporován anebo není knihovna Imlib správně "
 "nainstalována."
 
-#: src/imagewindow.cpp:829
+#: src/imagewindow.cpp:846
 #, kde-format
 msgid "Brightness"
 msgstr "Jas"
 
-#: src/imagewindow.cpp:833
+#: src/imagewindow.cpp:850
 #, kde-format
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: src/imagewindow.cpp:837
+#: src/imagewindow.cpp:854
 #, kde-format
 msgid "Gamma"
 msgstr "Gama"
 
-#: src/imagewindow.cpp:884
+#: src/imagewindow.cpp:901
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Obrázek nelze vytisknout."
 
-#: src/imagewindow.cpp:885
+#: src/imagewindow.cpp:902
 #, kde-format
 msgid "Printing Failed"
 msgstr "Tisk selhal"
 
-#: src/imagewindow.cpp:902
+#: src/imagewindow.cpp:919
 #, kde-format
 msgid "Keep original image size"
 msgstr "Zachovat původní velikost obrázku"
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:924
 #, kde-format
 msgid "Save Image As"
 msgstr "Uložit obrázek jako"
 
-#: src/imagewindow.cpp:912 src/kuickshow.cpp:1256
+#: src/imagewindow.cpp:929 src/kuickshow.cpp:1143
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Soubory obrázků (%1)"
 
-#: src/imagewindow.cpp:930
+#: src/imagewindow.cpp:947
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -451,12 +464,12 @@ msgstr ""
 "Nelze uložit soubor.\n"
 "Možná je disk plný anebo nemáte oprávnění k zápisu do souboru."
 
-#: src/imagewindow.cpp:933
+#: src/imagewindow.cpp:950
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Ukládání souboru selhalo"
 
-#: src/imagewindow.cpp:1180
+#: src/imagewindow.cpp:1197
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -586,12 +599,12 @@ msgstr "Nastav&ení"
 msgid "Main Toolbar"
 msgstr "Hlavní nástrojový panel"
 
-#: src/kuickshow.cpp:1127
+#: src/kuickshow.cpp:1021
 #, kde-format
 msgid "Image Error"
 msgstr "Chyba obrázku"
 
-#: src/kuickshow.cpp:1138
+#: src/kuickshow.cpp:1032
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -604,47 +617,47 @@ msgstr ""
 "Více informací můžete najít v souboru záznamu sezení,\n"
 "nebo je získáte spuštěním %1 z terminálu."
 
-#: src/kuickshow.cpp:1142
+#: src/kuickshow.cpp:1036
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Fatální chyba inicializace"
 
-#: src/kuickshow.cpp:1255
+#: src/kuickshow.cpp:1142
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Výběr souborů nebo složky k otevření"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1201
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Spustit prezentaci"
 
-#: src/kuickshow.cpp:1318
+#: src/kuickshow.cpp:1205
 #, kde-format
 msgid "Show File Browser"
 msgstr "Zobrazit prohlížeč souborů"
 
-#: src/kuickshow.cpp:1319
+#: src/kuickshow.cpp:1206
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Skrýt prohlížeč souborů"
 
-#: src/kuickshow.cpp:1332
+#: src/kuickshow.cpp:1219
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Otevřít pouze jedno okno s obrázkem"
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1233
 #, kde-format
 msgid "Show Image"
 msgstr "Zobrazit obrázek"
 
-#: src/kuickshow.cpp:1350
+#: src/kuickshow.cpp:1237
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Zobrazit obrázek v aktivním okně"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1241
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Zobrazit obrázek na celé obrazovce"

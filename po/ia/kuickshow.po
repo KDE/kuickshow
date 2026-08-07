@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-31 00:43+0000\n"
+"POT-Creation-Date: 2026-08-07 00:43+0000\n"
 "PO-Revision-Date: 2026-07-20 11:49+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -260,133 +260,145 @@ msgstr "Monstra proxime imagine"
 msgid "Show Previous Image"
 msgstr "Monstra previe imagine"
 
-#: src/imagewindow.cpp:135
+#: src/imagewindow.cpp:136
+#, fuzzy, kde-format
+#| msgid "Show Next Image"
+msgid "Show First Image"
+msgstr "Monstra proxime imagine"
+
+#: src/imagewindow.cpp:144
+#, fuzzy, kde-format
+#| msgid "Show Next Image"
+msgid "Show Last Image"
+msgstr "Monstra proxime imagine"
+
+#: src/imagewindow.cpp:152
 #, kde-format
 msgid "Duplicate Window"
 msgstr "Duplica fenestra"
 
-#: src/imagewindow.cpp:153
+#: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
 msgstr ""
 
-#: src/imagewindow.cpp:159
+#: src/imagewindow.cpp:176
 #, kde-format
 msgid "Rotate 90 Degrees"
 msgstr "Rota 90 Grados"
 
-#: src/imagewindow.cpp:164
+#: src/imagewindow.cpp:181
 #, kde-format
 msgid "Rotate 180 Degrees"
 msgstr "Rota 180 Grados"
 
-#: src/imagewindow.cpp:169
+#: src/imagewindow.cpp:186
 #, kde-format
 msgid "Rotate 270 Degrees"
 msgstr "Rota 270 Grados"
 
-#: src/imagewindow.cpp:174
+#: src/imagewindow.cpp:191
 #, kde-format
 msgid "Flip Horizontally"
 msgstr "Colpa horizontalmente"
 
-#: src/imagewindow.cpp:179
+#: src/imagewindow.cpp:196
 #, kde-format
 msgid "Flip Vertically"
 msgstr "Colpa verticalmente"
 
-#: src/imagewindow.cpp:185
+#: src/imagewindow.cpp:202
 #, kde-format
 msgid "Delete Image"
 msgstr "Dele imagine"
 
-#: src/imagewindow.cpp:189
+#: src/imagewindow.cpp:206
 #, kde-format
 msgid "Move Image to Trash"
 msgstr "Move imagine a corbe"
 
-#: src/imagewindow.cpp:193 src/kuickshow.cpp:1358
+#: src/imagewindow.cpp:210 src/kuickshow.cpp:1245
 #, kde-format
 msgid "Print Image..."
 msgstr "Imprime imagine..."
 
-#: src/imagewindow.cpp:209
+#: src/imagewindow.cpp:226
 #, kde-format
 msgid "Return to File Browser"
 msgstr "Retorna a navigator de file"
 
-#: src/imagewindow.cpp:214
+#: src/imagewindow.cpp:231
 #, kde-format
 msgid "More Brightness"
 msgstr "Plus Brillantia"
 
-#: src/imagewindow.cpp:218
+#: src/imagewindow.cpp:235
 #, kde-format
 msgid "Less Brightness"
 msgstr "Minus Brillantia"
 
-#: src/imagewindow.cpp:222
+#: src/imagewindow.cpp:239
 #, kde-format
 msgid "More Contrast"
 msgstr "Plus Contrasto"
 
-#: src/imagewindow.cpp:226
+#: src/imagewindow.cpp:243
 #, kde-format
 msgid "Less Contrast"
 msgstr "Minus Contrasto"
 
-#: src/imagewindow.cpp:230
+#: src/imagewindow.cpp:247
 #, kde-format
 msgid "More Gamma"
 msgstr "Plus Gamma"
 
-#: src/imagewindow.cpp:234
+#: src/imagewindow.cpp:251
 #, kde-format
 msgid "Less Gamma"
 msgstr "Minus Gamma"
 
-#: src/imagewindow.cpp:239
+#: src/imagewindow.cpp:256
 #, kde-format
 msgid "Scroll Up"
 msgstr "Rola in alto"
 
-#: src/imagewindow.cpp:243
+#: src/imagewindow.cpp:260
 #, kde-format
 msgid "Scroll Down"
 msgstr "Rola a basso"
 
-#: src/imagewindow.cpp:247
+#: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
 msgstr "Rola a sinistra"
 
-#: src/imagewindow.cpp:251
+#: src/imagewindow.cpp:268
 #, kde-format
 msgid "Scroll Right"
 msgstr "Rola a dextera"
 
-#: src/imagewindow.cpp:256
+#: src/imagewindow.cpp:273
 #, kde-format
 msgid "Pause Slideshow"
 msgstr "Pausa Slideshow (Presentation)"
 
-#: src/imagewindow.cpp:269
+#: src/imagewindow.cpp:286
 #, kde-format
 msgid "Reload Image"
 msgstr "Recarga Imagine"
 
-#: src/imagewindow.cpp:339
+#: src/imagewindow.cpp:356
 #, kde-format
 msgctxt "Filename (Imagewidth x Imageheight)"
 msgid "%3 (%1 x %2)"
 msgstr "%3 (%1 x %2)"
 
-#: src/imagewindow.cpp:404
+#: src/imagewindow.cpp:421
 #, kde-format
 msgid "Unable to download the image from %1."
 msgstr "Incapace a discargar le imagine ex %1."
 
-#: src/imagewindow.cpp:420
+#: src/imagewindow.cpp:437
 #, kde-format
 msgid ""
 "Unable to load the image %1.\n"
@@ -397,47 +409,47 @@ msgstr ""
 "Forsan le formato de file non es supportate o tu Imlib non  es installate "
 "correctemente."
 
-#: src/imagewindow.cpp:829
+#: src/imagewindow.cpp:846
 #, kde-format
 msgid "Brightness"
 msgstr "Brillantia"
 
-#: src/imagewindow.cpp:833
+#: src/imagewindow.cpp:850
 #, kde-format
 msgid "Contrast"
 msgstr "Contrasto"
 
-#: src/imagewindow.cpp:837
+#: src/imagewindow.cpp:854
 #, kde-format
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/imagewindow.cpp:884
+#: src/imagewindow.cpp:901
 #, kde-format
 msgid "Unable to print the image."
 msgstr "Incapace a imprimer le imagine"
 
-#: src/imagewindow.cpp:885
+#: src/imagewindow.cpp:902
 #, kde-format
 msgid "Printing Failed"
 msgstr "Imprimer falleva"
 
-#: src/imagewindow.cpp:902
+#: src/imagewindow.cpp:919
 #, kde-format
 msgid "Keep original image size"
 msgstr "Mantene dimension original de imagine"
 
-#: src/imagewindow.cpp:907
+#: src/imagewindow.cpp:924
 #, kde-format
 msgid "Save Image As"
 msgstr "Salva imagine como"
 
-#: src/imagewindow.cpp:912 src/kuickshow.cpp:1256
+#: src/imagewindow.cpp:929 src/kuickshow.cpp:1143
 #, kde-format
 msgid "Image Files (%1)"
 msgstr "Files de Image (%1)"
 
-#: src/imagewindow.cpp:930
+#: src/imagewindow.cpp:947
 #, kde-format
 msgid ""
 "Could not save the file.\n"
@@ -446,12 +458,12 @@ msgstr ""
 "Il non poteva salveguardar le file.Forsan le disco es plen, o tu non ha "
 "permission de scriptura pro le file."
 
-#: src/imagewindow.cpp:933
+#: src/imagewindow.cpp:950
 #, kde-format
 msgid "File Saving Failed"
 msgstr "Il falleva a salveguardar le file"
 
-#: src/imagewindow.cpp:1180
+#: src/imagewindow.cpp:1197
 #, kde-format
 msgid ""
 "You are about to view a very large image (%1 x %2 pixels), which can be very "
@@ -577,12 +589,12 @@ msgstr "Preferentia&s"
 msgid "Main Toolbar"
 msgstr "Barra de instrumento principal"
 
-#: src/kuickshow.cpp:1127
+#: src/kuickshow.cpp:1021
 #, kde-format
 msgid "Image Error"
 msgstr "Error de Imagine"
 
-#: src/kuickshow.cpp:1138
+#: src/kuickshow.cpp:1032
 #, kde-format
 msgid ""
 "Unable to initialize the image library \"%2\".\n"
@@ -596,47 +608,47 @@ msgstr ""
 "session,\n"
 "o pote esser obtenite per initiar %1 ab un terminal."
 
-#: src/kuickshow.cpp:1142
+#: src/kuickshow.cpp:1036
 #, kde-format
 msgid "Fatal Initialization Error"
 msgstr "Error fatal de initialisation"
 
-#: src/kuickshow.cpp:1255
+#: src/kuickshow.cpp:1142
 #, kde-format
 msgid "Select Files or Folder to Open"
 msgstr "Selige Files o Dossier a aperir"
 
-#: src/kuickshow.cpp:1314
+#: src/kuickshow.cpp:1201
 #, kde-format
 msgid "Start Slideshow"
 msgstr "Starta presentation (slideshow)"
 
-#: src/kuickshow.cpp:1318
+#: src/kuickshow.cpp:1205
 #, kde-format
 msgid "Show File Browser"
 msgstr "Monstra Navigator de file"
 
-#: src/kuickshow.cpp:1319
+#: src/kuickshow.cpp:1206
 #, kde-format
 msgid "Hide File Browser"
 msgstr "Cela Navigator de file"
 
-#: src/kuickshow.cpp:1332
+#: src/kuickshow.cpp:1219
 #, kde-format
 msgid "Open Only One Image Window"
 msgstr "Aperi solmente un fenestra de imagine"
 
-#: src/kuickshow.cpp:1346
+#: src/kuickshow.cpp:1233
 #, kde-format
 msgid "Show Image"
 msgstr "Monstra imagine"
 
-#: src/kuickshow.cpp:1350
+#: src/kuickshow.cpp:1237
 #, kde-format
 msgid "Show Image in Active Window"
 msgstr "Monstra imagine in fenestra active"
 
-#: src/kuickshow.cpp:1354
+#: src/kuickshow.cpp:1241
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
 msgstr "Monstra imagine a schermo plen"
