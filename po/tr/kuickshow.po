@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-07-31 19:09+0300\n"
+"PO-Revision-Date: 2026-08-07 19:11+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -269,16 +269,14 @@ msgid "Show Previous Image"
 msgstr "Önceki Görseli Göster"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Sonraki Görseli Göster"
+msgstr "İlk Görseli Göster"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Sonraki Görseli Göster"
+msgstr "Son Görseli Göster"
 
 #: src/imagewindow.cpp:152
 #, kde-format
