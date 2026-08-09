@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-08-06 23:04+0200\n"
+"PO-Revision-Date: 2026-08-08 23:25+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -267,16 +267,14 @@ msgid "Show Previous Image"
 msgstr "Zobrazit předchozí obrázek"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Zobrazit následující obrázek"
+msgstr "Zobrazit první obrázek"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Zobrazit následující obrázek"
+msgstr "Zobrazit poslední obrázek"
 
 #: src/imagewindow.cpp:152
 #, kde-format
