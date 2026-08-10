@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-08-01 09:47+0200\n"
+"PO-Revision-Date: 2026-08-08 10:48+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -276,16 +276,14 @@ msgid "Show Previous Image"
 msgstr "Afficher l'image précédente"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Afficher l'image suivante"
+msgstr "Afficher la première image"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Afficher l'image suivante"
+msgstr "Afficher la dernière image"
 
 #: src/imagewindow.cpp:152
 #, kde-format
