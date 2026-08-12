@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-07-20 16:15+0200\n"
+"PO-Revision-Date: 2026-08-08 21:11+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -267,16 +267,14 @@ msgid "Show Previous Image"
 msgstr "Mostra l'immagine precedente"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Mostra l'immagine successiva"
+msgstr "Mostra la prima immagine"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Mostra l'immagine successiva"
+msgstr "Ultima l'ultima immagine"
 
 #: src/imagewindow.cpp:152
 #, kde-format
@@ -286,7 +284,7 @@ msgstr "Duplica finestra"
 #: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "Ingrandimento alla dimensione massima"
 
 #: src/imagewindow.cpp:176
 #, kde-format

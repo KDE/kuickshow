@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-08-01 14:40+0300\n"
+"PO-Revision-Date: 2026-08-11 16:22+0300\n"
 "Last-Translator: Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -263,16 +263,14 @@ msgid "Show Previous Image"
 msgstr "Rodyti ankstesnį paveikslą"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Rodyti kitą paveikslą"
+msgstr "Rodyti pirmą paveikslą"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Rodyti kitą paveikslą"
+msgstr "Rodyti paskutinį paveikslą"
 
 #: src/imagewindow.cpp:152
 #, kde-format
