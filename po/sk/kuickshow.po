@@ -31,7 +31,7 @@ msgstr "visnovsky@kde.org"
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">Webová stránka %1</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -261,16 +261,14 @@ msgid "Show Previous Image"
 msgstr "Zobraziť predchádzajúci obrázok"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Zobraziť nasledujúci obrázok"
+msgstr "Zobraziť prvý obrázok"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Zobraziť nasledujúci obrázok"
+msgstr "Zobraziť posledný obrázok"
 
 #: src/imagewindow.cpp:152
 #, kde-format
@@ -280,7 +278,7 @@ msgstr "Duplikovať okno"
 #: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "Zväčšiť na maximálnu veľkosť"
 
 #: src/imagewindow.cpp:176
 #, kde-format
@@ -507,7 +505,7 @@ msgstr "&Prezentácia"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Informácie"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
