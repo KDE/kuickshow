@@ -260,16 +260,14 @@ msgid "Show Previous Image"
 msgstr "显示前一张图片"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "显示下一张图片"
+msgstr ""
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "显示下一张图片"
+msgstr ""
 
 #: src/imagewindow.cpp:152
 #, kde-format
