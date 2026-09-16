@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-08-04 06:45+0900\n"
+"PO-Revision-Date: 2026-09-15 14:08+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -250,7 +250,7 @@ msgstr "只顯示這些副檔名的檔案："
 #: src/generalwidget.ui:128
 #, kde-format
 msgid "Preload next image"
-msgstr "預讀下一張圖"
+msgstr "預先載入下一張圖"
 
 #: src/imagewindow.cpp:127
 #, kde-format
@@ -263,16 +263,14 @@ msgid "Show Previous Image"
 msgstr "顯示前一張圖"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "顯示下一張圖"
+msgstr "顯示第一張圖"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "顯示下一張圖"
+msgstr "顯示最後一張圖"
 
 #: src/imagewindow.cpp:152
 #, kde-format
@@ -362,22 +360,22 @@ msgstr "減少 Gamma"
 #: src/imagewindow.cpp:256
 #, kde-format
 msgid "Scroll Up"
-msgstr "向上移"
+msgstr "向上捲動"
 
 #: src/imagewindow.cpp:260
 #, kde-format
 msgid "Scroll Down"
-msgstr "向下移"
+msgstr "向下捲動"
 
 #: src/imagewindow.cpp:264
 #, kde-format
 msgid "Scroll Left"
-msgstr "向左移"
+msgstr "向左捲動"
 
 #: src/imagewindow.cpp:268
 #, kde-format
 msgid "Scroll Right"
-msgstr "向右移"
+msgstr "向右捲動"
 
 #: src/imagewindow.cpp:273
 #, kde-format
@@ -387,7 +385,7 @@ msgstr "暫停投影片播放"
 #: src/imagewindow.cpp:286
 #, kde-format
 msgid "Reload Image"
-msgstr "重讀影像"
+msgstr "重新載入影像"
 
 #: src/imagewindow.cpp:356
 #, kde-format
