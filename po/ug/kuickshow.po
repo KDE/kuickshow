@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-05-31 19:55-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
-"Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -224,7 +224,7 @@ msgstr "چەكسىز"
 #: src/generalwidget.ui:91
 #, kde-format
 msgid " MB"
-msgstr " MB"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, cbFullscreen)
 #: src/generalwidget.ui:104
@@ -442,7 +442,7 @@ msgstr "سۈرەتنى باشقا ئاتتا ساقلاش"
 #: src/imagewindow.cpp:929 src/kuickshow.cpp:1143
 #, kde-format
 msgid "Image Files (%1)"
-msgstr ""
+msgstr "سۈرەت ھۆججىتى (%1)"
 
 #: src/imagewindow.cpp:947
 #, kde-format
@@ -497,7 +497,7 @@ msgstr ""
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "ئۇچۇر"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
@@ -646,7 +646,7 @@ msgstr ""
 #: src/main.cpp:46
 #, kde-format
 msgid "Carsten Pfeiffer"
-msgstr "Carsten Pfeiffer"
+msgstr ""
 
 #: src/main.cpp:48
 #, kde-format
