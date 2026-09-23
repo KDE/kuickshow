@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-02-17 20:44+0200\n"
+"PO-Revision-Date: 2026-09-22 21:55+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -40,7 +40,7 @@ msgstr "01@k.st"
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">Сайт %1</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -270,16 +270,14 @@ msgid "Show Previous Image"
 msgstr "Предыдущее изображение"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Следующее изображение"
+msgstr "Первое изображение"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Следующее изображение"
+msgstr "Последнее изображение"
 
 #: src/imagewindow.cpp:152
 #, kde-format
@@ -289,7 +287,7 @@ msgstr "Дублировать окно"
 #: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "Увеличить до максимального размера"
 
 #: src/imagewindow.cpp:176
 #, kde-format
@@ -515,7 +513,7 @@ msgstr "&Слайд-шоу"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Сведения"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
