@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-09-22 21:55+0200\n"
+"PO-Revision-Date: 2026-09-26 08:30+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -143,7 +143,7 @@ msgstr "Контрастность:"
 #: src/defaultswidget.ui:226
 #, kde-format
 msgid "Gamma:"
-msgstr "Интенсивность:"
+msgstr "Гамма:"
 
 #. i18n: ectx: property (title), widget (QGroupBox, gbPreview)
 #: src/defaultswidget.ui:272
@@ -523,7 +523,7 @@ msgstr "&Клавиши быстрого просмотра"
 #: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
-msgstr "Комбинации &клавиш веб-браузера"
+msgstr "Клавиши обо&зревателя"
 
 #: src/kuickfile.cpp:128
 #, kde-format
@@ -590,7 +590,7 @@ msgstr "&Правка"
 #: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
-msgstr "Просмотр"
+msgstr "Вид"
 
 #: src/kuickshow.cpp:306
 #, kde-format
@@ -663,7 +663,7 @@ msgstr "Показать изображение в активном окне"
 #: src/kuickshow.cpp:1241
 #, kde-format
 msgid "Show Image in Fullscreen Mode"
-msgstr "Показать рисунок на полном экране"
+msgstr "Показать изображение в полноэкранном режиме"
 
 #: src/main.cpp:37
 #, kde-format
