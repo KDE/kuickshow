@@ -1,0 +1,1453 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % Arabic "INCLUDE"
+><!-- change language only here -->
+]>
+
+<!-- The language must NOT be changed here. -->
+<book id="kuickshow" lang="&language;">
+
+<bookinfo>
+<title
+>دليل العارض السريع</title>
+
+<authorgroup>
+<author
+><firstname
+>Carsten</firstname
+> <surname
+>Pfeiffer</surname
+> <affiliation
+> <address
+>&Carsten.Pfeiffer.mail;</address>
+</affiliation>
+</author>
+<othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2001</year>
+<holder
+>&Carsten.Pfeiffer;</holder>
+</copyright>
+
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2012-07-15</date>
+<releaseinfo
+>0.9.2 (كيدي 4.8)</releaseinfo>
+
+<!-- Abstract about this handbook -->
+
+<abstract>
+<para
+>العارض السريع هو متصفح/عارض صور مريح. </para>
+</abstract>
+
+<keywordset>
+<keyword
+>كيدي</keyword>
+<keyword
+>kdegraphics</keyword>
+<keyword
+>العارض السريع</keyword>
+<keyword
+>صورة</keyword>
+<keyword
+>المستعرض</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>مقدمة</title>
+
+<para
+>العارض السريع هو متصفح/عارض صور مريح. يعرض متصفح ملفات يمكنك فيه اختيار الصور التي تُعرض بعد ذلك. </para>
+
+<!-- LW: put a nice screenshot here -->
+
+<para
+>تُدعم صيغ الصور التالية:</para>
+<itemizedlist>
+<listitem
+><para
+>jpg</para>
+</listitem>
+<listitem
+><para
+>gif</para>
+</listitem>
+<listitem
+><para
+>tiff</para>
+</listitem>
+<listitem
+><para
+>png</para>
+</listitem>
+<listitem
+><para
+>bmp</para>
+</listitem>
+<listitem
+><para
+>psd</para>
+</listitem>
+<listitem
+><para
+>xpm</para>
+</listitem>
+<listitem
+><para
+>ppm</para>
+</listitem>
+<listitem
+><para
+>pgm</para>
+</listitem>
+<listitem
+><para
+>pbm</para>
+</listitem>
+<listitem
+><para
+>pnm</para>
+</listitem>
+<listitem
+><para
+>eim</para>
+</listitem>
+<listitem
+><para
+>xcf</para>
+</listitem>
+</itemizedlist>
+
+<para
+>يمكن عرض الصور إما في نافذتها الخاصة بحجم الصورة، أو بملء الشاشة.</para>
+
+</chapter>
+
+<chapter id="using-kuickshow">
+<title
+>استخدام العارض السريع</title>
+
+<para
+>استخدام العارض السريع بسيط جدًا. يعرض متصفح الملفات قائمة بالملفات، يمكنك اختيارها بنقرة زر الفأرة الأيسر أو مفتاح <keycap
+>رجوع</keycap
+>.</para>
+
+<screenshot>
+<screeninfo
+>هذه لقطة شاشة لـ العارض السريع</screeninfo>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase
+>لقطة شاشة</phrase>
+	  </textobject>
+	</mediaobject>
+</screenshot>
+
+
+<sect1 id="kuickshow-features">
+<title
+>مزيد من ميزات العارض السريع</title>
+
+<para
+>يتيح حوار الخيارات إمكانيات أكثر:</para>
+
+<itemizedlist>
+<listitem
+><para
+>يمكن تصغير الصور آليًا لتناسب الشاشة إذا كانت أكبر.</para>
+</listitem>
+<listitem
+><para
+>يمكنك ضبط ما إذا كانت الصور ستظهر في نافذتها الخاصة أم ستستخدم النافذة نفسها دائمًا.</para>
+</listitem>
+<listitem
+><para
+>يمكنك ضبط زمن التأخير لعرض الشرائح.</para>
+</listitem>
+<listitem
+><para
+>يمكنك إخبار المتصفح بأنواع الملفات التي يعرضها.</para>
+</listitem>
+<listitem
+><para
+>يمكنك ضبط نسبة السرعة/الجودة</para
+></listitem>
+</itemizedlist>
+
+<para
+>إذا كنت تبحث عن ملف معين، فأدخل الأحرف القليلة الأولى من اسمه في المتصفح. ستظهر نافذة تحرير صغيرة في الزاوية اليمنى السفلية. عند العثور على ملف مطابق، يُبرز. يمكنك مغادرة نافذة التحرير بالضغط على <keycap
+>رجوع</keycap
+> أو &Esc;.</para>
+
+</sect1>
+</chapter>
+
+<chapter id="configuration-dialog">
+<title
+>حوار تهيئة العارض السريع</title>
+
+<para
+>يحتوي حوار <guilabel
+>تهيئة العارض السريع</guilabel
+> على 5 ألسنة. ثلاثة منها: <link linkend="general-options"
+><guilabel
+>عام</guilabel
+></link
+> و<link linkend="modifications-options"
+><guilabel
+>تعديلات</guilabel
+></link
+> و<link linkend="slideshow-options"
+><guilabel
+>عرض شرائح</guilabel
+></link
+> تضبط تشغيل العارض السريع، والآخران: <link linkend="shortcuts-options"
+><guilabel
+>اختصارات العارض</guilabel
+></link
+> و<link linkend="shortcuts-options"
+><guilabel
+>اختصارات المتصفح</guilabel
+></link
+> يسمحان لك بتخصيص الاختصارات للنوافذ المعنية.</para>
+
+<sect1 id="general-options">
+<title
+>خيارات عامة</title>
+
+<para
+>يحتوي <guilabel
+>عام</guilabel
+> على الخيارات لضبط وتهيئة العارض السريع.</para>
+
+<variablelist>
+<varlistentry>
+<term
+><guilabel
+>نمط ملء الشاشة</guilabel
+></term>
+<listitem>
+<para
+>إذا اختير هذا، تُفتح الصور في وضع ملء الشاشة. إذا لم تكن الصورة كبيرة كافية لملء الشاشة، يملأ باقي الشاشة بلون الخلفية المختار أدناه. المبدئي هو إيقاف.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>تحميل تمهيدي للصورة التالية</guilabel
+></term>
+<listitem>
+<para
+>إذا اختير هذا، سيحمل العارض السريع الصورة التالية في المجلد بينما تنظر إلى الصورة الحالية. يقلل هذا التأخير عند اختيار الصورة التالية، وهو مفيد خاصة لعروض الشرائح.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>تذكر آخر مجلد</guilabel
+></term>
+<listitem>
+<para
+>إذا اختير هذا، يحفظ كويك شو اسم آخر مجلد عند الخروج. عند التشغيل التالي، سيفتح كويك شو هذا المجلد في نافذة المتصفح.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>لون الخلفية:</guilabel
+></term>
+<listitem>
+<para
+>انقر على الشريط الملون لاختيار لون خلفية. يُستخدم هذا لملء الشاشة في وضع ملء الشاشة، أو النافذة، إذا غيّرت حجمها ليكون أكبر من الصورة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>اعرض فقط الملفات ذات الامتداد:</guilabel
+></term>
+<listitem>
+<para
+>يمكنك ضبط كويك شو ليعرض لك فقط بعض أنواع الملفات التي يستطيع التعامل معها.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>النوعية / السرعة </guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>تصيير سريع</guilabel
+></term>
+<listitem
+><para
+>اعرض الأشياء بسرعة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>أنماط Dither في HiColor (15/16بت) </guilabel
+></term>
+<listitem
+><para
+><!-- LW: Maybe these should be on an advanced tab -->
+<!-- Write an example what this does here -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>مزج الألوان في أوضاع الألوان المنخفضة (8 بت فأقل)</guilabel
+></term>
+<listitem
+><para
+><!-- And here -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>استعمل لوحة ألوان خاصة</guilabel
+></term>
+<listitem
+><para
+><!-- and this one -->
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>إعادة تنظيم لوحة الألوان بسرعة</guilabel
+></term>
+<listitem>
+<para
+><!-- and this one -->
+</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>الحجم الأقصى للخبيئة (م.ب):</guilabel
+></term>
+<listitem>
+<para
+><!-- and another -->
+</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="modifications-options">
+<title
+>لسان التعديلات</title>
+
+<para
+>حدد <guilabel
+>طبق تعديلات الصورة المبدئية</guilabel
+> لفتح صورة بهذه التعديلات في كويك شو.</para>
+
+<variablelist>
+<title
+><guilabel
+>تحجيم</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>صغّر الصورة إلى حجم الشاشة، إذا كانت الصورة كبيرة</guilabel
+></term>
+<listitem>
+<para
+>إذا اختير هذا، تُعرض الصور الكبيرة في نافذة مكبرة. المبدئي مفعل.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>صغّر الصورة إلى حجم الشاشة، إذا كانت أصغر، حتى عامل:</guilabel
+></term>
+<listitem>
+<para
+>إذا اختير هذا، يزيد كويك شو تكبير الصور الصغيرة حتى العامل المختار.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>الأبعاد</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>قلب عمودي</guilabel
+></term>
+<listitem
+><para
+>اقلب الصورة عموديًا.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>قلب أفقي</guilabel
+></term>
+<listitem
+><para
+>اقلب الصورة أفقيًا. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>دوّر الصّورة</guilabel
+></term>
+<listitem
+><para
+>دوّر الصورة إلى 0 أو 90 أو 180 أو 270 درجة. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<variablelist>
+<title
+><guilabel
+>التعديلات</guilabel
+></title>
+<varlistentry>
+<term
+><guilabel
+>السّطوع:</guilabel
+></term>
+<listitem
+><para
+>أفتح/أغمق الصورة.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>التّباين:</guilabel
+></term>
+<listitem
+><para
+>أضف/أزل التباين.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>غاما:</guilabel
+></term>
+<listitem
+><para
+>زيادة/تقليل غاما. </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+<para
+>يُعرض <guilabel
+>معاينة</guilabel
+> للصورة <guilabel
+>الأصلية</guilabel
+> و<guilabel
+>المعدلة</guilabel
+> أسفل هذه الخيارات.</para>
+
+</sect1>
+
+<sect1 id="slideshow-options">
+<title
+>لسان عرض الشرائح</title>
+
+<variablelist>
+
+<varlistentry>
+<term
+><guilabel
+>حوّل إلى ملء الشاشة</guilabel
+></term>
+<listitem>
+<para
+>يشير إلى ما إذا كان على كويك شو التبديل إلى وضع ملء الشاشة عند بدء عرض الشرائح. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>ابدأ بالصّورة الحاليّة</guilabel
+></term>
+<listitem>
+<para
+>يُشير إلى ما إذا كان عرض الشرائح سيبدأ بأول صورة في المجلد أو بالصورة المُحدَّدة. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>الفترة بين الشرائح:</guilabel
+></term>
+<listitem>
+<para
+>طول الوقت بين تغييرات الصور أثناء عرض الشرائح. يمكنك استخدام شريط التمرير، أو كتابة قيمة جديدة في الحقل، أو استخدام الأسهم الصغيرة لزيادة القيمة أو تقليلها. المبدئي هو 3 ثوانٍ.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><guilabel
+>التكرارات (0 = لانهائي):</guilabel
+></term>
+<listitem>
+<para
+>عدد التكرارات. إذا ضُبط على 0 فسيتكرر حتى تُنهي عرض الشرائح. يمكنك استخدام شريط التمرير، أو كتابة قيمة جديدة في الحقل، أو استخدام الأسهم الصغيرة لزيادة القيمة أو تقليلها. المبدئي هو 1.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+<sect1 id="shortcuts-options">
+<title
+>ألسنة الاختصارات</title
+> 
+<para
+>غيّر الاختصارات للأوضاع المختلفة لـالعارض السريع في لسني <guilabel
+>اختصارات العارض</guilabel
+> و<guilabel
+>اختصارات المستعرض</guilabel
+>.</para>
+
+<para
+>لمزيد من المعلومات اقرأ القسم عن <ulink url="help:/fundamentals/config.html#shortcuts"
+>الاختصارات</ulink
+> من أساسيات كِيدِي.</para>
+</sect1>
+
+</chapter>
+
+<chapter id="menus">
+<title
+>مرجع القائمة</title>
+
+<sect1 id="file-menu">
+<title
+>قائمة ملف</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>O</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>افتح</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يفتح صورة جديدة</action
+> في العارض السريع.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>اعرض الصورة</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يعرض</action
+> الصورة المُحدَّدة في نافذة صور جديدة.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>اعرض الصورة في النافذة النشطة</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يعرض</action
+> الصورة المُحدَّدة في نافذة الصور النشطة.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>اعرض الصورة في وضع ملء الشاشة</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يعرض</action
+> الصورة المُحدَّدة في وضع ملء الشاشة. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F2</keycap
+></shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>ابدأ عرض الشرائح</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يبدأ</action
+> عرض شرائح للصور في المجلد.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>P</keycap
+></keycombo
+></shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>اطبع الصورة...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يطبع الصورة</action
+>.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>أنهِ</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يُنهي</action
+> العارض السريع. إذا كان لديك عدة نوافذ صور مفتوحة، فتُغلق جميعها.</para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title
+>قائمة حرر</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F10</keycap
+></shortcut
+> <guimenu
+>حرّر</guimenu
+> <guimenuitem
+>مجلد جديد...</guimenuitem
+></menuchoice>
+</term>
+<listitem>
+<para
+><action
+>أنشئ</action
+> مجلدًّا جديدًا</para
+> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>Del</keycap
+></shortcut
+> <guimenu
+>حرّر</guimenu
+> <guimenuitem
+>انقل إلى المهملات</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>ينقل</action
+> الملف الحالي إلى سلة المهملات. سيُطلب منك تأكيد الإجراء.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+> &Alt;<keycap
+>رجوع</keycap
+></keycombo
+></shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>خصائص</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يعرض</action
+> خصائص ملف الصورة الحالي.</para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="view-menu">
+<title
+>قائمة عرض</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F6</keycap
+></shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>عرض مختصر</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>إذا اختير هذا الخيار، ستُعرض أسماء الملفات والمجلدات فقط.</para>
+<para
+>قارن هذا بعرض مفصّل.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><shortcut
+><keycap
+>F7</keycap
+></shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>عرض مفصّل</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+>إذا اختير هذا الخيار، ستُعرض الأسماء والأحجام والتواريخ والأذون ومالكو الملفات ومجموعاتهم.</para>
+<para
+>قارن هذا بعرض مختصر.</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>عرض شجري</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>عرض شجري مفصّل</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+></para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings-help-menu">
+<title
+>قائمة الإعدادات والمساعدة</title>
+
+<variablelist>
+<varlistentry>
+<term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>اضبط العارض السريع...</guimenuitem
+> </menuchoice
+></term>
+<listitem
+><para
+><action
+>يفتح حوارًا لتغيير بعض الخيارات</action
+> كما هو موصوف في القسم <xref linkend="configuration-dialog"/></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>العارض السريع يحتوي على عناصر قائمة &kde; <guimenu
+>مساعدة</guimenu
+> الشائعة، لمزيد من المعلومات اقرأ القسم <ulink url="help:/fundamentals/menus.html#menus-help"
+>قائمة المساعدة</ulink
+> من أساسيات &kde;. </para>
+</sect1>
+
+</chapter>
+
+<chapter id="commands">
+<title
+>مرجع الأوامر</title>
+
+<sect1 id="keybindings">
+<title
+>نافذة الصورة</title>
+
+<para
+>جميع الاختصارات قابلة للضبط من <link linkend="configuration-dialog"
+>حوار الضبط</link
+>.</para>
+
+<table>
+<title
+>اختصارات لوحة المفاتيح لنافذة الصورة</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>المفتاح</entry>
+<entry
+>الإجراء</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>صفحة لأسفل</keycap
+></entry>
+<entry
+>حمّل الصورة التالية</entry>
+</row>
+<row>
+<entry
+><keycap
+>صفحة لأعلى</keycap
+></entry>
+<entry
+>حمّل الصورة السابقة</entry>
+</row>
+<row>
+<entry
+><keycap
+>المنزل</keycap
+></entry>
+<entry
+>يحمل الصورة الأولى</entry>
+</row>
+<row>
+<entry
+><keycap
+>النهاية</keycap
+></entry>
+<entry
+>تحميل آخر صورة</entry>
+</row>
+<row>
+<entry
+><keycap
+>+</keycap
+></entry>
+<entry
+>تكبير الصورة</entry>
+</row>
+<row>
+<entry
+><keycap
+>-</keycap
+></entry>
+<entry
+>تصغير الصورة</entry>
+</row>
+<row>
+<entry
+><keycap
+>*</keycap
+></entry>
+<entry
+>قلب الصورة أفقيًا</entry>
+</row>
+<row>
+<entry
+><keycap
+>/</keycap
+></entry>
+<entry
+>قلب الصورة عموديًا</entry>
+</row>
+<row>
+<entry
+><keycap
+>7</keycap
+></entry>
+<entry
+>تدوير 270&deg; مع عقارب الساعة (وهو أيضًا 90&deg; عكس عقارب الساعة)</entry>
+</row>
+<row>
+<entry
+><keycap
+>8</keycap
+></entry>
+<entry
+>تدوير 90&deg; مع عقارب الساعة</entry>
+</row>
+<row>
+<entry
+><keycap
+>9</keycap
+></entry>
+<entry
+>تدوير 180&deg; مع عقارب الساعة</entry>
+</row>
+<row>
+<entry
+>مفاتيح <keycap
+>السهم</keycap
+></entry>
+<entry
+>تحريك الصورة (أو بالأحرى أنت، المشاهد) إذا كانت أكبر من الشاشة</entry>
+</row>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>التبديل بين وضع ملء الشاشة ووضع النافذة</entry>
+</row>
+<row>
+<entry
+><keycap
+>Space</keycap
+></entry>
+<entry
+>التبديل بين إظهار المستعرض وإخفائه</entry>
+</row>
+<row>
+<entry
+>&Esc;</entry>
+<entry
+>يغلق نافذة الصورة. سيؤدي هذا إلى إغلاق العارض السريع بالكامل، إذا لم تكن لديك نافذة متصفح مفتوحة.</entry>
+</row>
+<row>
+<entry
+><keycap
+>B</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>B</keycap
+></keycombo
+></entry>
+<entry
+>يُفتح/يُغمق الصورة</entry>
+</row>
+<row>
+<entry
+><keycap
+>C</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>C</keycap
+></keycombo
+></entry>
+<entry
+>يُضيف/يُزيل التباين</entry>
+</row>
+<row>
+<entry
+><keycap
+>G</keycap
+>/<keycombo action="simul"
+>&Shift;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+>أكثر/أقل <firstterm
+>غاما</firstterm
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>O</keycap
+></entry>
+<entry
+>يُظهر الصورة بالحجم الأصلي. هذا مفيد فقط عندما يكون القياس الآلي مفعّلًا.</entry>
+</row>
+<row>
+<entry
+>&Enter;</entry>
+<entry
+>يُعيد عرض الصورة بالإعدادات والحجم المبدئيين.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>S</keycap
+></keycombo
+></entry>
+<entry
+>يُفتح حوار <guilabel
+>حفظ باسم</guilabel
+></entry>
+</row>
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>يحذف الصورة الحالية. سيُطلب منك تأكيد الطلب.</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>يحذف الصورة الحالية دون طلب تأكيد</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Alt;<keycap
+>Return</keycap
+></keycombo
+></entry>
+<entry
+>يعرض خصائص الصورة</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>يُفتح المساعدة الشبكية (هذا الملف)</entry>
+</row>
+<row>
+<entry
+><keycombo action="simul"
+>&Ctrl;<keycap
+>W</keycap
+></keycombo
+></entry>
+<entry
+>يُنهي العارض السريع</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>استخدام الفأرة في نافذة الصورة</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>زر الفأرة</entry>
+<entry
+>الإجراء</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>نقرة <mousebutton
+>يمنى</mousebutton
+></entry>
+<entry
+>تفتح القائمة السياقية، بعدة خيارات</entry>
+</row>
+<row>
+<entry
+>سحب <mousebutton
+>أيسر</mousebutton
+></entry>
+<entry
+>تنقل الصورة، إذا لم تكن مناسبة في النافذة.</entry>
+</row>
+<row>
+<entry
+>سحب <keycombo action="simul"
+>&Shift;<mousebutton
+>أيسر</mousebutton
+> </keycombo
+></entry>
+<entry
+>تحدد مستطيلًا يمكنك التكبير إليه.</entry>
+</row>
+<row>
+<entry
+>نقرة مزدوجة <mousebutton
+>يسرى</mousebutton
+></entry>
+<entry
+>تُغلق الصورة الحالية</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+</sect1>
+
+<sect1 id="browser-window">
+<title
+>نافذة المستعرض</title>
+
+<table>
+<title
+>ارتباطات مفاتيح نافذة المستعرض</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>ارتباط المفتاح</entry>
+<entry
+>الإجراء</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+><keycap
+>Return</keycap
+></entry>
+<entry
+>يدخل مجلدًا، أو يفتح نافذة صورة، حسب العنصر المحدد.</entry>
+</row>
+<row>
+<entry
+><keycap
+>صفحة لأسفل</keycap
+></entry>
+<entry
+>يتقدم صفحة واحدة في قائمة الملفات</entry>
+</row>
+<row>
+<entry
+><keycap
+>صفحة لأعلى</keycap
+></entry>
+<entry
+>يرجع صفحة واحدة لأعلى في قائمة الملفات</entry>
+</row>
+<row>
+<entry
+><keycap
+>المنزل</keycap
+></entry>
+<entry
+>يحدد أول ملف أو مجلد</entry>
+</row>
+<row>
+<entry
+><keycap
+>النهاية</keycap
+></entry>
+<entry
+>يحدد آخر ملف أو مجلد</entry>
+</row>
+<row>
+<entry
+><keycap
+>Space</keycap
+></entry>
+<entry
+>يبدل إظهار المستعرض، إذا كانت نافذة صورة مفتوحة</entry>
+</row>
+<row>
+<entry
+><keycap
+>أي حرف أبجدي رقمي</keycap
+></entry>
+<entry
+>يفتح حقل التحرير المستخدم لـ<quote
+>الإكمال</quote
+>. أدخل الأحرف الأولى من اسم ملف للبحث عنه، وإذا وُجد، سيُختار الملف.</entry>
+</row>
+<!-- not in 0.9.2 kde 4.8
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+></entry>
+<entry
+><quote
+>Go to</quote
+> &mdash; lets you enter a folder to go
+to.</entry>
+</row>
+-->
+<row>
+<entry
+><keycap
+>Delete</keycap
+></entry>
+<entry
+>يحذف الملف الحالي. سيُطلب منك تأكيد الإجراء.</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Shift;<keycap
+>Delete</keycap
+></keycombo
+></entry>
+<entry
+>يحذف الملف الحالي دون طلب تأكيد.</entry>
+</row>
+<row>
+<entry
+><keycap
+>F1</keycap
+></entry>
+<entry
+>يُفتح المساعدة الشبكية (هذا الملف)</entry>
+</row>
+<row>
+<entry
+><keycombo
+action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></entry>
+<entry
+>يُنهي العارض السريع</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+
+<table>
+<title
+>استخدام الفأرة في نافذة المتصفح</title>
+<tgroup cols="2">
+<thead>
+<row>
+<entry
+>استخدام الفأرة</entry>
+<entry
+>الإجراء</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry
+>نقرة <mousebutton
+>يسرى</mousebutton
+></entry>
+<entry
+>ادخل مجلدًا، أو اختر نافذة صورة.</entry>
+</row>
+<row>
+<entry
+>نقرة <mousebutton
+>يمنى</mousebutton
+></entry>
+<entry
+>يفتح قائمة سياقية، تحتوي على عدة خيارات.</entry>
+</row>
+<row>
+<entry
+>النقر المزدوج</entry>
+<entry
+>يحمل الصورة المختارة أو يدخل المجلد المختار</entry>
+</row>
+</tbody>
+</tgroup>
+
+</table>
+
+</sect1>
+</chapter>
+
+<chapter id="credits">
+
+<title
+>الحقوق والترخيص</title>
+
+<para
+>العارض السريع </para>
+<para
+>حقوق ملكية البرنامج 1998-2009 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+
+<para
+>حقوق نشر التوثيق 2001 &Carsten.Pfeiffer; &Carsten.Pfeiffer.mail; </para>
+<para
+>حُوِّل إلى DocBook &XML; ووُسِّع بواسطة &Lauri.Watts; &Lauri.Watts.mail;</para>
+
+<para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+-->
+

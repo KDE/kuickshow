@@ -9,19 +9,21 @@
 # SPDX-FileCopyrightText: 2010 Panagiotis Papadopoulos <pano_90@gmx.net>
 # SPDX-FileCopyrightText: 2010, 2012-2013 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2012-2013 Frank Steinmetzger <Warp_7@gmx.de>
+# SPDX-FileCopyrightText: 2026 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2021-04-14 06:21+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2026-11-11 22:59+0100\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -36,7 +38,7 @@ msgstr "kde-i18n-de@kde.org"
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">%1 Webseite</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -266,26 +268,24 @@ msgid "Show Previous Image"
 msgstr "Vorheriges Bild anzeigen"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Nächstes Bild anzeigen"
+msgstr "Erstes Bild anzeigen"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Nächstes Bild anzeigen"
+msgstr "Letztes Bild anzeigen"
 
 #: src/imagewindow.cpp:152
 #, kde-format
 msgid "Duplicate Window"
-msgstr ""
+msgstr "Fenster duplizieren"
 
 #: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "Auf maximale Größe skalieren"
 
 #: src/imagewindow.cpp:176
 #, kde-format
@@ -328,10 +328,9 @@ msgid "Print Image..."
 msgstr "Bild drucken ..."
 
 #: src/imagewindow.cpp:226
-#, fuzzy, kde-format
-#| msgid "Show File Browser"
+#, kde-format
 msgid "Return to File Browser"
-msgstr "Dateimanager anzeigen"
+msgstr "Zum Dateibrowser zurück gehen"
 
 #: src/imagewindow.cpp:231
 #, kde-format
@@ -446,10 +445,9 @@ msgid "Keep original image size"
 msgstr "Originalgröße beibehalten"
 
 #: src/imagewindow.cpp:924
-#, fuzzy, kde-format
-#| msgid "Save As"
+#, kde-format
 msgid "Save Image As"
-msgstr "Speichern unter"
+msgstr "Bild speichern unter"
 
 #: src/imagewindow.cpp:929 src/kuickshow.cpp:1143
 #, kde-format
@@ -485,12 +483,12 @@ msgstr ""
 #: src/imlib_imlib1.cpp:157
 #, kde-format
 msgid "Image loading and rendering library"
-msgstr ""
+msgstr "Bibliothek zum Laden und Rendern von Bildern"
 
 #: src/imlib_imlib2.cpp:119
 #, kde-format
 msgid "Image processing library"
-msgstr ""
+msgstr "Bibliothek zur Bildverarbeitung"
 
 #: src/kuickconfigdlg.cpp:41
 #, kde-format
@@ -515,7 +513,7 @@ msgstr "&Diaschau"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Information"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
@@ -525,7 +523,7 @@ msgstr "Kurzbefehle für das &Anzeigefenster"
 #: src/kuickconfigdlg.cpp:73
 #, kde-format
 msgid "Bro&wser Shortcuts"
-msgstr "Kurzbefehle für den Bro&wser"
+msgstr "Kurzbefehle für den &Dateibrowser"
 
 #: src/kuickfile.cpp:128
 #, kde-format
@@ -544,15 +542,7 @@ msgstr ""
 
 # ressource intesive = ressourcenintensiv?
 #: src/kuickshow.cpp:166
-#, fuzzy, kde-kuit-format
-#| msgid ""
-#| "Do you really want to display this 1 image at the same time? This might "
-#| "be quite resource intensive and could overload your computer.<br>If you "
-#| "choose %1, only the first image will be shown."
-#| msgid_plural ""
-#| "Do you really want to display these %n images at the same time? This "
-#| "might be quite resource intensive and could overload your computer.<br>If "
-#| "you choose %1, only the first image will be shown."
+#, kde-kuit-format
 msgctxt "@info"
 msgid ""
 "Do you really want to display this 1 image at the same time? This might be "
@@ -564,12 +554,12 @@ msgid_plural ""
 "choose <interface>%2</interface>, only the first image will be shown."
 msgstr[0] ""
 "Möchten Sie dieses eine Bild wirklich gleichzeitig anzeigen? Dies kann "
-"ziemlich rechenintensiv sein und Ihren Rechner überlasten.<br>Falls Sie %1 "
-"wählen, wird nur das erste Bild angezeigt."
+"ziemlich rechenintensiv sein und Ihren Rechner überlasten.<br/>Falls Sie "
+"<interface>%2</interface> wählen, wird nur das erste Bild angezeigt."
 msgstr[1] ""
-"Möchten Sie diese %n Bilder wirklich gleichzeitig anzeigen? Dies kann "
-"ziemlich rechenintensiv sein und Ihren Rechner überlasten.<br>Falls Sie %1 "
-"wählen, wird nur das erste Bild angezeigt."
+"Möchten Sie diese %1 Bilder wirklich gleichzeitig anzeigen? Dies kann "
+"ziemlich rechenintensiv sein und Ihren Rechner überlasten.<br/>Falls Sie "
+"<interface>%2</interface> wählen, wird nur das erste Bild angezeigt."
 
 #: src/kuickshow.cpp:168
 #, kde-format
@@ -579,7 +569,7 @@ msgstr "Mehrere Bilder anzeigen?"
 #: src/kuickshow.cpp:169
 #, kde-format
 msgid "Display"
-msgstr ""
+msgstr "Anzeigen"
 
 #: src/kuickshow.cpp:283
 #, kde-format
@@ -594,7 +584,7 @@ msgstr "&Bearbeiten"
 #: src/kuickshow.cpp:303
 #, kde-format
 msgid "View"
-msgstr ""
+msgstr "Ansicht"
 
 #: src/kuickshow.cpp:306
 #, kde-format
@@ -619,12 +609,16 @@ msgid ""
 "More information may be available in the session log file,\n"
 "or can be obtained by starting %1 from a terminal."
 msgstr ""
+"Die Bildbibliothek „%2“ konnte nicht initialisiert werden.\n"
+"\n"
+"Weitere Informationen sind möglicherweise in der Sitzungsprotokolldatei zu "
+"finden oder sie können erlangt werden, indem %1 über ein Terminal gestartet "
+"wird."
 
 #: src/kuickshow.cpp:1036
-#, fuzzy, kde-format
-#| msgid "Fatal Imlib Error"
+#, kde-format
 msgid "Fatal Initialization Error"
-msgstr "Kritischer Imlib-Fehler"
+msgstr "Kritischer Initialisierungsfehler"
 
 #: src/kuickshow.cpp:1142
 #, kde-format
@@ -639,12 +633,12 @@ msgstr "Diaschau starten"
 #: src/kuickshow.cpp:1205
 #, kde-format
 msgid "Show File Browser"
-msgstr "Dateimanager anzeigen"
+msgstr "Dateibrowser anzeigen"
 
 #: src/kuickshow.cpp:1206
 #, kde-format
 msgid "Hide File Browser"
-msgstr "Dateimanager ausblenden"
+msgstr "Dateibrowser ausblenden"
 
 #: src/kuickshow.cpp:1219
 #, kde-format
@@ -775,7 +769,7 @@ msgstr "Bild auf Bildschirmgröße &verkleinern, wenn nötig"
 #, kde-format
 msgctxt "Run the slideshow until manually stopped"
 msgid "Forever"
-msgstr ""
+msgstr "Für immer"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, SlideShowWidget)
 #: src/slideshowwidget.ui:14
@@ -815,10 +809,9 @@ msgstr " Sek."
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
-#, fuzzy, kde-format
-#| msgid "&Iterations (0 = infinite):"
+#, kde-format
 msgid "&Iterations:"
-msgstr "&Wiederholungen (0 = unendlich oft):"
+msgstr "&Wiederholungen:"
 
 #~ msgid "Restore Original Size"
 #~ msgstr "Originalgröße wiederherstellen"
