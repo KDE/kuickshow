@@ -2,7 +2,7 @@
 # Translation of kuickshow.po to Slovenian
 # Slovenian translation of kuickshow.
 # Copyright (C) 2001, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
-# $Id: kuickshow.po 1743268 2026-08-08 01:29:42Z scripty $
+# $Id$
 # $Source$
 #
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2001.
