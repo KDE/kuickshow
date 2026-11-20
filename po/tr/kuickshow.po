@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-11-16 19:25+0300\n"
+"PO-Revision-Date: 2026-11-19 18:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -220,7 +220,7 @@ msgstr "Hızlı palet haritalama"
 #: src/generalwidget.ui:78
 #, kde-format
 msgid "Maximum cache size: "
-msgstr "En büyük önbellek boyutu: "
+msgstr "En büyük ön bellek boyutu: "
 
 #. i18n: ectx: property (specialValueText), widget (QSpinBox, maxCacheSpinBox)
 #: src/generalwidget.ui:88
