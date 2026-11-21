@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2026-09-06 17:27+0200\n"
+"PO-Revision-Date: 2026-11-20 20:19+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -802,7 +802,7 @@ msgstr "Espera una tecla"
 #: src/slideshowwidget.ui:47
 #, kde-format
 msgid " sec"
-msgstr " seg"
+msgstr " s"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: src/slideshowwidget.ui:57
