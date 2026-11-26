@@ -4,13 +4,13 @@
 # Pjetur G. Hjaltason <pjetur@pjetur.net>, 2003.
 # Þröstur Svanbergsson <throstur@bylur.net>, 2004.
 # Arnar Leosson <leosson@frisurf.no>, 2005.
-# SPDX-FileCopyrightText: 2006, 2009, 2010, 2021, 2022, 2024 Sveinn í Felli <sveinki@nett.is>
+# SPDX-FileCopyrightText: 2006, 2009, 2010, 2021, 2022, 2024, 2026 Sveinn í Felli <sveinki@nett.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: kuickshow\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-07 00:43+0000\n"
-"PO-Revision-Date: 2024-12-18 14:23+0000\n"
+"PO-Revision-Date: 2026-11-25 16:04+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -35,7 +35,7 @@ msgstr "pjetur@pjetur.net, sveinki@nett.is"
 #: src/aboutwidget.cpp:39
 #, kde-format
 msgid "<A HREF=\"%2\">%1 Website</A>"
-msgstr ""
+msgstr "<A HREF=\"%2\">Vefsvæði %1</A>"
 
 #. i18n: ectx: property (windowTitle), widget (QWidget, DefaultsWidget)
 #: src/defaultswidget.ui:14
@@ -265,16 +265,14 @@ msgid "Show Previous Image"
 msgstr "Sýna fyrri mynd"
 
 #: src/imagewindow.cpp:136
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show First Image"
-msgstr "Sýna næstu mynd"
+msgstr "Sýna fyrstu mynd"
 
 #: src/imagewindow.cpp:144
-#, fuzzy, kde-format
-#| msgid "Show Next Image"
+#, kde-format
 msgid "Show Last Image"
-msgstr "Sýna næstu mynd"
+msgstr "Sýna síðustu mynd"
 
 #: src/imagewindow.cpp:152
 #, kde-format
@@ -284,7 +282,7 @@ msgstr "Annan eins glugga"
 #: src/imagewindow.cpp:170
 #, kde-format
 msgid "Zooom to Maximum Size"
-msgstr ""
+msgstr "Aðdráttur að hámarksstærð"
 
 #: src/imagewindow.cpp:176
 #, kde-format
@@ -511,7 +509,7 @@ msgstr "Mynda&sýning"
 #: src/kuickconfigdlg.cpp:62
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Upplýsingar"
 
 #: src/kuickconfigdlg.cpp:69
 #, kde-format
